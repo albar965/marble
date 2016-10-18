@@ -103,8 +103,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL Android)
    find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
    set ( MARBLE_NO_WEBKITWIDGETS TRUE )
 else()
-   find_package(Qt5WebKit ${REQUIRED_QT_VERSION})
-   find_package(Qt5WebKitWidgets ${REQUIRED_QT_VERSION})
+# Have to disable these since the wrong webkit is found on Linux
+#   find_package(Qt5WebKit ${REQUIRED_QT_VERSION})
+#   find_package(Qt5WebKitWidgets ${REQUIRED_QT_VERSION})
 
    if ( NOT Qt5WebKitWidgets_FOUND )
      set ( MARBLE_NO_WEBKITWIDGETS TRUE )
