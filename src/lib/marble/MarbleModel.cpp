@@ -777,9 +777,9 @@ void MarbleModel::setLegend( QTextDocument * legend )
     d->m_legend = legend;
 }
 
-void MarbleModel::addGeoDataFile( const QString& filename )
+void MarbleModel::addGeoDataFile(const QString& filename , int renderOrder, bool recenter)
 {
-    d->m_fileManager.addFile( filename, filename, GeoDataStyle::Ptr(), UserDocument, true );
+    d->m_fileManager.addFile( filename, filename, GeoDataStyle::Ptr(), UserDocument, renderOrder,  recenter);
 }
 
 void MarbleModel::addGeoDataString( const QString& data, const QString& key )
@@ -807,7 +807,7 @@ void MarbleModel::updateProperty( const QString &property, bool value )
 
 void MarbleModelPrivate::assignFillColors( const QString &filePath ) {
     foreach( GeoSceneLayer *layer, m_mapTheme->map()->layers() ) {
-        if ( layer->backend() == dgml::dgmlValue_geodata 
+        if ( layer->backend() == dgml::dgmlValue_geodata
              || layer->backend() == dgml::dgmlValue_vector )
         {
             foreach( GeoSceneAbstractDataset *dataset, layer->datasets() ) {

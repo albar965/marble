@@ -192,7 +192,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Handle file loading into the treeModel
      * @param filename the file to load
      */
-    void addGeoDataFile( const QString& filename );
+    void addGeoDataFile( const QString& filename, int renderOrder = 0, bool recenter = false );
 
     /**
      * @brief Handle raw data loading into the treeModel
@@ -326,7 +326,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see setTrackedPlacemark(), trackedPlacemark()
      */
     void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
- 
+
     /** @brief Emitted when the home location is changed
      * @see home(), setHome()
      */
