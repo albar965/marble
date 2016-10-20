@@ -46,6 +46,8 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
     void setMarbleModel( MarbleModel *marbleModel );
     QSize sizeHint() const;
 
+    QString getHtml(QString& basePath);
+
  public Q_SLOTS:
     void setCheckedProperty( const QString& name, bool checked );
     void setRadioCheckedProperty( const QString& value,const QString& name, bool checked );
@@ -73,6 +75,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public MarbleWebView
  private:
     Q_DISABLE_COPY( MarbleLegendBrowser )
     MarbleLegendBrowserPrivate  * const d;
+    QString getLegend(QString& basePath);
 };
 
 }

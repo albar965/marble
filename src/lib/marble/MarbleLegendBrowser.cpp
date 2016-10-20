@@ -97,11 +97,17 @@ void MarbleLegendBrowser::setMarbleModel( MarbleModel *marbleModel )
 
 QSize MarbleLegendBrowser::sizeHint() const
 {
-    return QSize( 180, 320 );
+  return QSize( 180, 320 );
+}
+
+QString MarbleLegendBrowser::getHtml(QString& basePath)
+{
+  return getLegend(basePath);
 }
 
 void MarbleLegendBrowser::initTheme()
 {
+#ifndef MARBLE_NO_WEBKITWIDGETS
     // Check for a theme specific legend.html first
     if ( d->m_marbleModel != 0 && d->m_marbleModel->mapTheme() != 0 )
     {
@@ -115,6 +121,7 @@ void MarbleLegendBrowser::initTheme()
             }
         }
 
+
         disconnect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)), 0, 0 );
         connect ( currentMapTheme, SIGNAL(valueChanged(QString,bool)),
                   this, SLOT(setCheckedProperty(QString,bool)) );
@@ -123,6 +130,7 @@ void MarbleLegendBrowser::initTheme()
     if ( isVisible() ) {
         loadLegend();
     }
+#endif
 }
 
 void MarbleLegendBrowser::loadLegend()
@@ -132,28 +140,50 @@ void MarbleLegendBrowser::loadLegend()
     }
 
 #ifndef MARBLE_NO_WEBKITWIDGETS
+
+    QString legendPath;
+    QUrl baseUrl = QUrl::fromLocalFile( legendPath );
+
+    // Set the html string in the QTextBrowser.
+    setHtml(finalHtml, baseUrl);
+
+    QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
+    d->m_marbleModel->setLegend( document );
+#endif
+
+}
+
+QString MarbleLegendBrowser::getLegend(QString& basePath)
+{
+    if (!d->m_marbleModel) {
+        return QString();
+    }
+
     if (d->m_currentThemeId != d->m_marbleModel->mapThemeId()) {
         d->m_currentThemeId = d->m_marbleModel->mapThemeId();
     } else {
-        return;
+        return QString();
     }
 
     // Read the html string.
-    QString legendPath;
+    QString legendFilepath;
 
     // Check for a theme specific legend.html first
     if (d->m_marbleModel->mapTheme() != 0 ) {
         const GeoSceneDocument *currentMapTheme = d->m_marbleModel->mapTheme();
 
-        legendPath = MarbleDirs::path( "maps/" +
+        legendFilepath = MarbleDirs::path( "maps/" +
         currentMapTheme->head()->target() + '/' +
         currentMapTheme->head()->theme() + "/legend.html" );
+
     }
-    if ( legendPath.isEmpty() ) {
-        legendPath = MarbleDirs::path( "legend.html" );
+    if ( legendFilepath.isEmpty() ) {
+        legendFilepath = MarbleDirs::path( "legend.html" );
     }
 
-    QString finalHtml = readHtml( QUrl::fromLocalFile( legendPath ) );
+    basePath = QFileInfo(legendFilepath).absolutePath();
+
+    QString finalHtml = readHtml( QUrl::fromLocalFile( legendFilepath ) );
 
     TemplateDocument doc(finalHtml);
     finalHtml = doc.finalText();
@@ -168,14 +198,7 @@ void MarbleLegendBrowser::loadLegend()
 
     translateHtml( finalHtml );
 
-    QUrl baseUrl = QUrl::fromLocalFile( legendPath );
-
-    // Set the html string in the QTextBrowser.
-    setHtml(finalHtml, baseUrl);
-
-    QTextDocument *document = new QTextDocument(page()->mainFrame()->toHtml());
-    d->m_marbleModel->setLegend( document );
-#endif
+    return finalHtml;
 }
 
 void MarbleLegendBrowser::injectCheckBoxChecker()
@@ -197,7 +220,7 @@ void MarbleLegendBrowser::openLinkExternally( const QUrl &url )
 
 bool MarbleLegendBrowser::event( QEvent * event )
 {
-    // "Delayed initialization": legend gets created only 
+    // "Delayed initialization": legend gets created only
     if ( event->type() == QEvent::Show ) {
         loadLegend();
         return true;
@@ -340,6 +363,8 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             }
 
             // pixmap and text
+            const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
+
             QString src;
             QString styleDiv;
             int pixmapWidth = 24;
@@ -349,7 +374,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 const QPixmap oncePixmap(path);
                 pixmapWidth = oncePixmap.width();
                 pixmapHeight = oncePixmap.height();
-                src = QUrl::fromLocalFile( path ).toString();
+                src = /*QUrl::fromLocalFile(*/ path/* ).toString()*/;
                 styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
                         QString::number(pixmapHeight) + "px;";
             }
@@ -357,17 +382,28 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             //         create just a plain rectangle with set color
             else if (item->icon()->color().isValid()) {
                 const QColor color = item->icon()->color();
-                styleDiv = "width: " + QString::number(pixmapWidth) + "px; height: " +
-                        QString::number(pixmapHeight) + "px; background-color: " + color.name() + ';';
+                styleDiv = /*"width: " + QString::number(pixmapWidth) + "px; height: " +
+                        QString::number(pixmapHeight) + "px; */"background-color: " + color.name() + ';';
             }
-            const QString text = QCoreApplication::translate("DGML", item->text().toUtf8().constData());
-            QString html = ""
-                    "<div class=\"legend-entry\">"
-                    "  <label>" + checkBoxString +
-                    "    <img class=\"image-pic\" src=\"" + src + "\" style=\"" + styleDiv + "\"/>"
-                    "    <span class=\"notation\">" + text + "</span>"
-                    "  </label>"
-                    "</div>";
+
+            QString html;
+
+            if(src.isEmpty())
+              html = ""
+                     "<div class=\"legend-entry\">"
+                     "  <label>" + checkBoxString +
+                     "    <span style=\"" + styleDiv + "\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                     "    <span class=\"notation\">" + text + "</span>"
+                     "  </label>"
+                     "</div>";
+            else
+              html = ""
+                     "<div class=\"legend-entry\">"
+                     "  <label>" + checkBoxString +
+                     "    <img class=\"image-pic\" src=\"" + src + "\" style=\"" + styleDiv + "\"/>"
+                     "    <span class=\"notation\">" + text + "</span>"
+                     "  </label>"
+                     "</div>";
             customLegendString += html;
         }
         customLegendString += "</div>"; // <div class="well">

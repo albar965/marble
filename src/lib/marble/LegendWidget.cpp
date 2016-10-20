@@ -41,10 +41,7 @@ LegendWidget::LegendWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
       d( new LegendWidgetPrivate )
 {
-    d->setupUi( this );
-    layout()->setMargin( 0 );
-    connect( d->m_marbleLegendBrowser, SIGNAL(tourLinkClicked(QString)),
-             this, SIGNAL(tourLinkClicked(QString)) );
+  d->setupUi( this );
 }
 
 LegendWidget::~LegendWidget()
@@ -56,10 +53,11 @@ void LegendWidget::setMarbleModel( MarbleModel *model )
 {
     // Initialize the MarbleLegendBrowser
     d->m_marbleLegendBrowser->setMarbleModel( model );
+}
 
-    // connect signals for the Legend
-    connect( d->m_marbleLegendBrowser, SIGNAL(toggledShowProperty(QString,bool)),
-             this,                            SIGNAL(propertyValueChanged(QString,bool)) );
+QString LegendWidget::getHtml(QString& basePath)
+{
+  return d->m_marbleLegendBrowser->getHtml(basePath);
 }
 
 }

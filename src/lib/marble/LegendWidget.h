@@ -38,6 +38,8 @@ class MARBLE_EXPORT LegendWidget : public QWidget
      */
     void setMarbleModel( MarbleModel *model );
 
+    QString getHtml(QString& basePath);
+
  Q_SIGNALS:
     void propertyValueChanged( const QString &propertyName, bool value );
     void tourLinkClicked( const QString &url );
