@@ -69,6 +69,8 @@ class MergedLayerDecorator
 
     void setShowSunShading( bool show );
     bool showSunShading() const;
+    void setSunShadingDimFactor(qreal dimFactor);
+    qreal sunShadingDimFactor();
 
     void setShowCityLights( bool show );
     bool showCityLights() const;
@@ -79,7 +81,7 @@ class MergedLayerDecorator
 
     bool hasTextureLayer() const;
 
- protected:
+protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
 
     class Private;

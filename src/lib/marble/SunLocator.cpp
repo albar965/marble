@@ -1,16 +1,16 @@
 // Copyright 2007-2009 David Roberts <dvdr18@gmail.com>
-// 
+//
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public 
+//
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "SunLocator.h"
@@ -19,7 +19,7 @@
 #include "MarbleClock.h"
 #include "Planet.h"
 #include "MarbleMath.h"
- 
+
 #include "MarbleDebug.h"
 
 #include "src/lib/astro/solarsystem.h"
@@ -28,7 +28,7 @@
 
 #include <cmath>
 // M_PI is sometimes defined in <cmath>
-#ifndef M_PI 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
 
@@ -100,8 +100,8 @@ qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
     // haversine formula
     qreal b = sin((lon-d->m_lon)/2.0);
 //    qreal g = sin((lat-d->m_lat)/2.0);
-//    qreal h = (g*g)+cos(lat)*cos(d->m_lat)*(b*b); 
-    qreal h = (a*a) + c * (b*b); 
+//    qreal h = (g*g)+cos(lat)*cos(d->m_lat)*(b*b);
+    qreal h = (a*a) + c * (b*b);
 
     /*
       h = 0.0 // directly beneath sun
@@ -131,24 +131,26 @@ qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
     return brightness;
 }
 
-void SunLocator::shadePixel(QRgb& pixcol, qreal brightness) const
+void SunLocator::shadePixel(QRgb& pixcol, qreal brightness, qreal dimFactor) const
 {
     // daylight - no change
     if ( brightness > 0.99999 )
         return;
 
+//    double dimFactor = 0.60;
+
     if ( brightness < 0.00001 ) {
         // night
         //      Doing  "pixcol = qRgb(r/2, g/2, b/2);" by shifting some electrons around ;)
         // by shifting some electrons around ;)
-        pixcol = qRgb(qRed(pixcol) * 0.35, qGreen(pixcol) * 0.35, qBlue(pixcol)  * 0.35);
+        pixcol = qRgb(qRed(pixcol) * dimFactor, qGreen(pixcol) * dimFactor, qBlue(pixcol)  * dimFactor);
         // pixcol = (pixcol & 0xff000000) | ((pixcol >> 1) & 0x7f7f7f);
     } else {
         // gradual shadowing
         int r = qRed( pixcol );
         int g = qGreen( pixcol );
         int b = qBlue( pixcol );
-        qreal  d = 0.65 * brightness + 0.35;
+        qreal  d = (1. - dimFactor) * brightness + dimFactor;
         pixcol = qRgb((int)(d * r), (int)(d * g), (int)(d * b));
     }
 }
@@ -191,7 +193,7 @@ void SunLocator::update()
 void SunLocator::setPlanet( const Planet *planet )
 {
     /*
-    // This won't work as expected if the same pointer 
+    // This won't work as expected if the same pointer
     // points to different planets
     if ( planet == d->m_planet ) {
         return;

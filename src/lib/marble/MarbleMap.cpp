@@ -1072,6 +1072,11 @@ void MarbleMap::setShowSunShading( bool visible )
     d->m_textureLayer.setShowSunShading( visible );
 }
 
+void MarbleMap::setSunShadingDimFactor( qreal dimFactor )
+{
+  d->m_textureLayer.setSunShadingDimFactor( dimFactor );
+}
+
 void MarbleMap::setShowCityLights( bool visible )
 {
     d->m_textureLayer.setShowCityLights( visible );
@@ -1225,7 +1230,7 @@ AngleUnit MarbleMap::defaultAngleUnit() const
     if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal ) {
         return DecimalDegree;
     } else if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::UTM ) {
-    	return UTM;
+      return UTM;
     }
 
     return DMSDegree;

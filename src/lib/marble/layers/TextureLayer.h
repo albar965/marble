@@ -69,6 +69,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     void removeTextureLayer(const QString &key);
 
     bool showSunShading() const;
+    void setSunShadingDimFactor(qreal dimFactor);
     bool showCityLights() const;
 
     /**

@@ -603,7 +603,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setHighlightEnabled( bool enabled );
 
- public Q_SLOTS:
+public Q_SLOTS:
 
     /// @name Position management slots
     //@{
@@ -776,13 +776,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *
      * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
-     */	
+     */
     void setMapThemeId( const QString& maptheme );
 
     /**
      * @brief  Sets the value of a map theme property
      * @param  value  value of the property (usually: visibility)
-     * 
+     *
      * Later on we might add a "setPropertyType and a QVariant
      * if needed.
      */
@@ -817,6 +817,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visibile visibility of shadow
      */
     void setShowSunShading( bool visible );
+    void setSunShadingDimFactor(qreal dimFactor);
 
     /**
      * @brief  Set whether city lights instead of night shadow are visible.
@@ -1043,7 +1044,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void framesPerSecond( qreal fps );
 
-    /** This signal is emit when a new rectangle region is selected over the map 
+    /** This signal is emit when a new rectangle region is selected over the map
      *  The list of double values include coordinates in degrees using this order:
      *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
      */
@@ -1053,7 +1054,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * This signal is emit when the settings of a plugin changed.
      */
     void pluginSettingsChanged();
-    
+
     /**
      * @brief Signal that a render item has been initialized
      */

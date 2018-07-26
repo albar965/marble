@@ -36,7 +36,7 @@ class QString;
 namespace Marble
 {
 
-// MarbleMap 
+// MarbleMap
 class MarbleMapPrivate;
 
 // Marble
@@ -417,7 +417,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     RenderState renderState() const;
 
- public Q_SLOTS:
+public Q_SLOTS:
 
     /**
      * @brief Paint the map using a give painter.
@@ -474,19 +474,19 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Set a new map theme
-     * @param maptheme  The ID of the new maptheme. To ensure that a unique 
-     * identifier is being used the theme does NOT get represented by its 
+     * @param maptheme  The ID of the new maptheme. To ensure that a unique
+     * identifier is being used the theme does NOT get represented by its
      * name but the by relative location of the file that specifies the theme:
      *
-     * Example: 
-     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
+     * Example:
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
     void setMapThemeId( const QString& maptheme );
 
     /**
      * @brief  Sets the value of a map theme property
      * @param  value  value of the property (usually: visibility)
-     * 
+     *
      * Later on we might add a "setPropertyType and a QVariant
      * if needed.
      */
@@ -521,6 +521,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visibile visibility of shadow
      */
     void setShowSunShading( bool visible );
+    void setSunShadingDimFactor(qreal dimFactor);
 
     /**
      * @brief  Set whether city lights instead of night shadow are visible.
@@ -545,7 +546,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * NOTE: This is part of the transitional debug API
      *       and might be subject to changes until Marble 0.8
      * @param visible visibility of the tile
-     */ 
+     */
     void setShowTileId( bool visible );
 
     /**

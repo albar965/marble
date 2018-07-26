@@ -806,6 +806,11 @@ void MarbleWidget::setShowSunShading( bool visible )
     d->m_map.setShowSunShading( visible );
 }
 
+void MarbleWidget::setSunShadingDimFactor( qreal dimFactor )
+{
+  d->m_map.setSunShadingDimFactor( dimFactor );
+}
+
 void MarbleWidget::setShowCityLights( bool visible )
 {
     d->m_map.setShowCityLights( visible );
@@ -958,7 +963,7 @@ void MarbleWidget::setVolatileTileCacheLimit( quint64 kiloBytes )
 // This slot will called when the Globe starts to create the tiles.
 
 void MarbleWidget::creatingTilesStart( TileCreator *creator,
-                                       const QString &name, 
+                                       const QString &name,
                                        const QString &description )
 {
     QPointer<TileCreatorDialog> dialog = new TileCreatorDialog( creator, this );

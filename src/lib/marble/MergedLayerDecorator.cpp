@@ -48,7 +48,7 @@ public:
     StackedTile *createTile( const QVector<QSharedPointer<TextureTile> > &tiles ) const;
 
     void renderGroundOverlays( QImage *tileImage, const QVector<QSharedPointer<TextureTile> > &tiles ) const;
-    void paintSunShading( QImage *tileImage, const TileId &id ) const;
+    void paintSunShading(QImage *tileImage, const TileId &id ) const;
     void paintTileId( QImage *tileImage, const TileId &id ) const;
 
     void detectMaxTileLevel();
@@ -64,6 +64,7 @@ public:
     int m_levelZeroColumns;
     int m_levelZeroRows;
     bool m_showSunShading;
+    qreal m_sunShadingDimFactor = 0.35; // 0.60
     bool m_showCityLights;
     bool m_showTileId;
 };
@@ -395,6 +396,16 @@ void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage 
     }
 }
 
+void MergedLayerDecorator::setSunShadingDimFactor( qreal dimFactor)
+{
+  d->m_sunShadingDimFactor = dimFactor;
+}
+
+qreal MergedLayerDecorator::sunShadingDimFactor( )
+{
+  return d->m_sunShadingDimFactor;
+}
+
 void MergedLayerDecorator::setShowSunShading( bool show )
 {
     d->m_showSunShading = show;
@@ -471,7 +482,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 }
                 if ( shade == lastShade && shade == 0.0 ) {
                     for ( int t = 0; t < n; ++t ) {
-                        m_sunLocator->shadePixel( *scanline, shade );
+                        m_sunLocator->shadePixel( *scanline, shade, m_sunShadingDimFactor );
                         ++scanline;
                     }
                     cur_x += n;
@@ -480,7 +491,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 for ( int t = 0; t < n ; ++t ) {
                     const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixel( *scanline, shade );
+                    m_sunLocator->shadePixel( *scanline, shade, m_sunShadingDimFactor );
                     ++scanline;
                     ++cur_x;
                 }
@@ -491,7 +502,7 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
                 if ( cur_x < tileWidth ) {
                     const qreal lon   = lon_scale * ( id.x() * tileWidth + cur_x );
                     shade = m_sunLocator->shading( lon, a, c );
-                    m_sunLocator->shadePixel( *scanline, shade );
+                    m_sunLocator->shadePixel( *scanline, shade, m_sunShadingDimFactor );
                     ++scanline;
                     ++cur_x;
                 }

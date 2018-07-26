@@ -366,6 +366,11 @@ void TextureLayer::setShowRelief( bool show )
     }
 }
 
+void TextureLayer::setSunShadingDimFactor( qreal dimFactor )
+{
+    d->m_layerDecorator.setSunShadingDimFactor( dimFactor );
+}
+
 void TextureLayer::setShowSunShading( bool show )
 {
     disconnect( d->m_sunLocator, SIGNAL(positionChanged(qreal,qreal)),
