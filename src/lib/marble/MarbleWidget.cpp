@@ -352,7 +352,12 @@ int  MarbleWidget::minimumZoom() const
 
 int  MarbleWidget::maximumZoom() const
 {
-    return d->m_map.maximumZoom();
+  return d->m_map.maximumZoom();
+}
+
+int MarbleWidget::zoomStep() const
+{
+  return d->m_presenter.zoomStep();
 }
 
 QVector<const GeoDataFeature*> MarbleWidget::whichFeatureAt( const QPoint &curpos ) const

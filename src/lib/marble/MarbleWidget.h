@@ -309,6 +309,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     int maximumZoom() const;
 
+    int zoomStep() const;
+
     //@}
 
     /// @name Position management
