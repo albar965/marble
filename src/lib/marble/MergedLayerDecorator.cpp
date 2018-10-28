@@ -453,8 +453,8 @@ void MergedLayerDecorator::Private::paintSunShading( QImage *tileImage, const Ti
 
     for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
         const qreal lat = lat_scale * ( id.y() * tileHeight + cur_y ) - 0.5*M_PI;
-        const qreal a = sin( (lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
-        const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
+        const qreal a = sin( (lat+DEG2RAD * m_sunLocator->getLat() * 2.)/2.0 );
+        const qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() * 2.);
 
         QRgb* scanline = (QRgb*)tileImage->scanLine( cur_y );
 
