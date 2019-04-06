@@ -18,7 +18,7 @@ before_install:
     - sudo apt-get -qq update
 
     # Decrypt auth token for deployment
-    - '[ "$TRAVIS_SECURE_ENV_VARS" == "false" ] || openssl aes-256-cbc -K $encrypted_32e4a7602a6c_key -iv $encrypted_32e4a7602a6c_iv -in deployment/.dropbox_uploader.enc -out ~/.dropbox_uploader -d'
+    - '[ "$TRAVIS_SECURE_ENV_VARS" == "false" ] || openssl aes-256-cbc -K $encrypted_8b87afd31ef9_key -iv $encrypted_8b87afd31ef9_iv -in deployment/.dropbox_uploader.enc -out ~/.dropbox_uploader -d'
 
 install:
     # Install needed Qt modules and libraries for qt
@@ -48,6 +48,6 @@ script:
 after_success:
     # Deploy artefacts to dropbox
     - tar -cvzf ../marble-release.tar.gz ../build-marble-release/
-    - '[ -f ~/.dropbox_uploader ] && ../atools/deployment/dropbox_uploader.sh delete linux/marble-release.tar.gz'
-    - '[ -f ~/.dropbox_uploader ] && ../atools/deployment/dropbox_uploader.sh mkdir linux'
-    - '[ -f ~/.dropbox_uploader ] && ../atools/deployment/dropbox_uploader.sh upload ../marble-release.tar.gz linux'
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh delete linux/marble-release.tar.gz'
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh mkdir linux'
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh upload ../marble-release.tar.gz linux'
