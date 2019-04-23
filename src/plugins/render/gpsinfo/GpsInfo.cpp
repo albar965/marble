@@ -1,3 +1,4 @@
+
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -19,6 +20,8 @@
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
+
+#include <QIcon>
 
 namespace Marble
 {
