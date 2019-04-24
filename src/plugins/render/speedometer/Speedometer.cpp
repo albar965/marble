@@ -19,6 +19,8 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "ViewportParams.h"
 
+#include <QIcon>
+
 namespace Marble
 {
 

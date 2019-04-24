@@ -14,6 +14,8 @@
 
 #include "ui_RoutinoConfigWidget.h"
 
+#include <QSet>
+
 namespace Marble
 {
 
