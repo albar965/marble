@@ -19,6 +19,8 @@
 
 #include "ui_Speedometer.h"
 
+class QIcon;
+
 namespace Marble
 {
 
@@ -37,7 +39,7 @@ class Speedometer : public AbstractFloatItem
     Q_PLUGIN_METADATA(IID "org.kde.marble.Speedometer")
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( Speedometer )
-    
+
  public:
     Speedometer();
     explicit Speedometer( const MarbleModel *marbleModel );

@@ -1,0 +1,53 @@
+language: cpp
+os: linux
+compiler: gcc
+dist: xenial
+
+addons:
+  apt:
+    # Get new gcc
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+
+before_install:
+    # Add repository for Qt
+    - sudo apt-add-repository --yes ppa:beineri/opt-qt-5.12.2-xenial
+    - sudo apt-get -qq update
+
+    # Decrypt auth token for deployment
+    - '[ "$TRAVIS_SECURE_ENV_VARS" == "false" ] || openssl aes-256-cbc -K $encrypted_d91a5e88c426_key -iv $encrypted_d91a5e88c426_iv -in deployment/.dropbox_uploader.enc -out ~/.dropbox_uploader -d'
+
+install:
+    # Install needed Qt modules and libraries for qt
+    - sudo apt-get --yes install libgl1-mesa-dev qt512base qt512svg qt512script qt512declarative
+
+    # Set Qt variables
+    - QTDIR="/opt/qt512"
+    - PATH="$QTDIR/bin:$PATH"
+    - source /opt/qt512/bin/qt512-env.sh
+
+    # Set used gcc version
+    - sudo ln -s /usr/bin/gcc-7 /usr/local/bin/gcc
+    - sudo ln -s /usr/bin/g++-7 /usr/local/bin/g++
+    - export CC=gcc-7
+    - export CXX=g++-7
+
+    # Set environment variables for marble
+    - export MARBLE_BASE=/home/travis/Programs/Marble
+
+script:
+    # Build marble
+    - mkdir ../build-marble-release
+    - cd ../build-marble-release
+    - cmake -DCMAKE_BUILD_TYPE=Release -DSTATIC_BUILD=TRUE -DQTONLY=TRUE -DBUILD_MARBLE_EXAMPLES=NO -DBUILD_INHIBIT_SCREENSAVER_PLUGIN=NO -DBUILD_MARBLE_APPS=NO -DBUILD_MARBLE_EXAMPLES=NO -DBUILD_MARBLE_TESTS=NO -DBUILD_MARBLE_TOOLS=NO -DBUILD_TESTING=NO -DBUILD_WITH_DBUS=NO -DMARBLE_EMPTY_MAPTHEME=YES -DMOBILE=NO -DWITH_DESIGNER_PLUGIN=NO -DWITH_Phonon=NO -DWITH_Qt5Location=NO -DWITH_Qt5Positioning=NO -DWITH_Qt5SerialPort=NO -DWITH_ZLIB=NO -DWITH_libgps=NO -DWITH_libshp=NO -DWITH_libwlocate=NO -DCMAKE_INSTALL_PREFIX=$MARBLE_BASE -DEXEC_INSTALL_PREFIX=$MARBLE_BASE -DCMAKE_PREFIX_PATH=$QTDIR/ ../marble/
+    - make -j2
+
+after_success:
+    # Deploy artefacts to dropbox
+    - tar -cvzf ../marble-release.tar.gz ../build-marble-release/
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh delete linux/marble-release.tar.gz'
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh mkdir linux'
+    - '[ -f ~/.dropbox_uploader ] && ../marble/deployment/dropbox_uploader.sh upload ../marble-release.tar.gz linux'

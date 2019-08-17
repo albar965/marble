@@ -21,6 +21,8 @@
 
 #include "ui_GpsInfoPlugin.h"
 
+class QIcon;
+
 namespace Marble
 {
 
@@ -39,7 +41,7 @@ class GpsInfo : public AbstractFloatItem
     Q_PLUGIN_METADATA(IID "org.kde.marble.GpsInfo")
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( GpsInfo )
-    
+
  public:
     GpsInfo();
     explicit GpsInfo( const MarbleModel *marbleModel );
