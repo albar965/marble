@@ -12,6 +12,8 @@
 #include "RoutinoRunner.h"
 #include "MarbleDirs.h"
 
+#include <QSet>
+
 #include "ui_RoutinoConfigWidget.h"
 
 namespace Marble

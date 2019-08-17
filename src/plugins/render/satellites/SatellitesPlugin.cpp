@@ -27,6 +27,7 @@
 
 #include <QUrl>
 #include <QMouseEvent>
+#include <QAction>
 
 namespace Marble
 {
