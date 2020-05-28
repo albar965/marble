@@ -223,6 +223,13 @@ QPixmap NavigationFloatItem::pixmap( const QString &id )
     return result;
 }
 
+void NavigationFloatItem::paintContent( QPainter *painter )
+{
+    painter->drawPixmap( 0, 0, pixmap( "marble/navigation/navigational_backdrop_top" ) );
+    painter->drawPixmap( 0, 70, 70, 200, pixmap( "marble/navigation/navigational_backdrop_center" )  );
+    painter->drawPixmap( 0, 270, pixmap( "marble/navigation/navigational_backdrop_bottom" ) );
+}
+
 void NavigationFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
     if ( !m_contextMenu ) {

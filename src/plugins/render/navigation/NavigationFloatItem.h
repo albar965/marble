@@ -78,6 +78,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );
+    void paintContent( QPainter *painter );
     void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
