@@ -67,6 +67,16 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
     QDialog *configDialog();
 
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( const QHash<QString,QVariant> &settings );
+
  protected:
     virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
     virtual void toolTipEvent( QHelpEvent *e );
@@ -110,7 +120,7 @@ private:
 
     QAction  *m_minimizeAction;
     bool m_minimized;
-    int m_widthScaleFactor;
+    int m_widthScaleFactor; // Width of view port / factor = content size
 };
 
 }
