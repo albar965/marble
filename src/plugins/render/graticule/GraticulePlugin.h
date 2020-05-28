@@ -31,7 +31,7 @@
 #include "GeoDataLatLonAltBox.h"
 
 
-namespace Ui 
+namespace Ui
 {
     class GraticuleConfigWidget;
 }
@@ -44,8 +44,8 @@ class GeoDataLatLonAltBox;
 /**
  * @brief A plugin that creates a coordinate grid on top of the map.
  * Unlike in all other classes we are using degree by default in this class.
- * This choice was made due to the fact that all common coordinate grids focus fully 
- * on the degree system. 
+ * This choice was made due to the fact that all common coordinate grids focus fully
+ * on the degree system.
  */
 
 class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
@@ -115,7 +115,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param viewport the viewport
      */
     void renderGrid( GeoPainter *painter, ViewportParams *viewport,
-                     const QPen& equatorCirclePen,    
+                     const QPen& equatorCirclePen,
                      const QPen& tropicsCirclePen,
                      const QPen& gridCirclePen );
 
@@ -138,7 +138,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param polarGap the area around the poles in which most longitude lines are not drawn
      *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
      *        concurring lines around the poles which obstruct the view onto the surface.
-     *        The radius of the polarGap area is measured in degrees. 
+     *        The radius of the polarGap area is measured in degrees.
      * @param lineLabel draws a label using the font and color properties set for the painter.
      */
     static void renderLongitudeLine( GeoPainter *painter, qreal longitude,
@@ -153,7 +153,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      * @param step the angular distance between the lines measured in degrees .
      */
-    void renderLatitudeLines( GeoPainter *painter, 
+    void renderLatitudeLines( GeoPainter *painter,
                               const GeoDataLatLonAltBox& viewLatLonAltBox,
                               qreal step, qreal skipStep,
                               LabelPositionFlags labelPositionFlags = LineCenter
@@ -171,35 +171,14 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param southPolarGap the area around the south pole in which most longitude lines are not drawn
      *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
      *        concurring lines around the poles which obstruct the view onto the surface.
-     *        The radius of the polarGap area is measured in degrees. 
+     *        The radius of the polarGap area is measured in degrees.
      */
-    void renderLongitudeLines( GeoPainter *painter, 
-                              const GeoDataLatLonAltBox& viewLatLonAltBox, 
+    void renderLongitudeLines( GeoPainter *painter,
+                              const GeoDataLatLonAltBox& viewLatLonAltBox,
                               qreal step, qreal skipStep,
                               qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
                               LabelPositionFlags labelPositionFlags = LineCenter
                              );
-
-    /**
-     * @brief Renders UTM exceptions that are visible within the defined view bounding box.
-     * @param painter the painter used to draw the latitude lines
-     * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
-     * @param step the angular distance between the lines measured in degrees .
-     * @param northPolarGap the area around the north pole in which most longitude lines are not drawn
-     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
-     *        concurring lines around the poles which obstruct the view onto the surface.
-     *        The radius of the polarGap area is measured in degrees.
-     * @param southPolarGap the area around the south pole in which most longitude lines are not drawn
-     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
-     *        concurring lines around the poles which obstruct the view onto the surface.
-     *        The radius of the polarGap area is measured in degrees.
-     */
-    static void renderUtmExceptions( GeoPainter *painter,
-                                     const GeoDataLatLonAltBox& viewLatLonAltBox,
-                                     qreal step,
-                                     qreal northPolarGap, qreal southPolarGap,
-                                     const QString & label,
-                                     LabelPositionFlags labelPositionFlags );
 
     /**
      * @brief Maps the number of coordinate lines per 360 deg against the globe radius on the screen.
@@ -210,7 +189,6 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
     GeoDataCoordinates::Notation m_currentNotation;
 
     // Maps the zoom factor to the amount of lines per 360 deg
-    QMap<qreal,qreal> m_boldLineMap;
     QMap<qreal,qreal> m_normalLineMap;
 
     QPen m_equatorCirclePen;
