@@ -79,7 +79,6 @@ class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationIn
 
  protected:
     virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
-    virtual void toolTipEvent( QHelpEvent *e );
 
  private Q_SLOTS:
     void readSettings();
@@ -110,11 +109,7 @@ private:
     int      m_pixelInterval;
     int      m_valueInterval;
 
-    QString m_ratioString;
-
     bool     m_scaleInitDone;
-
-    bool     m_showRatioScale;
 
     QMenu*   m_contextMenu;
 

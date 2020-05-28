@@ -15,16 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="m_showRatioScaleCheckBox">
-     <property name="text">
-      <string>Show Ratio Scale</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QCheckBox" name="m_minimizeCheckBox">
      <property name="text">
       <string>Minimize</string>

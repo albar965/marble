@@ -47,7 +47,6 @@ MapScaleFloatItem::MapScaleFloatItem( const MarbleModel *marbleModel )
       m_pixelInterval(0),
       m_valueInterval(0),
       m_scaleInitDone( false ),
-      m_showRatioScale( false ),
       m_contextMenu( 0 ),
       m_minimized(false),
       m_widthScaleFactor(2)
@@ -137,13 +136,8 @@ void MapScaleFloatItem::setProjection( const ViewportParams *viewport )
             && m_scaleInitDone ) )
     {
         int fontHeight     = QFontMetrics( font() ).ascent();
-        if (m_showRatioScale) {
-            setContentSize( QSizeF( viewport->width() / m_widthScaleFactor,
-                                    fontHeight + 3 + m_scaleBarHeight + fontHeight + 7 ) );
-        } else {
             setContentSize( QSizeF( viewport->width() / m_widthScaleFactor,
                                     fontHeight + 3 + m_scaleBarHeight ) );
-        }
 
         m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
         m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
@@ -207,22 +201,6 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
     painter->setRenderHint( QPainter::Antialiasing, true );
 
     int fontHeight     = QFontMetrics( font() ).ascent();
-
-    //calculate scale ratio
-    qreal displayMMPerPixel = 1.0 * painter->device()->widthMM() / painter->device()->width();
-    qreal ratio = m_pixel2Length * 1000. / (displayMMPerPixel * MM2M);
-
-    //round ratio to 3 most significant digits, assume that ratio >= 1, otherwise it may display "1 : 0"
-    //i made this assumption because as the primary use case we do not need to zoom in that much
-    qreal power = 1;
-    int iRatio = (int)(ratio + 0.5); //round ratio to the nearest integer
-    while (iRatio >= 1000) {
-        iRatio /= 10;
-        power *= 10;
-    }
-    iRatio *= power;
-    m_ratioString = QLocale().toString(iRatio);
-    m_ratioString = m_ratioString = "1 : " + m_ratioString;
 
     painter->setPen(   QColor( Qt::darkGray ) );
     painter->setBrush( QColor( Qt::darkGray ) );
@@ -319,9 +297,6 @@ void MapScaleFloatItem::paintContent( QPainter *painter )
               lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );
           }
       }
-
-      int leftRatioIndent = m_leftBarMargin + (m_scaleBarWidth - QFontMetrics( font() ).width(m_ratioString) ) / 2;
-      painter->drawText( leftRatioIndent, fontHeight + 3 + m_scaleBarHeight + fontHeight + 5, m_ratioString );
     }
 
     painter->restore();
@@ -383,7 +358,6 @@ QHash<QString, QVariant> MapScaleFloatItem::settings() const
 {
   QHash<QString, QVariant> settings = AbstractFloatItem::settings();
   settings.insert( "minimized", m_minimized );
-  settings.insert( "showRatioScale", m_showRatioScale );
   return settings;
 }
 
@@ -391,7 +365,6 @@ void MapScaleFloatItem::setSettings(const QHash<QString, QVariant>& settings)
 {
   AbstractFloatItem::setSettings( settings );
   m_minimized = settings.value( "minimized", false ).toBool();
-  m_showRatioScale = settings.value( "showRatioScale", false ).toBool();
   readSettings();
 }
 
@@ -407,11 +380,6 @@ void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
             }
         }
 
-        QAction *toggleAction = m_contextMenu->addAction( tr("&Ratio Scale"), this,
-                                                SLOT(toggleRatioScaleVisibility()) );
-        toggleAction->setCheckable( true );
-        toggleAction->setChecked( m_showRatioScale );
-
         m_contextMenu->addAction(m_minimizeAction);
     }
 
@@ -419,33 +387,16 @@ void MapScaleFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
     m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
-void MapScaleFloatItem::toolTipEvent( QHelpEvent *e )
-{
-    QToolTip::showText( e->globalPos(), m_ratioString );
-}
-
 void MapScaleFloatItem::readSettings()
 {
     if ( !m_configDialog )
         return;
-
-    if ( m_showRatioScale ) {
-        ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Checked );
-    } else {
-        ui_configWidget->m_showRatioScaleCheckBox->setCheckState( Qt::Unchecked );
-    }
 
     ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
 }
 
 void MapScaleFloatItem::writeSettings()
 {
-    if ( ui_configWidget->m_showRatioScaleCheckBox->checkState() == Qt::Checked ) {
-        m_showRatioScale = true;
-    } else {
-        m_showRatioScale = false;
-    }
-
     if (m_minimized != ui_configWidget->m_minimizeCheckBox->isChecked()) {
         toggleMinimized();
     }
@@ -455,7 +406,6 @@ void MapScaleFloatItem::writeSettings()
 
 void MapScaleFloatItem::toggleRatioScaleVisibility()
 {
-    m_showRatioScale = !m_showRatioScale;
     readSettings();
     emit settingsChanged( nameId() );
 }
