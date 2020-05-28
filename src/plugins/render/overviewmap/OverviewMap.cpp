@@ -122,12 +122,7 @@ QDialog *OverviewMap::configDialog()
         m_configDialog = new QDialog();
         ui_configWidget = new Ui::OverviewMapConfigWidget;
         ui_configWidget->setupUi( m_configDialog );
-        for( int i = 0; i < m_planetID.size(); ++i ) {
-            ui_configWidget->m_planetComboBox->addItem( PlanetFactory::localizedName(m_planetID.value( i ) ) );
-        }
-        ui_configWidget->m_planetComboBox->setCurrentIndex( 2 );
         readSettings();
-        loadMapSuggestions();
         connect( ui_configWidget->m_buttonBox, SIGNAL(accepted()),
                  SLOT(writeSettings()) );
         connect( ui_configWidget->m_buttonBox, SIGNAL(rejected()),
@@ -137,18 +132,12 @@ QDialog *OverviewMap::configDialog()
         QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL(clicked()),
                  SLOT(writeSettings()) );
-        connect( ui_configWidget->m_fileChooserButton, SIGNAL(clicked()),
-                 SLOT(chooseCustomMap()) );
         connect( ui_configWidget->m_widthBox, SIGNAL(valueChanged(int)),
                  SLOT(synchronizeSpinboxes()) );
         connect( ui_configWidget->m_heightBox, SIGNAL(valueChanged(int)),
                  SLOT(synchronizeSpinboxes()) );
-        connect( ui_configWidget->m_planetComboBox, SIGNAL(currentIndexChanged(int)),
-                 SLOT(showCurrentPlanetPreview()) );
         connect( ui_configWidget->m_colorChooserButton, SIGNAL(clicked()),
                  SLOT(choosePositionIndicatorColor()) );
-        connect( ui_configWidget->m_tableWidget, SIGNAL(cellClicked(int,int)),
-                 SLOT(useMapSuggestion(int)) );
     }
     return m_configDialog;
 }
@@ -204,7 +193,7 @@ void OverviewMap::paintContent( QPainter *painter )
             mapPainter.begin( &m_worldmap );
             mapPainter.setViewport( m_worldmap.rect() );
             m_svgobj.render( &mapPainter );
-            mapPainter.end(); 
+            mapPainter.end();
         }
 
         painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
@@ -238,11 +227,11 @@ void OverviewMap::paintContent( QPainter *painter )
     }
 
     // Now draw the latitude longitude bounding box
-    qreal xWest = mapRect.width() / 2.0 
+    qreal xWest = mapRect.width() / 2.0
                     + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.west();
     qreal xEast = mapRect.width() / 2.0
                     + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.east();
-    qreal xNorth = mapRect.height() / 2.0 
+    qreal xNorth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.north();
     qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
@@ -270,7 +259,7 @@ void OverviewMap::paintContent( QPainter *painter )
         painter->drawRect( QRectF( xWest, xNorth, boxWidth, boxHeight ) );
     }
     else {
-        // If the dateline is shown in the viewport  and if the poles are not 
+        // If the dateline is shown in the viewport  and if the poles are not
         // then there are two boxes that represent the latLonBox of the view.
 
         boxWidth = xEast;
@@ -379,14 +368,11 @@ void OverviewMap::updateSettings()
     }
 
     m_posColor = QColor( m_settings.value( "posColor" ).toString() );
-    loadPlanetMaps();
 
     if ( !m_configDialog ) {
         return;
     }
-    
-    setCurrentWidget( m_svgWidgets[m_planetID[2]] );
-    showCurrentPlanetPreview();
+
     setContentSize( QSizeF( ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value() ) );
 }
 
@@ -412,7 +398,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
             // Double click triggers recentering the map at the specified position
             if ( e->type() == QEvent::MouseButtonDblClick ) {
                 QRectF mapRect( contentRect() );
-                QPointF pos = event->pos() - floatItemRect.topLeft() 
+                QPointF pos = event->pos() - floatItemRect.topLeft()
                     - QPointF(padding(),padding());
 
                 qreal lon = ( pos.x() - mapRect.width() / 2.0 ) / mapRect.width() * 360.0 ;
@@ -423,7 +409,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
             }
         }
 
-        if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove 
+        if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove
                 && !(event->buttons() & Qt::LeftButton) )
         {
             // Cross hair cursor when moving above the float item without pressing a button
@@ -441,58 +427,6 @@ void OverviewMap::changeBackground( const QString& target )
     m_mapChanged = true;
 }
 
-QSvgWidget *OverviewMap::currentWidget() const
-{
-    return m_svgWidgets[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]];
-}
-
-void OverviewMap::setCurrentWidget( QSvgWidget *widget )
-{
-    m_svgWidgets[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = widget;
-    if( m_target == m_planetID[ui_configWidget->m_planetComboBox->currentIndex()] ) {
-        changeBackground( m_target );
-    }
-}
-
-void OverviewMap::loadPlanetMaps()
-{
-    foreach( const QString& planet, m_planetID ) {
-        if ( m_svgWidgets.contains( planet) ) {
-            m_svgWidgets[planet]->load( m_svgPaths[planet] );
-        } else {
-            m_svgWidgets[planet] = new QSvgWidget( m_svgPaths[planet] );
-        }
-    }
-}
-
-void OverviewMap::loadMapSuggestions()
-{
-    QStringList paths = QDir( MarbleDirs::pluginPath( "" ) ).entryList( QStringList( "*.svg" ), QDir::Files | QDir::NoDotAndDotDot );
-    for( int i = 0; i < paths.size(); ++i ) {
-        paths[i] = MarbleDirs::pluginPath( QString() ) + '/' + paths[i];
-    }
-    paths << MarbleDirs::path( "svg/worldmap.svg" ) << MarbleDirs::path( "svg/lunarmap.svg" );
-    ui_configWidget->m_tableWidget->setRowCount( paths.size() );
-    for( int i = 0; i < paths.size(); ++i ) {
-        ui_configWidget->m_tableWidget->setCellWidget( i, 0, new QSvgWidget( paths[i] ) );
-        ui_configWidget->m_tableWidget->setItem( i, 1, new QTableWidgetItem( paths[i] ) );
-    }
-}
-
-void OverviewMap::chooseCustomMap()
-{
-    QString path = QFileDialog::getOpenFileName ( m_configDialog, tr( "Choose Overview Map" ), "", "SVG (*.svg)" );
-    if( !path.isNull() )
-    {
-        ui_configWidget->m_fileChooserButton->layout()->removeWidget( currentWidget() );
-        delete currentWidget();
-        QSvgWidget *widget = new QSvgWidget( path );
-        setCurrentWidget( widget );
-        ui_configWidget->m_fileChooserButton->layout()->addWidget( widget );
-        m_svgPaths[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = path;
-    }
-}
-
 void OverviewMap::synchronizeSpinboxes()
 {
     if( sender() == ui_configWidget->m_widthBox ) {
@@ -503,17 +437,10 @@ void OverviewMap::synchronizeSpinboxes()
     }
 }
 
-void OverviewMap::showCurrentPlanetPreview() const
-{
-    delete ui_configWidget->m_fileChooserButton->layout();
-    ui_configWidget->m_fileChooserButton->setLayout( new QHBoxLayout() );
-    ui_configWidget->m_fileChooserButton->layout()->addWidget( currentWidget() );
-}
-
 void OverviewMap::choosePositionIndicatorColor()
 {
-    QColor c = QColorDialog::getColor( m_posColor, 0, 
-                                       tr( "Please choose the color for the position indicator" ), 
+    QColor c = QColorDialog::getColor( m_posColor, 0,
+                                       tr( "Please choose the color for the position indicator" ),
                                        QColorDialog::ShowAlphaChannel );
     if( c.isValid() )
     {
@@ -522,16 +449,6 @@ void OverviewMap::choosePositionIndicatorColor()
         palette.setColor( QPalette::Button, m_posColor );
         ui_configWidget->m_colorChooserButton->setPalette( palette );
     }
-}
-
-void OverviewMap::useMapSuggestion( int index )
-{
-    QString path = ui_configWidget->m_tableWidget->item( index, 1 )->text();
-    m_svgPaths[m_planetID[ui_configWidget->m_planetComboBox->currentIndex()]] = path;
-    delete currentWidget();
-    QSvgWidget *widget = new QSvgWidget( path );
-    setCurrentWidget( widget );
-    showCurrentPlanetPreview();
 }
 
 }

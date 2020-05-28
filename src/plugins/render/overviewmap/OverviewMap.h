@@ -41,7 +41,7 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     Q_INTERFACES( Marble::RenderPluginInterface )
     Q_INTERFACES( Marble::DialogConfigurationInterface )
     MARBLE_PLUGIN( OverviewMap )
-    
+
  public:
     OverviewMap();
     explicit OverviewMap( const MarbleModel *marbleModel );
@@ -95,10 +95,6 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
 
  private:
     void changeBackground( const QString& target );
-    QSvgWidget *currentWidget() const;
-    void setCurrentWidget( QSvgWidget *widget );
-    void loadPlanetMaps();
-    void loadMapSuggestions();
 
     QString m_target;
     QSvgRenderer   m_svgobj;
@@ -119,11 +115,8 @@ class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterfac
     bool m_mapChanged;
 
  private Q_SLOTS:
-    void chooseCustomMap();
     void synchronizeSpinboxes();
-    void showCurrentPlanetPreview() const;
     void choosePositionIndicatorColor();
-    void useMapSuggestion( int index );
 };
 
 }
