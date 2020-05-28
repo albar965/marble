@@ -78,7 +78,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );
-    void paintContent( QPainter *painter );
     void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
 
  private Q_SLOTS:
@@ -87,10 +86,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     /** Enable/disable zoom in/out buttons */
     void updateButtons( int zoomValue );
-
-    void activateCurrentPositionButton();
-    void activateHomeButton();
-    void centerOnCurrentLocation();
 
  private:
     /** MarbleWidget this float item is installed as event filter for */
@@ -113,10 +108,9 @@ MARBLE_PLUGIN( NavigationFloatItem )
     int m_minZoom;
 
     QMenu *m_contextMenu;
-    QAction *m_activateCurrentPositionButtonAction;
-    QAction *m_activateHomeButtonAction;
-
-    bool m_showHomeButton;
+    // QAction *m_activateCurrentPositionButtonAction;
+    // QAction *m_activateHomeButtonAction;
+    // bool m_showHomeButton;
 };
 
 }

@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QPixmapCache>
+#include <QApplication>
 
 namespace Marble
 {
@@ -46,26 +47,35 @@ QPixmap NavigationSlider::pixmap( const QString &id )
     return result;
 }
 
-void NavigationSlider::enterEvent( QEvent * )
+void NavigationSlider::enterEvent( QEvent *)
 {
+  if(QApplication::mouseButtons() & Qt::LeftButton)
+    pressedOnEnter = true;
+  else
+  {
+    pressedOnEnter = false;
     setSliderDown( false );
     if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
         repaint();
     }
+  }
 }
 
 void NavigationSlider::mouseMoveEvent( QMouseEvent *mouseEvent )
 {
+  if(!pressedOnEnter)
+  {
     if ( !isSliderDown() && mouseEvent->buttons() & Qt::LeftButton ) {
-        setSliderDown( true );
+      setSliderDown( true );
     }
     if ( isSliderDown() ) {
-        qreal const fraction = ( mouseEvent->pos().y() - handleImageHeight/2 ) / qreal ( height() - handleImageHeight );
-        int v = ( int ) minimum() + ( ( maximum() - minimum() ) ) * ( 1 - fraction );
-        setValue( v );
-        repaint();
+      qreal const fraction = ( mouseEvent->pos().y() - handleImageHeight/2 ) / qreal ( height() - handleImageHeight );
+      int v = ( int ) minimum() + ( ( maximum() - minimum() ) ) * ( 1 - fraction );
+      setValue( v );
+      repaint();
     }
+  }
 }
 
 void NavigationSlider::mousePressEvent( QMouseEvent * )
@@ -79,6 +89,7 @@ void NavigationSlider::mousePressEvent( QMouseEvent * )
 
 void NavigationSlider::mouseReleaseEvent( QMouseEvent * )
 {
+    pressedOnEnter = false;
     setSliderDown( false );
     if ( m_handleImagePath != "marble/navigation/navigational_slider_handle_hover" ) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle_hover";
@@ -88,6 +99,7 @@ void NavigationSlider::mouseReleaseEvent( QMouseEvent * )
 
 void NavigationSlider::leaveEvent( QEvent * )
 {
+    pressedOnEnter = false;
     setSliderDown( false );
     if ( m_handleImagePath != "marble/navigation/navigational_slider_handle" ) {
         m_handleImagePath = "marble/navigation/navigational_slider_handle";

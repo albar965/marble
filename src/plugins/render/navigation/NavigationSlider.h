@@ -28,7 +28,7 @@ Q_SIGNALS:
     void repaintNeeded();
 
 protected:
-    void enterEvent( QEvent * );
+    void enterEvent(QEvent *);
     void mouseMoveEvent( QMouseEvent * mouseEvent);
     void mousePressEvent( QMouseEvent * );
     void mouseReleaseEvent( QMouseEvent * );
@@ -39,6 +39,7 @@ protected:
 private:
     static QPixmap pixmap(const QString &id );
     QString m_handleImagePath;
+    bool pressedOnEnter = false;
 };
 
 }

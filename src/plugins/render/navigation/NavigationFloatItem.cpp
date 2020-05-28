@@ -38,8 +38,7 @@ NavigationFloatItem::NavigationFloatItem( const MarbleModel *marbleModel )
       m_widgetItem( 0 ),
       m_navigationWidget( 0 ),
       m_oldViewportRadius( 0 ),
-      m_contextMenu( 0 ),
-      m_showHomeButton( true )
+      m_contextMenu( 0 )
 {
     // Plugin is visible by default on desktop systems
     const bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -103,7 +102,8 @@ QList<PluginAuthor> NavigationFloatItem::pluginAuthors() const
     return QList<PluginAuthor>()
             << PluginAuthor( QString::fromUtf8( "Dennis Nienhüser" ), "nienhueser@kde.org" )
             << PluginAuthor( "Bastian Holst", "bastianholst@gmx.de" )
-            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" );
+            << PluginAuthor( "Mohammed Nafees", "nafees.technocool@gmail.com" )
+            << PluginAuthor( "Alexander Barthel", "alex@littlenavmap.org" );
 }
 
 QIcon NavigationFloatItem::icon() const
@@ -126,12 +126,6 @@ void NavigationFloatItem::initialize()
     layout->addItem( m_widgetItem, 0, 0 );
 
     setLayout( layout );
-
-    if ( m_showHomeButton ) {
-      activateHomeButton();
-    } else {
-      activateCurrentPositionButton();
-    }
 }
 
 bool NavigationFloatItem::isInitialized() const
@@ -170,13 +164,6 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
 
         m_navigationWidget->arrowDisc->setMarbleWidget( m_marbleWidget );
         connect( m_navigationWidget->arrowDisc, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
-
-        connect( m_navigationWidget->homeButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
-        if ( m_showHomeButton ) {
-          activateHomeButton();
-        } else {
-          activateCurrentPositionButton();
-        }
 
         connect( m_navigationWidget->zoomInButton, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
         connect( m_navigationWidget->zoomInButton, SIGNAL(clicked()),
@@ -236,113 +223,26 @@ QPixmap NavigationFloatItem::pixmap( const QString &id )
     return result;
 }
 
-void NavigationFloatItem::paintContent( QPainter *painter )
-{
-    painter->drawPixmap( 0, 0, pixmap( "marble/navigation/navigational_backdrop_top" ) );
-    painter->drawPixmap( 0, 70, pixmap( "marble/navigation/navigational_backdrop_center" ) );
-    painter->drawPixmap( 0, 311, pixmap( "marble/navigation/navigational_backdrop_bottom" ) );
-}
-
 void NavigationFloatItem::contextMenuEvent( QWidget *w, QContextMenuEvent *e )
 {
     if ( !m_contextMenu ) {
         m_contextMenu = contextMenu();
 
-        m_activateCurrentPositionButtonAction = new QAction( QIcon(),
-                                                             tr( "Current Location Button" ),
-                                                             m_contextMenu );
-        m_activateHomeButtonAction = new QAction( QIcon( ":/icons/go-home.png" ),
-                                                             tr( "Home Button" ),
-                                                             m_contextMenu );
-        m_activateHomeButtonAction->setVisible( !m_showHomeButton );
-        m_activateCurrentPositionButtonAction->setVisible( m_showHomeButton );
-        m_contextMenu->addSeparator();
-        m_contextMenu->addAction( m_activateCurrentPositionButtonAction );
-        m_contextMenu->addAction( m_activateHomeButtonAction );
-
-        connect( m_activateCurrentPositionButtonAction, SIGNAL(triggered()), SLOT(activateCurrentPositionButton()) );
-        connect( m_activateHomeButtonAction, SIGNAL(triggered()), SLOT(activateHomeButton()) );
     }
 
     Q_ASSERT( m_contextMenu );
     m_contextMenu->exec( w->mapToGlobal( e->pos() ) );
 }
 
-void NavigationFloatItem::activateCurrentPositionButton()
-{
-    if ( !isInitialized() ) {
-        return;
-    }
-
-    QIcon icon;
-    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation"), QIcon::Normal );
-    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_hover"), QIcon::Active );
-    icon.addPixmap( pixmap("marble/navigation/navigational_currentlocation_pressed"), QIcon::Selected );
-    m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
-
-    if ( m_contextMenu ) {
-        m_activateCurrentPositionButtonAction->setVisible( false );
-        m_activateHomeButtonAction->setVisible( true );
-    }
-
-    if (m_marbleWidget) {
-      disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
-    }
-    connect( m_navigationWidget->homeButton, SIGNAL(clicked()), SLOT(centerOnCurrentLocation()) );
-    emit repaintNeeded();
-    m_showHomeButton = false;
-    emit settingsChanged( nameId() );
-}
-
-void NavigationFloatItem::activateHomeButton()
-{
-    if ( !isInitialized() ) {
-        return;
-    }
-
-    QIcon icon;
-    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton"), QIcon::Normal );
-    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_hover"), QIcon::Active );
-    icon.addPixmap( pixmap("marble/navigation/navigational_homebutton_press"), QIcon::Selected );
-    m_navigationWidget->homeButton->setProperty("icon", QVariant(icon));
-
-    if ( m_contextMenu ) {
-        m_activateCurrentPositionButtonAction->setVisible( true );
-        m_activateHomeButtonAction->setVisible( false );
-    }
-
-    disconnect( m_navigationWidget->homeButton, SIGNAL(clicked()), this, SLOT(centerOnCurrentLocation()) );
-    if (m_marbleWidget) {
-      connect( m_navigationWidget->homeButton, SIGNAL(clicked()), m_marbleWidget, SLOT(goHome()) );
-    }
-    emit repaintNeeded();
-    m_showHomeButton = true;
-    emit settingsChanged( nameId() );
-}
-
-void NavigationFloatItem::centerOnCurrentLocation()
-{
-    if ( m_marbleWidget->model()->positionTracking()->currentLocation().isValid() ) {
-        m_marbleWidget->centerOn( m_marbleWidget->model()->positionTracking()->currentLocation(), true );
-    }
-}
-
 QHash<QString,QVariant> NavigationFloatItem::settings() const
 {
     QHash<QString, QVariant> settings = AbstractFloatItem::settings();
-    settings.insert( "showHomeButton", m_showHomeButton );
     return settings;
 }
 
 void NavigationFloatItem::setSettings( const QHash<QString, QVariant> &settings )
 {
     AbstractFloatItem::setSettings( settings );
-    m_showHomeButton = settings.value( "showHomeButton", true ).toBool();
-    if ( m_showHomeButton ) {
-        activateHomeButton();
-    } else {
-        activateCurrentPositionButton();
-    }
 }
 
 #include "moc_NavigationFloatItem.cpp"
