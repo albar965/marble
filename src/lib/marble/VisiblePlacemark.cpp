@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QPainter>
 #include <QPalette>
+#include <QPainterPath>
 
 using namespace Marble;
 
