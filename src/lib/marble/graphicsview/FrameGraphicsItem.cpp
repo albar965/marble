@@ -21,6 +21,7 @@
 #include <QPixmapCache>
 #include <QMargins>
 #include <qdrawutil.h>
+#include <QPainterPath>
 
 using namespace Marble;
 

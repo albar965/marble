@@ -32,6 +32,7 @@
 #include <QContextMenuEvent>
 #include <QRect>
 #include <QPainter>
+#include <QPainterPath>
 #include <QPushButton>
 #include <QMenu>
 #include <QMouseEvent>
