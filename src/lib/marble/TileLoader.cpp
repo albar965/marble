@@ -64,7 +64,7 @@ TileLoader::~TileLoader()
 // If the tile image file is locally available:
 //     - if not expired: create ImageTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
-QImage TileLoader::loadTileImage( GeoSceneTextureTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+QImage TileLoader::loadTileImage(GeoSceneTextureTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage , QHash<QString, QString> keys)
 {
     QString const fileName = tileFileName( textureLayer, tileId );
 
@@ -77,7 +77,7 @@ QImage TileLoader::loadTileImage( GeoSceneTextureTileDataset const *textureLayer
         } else {
             Q_ASSERT( status == Expired );
             mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
-            triggerDownload( textureLayer, tileId, usage );
+            triggerDownload( textureLayer, tileId, usage ,keys);
         }
 
         QImage const image( fileName );
@@ -93,13 +93,13 @@ QImage TileLoader::loadTileImage( GeoSceneTextureTileDataset const *textureLayer
     QImage replacementTile = scaledLowerLevelTile( textureLayer, tileId );
     Q_ASSERT( !replacementTile.isNull() );
 
-    triggerDownload( textureLayer, tileId, usage );
+    triggerDownload( textureLayer, tileId, usage, keys);
 
     return replacementTile;
 }
 
 
-GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage )
+GeoDataDocument *TileLoader::loadTileVectorData(GeoSceneVectorTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage , QHash<QString, QString> keys)
 {
     // FIXME: textureLayer->fileFormat() could be used in the future for use just that parser, instead of all available parsers
 
@@ -114,7 +114,7 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
         } else {
             Q_ASSERT( status == Expired );
             mDebug() << Q_FUNC_INFO << tileId << "StateExpired";
-            triggerDownload( textureLayer, tileId, usage );
+            triggerDownload( textureLayer, tileId, usage, keys);
         }
 
         QFile file ( fileName );
@@ -129,7 +129,7 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
     }
 
     // tile was not locally available => trigger download
-    triggerDownload( textureLayer, tileId, usage );
+    triggerDownload( textureLayer, tileId, usage , keys);
     return nullptr;
 }
 
@@ -139,9 +139,9 @@ GeoDataDocument *TileLoader::loadTileVectorData( GeoSceneVectorTileDataset const
 //
 // post condition
 //     - download is triggered
-void TileLoader::downloadTile( GeoSceneTileDataset const *tileData, TileId const &tileId, DownloadUsage const usage )
+void TileLoader::downloadTile(GeoSceneTileDataset const *tileData, TileId const &tileId, DownloadUsage const usage, QHash<QString, QString> keys )
 {
-    triggerDownload( tileData, tileId, usage );
+    triggerDownload( tileData, tileId, usage , keys);
 }
 
 int TileLoader::maximumTileLevel( GeoSceneTileDataset const & tileData )
@@ -260,7 +260,8 @@ QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId c
     return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
 }
 
-void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage )
+void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage ,
+                                  QHash<QString, QString> keys)
 {
     if (id.zoomLevel() > 0) {
         int minValue = tileData->maximumTileLevel() == -1 ? id.zoomLevel() : qMin( id.zoomLevel(), tileData->maximumTileLevel() );
@@ -270,7 +271,7 @@ void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId co
         }
     }
 
-    QUrl const sourceUrl = tileData->downloadUrl( id );
+    QUrl const sourceUrl = tileData->downloadUrl( id ,keys);
     QString const destFileName = tileData->relativeTileFileName( id );
     QString const idStr = QString( "%1:%2:%3:%4:%5" ).arg( tileData->nodeType()).arg( tileData->sourceDir() ).arg( id.zoomLevel() ).arg( id.x() ).arg( id.y() );
     emit downloadTile( sourceUrl, destFileName, idStr, usage );

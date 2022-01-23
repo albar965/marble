@@ -16,6 +16,7 @@
 #include "TileId.h"
 
 #include <QUrlQuery>
+#include <QDebug>
 
 #include <math.h>
 
@@ -36,7 +37,7 @@ MarbleServerLayout::MarbleServerLayout( GeoSceneTileDataset *textureLayer )
 {
 }
 
-QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
+QUrl MarbleServerLayout::downloadUrl(const QUrl &prototypeUrl, const TileId &id , QHash<QString, QString> keys) const
 {
     const QString path = QString( "%1/%2/%3/%3_%4.%5" )
         .arg( prototypeUrl.path() )
@@ -67,7 +68,7 @@ OsmServerLayout::OsmServerLayout( GeoSceneTileDataset *textureLayer )
 {
 }
 
-QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
+QUrl OsmServerLayout::downloadUrl(const QUrl &prototypeUrl, const TileId &id , QHash<QString, QString> keys) const
 {
     const QString suffix = m_textureLayer->fileFormat().toLower();
     const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
@@ -92,13 +93,17 @@ CustomServerLayout::CustomServerLayout( GeoSceneTileDataset *texture )
 {
 }
 
-QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
+QUrl CustomServerLayout::downloadUrl(const QUrl &prototypeUrl, const TileId &id , QHash<QString, QString> keys) const
 {
     const GeoDataLatLonBox bbox = id.toLatLonBox( m_textureLayer );
 
-    QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
+    QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved ).replace("%3F", "?");
+
+    for(auto it = keys.begin(); it != keys.end(); ++it)
+      urlStr.replace( "{"+it.key()+"}", it.value() );
 
     urlStr.replace( "{zoomLevel}", QString::number( id.zoomLevel() ) );
+    urlStr.replace( "{z}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{x}", QString::number( id.x() ) );
     urlStr.replace( "{y}", QString::number( id.y() ) );
     urlStr.replace( "{west}", QString::number( bbox.west( GeoDataCoordinates::Degree ), 'f', 12 ) );
@@ -120,7 +125,7 @@ WmsServerLayout::WmsServerLayout( GeoSceneTileDataset *texture )
 {
 }
 
-QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
+QUrl WmsServerLayout::downloadUrl(const QUrl &prototypeUrl, const Marble::TileId &tileId , QHash<QString, QString> keys ) const
 {
     GeoDataLatLonBox box = tileId.toLatLonBox( m_textureLayer );
 
@@ -175,7 +180,7 @@ QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTileDataset *textureLayer )
 {
 }
 
-QUrl QuadTreeServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+QUrl QuadTreeServerLayout::downloadUrl(const QUrl &prototypeUrl, const Marble::TileId &id , QHash<QString, QString> keys ) const
 {
     QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved );
 
@@ -209,7 +214,7 @@ TmsServerLayout::TmsServerLayout(GeoSceneTileDataset *textureLayer )
 {
 }
 
-QUrl TmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
+QUrl TmsServerLayout::downloadUrl(const QUrl &prototypeUrl, const TileId &id , QHash<QString, QString> keys ) const
 {
     const QString suffix = m_textureLayer->fileFormat().toLower();
     // y coordinate in TMS start at the bottom of the map (South) and go upwards,

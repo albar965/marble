@@ -770,6 +770,9 @@ public Q_SLOTS:
     void setProjection( int        projection );
     void setProjection( Projection projection );
 
+    /* Set API key which will be used as a replacement for {apikey} in storageLayout of type "Custom"/> */
+    void setKeys(QHash<QString, QString> keys);
+
     /**
      * @brief Set a new map theme
      * @param maptheme  The ID of the new maptheme. To ensure that a unique
@@ -921,6 +924,8 @@ public Q_SLOTS:
 
     /**
      * @brief Set whether the is tile is visible
+     *
+     *
      * NOTE: This is part of the transitional debug API
      *       and might be subject to changes until Marble 0.8
      * @param visible visibility of the tile

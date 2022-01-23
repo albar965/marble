@@ -45,7 +45,7 @@ const int REPAINT_SCHEDULING_INTERVAL = 1000;
 class Q_DECL_HIDDEN TextureLayer::Private
 {
 public:
-    Private( HttpDownloadManager *downloadManager,
+    Private(HttpDownloadManager *downloadManager,
              PluginManager* pluginManager,
              const SunLocator *sunLocator,
              QAbstractItemModel *groundOverlayModel,
@@ -89,12 +89,12 @@ TextureLayer::Private::Private( HttpDownloadManager *downloadManager,
                                 PluginManager* pluginManager,
                                 const SunLocator *sunLocator,
                                 QAbstractItemModel *groundOverlayModel,
-                                TextureLayer *parent )
+                                TextureLayer *parent)
     : m_parent( parent )
     , m_sunLocator( sunLocator )
     , m_loader( downloadManager, pluginManager )
     , m_layerDecorator( &m_loader, sunLocator )
-    , m_tileLoader( &m_layerDecorator )
+    , m_tileLoader( &m_layerDecorator , nullptr)
     , m_centerCoordinates()
     , m_tileZoomLevel( -1 )
     , m_texmapper( 0 )
@@ -239,7 +239,7 @@ void TextureLayer::Private::addCustomTextures()
     }
 }
 
-TextureLayer::TextureLayer( HttpDownloadManager *downloadManager,
+TextureLayer::TextureLayer(HttpDownloadManager *downloadManager,
                             PluginManager* pluginManager,
                             const SunLocator *sunLocator,
                             QAbstractItemModel *groundOverlayModel )
@@ -354,9 +354,14 @@ bool TextureLayer::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+void TextureLayer::setKeys(QHash<QString, QString> keys)
+{
+ d->m_tileLoader.setKeys(keys);
+}
+
 QString TextureLayer::runtimeTrace() const
 {
-    return d->m_runtimeTrace;
+  return d->m_runtimeTrace;
 }
 
 void TextureLayer::setShowRelief( bool show )
@@ -464,13 +469,13 @@ void TextureLayer::reload()
         // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
-        d->m_layerDecorator.downloadStackedTile( id, DownloadBrowse );
+        d->m_layerDecorator.downloadStackedTile( id, DownloadBrowse , d->m_tileLoader.getKeys());
     }
 }
 
 void TextureLayer::downloadStackedTile( const TileId &stackedTileId )
 {
-    d->m_layerDecorator.downloadStackedTile( stackedTileId, DownloadBulk );
+    d->m_layerDecorator.downloadStackedTile( stackedTileId, DownloadBulk, d->m_tileLoader.getKeys());
 }
 
 void TextureLayer::setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile )

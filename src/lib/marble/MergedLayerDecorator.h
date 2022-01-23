@@ -61,11 +61,11 @@ class MergedLayerDecorator
 
     QSize tileSize() const;
 
-    StackedTile *loadTile( const TileId &id );
+    StackedTile *loadTile(const TileId &id , QHash<QString, QString> keys);
 
     StackedTile *updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage );
 
-    void downloadStackedTile( const TileId &id, DownloadUsage usage );
+    void downloadStackedTile(const TileId &id, DownloadUsage usage , QHash<QString, QString> keys);
 
     void setShowSunShading( bool show );
     bool showSunShading() const;

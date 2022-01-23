@@ -47,9 +47,9 @@ class StackedTileLoaderPrivate;
  * @short Tile loading from a quad tree
  *
  * This class loads tiles into memory. For faster access
- * we keep the tileIDs and their respective pointers to 
+ * we keep the tileIDs and their respective pointers to
  * the tiles in a hashtable.
- * The class also contains convenience methods to remove entries 
+ * The class also contains convenience methods to remove entries
  * from the hashtable and to return more detailed properties
  * about each tile level and their tiles.
  *
@@ -67,7 +67,7 @@ class StackedTileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent = 0 );
+        explicit StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent );
         virtual ~StackedTileLoader();
 
         int tileColumnCount( int level ) const;
@@ -133,12 +133,25 @@ class StackedTileLoader : public QObject
 
         RenderState renderState() const;
 
-    Q_SIGNALS:
+        void setKeys(QHash<QString, QString> keys)
+        {
+          this->keys = keys;
+        }
+
+        const QHash<QString, QString>  getKeys() const
+        {
+          return keys;
+        }
+
+
+Q_SIGNALS:
         void tileLoaded( TileId const &tileId );
         void cleared();
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
+
+        QHash<QString, QString> keys;
 
         friend class StackedTileLoaderPrivate;
         StackedTileLoaderPrivate* const d;

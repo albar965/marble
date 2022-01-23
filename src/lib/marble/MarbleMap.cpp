@@ -686,6 +686,10 @@ void MarbleMap::setProjection( Projection projection )
     emit visibleLatLonAltBoxChanged( d->m_viewport.viewLatLonAltBox() );
 }
 
+void MarbleMap::setKeys(QHash<QString, QString> keys)
+{
+  d->m_textureLayer.setKeys(keys);
+}
 
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const

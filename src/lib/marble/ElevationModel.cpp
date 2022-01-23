@@ -133,7 +133,7 @@ qreal ElevationModel::height( qreal lon, qreal lat ) const
 
         const QImage *image = d->m_cache[id];
         if ( image == 0 ) {
-            image = new QImage( d->m_tileLoader.loadTileImage( d->m_textureLayer, id, DownloadBrowse ) );
+            image = new QImage( d->m_tileLoader.loadTileImage( d->m_textureLayer, id, DownloadBrowse, QHash<QString, QString>() ) );
             d->m_cache.insert( id, image );
         }
         Q_ASSERT( image );

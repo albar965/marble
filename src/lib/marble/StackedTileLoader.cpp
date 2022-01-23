@@ -55,7 +55,7 @@ public:
     QReadWriteLock m_cacheLock;
 };
 
-StackedTileLoader::StackedTileLoader( MergedLayerDecorator *mergedLayerDecorator, QObject *parent )
+StackedTileLoader::StackedTileLoader(MergedLayerDecorator *mergedLayerDecorator, QObject *parent )
     : QObject( parent ),
       d( new StackedTileLoaderPrivate( mergedLayerDecorator ) )
 {
@@ -152,7 +152,7 @@ const StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId )
 
     mDebug() << "load tile from disk:" << stackedTileId;
 
-    stackedTile = d->m_layerDecorator->loadTile( stackedTileId );
+    stackedTile = d->m_layerDecorator->loadTile( stackedTileId , keys);
     Q_ASSERT( stackedTile );
     stackedTile->setUsed( true );
 

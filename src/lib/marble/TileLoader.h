@@ -55,9 +55,9 @@ class TileLoader: public QObject
     explicit TileLoader(HttpDownloadManager * const, const PluginManager * );
     ~TileLoader();
 
-    QImage loadTileImage( GeoSceneTextureTileDataset const *textureData, TileId const & tileId, DownloadUsage const );
-    GeoDataDocument* loadTileVectorData( GeoSceneVectorTileDataset const *vectorData, TileId const & tileId, DownloadUsage const usage );
-    void downloadTile( GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const );
+    QImage loadTileImage(GeoSceneTextureTileDataset const *textureData, TileId const & tileId, DownloadUsage const , QHash<QString, QString> keys);
+    GeoDataDocument* loadTileVectorData(GeoSceneVectorTileDataset const *vectorData, TileId const & tileId, DownloadUsage const usage , QHash<QString, QString> keys);
+    void downloadTile(GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const , QHash<QString, QString> keys);
 
     static int maximumTileLevel( GeoSceneTileDataset const & tileData );
 
@@ -89,7 +89,7 @@ class TileLoader: public QObject
 
  private:
     static QString tileFileName( GeoSceneTileDataset const * tileData, TileId const & );
-    void triggerDownload( GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const );
+    void triggerDownload(GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const , QHash<QString, QString> keys);
     static QImage scaledLowerLevelTile( GeoSceneTextureTileDataset const * textureData, TileId const & );
     GeoDataDocument* openVectorFile(const QString &filename) const;
 

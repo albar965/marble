@@ -75,7 +75,7 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
 
     int minimumTileLevel() const;
     void setMinimumTileLevel(int level);
-    
+
     void setTileLevels(const QString &tileLevels);
     QVector<int> tileLevels() const;
 
@@ -96,7 +96,7 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
      * It implements the round robin for the tile servers.
      * On each invocation the next url is returned.
      */
-    QUrl downloadUrl( const TileId & ) const;
+    QUrl downloadUrl(const TileId & , QHash<QString, QString> keys) const;
     void addDownloadUrl( const QUrl & );
 
     QString relativeTileFileName( const TileId & ) const;

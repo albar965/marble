@@ -303,7 +303,7 @@ void MergedLayerDecorator::Private::renderGroundOverlays( QImage *tileImage, con
     }
 }
 
-StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
+StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId ,QHash<QString, QString> keys)
 {
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( stackedTileId );
     QVector<QSharedPointer<TextureTile> > tiles;
@@ -322,7 +322,7 @@ StackedTile *MergedLayerDecorator::loadTile( const TileId &stackedTileId )
         }
 
         const GeoSceneTextureTileDataset *const textureLayer = static_cast<const GeoSceneTextureTileDataset *>( layer );
-        const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse );
+        const QImage tileImage = d->m_tileLoader->loadTileImage( textureLayer, tileId, DownloadBrowse , keys);
 
         QSharedPointer<TextureTile> tile( new TextureTile( tileId, tileImage, blending ) );
         tiles.append( tile );
@@ -386,13 +386,13 @@ StackedTile *MergedLayerDecorator::updateTile( const StackedTile &stackedTile, c
     return d->createTile( tiles );
 }
 
-void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage usage )
+void MergedLayerDecorator::downloadStackedTile( const TileId &id, DownloadUsage usage, QHash<QString, QString> keys )
 {
     const QVector<const GeoSceneTextureTileDataset *> textureLayers = d->findRelevantTextureLayers( id );
 
     foreach ( const GeoSceneTextureTileDataset *textureLayer, textureLayers ) {
         if ( TileLoader::tileStatus( textureLayer, id ) != TileLoader::Available || usage == DownloadBrowse ) {
-            d->m_tileLoader->downloadTile( textureLayer, id, usage );
+            d->m_tileLoader->downloadTile( textureLayer, id, usage, keys);
         }
     }
 }

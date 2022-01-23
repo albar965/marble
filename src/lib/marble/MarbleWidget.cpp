@@ -599,7 +599,12 @@ Projection MarbleWidget::projection() const
 
 void MarbleWidget::setProjection( Projection projection )
 {
-    d->m_map.setProjection( projection );
+  d->m_map.setProjection( projection );
+}
+
+void MarbleWidget::setKeys(QHash<QString, QString> keys)
+{
+  d->m_map.setKeys(keys);
 }
 
 void MarbleWidget::setProjection( int projection )

@@ -472,6 +472,8 @@ public Q_SLOTS:
      */
     void setProjection( Projection projection );
 
+    void setKeys(QHash<QString, QString> keys );
+
     /**
      * @brief Set a new map theme
      * @param maptheme  The ID of the new maptheme. To ensure that a unique

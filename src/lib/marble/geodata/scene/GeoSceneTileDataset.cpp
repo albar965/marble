@@ -220,7 +220,7 @@ void GeoSceneTileDataset::setProjection( const Projection projection )
 
 // Even though this method changes the internal state, it may be const
 // because the compiler is forced to invoke this method for different TileIds.
-QUrl GeoSceneTileDataset::downloadUrl( const TileId &id ) const
+QUrl GeoSceneTileDataset::downloadUrl( const TileId &id ,QHash<QString, QString> keys) const
 {
     // default download url
     if ( m_downloadUrls.empty() ) {
@@ -229,13 +229,13 @@ QUrl GeoSceneTileDataset::downloadUrl( const TileId &id ) const
                                      .arg(m_serverLayout->sourceDir()));
         mDebug() << "No download URL specified for tiles stored in "
                  << m_sourceDir << ", falling back to " << defaultUrl.toString();
-        return m_serverLayout->downloadUrl(defaultUrl, id);
+        return m_serverLayout->downloadUrl(defaultUrl, id, keys);
     }
 
     if ( m_nextUrl == m_downloadUrls.constEnd() )
         m_nextUrl = m_downloadUrls.constBegin();
 
-    const QUrl url = m_serverLayout->downloadUrl( *m_nextUrl, id );
+    const QUrl url = m_serverLayout->downloadUrl( *m_nextUrl, id ,keys);
 
     ++m_nextUrl;
 

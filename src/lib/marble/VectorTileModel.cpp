@@ -37,7 +37,7 @@ TileRunner::TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *tex
 
 void TileRunner::run()
 {
-    GeoDataDocument *const document = m_loader->loadTileVectorData( m_texture, m_id, DownloadBrowse );
+    GeoDataDocument *const document = m_loader->loadTileVectorData( m_texture, m_id, DownloadBrowse, QHash<QString, QString>());
 
     emit documentLoaded( m_id, document );
 }

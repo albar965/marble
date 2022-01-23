@@ -41,7 +41,7 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     TextureLayer( HttpDownloadManager *downloadManager,
                   PluginManager* pluginManager,
                   const SunLocator *sunLocator,
-                  QAbstractItemModel *groundOverlayModel );
+                  QAbstractItemModel *groundOverlayModel);
 
     ~TextureLayer();
 
@@ -97,6 +97,8 @@ class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
                          const QString &renderPos = QLatin1String("NONE"),
                          GeoSceneLayer *layer = 0 );
+
+    void setKeys(QHash<QString, QString> keys);
 
 public Q_SLOTS:
     void setShowRelief( bool show );
