@@ -139,6 +139,11 @@ void HttpJob::execute()
     QNetworkRequest request( d->m_sourceUrl );
     request.setAttribute( QNetworkRequest::HttpPipeliningAllowedAttribute, true );
     request.setRawHeader( "User-Agent", userAgent() );
+
+    QString lang = QLocale().uiLanguages().join(",");
+    if(lang.isEmpty())
+      lang = "*";
+    request.setRawHeader( "Accept-Language", lang.toLatin1() );
     d->m_networkReply = d->m_networkAccessManager->get( request );
 
     connect( d->m_networkReply, SIGNAL(downloadProgress(qint64,qint64)),
