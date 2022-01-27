@@ -17,6 +17,7 @@
 
 #include <QUrlQuery>
 #include <QDebug>
+#include <QLocale>
 
 #include <math.h>
 
@@ -99,9 +100,15 @@ QUrl CustomServerLayout::downloadUrl(const QUrl &prototypeUrl, const TileId &id 
 
     QString urlStr = prototypeUrl.toString( QUrl::DecodeReserved ).replace("%3F", "?");
 
+
+
     for(auto it = keys.begin(); it != keys.end(); ++it)
       urlStr.replace( "{"+it.key()+"}", it.value() );
 
+    QString lang = QLocale().uiLanguages().value(0);
+    if(lang.isEmpty())
+      lang = "en";
+    urlStr.replace( "{language}", lang );
     urlStr.replace( "{zoomLevel}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{z}", QString::number( id.zoomLevel() ) );
     urlStr.replace( "{x}", QString::number( id.x() ) );
