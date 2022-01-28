@@ -61,14 +61,17 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
                 m_canvasImage = QImage( viewport->size(), optimalFormat );
             }
 
-            if ( !viewport->mapCoversViewport() ) {
+//            if ( !viewport->mapCoversViewport() ) {
+            // Clear whole viewport to avoid shadow and smearing effects for maps not covering whole world
                 m_canvasImage.fill( 0 );
-            }
+//            }
 
             m_repaintNeeded = true;
         }
 
         if ( m_repaintNeeded ) {
+
+          // Called on zoom
             mapTexture( painter, viewport, tileZoomLevel, texColorizer );
 
             m_radius = viewport->radius();
@@ -77,9 +80,13 @@ void TileScalingTextureMapper::mapTexture( GeoPainter *painter,
 
         painter->drawImage( dirtyRect, m_canvasImage, dirtyRect );
     } else {
-        mapTexture( painter, viewport, tileZoomLevel, texColorizer );
 
-        m_radius = viewport->radius();
+      // Called on move
+      // Clear whole viewport to avoid shadow and smearing effects for maps not covering whole world
+      painter->fillRect(painter->window(), Qt::black);
+      mapTexture( painter, viewport, tileZoomLevel, texColorizer );
+
+      m_radius = viewport->radius();
     }
 }
 
