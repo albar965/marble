@@ -4,6 +4,9 @@ project(marble)
 
 ####################################################
 # CMake Settings
+
+add_compile_options(-Wno-deprecated-copy -Wno-deprecated-declarations)
+
 SET(CMAKE_COLOR_MAKEFILE ON)
 # SET(CMAKE_SKIP_RPATH ON)
 
@@ -89,7 +92,6 @@ find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Network ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Test ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Script ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
@@ -193,11 +195,11 @@ else() # Linux / bsd etc...
 endif()
 
 if(NOT ICON_INSTALL_DIR)
-	set(ICON_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons)
+  set(ICON_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons)
 endif(NOT ICON_INSTALL_DIR)
 
 if(NOT APPS_INSTALL_DIR)
-	set(APPS_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications)
+  set(APPS_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications)
 endif(NOT APPS_INSTALL_DIR)
 
 if(NOT INCLUDE_INSTALL_DIR)

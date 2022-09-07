@@ -29,10 +29,8 @@
 #include "GeoDataExtendedData.h"
 
 #include <QNetworkAccessManager>
-#include <QScriptValueIterator>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QScriptEngine>
 #include <QFileInfo>
 #include <QBuffer>
 #include <QDir>
@@ -41,7 +39,7 @@ namespace Marble
 {
 
 class Q_DECL_HIDDEN OwncloudSyncBackend::Private {
-    
+
     public:
         Private( CloudSyncManager* cloudSyncManager );
 
@@ -204,7 +202,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
 }
 
 void OwncloudSyncBackend::downloadRouteList()
-{    
+{
     QNetworkRequest request( endpointUrl( d->m_routeListEndpoint ) );
     d->m_routeListReply = d->m_network.get( request );
     connect( d->m_routeListReply, SIGNAL(downloadProgress(qint64,qint64)), this, SIGNAL(routeListDownloadProgress(qint64,qint64)) );
@@ -339,18 +337,19 @@ void OwncloudSyncBackend::prepareRouteList()
 {
     QString result = d->m_routeListReply->readAll();
 
+#ifdef QSCRIPT_ENABLED
     QScriptEngine engine;
     QScriptValue response = engine.evaluate( QString( "(%0)" ).arg( result ) );
     QScriptValue routes = response.property( "data" );
 
     d->m_routeList.clear();
-    
+
     if( routes.isArray() ) {
         QScriptValueIterator iterator( routes );
-        
+
         while( iterator.hasNext() ) {
             iterator.next();
-            
+
             RouteItem route;
             route.setIdentifier( iterator.value().property( "timestamp" ).toString() );
             route.setName ( iterator.value().property( "name" ).toString() );
@@ -358,29 +357,31 @@ void OwncloudSyncBackend::prepareRouteList()
             route.setDuration( iterator.value().property( "duration" ).toString() );
             route.setPreviewUrl( endpointUrl( d->m_routePreviewEndpoint, route.identifier() ) );
             route.setOnCloud( true );
-            
+
             d->m_routeList.append( route );
         }
     }
-    
+
     // FIXME Find why an empty item added to the end.
     if( !d->m_routeList.isEmpty() ) {
         d->m_routeList.remove( d->m_routeList.count() - 1 );
     }
 
     emit routeListDownloaded( d->m_routeList );
+#endif
+
 }
 
 void OwncloudSyncBackend::saveDownloadedRoute()
 {
     QString timestamp = QFileInfo( d->m_routeDownloadReply->url().toString() ).fileName();
-    
+
     bool pathCreated = d->m_cacheDir.mkpath( d->m_cacheDir.absolutePath() );
     if ( !pathCreated ) {
         mDebug() << "Couldn't create the path " << d->m_cacheDir.absolutePath() <<
                     ". Check if your user has sufficient permissions for this operation.";
     }
-    
+
     QString kmlFilePath = QString( "%0/%1.kml").arg( d->m_cacheDir.absolutePath(), timestamp );
     QFile kmlFile( kmlFilePath );
     bool fileOpened = kmlFile.open( QFile::ReadWrite );

@@ -4,5 +4,4 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL Android)
 endif()
 
 add_subdirectory( render )
-add_subdirectory( positionprovider )
 add_subdirectory( runner )

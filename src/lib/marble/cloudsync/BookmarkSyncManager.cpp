@@ -25,8 +25,6 @@
 
 #include <QFile>
 #include <QBuffer>
-#include <QScriptValue>
-#include <QScriptEngine>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTimer>
@@ -707,6 +705,7 @@ void BookmarkSyncManager::Private::saveDownloadedToCache( const QByteArray &kml 
 
 void BookmarkSyncManager::Private::parseTimestamp()
 {
+#ifdef QSCRIPT_ENABLED
     QString response = m_timestampReply->readAll();
     QScriptEngine engine;
     QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
@@ -714,6 +713,7 @@ void BookmarkSyncManager::Private::parseTimestamp()
     m_cloudTimestamp = timestamp;
     mDebug() << "Remote bookmark timestamp is " << m_cloudTimestamp;
     continueSynchronization();
+#endif
 }
 void BookmarkSyncManager::Private::copyLocalToCache()
 {
@@ -795,6 +795,7 @@ void BookmarkSyncManager::Private::completeMerge()
 
 void BookmarkSyncManager::Private::completeUpload()
 {
+#ifdef QSCRIPT_ENABLED
     QString response = m_uploadReply->readAll();
     QScriptEngine engine;
     QScriptValue parsedResponse = engine.evaluate( QString( "(%0)" ).arg( response ) );
@@ -803,6 +804,8 @@ void BookmarkSyncManager::Private::completeUpload()
     mDebug() << "Uploaded bookmarks to remote server. Timestamp is " << m_cloudTimestamp;
     copyLocalToCache();
     emit m_q->syncComplete();
+#endif
+
 }
 
 }

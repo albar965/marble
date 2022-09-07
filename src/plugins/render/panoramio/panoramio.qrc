@@ -1,5 +1,0 @@
-<RCC>
-  <qresource prefix="icons">
-    <file alias="panoramio.png">icon.png</file>
-  </qresource>
-</RCC>
