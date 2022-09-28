@@ -112,6 +112,8 @@ class MARBLE_EXPORT MarbleDirs
 
     static void setMarblePluginPath( const QString& adaptedPath);
 
+    static void setMarbleLocalPath( const QString& adaptedPath);
+
 
     static void debug();
 
