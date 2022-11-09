@@ -173,7 +173,7 @@ if(WIN32)
     set(data_dir data)
     set(plugin_dir plugins)
 elseif(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET 10.13)
+#    set(CMAKE_OSX_DEPLOYMENT_TARGET 10.13)
     # needed for finding bundle path in e.g. katlasdir.h
     FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
     MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)

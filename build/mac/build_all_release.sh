@@ -2,8 +2,9 @@
 
 set -e
 
-export CONF_TYPE=debug
-export CONF_BUILD_TYPE=Debug
+
+export CONF_TYPE=release
+export CONF_BUILD_TYPE=Release
 export QT_PATH=${QT_PATH:-"$HOME/Qt"}
 export QT_PREFIX_PATH="${QT_PATH}/5.15.2/clang_64"
 
