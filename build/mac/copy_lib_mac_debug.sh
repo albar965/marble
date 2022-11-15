@@ -3,24 +3,24 @@
 # This script replaces the broken deploy step in the Marble build
 # Run it to copy all required files to $APROJECTS/Marble-debug
 
-mkdir ~/Programme/Marble-debug/include
-mkdir ~/Programme/Marble-debug/include/astro
-mkdir ~/Programme/Marble-debug/include/marble
+mkdir $APROJECTS/Marble-debug/include
+mkdir $APROJECTS/Marble-debug/include/astro
+mkdir $APROJECTS/Marble-debug/include/marble
 
-mkdir ~/Programme/Marble-debug/lib
-mkdir ~/Programme/Marble-debug/lib/plugins
-
-
-for i in `find  ~/Projekte/marble/src/lib/astro -name *.h` ; do cp -av $i ~/Programme/Marble-debug/include/astro ;done
-
-for i in `find  ~/Projekte/build-marble-debug/src/lib/astro -name *.h` ; do cp -av $i ~/Programme/Marble-debug/include/astro ;done
-
-for i in `find  ~/Projekte/marble/src/lib/marble -name *.h` ; do cp -v $i ~/Programme/Marble-debug/include/marble ;done
-
-for i in `find  ~/Projekte/build-marble-debug/src/lib/marble -name *.h` ; do cp -av $i ~/Programme/Marble-debug/include/marble ;done
-
-for i in `find  ~/Projekte/build-marble-debug/src/plugins -name *.so` ; do cp -av $i ~/Programme/Marble-debug/lib/plugins/ ;done
+mkdir $APROJECTS/Marble-debug/lib
+mkdir $APROJECTS/Marble-debug/lib/plugins
 
 
-for i in `find  ~/Projekte/build-marble-debug/src/lib/marble -name *.dylib` ; do cp -av $i ~/Programme/Marble-debug/lib/ ;done
+for i in `find $APROJECTS/marble/src/lib/astro -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/astro ;done
+
+for i in `find $APROJECTS/build-marble-release/src/lib/astro -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/astro ;done
+
+for i in `find $APROJECTS/marble/src/lib/marble -name *.h` ; do cp -v $i $APROJECTS/Marble-debug/include/marble ;done
+
+for i in `find $APROJECTS/build-marble-debug/src/lib/marble -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/marble ;done
+
+for i in `find $APROJECTS/build-marble-debug/src/plugins -name *.so` ; do cp -av $i $APROJECTS/Marble-debug/lib/plugins/ ;done
+
+
+for i in `find $APROJECTS/build-marble-debug/src/lib/marble -name *.dylib` ; do cp -av $i $APROJECTS/Marble-debug/lib/ ;done
 
