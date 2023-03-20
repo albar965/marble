@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BUILDTYPE=debug
+BUILDTYPE=release
 
 mkdir -p $APROJECTS/build-marble-${BUILDTYPE}
 rm -rf $APROJECTS/build-marble-${BUILDTYPE}/* $APROJECTS/build-marble-${BUILDTYPE}/.cmake
