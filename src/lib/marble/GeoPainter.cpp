@@ -555,7 +555,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
     // - the object is not visible in the viewport or if
     // - the size of the object is below the resolution of the viewport
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) ||
-         ! d->m_viewport->resolves( lineString.latLonAltBox() )
+         ! d->m_viewport->resolvesRelaxed( lineString.latLonAltBox() )
         )
     {
         // mDebug() << "LineString doesn't get displayed on the viewport";

@@ -88,7 +88,7 @@ bool CylindricalProjection::screenCoordinates( const GeoDataLineString &lineStri
     Q_D( const CylindricalProjection );
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
-    if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
+    if ( !viewport->resolvesRelaxed( lineString.latLonAltBox() ) ) {
     //    mDebug() << "Object too small to be resolved";
         return false;
     }
@@ -304,7 +304,7 @@ bool CylindricalProjectionPrivate::lineStringToPolygon( const GeoDataLineString 
         // Optimization for line strings with a big amount of nodes
         bool skipNode = (hasDetail ? itCoords->detail() > maximumDetail
                 : itCoords != itBegin && isLong && !processingLastNode &&
-                !viewport->resolves( *itPreviousCoords, *itCoords ) );
+                !viewport->resolvesRelaxed( *itPreviousCoords, *itCoords ) );
 
         if ( !skipNode ) {
 
@@ -417,7 +417,7 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 
     // Choose a latitude that is inside the viewport.
     qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
-    
+
     GeoDataCoordinates westCoords( -M_PI, centerLatitude );
     GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
 
@@ -446,7 +446,7 @@ void CylindricalProjectionPrivate::repeatPolygons( const ViewportParams *viewpor
 
     qreal xOffset = 0;
     qreal it = repeatsLeft;
-    
+
     while ( it > 0 ) {
         xOffset = -it * repeatXInterval;
         translatePolygons( polygons, translatedPolygons, xOffset );

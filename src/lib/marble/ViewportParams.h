@@ -15,7 +15,7 @@
 
 /** @file
  * This file contains the headers for ViewportParams.
- * 
+ *
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
@@ -36,7 +36,7 @@ namespace Marble
 class AbstractProjection;
 class ViewportParamsPrivate;
 
-/** 
+/**
  * @short A public class that controls what is visible in the viewport of a Marble map.
  *
  */
@@ -65,14 +65,14 @@ class MARBLE_EXPORT ViewportParams
     // Calculates an educated guess for the average angle in radians covered per pixel.
     // Given a certain resolution it doesn't make much sense
     // - to display an object that covers an angle that is smaller than that.
-    // - to display two points as distinct points if they are separated by a 
+    // - to display two points as distinct points if they are separated by a
     //   an angular distance that is smaller. Instead only one point should be shown.
     // So this method helps to filter out details.
     // It's somewhat related to http://en.wikipedia.org/wiki/Angular_resolution
 
     qreal angularResolution() const;
 
-    // Determines whether a geographical feature is big enough so that it should 
+    // Determines whether a geographical feature is big enough so that it should
     // represent a single point on the screen already.
     // See angularResolution()
 
@@ -80,12 +80,16 @@ class MARBLE_EXPORT ViewportParams
 
     bool resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0 ) const;
 
-    // Determines whether two points are located enough apart so that it makes 
+    /* Relaxed check to avoid small line segments disappearing from the map */
+    bool resolvesRelaxed ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0 ) const;
+
+    // Determines whether two points are located enough apart so that it makes
     // sense to display them as distinct points. If this is not the case
     // calculation and drawing of one point can be skipped as only a single
     // point will be displayed on the screen.
-    
+
     bool resolves ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
+    bool resolvesRelaxed ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
 
     int  radius() const;
 

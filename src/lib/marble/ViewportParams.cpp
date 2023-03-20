@@ -323,7 +323,7 @@ qreal ViewportParams::centerLatitude() const
 const GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
 {
     if (d->m_dirtyBox) {
-        d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 
+        d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ),
                         d->m_size ),
                         this );
         d->m_dirtyBox = false;
@@ -340,7 +340,7 @@ GeoDataLatLonAltBox ViewportParams::latLonAltBox( const QRect &screenRect ) cons
 qreal ViewportParams::angularResolution() const
 {
     // We essentially divide the diameter by 180 deg and
-    // take half of the result as a guess for the angle per pixel resolution. 
+    // take half of the result as a guess for the angle per pixel resolution.
     // d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius);
     return d->m_angularResolution;
 }
@@ -357,7 +357,13 @@ bool ViewportParams::resolves ( const GeoDataLatLonAltBox &latLonAltBox, qreal p
            || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
 }
 
-bool ViewportParams::resolves ( const GeoDataCoordinates &coord1, 
+bool ViewportParams::resolvesRelaxed ( const GeoDataLatLonAltBox &latLonAltBox, qreal pixel, qreal altitude ) const
+{
+  return    latLonAltBox.width() + latLonAltBox.height() > pixel * angularResolution() / 20.
+      || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
+}
+
+bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
                                 const GeoDataCoordinates &coord2 ) const
 {
     qreal lon1, lat1;
@@ -370,6 +376,18 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
     return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) > angularResolution() );
 }
 
+bool ViewportParams::resolvesRelaxed ( const GeoDataCoordinates &coord1,
+                                       const GeoDataCoordinates &coord2 ) const
+{
+    qreal lon1, lat1;
+    coord1.geoCoordinates( lon1, lat1 );
+
+    qreal lon2, lat2;
+    coord2.geoCoordinates( lon2, lat2 );
+
+    // We take the manhattan length as an approximation for the distance
+    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) > angularResolution() / 20.);
+}
 
 bool ViewportParams::screenCoordinates( const qreal lon, const qreal lat,
                         qreal &x, qreal &y ) const
