@@ -65,7 +65,7 @@ class TileLoader: public QObject
      * Returns whether the mandatory most basic tile level is fully available for
      * the given @p layer.
      */
-    static bool baseTilesAvailable( GeoSceneTileDataset const & tileData );
+    static bool baseTilesAvailable(GeoSceneTileDataset const & tileData , const QString& documentPath);
 
     /**
       * Returns the status of the downloaded tile file:
@@ -88,7 +88,8 @@ class TileLoader: public QObject
     void tileCompleted( TileId const & tileId, GeoDataDocument * document );
 
  private:
-    static QString tileFileName( GeoSceneTileDataset const * tileData, TileId const & );
+    static QString tileFileName( GeoSceneTileDataset const * tileData, TileId const & tileId);
+     static QString tileFileName( GeoSceneTileDataset const * tileData, TileId const & tileId, const QString& documentPath);
     void triggerDownload(GeoSceneTileDataset const *tileData, TileId const &, DownloadUsage const , QHash<QString, QString> keys);
     static QImage scaledLowerLevelTile( GeoSceneTextureTileDataset const * textureData, TileId const & );
     GeoDataDocument* openVectorFile(const QString &filename) const;

@@ -41,7 +41,7 @@ class GeoSceneDocumentPrivate;
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GEODATA_EXPORT GeoSceneDocument : public QObject, 
+class GEODATA_EXPORT GeoSceneDocument : public QObject,
                                         public GeoDocument,
                                         public GeoNode
 {
@@ -50,7 +50,7 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
  public:
     GeoSceneDocument();
     ~GeoSceneDocument();
-    
+
     virtual const char* nodeType() const;
 
     virtual bool isGeoSceneDocument() const { return true; }
@@ -66,6 +66,11 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
 
     const GeoSceneLegend* legend() const;
     GeoSceneLegend* legend();
+
+    /* path to DGML file */
+    const QString documentPath() const;
+    void documentPath(const QString& path);
+
 
  Q_SIGNALS:
     void valueChanged( const QString&, bool );

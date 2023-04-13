@@ -30,6 +30,8 @@
 #include "GeoSceneSettings.h"
 #include "GeoSceneTypes.h"
 
+#include <QFileInfo>
+
 namespace Marble
 {
 
@@ -40,7 +42,8 @@ class GeoSceneDocumentPrivate
         : m_head(new GeoSceneHead),
           m_map(new GeoSceneMap),
           m_settings(new GeoSceneSettings),
-          m_legend(new GeoSceneLegend)
+          m_legend(new GeoSceneLegend),
+          m_documentFilePath()
     {
     }
 
@@ -51,16 +54,17 @@ class GeoSceneDocumentPrivate
         delete m_settings;
         delete m_legend;
     }
-    
+
     const char* nodeType() const
     {
         return GeoSceneTypes::GeoSceneDocumentType;
     }
-    
+
     GeoSceneHead*     m_head;
     GeoSceneMap*      m_map;
     GeoSceneSettings* m_settings;
     GeoSceneLegend*   m_legend;
+    QString m_documentFilePath;
 };
 
 
@@ -69,7 +73,7 @@ GeoSceneDocument::GeoSceneDocument()
       d( new GeoSceneDocumentPrivate )
 {
     // Establish connection of property changes to the outside, e.g. the LegendBrowser
-    connect ( d->m_settings, SIGNAL(valueChanged(QString,bool)), 
+    connect ( d->m_settings, SIGNAL(valueChanged(QString,bool)),
                           SIGNAL(valueChanged(QString,bool)) );
 }
 
@@ -123,6 +127,17 @@ GeoSceneLegend* GeoSceneDocument::legend()
     return d->m_legend;
 }
 
+const QString GeoSceneDocument::documentPath() const
+{
+    return d->m_documentFilePath;
+}
+
+void GeoSceneDocument::documentPath(const QString& path)
+{
+    d->m_documentFilePath = path;
+}
+
 }
 
 #include "moc_GeoSceneDocument.cpp"
+

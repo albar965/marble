@@ -216,8 +216,13 @@ bool MapThemeManager::Private::deleteDirectory( const QString& directory )
 
 GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& mapThemeStringID )
 {
-    const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
-    const QString dgmlPath = MarbleDirs::path( mapThemePath );
+    // mapThemeStringID: "earth/google-maps-def/google-maps-def.dgml"
+    // Allow absolute paths
+    QString dgmlPath;
+    if(QFileInfo(mapThemeStringID).isAbsolute())
+        dgmlPath = QFileInfo(mapThemeStringID).canonicalFilePath();
+    else
+        dgmlPath = MarbleDirs::path( mapDirName + '/' + mapThemeStringID );
 
     // Check whether file exists
     QFile file( dgmlPath );
@@ -246,6 +251,9 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
     // Get result document
     GeoSceneDocument* document = static_cast<GeoSceneDocument*>( parser.releaseDocument() );
     Q_ASSERT( document );
+
+    // Set path to DGML file folder
+    document->documentPath(QFileInfo(dgmlPath).absolutePath());
     return document;
 }
 
@@ -413,7 +421,7 @@ void MapThemeManager::Private::updateMapThemeModel()
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
 
-    	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
+        QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
             m_mapThemeModel.appendRow( itemList );
         }
@@ -477,9 +485,9 @@ void MapThemeManager::Private::fileChanged( const QString& path )
 
     if ( matchingItems.size() == 1 ) {
         const int row = matchingItems.front()->row();
-	insertAtRow = row;
+    insertAtRow = row;
         QList<QStandardItem *> toBeDeleted = m_mapThemeModel.takeRow( row );
-	while ( !toBeDeleted.isEmpty() ) {
+    while ( !toBeDeleted.isEmpty() ) {
             delete toBeDeleted.takeFirst();
         }
     }
@@ -521,7 +529,7 @@ void MapThemeManager::Private::addMapThemePaths( const QString& mapPathName, QSt
             result << themePathName;
 
             QDir themePath( themePathName );
-	    QStringList themeFileNames = themePath.entryList( QStringList( "*.dgml" ),
+        QStringList themeFileNames = themePath.entryList( QStringList( "*.dgml" ),
                                                               QDir::Files
                                                               | QDir::NoSymLinks );
             QStringListIterator itThemeFile( themeFileNames );

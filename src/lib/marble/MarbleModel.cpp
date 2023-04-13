@@ -635,7 +635,7 @@ void MarbleModel::clearPersistentTileCache()
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( *texture )
+        if ( !TileLoader::baseTilesAvailable( *texture, d->m_mapTheme->documentPath() )
             && !installMap.isEmpty() )
         {
             mDebug() << "Base tiles not available. Creating Tiles ... \n"

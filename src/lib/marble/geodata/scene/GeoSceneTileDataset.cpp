@@ -287,6 +287,41 @@ QString GeoSceneTileDataset::relativeTileFileName( const TileId &id ) const
     return relFileName;
 }
 
+QString GeoSceneTileDataset::relativeTileFileNameNoPath( const TileId &id ) const
+{
+    const QString suffix = fileFormat().toLower();
+
+    QString relFileName;
+
+    switch ( m_storageLayoutMode ) {
+    default:
+        mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
+    case GeoSceneTileDataset::Marble:
+        relFileName = QString( "%1/%2/%2_%3.%4" )
+                          .arg( id.zoomLevel() )
+                          .arg( id.y(), tileDigits, 10, QChar('0') )
+                          .arg( id.x(), tileDigits, 10, QChar('0') )
+                          .arg( suffix );
+        break;
+    case GeoSceneTileDataset::OpenStreetMap:
+        relFileName = QString( "%1/%2/%3.%4" )
+                          .arg( id.zoomLevel() )
+                          .arg( id.x() )
+                          .arg( id.y() )
+                          .arg( suffix );
+        break;
+    case GeoSceneTileDataset::TileMapService:
+        relFileName = QString( "%1/%2/%3.%4" )
+                          .arg( id.zoomLevel() )
+                          .arg( id.x() )
+                          .arg( ( 1<<id.zoomLevel() ) - id.y() - 1 )  //Y coord in TMS runs from bottom to top
+                          .arg( suffix );
+        break;
+    }
+
+    return relFileName;
+}
+
 QString GeoSceneTileDataset::themeStr() const
 {
     QFileInfo const dirInfo( sourceDir() );

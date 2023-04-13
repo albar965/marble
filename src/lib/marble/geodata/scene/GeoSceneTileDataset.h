@@ -100,6 +100,7 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     void addDownloadUrl( const QUrl & );
 
     QString relativeTileFileName( const TileId & ) const;
+    QString relativeTileFileNameNoPath( const TileId & ) const;
 
     QString themeStr() const;
 

@@ -174,7 +174,7 @@ int TileLoader::maximumTileLevel( GeoSceneTileDataset const & tileData )
     return maximumTileLevel + 1;
 }
 
-bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData )
+bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData , const QString& documentPath)
 {
     const int  levelZeroColumns = tileData.levelZeroColumns();
     const int  levelZeroRows    = tileData.levelZeroRows();
@@ -186,7 +186,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData )
     for ( int column = 0; result && column < levelZeroColumns; ++column ) {
         for ( int row = 0; result && row < levelZeroRows; ++row ) {
             const TileId id( 0, 0, column, row );
-            const QString tilepath = tileFileName( &tileData, id );
+            const QString tilepath = tileFileName( &tileData, id, documentPath );
             result &= QFile::exists( tilepath );
             if (!result) {
                 mDebug() << "Base tile " << tileData.relativeTileFileName( id ) << " is missing for source dir " << tileData.sourceDir();
@@ -258,6 +258,11 @@ QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId c
     QString const fileName = tileData->relativeTileFileName( tileId );
     QFileInfo const dirInfo( fileName );
     return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
+}
+
+QString TileLoader::tileFileName(const GeoSceneTileDataset* tileData, const TileId& tileId, const QString& documentPath)
+{
+    return documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
 }
 
 void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage ,
