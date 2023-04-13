@@ -37,7 +37,7 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(MARBLE_LIB_VERSION "0.25.2")
+set(MARBLE_LIB_VERSION "0.25.3")
 set(MARBLE_ABI_VERSION "25")
 
 ########### next target ###############
@@ -269,7 +269,7 @@ set(marblewidget_SRCS
     MarbleZip.cpp
 
     StyleBuilder.cpp
-    
+
     cloudsync/CloudSyncManager.cpp
     cloudsync/RouteSyncManager.cpp
     cloudsync/OwncloudSyncBackend.cpp
