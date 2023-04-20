@@ -1,3 +1,7 @@
+@echo off
+
+setlocal enableextensions
+
 if defined APROJECTS ( echo %APROJECTS% ) else ( echo APROJECTS not set && exit /b 1 )
 if defined DEPLOYDIR ( echo %DEPLOYDIR% ) else ( echo DEPLOYDIR not set && exit /b 1 )
 if defined BUILDDIR ( echo %BUILDDIR% ) else ( echo BUILDDIR not set && exit /b 1 )

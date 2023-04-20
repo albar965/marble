@@ -1,3 +1,7 @@
+@echo off
+
+setlocal enableextensions
+
 if defined APROJECTS ( echo %APROJECTS% ) else ( echo APROJECTS not set && exit /b 1 )
 
 set BUILDDIR=%APROJECTS%\build-marble-release
