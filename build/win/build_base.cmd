@@ -1,9 +1,13 @@
-
-
-
 if defined APROJECTS ( echo %APROJECTS% ) else ( echo APROJECTS not set && exit /b 1 )
 if defined DEPLOYDIR ( echo %DEPLOYDIR% ) else ( echo DEPLOYDIR not set && exit /b 1 )
 if defined BUILDDIR ( echo %BUILDDIR% ) else ( echo BUILDDIR not set && exit /b 1 )
+if defined BUILDTYPE ( echo %BUILDTYPE% ) else ( echo BUILDTYPE not set && exit /b 1 )
+
+pushd %APROJECTS%\marble
+
+git pull
+
+popd
 
 rmdir /s/q "%DEPLOYDIR%"
 mkdir "%DEPLOYDIR%"
