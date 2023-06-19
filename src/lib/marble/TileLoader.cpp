@@ -262,7 +262,33 @@ QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId c
 
 QString TileLoader::tileFileName(const GeoSceneTileDataset* tileData, const TileId& tileId, const QString& documentPath)
 {
-    return documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
+    // "/home/USER/Projekte/build-littlenavmap-debug/data/maps/earth/openflightmaps"
+    // "/home/USER/Dokumente/Little Navmap Files/Map Themes/openflightmaps"
+    // documentPath
+
+    // Fix path for DGML files having a sub-path in their sourceDir element
+    // Add sub-path if detected
+
+    // docDirName = "openflightmaps"
+    QString docDirName = QDir(documentPath).dirName();
+
+    // tileData->sourceDir() = "earth/openflightmaps/base"
+    QString sourceDir = QDir::cleanPath(tileData->sourceDir());
+    if(sourceDir.startsWith("earth/", Qt::CaseInsensitive))
+        // sourceDir = "openflightmaps/base"
+        sourceDir.remove(0, 6);
+
+    if(sourceDir.startsWith(docDirName, Qt::CaseInsensitive))
+        // sourceDir = "base"
+        sourceDir.remove(0, docDirName.size());
+
+    if(!sourceDir.isEmpty())
+        // There is a sub-path in sourceDir
+        // .../maps/earth/openflightmaps/base/0/0/0.jpg
+        return documentPath + QDir::separator() + sourceDir + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
+    else
+        // No sub-path in sourceDir
+        return documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
 }
 
 void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage ,
