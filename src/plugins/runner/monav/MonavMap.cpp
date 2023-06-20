@@ -37,7 +37,7 @@ void MonavMap::parseBoundingBox( const QFileInfo &file )
     bool tooLarge = false;
     QFile input( file.absoluteFilePath() );
     if ( input.open( QFile::ReadOnly ) ) {
-        GeoDataParser parser( GeoData_KML );
+        GeoDataParser parser( GeoData_KML , QString() );
         if ( !parser.read( &input ) ) {
             mDebug() << "Could not parse file: " << parser.errorString();
             return;

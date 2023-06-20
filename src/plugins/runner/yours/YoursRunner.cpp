@@ -124,7 +124,7 @@ void YoursRunner::handleError( QNetworkReply::NetworkError error )
 
 GeoDataDocument* YoursRunner::parse( const QByteArray &content )
 {
-    GeoDataParser parser( GeoData_UNKNOWN );
+    GeoDataParser parser( GeoData_UNKNOWN , QString() );
 
     // Open file in right mode
     QBuffer buffer;

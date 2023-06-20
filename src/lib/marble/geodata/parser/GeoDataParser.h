@@ -40,7 +40,7 @@ enum GeoDataSourceType {
 class GEODATA_EXPORT GeoDataParser : public GeoParser
 {
 public:
-    explicit GeoDataParser(GeoDataSourceType source);
+    explicit GeoDataParser(GeoDataSourceType source, const QString& docPath);
     virtual ~GeoDataParser();
 
 private:

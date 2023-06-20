@@ -37,8 +37,8 @@
 namespace Marble
 {
 
-GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
-    : GeoParser(source)
+GeoSceneParser::GeoSceneParser(GeoSceneSourceType source, const QString& docPath )
+    : GeoParser(source, docPath)
 {
 }
 

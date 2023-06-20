@@ -49,7 +49,7 @@ class Q_DECL_HIDDEN OwncloudSyncBackend::Private {
         QNetworkReply *m_routeListReply;
         QNetworkReply *m_routeDownloadReply;
         QNetworkReply *m_routeDeleteReply;
-	QNetworkReply *m_authReply;
+    QNetworkReply *m_authReply;
 
         QVector<RouteItem> m_routeList;
 
@@ -124,7 +124,7 @@ void OwncloudSyncBackend::uploadRoute( const QString &timestamp )
         return;
     }
 
-    GeoDataParser parser(GeoData_KML);
+    GeoDataParser parser(GeoData_KML, QString() );
     if (!parser.read(&kmlFile)) {
         mDebug() << "[OwncloudSyncBackend] KML file" << kmlFile.fileName()
                  << "is broken so I can't fill required properties";
@@ -256,7 +256,7 @@ QString OwncloudSyncBackend::routeName( const QString &timestamp ) const
     QFile file( d->m_cacheDir.absolutePath() + QString( "/%0.kml" ).arg( timestamp ) );
     file.open( QFile::ReadOnly );
 
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML , QString() );
     if( !parser.read( &file ) ) {
         mDebug() << "Could not read " << timestamp << ".kml. Timestamp will be used as "
                     << "route name because of the problem";

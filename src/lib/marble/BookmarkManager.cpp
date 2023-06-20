@@ -265,7 +265,7 @@ bool BookmarkManager::updateBookmarkFile()
 
 GeoDataDocument* BookmarkManager::openFile( const QString &fileName )
 {
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML, QString() );
     QFile file( fileName );
 
     if ( !file.exists() ) {

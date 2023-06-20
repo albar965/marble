@@ -133,7 +133,7 @@ QVector<RouteItem> RouteSyncManager::cachedRouteList() const
         QFile file( d->m_cacheDir.absolutePath() + '/' + routeFilename );
         file.open( QFile::ReadOnly );
 
-        GeoDataParser parser( GeoData_KML );
+        GeoDataParser parser( GeoData_KML, QString() );
         if( !parser.read( &file ) ) {
             mDebug() << "Could not read " + routeFilename;
         }

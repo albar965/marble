@@ -285,10 +285,10 @@ QString TileLoader::tileFileName(const GeoSceneTileDataset* tileData, const Tile
     if(!sourceDir.isEmpty())
         // There is a sub-path in sourceDir
         // .../maps/earth/openflightmaps/base/0/0/0.jpg
-        return documentPath + QDir::separator() + sourceDir + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
+        return QDir::cleanPath(documentPath + QDir::separator() + sourceDir + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
     else
         // No sub-path in sourceDir
-        return documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId );
+        return QDir::cleanPath(documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
 }
 
 void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage ,
@@ -321,7 +321,7 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTileDataset * text
 
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
-        QString const fileName = tileFileName( textureData, replacementTileId );
+        QString const fileName = tileFileName( textureData, replacementTileId, textureData->documentPath() );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
         QImage toScale = QFile::exists(fileName) ? QImage(fileName) : QImage();
 

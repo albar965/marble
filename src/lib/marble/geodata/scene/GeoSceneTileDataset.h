@@ -54,6 +54,9 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     QString sourceDir() const;
     void setSourceDir( const QString& sourceDir );
 
+    QString documentPath() const;
+    void setDocumentPath( const QString& docPath );
+
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
@@ -112,6 +115,7 @@ class GEODATA_EXPORT GeoSceneTileDataset : public GeoSceneAbstractDataset
     QStringList hostNames() const;
 
     QString m_sourceDir;
+    QString m_documentPath;
     QString m_installMap;
     StorageLayout m_storageLayoutMode;
     const ServerLayout *m_serverLayout;

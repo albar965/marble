@@ -14,7 +14,7 @@
 namespace Marble {
 
 GpxParser::GpxParser()
-    : GeoParser( 0 )
+    : GeoParser( 0 , QString())
 {
 }
 

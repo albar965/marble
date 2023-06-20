@@ -239,7 +239,7 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
         return 0;
     }
 
-    GeoSceneParser parser( GeoScene_DGML );
+    GeoSceneParser parser( GeoScene_DGML,QFileInfo(dgmlPath).absolutePath() );
 
     if ( !parser.read( &file )) {
         qWarning() << "Map theme file not well-formed:" << dgmlPath;

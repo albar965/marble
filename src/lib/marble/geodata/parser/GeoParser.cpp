@@ -36,10 +36,11 @@ namespace Marble
 // Set to a value greater than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0
 
-GeoParser::GeoParser( GeoDataGenericSourceType source )
+GeoParser::GeoParser(GeoDataGenericSourceType source , const QString& docPath)
     : QXmlStreamReader(),
       m_document( 0 ),
-      m_source( source )
+      m_source( source ),
+      m_documentPath( docPath )
 {
 }
 
@@ -90,15 +91,15 @@ bool GeoParser::read( QIODevice* device )
 #if DUMP_PARENT_STACK > 0
                 dumpParentStack( name().toString(), m_nodeStack.size(), false );
 #endif
- 
+
                 parseDocument();
 
                 if ( !m_nodeStack.isEmpty() )
                     raiseError(
                         // Keep trailing space in both strings, to match translated string
                         // TODO: check if that space is kept through the tool pipeline
-                        //~ singular Parsing failed line %1. Still %n unclosed tag after document end. 
-                        //~ plural Parsing failed line %1. Still %n unclosed tags after document end. 
+                        //~ singular Parsing failed line %1. Still %n unclosed tag after document end.
+                        //~ plural Parsing failed line %1. Still %n unclosed tags after document end.
                         QObject::tr("Parsing failed line %1. Still %n unclosed tag(s) after document end. ", "",
                                      m_nodeStack.size() ).arg( lineNumber() ) + errorString());
             } else

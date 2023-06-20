@@ -177,7 +177,7 @@ void FileLoader::run()
     // content is not empty, we load from data
     } else {
         // Read the KML Data
-        GeoDataParser parser( GeoData_KML );
+        GeoDataParser parser( GeoData_KML, QString()  );
 
         QByteArray ba( d->m_contents.toUtf8() );
         QBuffer buffer( &ba );

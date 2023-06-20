@@ -197,7 +197,7 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
         return;
     }
 
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML , QString() );
     if ( !parser.read( &file ) ) {
         mDebug() << "Could not parse file: " << parser.errorString();
         return;

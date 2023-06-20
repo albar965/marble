@@ -45,6 +45,7 @@ GeoNode* DgmlSourceDirTagHandler::parse(GeoParser& parser) const
         GeoSceneTileDataset *texture = parentItem.nodeAs<GeoSceneTileDataset>();
         texture->setSourceDir( parser.readElementText().trimmed() );
         texture->setFileFormat(format);
+        texture->setDocumentPath(parser.documentPath());
     }
 
     return 0;

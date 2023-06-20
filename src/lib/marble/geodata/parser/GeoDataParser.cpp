@@ -41,8 +41,8 @@
 namespace Marble
 {
 
-GeoDataParser::GeoDataParser(GeoDataSourceType source)
-    : GeoParser(source)
+GeoDataParser::GeoDataParser(GeoDataSourceType source, const QString& docPath)
+    : GeoParser(source, docPath)
 {
 }
 
@@ -82,8 +82,8 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML:
-        return (namespaceUri() == kml::kmlTag_nameSpace20 || 
-                namespaceUri() == kml::kmlTag_nameSpace21 || 
+        return (namespaceUri() == kml::kmlTag_nameSpace20 ||
+                namespaceUri() == kml::kmlTag_nameSpace21 ||
                 namespaceUri() == kml::kmlTag_nameSpace22 ||
                 namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
                 namespaceUri() == kml::kmlTag_nameSpaceGx22 ||

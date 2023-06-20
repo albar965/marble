@@ -65,6 +65,16 @@ void GeoSceneTileDataset::setSourceDir( const QString& sourceDir )
     m_sourceDir = sourceDir;
 }
 
+QString GeoSceneTileDataset::documentPath() const
+{
+    return m_documentPath;
+}
+
+void GeoSceneTileDataset::setDocumentPath(const QString& docPath)
+{
+    m_documentPath = docPath;
+}
+
 QString GeoSceneTileDataset::installMap() const
 {
     return m_installMap;

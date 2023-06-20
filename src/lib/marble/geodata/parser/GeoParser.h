@@ -42,7 +42,7 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
  public:
     typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
 
-    explicit GeoParser( GeoDataGenericSourceType sourceType );
+    explicit GeoParser( GeoDataGenericSourceType sourceType, const QString& docPath );
     virtual ~GeoParser();
 
     /**
@@ -73,6 +73,11 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
     // Used by tag handlers, to retrieve the value for an attribute of the currently parsed element
     QString attribute( const char* attributeName ) const;
 
+    const QString& documentPath() const
+    {
+        return m_documentPath;
+    }
+
 protected:
     /**
      * This method is intended to check if the current element being served by
@@ -92,6 +97,7 @@ protected:
 private:
     void parseDocument();
     QStack<GeoStackItem> m_nodeStack;
+    QString m_documentPath;
 };
 
 class GeoStackItem
@@ -122,7 +128,7 @@ class GeoStackItem
         Q_ASSERT( dynamic_cast<T*>( m_node ) != 0 );
         return static_cast<T*>(m_node);
     }
-    
+
     template<class T>
     bool is() const
     {

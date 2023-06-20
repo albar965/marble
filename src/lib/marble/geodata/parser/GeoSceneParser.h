@@ -38,7 +38,7 @@ enum GeoSceneSourceType {
 class GEODATA_EXPORT GeoSceneParser : public GeoParser
 {
 public:
-    explicit GeoSceneParser(GeoSceneSourceType source);
+    explicit GeoSceneParser(GeoSceneSourceType source, const QString& docPath);
     virtual ~GeoSceneParser();
 
 private:

@@ -303,7 +303,7 @@ void PositionTracking::readSettings()
         return;
     }
 
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML, QString()  );
     if ( !parser.read( &file ) ) {
         mDebug() << "Could not parse tracking file: " << parser.errorString();
         return;

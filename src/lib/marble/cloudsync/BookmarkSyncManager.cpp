@@ -501,11 +501,11 @@ QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *source, QString &
 
 QList<DiffItem> BookmarkSyncManager::Private::diff( QIODevice *fileA, QIODevice *fileB )
 {
-    GeoDataParser parserA( GeoData_KML );
+    GeoDataParser parserA( GeoData_KML , QString() );
     parserA.read( fileA );
     GeoDataDocument *documentA = dynamic_cast<GeoDataDocument*>( parserA.releaseDocument() );
 
-    GeoDataParser parserB( GeoData_KML );
+    GeoDataParser parserB( GeoData_KML , QString() );
     parserB.read( fileB );
     GeoDataDocument *documentB = dynamic_cast<GeoDataDocument*>( parserB.releaseDocument() );
 
