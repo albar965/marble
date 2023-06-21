@@ -83,7 +83,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
 
     QIcon icon () const;
 
-    QDialog *configDialog();
+    virtual QDialog *configDialog();
 
     void initialize ();
 
@@ -104,6 +104,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
     void writeSettings();
 
     void gridGetColor();
+    void gridLabelGetColor();
     void tropicsGetColor();
     void equatorGetColor();
 
@@ -114,10 +115,10 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param painter the painter used to draw the grid
      * @param viewport the viewport
      */
-    void renderGrid( GeoPainter *painter, ViewportParams *viewport,
+    void renderGrid(GeoPainter *painter, ViewportParams *viewport,
                      const QPen& equatorCirclePen,
                      const QPen& tropicsCirclePen,
-                     const QPen& gridCirclePen );
+                     const QPen& gridCirclePen , const QColor& gridLabelColor);
 
      /**
      * @brief Renders a latitude line within the defined view bounding box.
@@ -125,10 +126,10 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param latitude the latitude of the coordinate line measured in degree .
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      */
-    static void renderLatitudeLine( GeoPainter *painter, qreal latitude,
-                                    const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                                    const QString& lineLabel = QString(),
-                                    LabelPositionFlags labelPositionFlags = LineCenter );
+    static void renderLatitudeLine(GeoPainter *painter, qreal latitude,
+                                    const GeoDataLatLonAltBox& viewLatLonAltBox,
+                                    const QString& lineLabel,
+                                    LabelPositionFlags labelPositionFlags , const QColor& labelColor);
 
     /**
      * @brief Renders a longitude line within the defined view bounding box.
@@ -141,11 +142,11 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      *        The radius of the polarGap area is measured in degrees.
      * @param lineLabel draws a label using the font and color properties set for the painter.
      */
-    static void renderLongitudeLine( GeoPainter *painter, qreal longitude,
-                                     const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                                     qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
-                                     const QString& lineLabel = QString(),
-                                     LabelPositionFlags labelPositionFlags = LineCenter );
+    static void renderLongitudeLine(GeoPainter *painter, qreal longitude,
+                                     const GeoDataLatLonAltBox& viewLatLonAltBox,
+                                     qreal northPolarGap, qreal southPolarGap,
+                                     const QString& lineLabel,
+                                     LabelPositionFlags labelPositionFlags , const QColor& labelColor);
 
     /**
      * @brief Renders the latitude lines that are visible within the defined view bounding box.
@@ -153,11 +154,10 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      * @param step the angular distance between the lines measured in degrees .
      */
-    void renderLatitudeLines( GeoPainter *painter,
+    void renderLatitudeLines(GeoPainter *painter,
                               const GeoDataLatLonAltBox& viewLatLonAltBox,
                               qreal step, qreal skipStep,
-                              LabelPositionFlags labelPositionFlags = LineCenter
-                            );
+                              LabelPositionFlags labelPositionFlags , const QColor& labelColor);
 
     /**
      * @brief Renders the longitude lines that are visible within the defined view bounding box.
@@ -173,12 +173,12 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
      *        concurring lines around the poles which obstruct the view onto the surface.
      *        The radius of the polarGap area is measured in degrees.
      */
-    void renderLongitudeLines( GeoPainter *painter,
+    void renderLongitudeLines(GeoPainter *painter,
                               const GeoDataLatLonAltBox& viewLatLonAltBox,
                               qreal step, qreal skipStep,
-                              qreal northPolarGap = 0.0, qreal southPolarGap = 0.0,
-                              LabelPositionFlags labelPositionFlags = LineCenter
-                             );
+                              qreal northPolarGap, qreal southPolarGap ,
+                              LabelPositionFlags labelPositionFlags
+                             , const QColor& labelColor);
 
     /**
      * @brief Maps the number of coordinate lines per 360 deg against the globe radius on the screen.
@@ -194,6 +194,7 @@ class GraticulePlugin : public RenderPlugin, public DialogConfigurationInterface
     QPen m_equatorCirclePen;
     QPen m_tropicsCirclePen;
     QPen m_gridCirclePen;
+    QColor m_gridLabelColor;
     bool m_showPrimaryLabels;
     bool m_showSecondaryLabels;
 

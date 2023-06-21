@@ -202,7 +202,9 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     virtual QString runtimeTrace() const;
 
- public Q_SLOTS:
+    virtual QDialog* configDialog();
+
+public Q_SLOTS:
     /**
      * @brief settting enabled
      *

@@ -50,6 +50,7 @@ GraticulePlugin::GraticulePlugin( const MarbleModel *marbleModel )
       m_equatorCirclePen( Qt::yellow ),
       m_tropicsCirclePen( Qt::yellow ),
       m_gridCirclePen( Qt::white ),
+      m_gridLabelColor( Qt::white ),
       m_showPrimaryLabels( true ),
       m_showSecondaryLabels( true ),
       m_isInitialized( false ),
@@ -137,6 +138,8 @@ QDialog *GraticulePlugin::configDialog()
 
         connect( ui_configWidget->gridPushButton, SIGNAL(clicked()), this,
                 SLOT(gridGetColor()) );
+        connect( ui_configWidget->gridLabelPushButton, SIGNAL(clicked()), this,
+                 SLOT(gridLabelGetColor()));
         connect( ui_configWidget->tropicsPushButton, SIGNAL(clicked()), this,
                 SLOT(tropicsGetColor()) );
         connect( ui_configWidget->equatorPushButton, SIGNAL(clicked()), this,
@@ -163,6 +166,7 @@ QHash<QString,QVariant> GraticulePlugin::settings() const
     QHash<QString, QVariant> settings = RenderPlugin::settings();
 
     settings.insert( "gridColor", m_gridCirclePen.color().name() );
+    settings.insert( "gridLabelColor", m_gridLabelColor.name() );
     settings.insert( "tropicsColor", m_tropicsCirclePen.color().name() );
     settings.insert( "equatorColor", m_equatorCirclePen.color().name() );
     settings.insert( "primarylabels", m_showPrimaryLabels );
@@ -176,12 +180,14 @@ void GraticulePlugin::setSettings( const QHash<QString,QVariant> &settings )
     RenderPlugin::setSettings( settings );
 
     const QColor gridColor = settings.value( "gridColor", QColor( Qt::white ) ).value<QColor>();
+    const QColor gridLabelColor = settings.value( "gridLabelColor", QColor( Qt::white ) ).value<QColor>();
     const QColor tropicsColor = settings.value( "tropicsColor", QColor( Qt::yellow ) ).value<QColor>();
     const QColor equatorColor = settings.value( "equatorColor", QColor( Qt::yellow ) ).value<QColor>();
     bool primaryLabels = settings.value( "primaryLabels", true ).toBool();
     bool secondaryLabels = settings.value( "secondaryLabels", true ).toBool();
 
     m_gridCirclePen.setColor( gridColor );
+    m_gridLabelColor = gridLabelColor;
     m_tropicsCirclePen.setColor( tropicsColor );
     m_equatorCirclePen.setColor( equatorColor );
 
@@ -200,6 +206,10 @@ void GraticulePlugin::readSettings()
     QPalette gridPalette;
     gridPalette.setColor( QPalette::Button, m_gridCirclePen.color() );
     ui_configWidget->gridPushButton->setPalette( gridPalette );
+
+    QPalette gridLabelPalette;
+    gridLabelPalette.setColor( QPalette::Button, m_gridLabelColor );
+    ui_configWidget->gridLabelPushButton->setPalette( gridLabelPalette );
 
     QPalette tropicsPalette;
     tropicsPalette.setColor( QPalette::Button, m_tropicsCirclePen.color() );
@@ -221,6 +231,17 @@ void GraticulePlugin::gridGetColor()
         QPalette palette = ui_configWidget->gridPushButton->palette();
         palette.setColor( QPalette::Button, c );
         ui_configWidget->gridPushButton->setPalette( palette );
+    }
+}
+
+void GraticulePlugin::gridLabelGetColor()
+{
+    const QColor c = QColorDialog::getColor( m_gridLabelColor, 0, tr("Please choose the color for the coordinate grid labels.") );
+
+    if ( c.isValid() ) {
+        QPalette palette = ui_configWidget->gridLabelPushButton->palette();
+        palette.setColor( QPalette::Button, c );
+        ui_configWidget->gridLabelPushButton->setPalette( palette );
     }
 }
 
@@ -251,6 +272,7 @@ void GraticulePlugin::writeSettings()
     m_equatorCirclePen.setColor( ui_configWidget->equatorPushButton->palette().color( QPalette::Button ) );
     m_tropicsCirclePen.setColor( ui_configWidget->tropicsPushButton->palette().color( QPalette::Button ) );
     m_gridCirclePen.setColor( ui_configWidget->gridPushButton->palette().color( QPalette::Button) );
+    m_gridLabelColor = ui_configWidget->gridLabelPushButton->palette().color( QPalette::Button) ;
     m_showPrimaryLabels = ui_configWidget->primaryCheckBox->isChecked();
     m_showSecondaryLabels = ui_configWidget->secondaryCheckBox->isChecked();
 
@@ -283,7 +305,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->setFont( gridFont );
 
-    renderGrid( painter, viewport, m_equatorCirclePen, m_tropicsCirclePen, m_gridCirclePen );
+    renderGrid( painter, viewport, m_equatorCirclePen, m_tropicsCirclePen, m_gridCirclePen, m_gridLabelColor );
 
     painter->restore();
 
@@ -298,7 +320,8 @@ qreal GraticulePlugin::zValue() const
 void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                                   const QPen& equatorCirclePen,
                                   const QPen& tropicsCirclePen,
-                                  const QPen& gridCirclePen )
+                                  const QPen& gridCirclePen,
+                                  const QColor& gridLabelColor )
 {
     GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
 
@@ -309,13 +332,13 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
         mainPosition = LineCenter;
     }
     // Render the equator
-    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ), mainPosition );
+    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ), mainPosition, gridLabelColor );
 
     // Render the Prime Meridian and Antimeridian
     GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
     if (marbleModel()->planet()->id() != "sky" && notation != GeoDataCoordinates::Astro) {
-        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ), mainPosition );
-        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ), mainPosition );
+        renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, 0.0, tr( "Prime Meridian" ), mainPosition, gridLabelColor );
+        renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, 0.0, tr( "Antimeridian" ), mainPosition, gridLabelColor );
     }
 
     painter->setPen( gridCirclePen );
@@ -335,13 +358,13 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     renderLongitudeLines( painter, viewLatLonAltBox,
                           normalDegreeStep, boldDegreeStep,
                           normalDegreeStep, normalDegreeStep,
-                          labelXPosition );
+                          labelXPosition, gridLabelColor );
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep, boldDegreeStep,
-                          labelYPosition );
+                          labelYPosition, gridLabelColor);
 
     // Render some non-cut off longitude lines ..
-    renderLongitudeLine( painter, +90.0, viewLatLonAltBox );
-    renderLongitudeLine( painter, -90.0, viewLatLonAltBox );
+    renderLongitudeLine( painter, +90.0, viewLatLonAltBox, 0., 0., QString(), LineCenter, gridLabelColor );
+    renderLongitudeLine( painter, -90.0, viewLatLonAltBox, 0., 0., QString(), LineCenter, gridLabelColor );
 
 
     QPen tropicsPen = tropicsCirclePen;
@@ -356,19 +379,19 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
     if ( axialTilt > 0 ) {
         // Render the tropics
-        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" ), mainPosition  );
-        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ), mainPosition );
+        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" ), mainPosition, gridLabelColor  );
+        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ), mainPosition, gridLabelColor );
 
         // Render the arctics
-        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ), mainPosition );
-        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ), mainPosition );
+        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ), mainPosition, gridLabelColor );
+        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ), mainPosition, gridLabelColor );
     }
 }
 
 void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
                                           const GeoDataLatLonAltBox& viewLatLonAltBox,
                                           const QString& lineLabel,
-                                          LabelPositionFlags labelPositionFlags )
+                                          LabelPositionFlags labelPositionFlags, const QColor& labelColor )
 {
     qreal fromSouthLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal toNorthLat   = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
@@ -405,14 +428,14 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
         }
     }
 
-    painter->drawPolyline( line, lineLabel, labelPositionFlags, painter->pen().color() );
+    painter->drawPolyline( line, lineLabel, labelPositionFlags, labelColor );
 }
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
                                            qreal northPolarGap, qreal southPolarGap,
                                            const QString& lineLabel,
-                                           LabelPositionFlags labelPositionFlags )
+                                           LabelPositionFlags labelPositionFlags, const QColor& labelColor )
 {
     const qreal fromWestLon = viewLatLonAltBox.west();
     const qreal toEastLon   = viewLatLonAltBox.east();
@@ -450,13 +473,13 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
 
     line << n1 << n2 << n3;
 
-    painter->drawPolyline( line, lineLabel, labelPositionFlags, painter->pen().color() );
+    painter->drawPolyline( line, lineLabel, labelPositionFlags, labelColor );
 }
 
 void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
                                            qreal step, qreal skipStep,
-                                           LabelPositionFlags labelPositionFlags
+                                           LabelPositionFlags labelPositionFlags, const QColor& labelColor
                                          )
 {
     if ( step <= 0 ) {
@@ -484,7 +507,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
         // Paint all latitude coordinate lines except for the equator
         if ( itStep != 0.0 && fmod(itStep, skipStep) != 0 ) {
-            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
+            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags, labelColor );
         }
 
         itStep += step;
@@ -495,7 +518,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                                             const GeoDataLatLonAltBox& viewLatLonAltBox,
                                             qreal step, qreal skipStep,
                                             qreal northPolarGap, qreal southPolarGap,
-                                            LabelPositionFlags labelPositionFlags )
+                                            LabelPositionFlags labelPositionFlags , const QColor& labelColor )
 {
     if ( step <= 0 ) {
         return;
@@ -531,7 +554,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (fmod(itStep, skipStep) != 0 || skipStep == 0.0) {
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
+                    southPolarGap, label, labelPositionFlags, labelColor );
                 }
             }
             itStep += step;
@@ -557,7 +580,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (fmod((itStep), skipStep) != 0 || skipStep == 0.0) {
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
+                    southPolarGap, label, labelPositionFlags,labelColor );
                 }
             }
             itStep += step;
@@ -581,7 +604,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             if ( itStep != 0.0 && itStep != 180.0 && itStep != -180.0 ) {
                 if (fmod((itStep+180), skipStep) != 0 || skipStep == 0.0) {
                     renderLongitudeLine( painter, itStep, viewLatLonAltBox, northPolarGap,
-                    southPolarGap, label, labelPositionFlags );
+                    southPolarGap, label, labelPositionFlags,labelColor );
                 }
             }
             itStep += step;

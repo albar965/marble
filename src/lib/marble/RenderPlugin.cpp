@@ -213,6 +213,11 @@ QString RenderPlugin::runtimeTrace() const
     return name();
 }
 
+QDialog* Marble::RenderPlugin::configDialog()
+{
+    return nullptr;
+}
+
 bool RenderPlugin::eventFilter( QObject *, QEvent * )
 {
     return false;
