@@ -71,7 +71,7 @@ QString GraticulePlugin::renderPolicy() const
 
 QStringList GraticulePlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" );
+    return QStringList( "HOVERS_ABOVE_SURFACE"/*"SURFACE"*/ );
 }
 
 QString GraticulePlugin::name() const

@@ -252,6 +252,13 @@ GeoSceneDocument* MapThemeManager::Private::loadMapThemeFile( const QString& map
     GeoSceneDocument* document = static_cast<GeoSceneDocument*>( parser.releaseDocument() );
     Q_ASSERT( document );
 
+    // Need to add a new property - otherwise the grid cannot be enabled and disabled programmatically
+    // Document takes ownership
+    GeoSceneProperty *prop = new GeoSceneProperty("coordinate-grid");
+    prop->setValue(true);
+    prop->setAvailable(true);
+    document->settings()->addProperty(prop);
+
     // Set path to DGML file folder
     document->documentPath(QFileInfo(dgmlPath).absolutePath());
     return document;
