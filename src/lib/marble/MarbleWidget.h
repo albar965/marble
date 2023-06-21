@@ -49,7 +49,6 @@ class MarbleWidgetPopupMenu;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class RenderPlugin;
-class RoutingLayer;
 class TextureLayer;
 class TileCoordsPyramid;
 class TileCreator;
@@ -170,8 +169,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     ViewportParams *viewport();
     const ViewportParams *viewport() const;
 
-    MarbleWidgetPopupMenu *popupMenu();
-
     /**
      * Returns the current input handler
      */
@@ -242,8 +239,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Remove a layer from being included in rendering.
      */
     void removeLayer( LayerInterface *layer );
-
-    RoutingLayer* routingLayer();
 
     PopupLayer* popupLayer();
 

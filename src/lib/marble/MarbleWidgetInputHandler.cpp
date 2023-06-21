@@ -20,10 +20,8 @@
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "AbstractDataPluginItem.h"
-#include "MarbleWidgetPopupMenu.h"
 #include "PopupLayer.h"
 #include "RenderPlugin.h"
-#include "RoutingLayer.h"
 
 namespace Marble
 {
@@ -55,7 +53,7 @@ class MarbleWidgetInputHandlerPrivate
             ,m_marbleWidget(widget)
             ,m_selectionRubber(widget)
             ,m_debugModeEnabled(false)
-        {         
+        {
             foreach(RenderPlugin *renderPlugin, widget->renderPlugins())
             {
                 if(renderPlugin->isInitialized())
@@ -74,11 +72,6 @@ class MarbleWidgetInputHandlerPrivate
         bool layersEventFilter(QObject *o, QEvent *e)
         {   //FIXME - this should go up in hierarchy to MarbleInputHandler
             if (m_marbleWidget->popupLayer()->eventFilter(o, e))
-            {
-                return true;
-            }
-
-            if (m_marbleWidget->routingLayer()->eventFilter(o, e))
             {
                 return true;
             }
@@ -145,24 +138,6 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleAbstractPresenter *marb
 void MarbleWidgetInputHandler::setDebugModeEnabled(bool enabled)
 {
     d->m_debugModeEnabled = enabled;
-}
-
-//FIXME - these should be moved to superclass and popupMenu should be abstracted in MarbleAbstractPresenter
-void MarbleWidgetInputHandler::showLmbMenu(int x, int y)
-{
-    if (isMouseButtonPopupEnabled(Qt::LeftButton))
-    {
-        d->m_marbleWidget->popupMenu()->showLmbMenu(x, y);
-        toolTipTimer()->stop();
-    }
-}
-
-void MarbleWidgetInputHandler::showRmbMenu(int x, int y)
-{
-    if (isMouseButtonPopupEnabled(Qt::RightButton))
-    {
-        d->m_marbleWidget->popupMenu()->showRmbMenu(x, y);
-    }
 }
 
 void MarbleWidgetInputHandler::openItemToolTip()

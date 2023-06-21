@@ -141,8 +141,6 @@ class MARBLE_EXPORT MarbleDefaultInputHandler  : public MarbleInputHandler
 
  private Q_SLOTS:
     virtual void installPluginEventFilter( RenderPlugin *renderPlugin ) = 0;
-    virtual void showLmbMenu( int, int ) = 0;
-    virtual void showRmbMenu( int, int ) = 0;
     void handlePressAndHold();
 
     virtual void openItemToolTip() = 0;

@@ -35,8 +35,6 @@ public:
 
 private Q_SLOTS:
     void installPluginEventFilter(RenderPlugin *renderPlugin);
-    void showLmbMenu(int x, int y);
-    void showRmbMenu(int x, int y);
     void openItemToolTip();
     void setCursor(const QCursor &cursor);
 

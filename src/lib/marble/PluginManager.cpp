@@ -25,8 +25,6 @@
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
-#include "ReverseGeocodingRunnerPlugin.h"
-#include "RoutingRunnerPlugin.h"
 #include "SearchRunnerPlugin.h"
 #include "config-marble.h"
 
@@ -49,8 +47,6 @@ class PluginManagerPrivate
     QList<const RenderPlugin *> m_renderPluginTemplates;
     QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
-    QList<const ReverseGeocodingRunnerPlugin *> m_reverseGeocodingRunnerPlugins;
-    QList<RoutingRunnerPlugin *> m_routingRunnerPlugins;
     QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
     static QStringList m_blacklist;
     static QStringList m_whitelist;
@@ -119,32 +115,6 @@ void PluginManager::addSearchRunnerPlugin( const SearchRunnerPlugin *plugin )
     d->loadPlugins();
     d->m_searchRunnerPlugins << plugin;
     emit searchRunnerPluginsChanged();
-}
-
-QList<const ReverseGeocodingRunnerPlugin *> PluginManager::reverseGeocodingRunnerPlugins() const
-{
-    d->loadPlugins();
-    return d->m_reverseGeocodingRunnerPlugins;
-}
-
-void PluginManager::addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin )
-{
-    d->loadPlugins();
-    d->m_reverseGeocodingRunnerPlugins << plugin;
-    emit reverseGeocodingRunnerPluginsChanged();
-}
-
-QList<RoutingRunnerPlugin *> PluginManager::routingRunnerPlugins() const
-{
-    d->loadPlugins();
-    return d->m_routingRunnerPlugins;
-}
-
-void PluginManager::addRoutingRunnerPlugin( RoutingRunnerPlugin *plugin )
-{
-    d->loadPlugins();
-    d->m_routingRunnerPlugins << plugin;
-    emit routingRunnerPluginsChanged();
 }
 
 QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
@@ -222,8 +192,6 @@ void PluginManagerPrivate::loadPlugins()
     Q_ASSERT( m_renderPluginTemplates.isEmpty() );
     Q_ASSERT( m_positionProviderPluginTemplates.isEmpty() );
     Q_ASSERT( m_searchRunnerPlugins.isEmpty() );
-    Q_ASSERT( m_reverseGeocodingRunnerPlugins.isEmpty() );
-    Q_ASSERT( m_routingRunnerPlugins.isEmpty() );
     Q_ASSERT( m_parsingRunnerPlugins.isEmpty() );
 
     foreach( const QString &fileName, pluginFileNameList ) {
@@ -258,10 +226,6 @@ void PluginManagerPrivate::loadPlugins()
                        ( obj, loader, m_positionProviderPluginTemplates );
             isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>
                        ( obj, loader, m_searchRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<ReverseGeocodingRunnerPlugin, ReverseGeocodingRunnerPlugin>
-                       ( obj, loader, m_reverseGeocodingRunnerPlugins ); // intentionally T==U
-            isPlugin = isPlugin || appendPlugin<RoutingRunnerPlugin, RoutingRunnerPlugin>
-                       ( obj, loader, m_routingRunnerPlugins ); // intentionally T==U
             isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
                        ( obj, loader, m_parsingRunnerPlugins ); // intentionally T==U
             if ( !isPlugin ) {

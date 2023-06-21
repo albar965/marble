@@ -91,7 +91,6 @@ endif()
 find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Network ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Test ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
@@ -141,23 +140,7 @@ if( WIN32 )
 endif( WIN32 )
 
 ####################################################
-# build unit tests
-
-INCLUDE (CTest)
-ENABLE_TESTING()
-
-option( BUILD_MARBLE_TESTS "Build unit tests" ON )
-add_feature_info("Unit tests" BUILD_MARBLE_TESTS "Build unit tests. Toggle with BUILD_MARBLE_TESTS=YES/NO. 'make test' will run all.")
-
-if( BUILD_MARBLE_TESTS )
-#  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
-  #where unit test binaries should be installed to and run from
-#  SET (MARBLE_TEST_DIR   ${CMAKE_CURRENT_BINARY_DIR}/tests)
-endif( BUILD_MARBLE_TESTS )
-
-####################################################
 set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
-set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
 add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
@@ -307,8 +290,6 @@ add_subdirectory(src)
 add_subdirectory(data)
 
 include(DistTarget)
-
-add_subdirectory(tests)
 
 option(BUILD_MARBLE_TOOLS "Build various tools related to Marble" OFF)
 add_feature_info("Marble tools" BUILD_MARBLE_TOOLS "Build various Marble tools for e.g. file format conversion. Toggle with BUILD_MARBLE_TOOLS=YES/NO.")

@@ -14,7 +14,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/projections
- ${CMAKE_CURRENT_SOURCE_DIR}/routing
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/graphicsitem
@@ -26,7 +25,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
  ${CMAKE_CURRENT_SOURCE_DIR}/osm
- ${CMAKE_CURRENT_SOURCE_DIR}/cloudsync
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${ZLIB_INCLUDE_DIRS}
  ${PHONON_INCLUDES}
@@ -56,7 +54,6 @@ set(marblewidget_SRCS
     blendings/BlendingFactory.cpp
     blendings/SunLightBlending.cpp
     DownloadRegion.cpp
-    DownloadRegionDialog.cpp
     LatLonBoxWidget.cpp
     MarbleWidget.cpp
     MarbleAbstractPresenter.cpp
@@ -66,32 +63,16 @@ set(marblewidget_SRCS
     MapViewWidget.cpp
     CelestialSortFilterProxyModel.cpp
     FileViewWidget.cpp
-    TourWidget.cpp
     FlyToEditWidget.cpp
-    TourControlEditWidget.cpp
     WaitEditWidget.cpp
-    SoundCueEditWidget.cpp
     RemoveItemEditWidget.cpp
-    TourItemDelegate.cpp
     MapViewItemDelegate.cpp
-    TourPlayback.cpp
     LegendWidget.cpp
-    PlaybackItem.cpp
-    PlaybackAnimatedUpdateItem.cpp
-    PlaybackFlyToItem.cpp
-    PlaybackSoundCueItem.cpp
-    PlaybackTourControlItem.cpp
-    PlaybackWaitItem.cpp
-    SerialTrack.cpp
-    SoundTrack.cpp
-    AnimatedUpdateTrack.cpp
-    CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp
     MarbleAboutDialog.cpp
     MarbleInputHandler.cpp
     MarbleWidgetInputHandler.cpp
-    MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
     GeoUriParser.cpp
@@ -104,7 +85,6 @@ set(marblewidget_SRCS
     TileCoordsPyramid.cpp
     TileLevelRangeWidget.cpp
     TileLoader.cpp
-    QtMarbleConfigDialog.cpp
     ClipPainter.cpp
     DownloadPolicy.cpp
     DownloadQueueSet.cpp
@@ -168,9 +148,6 @@ set(marblewidget_SRCS
     PositionTracking.cpp
     DataMigration.cpp
     ImageF.cpp
-    MovieCapture.cpp
-    MovieCaptureDialog.cpp
-    TourCaptureDialog.cpp
     EditPlacemarkDialog.cpp
     AddLinkDialog.cpp
     FormattedTextWidget.cpp
@@ -189,7 +166,6 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     PlacemarkPositionProviderPlugin.cpp
-    RouteSimulationPositionProviderPlugin.cpp
     MarblePluginSettingsWidget.cpp
     RenderPluginModel.cpp
     PluginAboutDialog.cpp
@@ -209,53 +185,19 @@ set(marblewidget_SRCS
 
     TemplateDocument.cpp
 
-    routing/AlternativeRoutesModel.cpp
-    routing/Maneuver.cpp
-    routing/Route.cpp
-    routing/RouteRequest.cpp
-    routing/RouteSegment.cpp
-    routing/RoutingModel.cpp
-    routing/RoutingProfile.cpp
-    routing/RoutingManager.cpp
-    routing/RoutingLayer.cpp
-    routing/RoutingInputWidget.cpp
-    routing/RoutingWidget.cpp
-    routing/RoutingProfilesWidget.cpp
-    routing/RoutingProfilesModel.cpp
-    routing/RoutingProfileSettingsDialog.cpp
-    routing/SpeakersModel.cpp
-    routing/VoiceNavigationModel.cpp
-    routing/instructions/InstructionTransformation.cpp
-    routing/instructions/RoutingInstruction.cpp
-    routing/instructions/RoutingPoint.cpp
-    routing/instructions/RoutingWaypoint.cpp
-    routing/instructions/WaypointParser.cpp
-
     ParsingRunnerManager.cpp
-    ReverseGeocodingRunnerManager.cpp
-    RoutingRunnerManager.cpp
     SearchRunnerManager.cpp
 
     AutoNavigation.cpp
 
     SearchRunnerPlugin.cpp
-    ReverseGeocodingRunnerPlugin.cpp
-    RoutingRunnerPlugin.cpp
     ParseRunnerPlugin.cpp
     SearchRunner.cpp
-    ReverseGeocodingRunner.cpp
-    RoutingRunner.cpp
     ParsingRunner.cpp
     RunnerTask.cpp
 
-    BookmarkManager.cpp
-    EditBookmarkDialog.cpp
-    BookmarkManagerDialog.cpp
-    NewBookmarkFolderDialog.cpp
-
     PrintOptionsWidget.cpp
     ExternalEditorDialog.cpp
-    GoToDialog.cpp
 
     MapWizard.cpp
     MapThemeDownloadDialog.cpp
@@ -270,16 +212,6 @@ set(marblewidget_SRCS
 
     StyleBuilder.cpp
 
-    cloudsync/CloudSyncManager.cpp
-    cloudsync/RouteSyncManager.cpp
-    cloudsync/OwncloudSyncBackend.cpp
-    cloudsync/CloudRouteModel.cpp
-    cloudsync/CloudRoutesDialog.cpp
-    cloudsync/RouteItem.cpp
-    cloudsync/RouteItemDelegate.cpp
-    cloudsync/BookmarkSyncManager.cpp
-    cloudsync/MergeItem.cpp
-    cloudsync/ConflictDialog.cpp
 )
 
 
@@ -305,9 +237,7 @@ set (marblewidget_UI
     ${osm_UIS}
     LatLonBoxWidget.ui
     MapViewWidget.ui
-    CurrentLocationWidget.ui
     FileViewWidget.ui
-    TourWidget.ui
     MarbleNavigator.ui
     MarbleCacheSettingsWidget.ui
     MarbleViewSettingsWidget.ui
@@ -321,22 +251,11 @@ set (marblewidget_UI
     SunControlWidget.ui
     LatLonEdit.ui
     PlacemarkEditHeader.ui
-    routing/RoutingWidget.ui
     DataMigrationWidget.ui
-    EditBookmarkDialog.ui
-    BookmarkManagerDialog.ui
-    NewBookmarkFolderDialog.ui
     PrintOptions.ui
     ExternalEditor.ui
-    GoToDialog.ui
-    routing/RoutingSettingsWidget.ui
-    routing/RoutingProfileSettingsDialog.ui
     MapWizard.ui
     MapThemeDownloadDialog.ui
-    cloudsync/CloudRoutesDialog.ui
-    MarbleCloudSyncSettingsWidget.ui
-    MovieCaptureDialog.ui
-    TourCaptureDialog.ui
     EditPlacemarkDialog.ui
     AddLinkDialog.ui
     FormattedTextWidget.ui
@@ -474,9 +393,7 @@ install( FILES
     ${graphicsview_HDRS}
     ${marble_WebKit}
     AutoNavigation.h
-    BookmarkManager.h
     DownloadRegion.h
-    DownloadRegionDialog.h
     LatLonBoxWidget.h
     MarbleWidget.h
     MarbleMap.h
@@ -485,27 +402,19 @@ install( FILES
     CelestialSortFilterProxyModel.h
     LegendWidget.h
     FileViewWidget.h
-    TourWidget.h
     FlyToEditWidget.h
-    TourControlEditWidget.h
     WaitEditWidget.h
-    SoundCueEditWidget.h
     RemoveItemEditWidget.h
-    TourItemDelegate.h
     MapViewItemDelegate.h
-    TourPlayback.h
-    CurrentLocationWidget.h
     MarbleNavigator.h
     AbstractFloatItem.h
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleInputHandler.h
     MarbleWidgetInputHandler.h
-    MarbleWidgetPopupMenu.h
     TileId.h
     TileCoordsPyramid.h
     TileLevelRangeWidget.h
-    QtMarbleConfigDialog.h
     global.h
     MarbleMath.h
     MarbleColors.h
@@ -569,8 +478,6 @@ install( FILES
     geodata/parser/GeoDocument.h
     geodata/parser/GeoDataTypes.h
     geodata/writer/GeoWriter.h
-    routing/RoutingWidget.h
-    routing/RoutingManager.h
     TileCreator.h
     PluginManager.h
     PluginInterface.h
@@ -580,16 +487,10 @@ install( FILES
     RenderPlugin.h
     RenderPluginInterface.h
     ParsingRunnerManager.h
-    ReverseGeocodingRunnerManager.h
-    RoutingRunnerManager.h
     SearchRunnerManager.h
     ParsingRunner.h
     SearchRunner.h
-    ReverseGeocodingRunner.h
-    RoutingRunner.h
     SearchRunnerPlugin.h
-    ReverseGeocodingRunnerPlugin.h
-    RoutingRunnerPlugin.h
     ParseRunnerPlugin.h
     LayerInterface.h
     RenderState.h
@@ -610,15 +511,6 @@ install( FILES
     MapWizard.h
     MapThemeDownloadDialog.h
     ElevationModel.h
-
-    routing/AlternativeRoutesModel.h
-    routing/Route.h
-    routing/Maneuver.h
-    routing/RouteRequest.h
-    routing/RouteSegment.h
-    routing/RoutingManager.h
-    routing/RoutingModel.h
-    routing/RoutingProfile.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble
 )

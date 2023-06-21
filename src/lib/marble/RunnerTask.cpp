@@ -16,11 +16,6 @@
 #include "ParsingRunnerManager.h"
 #include "SearchRunner.h"
 #include "SearchRunnerManager.h"
-#include "ReverseGeocodingRunner.h"
-#include "ReverseGeocodingRunnerManager.h"
-#include "RoutingRunner.h"
-#include "RoutingRunnerManager.h"
-#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -39,41 +34,6 @@ SearchTask::SearchTask( SearchRunner *runner, SearchRunnerManager *manager, cons
 void SearchTask::run()
 {
     m_runner->search( m_searchTerm, m_preferredBbox );
-    m_runner->deleteLater();
-
-    emit finished( this );
-}
-
-ReverseGeocodingTask::ReverseGeocodingTask( ReverseGeocodingRunner *runner, ReverseGeocodingRunnerManager *manager, const MarbleModel *model, const GeoDataCoordinates &coordinates ) :
-    QObject(),
-    m_runner( runner ),
-    m_coordinates( coordinates )
-{
-    connect( m_runner, SIGNAL(reverseGeocodingFinished(GeoDataCoordinates,GeoDataPlacemark)),
-             manager, SLOT(addReverseGeocodingResult(GeoDataCoordinates,GeoDataPlacemark)) );
-    m_runner->setModel( model );
-}
-
-void ReverseGeocodingTask::run()
-{
-    m_runner->reverseGeocoding( m_coordinates );
-    m_runner->deleteLater();
-
-    emit finished( this );
-}
-
-RoutingTask::RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest* routeRequest ) :
-    QObject(),
-    m_runner( runner ),
-    m_routeRequest( routeRequest )
-{
-    connect( m_runner, SIGNAL(routeCalculated(GeoDataDocument*)),
-             manager, SLOT(addRoutingResult(GeoDataDocument*)) );
-}
-
-void RoutingTask::run()
-{
-    m_runner->retrieveRoute( m_routeRequest );
     m_runner->deleteLater();
 
     emit finished( this );

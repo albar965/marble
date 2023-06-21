@@ -24,13 +24,8 @@ namespace Marble
 class MarbleModel;
 class ParsingRunner;
 class SearchRunner;
-class ReverseGeocodingRunner;
-class RouteRequest;
-class RoutingRunner;
 class ParsingRunnerManager;
 class SearchRunnerManager;
-class ReverseGeocodingRunnerManager;
-class RoutingRunnerManager;
 
 /** A RunnerTask that executes a placemark search */
 class SearchTask : public QObject, public QRunnable
@@ -54,48 +49,6 @@ private:
     GeoDataLatLonBox m_preferredBbox;
 };
 
-/** A RunnerTask that executes reverse geocoding */
-class ReverseGeocodingTask : public QObject, public QRunnable
-{
-    Q_OBJECT
-
-public:
-    ReverseGeocodingTask( ReverseGeocodingRunner*runner, ReverseGeocodingRunnerManager *manager, const MarbleModel *model, const GeoDataCoordinates &coordinates );
-
-    /**
-     * @reimp
-     */
-    void run();
-
-Q_SIGNALS:
-    void finished( ReverseGeocodingTask *task );
-
-private:
-    ReverseGeocodingRunner *const m_runner;
-    GeoDataCoordinates m_coordinates;
-};
-
-
-/** A RunnerTask that executes a route calculation */
-class RoutingTask : public QObject, public QRunnable
-{
-    Q_OBJECT
-
-public:
-    RoutingTask( RoutingRunner *runner, RoutingRunnerManager *manager, const RouteRequest* routeRequest );
-
-    /**
-     * @reimp
-     */
-    void run();
-
-Q_SIGNALS:
-    void finished( RoutingTask *task );
-
-private:
-    RoutingRunner *const m_runner;
-    const RouteRequest *const m_routeRequest;
-};
 
 /** A RunnerTask that executes a file Parsing */
 class ParsingTask : public QObject, public QRunnable

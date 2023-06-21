@@ -35,14 +35,12 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidgetInputHandler.h"
-#include "MarbleWidgetPopupMenu.h"
 #include "Planet.h"
 #include "PopupLayer.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
-#include "routing/RoutingLayer.h"
 #include "MarbleAbstractPresenter.h"
 
 namespace Marble
@@ -91,10 +89,8 @@ class MarbleWidgetPrivate
           m_map( &m_model ),
           m_presenter( &m_map ),
           m_inputhandler( 0 ),
-          m_routingLayer( 0 ),
           m_mapInfoDialog( 0 ),
           m_customPaintLayer( parent ),
-          m_popupmenu( 0 ),
           m_showFrameRate( false )
     {
     }
@@ -104,7 +100,6 @@ class MarbleWidgetPrivate
         m_map.removeLayer( &m_customPaintLayer );
         m_map.removeLayer( m_mapInfoDialog );
         delete m_mapInfoDialog;
-        delete m_popupmenu;
     }
 
     void  construct();
@@ -131,11 +126,8 @@ class MarbleWidgetPrivate
 
     MarbleWidgetInputHandler  *m_inputhandler;
 
-    RoutingLayer     *m_routingLayer;
     PopupLayer    *m_mapInfoDialog;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
-
-    MarbleWidgetPopupMenu *m_popupmenu;
 
     bool             m_showFrameRate;
 };
@@ -228,13 +220,6 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
 
-    m_popupmenu = new MarbleWidgetPopupMenu( m_widget, &m_model );
-
-    m_routingLayer = new RoutingLayer( m_widget, m_widget );
-    m_routingLayer->setPlacemarkModel( 0 );
-    QObject::connect( m_routingLayer, SIGNAL(repaintNeeded(QRect)),
-                      m_widget, SLOT(update()) );
-
     m_mapInfoDialog = new PopupLayer( m_widget, m_widget );
     m_mapInfoDialog->setVisible( false );
     m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
@@ -303,12 +288,6 @@ const ViewportParams* MarbleWidget::viewport() const
 {
     return d->m_map.viewport();
 }
-
-MarbleWidgetPopupMenu *MarbleWidget::popupMenu()
-{
-    return d->m_popupmenu;
-}
-
 
 void MarbleWidget::setInputHandler( MarbleWidgetInputHandler *handler )
 {
@@ -764,13 +743,7 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 
 void MarbleWidgetPrivate::updateMapTheme()
 {
-    m_map.removeLayer( m_routingLayer );
-
     m_widget->setRadius( m_widget->radius() ); // Corrects zoom range, if needed
-
-    if ( m_model.planetId() == "earth" ) {
-        m_map.addLayer( m_routingLayer );
-    }
 
     emit m_widget->themeChanged( m_map.mapThemeId() );
 
@@ -1004,7 +977,6 @@ void MarbleWidget::setViewContext( ViewContext viewContext )
     // map. So either do not remove this line, or keep a similar call in place
     // when you refactor it and test your changes wrt drag performance at
     // high zoom level with long routes!
-    d->m_routingLayer->setViewContext( viewContext );
 
     d->m_map.setViewContext( viewContext );
 }
@@ -1192,11 +1164,6 @@ qreal MarbleWidget::zoomFromDistance( qreal distance ) const
 qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
 {
     return d->m_presenter.distanceFromZoom( zoom );
-}
-
-RoutingLayer* MarbleWidget::routingLayer()
-{
-    return d->m_routingLayer;
 }
 
 PopupLayer *MarbleWidget::popupLayer()

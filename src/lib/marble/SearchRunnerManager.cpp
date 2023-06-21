@@ -21,12 +21,8 @@
 #include "GeoDataPlacemark.h"
 #include "PluginManager.h"
 #include "ParseRunnerPlugin.h"
-#include "ReverseGeocodingRunnerPlugin.h"
-#include "RoutingRunnerPlugin.h"
 #include "SearchRunnerPlugin.h"
 #include "RunnerTask.h"
-#include "routing/RouteRequest.h"
-#include "routing/RoutingProfilesModel.h"
 
 #include <QObject>
 #include <QString>

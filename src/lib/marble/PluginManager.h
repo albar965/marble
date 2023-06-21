@@ -25,8 +25,6 @@ class PositionProviderPlugin;
 class AbstractFloatItem;
 class PluginManagerPrivate;
 class SearchRunnerPlugin;
-class ReverseGeocodingRunnerPlugin;
-class RoutingRunnerPlugin;
 class ParseRunnerPlugin;
 
 /**
@@ -97,32 +95,6 @@ class MARBLE_EXPORT PluginManager : public QObject
     void addSearchRunnerPlugin( const SearchRunnerPlugin *plugin );
 
     /**
-     * Returns all reverse geocoding runner plugins.
-     * @note: The runner plugins are owned by the PluginManager, do not delete them.
-     */
-    QList<const ReverseGeocodingRunnerPlugin *> reverseGeocodingRunnerPlugins() const;
-
-    /**
-     * @brief Add a ReverseGeocodingRunnerPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addReverseGeocodingRunnerPlugin( const ReverseGeocodingRunnerPlugin *plugin );
-
-    /**
-     * Returns all routing runner plugins.
-     * @note: The runner plugins are owned by the PluginManager, do not delete them.
-     */
-    QList<RoutingRunnerPlugin *> routingRunnerPlugins() const;
-
-    /**
-     * @brief Add a RoutingRunnerPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addRoutingRunnerPlugin( RoutingRunnerPlugin * plugin );
-
-    /**
      * Returns all parse runner plugins.
      * @note: The runner plugins are owned by the PluginManager, do not delete them.
      */
@@ -159,8 +131,6 @@ Q_SIGNALS:
     void searchRunnerPluginsChanged();
 
     void reverseGeocodingRunnerPluginsChanged();
-
-    void routingRunnerPluginsChanged();
 
     void parseRunnerPluginsChanged();
 

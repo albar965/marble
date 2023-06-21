@@ -4,17 +4,9 @@ add_subdirectory( geouri )
 add_subdirectory( latlon )
 add_subdirectory( localdatabase )
 
-# Routing
-add_subdirectory( mapquest )
-add_subdirectory( monav )
-add_subdirectory( yours )
-add_subdirectory( cyclestreets )
-
 #Parsing
 add_subdirectory( cache )
-add_subdirectory( gpx )
 add_subdirectory( kml )
-add_subdirectory( osm )
 add_subdirectory( pn2 )
 add_subdirectory( pnt )
 add_subdirectory( log )
