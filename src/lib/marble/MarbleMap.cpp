@@ -830,7 +830,6 @@ void MarbleMapPrivate::updateMapTheme()
 
     // Check whether there is a texture layer and vectortile layer available:
     if ( m_model->mapTheme()->map()->hasTextureLayers() ) {
-        const QString documentPath = m_model->mapTheme()->documentPath();
         const GeoSceneSettings *const settings = m_model->mapTheme()->settings();
         const GeoSceneGroup *const textureLayerSettings = settings ? settings->group( "Texture Layers" ) : 0;
         const GeoSceneGroup *const vectorTileLayerSettings = settings ? settings->group( "VectorTile Layers" ) : 0;
@@ -857,7 +856,7 @@ void MarbleMapPrivate::updateMapTheme()
 
                     // If the tiles aren't already there, put up a progress dialog
                     // while creating them.
-                    if ( !TileLoader::baseTilesAvailable( *texture, documentPath )
+                    if ( !TileLoader::baseTilesAvailable( *texture )
                          && !installMap.isEmpty() )
                     {
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
@@ -873,7 +872,7 @@ void MarbleMapPrivate::updateMapTheme()
                         tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
                                                     m_model->mapTheme()->head()->description() );
                         tileCreatorDlg->exec();
-                        if ( TileLoader::baseTilesAvailable( *texture, documentPath ) ) {
+                        if ( TileLoader::baseTilesAvailable( *texture ) ) {
                             mDebug() << "Base tiles for" << sourceDir << "successfully created.";
                         } else {
                             qWarning() << "Some or all base tiles for" << sourceDir << "could not be created.";
@@ -882,7 +881,7 @@ void MarbleMapPrivate::updateMapTheme()
                         delete tileCreatorDlg;
                     }
 
-                    if ( TileLoader::baseTilesAvailable( *texture, documentPath ) ) {
+                    if ( TileLoader::baseTilesAvailable( *texture ) ) {
                         textures.append( texture );
                     } else {
                         qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";
@@ -903,7 +902,7 @@ void MarbleMapPrivate::updateMapTheme()
 
                     // If the tiles aren't already there, put up a progress dialog
                     // while creating them.
-                    if ( !TileLoader::baseTilesAvailable( *vectorTile, documentPath )
+                    if ( !TileLoader::baseTilesAvailable( *vectorTile )
                          && !installMap.isEmpty() )
                     {
                         mDebug() << "Base tiles not available. Creating Tiles ... \n"
@@ -919,7 +918,7 @@ void MarbleMapPrivate::updateMapTheme()
                         tileCreatorDlg->setSummary( m_model->mapTheme()->head()->name(),
                                                     m_model->mapTheme()->head()->description() );
                         tileCreatorDlg->exec();
-                        if ( TileLoader::baseTilesAvailable( *vectorTile, documentPath ) ) {
+                        if ( TileLoader::baseTilesAvailable( *vectorTile  ) ) {
                             qDebug() << "Base tiles for" << sourceDir << "successfully created.";
                         } else {
                             qDebug() << "Some or all base tiles for" << sourceDir << "could not be created.";
@@ -928,7 +927,7 @@ void MarbleMapPrivate::updateMapTheme()
                         delete tileCreatorDlg;
                     }
 
-                    if ( TileLoader::baseTilesAvailable( *vectorTile, documentPath ) ) {
+                    if ( TileLoader::baseTilesAvailable( *vectorTile  ) ) {
                         vectorTiles.append( vectorTile );
                     } else {
                         qWarning() << "Base tiles for" << sourceDir << "not available. Skipping all texture layers.";

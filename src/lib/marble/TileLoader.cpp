@@ -66,8 +66,6 @@ TileLoader::~TileLoader()
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 QImage TileLoader::loadTileImage(GeoSceneTextureTileDataset const *textureLayer, TileId const & tileId, DownloadUsage const usage , QHash<QString, QString> keys)
 {
-    QString const fileName = tileFileName( textureLayer, tileId );
-
     TileStatus status = tileStatus( textureLayer, tileId );
     if ( status != Missing ) {
         // check if an update should be triggered
@@ -80,7 +78,7 @@ QImage TileLoader::loadTileImage(GeoSceneTextureTileDataset const *textureLayer,
             triggerDownload( textureLayer, tileId, usage ,keys);
         }
 
-        QImage const image( fileName );
+        QImage const image( tileFileName( textureLayer, tileId, true /* cache */ ) );
         if ( !image.isNull() ) {
             // file is there, so create and return a tile object in any case
             return image;
@@ -103,7 +101,7 @@ GeoDataDocument *TileLoader::loadTileVectorData(GeoSceneVectorTileDataset const 
 {
     // FIXME: textureLayer->fileFormat() could be used in the future for use just that parser, instead of all available parsers
 
-    QString const fileName = tileFileName( textureLayer, tileId );
+    QString const fileName = tileFileName( textureLayer, tileId, true /* cache */ );
 
     TileStatus status = tileStatus( textureLayer, tileId );
     if ( status != Missing ) {
@@ -174,7 +172,7 @@ int TileLoader::maximumTileLevel( GeoSceneTileDataset const & tileData )
     return maximumTileLevel + 1;
 }
 
-bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData , const QString& documentPath)
+bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData)
 {
     const int  levelZeroColumns = tileData.levelZeroColumns();
     const int  levelZeroRows    = tileData.levelZeroRows();
@@ -186,7 +184,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData , cons
     for ( int column = 0; result && column < levelZeroColumns; ++column ) {
         for ( int row = 0; result && row < levelZeroRows; ++row ) {
             const TileId id( 0, 0, column, row );
-            const QString tilepath = tileFileName( &tileData, id, documentPath );
+            const QString tilepath = tileFileName( &tileData, id, false /* cache */ );
             result &= QFile::exists( tilepath );
             if (!result) {
                 mDebug() << "Base tile " << tileData.relativeTileFileName( id ) << " is missing for source dir " << tileData.sourceDir();
@@ -199,7 +197,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTileDataset const & tileData , cons
 
 TileLoader::TileStatus TileLoader::tileStatus( GeoSceneTileDataset const *tileData, const TileId &tileId )
 {
-    QString const fileName = tileFileName( tileData, tileId );
+    QString const fileName = tileFileName( tileData, tileId, true /* cache */ );
     QFileInfo fileInfo( fileName );
     if ( !fileInfo.exists() ) {
         return Missing;
@@ -253,42 +251,45 @@ void TileLoader::updateTile(const QString &fileName, const QString &idStr)
     }
 }
 
-QString TileLoader::tileFileName( GeoSceneTileDataset const * tileData, TileId const & tileId )
+
+QString TileLoader::tileFileName(const GeoSceneTileDataset* tileData, const TileId& tileId, bool cache)
 {
-    QString const fileName = tileData->relativeTileFileName( tileId );
-    QFileInfo const dirInfo( fileName );
-    return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
-}
-
-QString TileLoader::tileFileName(const GeoSceneTileDataset* tileData, const TileId& tileId, const QString& documentPath)
-{
-    // "/home/USER/Projekte/build-littlenavmap-debug/data/maps/earth/openflightmaps"
-    // "/home/USER/Dokumente/Little Navmap Files/Map Themes/openflightmaps"
-    // documentPath
-
-    // Fix path for DGML files having a sub-path in their sourceDir element
-    // Add sub-path if detected
-
-    // docDirName = "openflightmaps"
-    QString docDirName = QDir(documentPath).dirName();
-
-    // tileData->sourceDir() = "earth/openflightmaps/base"
-    QString sourceDir = QDir::cleanPath(tileData->sourceDir());
-    if(sourceDir.startsWith("earth/", Qt::CaseInsensitive))
-        // sourceDir = "openflightmaps/base"
-        sourceDir.remove(0, 6);
-
-    if(sourceDir.startsWith(docDirName, Qt::CaseInsensitive))
-        // sourceDir = "base"
-        sourceDir.remove(0, docDirName.size());
-
-    if(!sourceDir.isEmpty())
-        // There is a sub-path in sourceDir
-        // .../maps/earth/openflightmaps/base/0/0/0.jpg
-        return QDir::cleanPath(documentPath + QDir::separator() + sourceDir + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
+    if(cache)
+    {
+        QString const fileName = tileData->relativeTileFileName( tileId );
+        QFileInfo const dirInfo( fileName );
+        return dirInfo.isAbsolute() ? fileName : MarbleDirs::path( fileName );
+    }
     else
-        // No sub-path in sourceDir
-        return QDir::cleanPath(documentPath + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
+    {
+        // "/home/USER/Projekte/build-littlenavmap-debug/data/maps/earth/openflightmaps"
+        // "/home/USER/Dokumente/Little Navmap Files/Map Themes/openflightmaps"
+        // documentPath
+
+        // Fix path for DGML files having a sub-path in their sourceDir element
+        // Add sub-path if detected
+
+        // docDirName = "openflightmaps"
+        QString docDirName = QDir(tileData->documentPath()).dirName();
+
+        // tileData->sourceDir() = "earth/openflightmaps/base"
+        QString sourceDir = QDir::cleanPath(tileData->sourceDir());
+        if(sourceDir.startsWith("earth/", Qt::CaseInsensitive))
+            // sourceDir = "openflightmaps/base"
+            sourceDir.remove(0, 6);
+
+        if(sourceDir.startsWith(docDirName, Qt::CaseInsensitive))
+            // sourceDir = "base"
+            sourceDir.remove(0, docDirName.size());
+
+        if(!sourceDir.isEmpty())
+            // There is a sub-path in sourceDir
+            // .../maps/earth/openflightmaps/base/0/0/0.jpg
+            return QDir::cleanPath(tileData->documentPath() + QDir::separator() + sourceDir + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
+        else
+            // No sub-path in sourceDir
+            return QDir::cleanPath(tileData->documentPath() + QDir::separator() + tileData->relativeTileFileNameNoPath( tileId ));
+    }
 }
 
 void TileLoader::triggerDownload( GeoSceneTileDataset const *tileData, TileId const &id, DownloadUsage const usage ,
@@ -321,7 +322,13 @@ QImage TileLoader::scaledLowerLevelTile( const GeoSceneTextureTileDataset * text
 
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
-        QString const fileName = tileFileName( textureData, replacementTileId, textureData->documentPath() );
+
+        // First look into cache
+        QString fileName = tileFileName( textureData, replacementTileId, true /* cache */ );
+        if(!QFile::exists(fileName))
+            // not in cache - use top level 0/0/0 tile from theme
+            fileName = tileFileName( textureData, replacementTileId, false /* cache */ );
+
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
         QImage toScale = QFile::exists(fileName) ? QImage(fileName) : QImage();
 
