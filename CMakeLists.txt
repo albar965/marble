@@ -8,6 +8,13 @@ project(marble)
 add_compile_options(-Wno-deprecated-copy -Wno-deprecated-declarations, -Wno-unknown-warning-option)
 
 SET(CMAKE_COLOR_MAKEFILE ON)
+
+if( WIN32 )
+  SET(CMAKE_COLOR_MAKEFILE OFF)
+  SET(CMAKE_COLOR_DIAGNOSTICS OFF)
+  add_compile_options(-fdiagnostics-color=never)
+endif()
+
 # SET(CMAKE_SKIP_RPATH ON)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
