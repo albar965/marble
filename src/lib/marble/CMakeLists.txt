@@ -35,7 +35,8 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 INCLUDE(osm/CMakeLists.txt)
 
-set(MARBLE_LIB_VERSION "0.25.4")
+# VERSION_NUMBER_TODO
+set(MARBLE_LIB_VERSION "0.25.5")
 set(MARBLE_ABI_VERSION "25")
 
 ########### next target ###############
