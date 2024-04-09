@@ -13,7 +13,7 @@
 * The algorithm for the Modified Julian Date are based on                  *
 * O.Montebruck and T.Pfleger, "Astronomy with a PC",                       *
 * Springer Verlag, Berlin, Heidelberg, New York, 1989                      *
-* 
+*
 * The calculations of the positions and physical ephemerides of the        *
 * various solar system bodies are based on                                 *
 * O.Montebruck, "Astronomie mit dem Personal Computer",                    *
@@ -142,7 +142,7 @@ void SolarSystem::ssinit()
   ss_del_tdut = DefTdUt(ss_year);
   ss_RT = true;
   ss_epoch = 51544.5;  // J2000.0
-  ss_central_body = 4;  
+  ss_central_body = 4;
   setCurrentMJD();
   ss_planmat = mxidn();
   getConstEarth();
@@ -154,10 +154,10 @@ void SolarSystem::ssinit()
   ss_user_axl0 = 0.0;
   ss_user_axl1 = 0.0;
   ss_user_axb0 = 90.0;
-  ss_user_axb1 = 0.0;	
+  ss_user_axb1 = 0.0;
   ss_user_W = 0;
   ss_user_Wd = 359.017045833334;
-  ss_user_GM = 3.986005e+14;  
+  ss_user_GM = 3.986005e+14;
 
 }
 
@@ -286,7 +286,7 @@ void SolarSystem::setEpoch (double yr)
    day = 1;
 
    b = 0;
-   ss_epoch = mjd(day, month, year, b); 
+   ss_epoch = mjd(day, month, year, b);
   }
   ss_update_called = false;
   ss_moon_called = false;
@@ -421,7 +421,7 @@ void SolarSystem::includeUser(bool uact)
  // set user defined object active if possible
  if(ss_user_stored) ss_user_active = uact;
 
- ss_update_called = false; 
+ ss_update_called = false;
 
 }
 
@@ -432,7 +432,6 @@ void SolarSystem::updateSolar()
   const double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
   double dt, eps2;
   Sun200 sun;
-  Moon200 moon;
   Plan200 pln;
   Vec3 coff, r1, v1;
   Mat3 pmx;
@@ -443,7 +442,6 @@ void SolarSystem::updateSolar()
   dt = ss_time + ss_del_tdut/86400.0;
   dt = julcent (dt);
   ss_rs = sun.position(dt);
-  ss_rm = moon.position(dt)/ae;
   ss_pmer = pln.Mercury(dt);
   ss_pven = pln.Venus(dt);
   ss_pearth[0] = -ss_rs[0];
@@ -472,25 +470,24 @@ void SolarSystem::updateSolar()
   coff[1] = 0;
   coff[2] = 0;
 
-  if (ss_central_body == 2) coff -= ss_pmer; 
-  if (ss_central_body == 3) coff -= ss_pven; 
+  if (ss_central_body == 2) coff -= ss_pmer;
+  if (ss_central_body == 3) coff -= ss_pven;
   if (ss_central_body == 4) coff -= ss_pearth;
-  if (ss_central_body == 5) coff -= ss_pmars; 
-  if (ss_central_body == 6) coff -= ss_pjup; 
-  if (ss_central_body == 7) coff -= ss_psat; 
-  if (ss_central_body == 8) coff -= ss_pura; 
-  if (ss_central_body == 9) coff -= ss_pnept; 
-  if (ss_central_body == 10) coff -= ss_pio; 
-  if (ss_central_body == 11) coff -= ss_peuropa; 
-  if (ss_central_body == 12) coff -= ss_pganymede; 
-  if (ss_central_body == 13) coff -= ss_pcallisto; 
-  if (ss_central_body == 14) coff -= ss_prhea; 
-  if (ss_central_body == 15) coff -= ss_ptitan; 
-  if (ss_central_body == 16) coff -= ss_pmimas; 
-  if (ss_central_body == 17) coff -= ss_penceladus; 
+  if (ss_central_body == 5) coff -= ss_pmars;
+  if (ss_central_body == 6) coff -= ss_pjup;
+  if (ss_central_body == 7) coff -= ss_psat;
+  if (ss_central_body == 8) coff -= ss_pura;
+  if (ss_central_body == 9) coff -= ss_pnept;
+  if (ss_central_body == 10) coff -= ss_pio;
+  if (ss_central_body == 11) coff -= ss_peuropa;
+  if (ss_central_body == 12) coff -= ss_pganymede;
+  if (ss_central_body == 13) coff -= ss_pcallisto;
+  if (ss_central_body == 14) coff -= ss_prhea;
+  if (ss_central_body == 15) coff -= ss_ptitan;
+  if (ss_central_body == 16) coff -= ss_pmimas;
+  if (ss_central_body == 17) coff -= ss_penceladus;
   if (ss_central_body == 18) coff -= ss_pdione;
-  if (ss_central_body == -1) coff -= ss_user; 
-  if (ss_central_body == 1) coff = coff + ss_rs - ss_rm; 
+  if (ss_central_body == -1) coff -= ss_user;
 
   ss_pmer += coff;
   ss_pven += coff;
@@ -517,7 +514,6 @@ void SolarSystem::updateSolar()
 
   // convert into equatorial
   ss_rs = eclequ(dt, ss_rs);
-  ss_rm = eclequ(dt, ss_rm);
   ss_pmer = eclequ(dt, ss_pmer);
   ss_pven = eclequ(dt, ss_pven);
   ss_pearth = eclequ(dt, ss_pearth);
@@ -543,7 +539,6 @@ void SolarSystem::updateSolar()
     eps2 = julcent(ss_epoch);
     pmx = pmatequ(dt, eps2);
     ss_rs = mxvct(pmx,ss_rs);
-    ss_rm = mxvct(pmx,ss_rm);
     ss_pmer = mxvct(pmx,ss_pmer);
     ss_pven = mxvct(pmx,ss_pven);
     ss_pearth = mxvct(pmx,ss_pearth);
@@ -569,7 +564,6 @@ void SolarSystem::updateSolar()
    {
     pmx = nutmat(dt, eps2, false);
     ss_rs = mxvct(pmx,ss_rs);
-    ss_rm = mxvct(pmx,ss_rm);
     ss_pmer = mxvct(pmx,ss_pmer);
     ss_pven = mxvct(pmx,ss_pven);
     ss_pearth = mxvct(pmx,ss_pearth);
@@ -603,7 +597,7 @@ void SolarSystem::getRaDec(Vec3 r1, double& ra, double& decl)
   ra = r2[1] / degrad;
   ra /= 15.0;
   if (ra < 0) ra += 24.0;
-  
+
   decl = DegFDms(decl);
   ra = DegFDms(ra);
 
@@ -618,18 +612,7 @@ void SolarSystem::getSun (double& ra, double& decl)  // RA and Dec for the Sun
     decl = 0;
    }
   else getRaDec (ss_rs, ra, decl);
-} 
-
-void SolarSystem::getMoon (double& ra, double& decl)  // RA and Dec for the Moon
-{
-  if (!ss_update_called) updateSolar();
-  if (ss_central_body != 4)
-   {
-    ra = -100.0;
-    decl = 0;
-   }
-  else getRaDec (ss_rm, ra, decl);
-} 
+}
 
 void SolarSystem::getMercury (double& ra, double& decl)  // RA and Dec for Mercury
 {
@@ -640,7 +623,7 @@ void SolarSystem::getMercury (double& ra, double& decl)  // RA and Dec for Mercu
     decl = 0;
    }
   else getRaDec (ss_pmer, ra, decl);
-} 
+}
 
 void SolarSystem::getVenus (double& ra, double& decl)  // RA and Dec for Venus
 {
@@ -651,7 +634,7 @@ void SolarSystem::getVenus (double& ra, double& decl)  // RA and Dec for Venus
     decl = 0;
    }
   else getRaDec (ss_pven, ra, decl);
-} 
+}
 
 void SolarSystem::getEarth (double& ra, double& decl)  // RA and Dec for Earth
 {
@@ -662,7 +645,7 @@ void SolarSystem::getEarth (double& ra, double& decl)  // RA and Dec for Earth
     decl = 0;
    }
   else getRaDec (ss_pearth, ra, decl);
-} 
+}
 
 void SolarSystem::getMars (double& ra, double& decl)  // RA and Dec for Mars
 {
@@ -673,7 +656,7 @@ void SolarSystem::getMars (double& ra, double& decl)  // RA and Dec for Mars
     decl = 0;
    }
   else getRaDec (ss_pmars, ra, decl);
-} 
+}
 
 void SolarSystem::getJupiter (double& ra, double& decl)  // RA and Dec for Jupiter
 {
@@ -684,7 +667,7 @@ void SolarSystem::getJupiter (double& ra, double& decl)  // RA and Dec for Jupit
     decl = 0;
    }
   else getRaDec (ss_pjup, ra, decl);
-} 
+}
 
 void SolarSystem::getSaturn (double& ra, double& decl)  // RA and Dec for Saturn
 {
@@ -695,7 +678,7 @@ void SolarSystem::getSaturn (double& ra, double& decl)  // RA and Dec for Saturn
     decl = 0;
    }
   else getRaDec (ss_psat, ra, decl);
-} 
+}
 
 void SolarSystem::getUranus (double& ra, double& decl)  // RA and Dec for Uranus
 {
@@ -706,7 +689,7 @@ void SolarSystem::getUranus (double& ra, double& decl)  // RA and Dec for Uranus
     decl = 0;
    }
   else getRaDec (ss_pura, ra, decl);
-} 
+}
 
 void SolarSystem::getNeptune (double& ra, double& decl)  // RA and Dec for Neptune
 {
@@ -717,7 +700,7 @@ void SolarSystem::getNeptune (double& ra, double& decl)  // RA and Dec for Neptu
     decl = 0;
    }
   else getRaDec (ss_pnept, ra, decl);
-} 
+}
 
 void SolarSystem::getIo (double& ra, double& decl)  // RA and Dec for Io
 {
@@ -728,7 +711,7 @@ void SolarSystem::getIo (double& ra, double& decl)  // RA and Dec for Io
     decl = 0;
    }
   else getRaDec (ss_pio, ra, decl);
-} 
+}
 
 void SolarSystem::getEuropa (double& ra, double& decl)  // RA and Dec for Europa
 {
@@ -739,7 +722,7 @@ void SolarSystem::getEuropa (double& ra, double& decl)  // RA and Dec for Europa
     decl = 0;
    }
   else getRaDec (ss_peuropa, ra, decl);
-} 
+}
 
 void SolarSystem::getGanymede (double& ra, double& decl)  // RA and Dec for Ganymede
 {
@@ -750,7 +733,7 @@ void SolarSystem::getGanymede (double& ra, double& decl)  // RA and Dec for Gany
     decl = 0;
    }
   else getRaDec (ss_pganymede, ra, decl);
-} 
+}
 
 void SolarSystem::getCallisto (double& ra, double& decl)  // RA and Dec for Callisto
 {
@@ -761,7 +744,7 @@ void SolarSystem::getCallisto (double& ra, double& decl)  // RA and Dec for Call
     decl = 0;
    }
   else getRaDec (ss_pcallisto, ra, decl);
-} 
+}
 
 void SolarSystem::getRhea (double& ra, double& decl)  // RA and Dec for Rhea
 {
@@ -772,7 +755,7 @@ void SolarSystem::getRhea (double& ra, double& decl)  // RA and Dec for Rhea
     decl = 0;
    }
   else getRaDec (ss_prhea, ra, decl);
-} 
+}
 
 void SolarSystem::getTitan (double& ra, double& decl)  // RA and Dec for Titan
 {
@@ -783,7 +766,7 @@ void SolarSystem::getTitan (double& ra, double& decl)  // RA and Dec for Titan
     decl = 0;
    }
   else getRaDec (ss_ptitan, ra, decl);
-} 
+}
 
 void SolarSystem::getMimas (double& ra, double& decl)  // RA and Dec for Mimas
 {
@@ -794,7 +777,7 @@ void SolarSystem::getMimas (double& ra, double& decl)  // RA and Dec for Mimas
     decl = 0;
    }
   else getRaDec (ss_pmimas, ra, decl);
-} 
+}
 
 void SolarSystem::getEnceladus (double& ra, double& decl)  // RA and Dec for Enceladus
 {
@@ -805,7 +788,7 @@ void SolarSystem::getEnceladus (double& ra, double& decl)  // RA and Dec for Enc
     decl = 0;
    }
   else getRaDec (ss_penceladus, ra, decl);
-} 
+}
 
 void SolarSystem::getDione (double& ra, double& decl)  // RA and Dec for Dione
 {
@@ -816,7 +799,7 @@ void SolarSystem::getDione (double& ra, double& decl)  // RA and Dec for Dione
     decl = 0;
    }
   else getRaDec (ss_pdione, ra, decl);
-} 
+}
 
 void SolarSystem::getUser (double& ra, double& decl)  // RA and Dec for User
 {
@@ -840,16 +823,16 @@ void SolarSystem::getPhysSun (double &pdiam, double &pmag)
     pmag = 0;
 
     return;
-   }; 
+   };
   if (!ss_update_called) updateSolar();
 
   pdiam = 0.00930495 / abs(ss_rs);
   pmag = -26.7 + 5.0 * log10(abs(ss_rs));
-} 
- 
+}
+
 void SolarSystem::getPhysMercury(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Mercury 
+ // Physical elements Mercury
 
  double ia, cp, cs, ps;
 
@@ -860,7 +843,7 @@ void SolarSystem::getPhysMercury(double &pdiam, double &pmag, double &pphase)
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -885,18 +868,18 @@ void SolarSystem::getPhysMercury(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysVenus(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Venus 
+ // Physical elements Venus
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 3) 
+ if (ss_central_body == 3)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -921,18 +904,18 @@ void SolarSystem::getPhysVenus(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysEarth(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Earth 
+ // Physical elements Earth
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 4) 
+ if (ss_central_body == 4)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -957,18 +940,18 @@ void SolarSystem::getPhysEarth(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysMars(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Mars 
+ // Physical elements Mars
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 5) 
+ if (ss_central_body == 5)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -993,18 +976,18 @@ void SolarSystem::getPhysMars(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysJupiter(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Jupiter 
+ // Physical elements Jupiter
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 6) 
+ if (ss_central_body == 6)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1029,18 +1012,18 @@ void SolarSystem::getPhysJupiter(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysSaturn(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Saturn 
+ // Physical elements Saturn
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 7) 
+ if (ss_central_body == 7)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1065,18 +1048,18 @@ void SolarSystem::getPhysSaturn(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysUranus(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Uranus 
+ // Physical elements Uranus
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 8) 
+ if (ss_central_body == 8)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1101,18 +1084,18 @@ void SolarSystem::getPhysUranus(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysNeptune(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Neptune 
+ // Physical elements Neptune
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 9) 
+ if (ss_central_body == 9)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1135,18 +1118,18 @@ void SolarSystem::getPhysNeptune(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysIo(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Io 
+ // Physical elements Io
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 10) 
+ if (ss_central_body == 10)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1171,18 +1154,18 @@ void SolarSystem::getPhysIo(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysEuropa(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Europa 
+ // Physical elements Europa
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 11) 
+ if (ss_central_body == 11)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1207,18 +1190,18 @@ void SolarSystem::getPhysEuropa(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysGanymede(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Ganymede 
+ // Physical elements Ganymede
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 12) 
+ if (ss_central_body == 12)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1243,18 +1226,18 @@ void SolarSystem::getPhysGanymede(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysCallisto(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Callisto 
+ // Physical elements Callisto
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 13) 
+ if (ss_central_body == 13)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1279,18 +1262,18 @@ void SolarSystem::getPhysCallisto(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysRhea(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Rhea 
+ // Physical elements Rhea
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 14) 
+ if (ss_central_body == 14)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1313,18 +1296,18 @@ void SolarSystem::getPhysRhea(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysTitan(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Titan 
+ // Physical elements Titan
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 15) 
+ if (ss_central_body == 15)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1347,18 +1330,18 @@ void SolarSystem::getPhysTitan(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysMimas(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Mimas 
+ // Physical elements Mimas
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 16) 
+ if (ss_central_body == 16)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1381,18 +1364,18 @@ void SolarSystem::getPhysMimas(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysEnceladus(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Enceladus 
+ // Physical elements Enceladus
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 17) 
+ if (ss_central_body == 17)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1415,18 +1398,18 @@ void SolarSystem::getPhysEnceladus(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysDione(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements Dione 
+ // Physical elements Dione
 
  double ia, cp, cs, ps;
 
- if (ss_central_body == 18) 
+ if (ss_central_body == 18)
   {
    pdiam = 0;
    pmag = 0;
    pphase = 0;
 
    return;
-  }; 
+  };
 
  if (!ss_update_called) updateSolar();
 
@@ -1449,7 +1432,7 @@ void SolarSystem::getPhysDione(double &pdiam, double &pmag, double &pphase)
 
 void SolarSystem::getPhysUser(double &pdiam, double &pmag, double &pphase)
 {
- // Physical elements user defined object 
+ // Physical elements user defined object
 
  double ia, cp, cs, ps;
 
@@ -1459,7 +1442,7 @@ void SolarSystem::getPhysUser(double &pdiam, double &pmag, double &pphase)
 
  if (!ss_user_active) return;
  if (ss_central_body == -1) return;
- 
+
  if (!ss_update_called) updateSolar();
 
  cp = abs(ss_user);
@@ -1475,39 +1458,9 @@ void SolarSystem::getPhysUser(double &pdiam, double &pmag, double &pphase)
 
  pphase = 0.5 * (1.0 + ia);
 
- pmag = getCometMag(6.0,4.0);  // Just to have a value.  This will usually be wrong! 
+ pmag = getCometMag(6.0,4.0);  // Just to have a value.  This will usually be wrong!
  // pmag = pmag + 5.0 * log10(ps * cp);
 
-}
-
-double SolarSystem::getDiamMoon ()
-{
- // Apparent diameter for the Moon
-
-  if (ss_central_body == 1) return 0; 
-  if (!ss_update_called) updateSolar();
-
-  return 2.32356e-05 / abs(ss_rm);
-} 
-
-void SolarSystem::getLunarLibration (double &lblon, double &lblat, double &termt)
-{
- // librations of the Moon and terminator position
-  if (!ss_moon_called) MoonDetails();
-
-  lblon = ss_moon_lblon;
-  lblat = ss_moon_lblat;
-  termt = ss_moon_term;
-}
-
-void SolarSystem::getLunarPhase (double &phase, double &ildisk, double &amag)
-{
- // phase and mag of Moon
-  if (!ss_moon_called) MoonDetails();
-
-  phase = ss_moon_phase;
-  ildisk = ss_moon_ildisk;
-  amag = ss_moon_mag;
 }
 
 Vec3 SolarSystem::SnPos (double &ep2, double &els)
@@ -1535,33 +1488,10 @@ Vec3 SolarSystem::SnPos (double &ep2, double &els)
   return rs;
  }
 
-Vec3 SolarSystem::MnPos (double &ep2, double &elm)
- {
-  // return the apparent position of the Moon
-  // and the Nutation ep2 value and the ecliptic longitude of the Moon elm
-	
-  Moon200 moon;
-  Mat3 mx;
-  Vec3 rm, s;
-  double t;
-
-  t = ss_time + ss_del_tdut/86400.0;
-  t = julcent (t);
-
-  rm = moon.position(t);
-  s = carpol(rm);
-  elm = s[1];
-
-  rm = eclequ(t,rm);
-  mx = nutmat(t,ep2);   // nutation
-  rm = mxvct(mx,rm);
-
-  return rm;
- }
 
 Vec3 SolarSystem::PosUser (double t)
 {
- /* Ecliptic coordinates (in A.U.) of User defined object 
+ /* Ecliptic coordinates (in A.U.) of User defined object
     for Equinox of Date.
     t is the time in Julian centuries since J2000.
   ===================================================================*/
@@ -1590,7 +1520,7 @@ Vec3 SolarSystem::PosUser (double t)
    day = 1;
 
    b = mjd(day, month, year, 0);
-   b  = julcent(b); 
+   b  = julcent(b);
 
    pmx = pmatecl(b, t);
    r1 = mxvct(pmx,r1);
@@ -1680,87 +1610,6 @@ void SolarSystem::MoonLibr (double jd, Vec3 rm, Vec3 sn,
    };
  }
 
-void SolarSystem::MoonDetails ()
- {
-  // Calculate specific details about the Moon
-  // Libration, Terminator position, Phase and Magnitude
-
-  double jd, t, lblon, lblat, termt, mnmag;
-  double dist, ps;
-  static double els, elm;
-  double const degrad = M_PI / 180.0;
-  double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
-  static Vec3 snc, mnc;   // position of the Sun and the Moon
-  Vec3 s, rm, rs, s3;
-  double ep2;    // correction for Apparent Sideral Time
-
-  if (ss_central_body != 4)   // calculate only for the Earth as reference
-   {
-    ss_moon_ildisk = 0;
-    ss_moon_phase = 0;
-    ss_moon_lblon = 0;
-    ss_moon_lblat = 0;
-    ss_moon_mag = 0;
-    ss_moon_term = 0; 
-
-    return;
-   };
-
-  if (!ss_update_called) updateSolar();
-  ss_moon_called = true;
-
-  jd = ss_time;
-
-  rs = SnPos (ep2, els);
-  rs *= ae;
-  snc = rs;
-
-  rm = MnPos (ep2, elm);
-  mnc = rm;
-  s = snc - rm;
-  MoonLibr(jd, rm, s, lblon, lblat, termt);  // librations and terminator
-
-  // calculate apparent magnitude of the Moon
-  mnmag = abs(rm) / 23454.77992;  // distance moon-observer in AU
-  s = vnorm(s);
-  s[0] = -s[0];
-  s[1] = -s[1];
-  s[2] = -s[2];
-  s3 = vnorm(rm);
-
-  dist = dot(s, s3);  // cos of phase angle Sun-Moon-Observer
-  if (fabs(dist) <= 1.0) dist = acos(dist) / degrad;
-  else dist = 180.0;
-  if (dist <= 61.0) dist = -3.475256769e-2 + 2.75256769e-2*dist;
-  else
-   {
-    if (dist < 115.0) dist = 0.6962632 * exp(1.48709985e-2*dist);
-    else
-     {
-      if (dist < 155.0) dist = 0.6531068 * exp(1.49213e-2*dist);
-      else dist = 1.00779e-9 * pow (dist, 4.486359);
-     };
-   };
-  if (mnmag <= 0) mnmag = 1e-30;  // should never happen.
-  mnmag = 0.23 + 5.0*log10(mnmag) + dist;  // moon's mag
-
-  // illuminated fraction
-  rs = snc - mnc;
-  rs = vnorm(rs);
-  rm = vnorm(mnc);
-  t = (1.0 - dot(rs,rm)) * 0.5;
-  ps = elm - els;
-  if (ps < 0) ps += 2*M_PI;
-  ps = ps / (2.0*M_PI);
-
-  ss_moon_ildisk = t;
-  ss_moon_phase = ps;
-  ss_moon_lblon = lblon;
-  ss_moon_lblat = lblat;
-  ss_moon_mag = mnmag;
-  ss_moon_term = termt; 
- }
-
 void SolarSystem::getConstSun()  // Sun constants
 {
   ss_J2 = 0;
@@ -1769,11 +1618,11 @@ void SolarSystem::getConstSun()  // Sun constants
   ss_axl0 = 286.13;
   ss_axl1 = 0.0;
   ss_axb0 = 63.87;
-  ss_axb1 = 0.0;	
+  ss_axb1 = 0.0;
   ss_W = 84.10;
   ss_Wd = 14.1844000;
-  ss_GM = 1.32712438e+20;  
-}	
+  ss_GM = 1.32712438e+20;
+}
 
 void SolarSystem::getConstMoon()  // Moon planetary constants
 {
@@ -1783,53 +1632,53 @@ void SolarSystem::getConstMoon()  // Moon planetary constants
   ss_axl0 = 0.0;
   ss_axl1 = 0.0;
   ss_axb0 = 90.0;
-  ss_axb1 = 0.0;	
+  ss_axb1 = 0.0;
   ss_W = 0.0;
   ss_Wd = 13.17635898;
-  ss_GM = 4.90279412e+12;  
-}	
+  ss_GM = 4.90279412e+12;
+}
 
 void SolarSystem::getConstMercury()  // Mercury planetary constants
-{ 
+{
   ss_J2 = 0.0;
   ss_R0 = 2439.7;
   ss_flat = 0.0;
   ss_axl0 = 281.0097;
   ss_axl1 = -0.0328;
   ss_axb0 = 61.4143;
-  ss_axb1 = -0.0049;	
+  ss_axb1 = -0.0049;
   ss_W = 329.5469;
   ss_Wd = 6.1385025;
-  ss_GM = 2.20320802e+13;  
-}	
+  ss_GM = 2.20320802e+13;
+}
 
 void SolarSystem::getConstVenus()  // Venus planetary constants
-{ 
+{
   ss_J2 = 0.027e-3;
   ss_R0 = 6051.9;
   ss_flat = 0.0;
   ss_axl0 = 272.72;
   ss_axl1 = 0.0;
   ss_axb0 = 67.16;
-  ss_axb1 = 0.0;	
+  ss_axb1 = 0.0;
   ss_W = 160.20;
   ss_Wd = -1.4813688;
-  ss_GM = 3.24858761e+14;  
-}	
+  ss_GM = 3.24858761e+14;
+}
 
 void SolarSystem::getConstEarth()  // Earth planetary constants
-{ 
+{
   ss_J2 = 1.08263e-3;
   ss_R0 = 6378.140;
   ss_flat = 0.00335364;
   ss_axl0 = 0.0;
   ss_axl1 = 0.0;
   ss_axb0 = 90.0;
-  ss_axb1 = 0.0;	
+  ss_axb1 = 0.0;
   ss_W = 0;
   ss_Wd = 359.017045833334;
-  ss_GM = 3.986005e+14;  
-}	
+  ss_GM = 3.986005e+14;
+}
 
 void SolarSystem::getConstMars()  // Mars planetary constants
 {
@@ -1839,11 +1688,11 @@ void SolarSystem::getConstMars()  // Mars planetary constants
   ss_axl0 = 317.68143;
   ss_axl1 = -0.1061;
   ss_axb0 = 52.88650;
-  ss_axb1 = -0.0609;	
+  ss_axb1 = -0.0609;
   ss_W = 176.630; // 176.655;
   ss_Wd = 350.89198226;
   ss_GM = 4.282828596416e+13; // 4.282837405582e+13
-}	
+}
 
 void SolarSystem::getConstJupiter()  // Jupiter planetary constants
 {
@@ -1853,11 +1702,11 @@ void SolarSystem::getConstJupiter()  // Jupiter planetary constants
   ss_axl0 = 268.056595;
   ss_axl1 = -0.009;
   ss_axb0 = 64.495303;
-  ss_axb1 = 0.003;	
+  ss_axb1 = 0.003;
   ss_W = 43.3;
   ss_Wd = 870.270;
   ss_GM = 1.2671199164e+17;
-}	
+}
 
 void SolarSystem::getConstSaturn()  // Saturn planetary constants
 {
@@ -1867,11 +1716,11 @@ void SolarSystem::getConstSaturn()  // Saturn planetary constants
   ss_axl0 = 40.589;
   ss_axl1 = -0.036;
   ss_axb0 = 83.537;
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 38.90;
   ss_Wd = 810.7939024;
   ss_GM = 3.7934096899e+16;
-}	
+}
 
 void SolarSystem::getConstUranus()  // Uranus planetary constants
 {
@@ -1881,11 +1730,11 @@ void SolarSystem::getConstUranus()  // Uranus planetary constants
   ss_axl0 = 257.311;
   ss_axl1 = 0;
   ss_axb0 = -15.175;
-  ss_axb1 = 0;	
+  ss_axb1 = 0;
   ss_W = 203.18;
   ss_Wd = -501.1600928;
   ss_GM = 5.8031587739e+15;
-}	
+}
 
 void SolarSystem::getConstNeptune()  // Neptune planetary constants
 {
@@ -1895,11 +1744,11 @@ void SolarSystem::getConstNeptune()  // Neptune planetary constants
   ss_axl0 = 299.36;
   ss_axl1 = 0;
   ss_axb0 = 43.46;
-  ss_axb1 = 0;	
+  ss_axb1 = 0;
   ss_W = 253.18;
   ss_Wd = 536.3128492;
   ss_GM = 6.8713077560e+15;
-}	
+}
 
 void SolarSystem::getConstIo()  // Io planetary constants
 {
@@ -1909,11 +1758,11 @@ void SolarSystem::getConstIo()  // Io planetary constants
   ss_axl0 = 268.05;
   ss_axl1 = -0.009;
   ss_axb0 = 64.49;
-  ss_axb1 = 0.003;	
+  ss_axb1 = 0.003;
   ss_W = 200.39;
   ss_Wd = 203.4889538;
   ss_GM = 5.930121208752e+12;
-}	
+}
 
 void SolarSystem::getConstEuropa()  // Europa planetary constants
 {
@@ -1929,11 +1778,11 @@ void SolarSystem::getConstEuropa()  // Europa planetary constants
   ss_axl0 = 268.08 + 1.086*sin(j4);
   ss_axl1 = -0.009;
   ss_axb0 = 64.51 + 0.468*cos(j4);
-  ss_axb1 = 0.003;	
+  ss_axb1 = 0.003;
   ss_W = 36.022 - 0.980*sin(j4);
   ss_Wd = 101.3747235;
   ss_GM = 3.193142189328e+12;
-}	
+}
 
 void SolarSystem::getConstGanymede()  // Ganymede planetary constants
 {
@@ -1949,11 +1798,11 @@ void SolarSystem::getConstGanymede()  // Ganymede planetary constants
   ss_axl0 = 268.20 + 0.431*sin(j5);
   ss_axl1 = -0.009;
   ss_axb0 = 64.57 + 0.186*cos(j5);
-  ss_axb1 = 0.003;	
+  ss_axb1 = 0.003;
   ss_W = 44.064 - 0.186*sin(j5);
   ss_Wd = 50.3176081;
   ss_GM = 9.883535347920e+12;
-}	
+}
 
 void SolarSystem::getConstCallisto()  // Callisto planetary constants
 {
@@ -1969,11 +1818,11 @@ void SolarSystem::getConstCallisto()  // Callisto planetary constants
   ss_axl0 = 268.72 + 0.590*sin(j6);
   ss_axl1 = -0.009;
   ss_axb0 = 64.83 + 0.254*cos(j6);
-  ss_axb1 = 0.003;	
+  ss_axb1 = 0.003;
   ss_W = 259.51 - 0.254*sin(j6);
   ss_Wd = 21.5710715;
   ss_GM = 7.171898726824e+12;
-}	
+}
 
 void SolarSystem::getConstRhea()  // Rhea planetary constants
 {
@@ -1989,11 +1838,11 @@ void SolarSystem::getConstRhea()  // Rhea planetary constants
   ss_axl0 = 40.38 + 3.10*sin(s7);
   ss_axl1 = -0.036;
   ss_axb0 = 83.55 - 0.35*cos(s7);
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 235.16 - 3.08*sin(s7);
   ss_Wd = 79.6900478;
   ss_GM = 1.669100263556e+11;
-}	
+}
 
 void SolarSystem::getConstTitan()  // Titan planetary constants
 {
@@ -2009,11 +1858,11 @@ void SolarSystem::getConstTitan()  // Titan planetary constants
   ss_axl0 = 39.4827 + 2.66*sin(s8);
   ss_axl1 = -0.036;
   ss_axb0 = 83.4279 - 0.33*cos(s8);
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 186.5855 - 2.64*sin(s8);
   ss_Wd = 22.5769768;
   ss_GM = 9.028315061962e+12;
-}	
+}
 
 void SolarSystem::getConstMimas()  // Mimas planetary constants
 {
@@ -2031,11 +1880,11 @@ void SolarSystem::getConstMimas()  // Mimas planetary constants
   ss_axl0 = 40.66 + 13.56*sin(s3);
   ss_axl1 = -0.036;
   ss_axb0 = 83.52 - 1.53*cos(s3);
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 333.46 - 13.48*sin(s3) - 44.85*sin(s9);
   ss_Wd = 381.9945550;
   ss_GM = 3.034727751920e+09;
-}	
+}
 
 void SolarSystem::getConstEnceladus()  // Enceladus planetary constants
 {
@@ -2045,11 +1894,11 @@ void SolarSystem::getConstEnceladus()  // Enceladus planetary constants
   ss_axl0 = 40.66;
   ss_axl1 = -0.036;
   ss_axb0 = 83.52;
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 6.32;
   ss_Wd = 262.7318996;
   ss_GM = 4.931432596870e+09;
-}	
+}
 
 void SolarSystem::getConstDione()  // Dione planetary constants
 {
@@ -2059,11 +1908,11 @@ void SolarSystem::getConstDione()  // Dione planetary constants
   ss_axl0 = 40.66;
   ss_axl1 = -0.036;
   ss_axb0 = 83.52;
-  ss_axb1 = -0.004;	
+  ss_axb1 = -0.004;
   ss_W = 357.00;
   ss_Wd = 131.5349316;
   ss_GM = 7.017807926315e+10;
-}	
+}
 
 void SolarSystem::getConstUser()  // User planetary constants
 {
@@ -2073,13 +1922,13 @@ void SolarSystem::getConstUser()  // User planetary constants
   ss_axl0 = ss_user_axl0;
   ss_axl1 = ss_user_axl1;
   ss_axb0 = ss_user_axb0;
-  ss_axb1 = ss_user_axb1;	
+  ss_axb1 = ss_user_axb1;
   ss_W = ss_user_W;
   ss_Wd = ss_user_Wd;
   ss_GM = ss_user_GM;
-}	
+}
 
-void SolarSystem::putConstUser(double j2, double r0, double flat, double axl0, double axl1, double axb0, double axb1, double w, double wd, double gm)  
+void SolarSystem::putConstUser(double j2, double r0, double flat, double axl0, double axl1, double axb0, double axb1, double w, double wd, double gm)
 {
 // store physical user constants
   ss_user_J2 = j2;
@@ -2088,17 +1937,17 @@ void SolarSystem::putConstUser(double j2, double r0, double flat, double axl0, d
   ss_user_axl0 = axl0;
   ss_user_axl1 = axl1;
   ss_user_axb0 = axb0;
-  ss_user_axb1 = axb1;	
+  ss_user_axb1 = axb1;
   ss_user_W = w;
   ss_user_Wd = wd;
   ss_user_GM = gm;
-}	
+}
 
 Mat3 SolarSystem::getSelenographic ()
 {
   // Calculate the Matrix to transform from Mean of J2000 into selenographic
   // coordinates at MJD time ss_time.
-  
+
   double t, gam, gmp, l, omg, mln;
   double a, b, c, ic, gn, gp, omp;
   double const degrad = M_PI / 180.0;
@@ -2152,13 +2001,13 @@ Mat3 SolarSystem::getSelenographic ()
   return m1;
 }
 
-void SolarSystem::getPlanMat()  
+void SolarSystem::getPlanMat()
 {
  // get Matrix to convert from Equatorial into planetary coordinates
 
  double ag, dt;
  Mat3 mx, m1;
- 
+
  ss_planmat_called = true;
 
  dt = ss_time + ss_del_tdut/86400.0;
@@ -2175,15 +2024,15 @@ void SolarSystem::getPlanMat()
     }
    else  // other planets
     {
-     ag = (ss_axl0 + ss_axl1 * dt) * M_PI / 180.0; 
+     ag = (ss_axl0 + ss_axl1 * dt) * M_PI / 180.0;
      mx = zrot(ag + M_PI / 2.0);
-     ag = (ss_axb0 + ss_axb1 * dt) * M_PI / 180.0; 
+     ag = (ss_axb0 + ss_axb1 * dt) * M_PI / 180.0;
      m1 = xrot(M_PI / 2.0 - ag);
      mx = m1 * mx;
      m1 = zrot((ss_W + ss_Wd*(ss_time+ss_del_tdut/86400.0-51544.5))*(M_PI/180.0));
     };
    ss_planmat = m1 * mx;
-  }; 
+  };
 
  if (ss_epoch != 51544.5)  // correct for precession
   {
@@ -2225,7 +2074,7 @@ void SolarSystem::getPlanetographic (double ra, double decl, double &lng, double
  // sky point at R.A ra (in HH.MMSS) and Declination decl (in DDD.MMSS) is at zenith.
 
  int j;
- double f, re, b1, b2, b3, c, sh, s, mp2; 
+ double f, re, b1, b2, b3, c, sh, s, mp2;
  Vec3 ru, s2;
 
  ru = getPlanetocentric (ra, decl);
@@ -2270,14 +2119,14 @@ void SolarSystem::getPlanetographic (double ra, double decl, double &lng, double
      sh = sqrt(s+sh*sh) - b2;
      ss_height = sh;
     };
-  } 
+  }
  else ss_height = 0;  // this should never happen
-  
+
  ss_lat = ss_lat * 180.0 / M_PI;
  ss_lng = ss_lng * 180.0 / M_PI;
 
  lat = ss_lat;
- lng = ss_lng;  
+ lng = ss_lng;
 
 }
 
@@ -2291,7 +2140,7 @@ void SolarSystem::getSkyRotAngles (double &raz1, double &rax, double &raz2)
  double rz1, rx1, rz2;
  Vec3 rpole, rnull, rtmp;
  Mat3 pmheq;
-  
+
  if (!ss_update_called) updateSolar();
  if (!ss_planmat_called) getPlanMat();
 
@@ -2307,7 +2156,7 @@ void SolarSystem::getSkyRotAngles (double &raz1, double &rax, double &raz2)
 
  rtmp = carpol (rpole);
  rz1 = rtmp[1]; // Right Ascension of North Pole direction
- rx1 = rtmp[2]; // Declination 
+ rx1 = rtmp[2]; // Declination
 
  pmheq = zrot(rz1 + M_PI*0.5);
  pmheq = xrot(M_PI*0.5 - rx1) * pmheq;
@@ -2318,10 +2167,10 @@ void SolarSystem::getSkyRotAngles (double &raz1, double &rax, double &raz2)
  raz1 = rz1 + M_PI*0.5;
  if (raz1 > 2.0*M_PI) raz1 -= 2.0*M_PI;
  rax = M_PI*0.5 - rx1;
- raz2 = rz2; 
- 
+ raz2 = rz2;
+
 }
- 
+
 void SolarSystem::putOrbitElements (double t0, double pdist, double ecc, double ran, double aper, double inc, double eclep)
 {
  // store orbit elements for a hyperbolic, parabolic or highly elliptic heliocentric orbit
@@ -2436,7 +2285,7 @@ void SolarSystem::getOrbitPosition (double& ra, double& decl)
    day = 1;
 
    b = mjd(day, month, year, 0);
-   b  = julcent(b); 
+   b  = julcent(b);
   };
 
  pmx = pmatecl(b, eps2);
@@ -2508,7 +2357,7 @@ double SolarSystem::getAsteroidMag(double h, double g)
  t /= 10.0;
 
  ra = h + 5.0 * log10(ra*decl) + g * t;
- 
- return ra;  
+
+ return ra;
 
 }

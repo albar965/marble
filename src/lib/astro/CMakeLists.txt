@@ -12,12 +12,10 @@ endif()
 
 ADD_DEFINITIONS(-O3)
 
-SET(astrolib_SRCS 
+SET(astrolib_SRCS
   astrolib.cpp
   astr2lib.cpp
   attlib.cpp
-  eclsolar.cpp
-  planetarySats.cpp
   solarsystem.cpp
 )
 
@@ -78,8 +76,6 @@ endif()
     astrolib.h
     astr2lib.h
     attlib.h
-    eclsolar.h
-    planetarySats.h
     solarsystem.h
     ${CMAKE_CURRENT_BINARY_DIR}/astrolib_export.h
 

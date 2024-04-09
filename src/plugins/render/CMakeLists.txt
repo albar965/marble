@@ -13,8 +13,6 @@ add_subdirectory( progress )
 add_subdirectory( crosshairs )
 add_subdirectory( graticule )
 add_subdirectory( atmosphere )
-add_subdirectory( stars )
-add_subdirectory( sun )
 
 find_package( Perl )
 marble_set_package_properties( Perl PROPERTIES URL "http://www.perl.org" )

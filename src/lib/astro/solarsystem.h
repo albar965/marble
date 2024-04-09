@@ -24,8 +24,8 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void setDeltaTAI_UTC(double d);  // set IERS Parameter TAI - UTC
     void setAutoTAI_UTC();  // IERS Parameter TAI - UTC to auto
     void setCurrentMJD(int year, int month, int day, int hour, int min, double sec); // set current time
-    void setCurrentMJD();  // sets current MJD to R/T 
-    double getMJD(int year, int month, int day, int hour, int min, double sec); // get MJD from date 
+    void setCurrentMJD();  // sets current MJD to R/T
+    double getMJD(int year, int month, int day, int hour, int min, double sec); // get MJD from date
     void getDatefromMJD(double mjd, int &year, int &month, int &day,
                         int &hour, int &min, double &sec); // convert MJD into date and time
     void setEpoch (double yr);  // set epoch of coordinates
@@ -33,49 +33,45 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void setCentralBody (char* pname); // select which planet is central body
     void includeUser (bool uact);  // activate user defined object
 
-    void getSun (double& ra, double& decl);  // RA and Dec for the Sun 
-    void getMoon (double& ra, double& decl);  // RA and Dec for the Moon 
-    void getMercury (double& ra, double& decl);  // RA and Dec for Mercury 
-    void getVenus (double& ra, double& decl);  // RA and Dec for Venus 
-    void getEarth (double& ra, double& decl);  // RA and Dec for Earth (with regard to the Sun) 
-    void getMars (double& ra, double& decl);  // RA and Dec for Mars 
-    void getJupiter (double& ra, double& decl);  // RA and Dec for Jupiter 
-    void getSaturn (double& ra, double& decl);  // RA and Dec for Saturn 
-    void getUranus (double& ra, double& decl);  // RA and Dec for Uranus 
+    void getSun (double& ra, double& decl);  // RA and Dec for the Sun
+    void getMercury (double& ra, double& decl);  // RA and Dec for Mercury
+    void getVenus (double& ra, double& decl);  // RA and Dec for Venus
+    void getEarth (double& ra, double& decl);  // RA and Dec for Earth (with regard to the Sun)
+    void getMars (double& ra, double& decl);  // RA and Dec for Mars
+    void getJupiter (double& ra, double& decl);  // RA and Dec for Jupiter
+    void getSaturn (double& ra, double& decl);  // RA and Dec for Saturn
+    void getUranus (double& ra, double& decl);  // RA and Dec for Uranus
     void getNeptune (double& ra, double& decl);  // RA and Dec for Neptune
-    void getIo (double& ra, double& decl);  // RA and Dec for Io 
-    void getEuropa (double& ra, double& decl);  // RA and Dec for Europa 
-    void getGanymede (double& ra, double& decl);  // RA and Dec for Ganymede 
-    void getCallisto (double& ra, double& decl);  // RA and Dec for Callisto 
-    void getRhea (double& ra, double& decl);  // RA and Dec for Rhea 
-    void getTitan (double& ra, double& decl);  // RA and Dec for Titan 
-    void getMimas (double& ra, double& decl);  // RA and Dec for Mimas 
-    void getEnceladus (double& ra, double& decl);  // RA and Dec for Enceladus 
-    void getDione (double& ra, double& decl);  // RA and Dec for Dione 
-    void getUser (double& ra, double& decl);  // RA and Dec for user defined object 
+    void getIo (double& ra, double& decl);  // RA and Dec for Io
+    void getEuropa (double& ra, double& decl);  // RA and Dec for Europa
+    void getGanymede (double& ra, double& decl);  // RA and Dec for Ganymede
+    void getCallisto (double& ra, double& decl);  // RA and Dec for Callisto
+    void getRhea (double& ra, double& decl);  // RA and Dec for Rhea
+    void getTitan (double& ra, double& decl);  // RA and Dec for Titan
+    void getMimas (double& ra, double& decl);  // RA and Dec for Mimas
+    void getEnceladus (double& ra, double& decl);  // RA and Dec for Enceladus
+    void getDione (double& ra, double& decl);  // RA and Dec for Dione
+    void getUser (double& ra, double& decl);  // RA and Dec for user defined object
 
-    void getPhysSun (double &pdiam, double &pmag);  // Physical elements Sun 
-    void getPhysMercury(double &pdiam, double &pmag, double &pphase);  // Physical elements Mercury 
-    void getPhysVenus(double &pdiam, double &pmag, double &pphase);  // Physical elements Venus 
-    void getPhysEarth(double &pdiam, double &pmag, double &pphase);  // Physical elements Earth 
-    void getPhysMars(double &pdiam, double &pmag, double &pphase);  // Physical elements Mars 
-    void getPhysJupiter(double &pdiam, double &pmag, double &pphase);  // Physical elements Jupiter 
-    void getPhysSaturn(double &pdiam, double &pmag, double &pphase);  // Physical elements Saturn 
-    void getPhysUranus(double &pdiam, double &pmag, double &pphase);  // Physical elements Uranus 
-    void getPhysNeptune(double &pdiam, double &pmag, double &pphase);  // Physical elements Neptune 
-    double getDiamMoon (); // Apparent diameter for the Moon 
-    void getLunarLibration (double &lblon, double &lblat, double &termt);  // librations of the Moon and terminator position
-    void getLunarPhase (double &phase, double &ildisk, double &amag);  // phase and mag of Moon
+    void getPhysSun (double &pdiam, double &pmag);  // Physical elements Sun
+    void getPhysMercury(double &pdiam, double &pmag, double &pphase);  // Physical elements Mercury
+    void getPhysVenus(double &pdiam, double &pmag, double &pphase);  // Physical elements Venus
+    void getPhysEarth(double &pdiam, double &pmag, double &pphase);  // Physical elements Earth
+    void getPhysMars(double &pdiam, double &pmag, double &pphase);  // Physical elements Mars
+    void getPhysJupiter(double &pdiam, double &pmag, double &pphase);  // Physical elements Jupiter
+    void getPhysSaturn(double &pdiam, double &pmag, double &pphase);  // Physical elements Saturn
+    void getPhysUranus(double &pdiam, double &pmag, double &pphase);  // Physical elements Uranus
+    void getPhysNeptune(double &pdiam, double &pmag, double &pphase);  // Physical elements Neptune
 
-    void getPhysIo(double &pdiam, double &pmag, double &pphase);  // Physical elements Io 
-    void getPhysEuropa(double &pdiam, double &pmag, double &pphase);  // Physical elements Europa 
-    void getPhysGanymede(double &pdiam, double &pmag, double &pphase);  // Physical elements Ganymede 
-    void getPhysCallisto(double &pdiam, double &pmag, double &pphase);  // Physical elements Callisto 
-    void getPhysRhea(double &pdiam, double &pmag, double &pphase);  // Physical elements Rhea 
-    void getPhysTitan(double &pdiam, double &pmag, double &pphase);  // Physical elements Titan 
-    void getPhysMimas(double &pdiam, double &pmag, double &pphase);  // Physical elements Mimas 
-    void getPhysEnceladus(double &pdiam, double &pmag, double &pphase);  // Physical elements Enceladus 
-    void getPhysDione(double &pdiam, double &pmag, double &pphase);  // Physical elements Dione 
+    void getPhysIo(double &pdiam, double &pmag, double &pphase);  // Physical elements Io
+    void getPhysEuropa(double &pdiam, double &pmag, double &pphase);  // Physical elements Europa
+    void getPhysGanymede(double &pdiam, double &pmag, double &pphase);  // Physical elements Ganymede
+    void getPhysCallisto(double &pdiam, double &pmag, double &pphase);  // Physical elements Callisto
+    void getPhysRhea(double &pdiam, double &pmag, double &pphase);  // Physical elements Rhea
+    void getPhysTitan(double &pdiam, double &pmag, double &pphase);  // Physical elements Titan
+    void getPhysMimas(double &pdiam, double &pmag, double &pphase);  // Physical elements Mimas
+    void getPhysEnceladus(double &pdiam, double &pmag, double &pphase);  // Physical elements Enceladus
+    void getPhysDione(double &pdiam, double &pmag, double &pphase);  // Physical elements Dione
     void getPhysUser(double &pdiam, double &pmag, double &pphase);  // Physical elements user defined object
 
     Vec3 getPlanetocentric (double ra, double decl);  // planetocentric position
@@ -91,22 +87,20 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
     void putOrbitUser (double t0, double pdist, double ecc, double ran, double aper, double inc, double eclep);
     void putEllipticUser (double t0, double a, double m0, double ecc, double ran, double aper, double inc, double eclep);
     void putConstUser(double j2, double r0, double flat, double axl0, double axl1, double axb0, double axb1, double w, double wd, double gm);  // store physical user constants
-    
+
     double DmsDegF (double h); // conversion from Format DDD.MMSS into d.fff
     double DegFDms (double h); // conversion from Format d.fff into DDD.MMSS
 
 
-  private:  
+  private:
     void ssinit();  // initialize SolarSystem
     double atan23 (double y, double x);  // atan without singularity for x,y=0
     void DefTime ();  // Get System Time and Date
     void getRaDec (Vec3 r1, double& ra, double& decl); // convert r1 into RA and DEC
     void updateSolar();  // update all positions of planets according to current MJD.
-   
-    void MoonDetails();
+
     void MoonLibr (double jd, Vec3 rm, Vec3 sn, double &lblon, double &lblat, double &termt);
     Vec3 SnPos (double &ep2, double &els);
-    Vec3 MnPos (double &ep2, double &els);
     Vec3 PosUser(double dt);  // position of User defined object
     Mat3 getSelenographic();
     void getConstSun();  // Sun constants
@@ -157,7 +151,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
       double ss_epoch;  // epoch of coordinates in MJD
       int ss_central_body;  // body defining the coordinate origin (0=sun,1=moon,2=mercury etc.; -1=user)
 
-     Vec3 ss_rm, ss_rs;  // position of Moon and Sun in ecliptic of date (A.U.)
+     Vec3 ss_rs;  // position of Moon and Sun in ecliptic of date (A.U.)
      Vec3 ss_pmer, ss_pven, ss_pearth, ss_pmars, ss_pjup, ss_psat, ss_pura, ss_pnept; // positions of planets
      Vec3 ss_pio, ss_peuropa, ss_pganymede, ss_pcallisto;  // positions of Jupiter moons
      Vec3 ss_prhea, ss_ptitan, ss_pmimas, ss_penceladus, ss_pdione; // positions of Saturn moons
@@ -204,7 +198,7 @@ class ASTROLIB_EXPORT SolarSystem     // Calculate Positions of Solar System Bod
      Mat3 ss_planmat; // matrix to convert from J2000.0 into planetary coordinates
      double ss_lat;  // planetary latitude (decimal degrees)
      double ss_lng;  // planetary longitude (decimal degrees)
-     double ss_height; // height above reference ellipsoid (km) 
+     double ss_height; // height above reference ellipsoid (km)
 
      double ss_t0;  // time of perihelion passage or epoch of elliptical elements (MJD)
      double ss_m0;  // Mean Anomaly in degrees
