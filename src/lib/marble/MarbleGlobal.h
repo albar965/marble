@@ -248,7 +248,7 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
 // VERSION_NUMBER_TODO
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.25.5 (stable release for Little Navmap)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "1.0.0 (stable release for Little Navmap)" );
 
 // API Version id:
 // form : 0xMMmmpp

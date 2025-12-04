@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5)
 
 project(marble)
 
@@ -61,21 +61,6 @@ set ( CMAKE_MODULE_PATH
 include(GenerateExportHeader)
 include( MarbleMacros )
 
-####################################################
-# Generate the tiles with the tilecreator at compile time
-# if this option is set, srtm.jpg will not be installed but the generated tiles instead
-option(MOBILE "Create a Marble version optimized for handheld devices")
-
-####################################################
-# Build a D-Bus interface for the Marble widget
-# This is disabled by default for all win32, apple and Android
-if(WIN32 OR APPLE OR CMAKE_SYSTEM_NAME STREQUAL Android)
-    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
-else()
-    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
-endif()
-
-
 #######################################################
 # Specific options for building for different platforms
 
@@ -102,32 +87,8 @@ find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5Concurrent ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Quick ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt5PrintSupport ${REQUIRED_QT_VERSION} REQUIRED)
 
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
-   find_package(Qt5Location ${REQUIRED_QT_VERSION} REQUIRED)
-   find_package(Qt5Positioning ${REQUIRED_QT_VERSION} REQUIRED)
-   find_package(Qt5Multimedia ${REQUIRED_QT_VERSION} REQUIRED)
-   set ( MARBLE_NO_WEBKITWIDGETS TRUE )
-else()
-# Have to disable these since the wrong webkit is found on Linux
-#   find_package(Qt5WebKit ${REQUIRED_QT_VERSION})
-#   find_package(Qt5WebKitWidgets ${REQUIRED_QT_VERSION})
-
-   if ( NOT Qt5WebKitWidgets_FOUND )
-     set ( MARBLE_NO_WEBKITWIDGETS TRUE )
-   endif()
-endif()
-
-if (BUILD_WITH_DBUS)
-  find_package(Qt5DBus ${REQUIRED_QT_VERSION})
-  if (NOT Qt5DBus_FOUND)
-    set(MARBLE_NO_DBUS TRUE)
-  endif()
-else()
-  set(MARBLE_NO_DBUS TRUE)
-endif()
 
 if(QTONLY)
   # Forward the old QTONLY=TRUE option to the new WITH_KDE=FALSE
@@ -145,11 +106,6 @@ SET(CMAKE_AUTOMOC TRUE)
 if( WIN32 )
     add_definitions( -D_USE_MATH_DEFINES )
 endif( WIN32 )
-
-####################################################
-set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
-set (WITH_DESIGNER_PLUGIN TRUE CACHE BOOL "Build plugins for Qt Designer")
-add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget support in Qt Designer. Toggle with WITH_DESIGNER_PLUGIN=YES/NO")
 
 set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
 if (NOT QT_PLUGINS_DIR)
@@ -188,10 +144,6 @@ endif()
 if(NOT ICON_INSTALL_DIR)
   set(ICON_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons)
 endif(NOT ICON_INSTALL_DIR)
-
-if(NOT APPS_INSTALL_DIR)
-  set(APPS_INSTALL_DIR ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications)
-endif(NOT APPS_INSTALL_DIR)
 
 if(NOT INCLUDE_INSTALL_DIR)
     set(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include")
@@ -238,10 +190,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
     add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
                      -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security )
 
-    # In pedantic mode, treat warnings as errors
-    if (PEDANTIC)
-        add_definitions( -Werror )
-    endif (PEDANTIC)
 endif (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_C_COMPILER MATCHES "icc")
 
 #############################################################
@@ -262,14 +210,6 @@ if(WIN32)
   SET(CMAKE_DEBUG_POSTFIX "d")
 endif(WIN32)
 ####################################################
-
-
-####################################################
-# Add global ECM & KF5 settings
-set(REQUIRED_ECM_VERSION 1.7.0)
-set(KDE_INSTALL_DIRS_NO_DEPRECATED TRUE)
-set(KDE_SKIP_UNINSTALL_TARGET ON CACHE BOOL "KDE uninstall target must be disabled")
-set(REQUIRED_KF5_VERSION 5.7.0)
 
 
 ####################################################
@@ -297,18 +237,6 @@ add_subdirectory(src)
 add_subdirectory(data)
 
 include(DistTarget)
-
-option(BUILD_MARBLE_TOOLS "Build various tools related to Marble" OFF)
-add_feature_info("Marble tools" BUILD_MARBLE_TOOLS "Build various Marble tools for e.g. file format conversion. Toggle with BUILD_MARBLE_TOOLS=YES/NO.")
-if(BUILD_MARBLE_TOOLS)
-  add_subdirectory(tools)
-endif()
-
-option(BUILD_MARBLE_EXAMPLES "Build C++ examples showing how to use the Marble library" OFF)
-add_feature_info("Marble library C++ examples" BUILD_MARBLE_EXAMPLES "Build C++ examples showing how to use the Marble library. Toggle with BUILD_MARBLE_EXAMPLES=YES/NO.")
-if(BUILD_MARBLE_EXAMPLES)
-  add_subdirectory(examples/cpp)
-endif()
 
 ####################################################
 # Install extra files

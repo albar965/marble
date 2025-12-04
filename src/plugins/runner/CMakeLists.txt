@@ -1,8 +1,4 @@
 # Search and/or reverse geocoding
-add_subdirectory( hostip )
-add_subdirectory( geouri )
-add_subdirectory( latlon )
-add_subdirectory( localdatabase )
 
 #Parsing
 add_subdirectory( cache )
@@ -11,10 +7,3 @@ add_subdirectory( pn2 )
 add_subdirectory( pnt )
 add_subdirectory( log )
 
-macro_optional_find_package( libshp )
-marble_set_package_properties( libshp PROPERTIES DESCRIPTION "reading and writing of ESRI Shapefiles (.shp)" )
-marble_set_package_properties( libshp PROPERTIES URL "http://shapelib.maptools.org/" )
-marble_set_package_properties( libshp PROPERTIES TYPE OPTIONAL PURPOSE "reading and displaying .shp files" )
-if( LIBSHP_FOUND )
-  add_subdirectory( shp )
-endif( LIBSHP_FOUND )

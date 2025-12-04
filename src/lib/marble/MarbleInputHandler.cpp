@@ -732,7 +732,7 @@ bool MarbleDefaultInputHandler::handleMouseEvent(QMouseEvent *event)
     // handled, however.
     if (event->type() != QEvent::MouseMove && !selectionRubber()->isVisible())
     {
-		auto const floatItems = MarbleInputHandler::d->m_marblePresenter->map()->floatItems();
+    auto const floatItems = MarbleInputHandler::d->m_marblePresenter->map()->floatItems();
         foreach (AbstractFloatItem *floatItem, floatItems)
         {
             if ( floatItem->enabled() && floatItem->visible()
@@ -862,7 +862,7 @@ bool MarbleDefaultInputHandler::eventFilter(QObject* o, QEvent* e)
 
 bool MarbleDefaultInputHandler::handleTouch(QTouchEvent*)
 {
-    return false; //reimplement to handle in cases of QML and PinchArea element
+    return false; //reimplement to handle in cases of PinchArea element
 }
 
 bool MarbleDefaultInputHandler::handleKeyPress(QKeyEvent* event)

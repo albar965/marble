@@ -25,17 +25,3 @@ if(NOT KF5_FOUND)
     return()
 endif()
 
-# register marble part as handler
-# install again once part is fixed to load and show the passed file
-# install(FILES marble_part_kml.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-# install(FILES marble_part_kmz.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-
-# register thumbnail plugin as handler
-install(FILES marble_thumbnail_kml.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-install(FILES marble_thumbnail_kmz.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-
-if(NOT WIN32 AND NOT APPLE)
-    # register marble app as handler
-    install(FILES marble_kml.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-    install(FILES marble_kmz.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-endif()

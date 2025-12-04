@@ -240,8 +240,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void removeLayer( LayerInterface *layer );
 
-    PopupLayer* popupLayer();
-
     /**
      * @brief  Get the Projection used for the map
      * @return @c Spherical         a Globe

@@ -24,11 +24,8 @@
 #include <QRegion>
 
 // Marble
-#include "layers/FogLayer.h"
-#include "layers/FpsLayer.h"
 #include "layers/GeometryLayer.h"
 #include "layers/GroundLayer.h"
-#include "layers/MarbleSplashLayer.h"
 #include "layers/PlacemarkLayer.h"
 #include "layers/TextureLayer.h"
 #include "layers/VectorTileLayer.h"
@@ -135,10 +132,8 @@ public:
     StyleBuilder     m_styleBuilder;
 
     LayerManager     m_layerManager;
-    MarbleSplashLayer m_marbleSplashLayer;
     MarbleMap::CustomPaintLayer m_customPaintLayer;
     GeometryLayer            m_geometryLayer;
-    FogLayer                 m_fogLayer;
     GroundLayer              m_groundLayer;
     TextureLayer     m_textureLayer;
     PlacemarkLayer   m_placemarkLayer;
@@ -165,7 +160,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     m_isLockedToSubSolarPoint( false ),
     m_isSubSolarPointIconVisible( false )
 {
-    m_layerManager.addLayer( &m_fogLayer );
     m_layerManager.addLayer( &m_groundLayer );
     m_layerManager.addLayer( &m_geometryLayer );
     m_layerManager.addLayer( &m_placemarkLayer );
@@ -176,10 +170,8 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent, MarbleModel *model ) :
     QObject::connect( m_model->fileManager(), SIGNAL(fileAdded(QString)),
                       parent, SLOT(setDocument(QString)) );
 
-
     QObject::connect( &m_placemarkLayer, SIGNAL(repaintNeeded()),
                       parent, SIGNAL(repaintNeeded()));
-
     QObject::connect ( &m_layerManager, SIGNAL(pluginSettingsChanged()),
                        parent,        SIGNAL(pluginSettingsChanged()) );
     QObject::connect ( &m_layerManager, SIGNAL(repaintNeeded(QRegion)),
@@ -275,7 +267,6 @@ MarbleMap::~MarbleMap()
 
     d->m_layerManager.removeLayer( &d->m_customPaintLayer );
     d->m_layerManager.removeLayer( &d->m_geometryLayer );
-    d->m_layerManager.removeLayer( &d->m_fogLayer );
     d->m_layerManager.removeLayer( &d->m_placemarkLayer );
     d->m_layerManager.removeLayer( &d->m_textureLayer );
     d->m_layerManager.removeLayer( &d->m_groundLayer );
@@ -768,12 +759,6 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
         }
     }
 
-    if ( !d->m_model->mapTheme() ) {
-        mDebug() << "No theme yet!";
-        d->m_marbleSplashLayer.render( &painter, &d->m_viewport );
-        return;
-    }
-
     QTime t;
     t.start();
 
@@ -787,11 +772,6 @@ void MarbleMap::paint( GeoPainter &painter, const QRect &dirtyRect )
         emit renderStatusChanged( newRenderStatus );
     }
     emit renderStateChanged( d->m_renderState );
-
-    if ( d->m_showFrameRate ) {
-        FpsLayer fpsPainter( &t );
-        fpsPainter.paint( &painter );
-    }
 
     const qreal fps = 1000.0 / (qreal)( t.elapsed() );
     emit framesPerSecond( fps );

@@ -15,12 +15,9 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
-class QQmlComponent;
-class QQuickItem;
-
 namespace Marble
 {
-    
+
 class ViewportParams;
 class GeoSceneLayer;
 class AbstractDataPluginItem;
@@ -46,8 +43,8 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
     Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
     Q_PROPERTY( int numberOfItems READ numberOfItems WRITE setNumberOfItems NOTIFY changedNumberOfItems )
-    
- public:    
+
+ public:
     explicit AbstractDataPlugin( const MarbleModel *marbleModel );
 
     virtual ~AbstractDataPlugin();
@@ -58,17 +55,17 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * @brief Returns the name(s) of the backend that the plugin can render
      */
     QStringList backendTypes() const;
-    
+
     /**
      * @brief Return how the plugin settings should be used.
      */
     QString renderPolicy() const;
-    
+
     /**
      * @brief Preferred level in the layer stack for the rendering
      */
     QStringList renderPosition() const;
-    
+
     /**
      * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
@@ -91,12 +88,12 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      * Set the number of items to be shown at the same time.
      */
     void setNumberOfItems( quint32 number );
-    
+
     /**
      * @return The number of items to be shown at the same time.
      */
     quint32 numberOfItems() const;
-    
+
     /**
      * This function returns all items at the position @p curpos. Depending on where they have
      * been painted the last time.
@@ -113,17 +110,12 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      */
     virtual RenderType renderType() const;
 
-    void setDelegate(QQmlComponent* delegate, QQuickItem *parent );
-
     /** Convenience method to set the favorite item state on the current model */
     void setFavoriteItemsOnly( bool favoriteOnly );
 
     bool isFavoriteItemsOnly() const;
 
     QObject* favoritesModel();
-    
-public Q_SLOTS:
-    void handleViewportChange( const ViewportParams *viewport );
 
  private Q_SLOTS:
     virtual void favoriteItemsChanged( const QStringList& favoriteItems );
@@ -136,11 +128,11 @@ public Q_SLOTS:
     void favoriteItemsOnlyChanged();
 
     void favoritesModelChanged();
-    
+
  private:
     AbstractDataPluginPrivate * const d;
 };
-    
+
 }
 
 #endif

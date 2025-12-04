@@ -1,23 +1,15 @@
 set( layers_HDRS
-    FogLayer.h
-    FpsLayer.h
     GeometryLayer.h
     GroundLayer.h
-    MarbleSplashLayer.h
-    PlacemarkLayer.h
-    PopupLayer.h
     TextureLayer.h
+    PlacemarkLayer.h
     VectorTileLayer.h
 )
 
 set( layers_SRCS
-    layers/FogLayer.cpp
-    layers/FpsLayer.cpp
     layers/GeometryLayer.cpp
     layers/GroundLayer.cpp
-    layers/MarbleSplashLayer.cpp
-    layers/PlacemarkLayer.cpp
-    layers/PopupLayer.cpp
     layers/TextureLayer.cpp
+    layers/PlacemarkLayer.cpp
     layers/VectorTileLayer.cpp
 )

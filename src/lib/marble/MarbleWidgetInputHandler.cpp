@@ -20,7 +20,6 @@
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "AbstractDataPluginItem.h"
-#include "PopupLayer.h"
 #include "RenderPlugin.h"
 
 namespace Marble
@@ -71,11 +70,6 @@ class MarbleWidgetInputHandlerPrivate
 
         bool layersEventFilter(QObject *o, QEvent *e)
         {   //FIXME - this should go up in hierarchy to MarbleInputHandler
-            if (m_marbleWidget->popupLayer()->eventFilter(o, e))
-            {
-                return true;
-            }
-
             return false;
         }
 

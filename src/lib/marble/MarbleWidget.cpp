@@ -23,7 +23,6 @@
 #include <QNetworkProxy>
 #include <QMetaMethod>
 #include "DataMigration.h"
-#include "FpsLayer.h"
 #include "FileManager.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
@@ -36,7 +35,6 @@
 #include "MarbleModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
-#include "PopupLayer.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
@@ -89,7 +87,6 @@ class MarbleWidgetPrivate
           m_map( &m_model ),
           m_presenter( &m_map ),
           m_inputhandler( 0 ),
-          m_mapInfoDialog( 0 ),
           m_customPaintLayer( parent ),
           m_showFrameRate( false )
     {
@@ -98,8 +95,6 @@ class MarbleWidgetPrivate
     ~MarbleWidgetPrivate()
     {
         m_map.removeLayer( &m_customPaintLayer );
-        m_map.removeLayer( m_mapInfoDialog );
-        delete m_mapInfoDialog;
     }
 
     void  construct();
@@ -126,7 +121,6 @@ class MarbleWidgetPrivate
 
     MarbleWidgetInputHandler  *m_inputhandler;
 
-    PopupLayer    *m_mapInfoDialog;
     MarbleWidget::CustomPaintLayer m_customPaintLayer;
 
     bool             m_showFrameRate;
@@ -219,11 +213,6 @@ void MarbleWidgetPrivate::construct()
                                                              const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
-
-    m_mapInfoDialog = new PopupLayer( m_widget, m_widget );
-    m_mapInfoDialog->setVisible( false );
-    m_widget->connect( m_mapInfoDialog, SIGNAL(repaintNeeded()), m_widget, SLOT(update()) );
-    m_map.addLayer( m_mapInfoDialog );
 
     setInputHandler();
     m_widget->setMouseTracking( true );
@@ -708,15 +697,6 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
         widgetPainter.drawImage( rect(), image );
     }
 
-    if ( d->m_showFrameRate )
-    {
-        QPainter painter( this );
-        FpsLayer fpsPainter( &t );
-        fpsPainter.paint( &painter );
-
-        const qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
-        emit framesPerSecond( fps );
-    }
 }
 
 void MarbleWidget::customPaint( GeoPainter *painter )
@@ -1164,11 +1144,6 @@ qreal MarbleWidget::zoomFromDistance( qreal distance ) const
 qreal MarbleWidget::distanceFromZoom( qreal zoom ) const
 {
     return d->m_presenter.distanceFromZoom( zoom );
-}
-
-PopupLayer *MarbleWidget::popupLayer()
-{
-    return d->m_mapInfoDialog;
 }
 
 }

@@ -1,15 +1,5 @@
 PROJECT(marblewidget)
 
-macro_optional_find_package(Phonon)
-marble_set_package_properties( Phonon PROPERTIES DESCRIPTION "cross-platform multimedia framework that enables the use of audio and video content" )
-marble_set_package_properties( Phonon PROPERTIES URL "http://qt.digia.com/" )
-marble_set_package_properties( Phonon PROPERTIES TYPE OPTIONAL PURPOSE "Support for playback of soundcue elements" )
-if(PHONON_FOUND)
-    set(HAVE_PHONON TRUE)
-endif()
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config-phonon.h.cmake
-               ${CMAKE_CURRENT_BINARY_DIR}/config-phonon.h)
-
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
@@ -26,8 +16,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
  ${CMAKE_CURRENT_SOURCE_DIR}/osm
  ${CMAKE_SOURCE_DIR}/src/lib/astro
- ${ZLIB_INCLUDE_DIRS}
- ${PHONON_INCLUDES}
 )
 
 INCLUDE(geodata/CMakeLists.txt)
@@ -40,10 +28,6 @@ set(MARBLE_LIB_VERSION "0.25.5")
 set(MARBLE_ABI_VERSION "25")
 
 ########### next target ###############
-
-if(MARBLE_NO_WEBKITWIDGETS)
-add_definitions(-DMARBLE_NO_WEBKITWIDGETS)
-endif()
 
 set(marblewidget_SRCS
     ${geodata_SRCS}
@@ -68,9 +52,7 @@ set(marblewidget_SRCS
     WaitEditWidget.cpp
     RemoveItemEditWidget.cpp
     MapViewItemDelegate.cpp
-    LegendWidget.cpp
     MarbleNavigator.cpp
-    MarbleLegendBrowser.cpp
     MarbleAboutDialog.cpp
     MarbleInputHandler.cpp
     MarbleWidgetInputHandler.cpp
@@ -97,7 +79,6 @@ set(marblewidget_SRCS
     PluginManager.cpp
     TimeControlWidget.cpp
     AbstractFloatItem.cpp
-    PopupItem.cpp
     MarbleGlobal.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
@@ -216,24 +197,6 @@ set(marblewidget_SRCS
 )
 
 
-if (MARBLE_NO_WEBKITWIDGETS)
-    LIST(APPEND marblewidget_SRCS
-        NullMarbleWebView.cpp
-        NullTinyWebBrowser.cpp
-        )
-else()
-    LIST(APPEND marblewidget_SRCS
-        MarbleWebView.cpp
-        TinyWebBrowser.cpp
-        )
-endif()
-
-if (NOT MARBLE_NO_DBUS)
-    LIST(APPEND marblewidget_SRCS
-        MarbleDBusInterface.cpp
-        )
-endif()
-
 set (marblewidget_UI
     ${osm_UIS}
     LatLonBoxWidget.ui
@@ -262,17 +225,6 @@ set (marblewidget_UI
     FormattedTextWidget.ui
     ElevationWidget.ui
 )
-if (MARBLE_NO_WEBKITWIDGETS)
-    LIST(APPEND marblewidget_UI
-        NullLegendWidget.ui
-        NullWebPopupWidget.ui
-        )
-else()
-    LIST(APPEND marblewidget_UI
-        LegendWidget.ui
-        WebPopupWidget.ui
-        )
-endif()
 
 # FIXME: cleaner approach of src/lib/marblwidget/MarbleControlBox.* vs. marble.qrc
 qt_add_resources(marblewidget_SRCS libmarble.qrc ../../apps/marble-ui/marble.qrc)
@@ -290,40 +242,18 @@ generate_export_header(marblewidget BASE_NAME marble)
 # link with libastro
 target_link_libraries(marblewidget LINK_PRIVATE astro)
 
-# link against zlib
-target_link_libraries(marblewidget LINK_PRIVATE ${ZLIB_LIBRARIES})
-
 # link with release version of Qt libs
 target_link_libraries(marblewidget
     LINK_PUBLIC
         Qt5::Xml
         Qt5::Gui
         Qt5::Widgets
-        Qt5::Quick
         Qt5::Network
     LINK_PRIVATE
         Qt5::Svg
         Qt5::PrintSupport
         Qt5::Concurrent
 )
-if (NOT MARBLE_NO_WEBKITWIDGETS)
-    target_link_libraries(marblewidget
-        LINK_PUBLIC
-            Qt5::WebKitWidgets
-    )
-endif ()
-if (NOT MARBLE_NO_DBUS)
-    target_link_libraries(marblewidget
-        LINK_PRIVATE
-            Qt5::DBus
-    )
-endif ()
-if (PHONON_FOUND)
-    target_link_libraries(marblewidget
-        LINK_PRIVATE
-            ${PHONON_LIBS}
-    )
-endif()
 
 if (APPLE)
   # TODO: PUBLIC or can be PRIVATE?
@@ -377,22 +307,9 @@ if (WIN32 OR APPLE)
     return()
 endif()
 
-if (MARBLE_NO_WEBKITWIDGETS)
-    set(marble_WebKit
-        NullMarbleWebView.h
-        NullTinyWebBrowser.h
-        )
-else()
-    set(marble_WebKit
-        MarbleWebView.h
-        TinyWebBrowser.h
-        )
-endif()
-
 install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${graphicsview_HDRS}
-    ${marble_WebKit}
     AutoNavigation.h
     DownloadRegion.h
     LatLonBoxWidget.h
@@ -401,7 +318,6 @@ install( FILES
     MarbleModel.h
     MapViewWidget.h
     CelestialSortFilterProxyModel.h
-    LegendWidget.h
     FileViewWidget.h
     FlyToEditWidget.h
     WaitEditWidget.h
