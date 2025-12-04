@@ -16,6 +16,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
  ${CMAKE_CURRENT_SOURCE_DIR}/osm
  ${CMAKE_SOURCE_DIR}/src/lib/astro
+ ${ZLIB_INCLUDE_DIRS}
 )
 
 INCLUDE(geodata/CMakeLists.txt)
@@ -241,6 +242,9 @@ generate_export_header(marblewidget BASE_NAME marble)
 
 # link with libastro
 target_link_libraries(marblewidget LINK_PRIVATE astro)
+
+# link against zlib
+target_link_libraries(marblewidget LINK_PRIVATE ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
 target_link_libraries(marblewidget

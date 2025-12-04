@@ -1,3 +1,0 @@
-CHECKSETS kde5
-EXCLUDE qclasses,cpp
-SKIP /src/3rdparty/

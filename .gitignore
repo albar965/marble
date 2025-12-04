@@ -2,3 +2,4 @@
 .DS_Store
 CMakeLists.txt.user
 src/apps/marble_maps/Marble.keystore
+.qtcreator
