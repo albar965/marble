@@ -23,82 +23,87 @@
 #include <QTreeWidget>
 #include <QMenu>
 
-namespace Marble
-{
+namespace Marble {
 
 OsmRelationManagerWidgetPrivate::OsmRelationManagerWidgetPrivate()
 {
-    // nothing to do
+  // nothing to do
 }
 
 OsmRelationManagerWidgetPrivate::~OsmRelationManagerWidgetPrivate()
 {
-    // nothing to do
+  // nothing to do
 }
 
 void OsmRelationManagerWidgetPrivate::populateRelationsList()
 {
-    m_currentRelations->clear();
+  m_currentRelations->clear();
 
-    // This shouldn't happen
-    if ( !m_allRelations ) {
-        return;
+  // This shouldn't happen
+  if(!m_allRelations)
+  {
+    return;
+  }
+
+  if(m_placemark->hasOsmData())
+  {
+    const OsmPlacemarkData& osmData = m_placemark->osmData();
+    QHash<qint64, QString>::const_iterator it = osmData.relationReferencesBegin();
+    QHash<qint64, QString>::const_iterator end = osmData.relationReferencesEnd();
+
+    for(; it != end; ++it )
+    {
+
+      if(!m_allRelations->contains(it.key()))
+      {
+        mDebug() << QString("Relation %1 is not loaded in the Annotate Plugin").arg(it.key());
+        continue;
+      }
+
+      const OsmPlacemarkData& relationData = m_allRelations->value(it.key());
+
+      QTreeWidgetItem *newItem = new QTreeWidgetItem();
+      QString name = relationData.tagValue("name");
+      QString type = relationData.tagValue("type");
+      QString role = it.value();
+      newItem->setText(Column::Name, name);
+      newItem->setText(Column::Type, type);
+      newItem->setText(Column::Role, role);
+      newItem->setData(Column::Name, Qt::UserRole, relationData.id());
+      m_currentRelations->addTopLevelItem(newItem);
+
     }
-
-    if ( m_placemark->hasOsmData() ) {
-        const OsmPlacemarkData &osmData = m_placemark->osmData();
-        QHash< qint64, QString >::const_iterator it = osmData.relationReferencesBegin();
-        QHash< qint64, QString >::const_iterator end = osmData.relationReferencesEnd();
-
-        for ( ; it != end; ++it ) {
-
-            if ( !m_allRelations->contains( it.key() ) ) {
-                mDebug()<< QString( "Relation %1 is not loaded in the Annotate Plugin" ).arg( it.key() );
-                continue;
-            }
-
-            const OsmPlacemarkData &relationData = m_allRelations->value( it.key() );
-
-            QTreeWidgetItem *newItem = new QTreeWidgetItem();
-            QString name = relationData.tagValue( "name" );
-            QString type = relationData.tagValue( "type" );
-            QString role = it.value();
-            newItem->setText( Column::Name, name );
-            newItem->setText( Column::Type, type );
-            newItem->setText( Column::Role, role );
-            newItem->setData( Column::Name, Qt::UserRole, relationData.id() );
-            m_currentRelations->addTopLevelItem( newItem );
-
-        }
-    }
+  }
 }
 
 void OsmRelationManagerWidgetPrivate::populateDropMenu()
 {
-    m_relationDropMenu->clear();
+  m_relationDropMenu->clear();
 
-    m_addRelation->setIcon( QIcon( ":marble/list-add.png" ) );
+  m_addRelation->setIcon(QIcon(":marble/list-add.png"));
 
-    // The new relation adder
-    m_relationDropMenu->addAction( QObject::tr( "New Relation" ) );
-    m_relationDropMenu->addSeparator();
+  // The new relation adder
+  m_relationDropMenu->addAction(QObject::tr("New Relation"));
+  m_relationDropMenu->addSeparator();
 
-    // This shouldn't happen
-    Q_ASSERT( m_allRelations );
+  // This shouldn't happen
+  Q_ASSERT(m_allRelations);
 
-    // Suggesting existing relations
-    foreach ( const OsmPlacemarkData &relationData, m_allRelations->values() ) {
-        QString relationText = QString( "%1 (%2)" ).arg( relationData.tagValue( "name" ) ).arg( relationData.tagValue( "type" ) );
+  // Suggesting existing relations
+  foreach(const OsmPlacemarkData& relationData, m_allRelations->values())
+  {
+    QString relationText = QString("%1 (%2)").arg(relationData.tagValue("name")).arg(relationData.tagValue("type"));
 
-        // Don't suggest relations the placemark is already part of
-        if ( m_placemark->hasOsmData() && m_placemark->osmData().containsRelation( relationData.id() ) ) {
-            continue;
-        }
-        QAction *newAction = new QAction( m_relationDropMenu );
-        newAction->setText( relationText );
-        newAction->setData( relationData.id() );
-        m_relationDropMenu->addAction( newAction );
+    // Don't suggest relations the placemark is already part of
+    if(m_placemark->hasOsmData() && m_placemark->osmData().containsRelation(relationData.id()))
+    {
+      continue;
     }
+    QAction *newAction = new QAction(m_relationDropMenu);
+    newAction->setText(relationText);
+    newAction->setData(relationData.id());
+    m_relationDropMenu->addAction(newAction);
+  }
 }
 
 }

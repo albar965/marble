@@ -11,7 +11,6 @@
 #ifndef MARBLE_GEOGRAPHICSITEMPRIVATE_H
 #define MARBLE_GEOGRAPHICSITEMPRIVATE_H
 
-
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataStyle.h"
@@ -19,40 +18,39 @@
 #include "StyleBuilder.h"
 #include "GeoGraphicsItem.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoGraphicsItemPrivate
 {
- public:
-    explicit GeoGraphicsItemPrivate( const GeoDataFeature *feature)
-        : m_zValue( 0 ),
-          m_minZoomLevel( 0 ),
-          m_feature( feature ),
-          m_latLonAltBox(),
-          m_highlighted( false )
-    {
-    }
+public:
+  explicit GeoGraphicsItemPrivate(const GeoDataFeature *feature)
+    : m_zValue(0),
+    m_minZoomLevel(0),
+    m_feature(feature),
+    m_latLonAltBox(),
+    m_highlighted(false)
+  {
+  }
 
-    virtual ~GeoGraphicsItemPrivate()
-    {
-    }
+  virtual ~GeoGraphicsItemPrivate()
+  {
+  }
 
-    qreal m_zValue;
-    GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
+  qreal m_zValue;
+  GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 
-    int m_minZoomLevel;
-    const GeoDataFeature *m_feature;
-    GeoDataLatLonAltBox m_latLonAltBox;
-    RenderContext m_renderContext;
-    GeoDataStyle::ConstPtr m_style;
-    const StyleBuilder *m_styleBuilder;
+  int m_minZoomLevel;
+  const GeoDataFeature *m_feature;
+  GeoDataLatLonAltBox m_latLonAltBox;
+  RenderContext m_renderContext;
+  GeoDataStyle::ConstPtr m_style;
+  const StyleBuilder *m_styleBuilder;
 
-    QStringList m_paintLayers;
+  QStringList m_paintLayers;
 
-    // To highlight a placemark
-    bool m_highlighted;
-    GeoDataStyle::ConstPtr m_highlightStyle;
+  // To highlight a placemark
+  bool m_highlighted;
+  GeoDataStyle::ConstPtr m_highlightStyle;
 };
 
 }

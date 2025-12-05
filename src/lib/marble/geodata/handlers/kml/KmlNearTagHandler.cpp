@@ -14,25 +14,23 @@
 #include "GeoDataViewVolume.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(near)
+
+GeoNode *KmlnearTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( near )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_near));
 
-GeoNode* KmlnearTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_near ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_ViewVolume))
+  {
+    qreal near = parser.readElementText().toDouble();
 
-    if (parentItem.represents( kmlTag_ViewVolume ))
-    {
-        qreal near = parser.readElementText().toDouble();
-
-        parentItem.nodeAs<GeoDataViewVolume>()->setNear( near );
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataViewVolume>()->setNear(near);
+  }
+  return 0;
 }
 
 }

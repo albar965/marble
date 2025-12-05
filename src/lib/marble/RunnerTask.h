@@ -18,8 +18,7 @@
 #include <QRunnable>
 #include <QString>
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleModel;
 class ParsingRunner;
@@ -28,50 +27,52 @@ class ParsingRunnerManager;
 class SearchRunnerManager;
 
 /** A RunnerTask that executes a placemark search */
-class SearchTask : public QObject, public QRunnable
+class SearchTask :
+  public QObject, public QRunnable
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    SearchTask( SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString &searchTerm, const GeoDataLatLonBox &preferred );
+  SearchTask(SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString& searchTerm,
+             const GeoDataLatLonBox& preferred);
 
-    /**
-     * @reimp
-     */
-    void run();
+  /**
+   * @reimp
+   */
+  void run();
 
 Q_SIGNALS:
-    void finished( SearchTask *task );
+  void finished(SearchTask *task);
 
 private:
-    SearchRunner *const m_runner;
-    QString m_searchTerm;
-    GeoDataLatLonBox m_preferredBbox;
+  SearchRunner *const m_runner;
+  QString m_searchTerm;
+  GeoDataLatLonBox m_preferredBbox;
 };
 
-
 /** A RunnerTask that executes a file Parsing */
-class ParsingTask : public QObject, public QRunnable
+class ParsingTask :
+  public QObject, public QRunnable
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    ParsingTask( ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role );
+  ParsingTask(ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role);
 
-    /**
-     * @reimp
-     */
-    void run();
+  /**
+   * @reimp
+   */
+  void run();
 
 Q_SIGNALS:
-    void parsed(GeoDataDocument* document, const QString &error);
-    void finished();
+  void parsed(GeoDataDocument *document, const QString& error);
+  void finished();
 
 private:
-    ParsingRunner *const m_runner;
-    QString m_fileName;
-    DocumentRole m_role;
-    ParsingRunnerManager* m_manager;
+  ParsingRunner *const m_runner;
+  QString m_fileName;
+  DocumentRole m_role;
+  ParsingRunnerManager *m_manager;
 };
 
 }

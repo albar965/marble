@@ -14,26 +14,26 @@
 #include "GeoDataOverlay.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( drawOrder )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(drawOrder)
 
-GeoNode* KmldrawOrderTagHandler::parse(GeoParser &parser) const
+GeoNode *KmldrawOrderTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_drawOrder ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_drawOrder));
 
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.is<GeoDataOverlay>()) {
-        bool ok = false;
-        int value = parser.readElementText().trimmed().toInt(&ok, 10);
-        if (ok) {
-            parentItem.nodeAs<GeoDataOverlay>()->setDrawOrder(value);
-        }
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataOverlay>())
+  {
+    bool ok = false;
+    int value = parser.readElementText().trimmed().toInt(&ok, 10);
+    if(ok)
+    {
+      parentItem.nodeAs<GeoDataOverlay>()->setDrawOrder(value);
     }
+  }
 
-    return 0;
+  return 0;
 }
 
 } // namespace kml

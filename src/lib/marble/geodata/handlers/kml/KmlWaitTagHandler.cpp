@@ -17,29 +17,30 @@
 #include "GeoDataPlaylist.h"
 #include "GeoDataWait.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(Wait)
+
+GeoNode *KmlWaitTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( Wait )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Wait));
 
-GeoNode* KmlWaitTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Wait ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataWait *wait = new GeoDataWait;
+  KmlObjectTagHandler::parseIdentifiers(parser, wait);
 
-    GeoDataWait *wait = new GeoDataWait;
-    KmlObjectTagHandler::parseIdentifiers( parser, wait );
+  if(parentItem.is<GeoDataPlaylist>())
+  {
+    parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(wait);
+    return wait;
+  }
+  else
+  {
+    delete wait;
+  }
 
-    if (parentItem.is<GeoDataPlaylist>()) {
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(wait);
-        return wait;
-    } else {
-        delete wait;
-    }
-
-    return 0;
+  return 0;
 }
 
 } // namespace kml

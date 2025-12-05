@@ -15,130 +15,130 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDataExtendedData::GeoDataExtendedData()
-    : GeoDataObject(), d( new GeoDataExtendedDataPrivate )
+  : GeoDataObject(), d(new GeoDataExtendedDataPrivate)
 {
 }
 
-GeoDataExtendedData::GeoDataExtendedData( const GeoDataExtendedData& other )
-    : GeoDataObject( other ), d( new GeoDataExtendedDataPrivate( *other.d ) )
+GeoDataExtendedData::GeoDataExtendedData(const GeoDataExtendedData& other)
+  : GeoDataObject(other), d(new GeoDataExtendedDataPrivate(*other.d))
 {
 }
 
-bool GeoDataExtendedData::operator==( const GeoDataExtendedData& other ) const
+bool GeoDataExtendedData::operator==(const GeoDataExtendedData& other) const
 {
-    return equals(other) &&
-           d->hash == other.d->hash &&
-           d->arrayHash == other.d->arrayHash;
+  return equals(other) &&
+         d->hash == other.d->hash &&
+         d->arrayHash == other.d->arrayHash;
 }
 
 GeoDataExtendedData::~GeoDataExtendedData()
 {
-    qDeleteAll( d->arrayHash );
-    delete d;
+  qDeleteAll(d->arrayHash);
+  delete d;
 }
 
-GeoDataExtendedData& GeoDataExtendedData::operator=( const GeoDataExtendedData& other )
+GeoDataExtendedData& GeoDataExtendedData::operator=(const GeoDataExtendedData& other)
 {
-    GeoDataObject::operator=( other );
-    *d = *other.d;
-    return *this;
+  GeoDataObject::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataExtendedData::operator!=( const GeoDataExtendedData &other ) const
+bool GeoDataExtendedData::operator!=(const GeoDataExtendedData& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
-const char* GeoDataExtendedData::nodeType() const
+const char *GeoDataExtendedData::nodeType() const
 {
-    return d->nodeType();
+  return d->nodeType();
 }
 
-GeoDataData& GeoDataExtendedData::valueRef( const QString& key ) const
+GeoDataData& GeoDataExtendedData::valueRef(const QString& key) const
 {
-    return d->hash[ key ];
+  return d->hash[key];
 }
 
-GeoDataData GeoDataExtendedData::value( const QString& key ) const
+GeoDataData GeoDataExtendedData::value(const QString& key) const
 {
-    return d->hash.value( key );
+  return d->hash.value(key);
 }
 
-void GeoDataExtendedData::addValue( const GeoDataData& data )
+void GeoDataExtendedData::addValue(const GeoDataData& data)
 {
-    d->hash.insert( data.name(), data );
+  d->hash.insert(data.name(), data);
 }
 
-QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constBegin( ) const
+QHash<QString, GeoDataData>::const_iterator GeoDataExtendedData::constBegin() const
 {
-    return d->hash.constBegin();
+  return d->hash.constBegin();
 }
 
-QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constEnd( ) const
+QHash<QString, GeoDataData>::const_iterator GeoDataExtendedData::constEnd() const
 {
-    return d->hash.constEnd();
+  return d->hash.constEnd();
 }
 
 int GeoDataExtendedData::size() const
 {
-    return d->hash.size();
+  return d->hash.size();
 }
 
-bool GeoDataExtendedData::isEmpty( ) const
+bool GeoDataExtendedData::isEmpty() const
 {
-    return d->hash.empty() && d->schemaDataHash.empty();
+  return d->hash.empty() && d->schemaDataHash.empty();
 }
 
-bool GeoDataExtendedData::contains( const QString &key ) const
+bool GeoDataExtendedData::contains(const QString& key) const
 {
-    return d->hash.contains( key );
+  return d->hash.contains(key);
 }
 
-void GeoDataExtendedData::setSimpleArrayData( const QString& key, GeoDataSimpleArrayData *values )
+void GeoDataExtendedData::setSimpleArrayData(const QString& key, GeoDataSimpleArrayData *values)
 {
-    d->arrayHash[ key ] = values;
+  d->arrayHash[key] = values;
 }
 
-GeoDataSimpleArrayData* GeoDataExtendedData::simpleArrayData( const QString& key ) const
+GeoDataSimpleArrayData *GeoDataExtendedData::simpleArrayData(const QString& key) const
 {
-    if ( !d->arrayHash.contains( key ) ) return 0;
-    return d->arrayHash[ key ];
+  if(!d->arrayHash.contains(key))
+    return 0;
+  return d->arrayHash[key];
 }
 
-GeoDataSchemaData& GeoDataExtendedData::schemaData( const QString& schemaUrl ) const
+GeoDataSchemaData& GeoDataExtendedData::schemaData(const QString& schemaUrl) const
 {
-    return d->schemaDataHash[ schemaUrl ];
+  return d->schemaDataHash[schemaUrl];
 }
 
-void GeoDataExtendedData::addSchemaData( const GeoDataSchemaData& schemaData )
+void GeoDataExtendedData::addSchemaData(const GeoDataSchemaData& schemaData)
 {
-    d->schemaDataHash.insert( schemaData.schemaUrl(), schemaData );
-    d->schemaDataHash[schemaData.schemaUrl()].setParent( this );
+  d->schemaDataHash.insert(schemaData.schemaUrl(), schemaData);
+  d->schemaDataHash[schemaData.schemaUrl()].setParent(this);
 }
 
-void GeoDataExtendedData::removeSchemaData( const QString& schemaUrl )
+void GeoDataExtendedData::removeSchemaData(const QString& schemaUrl)
 {
-    GeoDataSchemaData schemaData = d->schemaDataHash.take( schemaUrl );
-    schemaData.setParent( 0 );
+  GeoDataSchemaData schemaData = d->schemaDataHash.take(schemaUrl);
+  schemaData.setParent(0);
 }
 
 QList<GeoDataSchemaData> GeoDataExtendedData::schemaDataList() const
 {
-    return d->schemaDataHash.values();
+  return d->schemaDataHash.values();
 }
 
-void GeoDataExtendedData::pack( QDataStream& stream ) const
+void GeoDataExtendedData::pack(QDataStream& stream) const
 {
-    GeoDataObject::pack( stream );
+  GeoDataObject::pack(stream);
 }
 
-void GeoDataExtendedData::unpack( QDataStream& stream )
+void GeoDataExtendedData::unpack(QDataStream& stream)
 {
-    GeoDataObject::unpack( stream );
+  GeoDataObject::unpack(stream);
 }
 
 }

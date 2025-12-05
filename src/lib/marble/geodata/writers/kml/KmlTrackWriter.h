@@ -15,11 +15,13 @@
 
 namespace Marble {
 
-class KmlTrackWriter : public GeoTagWriter
+class KmlTrackWriter :
+  public GeoTagWriter
 {
 
 public:
-    virtual bool write( const GeoNode *node, GeoWriter &writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

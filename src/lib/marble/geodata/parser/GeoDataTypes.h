@@ -25,11 +25,9 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
-namespace GeoDataTypes
-{
+namespace GeoDataTypes {
 /**
  * the following const char* XXType are used to provide RTTI to the GeoData for
  * downcasting to the good object

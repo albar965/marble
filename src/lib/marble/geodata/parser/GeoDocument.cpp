@@ -23,8 +23,7 @@
 #include <cstdio>
 #include "GeoSceneTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDocument::GeoDocument()
 {
@@ -36,14 +35,13 @@ GeoDocument::~GeoDocument()
 
 bool GeoDocument::isGeoDataDocument() const
 {
-    return false;
+  return false;
 }
 
 bool GeoDocument::isGeoSceneDocument() const
 {
-    return false;
+  return false;
 }
-
 
 GeoNode::GeoNode()
 {
@@ -53,9 +51,9 @@ GeoNode::~GeoNode()
 {
 }
 
-const char* GeoNode::nodeType() const
+const char *GeoNode::nodeType() const
 {
-    return "GeoNode";
+  return "GeoNode";
 }
 
 }

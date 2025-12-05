@@ -27,25 +27,24 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( outline )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(outline)
 
-GeoNode* KmloutlineTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmloutlineTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outline ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_outline));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_PolyStyle ) ) {
-        bool outline = static_cast<bool>( parser.readElementText().trimmed().toInt() );
-        
-        parentItem.nodeAs<GeoDataPolyStyle>()->setOutline( outline );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.represents(kmlTag_PolyStyle))
+  {
+    bool outline = static_cast<bool>(parser.readElementText().trimmed().toInt());
+
+    parentItem.nodeAs<GeoDataPolyStyle>()->setOutline(outline);
+  }
+
+  return 0;
 }
 
 }

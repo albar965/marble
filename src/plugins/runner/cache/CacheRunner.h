@@ -12,16 +12,17 @@
 
 #include "ParsingRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class CacheRunner : public ParsingRunner
+class CacheRunner :
+  public ParsingRunner
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    explicit CacheRunner(QObject *parent = 0);
-    ~CacheRunner();
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+  explicit CacheRunner(QObject *parent = 0);
+  ~CacheRunner();
+  GeoDataDocument *parseFile(const QString& fileName, DocumentRole role, QString& error);
 
 };
 

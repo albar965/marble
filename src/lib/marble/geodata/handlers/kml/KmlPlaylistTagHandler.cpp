@@ -16,26 +16,25 @@
 #include "GeoDataPlaylist.h"
 #include "GeoDataTour.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(Playlist)
+
+GeoNode *KmlPlaylistTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( Playlist )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Playlist));
 
-GeoNode* KmlPlaylistTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Playlist ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataTour>())
+  {
+    GeoDataPlaylist *playlist = new GeoDataPlaylist;
+    KmlObjectTagHandler::parseIdentifiers(parser, playlist);
+    parentItem.nodeAs<GeoDataTour>()->setPlaylist(playlist);
+    return playlist;
+  }
 
-    if (parentItem.is<GeoDataTour>()) {
-        GeoDataPlaylist *playlist = new GeoDataPlaylist;
-        KmlObjectTagHandler::parseIdentifiers( parser, playlist );
-        parentItem.nodeAs<GeoDataTour>()->setPlaylist(playlist);
-        return playlist;
-    }
-
-    return 0;
+  return 0;
 }
 
 } // namespace kml

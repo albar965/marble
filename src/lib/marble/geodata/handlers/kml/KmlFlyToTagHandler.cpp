@@ -15,29 +15,27 @@
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+
+KML_DEFINE_TAG_HANDLER_GX22(FlyTo)
+
+GeoNode *KmlFlyToTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_FlyTo));
 
-KML_DEFINE_TAG_HANDLER_GX22( FlyTo )
+  GeoStackItem parentItem = parser.parentElement();
 
-GeoNode* KmlFlyToTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_FlyTo ) );
+  if(parentItem.is<GeoDataPlaylist>())
+  {
+    GeoDataFlyTo *flyTo = new GeoDataFlyTo;
+    KmlObjectTagHandler::parseIdentifiers(parser, flyTo);
+    parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(flyTo);
+    return flyTo;
+  }
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if (parentItem.is<GeoDataPlaylist>()) {
-        GeoDataFlyTo *flyTo = new GeoDataFlyTo;
-        KmlObjectTagHandler::parseIdentifiers( parser, flyTo );
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive( flyTo );
-        return flyTo;
-    }
-
-    return 0;
+  return 0;
 }
 
 }
 }
-

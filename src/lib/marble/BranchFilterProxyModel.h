@@ -15,22 +15,22 @@
 
 #include <QSortFilterProxyModel>
 
-namespace Marble
-{
+namespace Marble {
 
-class BranchFilterProxyModel : public QSortFilterProxyModel
+class BranchFilterProxyModel :
+  public QSortFilterProxyModel
 {
 public:
-    explicit BranchFilterProxyModel( QObject *parent = 0 );
+  explicit BranchFilterProxyModel(QObject *parent = 0);
 
-    void setBranchIndex( GeoDataTreeModel *sourceModel, const QModelIndex &index );
+  void setBranchIndex(GeoDataTreeModel *sourceModel, const QModelIndex& index);
 
 protected:
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+  bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const;
 
 private:
-    GeoDataTreeModel *m_treeModel;
-    QPersistentModelIndex m_branchIndex;
+  GeoDataTreeModel *m_treeModel;
+  QPersistentModelIndex m_branchIndex;
 
 };
 

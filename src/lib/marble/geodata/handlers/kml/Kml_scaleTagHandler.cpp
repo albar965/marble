@@ -32,26 +32,27 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( scale )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(scale)
 
-GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlscaleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_scale ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_scale));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        parentItem.nodeAs<GeoDataIconStyle>()->setScale( 
-        parser.readElementText().trimmed().toFloat() );
-    } else if( parentItem.represents( kmlTag_LabelStyle ) ) {
-        parentItem.nodeAs<GeoDataLabelStyle>()->setScale( 
-        parser.readElementText().trimmed().toFloat() );
-    }
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+
+  if(parentItem.represents(kmlTag_IconStyle))
+  {
+    parentItem.nodeAs<GeoDataIconStyle>()->setScale(
+      parser.readElementText().trimmed().toFloat());
+  }
+  else if(parentItem.represents(kmlTag_LabelStyle))
+  {
+    parentItem.nodeAs<GeoDataLabelStyle>()->setScale(
+      parser.readElementText().trimmed().toFloat());
+  }
+  return 0;
 }
 
 }

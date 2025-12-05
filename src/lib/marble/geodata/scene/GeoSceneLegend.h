@@ -27,8 +27,7 @@
 
 #include <geodata_export.h>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneSection;
 
@@ -38,24 +37,25 @@ class GeoSceneLegendPrivate;
  * @short Legend of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneLegend : public GeoNode
+class GEODATA_EXPORT GeoSceneLegend :
+  public GeoNode
 {
- public:
-    GeoSceneLegend();
-    ~GeoSceneLegend();
-    
-    virtual const char* nodeType() const;
+public:
+  GeoSceneLegend();
+  ~GeoSceneLegend();
 
-    /**
-     * @brief  Add a section to the legend
-     * @param  section  the new section
-     */
-    void addSection( const GeoSceneSection* );
-    QVector<const GeoSceneSection*> sections() const;
+  virtual const char *nodeType() const;
 
- private:
-    Q_DISABLE_COPY( GeoSceneLegend )
-    GeoSceneLegendPrivate * const d;
+  /**
+   * @brief  Add a section to the legend
+   * @param  section  the new section
+   */
+  void addSection(const GeoSceneSection *);
+  QVector<const GeoSceneSection *> sections() const;
+
+private:
+  Q_DISABLE_COPY(GeoSceneLegend)
+  GeoSceneLegendPrivate * const d;
 };
 
 }

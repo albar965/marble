@@ -17,39 +17,38 @@
 #include "GeoSceneZoom.h"
 #include "DgmlElementDictionary.h"
 
-namespace Marble
+namespace Marble {
+
+static GeoTagWriterRegistrar s_writerHead(GeoTagWriter::QualifiedName(GeoSceneTypes::GeoSceneHeadType, dgml::dgmlTag_nameSpace20),
+                                          new DgmlHeadTagWriter());
+
+bool DgmlHeadTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
+  const GeoSceneHead *head = static_cast<const GeoSceneHead *>(node);
+  writer.writeStartElement(dgml::dgmlTag_Head);
+  writer.writeElement("name", head->name());
+  writer.writeElement("target", head->target());
+  writer.writeElement("theme", head->theme());
+  writer.writeElement("visible", head->visible() ? "true" : "false");
+  writer.writeStartElement("description");
+  writer.writeCDATA(head->description());
+  writer.writeEndElement();
 
-static GeoTagWriterRegistrar s_writerHead( GeoTagWriter::QualifiedName( GeoSceneTypes::GeoSceneHeadType, dgml::dgmlTag_nameSpace20 ),
-                                               new DgmlHeadTagWriter() );
+  const GeoSceneIcon& icon = static_cast<const GeoSceneIcon&>(*head->icon());
+  writer.writeStartElement(dgml::dgmlTag_Icon);
+  writer.writeAttribute("pixmap", icon.pixmap());
+  writer.writeEndElement();
 
-bool DgmlHeadTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
-{
-    const GeoSceneHead *head = static_cast<const GeoSceneHead*>( node );
-    writer.writeStartElement( dgml::dgmlTag_Head );
-    writer.writeElement( "name", head->name() );
-    writer.writeElement( "target", head->target() );
-    writer.writeElement( "theme", head->theme() );
-    writer.writeElement( "visible", head->visible() ? "true" : "false" );
-    writer.writeStartElement( "description" );
-    writer.writeCDATA( head->description() );
-    writer.writeEndElement();
-    
-    const GeoSceneIcon &icon = static_cast<const GeoSceneIcon&>( *head->icon() );
-    writer.writeStartElement( dgml::dgmlTag_Icon );
-    writer.writeAttribute( "pixmap", icon.pixmap() );
-    writer.writeEndElement();
-    
-    const GeoSceneZoom &zoom = static_cast<const GeoSceneZoom&>( *head->zoom() );
-    writer.writeStartElement( dgml::dgmlTag_Zoom );
-    writer.writeElement( "discrete", zoom.discrete() ? "true" : "false" );
-    writer.writeTextElement( "minimum", QString::number( zoom.minimum() ) );
-    writer.writeTextElement( "maximum", QString::number( zoom.maximum() ) );
-    writer.writeEndElement();
-    
-    writer.writeEndElement();
+  const GeoSceneZoom& zoom = static_cast<const GeoSceneZoom&>(*head->zoom());
+  writer.writeStartElement(dgml::dgmlTag_Zoom);
+  writer.writeElement("discrete", zoom.discrete() ? "true" : "false");
+  writer.writeTextElement("minimum", QString::number(zoom.minimum()));
+  writer.writeTextElement("maximum", QString::number(zoom.maximum()));
+  writer.writeEndElement();
 
-    return true;
+  writer.writeEndElement();
+
+  return true;
 }
 
 }

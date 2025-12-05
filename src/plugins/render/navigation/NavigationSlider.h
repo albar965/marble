@@ -14,32 +14,34 @@
 #include <QAbstractSlider>
 #include <QPixmap>
 
-namespace Marble
-{
+namespace Marble {
 
-class NavigationSlider : public QAbstractSlider
+class NavigationSlider :
+  public QAbstractSlider
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    explicit NavigationSlider( QWidget *parent = 0 );
-    ~NavigationSlider();
+  explicit NavigationSlider(QWidget *parent = 0);
+  ~NavigationSlider();
 
 Q_SIGNALS:
-    void repaintNeeded();
+  void repaintNeeded();
 
 protected:
-    void enterEvent(QEvent *);
-    void mouseMoveEvent( QMouseEvent * mouseEvent);
-    void mousePressEvent( QMouseEvent * );
-    void mouseReleaseEvent( QMouseEvent * );
-    void leaveEvent( QEvent * );
-    void paintEvent( QPaintEvent * );
-    void repaint();
+  void enterEvent(QEvent *);
+  void mouseMoveEvent(QMouseEvent *mouseEvent);
+  void mousePressEvent(QMouseEvent *);
+  void mouseReleaseEvent(QMouseEvent *);
+  void leaveEvent(QEvent *);
+  void paintEvent(QPaintEvent *);
+  void repaint();
 
 private:
-    static QPixmap pixmap(const QString &id );
-    QString m_handleImagePath;
-    bool pressedOnEnter = false;
+  static QPixmap pixmap(const QString& id);
+
+  QString m_handleImagePath;
+  bool pressedOnEnter = false;
 };
 
 }

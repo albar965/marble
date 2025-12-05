@@ -15,22 +15,22 @@
 
 #include <QString>
 
-namespace Marble
-{
+namespace Marble {
 
 // No registration for this writer, ColorStyle is an abstract kml element
-class KmlFeatureTagWriter: public GeoTagWriter
+class KmlFeatureTagWriter :
+  public GeoTagWriter
 {
 public:
-    explicit KmlFeatureTagWriter( const QString &elementName );
+  explicit KmlFeatureTagWriter(const QString& elementName);
 
-    bool write( const GeoNode *node, GeoWriter& writer ) const;
+  bool write(const GeoNode *node, GeoWriter& writer) const;
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const = 0;
 
 private:
-    QString const m_elementName;
+  QString const m_elementName;
 };
 
 }

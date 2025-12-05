@@ -15,8 +15,7 @@
 
 #include <QList>
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * All log entries for a cache.
@@ -24,28 +23,28 @@ namespace Marble
 class OpenCachingCacheLog
 {
 public:
-    OpenCachingCacheLog();
+  OpenCachingCacheLog();
 
-    OpenCachingCacheLogEntry& operator[]( int index );
+  OpenCachingCacheLogEntry& operator[](int index);
 
-    void setCacheId( unsigned long long cacheId );
+  void setCacheId(unsigned long long cacheId);
 
-    unsigned long long cacheId() const;
+  unsigned long long cacheId() const;
 
-    void addLogEntry( const OpenCachingCacheLogEntry& logEntry );
+  void addLogEntry(const OpenCachingCacheLogEntry& logEntry);
 
-    void removeLogEntry( int index );
+  void removeLogEntry(int index);
 
-    int size() const;
+  int size() const;
 
-    void clear();
+  void clear();
 
-    int currentIndex() const;
+  int currentIndex() const;
 
 private:
-    unsigned long long m_cacheId;                   ///< Unique ID of the cache.
+  unsigned long long m_cacheId;                     ///< Unique ID of the cache.
 
-    QList<OpenCachingCacheLogEntry> m_logEntries;   ///< All log entries.
+  QList<OpenCachingCacheLogEntry> m_logEntries;     ///< All log entries.
 };
 
 }

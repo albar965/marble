@@ -25,23 +25,21 @@
 #include "GeoParser.h"
 #include "GeoSceneItem.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Text)
 
-GeoNode* DgmlTextTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlTextTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Text));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Text));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Item))
-        parentItem.nodeAs<GeoSceneItem>()->setText( parser.readElementText().trimmed() );
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Item))
+    parentItem.nodeAs<GeoSceneItem>()->setText(parser.readElementText().trimmed());
 
-    return 0;
+  return 0;
 }
 
 }

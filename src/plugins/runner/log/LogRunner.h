@@ -12,18 +12,19 @@
 
 #include "ParsingRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class LogRunner : public ParsingRunner
+class LogRunner :
+  public ParsingRunner
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit LogRunner( QObject *parent = 0 );
-    ~LogRunner();
+  explicit LogRunner(QObject *parent = 0);
+  ~LogRunner();
 
-    GeoDataDocument* parseFile( const QString &fileName, DocumentRole role, QString& error );
+  GeoDataDocument *parseFile(const QString& fileName, DocumentRole role, QString& error);
+
 };
 
 }

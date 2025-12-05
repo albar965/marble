@@ -30,28 +30,33 @@
 #include "GeoDataScreenOverlay.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Icon )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Icon)
 
-GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlIconTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Icon ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Icon));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        return parentItem.nodeAs<GeoDataIconStyle>();
-    } else if ( parentItem.represents( kmlTag_GroundOverlay ) ) {
-        return parentItem.nodeAs<GeoDataGroundOverlay>();
-    }  else if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
-        return parentItem.nodeAs<GeoDataPhotoOverlay>();
-    }  else if ( parentItem.represents( kmlTag_ScreenOverlay ) ) {
-        return parentItem.nodeAs<GeoDataScreenOverlay>();
-    }
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+
+  if(parentItem.represents(kmlTag_IconStyle))
+  {
+    return parentItem.nodeAs<GeoDataIconStyle>();
+  }
+  else if(parentItem.represents(kmlTag_GroundOverlay))
+  {
+    return parentItem.nodeAs<GeoDataGroundOverlay>();
+  }
+  else if(parentItem.represents(kmlTag_PhotoOverlay))
+  {
+    return parentItem.nodeAs<GeoDataPhotoOverlay>();
+  }
+  else if(parentItem.represents(kmlTag_ScreenOverlay))
+  {
+    return parentItem.nodeAs<GeoDataScreenOverlay>();
+  }
+  return 0;
 }
 
 }

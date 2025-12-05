@@ -18,37 +18,37 @@
 
 #include "marble_export.h"
 
-namespace Marble
+namespace Marble {
+
+class MARBLE_EXPORT TileLevelRangeWidget :
+  public QWidget
 {
+  Q_OBJECT
 
-class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
-{
-    Q_OBJECT
+public:
+  explicit TileLevelRangeWidget(QWidget * const parent = 0, Qt::WindowFlags const f = 0);
+  ~TileLevelRangeWidget();
 
- public:
-    explicit TileLevelRangeWidget( QWidget * const parent = 0, Qt::WindowFlags const f = 0 );
-    ~TileLevelRangeWidget();
+  virtual QSize sizeHint() const;
 
-    virtual QSize sizeHint() const;
+  void setAllowedLevelRange(int const minimumLevel, int const maximumLevel);
+  void setDefaultLevel(int const);
 
-    void setAllowedLevelRange( int const minimumLevel, int const maximumLevel );
-    void setDefaultLevel( int const );
+  int topLevel() const;
+  int bottomLevel() const;
 
-    int topLevel() const;
-    int bottomLevel() const;
+Q_SIGNALS:
+  void topLevelChanged(int);
+  void bottomLevelChanged(int);
 
- Q_SIGNALS:
-    void topLevelChanged( int );
-    void bottomLevelChanged( int );
+private Q_SLOTS:
+  void setMaximumTopLevel(int const);
+  void setMinimumBottomLevel(int const);
 
- private Q_SLOTS:
-    void setMaximumTopLevel( int const );
-    void setMinimumBottomLevel( int const );
-
- private:
-    Q_DISABLE_COPY( TileLevelRangeWidget )
-    class Private;
-    Private * const d;
+private:
+  Q_DISABLE_COPY(TileLevelRangeWidget)
+  class Private;
+  Private * const d;
 };
 
 }

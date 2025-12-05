@@ -18,69 +18,69 @@
 
 class QDateTime;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimeStampPrivate;
 
-class GEODATA_EXPORT GeoDataTimeStamp : public GeoDataTimePrimitive
+class GEODATA_EXPORT GeoDataTimeStamp :
+  public GeoDataTimePrimitive
 {
-  public:
-    enum TimeResolution {
-        SecondResolution,
-        DayResolution,
-        MonthResolution,
-        YearResolution
-    };
+public:
+  enum TimeResolution
+  {
+    SecondResolution,
+    DayResolution,
+    MonthResolution,
+    YearResolution
+  };
 
-    GeoDataTimeStamp();
-    GeoDataTimeStamp( const GeoDataTimeStamp& other );
-    virtual ~GeoDataTimeStamp();
+  GeoDataTimeStamp();
+  GeoDataTimeStamp(const GeoDataTimeStamp& other);
+  virtual ~GeoDataTimeStamp();
 
-    /**
-    * @brief assignment operator
-    */
-    GeoDataTimeStamp& operator=( const GeoDataTimeStamp& other );
+  /**
+  * @brief assignment operator
+  */
+  GeoDataTimeStamp& operator=(const GeoDataTimeStamp& other);
 
-    /**
-     * @brief equality operators
-     */
-    bool operator==( const GeoDataTimeStamp& other ) const;
-    bool operator!=( const GeoDataTimeStamp& other ) const;
+  /**
+   * @brief equality operators
+   */
+  bool operator==(const GeoDataTimeStamp& other) const;
+  bool operator!=(const GeoDataTimeStamp& other) const;
 
+  /// Provides type information for downcasting a GeoNode
+  virtual const char *nodeType() const;
 
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+  /**
+  * @brief return the when time of timestamp
+  */
+  QDateTime when() const;
 
-    /**
-    * @brief return the when time of timestamp
-    */
-    QDateTime when() const;
- 
-    /**
-    * @brief Set the when time of timestamp
-    * @param when the when time of timestamp
-    */
-    void setWhen( const QDateTime& when );
-    
-    void setResolution( TimeResolution resolution );
+  /**
+  * @brief Set the when time of timestamp
+  * @param when the when time of timestamp
+  */
+  void setWhen(const QDateTime& when);
 
-    TimeResolution resolution() const;
+  void setResolution(TimeResolution resolution);
 
-    /**
-     * @brief Serialize the timestamp to a stream
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
+  TimeResolution resolution() const;
 
-    /**
-     * @brief  Unserialize the timestamp from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+   * @brief Serialize the timestamp to a stream
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
 
-  private:
-    GeoDataTimeStampPrivate * const d;
+  /**
+   * @brief  Unserialize the timestamp from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
+
+private:
+  GeoDataTimeStampPrivate * const d;
 };
 
 }

@@ -11,65 +11,63 @@
 #include "GeoDataTour.h"
 #include "GeoDataTour_p.h"
 
-
-namespace Marble
-{
+namespace Marble {
 
 const GeoDataTour GeoDataTour::null;
 
 GeoDataTour::GeoDataTour()
-    : GeoDataFeature( new GeoDataTourPrivate )
+  : GeoDataFeature(new GeoDataTourPrivate)
 {
-    // nothing to do
+  // nothing to do
 }
 
 GeoDataTour::~GeoDataTour()
 {
-    // nothing to do;
+  // nothing to do;
 }
 
 GeoDataTourPrivate *GeoDataTour::p()
 {
-    return static_cast<GeoDataTourPrivate*>(d);
+  return static_cast<GeoDataTourPrivate *>(d);
 }
 
 const GeoDataTourPrivate *GeoDataTour::p() const
 {
-    return static_cast<GeoDataTourPrivate*>(d);
+  return static_cast<GeoDataTourPrivate *>(d);
 }
 
 bool GeoDataTour::operator==(const GeoDataTour& other) const
 {
-    return equals( other ) &&
-           *p()->m_playlist == *other.p()->m_playlist;
+  return equals(other) &&
+         *p()->m_playlist == *other.p()->m_playlist;
 }
 
 bool GeoDataTour::operator!=(const GeoDataTour& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
-GeoDataPlaylist* GeoDataTour::playlist()
+GeoDataPlaylist *GeoDataTour::playlist()
 {
-    detach();
-    return p()->m_playlist;
+  detach();
+  return p()->m_playlist;
 }
 
-const GeoDataPlaylist* GeoDataTour::playlist() const
+const GeoDataPlaylist *GeoDataTour::playlist() const
 {
-    return p()->m_playlist;
+  return p()->m_playlist;
 }
 
 void GeoDataTour::setPlaylist(GeoDataPlaylist *playlist)
 {
-    detach();
-    p()->m_playlist = playlist;
-    p()->m_playlist->setParent( this );
+  detach();
+  p()->m_playlist = playlist;
+  p()->m_playlist->setParent(this);
 }
 
 const char *GeoDataTour::nodeType() const
 {
-    return GeoDataTypes::GeoDataTourType;
+  return GeoDataTypes::GeoDataTourType;
 }
 
 } // namespace Marble

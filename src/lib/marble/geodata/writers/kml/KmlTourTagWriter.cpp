@@ -15,27 +15,27 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
+namespace Marble {
 
 static GeoTagWriterRegistrar s_writerTour(
-        GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataTourType,
-                                     kml::kmlTag_nameSpaceOgc22 ),
-        new KmlTourTagWriter );
+  GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTourType,
+                              kml::kmlTag_nameSpaceOgc22),
+  new KmlTourTagWriter);
 
-bool KmlTourTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
+bool KmlTourTagWriter::writeMid(const GeoNode *node, GeoWriter& writer) const
 {
-    const  GeoDataTour* tour = static_cast<const GeoDataTour*>( node );
-    if ( tour->playlist() ) {
-        writeElement( tour->playlist(), writer );
-    }
-    return true;
+  const GeoDataTour *tour = static_cast<const GeoDataTour *>(node);
+  if(tour->playlist())
+  {
+    writeElement(tour->playlist(), writer);
+  }
+  return true;
 }
 
 KmlTourTagWriter::KmlTourTagWriter() :
-    KmlFeatureTagWriter( "gx:Tour" )
+  KmlFeatureTagWriter("gx:Tour")
 {
-    // nothing to do
+  // nothing to do
 }
 
 }

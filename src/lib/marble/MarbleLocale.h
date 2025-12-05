@@ -17,8 +17,7 @@
 
 #include <QtGlobal>
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleLocalePrivate;
 
@@ -30,49 +29,51 @@ class MarbleLocalePrivate;
 
 class MARBLE_EXPORT MarbleLocale
 {
- public:
-    MarbleLocale();
-    ~MarbleLocale();
+public:
+  MarbleLocale();
+  ~MarbleLocale();
 
-    enum MeasurementSystem {
-        MetricSystem = 0,
-        ImperialSystem,
-        NauticalSystem
-    };
+  enum MeasurementSystem
+  {
+    MetricSystem = 0,
+    ImperialSystem,
+    NauticalSystem
+  };
 
-    enum MeasureUnit {
-        Meter = 0,
-        Kilometer,
-        Milimeter,
-        Centimeter,
+  enum MeasureUnit
+  {
+    Meter = 0,
+    Kilometer,
+    Milimeter,
+    Centimeter,
 
-        Foot,
-        Inch,
-        Yard,
-        Mile,
+    Foot,
+    Inch,
+    Yard,
+    Mile,
 
-        NauticalMile
-    };
+    NauticalMile
+  };
 
-    void setMeasurementSystem( MarbleLocale::MeasurementSystem measurementSystem );
-    MarbleLocale::MeasurementSystem measurementSystem() const;
+  void setMeasurementSystem(MarbleLocale::MeasurementSystem measurementSystem);
+  MarbleLocale::MeasurementSystem measurementSystem() const;
 
-    static QString languageCode();
+  static QString languageCode();
 
-    /**
-     * @brief meterToCustomUnit Converts @p meters to @p targetValue of @p targetUnit in @p targetSystem
-     */
-    static void meterToTargetUnit(qreal meters, MeasurementSystem targetSystem,
-                                  qreal &targetValue, MeasureUnit &targetUnit);
+  /**
+   * @brief meterToCustomUnit Converts @p meters to @p targetValue of @p targetUnit in @p targetSystem
+   */
+  static void meterToTargetUnit(qreal meters, MeasurementSystem targetSystem,
+                                qreal& targetValue, MeasureUnit& targetUnit);
 
-    /**
-     * @brief unitAbbreviation Represents a short string form of @p unit, e.g. "km" for Kilometer
-     */
-    static QString unitAbbreviation(MeasureUnit unit);
+  /**
+   * @brief unitAbbreviation Represents a short string form of @p unit, e.g. "km" for Kilometer
+   */
+  static QString unitAbbreviation(MeasureUnit unit);
 
- private:
-    Q_DISABLE_COPY( MarbleLocale )
-    MarbleLocalePrivate  * const d;
+private:
+  Q_DISABLE_COPY(MarbleLocale)
+  MarbleLocalePrivate * const d;
 };
 
 }

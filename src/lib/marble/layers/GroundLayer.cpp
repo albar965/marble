@@ -14,11 +14,10 @@
 #include "ViewportParams.h"
 #include <QPainterPath>
 
-namespace Marble
-{
+namespace Marble {
 
 GroundLayer::GroundLayer()
-        : m_color( QColor( 153, 179, 204 ) )
+  : m_color(QColor(153, 179, 204))
 {
 }
 
@@ -28,45 +27,45 @@ GroundLayer::~GroundLayer()
 
 QStringList GroundLayer::renderPosition() const
 {
-    return QStringList() << "SURFACE";
+  return QStringList() << "SURFACE";
 }
 
-bool GroundLayer::render( GeoPainter *painter,
-                              ViewportParams *viewParams,
-                              const QString &renderPos,
-                              GeoSceneLayer *layer )
+bool GroundLayer::render(GeoPainter *painter,
+                         ViewportParams *viewParams,
+                         const QString& renderPos,
+                         GeoSceneLayer *layer)
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+  Q_UNUSED(renderPos)
+  Q_UNUSED(layer)
 
-    QBrush backgroundBrush( m_color );
-    QPen backgroundPen( Qt::NoPen );
+  QBrush backgroundBrush(m_color);
+  QPen backgroundPen(Qt::NoPen);
 
-    painter->setBrush( backgroundBrush );
-    painter->setPen( backgroundPen );
-    painter->drawPath( viewParams->mapShape() );
+  painter->setBrush(backgroundBrush);
+  painter->setPen(backgroundPen);
+  painter->drawPath(viewParams->mapShape());
 
-    return true;
+  return true;
 }
 
 qreal GroundLayer::zValue() const
 {
-    return -50.0;
+  return -50.0;
 }
 
-void GroundLayer::setColor( const QColor &color )
-{   
-    m_color = color;
+void GroundLayer::setColor(const QColor& color)
+{
+  m_color = color;
 }
 
 QColor GroundLayer::color() const
 {
-    return m_color;
+  return m_color;
 }
 
 RenderState GroundLayer::renderState() const
 {
-    return RenderState( "Ground" );
+  return RenderState("Ground");
 }
 
 }

@@ -16,25 +16,24 @@
 #include "GeoDataLod.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(minLodPixels)
+
+GeoNode *KmlminLodPixelsTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( minLodPixels )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_minLodPixels));
 
-GeoNode* KmlminLodPixelsTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_minLodPixels ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Lod))
+  {
+    float minLodPixels = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_Lod ) ) {
-        float minLodPixels = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLod>()->setMinLodPixels(minLodPixels);
+  }
 
-        parentItem.nodeAs<GeoDataLod>()->setMinLodPixels( minLodPixels );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

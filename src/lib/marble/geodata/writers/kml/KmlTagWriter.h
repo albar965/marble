@@ -13,13 +13,14 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlTagWriter : public GeoTagWriter
+class KmlTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

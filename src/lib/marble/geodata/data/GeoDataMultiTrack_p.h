@@ -15,51 +15,53 @@
 #include "GeoDataTypes.h"
 #include "GeoDataTrack.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataMultiTrackPrivate :
+  public GeoDataGeometryPrivate
 {
+public:
+  GeoDataMultiTrackPrivate()
+  {
+  }
 
-class GeoDataMultiTrackPrivate : public GeoDataGeometryPrivate
-{
-  public:
-    GeoDataMultiTrackPrivate()
+  ~GeoDataMultiTrackPrivate()
+  {
+    qDeleteAll(m_vector);
+  }
+
+  GeoDataMultiTrackPrivate& operator=(const GeoDataMultiTrackPrivate& other)
+  {
+    GeoDataGeometryPrivate::operator=(other);
+
+    qDeleteAll(m_vector);
+
+    m_vector.reserve(other.m_vector.size());
+    foreach(GeoDataTrack * track, other.m_vector)
     {
+      m_vector.append(new GeoDataTrack(*track));
     }
+    return *this;
+  }
 
-    ~GeoDataMultiTrackPrivate()
-    {
-        qDeleteAll(m_vector);
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataMultiTrackPrivate *copy = new GeoDataMultiTrackPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    GeoDataMultiTrackPrivate& operator=( const GeoDataMultiTrackPrivate &other)
-    {
-        GeoDataGeometryPrivate::operator=( other );
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataMultiTrackType;
+  }
 
-        qDeleteAll( m_vector );
+  virtual EnumGeometryId geometryId() const
+  {
+    return GeoDataMultiTrackId;
+  }
 
-        m_vector.reserve(other.m_vector.size());
-        foreach( GeoDataTrack *track, other.m_vector ) {
-            m_vector.append( new GeoDataTrack( *track ) );
-        }
-        return *this;
-    }
-
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-         GeoDataMultiTrackPrivate* copy = new GeoDataMultiTrackPrivate;
-        *copy = *this;
-        return copy;
-    }
-
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataMultiTrackType;
-    }
-
-    virtual EnumGeometryId geometryId() const
-    {
-        return GeoDataMultiTrackId;
-    }
-    QVector<GeoDataTrack*>  m_vector;
+  QVector<GeoDataTrack *> m_vector;
 };
 
 } // namespace Marble

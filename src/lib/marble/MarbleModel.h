@@ -17,15 +17,12 @@
 #ifndef MARBLE_MARBLEMODEL_H
 #define MARBLE_MARBLEMODEL_H
 
-
 /** @file
  * This file contains the headers for MarbleModel
  *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
-
-
 
 #include "marble_export.h"
 
@@ -40,8 +37,7 @@ class QAbstractItemModel;
 class QTextDocument;
 class QDateTime;
 
-namespace Marble
-{
+namespace Marble {
 
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
@@ -92,244 +88,246 @@ class ElevationModel;
  * @see MarbleWidget
  */
 
-class MARBLE_EXPORT MarbleModel : public QObject
+class MARBLE_EXPORT MarbleModel :
+  public QObject
 {
-    friend class MarbleModelPrivate;
+  friend class MarbleModelPrivate;
 
-    Q_OBJECT
+  Q_OBJECT
 
-    Q_PROPERTY( QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY themeChanged )
-    Q_PROPERTY( bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged )
+  Q_PROPERTY(QString mapThemeId READ mapThemeId WRITE setMapThemeId NOTIFY themeChanged)
+  Q_PROPERTY(bool workOffline READ workOffline WRITE setWorkOffline NOTIFY workOfflineChanged)
 
- public:
-    /**
-     * @brief  Construct a new MarbleModel.
-     * @param parent the parent widget
-     */
-    explicit MarbleModel( QObject *parent = 0 );
-    virtual ~MarbleModel();
+public:
+  /**
+   * @brief  Construct a new MarbleModel.
+   * @param parent the parent widget
+   */
+  explicit MarbleModel(QObject *parent = 0);
+  virtual ~MarbleModel();
 
-    /**
-     * @brief Return the list of Placemarks as a QAbstractItemModel *
-     * @return a list of all Placemarks in the MarbleModel.
-     */
-    GeoDataTreeModel *treeModel();
-    const GeoDataTreeModel *treeModel() const;
+  /**
+   * @brief Return the list of Placemarks as a QAbstractItemModel *
+   * @return a list of all Placemarks in the MarbleModel.
+   */
+  GeoDataTreeModel *treeModel();
+  const GeoDataTreeModel *treeModel() const;
 
-    QAbstractItemModel *groundOverlayModel();
-    const QAbstractItemModel *groundOverlayModel() const;
+  QAbstractItemModel *groundOverlayModel();
+  const QAbstractItemModel *groundOverlayModel() const;
 
-    QAbstractItemModel *placemarkModel();
-    const QAbstractItemModel *placemarkModel() const;
+  QAbstractItemModel *placemarkModel();
+  const QAbstractItemModel *placemarkModel() const;
 
-    QItemSelectionModel *placemarkSelectionModel();
+  QItemSelectionModel *placemarkSelectionModel();
 
-    /**
-     * @brief Return the name of the current map theme.
-     * @return the identifier of the current MapTheme.
-     * To ensure that a unique identifier is being used the theme does NOT
-     * get represented by its name but the by relative location of the file
-     * that specifies the theme:
-     *
-     * Example:
-     *    maptheme = "earth/bluemarble/bluemarble.dgml"
-     */
-    QString mapThemeId() const;
+  /**
+   * @brief Return the name of the current map theme.
+   * @return the identifier of the current MapTheme.
+   * To ensure that a unique identifier is being used the theme does NOT
+   * get represented by its name but the by relative location of the file
+   * that specifies the theme:
+   *
+   * Example:
+   *    maptheme = "earth/bluemarble/bluemarble.dgml"
+   */
+  QString mapThemeId() const;
 
-    GeoSceneDocument *mapTheme();
-    const GeoSceneDocument *mapTheme() const;
-    void setMapTheme( GeoSceneDocument * document );
+  GeoSceneDocument *mapTheme();
+  const GeoSceneDocument *mapTheme() const;
+  void setMapTheme(GeoSceneDocument *document);
 
-    /**
-     * @brief Set a new map theme to use.
-     * @param mapThemeId  the identifier of the new map theme
-     *
-     * This function sets the map theme, i.e. combination of tile set
-     * and color scheme to use.  If the map theme is not previously
-     * used, some basic tiles are created and a progress dialog is
-     * shown.
-     *
-     * The ID of the new maptheme. To ensure that a unique
-     * identifier is being used the theme does NOT get represented by its
-     * name but the by relative location of the file that specifies the theme:
-     *
-     * Example:
-     *    maptheme = "earth/bluemarble/bluemarble.dgml"
-     */
-    void setMapThemeId( const QString &mapThemeId );
+  /**
+   * @brief Set a new map theme to use.
+   * @param mapThemeId  the identifier of the new map theme
+   *
+   * This function sets the map theme, i.e. combination of tile set
+   * and color scheme to use.  If the map theme is not previously
+   * used, some basic tiles are created and a progress dialog is
+   * shown.
+   *
+   * The ID of the new maptheme. To ensure that a unique
+   * identifier is being used the theme does NOT get represented by its
+   * name but the by relative location of the file that specifies the theme:
+   *
+   * Example:
+   *    maptheme = "earth/bluemarble/bluemarble.dgml"
+   */
+  void setMapThemeId(const QString& mapThemeId);
 
-    /**
-     * @brief  get the home point
-     * @param  lon  the longitude of the home point.
-     * @param  lat  the latitude of the home point.
-     * @param  zoom the default zoom level of the home point.
-     */
-    void home( qreal &lon, qreal &lat, int& zoom ) const;
-    /**
-     * @brief  Set the home point
-     * @param  lon  the longitude of the new home point.
-     * @param  lat  the latitude of the new home point.
-     * @param  zoom the default zoom level for the new home point.
-     */
-    void setHome( qreal lon, qreal lat, int zoom = 1050 );
-    /**
-     * @brief  Set the home point
-     * @param  homePoint  the new home point.
-     * @param  zoom       the default zoom level for the new home point.
-     */
-    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
+  /**
+   * @brief  get the home point
+   * @param  lon  the longitude of the home point.
+   * @param  lat  the latitude of the home point.
+   * @param  zoom the default zoom level of the home point.
+   */
+  void home(qreal& lon, qreal& lat, int& zoom) const;
 
-    /**
-     * @brief Return the downloadmanager to load missing tiles
-     * @return the HttpDownloadManager instance.
-     */
-    HttpDownloadManager *downloadManager();
-    const HttpDownloadManager *downloadManager() const;
+  /**
+   * @brief  Set the home point
+   * @param  lon  the longitude of the new home point.
+   * @param  lat  the latitude of the new home point.
+   * @param  zoom the default zoom level for the new home point.
+   */
+  void setHome(qreal lon, qreal lat, int zoom = 1050);
 
+  /**
+   * @brief  Set the home point
+   * @param  homePoint  the new home point.
+   * @param  zoom       the default zoom level for the new home point.
+   */
+  void setHome(const GeoDataCoordinates& homePoint, int zoom = 1050);
 
-    /**
-     * @brief Handle file loading into the treeModel
-     * @param filename the file to load
-     */
-    void addGeoDataFile( const QString& filename, int renderOrder = 0, bool recenter = false );
+  /**
+   * @brief Return the downloadmanager to load missing tiles
+   * @return the HttpDownloadManager instance.
+   */
+  HttpDownloadManager *downloadManager();
+  const HttpDownloadManager *downloadManager() const;
 
-    /**
-     * @brief Handle raw data loading into the treeModel
-     * @param data the raw data to load
-     * @param key the name to remove this raw data later
-     */
-    void addGeoDataString( const QString& data, const QString& key = QLatin1String("data") );
+  /**
+   * @brief Handle file loading into the treeModel
+   * @param filename the file to load
+   */
+  void addGeoDataFile(const QString& filename, int renderOrder = 0, bool recenter = false);
 
-    /**
-     * @brief Remove the file or raw data from the treeModel
-     * @param key either the file name or the key for raw data
-     */
-    void removeGeoData( const QString& key );
+  /**
+   * @brief Handle raw data loading into the treeModel
+   * @param data the raw data to load
+   * @param key the name to remove this raw data later
+   */
+  void addGeoDataString(const QString& data, const QString& key = QLatin1String("data"));
 
-    FileManager       *fileManager();
+  /**
+   * @brief Remove the file or raw data from the treeModel
+   * @param key either the file name or the key for raw data
+   */
+  void removeGeoData(const QString& key);
 
-    PositionTracking   *positionTracking() const;
+  FileManager *fileManager();
 
-    qreal                 planetRadius()   const;
-    QString               planetName()     const;
-    QString               planetId()       const;
+  PositionTracking *positionTracking() const;
 
-    MarbleClock *clock();
-    const MarbleClock *clock() const;
+  qreal                 planetRadius()   const;
+  QString               planetName()     const;
+  QString               planetId()       const;
 
-    SunLocator *sunLocator();
-    const SunLocator *sunLocator() const;
+  MarbleClock *clock();
+  const MarbleClock *clock() const;
 
-    /**
-     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
-     * @return the limit of persistent tile cache in kilobytes.
-     */
-    quint64 persistentTileCacheLimit() const;
+  SunLocator *sunLocator();
+  const SunLocator *sunLocator() const;
 
-    /**
-     * @brief  Returns the limit of the volatile (in RAM) tile cache.
-     * @return the cache limit in kilobytes
-     */
-    quint64 volatileTileCacheLimit() const;
+  /**
+   * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
+   * @return the limit of persistent tile cache in kilobytes.
+   */
+  quint64 persistentTileCacheLimit() const;
 
-    const PluginManager* pluginManager() const;
+  /**
+   * @brief  Returns the limit of the volatile (in RAM) tile cache.
+   * @return the cache limit in kilobytes
+   */
+  quint64 volatileTileCacheLimit() const;
 
-    PluginManager* pluginManager();
+  const PluginManager *pluginManager() const;
 
-    /**
-     * @brief Returns the planet object for the current map.
-     * @return the planet object for the current map
-     */
-    const Planet *planet() const;
+  PluginManager *pluginManager();
 
-    void setClockDateTime( const QDateTime& datetime );
+  /**
+   * @brief Returns the planet object for the current map.
+   * @return the planet object for the current map
+   */
+  const Planet *planet() const;
 
-    QDateTime clockDateTime() const;
+  void setClockDateTime(const QDateTime& datetime);
 
-    int clockSpeed() const;
+  QDateTime clockDateTime() const;
 
-    void setClockSpeed( int speed );
+  int clockSpeed() const;
 
-    void setClockTimezone( int timeInSec );
+  void setClockSpeed(int speed);
 
-    int clockTimezone() const;
+  void setClockTimezone(int timeInSec);
 
-    QTextDocument * legend();
+  int clockTimezone() const;
 
-    /**
-     * @brief Uses the given text document as the new content of the legend
-     * Any previous legend content is overwritten. MarbleModel takes ownership
-     * of the passed document.
-     */
-    void setLegend( QTextDocument * document );
+  QTextDocument *legend();
 
-    bool workOffline() const;
+  /**
+   * @brief Uses the given text document as the new content of the legend
+   * Any previous legend content is overwritten. MarbleModel takes ownership
+   * of the passed document.
+   */
+  void setLegend(QTextDocument *document);
 
-    void setWorkOffline( bool workOffline );
+  bool workOffline() const;
 
-    ElevationModel* elevationModel();
-    const ElevationModel* elevationModel() const;
+  void setWorkOffline(bool workOffline);
 
-    /**
-     * Returns the placemark being tracked by this model or 0 if no
-     * placemark is currently tracked.
-     * @see setTrackedPlacemark(), trackedPlacemarkChanged()
-     */
-    const GeoDataPlacemark *trackedPlacemark() const;
+  ElevationModel *elevationModel();
+  const ElevationModel *elevationModel() const;
 
- public Q_SLOTS:
-    void clearPersistentTileCache();
+  /**
+   * Returns the placemark being tracked by this model or 0 if no
+   * placemark is currently tracked.
+   * @see setTrackedPlacemark(), trackedPlacemarkChanged()
+   */
+  const GeoDataPlacemark *trackedPlacemark() const;
 
-    /**
-     * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in kilobytes, 0 means no limit.
-     */
-    void setPersistentTileCacheLimit( quint64 kiloBytes );
+public Q_SLOTS:
+  void clearPersistentTileCache();
 
-    /**
-     * @brief Change the placemark tracked by this model
-     * @see trackedPlacemark(), trackedPlacemarkChanged()
-     */
-    void setTrackedPlacemark( const GeoDataPlacemark *placemark );
+  /**
+   * @brief  Set the limit of the persistent (on hard disc) tile cache.
+   * @param  bytes The limit in kilobytes, 0 means no limit.
+   */
+  void setPersistentTileCacheLimit(quint64 kiloBytes);
 
-    void updateProperty( const QString &property, bool value );
+  /**
+   * @brief Change the placemark tracked by this model
+   * @see trackedPlacemark(), trackedPlacemarkChanged()
+   */
+  void setTrackedPlacemark(const GeoDataPlacemark *placemark);
 
- Q_SIGNALS:
+  void updateProperty(const QString& property, bool value);
 
-    /**
-     * @brief Signal that the MarbleModel has started to create a new set of tiles.
-     * @param
-     */
-    void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
+Q_SIGNALS:
+  /**
+   * @brief Signal that the MarbleModel has started to create a new set of tiles.
+   * @param
+   */
+  void creatingTilesStart(TileCreator *, const QString& name, const QString& description);
 
-    /**
-     * @brief Signal that the map theme has changed, and to which theme.
-     * @param mapTheme the identifier of the new map theme.
-     * @see  mapTheme
-     * @see  setMapTheme
-     */
-    void themeChanged( const QString &mapTheme );
+  /**
+   * @brief Signal that the map theme has changed, and to which theme.
+   * @param mapTheme the identifier of the new map theme.
+   * @see  mapTheme
+   * @see  setMapTheme
+   */
+  void themeChanged(const QString& mapTheme);
 
-    void workOfflineChanged();
+  void workOfflineChanged();
 
-    /**
-     * @brief Emitted when the placemark tracked by this model has changed
-     * @see setTrackedPlacemark(), trackedPlacemark()
-     */
-    void trackedPlacemarkChanged( const GeoDataPlacemark *placemark );
+  /**
+   * @brief Emitted when the placemark tracked by this model has changed
+   * @see setTrackedPlacemark(), trackedPlacemark()
+   */
+  void trackedPlacemarkChanged(const GeoDataPlacemark *placemark);
 
-    /** @brief Emitted when the home location is changed
-     * @see home(), setHome()
-     */
-    void homeChanged( const GeoDataCoordinates &newHomePoint );
+  /** @brief Emitted when the home location is changed
+   * @see home(), setHome()
+   */
+  void homeChanged(const GeoDataCoordinates& newHomePoint);
 
- private:
-    Q_DISABLE_COPY( MarbleModel )
+private:
+  Q_DISABLE_COPY(MarbleModel)
 
-    Q_PRIVATE_SLOT( d, void assignFillColors( const QString &filePath ) )
+  Q_PRIVATE_SLOT(d, void assignFillColors(const QString& filePath))
 
-    void addDownloadPolicies( const GeoSceneDocument *mapTheme );
-    MarbleModelPrivate  * const d;
+  void addDownloadPolicies(const GeoSceneDocument *mapTheme);
+
+  MarbleModelPrivate * const d;
 };
 
 }

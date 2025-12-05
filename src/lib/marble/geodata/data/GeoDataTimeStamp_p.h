@@ -16,26 +16,24 @@
 #include "GeoDataTypes.h"
 #include <GeoDataTimeStamp.h>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimeStampPrivate
 {
-  public:
-    QDateTime m_when;
+public:
+  QDateTime m_when;
 
-    GeoDataTimeStamp::TimeResolution m_resolution;
+  GeoDataTimeStamp::TimeResolution m_resolution;
 
-    GeoDataTimeStampPrivate();
+  GeoDataTimeStampPrivate();
 };
 
 GeoDataTimeStampPrivate::GeoDataTimeStampPrivate() :
-  m_resolution( GeoDataTimeStamp::SecondResolution )
+  m_resolution(GeoDataTimeStamp::SecondResolution)
 {
   // nothing to do
 }
 
 } // namespace Marble
 
-#endif //GEODATATIMESTAMPPRIVATE_H
-
+#endif // GEODATATIMESTAMPPRIVATE_H

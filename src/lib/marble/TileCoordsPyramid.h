@@ -19,32 +19,33 @@
 
 class QRect;
 
-namespace Marble
-{
+namespace Marble {
 
 class MARBLE_EXPORT TileCoordsPyramid
 {
- public:
-    TileCoordsPyramid( int const topLevel, int const bottomLevel );
-    TileCoordsPyramid( TileCoordsPyramid const & other );
-    TileCoordsPyramid();
-    TileCoordsPyramid & operator=( TileCoordsPyramid const & rhs );
-    ~TileCoordsPyramid();
+public:
+  TileCoordsPyramid(int const topLevel, int const bottomLevel);
+  TileCoordsPyramid(TileCoordsPyramid const& other);
+  TileCoordsPyramid();
+  TileCoordsPyramid& operator=(TileCoordsPyramid const& rhs);
 
-    int topLevel() const;
-    int bottomLevel() const;
-    void setBottomLevelCoords( QRect const & coords );
-    QRect coords( int const level ) const;
+  ~TileCoordsPyramid();
 
-    /**
-      * @brief returns the number of tiles covered by one pyramid
-      **/
-    qint64 tilesCount() const;
+  int topLevel() const;
+  int bottomLevel() const;
+  void setBottomLevelCoords(QRect const& coords);
+  QRect coords(int const level) const;
 
- private:
-    void swap( TileCoordsPyramid & other );
-    class Private;
-    Private * d; // not const, needs to be swapable
+  /**
+    * @brief returns the number of tiles covered by one pyramid
+    **/
+  qint64 tilesCount() const;
+
+private:
+  void swap(TileCoordsPyramid& other);
+
+  class Private;
+  Private *d;    // not const, needs to be swapable
 };
 
 }

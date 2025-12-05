@@ -27,40 +27,41 @@ namespace Marble {
 
 class GeoDataCoordinates;
 
-class MARBLE_EXPORT SearchInputWidget : public MarbleLineEdit
+class MARBLE_EXPORT SearchInputWidget :
+  public MarbleLineEdit
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit SearchInputWidget( QWidget* parent = 0 );
+  explicit SearchInputWidget(QWidget *parent = 0);
 
-    void setCompletionModel( QAbstractItemModel *completionModel );
+  void setCompletionModel(QAbstractItemModel *completionModel);
 
 public Q_SLOTS:
-    void disableSearchAnimation();
+  void disableSearchAnimation();
 
 Q_SIGNALS:
-    void search( const QString &searchTerm, SearchMode searchMode );
+  void search(const QString& searchTerm, SearchMode searchMode);
 
-    void centerOn( const GeoDataCoordinates &coordinates );
+  void centerOn(const GeoDataCoordinates& coordinates);
 
 private Q_SLOTS:
-    void search();
+  void search();
 
-    void centerOnSearchSuggestion( const QModelIndex &suggestionIndex );
+  void centerOnSearchSuggestion(const QModelIndex& suggestionIndex);
 
-    void showDropDownMenu();
+  void showDropDownMenu();
 
-    void setGlobalSearch();
+  void setGlobalSearch();
 
-    void setAreaSearch();
+  void setAreaSearch();
 
 private:
-    void updatePlaceholderText();
+  void updatePlaceholderText();
 
-    QSortFilterProxyModel m_sortFilter;
-    QCompleter *const m_completer;
-    bool m_areaSearch;
+  QSortFilterProxyModel m_sortFilter;
+  QCompleter *const m_completer;
+  bool m_areaSearch;
 };
 
 }

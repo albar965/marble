@@ -16,30 +16,28 @@
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(displayMode)
+
+GeoNode *KmldisplayModeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( displayMode )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_displayMode));
 
-GeoNode* KmldisplayModeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_displayMode ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_BalloonStyle))
+  {
+    QString mode = parser.readElementText().trimmed();
+    GeoDataBalloonStyle::DisplayMode displayMode;
+    if(mode == "default")
+      displayMode = GeoDataBalloonStyle::Default;
+    else if(mode == "hide")
+      displayMode = GeoDataBalloonStyle::Hide;
 
-    if ( parentItem.represents( kmlTag_BalloonStyle ) )
-    {
-        QString mode = parser.readElementText().trimmed();
-        GeoDataBalloonStyle::DisplayMode displayMode;
-        if ( mode == "default" )
-                displayMode = GeoDataBalloonStyle::Default;
-        else if ( mode == "hide" )
-                displayMode = GeoDataBalloonStyle::Hide;
-
-        parentItem.nodeAs<GeoDataBalloonStyle>()->setDisplayMode( displayMode );
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataBalloonStyle>()->setDisplayMode(displayMode);
+  }
+  return 0;
 }
 
 }

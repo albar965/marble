@@ -15,22 +15,21 @@
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( ViewVolume )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(ViewVolume)
 
-GeoNode* KmlViewVolumeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlViewVolumeTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_ViewVolume ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_ViewVolume));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
-        return &parentItem.nodeAs<GeoDataPhotoOverlay>()->viewVolume();
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_PhotoOverlay))
+  {
+    return &parentItem.nodeAs<GeoDataPhotoOverlay>()->viewVolume();
+  }
+  return 0;
 }
 
 }

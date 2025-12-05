@@ -14,30 +14,30 @@
 #include "GeoDataGeometry_p.h"
 #include "GeoDataCoordinates_p.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class GeoDataPointPrivate : public GeoDataGeometryPrivate,
-                            public GeoDataCoordinatesPrivate
+class GeoDataPointPrivate :
+  public GeoDataGeometryPrivate, public GeoDataCoordinatesPrivate
 {
 public:
-    GeoDataCoordinates m_coordinates;
+  GeoDataCoordinates m_coordinates;
 
-    GeoDataPointPrivate()
-    {
-    }
+  GeoDataPointPrivate()
+  {
+  }
 
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-        GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataPointPrivate *copy = new GeoDataPointPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual EnumGeometryId geometryId() const
-    {
-        return GeoDataPointId;
-    }
+  virtual EnumGeometryId geometryId() const
+  {
+    return GeoDataPointId;
+  }
+
 };
 
 } // namespace Marble

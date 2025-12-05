@@ -19,52 +19,52 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataAbstractViewPrivate;
 
 /**
  * @see GeoDataLookAt
  */
-class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
+class GEODATA_EXPORT GeoDataAbstractView :
+  public GeoDataObject
 {
- public:
-    GeoDataAbstractView();
+public:
+  GeoDataAbstractView();
 
-    ~GeoDataAbstractView();
+  ~GeoDataAbstractView();
 
-    GeoDataAbstractView( const GeoDataAbstractView &other );
+  GeoDataAbstractView(const GeoDataAbstractView& other);
 
-    GeoDataAbstractView& operator=( const GeoDataAbstractView &other );
+  GeoDataAbstractView& operator=(const GeoDataAbstractView& other);
 
-    virtual GeoDataAbstractView *copy() const = 0;
+  virtual GeoDataAbstractView *copy() const = 0;
 
-    const GeoDataTimeSpan& timeSpan() const;
+  const GeoDataTimeSpan& timeSpan() const;
 
-    GeoDataTimeSpan& timeSpan();
+  GeoDataTimeSpan& timeSpan();
 
-    void setTimeSpan( const GeoDataTimeSpan &timeSpan );
+  void setTimeSpan(const GeoDataTimeSpan& timeSpan);
 
-    GeoDataTimeStamp& timeStamp();
+  GeoDataTimeStamp& timeStamp();
 
-    const GeoDataTimeStamp& timeStamp() const;
+  const GeoDataTimeStamp& timeStamp() const;
 
-    void setTimeStamp( const GeoDataTimeStamp &timeStamp );
+  void setTimeStamp(const GeoDataTimeStamp& timeStamp);
 
-    AltitudeMode altitudeMode() const;
+  AltitudeMode altitudeMode() const;
 
-    void setAltitudeMode(const AltitudeMode altitudeMode);
+  void setAltitudeMode(const AltitudeMode altitudeMode);
 
-    GeoDataCoordinates coordinates() const;
+  GeoDataCoordinates coordinates() const;
 
 private:
-    GeoDataAbstractViewPrivate* const d;
+  GeoDataAbstractViewPrivate * const d;
 
 protected:
-    bool equals(const GeoDataAbstractView &other) const;
+  bool equals(const GeoDataAbstractView& other) const;
 
-    using GeoDataObject::equals;
+  using GeoDataObject::equals;
 };
 
 } // namespace Marble

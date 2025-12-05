@@ -18,26 +18,25 @@
 
 class QFont;
 
-namespace Marble
-{
+namespace Marble {
 
 class LabelGraphicsItem;
 
 class LabelGraphicsItemPrivate
 {
- public:
-    explicit LabelGraphicsItemPrivate( LabelGraphicsItem *parent );
+public:
+  explicit LabelGraphicsItemPrivate(LabelGraphicsItem *parent);
 
-    // TODO: This has to go up to MarbleGraphicsItem
-    static QFont font();
+  // TODO: This has to go up to MarbleGraphicsItem
+  static QFont font();
 
-    QString m_text;
-    QImage m_image;
-    QIcon m_icon;
+  QString m_text;
+  QImage m_image;
+  QIcon m_icon;
 
-    QSizeF m_minimumSize;
+  QSizeF m_minimumSize;
 
-    LabelGraphicsItem *m_parent;
+  LabelGraphicsItem *m_parent;
 };
 
 } // namespace Marble

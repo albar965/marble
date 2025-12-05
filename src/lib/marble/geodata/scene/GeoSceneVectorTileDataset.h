@@ -17,16 +17,16 @@
 
 #include "GeoSceneTileDataset.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoSceneVectorTileDataset :
+  public GeoSceneTileDataset
 {
+public:
+  explicit GeoSceneVectorTileDataset(const QString& name);
 
-class GeoSceneVectorTileDataset : public GeoSceneTileDataset
-{
- public:
+  virtual const char *nodeType() const;
 
-    explicit GeoSceneVectorTileDataset( const QString& name );
-
-    virtual const char* nodeType() const;
 };
 
 }

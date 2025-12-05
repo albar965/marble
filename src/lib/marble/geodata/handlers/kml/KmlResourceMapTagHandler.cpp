@@ -18,25 +18,26 @@
 #include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( ResourceMap )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(ResourceMap)
 
-GeoNode* KmlResourceMapTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlResourceMapTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_ResourceMap ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_ResourceMap));
 
-    GeoDataResourceMap map;
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataResourceMap map;
+  GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Model ) ) {
-        parentItem.nodeAs<GeoDataModel>()->setResourceMap(map);
-	    return &parentItem.nodeAs<GeoDataModel>()->resourceMap();
-    } else {
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Model))
+  {
+    parentItem.nodeAs<GeoDataModel>()->setResourceMap(map);
+    return &parentItem.nodeAs<GeoDataModel>()->resourceMap();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

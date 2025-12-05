@@ -14,30 +14,30 @@
 #include "GeoDataContainer.h"
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataChangePrivate;
 
-class MARBLE_EXPORT GeoDataChange : public GeoDataContainer
+class MARBLE_EXPORT GeoDataChange :
+  public GeoDataContainer
 {
 public:
-    GeoDataChange();
+  GeoDataChange();
 
-    GeoDataChange( const GeoDataChange &other );
+  GeoDataChange(const GeoDataChange& other);
 
-    GeoDataChange& operator=( const GeoDataChange &other );
+  GeoDataChange& operator=(const GeoDataChange& other);
 
-    bool operator==( const GeoDataChange &other ) const;
-    bool operator!=( const GeoDataChange &other ) const;
+  bool operator==(const GeoDataChange& other) const;
+  bool operator!=(const GeoDataChange& other) const;
 
-    ~GeoDataChange();
+  ~GeoDataChange();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
 private:
-    GeoDataChangePrivate* const d;
+  GeoDataChangePrivate * const d;
 };
 
 }

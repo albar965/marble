@@ -14,22 +14,23 @@
 #include "marble_export.h"
 #include <QObject>
 
-namespace Marble
+namespace Marble {
+
+class MARBLE_EXPORT DataMigration :
+  public QObject
 {
+  Q_OBJECT
 
-class MARBLE_EXPORT DataMigration : public QObject
-{
-    Q_OBJECT
+public:
+  explicit DataMigration(QObject *parent);
+  virtual ~DataMigration();
 
- public:
-    explicit DataMigration( QObject *parent );
-    virtual ~DataMigration();
+public Q_SLOTS:
+  void exec();
 
- public Q_SLOTS:
-    void exec();
+private:
+  static void moveFiles(const QString& source, const QString& target);
 
- private:
-    static void moveFiles( const QString& source, const QString& target );
 };
 
 }

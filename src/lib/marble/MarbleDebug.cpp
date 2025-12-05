@@ -10,48 +10,51 @@
 
 #include "MarbleDebug.h"
 
-namespace Marble
-{
+namespace Marble {
 bool MarbleDebug::m_enabled = false;
 
-class NullDevice : public QIODevice
+class NullDevice :
+  public QIODevice
 {
 public:
-    NullDevice()
-    {
-        open( QIODevice::WriteOnly );
-    }
+  NullDevice()
+  {
+    open(QIODevice::WriteOnly);
+  }
 
-    qint64 readData( char * /*data*/, qint64 /*maxSize*/ )
-    {
-        return -1;
-    }
+  qint64 readData(char * /*data*/, qint64 /*maxSize*/)
+  {
+    return -1;
+  }
 
-    qint64 writeData( const char * /*data*/, qint64 maxSize )
-    {
-        return maxSize;
-    }
+  qint64 writeData(const char * /*data*/, qint64 maxSize)
+  {
+    return maxSize;
+  }
+
 };
 
 QDebug mDebug()
 {
-    if ( MarbleDebug::isEnabled() ) {
-        return QDebug( QtDebugMsg );
-    }
-    else {
-        static QIODevice *device = new NullDevice;
-        return QDebug( device );
-    }
+  if(MarbleDebug::isEnabled())
+  {
+    return QDebug(QtDebugMsg);
+  }
+  else
+  {
+    static QIODevice *device = new NullDevice;
+    return QDebug(device);
+  }
 }
 
 bool MarbleDebug::isEnabled()
 {
-    return MarbleDebug::m_enabled;
+  return MarbleDebug::m_enabled;
 }
 
 void MarbleDebug::setEnabled(bool enabled)
 {
-    MarbleDebug::m_enabled = enabled;
+  MarbleDebug::m_enabled = enabled;
 }
 
 } // namespace Marble

@@ -28,8 +28,7 @@
 
 #include <geodata_export.h>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneHead;
 class GeoSceneLegend;
@@ -41,43 +40,44 @@ class GeoSceneDocumentPrivate;
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GEODATA_EXPORT GeoSceneDocument : public QObject,
-                                        public GeoDocument,
-                                        public GeoNode
+class GEODATA_EXPORT GeoSceneDocument :
+  public QObject, public GeoDocument, public GeoNode
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    GeoSceneDocument();
-    ~GeoSceneDocument();
+public:
+  GeoSceneDocument();
+  ~GeoSceneDocument();
 
-    virtual const char* nodeType() const;
+  virtual const char *nodeType() const;
 
-    virtual bool isGeoSceneDocument() const { return true; }
+  virtual bool isGeoSceneDocument() const
+  {
+    return true;
+  }
 
-    const GeoSceneHead* head() const;
-    GeoSceneHead* head();
+  const GeoSceneHead *head() const;
+  GeoSceneHead *head();
 
-    const GeoSceneMap* map() const;
-    GeoSceneMap* map();
+  const GeoSceneMap *map() const;
+  GeoSceneMap *map();
 
-    const GeoSceneSettings* settings() const;
-    GeoSceneSettings* settings();
+  const GeoSceneSettings *settings() const;
+  GeoSceneSettings *settings();
 
-    const GeoSceneLegend* legend() const;
-    GeoSceneLegend* legend();
+  const GeoSceneLegend *legend() const;
+  GeoSceneLegend *legend();
 
-    /* path to DGML file */
-    const QString documentPath() const;
-    void documentPath(const QString& path);
+  /* path to DGML file */
+  const QString documentPath() const;
+  void documentPath(const QString& path);
 
+Q_SIGNALS:
+  void valueChanged(const QString&, bool);
 
- Q_SIGNALS:
-    void valueChanged( const QString&, bool );
-
- private:
-    Q_DISABLE_COPY( GeoSceneDocument )
-    GeoSceneDocumentPrivate * const d;
+private:
+  Q_DISABLE_COPY(GeoSceneDocument)
+  GeoSceneDocumentPrivate * const d;
 };
 
 }

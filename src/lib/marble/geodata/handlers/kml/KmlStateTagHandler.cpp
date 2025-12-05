@@ -16,47 +16,58 @@
 #include "GeoDataItemIcon.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(state)
+
+GeoNode *KmlstateTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( state )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_state));
 
-GeoNode* KmlstateTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_state ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataItemIcon::ItemIconStates itemIconState;
 
-    GeoDataItemIcon::ItemIconStates itemIconState;
+  if(parentItem.represents(kmlTag_ItemIcon))
+  {
+    QString value = parser.readElementText().trimmed();
+    QStringList iconStateTextList = value.split(QLatin1Char(' '));
 
-    if ( parentItem.represents( kmlTag_ItemIcon ) )
+    foreach(const QString& value, iconStateTextList)
     {
-        QString value = parser.readElementText().trimmed();
-        QStringList iconStateTextList = value.split(QLatin1Char(' '));
-
-        foreach( const QString &value, iconStateTextList ) {
-            if ( value == "open" ) {
-                itemIconState |= GeoDataItemIcon::Open;
-            } else if ( value == "closed" ) {
-                itemIconState |= GeoDataItemIcon::Closed;
-            } else if ( value == "error" ) {
-                itemIconState |= GeoDataItemIcon::Error;
-            } else if ( value == "fetching0" ) {
-                itemIconState |= GeoDataItemIcon::Fetching0;
-            } else if ( value == "fetching1" ) {
-                itemIconState |= GeoDataItemIcon::Fetching1;
-            } else if ( value == "fetching2" ) {
-                itemIconState |= GeoDataItemIcon::Fetching2;
-            }
-            else {
-                mDebug() << "Cannot parse state value" << value;
-            }
-        }
-
-        parentItem.nodeAs<GeoDataItemIcon>()->setState( itemIconState );
+      if(value == "open")
+      {
+        itemIconState |= GeoDataItemIcon::Open;
+      }
+      else if(value == "closed")
+      {
+        itemIconState |= GeoDataItemIcon::Closed;
+      }
+      else if(value == "error")
+      {
+        itemIconState |= GeoDataItemIcon::Error;
+      }
+      else if(value == "fetching0")
+      {
+        itemIconState |= GeoDataItemIcon::Fetching0;
+      }
+      else if(value == "fetching1")
+      {
+        itemIconState |= GeoDataItemIcon::Fetching1;
+      }
+      else if(value == "fetching2")
+      {
+        itemIconState |= GeoDataItemIcon::Fetching2;
+      }
+      else
+      {
+        mDebug() << "Cannot parse state value" << value;
+      }
     }
-    return 0;
+
+    parentItem.nodeAs<GeoDataItemIcon>()->setState(itemIconState);
+  }
+  return 0;
 }
 
 }

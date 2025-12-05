@@ -21,163 +21,169 @@
 
 using namespace Marble;
 
-GeoGraphicsItem::GeoGraphicsItem( const GeoDataFeature *feature )
-    : d( new GeoGraphicsItemPrivate( feature ) )
+GeoGraphicsItem::GeoGraphicsItem(const GeoDataFeature *feature)
+  : d(new GeoGraphicsItemPrivate(feature))
 {
-    setFlag( ItemIsVisible, true );
+  setFlag(ItemIsVisible, true);
 }
 
 GeoGraphicsItem::~GeoGraphicsItem()
 {
-    delete d;
+  delete d;
 }
 
 bool GeoGraphicsItem::visible() const
 {
-    return d->m_flags & ItemIsVisible;
+  return d->m_flags & ItemIsVisible;
 }
 
-void GeoGraphicsItem::setVisible( bool visible )
+void GeoGraphicsItem::setVisible(bool visible)
 {
-    setFlag( ItemIsVisible, visible );
+  setFlag(ItemIsVisible, visible);
 }
 
 GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags() const
 {
-    return d->m_flags;
+  return d->m_flags;
 }
 
-void GeoGraphicsItem::setFlag( GeoGraphicsItemFlag flag, bool enabled )
+void GeoGraphicsItem::setFlag(GeoGraphicsItemFlag flag, bool enabled)
 {
-    if( enabled ) {
-        d->m_flags = d->m_flags | flag;
-    } else {
-        d->m_flags = d->m_flags & ~flag;
-    }
+  if(enabled)
+  {
+    d->m_flags = d->m_flags | flag;
+  }
+  else
+  {
+    d->m_flags = d->m_flags & ~flag;
+  }
 }
 
-void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
+void GeoGraphicsItem::setFlags(GeoGraphicsItemFlags flags)
 {
-    d->m_flags = flags;
+  d->m_flags = flags;
 }
 
-const GeoDataFeature* GeoGraphicsItem::feature() const
+const GeoDataFeature *GeoGraphicsItem::feature() const
 {
-    return d->m_feature;
+  return d->m_feature;
 }
 
 const GeoDataLatLonAltBox& GeoGraphicsItem::latLonAltBox() const
 {
-    return d->m_latLonAltBox;
+  return d->m_latLonAltBox;
 }
 
-void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
+void GeoGraphicsItem::setLatLonAltBox(const GeoDataLatLonAltBox& latLonAltBox)
 {
-    d->m_latLonAltBox = latLonAltBox;
+  d->m_latLonAltBox = latLonAltBox;
 }
 
-void GeoGraphicsItem::setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle)
+void GeoGraphicsItem::setHighlightStyle(const GeoDataStyle::ConstPtr& highlightStyle)
 {
-    /**
-     * Delete any previously set style
-     * and assign the new style @highlightStyle
-     */
-    d->m_highlightStyle = highlightStyle;
+  /**
+   * Delete any previously set style
+   * and assign the new style @highlightStyle
+   */
+  d->m_highlightStyle = highlightStyle;
 }
 
 GeoDataStyle::ConstPtr GeoGraphicsItem::style() const
 {
-    /**
-     * m_isHighlight is set true when the item is
-     * supposed to be colored highlighted
-     */
-    if ( d->m_highlighted && d->m_highlightStyle ) {
-        return d->m_highlightStyle;
-    }
+  /**
+   * m_isHighlight is set true when the item is
+   * supposed to be colored highlighted
+   */
+  if(d->m_highlighted && d->m_highlightStyle)
+  {
+    return d->m_highlightStyle;
+  }
 
-    if (!d->m_style) {
-        auto const styling = StyleParameters(d->m_feature, d->m_renderContext.tileLevel());
-        d->m_style = d->m_styleBuilder->createStyle(styling);
-    }
+  if(!d->m_style)
+  {
+    auto const styling = StyleParameters(d->m_feature, d->m_renderContext.tileLevel());
+    d->m_style = d->m_styleBuilder->createStyle(styling);
+  }
 
-    return d->m_style;
+  return d->m_style;
 }
 
 void GeoGraphicsItem::setStyleBuilder(const StyleBuilder *styleBuilder)
 {
-    d->m_styleBuilder = styleBuilder;
+  d->m_styleBuilder = styleBuilder;
 }
 
 qreal GeoGraphicsItem::zValue() const
 {
-    return d->m_zValue;
+  return d->m_zValue;
 }
 
-void GeoGraphicsItem::setZValue( qreal z )
+void GeoGraphicsItem::setZValue(qreal z)
 {
-    d->m_zValue = z;
+  d->m_zValue = z;
 }
 
-void GeoGraphicsItem::setHighlighted( bool highlight )
+void GeoGraphicsItem::setHighlighted(bool highlight)
 {
-    d->m_highlighted = highlight;
+  d->m_highlighted = highlight;
 }
 
 bool GeoGraphicsItem::isHighlighted() const
 {
-    return d->m_highlighted;
+  return d->m_highlighted;
 }
 
 QStringList GeoGraphicsItem::paintLayers() const
 {
-    return d->m_paintLayers;
+  return d->m_paintLayers;
 }
 
-void GeoGraphicsItem::setPaintLayers(const QStringList &paintLayers)
+void GeoGraphicsItem::setPaintLayers(const QStringList& paintLayers)
 {
-    d->m_paintLayers = paintLayers;
+  d->m_paintLayers = paintLayers;
 }
 
-void GeoGraphicsItem::setRenderContext(const RenderContext &renderContext)
+void GeoGraphicsItem::setRenderContext(const RenderContext& renderContext)
 {
-    if (renderContext != d->m_renderContext) {
-        d->m_renderContext = renderContext;
-        d->m_style = GeoDataStyle::ConstPtr();
-    }
+  if(renderContext != d->m_renderContext)
+  {
+    d->m_renderContext = renderContext;
+    d->m_style = GeoDataStyle::ConstPtr();
+  }
 }
 
 int GeoGraphicsItem::minZoomLevel() const
 {
-    return d->m_minZoomLevel;
+  return d->m_minZoomLevel;
 }
 
 void GeoGraphicsItem::setMinZoomLevel(int zoomLevel)
 {
-    d->m_minZoomLevel = zoomLevel;
+  d->m_minZoomLevel = zoomLevel;
 }
 
 bool GeoGraphicsItem::zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two)
 {
-    return one->d->m_zValue < two->d->m_zValue;
+  return one->d->m_zValue < two->d->m_zValue;
 }
 
-bool RenderContext::operator==(const RenderContext &other) const
+bool RenderContext::operator==(const RenderContext& other) const
 {
-    return m_tileLevel == other.m_tileLevel;
+  return m_tileLevel == other.m_tileLevel;
 }
 
-bool RenderContext::operator!=(const RenderContext &other) const
+bool RenderContext::operator!=(const RenderContext& other) const
 {
-    return !operator==(other);
+  return !operator==(other);
 }
 
 int RenderContext::tileLevel() const
 {
-    return m_tileLevel;
+  return m_tileLevel;
 }
 
 RenderContext::RenderContext(int tileLevel) :
-    m_tileLevel(tileLevel)
+  m_tileLevel(tileLevel)
 {
-    // nothing to do
+  // nothing to do
 }

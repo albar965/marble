@@ -30,32 +30,35 @@
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 KML_DEFINE_TAG_HANDLER(Folder)
 
-GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
+GeoNode *KmlFolderTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
 
-    GeoStackItem parentItem = parser.parentElement();
-    GeoDataFolder *folder = new GeoDataFolder;
-    KmlObjectTagHandler::parseIdentifiers( parser, folder );
-    if ( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
-        parentPtr->append( folder );
+  GeoStackItem parentItem = parser.parentElement();
+  GeoDataFolder *folder = new GeoDataFolder;
+  KmlObjectTagHandler::parseIdentifiers(parser, folder);
+  if(parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
+  {
+    GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
+    parentPtr->append(folder);
 
-        return folder;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml) {
-        GeoDataDocument* doc = geoDataDoc( parser );
-        doc->append( folder );
-        return folder;
-    } else {
-        delete folder;
-        return 0;
-    }
+    return folder;
+  }
+  else if(parentItem.qualifiedName().first == kmlTag_kml)
+  {
+    GeoDataDocument *doc = geoDataDoc(parser);
+    doc->append(folder);
+    return folder;
+  }
+  else
+  {
+    delete folder;
+    return 0;
+  }
 }
 
 }

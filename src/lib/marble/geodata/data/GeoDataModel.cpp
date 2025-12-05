@@ -18,210 +18,219 @@
 
 namespace Marble {
 
-class GeoDataModelPrivate : public GeoDataGeometryPrivate
+class GeoDataModelPrivate :
+  public GeoDataGeometryPrivate
 {
 public:
-    GeoDataModelPrivate();
+  GeoDataModelPrivate();
 
-    const char *nodeType() const { return GeoDataTypes::GeoDataModelType; }
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataModelType;
+  }
 
-    GeoDataGeometryPrivate *copy() { return new GeoDataModelPrivate( *this ); }
+  GeoDataGeometryPrivate *copy()
+  {
+    return new GeoDataModelPrivate(*this);
+  }
 
-    EnumGeometryId geometryId() const { return GeoDataModelId; }
+  EnumGeometryId geometryId() const
+  {
+    return GeoDataModelId;
+  }
 
-    GeoDataCoordinates m_coordinates;
+  GeoDataCoordinates m_coordinates;
 
-    GeoDataScale m_scale;
-    GeoDataOrientation m_orientation;
-    GeoDataLocation m_location;
-    GeoDataLink m_link;
-    GeoDataResourceMap m_map;
-    QString m_targetHref;
-    QString m_sourceHref;
+  GeoDataScale m_scale;
+  GeoDataOrientation m_orientation;
+  GeoDataLocation m_location;
+  GeoDataLink m_link;
+  GeoDataResourceMap m_map;
+  QString m_targetHref;
+  QString m_sourceHref;
 };
 
 GeoDataModelPrivate::GeoDataModelPrivate() :
-    m_coordinates(),
-    m_scale(),
-    m_orientation(),
-    m_location(),
-    m_link(),
-    m_map(),
-    m_targetHref(),
-    m_sourceHref()
+  m_coordinates(),
+  m_scale(),
+  m_orientation(),
+  m_location(),
+  m_link(),
+  m_map(),
+  m_targetHref(),
+  m_sourceHref()
 {
 }
 
 GeoDataModel::GeoDataModel() :
-    GeoDataGeometry( new GeoDataModelPrivate )
+  GeoDataGeometry(new GeoDataModelPrivate)
 {
-    setAltitudeMode( ClampToGround );
+  setAltitudeMode(ClampToGround);
 }
 
-GeoDataModel::GeoDataModel( const GeoDataModel &other ) :
-    GeoDataGeometry( other )
+GeoDataModel::GeoDataModel(const GeoDataModel& other) :
+  GeoDataGeometry(other)
 {
-    // nothing to do
+  // nothing to do
 }
 
-GeoDataModel &GeoDataModel::operator=( const GeoDataModel &other )
+GeoDataModel& GeoDataModel::operator=(const GeoDataModel& other)
 {
-    GeoDataGeometry::operator=( other );
-    return *this;
+  GeoDataGeometry::operator=(other);
+  return *this;
 }
 
-
-bool GeoDataModel::operator==( const GeoDataModel &other ) const
+bool GeoDataModel::operator==(const GeoDataModel& other) const
 {
-    return equals(other) &&
-           p()->m_coordinates == other.p()->m_coordinates &&
-           p()->m_scale == other.p()->m_scale &&
-           p()->m_orientation == other.p()->m_orientation &&
-           p()->m_location == other.p()->m_location &&
-           p()->m_link == other.p()->m_link &&
-           p()->m_map == other.p()->m_map &&
-           p()->m_targetHref == other.p()->m_targetHref &&
-           p()->m_sourceHref == other.p()->m_sourceHref;
+  return equals(other) &&
+         p()->m_coordinates == other.p()->m_coordinates &&
+         p()->m_scale == other.p()->m_scale &&
+         p()->m_orientation == other.p()->m_orientation &&
+         p()->m_location == other.p()->m_location &&
+         p()->m_link == other.p()->m_link &&
+         p()->m_map == other.p()->m_map &&
+         p()->m_targetHref == other.p()->m_targetHref &&
+         p()->m_sourceHref == other.p()->m_sourceHref;
 }
 
-bool GeoDataModel::operator!=( const GeoDataModel &other ) const
+bool GeoDataModel::operator!=(const GeoDataModel& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
 }
 
 GeoDataModel::~GeoDataModel()
 {
 }
 
-const GeoDataCoordinates &GeoDataModel::coordinates() const
+const GeoDataCoordinates& GeoDataModel::coordinates() const
 {
-    return p()->m_coordinates;
+  return p()->m_coordinates;
 }
 
-GeoDataCoordinates &GeoDataModel::coordinates()
+GeoDataCoordinates& GeoDataModel::coordinates()
 {
-    return p()->m_coordinates;
+  return p()->m_coordinates;
 }
 
-const GeoDataLocation &GeoDataModel::location() const
+const GeoDataLocation& GeoDataModel::location() const
 {
-    return p()->m_location;
+  return p()->m_location;
 }
 
-GeoDataLocation &GeoDataModel::location()
+GeoDataLocation& GeoDataModel::location()
 {
-    return p()->m_location;
+  return p()->m_location;
 }
 
-void GeoDataModel::setCoordinates(const GeoDataCoordinates &coordinates)
+void GeoDataModel::setCoordinates(const GeoDataCoordinates& coordinates)
 {
-    detach();
+  detach();
 
-    p()->m_coordinates = coordinates;
+  p()->m_coordinates = coordinates;
 }
 
-void GeoDataModel::setLocation(const GeoDataLocation &location)
+void GeoDataModel::setLocation(const GeoDataLocation& location)
 {
-    detach();
+  detach();
 
-    p()->m_location = location;
+  p()->m_location = location;
 }
 
-const GeoDataLink &GeoDataModel::link() const
+const GeoDataLink& GeoDataModel::link() const
 {
-    return p()->m_link;
+  return p()->m_link;
 }
 
-GeoDataLink &GeoDataModel::link()
+GeoDataLink& GeoDataModel::link()
 {
-    return p()->m_link;
+  return p()->m_link;
 }
 
-void GeoDataModel::setLink( const GeoDataLink &link )
+void GeoDataModel::setLink(const GeoDataLink& link)
 {
-    detach();
+  detach();
 
-    p()->m_link = link;
+  p()->m_link = link;
 }
 
-const GeoDataScale &GeoDataModel::scale() const
+const GeoDataScale& GeoDataModel::scale() const
 {
-    return p()->m_scale;
+  return p()->m_scale;
 }
 
-GeoDataScale &GeoDataModel::scale()
+GeoDataScale& GeoDataModel::scale()
 {
-    return p()->m_scale;
+  return p()->m_scale;
 }
 
-void GeoDataModel::setScale(const GeoDataScale &scale)
+void GeoDataModel::setScale(const GeoDataScale& scale)
 {
-    detach();
+  detach();
 
-    p()->m_scale=scale;
+  p()->m_scale = scale;
 }
 
-const GeoDataOrientation &GeoDataModel::orientation() const
+const GeoDataOrientation& GeoDataModel::orientation() const
 {
-    return p()->m_orientation;
+  return p()->m_orientation;
 }
 
-GeoDataOrientation &GeoDataModel::orientation()
+GeoDataOrientation& GeoDataModel::orientation()
 {
-    return p()->m_orientation;
+  return p()->m_orientation;
 }
 
-void GeoDataModel::setOrientation(const GeoDataOrientation &orientation)
+void GeoDataModel::setOrientation(const GeoDataOrientation& orientation)
 {
-    detach();
+  detach();
 
-    p()->m_orientation=orientation;
+  p()->m_orientation = orientation;
 }
 
-const GeoDataResourceMap &GeoDataModel::resourceMap() const
+const GeoDataResourceMap& GeoDataModel::resourceMap() const
 {
-    return p()->m_map;
+  return p()->m_map;
 }
 
-GeoDataResourceMap &GeoDataModel::resourceMap()
+GeoDataResourceMap& GeoDataModel::resourceMap()
 {
-    return p()->m_map;
+  return p()->m_map;
 }
 
-void GeoDataModel::setResourceMap(const GeoDataResourceMap &map)
+void GeoDataModel::setResourceMap(const GeoDataResourceMap& map)
 {
-    detach();
+  detach();
 
-    p()->m_map=map;
+  p()->m_map = map;
 }
 
 QString GeoDataModel::targetHref() const
 {
-    return p()->m_map.targetHref();
+  return p()->m_map.targetHref();
 }
 
-void GeoDataModel::setTargetHref(const QString &targetHref)
+void GeoDataModel::setTargetHref(const QString& targetHref)
 {
-    detach();
+  detach();
 
-    p()->m_map.setTargetHref( targetHref );
+  p()->m_map.setTargetHref(targetHref);
 }
 
 QString GeoDataModel::sourceHref() const
 {
-    return p()->m_map.sourceHref();
+  return p()->m_map.sourceHref();
 }
 
-void GeoDataModel::setSourceHref(const QString &sourceHref)
+void GeoDataModel::setSourceHref(const QString& sourceHref)
 {
-    detach();
+  detach();
 
-    p()->m_map.setSourceHref( sourceHref );
+  p()->m_map.setSourceHref(sourceHref);
 }
 
 GeoDataModelPrivate *GeoDataModel::p() const
 {
-    return static_cast<GeoDataModelPrivate *>( d );
+  return static_cast<GeoDataModelPrivate *>(d);
 }
 
 }

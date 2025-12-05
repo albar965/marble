@@ -10,58 +10,57 @@
 #include "LogPlugin.h"
 #include "LogRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-LogfilePlugin::LogfilePlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+LogfilePlugin::LogfilePlugin(QObject *parent) :
+  ParseRunnerPlugin(parent)
 {
 }
 
 QString LogfilePlugin::name() const
 {
-    return tr( "TangoGPS Log File Parser" );
+  return tr("TangoGPS Log File Parser");
 }
 
 QString LogfilePlugin::nameId() const
 {
-    return "Log";
+  return "Log";
 }
 
 QString LogfilePlugin::version() const
 {
-    return "1.0";
+  return "1.0";
 }
 
 QString LogfilePlugin::description() const
 {
-    return tr( "Allows loading of TangoGPS log files." );
+  return tr("Allows loading of TangoGPS log files.");
 }
 
 QString LogfilePlugin::copyrightYears() const
 {
-    return "2012";
+  return "2012";
 }
 
 QList<PluginAuthor> LogfilePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Bernhard Beschow", "bbeschow@cs.tu-berlin.de");
 }
 
 QString LogfilePlugin::fileFormatDescription() const
 {
-    return tr( "TangoGPS Log Files" );
+  return tr("TangoGPS Log Files");
 }
 
 QStringList LogfilePlugin::fileExtensions() const
 {
-    return QStringList() << "log";
+  return QStringList() << "log";
 }
 
-ParsingRunner* LogfilePlugin::newRunner() const
+ParsingRunner *LogfilePlugin::newRunner() const
 {
-    return new LogRunner;
+  return new LogRunner;
 }
 
 }

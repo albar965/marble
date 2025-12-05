@@ -30,29 +30,28 @@
 #include "GeoSceneSettings.h"
 #include "GeoSceneGroup.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Group)
 
-GeoNode* DgmlGroupTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlGroupTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Group));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Group));
 
-    QString name      = parser.attribute(dgmlAttr_name);
+  QString name = parser.attribute(dgmlAttr_name);
 
-    GeoSceneGroup* group = 0;
+  GeoSceneGroup *group = 0;
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Settings)) {
-        group = new GeoSceneGroup( name );
-        parentItem.nodeAs<GeoSceneSettings>()->addGroup( group );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Settings))
+  {
+    group = new GeoSceneGroup(name);
+    parentItem.nodeAs<GeoSceneSettings>()->addGroup(group);
+  }
 
-    return group;
+  return group;
 }
 
 }

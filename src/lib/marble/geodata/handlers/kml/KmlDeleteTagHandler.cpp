@@ -16,27 +16,28 @@
 #include "GeoDataParser.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Delete )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Delete)
 
-GeoNode* KmlDeleteTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlDeleteTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Delete ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Delete));
 
-    GeoDataDelete *dataDelete = new GeoDataDelete;
-    KmlObjectTagHandler::parseIdentifiers( parser, dataDelete );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataDelete *dataDelete = new GeoDataDelete;
+  KmlObjectTagHandler::parseIdentifiers(parser, dataDelete);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_Update ) ) {
-        parentItem.nodeAs<GeoDataUpdate>()->setDelete( dataDelete );
-        return dataDelete;
-    } else {
-        delete dataDelete;
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Update))
+  {
+    parentItem.nodeAs<GeoDataUpdate>()->setDelete(dataDelete);
+    return dataDelete;
+  }
+  else
+  {
+    delete dataDelete;
+    return 0;
+  }
 }
 
 }

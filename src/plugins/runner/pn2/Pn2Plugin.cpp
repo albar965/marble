@@ -10,58 +10,57 @@
 #include "Pn2Plugin.h"
 #include "Pn2Runner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-Pn2Plugin::Pn2Plugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+Pn2Plugin::Pn2Plugin(QObject *parent) :
+  ParseRunnerPlugin(parent)
 {
 }
 
 QString Pn2Plugin::name() const
 {
-    return tr( "Pn2 File Parser" );
+  return tr("Pn2 File Parser");
 }
 
 QString Pn2Plugin::nameId() const
 {
-    return "Pn2";
+  return "Pn2";
 }
 
 QString Pn2Plugin::version() const
 {
-    return "1.0";
+  return "1.0";
 }
 
 QString Pn2Plugin::description() const
 {
-    return tr( "Create GeoDataDocument from Pn2 Files" );
+  return tr("Create GeoDataDocument from Pn2 Files");
 }
 
 QString Pn2Plugin::copyrightYears() const
 {
-    return "2012";
+  return "2012";
 }
 
 QList<PluginAuthor> Pn2Plugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Cezar Mocan", "mocancezar@gmail.com" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Cezar Mocan", "mocancezar@gmail.com");
 }
 
 QString Pn2Plugin::fileFormatDescription() const
 {
-    return tr( "Compressed Pnt" );
+  return tr("Compressed Pnt");
 }
 
 QStringList Pn2Plugin::fileExtensions() const
 {
-    return QStringList() << "pn2";
+  return QStringList() << "pn2";
 }
 
-ParsingRunner* Pn2Plugin::newRunner() const
+ParsingRunner *Pn2Plugin::newRunner() const
 {
-    return new Pn2Runner;
+  return new Pn2Runner;
 }
 
 }

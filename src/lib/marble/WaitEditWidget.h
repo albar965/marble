@@ -19,33 +19,34 @@
 class QDoubleSpinBox;
 class QToolButton;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataWait;
 
-class WaitEditWidget: public QWidget
+class WaitEditWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit WaitEditWidget( const QModelIndex& index, QWidget* parent=0 );
-    bool editable() const;
+  explicit WaitEditWidget(const QModelIndex& index, QWidget *parent = 0);
+  bool editable() const;
 
 Q_SIGNALS:
-    void editingDone( const QModelIndex& index );
+  void editingDone(const QModelIndex& index);
 
 public Q_SLOTS:
-    void setEditable( bool editable );
+  void setEditable(bool editable);
 
 private Q_SLOTS:
-    void save();
+  void save();
 
 private:
-    GeoDataWait* waitElement();
-    QPersistentModelIndex m_index;
-    QDoubleSpinBox *m_spinBox;
-    QToolButton *m_button;
+  GeoDataWait *waitElement();
+
+  QPersistentModelIndex m_index;
+  QDoubleSpinBox *m_spinBox;
+  QToolButton *m_button;
 };
 
 } // namespace Marble

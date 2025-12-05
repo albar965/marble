@@ -17,37 +17,37 @@
 #include <QSharedPointer>
 #include "MarbleInputHandler.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleWidget;
 class RenderPlugin;
 class MarbleWidgetInputHandlerPrivate;
 
-class MARBLE_EXPORT MarbleWidgetInputHandler : public MarbleDefaultInputHandler
+class MARBLE_EXPORT MarbleWidgetInputHandler :
+  public MarbleDefaultInputHandler
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *marbleWidget);
+  MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *marbleWidget);
 
-    void setDebugModeEnabled(bool enabled);
+  void setDebugModeEnabled(bool enabled);
 
 private Q_SLOTS:
-    void installPluginEventFilter(RenderPlugin *renderPlugin);
-    void openItemToolTip();
-    void setCursor(const QCursor &cursor);
+  void installPluginEventFilter(RenderPlugin *renderPlugin);
+  void openItemToolTip();
+  void setCursor(const QCursor& cursor);
 
 private:
-    bool handleKeyPress(QKeyEvent* event);
-    AbstractSelectionRubber *selectionRubber();
-    bool layersEventFilter(QObject *o, QEvent *e);
+  bool handleKeyPress(QKeyEvent *event);
+  AbstractSelectionRubber *selectionRubber();
+  bool layersEventFilter(QObject *o, QEvent *e);
 
-    typedef QSharedPointer<MarbleWidgetInputHandlerPrivate> MarbleWidgetInputHandlerPrivatePtr;
-    MarbleWidgetInputHandlerPrivatePtr d;
-    friend class MarbleWidgetInputHandlerPrivate;
+  typedef QSharedPointer<MarbleWidgetInputHandlerPrivate> MarbleWidgetInputHandlerPrivatePtr;
+  MarbleWidgetInputHandlerPrivatePtr d;
+  friend class MarbleWidgetInputHandlerPrivate;
 
-    Q_DISABLE_COPY(MarbleWidgetInputHandler)
+  Q_DISABLE_COPY(MarbleWidgetInputHandler)
 };
 
 }

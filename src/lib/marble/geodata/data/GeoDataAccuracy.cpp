@@ -12,22 +12,23 @@
 
 namespace Marble {
 
-GeoDataAccuracy::GeoDataAccuracy( Level level, qreal horizontal, qreal _vertical )
-    : level( level ),
-      horizontal( horizontal ),
-      vertical( _vertical )
+GeoDataAccuracy::GeoDataAccuracy(Level level, qreal horizontal, qreal _vertical)
+  : level(level),
+  horizontal(horizontal),
+  vertical(_vertical)
 {
-       // nothing to do
+  // nothing to do
 }
 
-bool GeoDataAccuracy::operator==( const GeoDataAccuracy &other ) const
+bool GeoDataAccuracy::operator==(const GeoDataAccuracy& other) const
 {
-    return ( level == other.level ) && ( horizontal == other.horizontal ) && ( vertical == other.vertical );
+  return (level == other.level) && (horizontal == other.horizontal) && (vertical == other.vertical);
 }
 
-bool GeoDataAccuracy::operator!=( const GeoDataAccuracy &other ) const
+bool GeoDataAccuracy::operator!=(const GeoDataAccuracy& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
+
 }
 
 }

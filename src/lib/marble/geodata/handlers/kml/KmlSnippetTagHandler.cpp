@@ -15,25 +15,24 @@
 #include "GeoDataParser.h"
 #include "GeoDataSnippet.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Snippet)
+
+GeoNode *KmlSnippetTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Snippet )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Snippet));
 
-GeoNode* KmlSnippetTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Snippet ) );
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataFeature>())
+  {
+    QString text = parser.readElementText().trimmed();
+    int maxLines = parser.attribute("maxLines").trimmed().toInt();
 
-    GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.is<GeoDataFeature>() ) {
-        QString text = parser.readElementText().trimmed();
-        int maxLines = parser.attribute( "maxLines" ).trimmed().toInt();
+    parentItem.nodeAs<GeoDataFeature>()->setSnippet(GeoDataSnippet(text, maxLines));
+  }
 
-        parentItem.nodeAs<GeoDataFeature>()->setSnippet( GeoDataSnippet(text, maxLines) );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

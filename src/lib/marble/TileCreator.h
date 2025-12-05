@@ -20,8 +20,7 @@
 class QSize;
 class QImage;
 
-namespace Marble
-{
+namespace Marble {
 
 class TileCreatorPrivate;
 
@@ -35,62 +34,65 @@ class TileCreatorPrivate;
 class MARBLE_EXPORT TileCreatorSource
 {
 public:
-    virtual ~TileCreatorSource() {}
+  virtual ~TileCreatorSource()
+  {
+  }
 
-    /**
-     * Must return the full size of the source image
-     */
-    virtual QSize fullImageSize() const = 0;
+  /**
+   * Must return the full size of the source image
+   */
+  virtual QSize fullImageSize() const = 0;
 
-    /**
-     * Must return one specific tile
-     *
-     * tileLevel can be used to calculate the number of tiles in a row or column
-     */
-    virtual QImage tile( int n, int m, int tileLevel ) = 0;
+  /**
+   * Must return one specific tile
+   *
+   * tileLevel can be used to calculate the number of tiles in a row or column
+   */
+  virtual QImage tile(int n, int m, int tileLevel) = 0;
+
 };
 
-class MARBLE_EXPORT TileCreator : public QThread
+class MARBLE_EXPORT TileCreator :
+  public QThread
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    /**
-     * Constructor for standard Image source
-     */
-    TileCreator( const QString& sourceDir, const QString& installMap, 
-                 const QString& dem,       const QString& targetDir=QString() );
+public:
+  /**
+   * Constructor for standard Image source
+   */
+  TileCreator(const QString& sourceDir, const QString& installMap,
+              const QString& dem, const QString& targetDir = QString());
 
-    /**
-     * Constructor for own, custom source class
-     *
-     * Ownership of source is taken by TileCreator
-     */
-    TileCreator( TileCreatorSource *source, const QString& dem, const QString& targetDir );
+  /**
+   * Constructor for own, custom source class
+   *
+   * Ownership of source is taken by TileCreator
+   */
+  TileCreator(TileCreatorSource *source, const QString& dem, const QString& targetDir);
 
-    virtual ~TileCreator();
+  virtual ~TileCreator();
 
-    void cancelTileCreation();
+  void cancelTileCreation();
 
-    void setTileFormat( const QString &format );
-    void setTileQuality( int quality );
-    void setResume( bool resume );
-    void setVerifyExactResult( bool verify );
-    QString tileFormat() const;
-    int tileQuality() const;
-    bool resume() const;
-    bool verifyExactResult() const;
+  void setTileFormat(const QString& format);
+  void setTileQuality(int quality);
+  void setResume(bool resume);
+  void setVerifyExactResult(bool verify);
+  QString tileFormat() const;
+  int tileQuality() const;
+  bool resume() const;
+  bool verifyExactResult() const;
 
- protected:
-    virtual void run();
+protected:
+  virtual void run();
 
- Q_SIGNALS:
-    void  progress( int value );
+Q_SIGNALS:
+  void  progress(int value);
 
-
- private:
-    Q_DISABLE_COPY( TileCreator )
-    TileCreatorPrivate  * const d;
+private:
+  Q_DISABLE_COPY(TileCreator)
+  TileCreatorPrivate * const d;
 };
 
 }

@@ -14,29 +14,31 @@
 #include "GeoParser.h"
 #include "GeoDataTourControl.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(playMode)
+
+GeoNode *KmlplayModeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( playMode )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_playMode));
 
-GeoNode* KmlplayModeTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_playMode ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataTourControl>())
+  {
+    GeoDataTourControl *control = parentItem.nodeAs<GeoDataTourControl>();
 
-    if (parentItem.is<GeoDataTourControl>()) {
-        GeoDataTourControl *control = parentItem.nodeAs<GeoDataTourControl>();
-
-        if (parser.readElementText().trimmed().toLower() == "play") {
-            control->setPlayMode(GeoDataTourControl::Play);
-        } else {
-            control->setPlayMode(GeoDataTourControl::Pause);
-        }
+    if(parser.readElementText().trimmed().toLower() == "play")
+    {
+      control->setPlayMode(GeoDataTourControl::Play);
     }
+    else
+    {
+      control->setPlayMode(GeoDataTourControl::Pause);
+    }
+  }
 
-    return 0;
+  return 0;
 }
 
 } // namespace kml

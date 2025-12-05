@@ -15,8 +15,7 @@
 
 #include "Blending.h"
 
-namespace Marble
-{
+namespace Marble {
 
 Blending::~Blending()
 {

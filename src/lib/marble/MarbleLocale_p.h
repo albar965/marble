@@ -13,17 +13,15 @@
 
 #include "MarbleLocale.h"
 
-namespace Marble
-{
-
+namespace Marble {
 
 class MarbleLocalePrivate
 {
- public:
-    MarbleLocalePrivate();
-    virtual ~MarbleLocalePrivate();
+public:
+  MarbleLocalePrivate();
+  virtual ~MarbleLocalePrivate();
 
-    MarbleLocale::MeasurementSystem m_measurementSystem;
+  MarbleLocale::MeasurementSystem m_measurementSystem;
 };
 
 }

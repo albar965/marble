@@ -15,20 +15,21 @@
 #include "GeoDataHotSpot.h"
 #include "KmlColorStyleTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlIconStyleTagWriter : public KmlColorStyleTagWriter
+class KmlIconStyleTagWriter :
+  public KmlColorStyleTagWriter
 {
 public:
-    KmlIconStyleTagWriter();
+  KmlIconStyleTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
-    virtual bool isEmpty( const GeoNode *node ) const;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const;
+  virtual bool isEmpty(const GeoNode *node) const;
 
 private:
-    static QString unitString( GeoDataHotSpot::Units unit );
+  static QString unitString(GeoDataHotSpot::Units unit);
+
 };
 
 }

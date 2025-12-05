@@ -14,8 +14,7 @@
 
 class QRect;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoPainter;
 class StackedTile;
@@ -23,23 +22,22 @@ class StackedTileLoader;
 class TextureColorizer;
 class ViewportParams;
 
-
 class TextureMapperInterface
 {
 public:
-    TextureMapperInterface();
-    virtual ~TextureMapperInterface();
+  TextureMapperInterface();
+  virtual ~TextureMapperInterface();
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer ) = 0;
+  virtual void mapTexture(GeoPainter *painter,
+                          const ViewportParams *viewport,
+                          int tileZoomLevel,
+                          const QRect& dirtyRect,
+                          TextureColorizer *texColorizer) = 0;
 
-    void setRepaintNeeded();
+  void setRepaintNeeded();
 
 protected:
-    bool m_repaintNeeded;
+  bool m_repaintNeeded;
 };
 
 }

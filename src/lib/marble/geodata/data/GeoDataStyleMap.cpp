@@ -8,94 +8,92 @@
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #include "GeoDataStyleMap.h"
 #include <QDataStream>
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataStyleMapPrivate
 {
-  public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataStyleMapType;
-    }
+public:
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataStyleMapType;
+  }
 
-    QString lastKey;
+  QString lastKey;
 };
 
-
 GeoDataStyleMap::GeoDataStyleMap()
-    : d( new GeoDataStyleMapPrivate )
+  : d(new GeoDataStyleMapPrivate)
 {
 }
 
-GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
-    : GeoDataStyleSelector( other ) , QMap<QString,QString>(other), d( new GeoDataStyleMapPrivate( *other.d ) )
-
+GeoDataStyleMap::GeoDataStyleMap(const GeoDataStyleMap& other)
+  : GeoDataStyleSelector(other), QMap<QString, QString>(other), d(new GeoDataStyleMapPrivate(*other.d))
 {
 }
 
 GeoDataStyleMap::~GeoDataStyleMap()
 {
-    delete d;
+  delete d;
 }
 
-const char* GeoDataStyleMap::nodeType() const
+const char *GeoDataStyleMap::nodeType() const
 {
-    return d->nodeType();
+  return d->nodeType();
 }
 
 QString GeoDataStyleMap::lastKey() const
 {
-    return d->lastKey;
+  return d->lastKey;
 }
 
-void GeoDataStyleMap::setLastKey( const QString& key )
+void GeoDataStyleMap::setLastKey(const QString& key)
 {
-    d->lastKey = key;
+  d->lastKey = key;
 }
 
-GeoDataStyleMap& GeoDataStyleMap::operator=( const GeoDataStyleMap& other )
+GeoDataStyleMap& GeoDataStyleMap::operator=(const GeoDataStyleMap& other)
 {
-    QMap<QString, QString>::operator=( other );
-    GeoDataStyleSelector::operator=( other );
-    *d = *other.d;
-    return *this;
+  QMap<QString, QString>::operator=(other);
+
+  GeoDataStyleSelector::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataStyleMap::operator==( const GeoDataStyleMap &other ) const
+bool GeoDataStyleMap::operator==(const GeoDataStyleMap& other) const
 {
-    if ( GeoDataStyleSelector::operator!=( other ) ||
-         QMap<QString, QString>::operator!=( other ) )
-    {
-        return false;
-    }
+  if(GeoDataStyleSelector::operator!=(other) ||
+     QMap<QString, QString>::operator!=(other))
+  {
+    return false;
+  }
 
-    return d->lastKey == other.d->lastKey;
+  return d->lastKey == other.d->lastKey;
 }
 
-bool GeoDataStyleMap::operator!=( const GeoDataStyleMap &other ) const
+bool GeoDataStyleMap::operator!=(const GeoDataStyleMap& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
+
 }
 
-void GeoDataStyleMap::pack( QDataStream& stream ) const
+void GeoDataStyleMap::pack(QDataStream& stream) const
 {
-    GeoDataStyleSelector::pack( stream );
-    // lastKey doesn't need to be stored as it is needed at runtime only
-    stream << *this;
+  GeoDataStyleSelector::pack(stream);
+  // lastKey doesn't need to be stored as it is needed at runtime only
+  stream << *this;
 }
 
-void GeoDataStyleMap::unpack( QDataStream& stream )
+void GeoDataStyleMap::unpack(QDataStream& stream)
 {
-    GeoDataStyleSelector::unpack( stream );
-    
-    stream >> *this;
+  GeoDataStyleSelector::unpack(stream);
+
+  stream >> *this;
 }
 
 }

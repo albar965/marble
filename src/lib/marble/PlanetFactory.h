@@ -19,8 +19,7 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class Planet;
 
@@ -30,14 +29,15 @@ class Planet;
 class MARBLE_EXPORT PlanetFactory
 {
 public:
-    /** Provides a list of known planet IDs */
-    static QList<QString> planetList();
+  /** Provides a list of known planet IDs */
+  static QList<QString> planetList();
 
-    /** Creates the planet with the given ID, or one with default values if ID is not among planetList() */
-    static Planet construct( const QString &id );
+  /** Creates the planet with the given ID, or one with default values if ID is not among planetList() */
+  static Planet construct(const QString& id);
 
-    /** Returns a localized name of the planet with the given ID */
-    static QString localizedName( const QString &id );
+  /** Returns a localized name of the planet with the given ID */
+  static QString localizedName(const QString& id);
+
 };
 
 typedef PlanetFactory Magrathea;

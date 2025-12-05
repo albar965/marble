@@ -16,22 +16,22 @@
 
 #include "MarbleGlobal.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlGroundOverlayWriter : public KmlOverlayTagWriter
+class KmlGroundOverlayWriter :
+  public KmlOverlayTagWriter
 {
 public:
-    KmlGroundOverlayWriter();
+  KmlGroundOverlayWriter();
 
-    bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
+  bool writeMid(const GeoNode *node, GeoWriter& writer) const;
 
-    static QString altitudeModeToString(AltitudeMode mode);
+  static QString altitudeModeToString(AltitudeMode mode);
 
-    static void writeAltitudeMode( GeoWriter &writer, AltitudeMode altitudeMode );
+  static void writeAltitudeMode(GeoWriter& writer, AltitudeMode altitudeMode);
+
 };
 
 }
 
 #endif
-

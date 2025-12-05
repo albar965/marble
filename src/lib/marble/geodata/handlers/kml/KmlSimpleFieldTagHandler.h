@@ -28,18 +28,18 @@
 
 class QString;
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-class KmlSimpleFieldTagHandler : public GeoTagHandler
+class KmlSimpleFieldTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+  virtual GeoNode *parse(GeoParser&) const;
 
 private:
-    static GeoDataSimpleField::SimpleFieldType resolveType( const QString& type );
+  static GeoDataSimpleField::SimpleFieldType resolveType(const QString& type);
+
 };
 
 }

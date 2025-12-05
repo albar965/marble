@@ -26,29 +26,29 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short Palette of a GeoScene document.
  */
 
-class GeoScenePalette : public GeoNode
+class GeoScenePalette :
+  public GeoNode
 {
- public:
-    GeoScenePalette( const QString& type, const QString& file );
+public:
+  GeoScenePalette(const QString& type, const QString& file);
 
-    QString type() const;
-    void    setType( const QString& type );
+  QString type() const;
+  void    setType(const QString& type);
 
-    QString file() const;
-    void    setFile( const QString& file );
+  QString file() const;
+  void    setFile(const QString& file);
 
-    bool operator==( const GeoScenePalette& rhs ) const;
+  bool operator==(const GeoScenePalette& rhs) const;
 
- private:
-    QString m_type;
-    QString m_file;
+private:
+  QString m_type;
+  QString m_file;
 };
 
 }

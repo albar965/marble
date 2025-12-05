@@ -15,93 +15,92 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataLineStringPrivate :
+  public GeoDataGeometryPrivate
 {
+public:
+  explicit GeoDataLineStringPrivate(TessellationFlags f)
+    :  m_rangeCorrected(0),
+    m_dirtyRange(true),
+    m_dirtyBox(true),
+    m_tessellationFlags(f),
+    m_previousResolution(-1),
+    m_level(-1)
+  {
+  }
 
-class GeoDataLineStringPrivate : public GeoDataGeometryPrivate
-{
-  public:
-    explicit GeoDataLineStringPrivate( TessellationFlags f )
-        :  m_rangeCorrected( 0 ),
-           m_dirtyRange( true ),
-           m_dirtyBox( true ),
-           m_tessellationFlags( f ),
-           m_previousResolution( -1 ),
-           m_level( -1 )
-    {
-    }
+  GeoDataLineStringPrivate()
+    : m_rangeCorrected(0),
+    m_dirtyRange(true),
+    m_dirtyBox(true)
+  {
+  }
 
-    GeoDataLineStringPrivate()
-         : m_rangeCorrected( 0 ),
-           m_dirtyRange( true ),
-           m_dirtyBox( true )
-    {
-    }
+  ~GeoDataLineStringPrivate()
+  {
+    delete m_rangeCorrected;
+  }
 
-    ~GeoDataLineStringPrivate()
-    {
-        delete m_rangeCorrected;
-    }
+  GeoDataLineStringPrivate& operator=(const GeoDataLineStringPrivate& other)
+  {
+    GeoDataGeometryPrivate::operator=(other);
+    m_vector = other.m_vector;
+    m_rangeCorrected = 0;
+    m_dirtyRange = true;
+    m_dirtyBox = other.m_dirtyBox;
+    m_tessellationFlags = other.m_tessellationFlags;
+    return *this;
+  }
 
-    GeoDataLineStringPrivate& operator=( const GeoDataLineStringPrivate &other)
-    {
-        GeoDataGeometryPrivate::operator=( other );
-        m_vector = other.m_vector;
-        m_rangeCorrected = 0;
-        m_dirtyRange = true;
-        m_dirtyBox = other.m_dirtyBox;
-        m_tessellationFlags = other.m_tessellationFlags;
-        return *this;
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataLineStringPrivate *copy = new GeoDataLineStringPrivate;
+    *copy = *this;
+    return copy;
+  }
 
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataLineStringType;
+  }
 
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-        GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual EnumGeometryId geometryId() const
+  {
+    return GeoDataLineStringId;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLineStringType;
-    }
+  void toPoleCorrected(const GeoDataLineString& q, GeoDataLineString& poleCorrected) const;
 
-    virtual EnumGeometryId geometryId() const 
-    {
-        return GeoDataLineStringId;
-    }
+  void toDateLineCorrected(const GeoDataLineString& q,
+                           QVector<GeoDataLineString *>& lineStrings) const;
 
-    void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected ) const;
+  void interpolateDateLine(const GeoDataCoordinates& previousCoords,
+                           const GeoDataCoordinates& currentCoords,
+                           GeoDataCoordinates& previousAtDateline,
+                           GeoDataCoordinates& currentAtDateline,
+                           TessellationFlags f) const;
 
-    void toDateLineCorrected( const GeoDataLineString & q,
-                              QVector<GeoDataLineString*> & lineStrings ) const;
+  GeoDataCoordinates findDateLine(const GeoDataCoordinates& previousCoords,
+                                  const GeoDataCoordinates& currentCoords,
+                                  int recursionCounter) const;
 
-    void interpolateDateLine( const GeoDataCoordinates & previousCoords,
-                              const GeoDataCoordinates & currentCoords,
-                              GeoDataCoordinates & previousAtDateline,
-                              GeoDataCoordinates & currentAtDateline,
-                              TessellationFlags f ) const;
+  quint8 levelForResolution(qreal resolution) const;
+  qreal resolutionForLevel(int level) const;
+  void optimize(GeoDataLineString& lineString) const;
 
-    GeoDataCoordinates findDateLine( const GeoDataCoordinates & previousCoords,
-                       const GeoDataCoordinates & currentCoords,
-                       int recursionCounter ) const;
+  QVector<GeoDataCoordinates> m_vector;
 
-    quint8 levelForResolution(qreal resolution) const;
-    qreal resolutionForLevel(int level) const;
-    void optimize(GeoDataLineString& lineString) const;
+  mutable GeoDataLineString *m_rangeCorrected;
+  mutable bool m_dirtyRange;
 
-    QVector<GeoDataCoordinates> m_vector;
-
-    mutable GeoDataLineString*  m_rangeCorrected;
-    mutable bool                m_dirtyRange;
-
-    mutable bool                m_dirtyBox; // tells whether there have been changes to the
-                                            // GeoDataPoints since the LatLonAltBox has 
-                                            // been calculated. Saves performance. 
-    TessellationFlags           m_tessellationFlags;
-    mutable qreal  m_previousResolution;
-    mutable quint8 m_level;
+  mutable bool m_dirtyBox;                  // tells whether there have been changes to the
+                                            // GeoDataPoints since the LatLonAltBox has
+                                            // been calculated. Saves performance.
+  TessellationFlags m_tessellationFlags;
+  mutable qreal m_previousResolution;
+  mutable quint8 m_level;
 
 };
 

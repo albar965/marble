@@ -21,23 +21,25 @@ class GeoDataPlacemark;
 class MarbleWidget;
 class SearchWidgetPrivate;
 
-class MARBLE_EXPORT SearchWidget : public QWidget
+class MARBLE_EXPORT SearchWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    explicit SearchWidget( QWidget * parent = 0, Qt::WindowFlags flags = 0 );
+  explicit SearchWidget(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 
-    void setMarbleWidget( MarbleWidget* widget );
+  void setMarbleWidget(MarbleWidget *widget);
 
-    ~SearchWidget();
+  ~SearchWidget();
 
 private:
-    Q_PRIVATE_SLOT( d, void setSearchResult( const QVector<GeoDataPlacemark*>& ) )
-    Q_PRIVATE_SLOT( d, void search( const QString &searchTerm, SearchMode searchMode ) )
-    Q_PRIVATE_SLOT( d, void centerMapOn( const QModelIndex &index ) )
-    Q_PRIVATE_SLOT( d, void handlePlanetChange() )
+  Q_PRIVATE_SLOT(d, void setSearchResult(const QVector<GeoDataPlacemark *>&))
+  Q_PRIVATE_SLOT(d, void search(const QString& searchTerm, SearchMode searchMode))
+  Q_PRIVATE_SLOT(d, void centerMapOn(const QModelIndex& index))
+  Q_PRIVATE_SLOT(d, void handlePlanetChange())
 
-    SearchWidgetPrivate* const d;
+  SearchWidgetPrivate * const d;
 
 };
 

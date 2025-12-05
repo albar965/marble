@@ -18,8 +18,7 @@
 #include <GeoDataStyle.h>
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 class GeoDataPlacemark;
 class OsmPlacemarkData;
 
@@ -30,57 +29,55 @@ class MARBLE_EXPORT OsmPresetLibrary
 {
 
 public:
-    typedef QPair<QString, QString> OsmTag;
+  typedef QPair<QString, QString> OsmTag;
 
-    /**
-     * @brief corespondingIcon returns the icon that is associated with a visual category
-     */
-    static GeoDataStyle::ConstPtr presetStyle( const OsmTag &tag );
+  /**
+   * @brief corespondingIcon returns the icon that is associated with a visual category
+   */
+  static GeoDataStyle::ConstPtr presetStyle(const OsmTag& tag);
 
-    /**
-     * @brief  Convenience categorization of placemarks for Osm key=value pairs
-     */
-    static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const QString &keyValue );
+  /**
+   * @brief  Convenience categorization of placemarks for Osm key=value pairs
+   */
+  static GeoDataFeature::GeoDataVisualCategory osmVisualCategory(const QString& keyValue);
 
-    /**
-     * @brief hasVisualCategory returns true if there is a visual category associated with
-     * @p tag
-     */
-    static bool hasVisualCategory( const OsmTag &tag );
+  /**
+   * @brief hasVisualCategory returns true if there is a visual category associated with
+   * @p tag
+   */
+  static bool hasVisualCategory(const OsmTag& tag);
 
-    /**
-     * @brief begin and end provide an stl style iterator for the preset map
-     */
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
+  /**
+   * @brief begin and end provide an stl style iterator for the preset map
+   */
+  static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator begin();
+  static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory>::const_iterator end();
 
-    /**
-     * @brief additionalTagsBegin and end provide an stl style iterator for the additional tags map
-     */
-    static QList<OsmTag>::const_iterator additionalTagsBegin();
-    static QList<OsmTag>::const_iterator additionalTagsEnd();
+  /**
+   * @brief additionalTagsBegin and end provide an stl style iterator for the additional tags map
+   */
+  static QList<OsmTag>::const_iterator additionalTagsBegin();
+  static QList<OsmTag>::const_iterator additionalTagsEnd();
 
-    static QStringList shopValues();
-    static QStringList buildingValues();
+  static QStringList shopValues();
+  static QStringList buildingValues();
 
-    static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData &osmData);
+  static GeoDataFeature::GeoDataVisualCategory determineVisualCategory(const OsmPlacemarkData& osmData);
 
 private:
-    static void initializeOsmVisualCategories();
-    static void initializeAdditionalOsmTags();
+  static void initializeOsmVisualCategories();
+  static void initializeAdditionalOsmTags();
 
-    /**
-     * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
-     */
-    static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
+  /**
+   * @brief s_visualCategories contains osm tag mappings to GeoDataVisualCategories
+   */
+  static QMap<OsmTag, GeoDataFeature::GeoDataVisualCategory> s_visualCategories;
 
-    /**
-     * @brief s_additionalOsmTags is a list of useful, popular osm tags that currently don't have a visual category associated with them
-     */
-    static QList<OsmTag> s_additionalOsmTags;
+  /**
+   * @brief s_additionalOsmTags is a list of useful, popular osm tags that currently don't have a visual category associated with them
+   */
+  static QList<OsmTag> s_additionalOsmTags;
 };
-
-
 
 }
 

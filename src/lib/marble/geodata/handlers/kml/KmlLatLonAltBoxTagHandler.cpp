@@ -18,28 +18,28 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataRegion.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(LatLonAltBox)
+
+GeoNode *KmlLatLonAltBoxTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( LatLonAltBox )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_LatLonAltBox));
 
-GeoNode* KmlLatLonAltBoxTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LatLonAltBox ) );
+  GeoDataLatLonAltBox box;
+  KmlObjectTagHandler::parseIdentifiers(parser, &box);
 
-    GeoDataLatLonAltBox box;
-    KmlObjectTagHandler::parseIdentifiers( parser, &box );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if( parentItem.represents( kmlTag_Region ) )
-    {
-        parentItem.nodeAs<GeoDataRegion>()->setLatLonAltBox( box );
-        return const_cast<GeoDataLatLonAltBox *>( &parentItem.nodeAs<GeoDataRegion>()->latLonAltBox() );
-    } else {
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Region))
+  {
+    parentItem.nodeAs<GeoDataRegion>()->setLatLonAltBox(box);
+    return const_cast<GeoDataLatLonAltBox *>(&parentItem.nodeAs<GeoDataRegion>()->latLonAltBox());
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

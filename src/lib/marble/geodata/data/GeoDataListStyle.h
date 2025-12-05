@@ -18,77 +18,78 @@
 #include "GeoDataItemIcon.h"
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataListStylePrivate;
 
-class GEODATA_EXPORT GeoDataListStyle : public GeoDataObject
+class GEODATA_EXPORT GeoDataListStyle :
+  public GeoDataObject
 {
 public:
-    GeoDataListStyle();
+  GeoDataListStyle();
 
-    GeoDataListStyle( const GeoDataListStyle &other );
+  GeoDataListStyle(const GeoDataListStyle& other);
 
-    GeoDataListStyle& operator=( const GeoDataListStyle &other );
+  GeoDataListStyle& operator=(const GeoDataListStyle& other);
 
-    bool operator==( const GeoDataListStyle &other ) const;
-    bool operator!=( const GeoDataListStyle &other ) const;
+  bool operator==(const GeoDataListStyle& other) const;
+  bool operator!=(const GeoDataListStyle& other) const;
 
-    ~GeoDataListStyle();
+  ~GeoDataListStyle();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    enum ListItemType {
-        Check,
-        RadioFolder,
-        CheckOffOnly,
-        CheckHideChildren
-    };
+  enum ListItemType
+  {
+    Check,
+    RadioFolder,
+    CheckOffOnly,
+    CheckHideChildren
+  };
 
-    ListItemType listItemType() const;
-    void setListItemType( const ListItemType &type );
+  ListItemType listItemType() const;
+  void setListItemType(const ListItemType& type);
 
-    QColor backgroundColor() const;
-    void setBackgroundColor( const QColor &color );
+  QColor backgroundColor() const;
+  void setBackgroundColor(const QColor& color);
 
-    QVector<GeoDataItemIcon*> itemIconList() const;
+  QVector<GeoDataItemIcon *> itemIconList() const;
 
-    GeoDataItemIcon* child( int );
+  GeoDataItemIcon *child(int);
 
-    const GeoDataItemIcon* child( int ) const;
+  const GeoDataItemIcon *child(int) const;
 
-    int childPosition( const GeoDataItemIcon *child ) const;
+  int childPosition(const GeoDataItemIcon *child) const;
 
-    void append( GeoDataItemIcon *other );
+  void append(GeoDataItemIcon *other);
 
-    void remove( int index );
+  void remove(int index);
 
-    int size() const;
+  int size() const;
 
-    GeoDataItemIcon& at( int pos );
-    const GeoDataItemIcon& at( int pos ) const;
+  GeoDataItemIcon& at(int pos);
+  const GeoDataItemIcon& at(int pos) const;
 
-    GeoDataItemIcon& last();
-    const GeoDataItemIcon& last() const;
+  GeoDataItemIcon& last();
+  const GeoDataItemIcon& last() const;
 
-    GeoDataItemIcon& first();
-    const GeoDataItemIcon& first() const;
+  GeoDataItemIcon& first();
+  const GeoDataItemIcon& first() const;
 
-    QVector<GeoDataItemIcon*>::Iterator begin();
-    QVector<GeoDataItemIcon*>::Iterator end();
-    QVector<GeoDataItemIcon*>::ConstIterator constBegin() const;
-    QVector<GeoDataItemIcon*>::ConstIterator constEnd() const;
-    void clear();
+  QVector<GeoDataItemIcon *>::Iterator begin();
+  QVector<GeoDataItemIcon *>::Iterator end();
+  QVector<GeoDataItemIcon *>::ConstIterator constBegin() const;
+  QVector<GeoDataItemIcon *>::ConstIterator constEnd() const;
+  void clear();
 
-    virtual void pack( QDataStream& stream ) const;
+  virtual void pack(QDataStream& stream) const;
 
-    virtual void unpack( QDataStream& stream );
+  virtual void unpack(QDataStream& stream);
 
 private:
-    friend class GeoDataItemIcon;
-    GeoDataListStylePrivate* const d;
+  friend class GeoDataItemIcon;
+  GeoDataListStylePrivate * const d;
 };
 
 }

@@ -13,13 +13,14 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class DgmlMapTagWriter : public GeoTagWriter
+class DgmlMapTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;    
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

@@ -16,46 +16,44 @@
 #include "GeoDataListStyle.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( listItemType )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(listItemType)
 
-GeoNode* KmllistItemTypeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmllistItemTypeTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_listItemType ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_listItemType));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_ListStyle ) )
+  if(parentItem.represents(kmlTag_ListStyle))
+  {
+    QString typeText = parser.readElementText().trimmed();
+    GeoDataListStyle::ListItemType type;
+    if(typeText == "check")
     {
-        QString typeText = parser.readElementText().trimmed();
-        GeoDataListStyle::ListItemType type;
-        if ( typeText == "check" )
-        {
-            type = GeoDataListStyle::Check;
-        }
-        else if ( typeText == "radioFolder" )
-        {
-            type = GeoDataListStyle::RadioFolder;
-        }
-        else if ( typeText == "checkOffOnly" )
-        {
-            type = GeoDataListStyle::CheckOffOnly;
-        }
-        else if ( typeText == "checkHideChildren" )
-        {
-            type = GeoDataListStyle::CheckHideChildren;
-        }
-        else
-        {
-            mDebug() << "listItemType value is inavlid"
-                     << "falling back to default - check";
-        }
-        parentItem.nodeAs<GeoDataListStyle>()->setListItemType( type );
+      type = GeoDataListStyle::Check;
     }
-    return 0;
+    else if(typeText == "radioFolder")
+    {
+      type = GeoDataListStyle::RadioFolder;
+    }
+    else if(typeText == "checkOffOnly")
+    {
+      type = GeoDataListStyle::CheckOffOnly;
+    }
+    else if(typeText == "checkHideChildren")
+    {
+      type = GeoDataListStyle::CheckHideChildren;
+    }
+    else
+    {
+      mDebug() << "listItemType value is inavlid"
+               << "falling back to default - check";
+    }
+    parentItem.nodeAs<GeoDataListStyle>()->setListItemType(type);
+  }
+  return 0;
 }
 
 }

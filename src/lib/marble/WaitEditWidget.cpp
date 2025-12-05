@@ -21,59 +21,58 @@
 #include "GeoDataTourControl.h"
 #include "geodata/data/GeoDataWait.h"
 
-namespace Marble
+namespace Marble {
+
+WaitEditWidget::WaitEditWidget(const QModelIndex& index, QWidget *parent) :
+  QWidget(parent),
+  m_index(index),
+  m_spinBox(new QDoubleSpinBox),
+  m_button(new QToolButton)
 {
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->setSpacing(5);
 
-WaitEditWidget::WaitEditWidget( const QModelIndex &index, QWidget *parent ) :
-    QWidget( parent ),
-    m_index( index ),
-    m_spinBox( new QDoubleSpinBox ),
-    m_button( new QToolButton )
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->setSpacing( 5 );
+  QLabel *iconLabel = new QLabel;
+  iconLabel->setPixmap(QPixmap(":/marble/player-time.png"));
+  layout->addWidget(iconLabel);
 
-    QLabel* iconLabel = new QLabel;
-    iconLabel->setPixmap( QPixmap( ":/marble/player-time.png" ) );
-    layout->addWidget( iconLabel );
+  QLabel *waitLabel = new QLabel;
+  waitLabel->setText(tr("Wait duration:"));
+  layout->addWidget(waitLabel);
 
-    QLabel *waitLabel = new QLabel;
-    waitLabel->setText( tr( "Wait duration:" ) );
-    layout->addWidget( waitLabel );
+  layout->addWidget(m_spinBox);
+  m_spinBox->setValue(waitElement()->duration());
+  m_spinBox->setSuffix(tr(" s", "seconds"));
 
-    layout->addWidget( m_spinBox );
-    m_spinBox->setValue( waitElement()->duration() );
-    m_spinBox->setSuffix( tr(" s", "seconds") );
+  m_button->setIcon(QIcon(":/marble/document-save.png"));
+  connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
+  layout->addWidget(m_button);
 
-    m_button->setIcon( QIcon( ":/marble/document-save.png" ) );
-    connect(m_button, SIGNAL(clicked()), this, SLOT(save()));
-    layout->addWidget( m_button );
-
-    setLayout( layout );
+  setLayout(layout);
 }
 
 bool WaitEditWidget::editable() const
 {
-    return m_button->isEnabled();
+  return m_button->isEnabled();
 }
 
-void WaitEditWidget::setEditable( bool editable )
+void WaitEditWidget::setEditable(bool editable)
 {
-    m_button->setEnabled( editable );
+  m_button->setEnabled(editable);
 }
 
 void WaitEditWidget::save()
 {
-    waitElement()->setDuration( m_spinBox->value() );
-    emit editingDone(m_index);
+  waitElement()->setDuration(m_spinBox->value());
+  emit editingDone(m_index);
 }
 
-GeoDataWait* WaitEditWidget::waitElement()
+GeoDataWait *WaitEditWidget::waitElement()
 {
-    GeoDataObject *object = qvariant_cast<GeoDataObject*>(m_index.data( MarblePlacemarkModel::ObjectPointerRole ) );
-    Q_ASSERT( object );
-    Q_ASSERT( object->nodeType() == GeoDataTypes::GeoDataWaitType );
-    return static_cast<GeoDataWait*>( object );
+  GeoDataObject *object = qvariant_cast<GeoDataObject *>(m_index.data(MarblePlacemarkModel::ObjectPointerRole));
+  Q_ASSERT(object);
+  Q_ASSERT(object->nodeType() == GeoDataTypes::GeoDataWaitType);
+  return static_cast<GeoDataWait *>(object);
 }
 
 } // namespace Marble

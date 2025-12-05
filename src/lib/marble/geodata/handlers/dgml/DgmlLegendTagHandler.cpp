@@ -29,22 +29,20 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneLegend.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Legend)
 
-GeoNode* DgmlLegendTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlLegendTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Document))
-        return parentItem.nodeAs<GeoSceneDocument>()->legend();
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Document))
+    return parentItem.nodeAs<GeoSceneDocument>()->legend();
 
-    return 0;
+  return 0;
 }
 
 }

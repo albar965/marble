@@ -23,8 +23,7 @@
 #include "GeoDataLatLonAltBox.h"
 #include "TileId.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoPainter;
 class GeoSceneGroup;
@@ -34,45 +33,45 @@ class SunLocator;
 class TileLoader;
 class ViewportParams;
 
-class VectorTileLayer : public QObject, public LayerInterface
+class VectorTileLayer :
+  public QObject, public LayerInterface
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    VectorTileLayer( HttpDownloadManager *downloadManager,
+public:
+  VectorTileLayer(HttpDownloadManager *downloadManager,
                   const PluginManager *pluginManager,
                   GeoDataTreeModel *treeModel);
 
-    ~VectorTileLayer();
+  ~VectorTileLayer();
 
-    QStringList renderPosition() const;
+  QStringList renderPosition() const;
 
-    RenderState renderState() const;
+  RenderState renderState() const;
 
-    int tileZoomLevel() const;
+  int tileZoomLevel() const;
 
-    QString runtimeTrace() const;
+  QString runtimeTrace() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 );
+  bool render(GeoPainter *painter, ViewportParams *viewport,
+              const QString& renderPos = QLatin1String("NONE"),
+              GeoSceneLayer *layer = 0);
 
 Q_SIGNALS:
-    void tileLevelChanged(int tileLevel);
+  void tileLevelChanged(int tileLevel);
 
- public Q_SLOTS:
-    void setMapTheme( const QVector<const GeoSceneVectorTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings );
+public Q_SLOTS:
+  void setMapTheme(const QVector<const GeoSceneVectorTileDataset *>& textures, const GeoSceneGroup *textureLayerSettings);
 
-    void reset();
+  void reset();
 
- private:
-    Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile(const TileId &tileId, GeoDataDocument* document) )
+private:
+  Q_PRIVATE_SLOT(d, void updateTextureLayers())
+  Q_PRIVATE_SLOT(d, void updateTile(const TileId& tileId, GeoDataDocument * document))
 
-
- private:
-    class Private;
-    Private *const d;
+private:
+  class Private;
+  Private *const d;
 
 };
 

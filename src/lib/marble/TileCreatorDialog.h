@@ -22,31 +22,31 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class TileCreator;
 class TileCreatorDialogPrivate;
 
-class MARBLE_EXPORT TileCreatorDialog : public QDialog
+class MARBLE_EXPORT TileCreatorDialog :
+  public QDialog
 {
 
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = 0 );
-    ~TileCreatorDialog();
+public:
+  explicit TileCreatorDialog(TileCreator *creator, QWidget *parent = 0);
+  ~TileCreatorDialog();
 
- public Q_SLOTS:
-    void setProgress( int progress );
-    void setSummary( const QString& name, const QString& description );
+public Q_SLOTS:
+  void setProgress(int progress);
+  void setSummary(const QString& name, const QString& description);
 
 private Q_SLOTS:
-    void cancelTileCreation();
+  void cancelTileCreation();
 
- private:
-    Q_DISABLE_COPY( TileCreatorDialog )
-    TileCreatorDialogPrivate  * const d;
+private:
+  Q_DISABLE_COPY(TileCreatorDialog)
+  TileCreatorDialogPrivate * const d;
 };
 
 }

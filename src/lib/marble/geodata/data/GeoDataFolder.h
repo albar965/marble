@@ -21,17 +21,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 #ifndef MARBLE_GEODATAFOLDER_H
 #define MARBLE_GEODATAFOLDER_H
-
 
 #include "GeoDataContainer.h"
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short A container that is used to arrange other GeoDataFeatures.
@@ -45,24 +42,26 @@ namespace Marble
  * @see GeoDataContainer
  */
 
-    class GeoDataFolderPrivate;
+class GeoDataFolderPrivate;
 
-class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
+class GEODATA_EXPORT GeoDataFolder :
+  public GeoDataContainer
 {
- public:
-    GeoDataFolder();
-    GeoDataFolder( const GeoDataFolder& other );
-    ~GeoDataFolder();
+public:
+  GeoDataFolder();
+  GeoDataFolder(const GeoDataFolder& other);
+  ~GeoDataFolder();
 
-    bool operator==( const GeoDataFolder &other ) const;
-    bool operator!=( const GeoDataFolder &other ) const;
+  bool operator==(const GeoDataFolder& other) const;
+  bool operator!=(const GeoDataFolder& other) const;
 
- private:
-    GeoDataFolderPrivate *p() const;
+private:
+  GeoDataFolderPrivate *p() const;
+
 };
 
 }
 
-Q_DECLARE_METATYPE(Marble::GeoDataFolder*)
+Q_DECLARE_METATYPE(Marble::GeoDataFolder *)
 
 #endif

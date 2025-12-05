@@ -31,27 +31,27 @@
 #include "GeoDataContainer.h"
 #include "GeoDataDocument.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(MarblePlacemark)
+
+GeoNode *KmlMarblePlacemarkTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( MarblePlacemark )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_MarblePlacemark));
 
-GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MarblePlacemark ) );
+  GeoStackItem parentItem = parser.parentElement();
 
+  if(parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
+  {
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    parentItem.nodeAs<GeoDataContainer>()->append(placemark);
+    return placemark;
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        GeoDataPlacemark *placemark = new GeoDataPlacemark;
-        parentItem.nodeAs<GeoDataContainer>()->append( placemark );
-        return placemark;
-
-    } else {
-        return 0;
-    }
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

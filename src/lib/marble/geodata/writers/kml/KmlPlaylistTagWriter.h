@@ -17,20 +17,21 @@
 #include "GeoDataFlyTo.h"
 #include "GeoDataSoundCue.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlPlaylistTagWriter : public GeoTagWriter
+class KmlPlaylistTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
 
 private:
-    void writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const;
-    static void writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer );
-    static void writeWait( const GeoDataWait* wait, GeoWriter& writer );
-    static void writeSoundCue( const GeoDataSoundCue *cue, GeoWriter &writer );
-    static QString playModeToString( GeoDataTourControl::PlayMode playMode );
+  void writeTourPrimitive(const GeoNode *primitive, GeoWriter& writer) const;
+  static void writeTourControl(const GeoDataTourControl *tourControl, GeoWriter& writer);
+  static void writeWait(const GeoDataWait *wait, GeoWriter& writer);
+  static void writeSoundCue(const GeoDataSoundCue *cue, GeoWriter& writer);
+  static QString playModeToString(GeoDataTourControl::PlayMode playMode);
+
 };
 
 }

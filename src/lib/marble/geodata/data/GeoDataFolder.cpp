@@ -26,38 +26,38 @@
 
 #include "GeoDataContainer_p.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataFolderPrivate :
+  public GeoDataContainerPrivate
 {
+public:
+  GeoDataFolderPrivate()
+  {
+  }
 
-class GeoDataFolderPrivate : public GeoDataContainerPrivate
-{
-  public:
-    GeoDataFolderPrivate()
-    {
-    }
+  virtual GeoDataFeaturePrivate *copy()
+  {
+    GeoDataFolderPrivate *copy = new GeoDataFolderPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual GeoDataFeaturePrivate* copy()
-    {
-        GeoDataFolderPrivate* copy = new GeoDataFolderPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataFolderType;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataFolderType;
-    }
 };
 
-
 GeoDataFolder::GeoDataFolder()
-        : GeoDataContainer( new GeoDataFolderPrivate )
+  : GeoDataContainer(new GeoDataFolderPrivate)
 {
-    setVisualCategory( GeoDataFeature::Folder );
+  setVisualCategory(GeoDataFeature::Folder);
 }
 
-GeoDataFolder::GeoDataFolder( const GeoDataFolder& other )
-    : GeoDataContainer( other )
+GeoDataFolder::GeoDataFolder(const GeoDataFolder& other)
+  : GeoDataContainer(other)
 {
 }
 
@@ -65,19 +65,20 @@ GeoDataFolder::~GeoDataFolder()
 {
 }
 
-GeoDataFolderPrivate* GeoDataFolder::p() const
+GeoDataFolderPrivate *GeoDataFolder::p() const
 {
-    return static_cast<GeoDataFolderPrivate*>(d);
+  return static_cast<GeoDataFolderPrivate *>(d);
 }
 
-bool GeoDataFolder::operator==( const GeoDataFolder &other ) const
+bool GeoDataFolder::operator==(const GeoDataFolder& other) const
 {
-    return GeoDataContainer::equals( other );
+  return GeoDataContainer::equals(other);
 }
 
-bool GeoDataFolder::operator!=( const GeoDataFolder &other ) const
+bool GeoDataFolder::operator!=(const GeoDataFolder& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
+
 }
 
 }

@@ -27,8 +27,7 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneItem;
 
@@ -36,54 +35,55 @@ class GeoSceneItem;
  * @short Section of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneSection : public GeoNode
+class GEODATA_EXPORT GeoSceneSection :
+  public GeoNode
 {
- public:
-    explicit GeoSceneSection( const QString& name );
-    ~GeoSceneSection();
+public:
+  explicit GeoSceneSection(const QString& name);
+  ~GeoSceneSection();
 
-    virtual const char* nodeType() const;
+  virtual const char *nodeType() const;
 
-    /**
-     * @brief  Add an item to the legend section
-     * @param  item  the new item
-     */
-    void addItem(GeoSceneItem*);
-    GeoSceneItem* item(const QString&);
-    QVector<GeoSceneItem*> items() const;
+  /**
+   * @brief  Add an item to the legend section
+   * @param  item  the new item
+   */
+  void addItem(GeoSceneItem *);
+  GeoSceneItem *item(const QString&);
+  QVector<GeoSceneItem *> items() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString heading() const;
-    void setHeading( const QString& heading );
+  QString heading() const;
+  void setHeading(const QString& heading);
 
-    bool checkable() const;
-    void setCheckable( bool checkable );
+  bool checkable() const;
+  void setCheckable(bool checkable);
 
-    QString connectTo() const;
-    void setConnectTo( const QString& text );
+  QString connectTo() const;
+  void setConnectTo(const QString& text);
 
-    int  spacing() const;
-    void setSpacing( int spacing );
+  int  spacing() const;
+  void setSpacing(int spacing);
 
-    QString radio() const;
-    void setRadio( const QString& radio );
+  QString radio() const;
+  void setRadio(const QString& radio);
 
- private:
-    Q_DISABLE_COPY( GeoSceneSection )
+private:
+  Q_DISABLE_COPY(GeoSceneSection)
 
-    /// The vector holding all the items in the legend section.
-    /// (We want to preserve the order and don't care
-    /// much about speed here), so we don't use a hash
-    QVector<GeoSceneItem*> m_items;
+  /// The vector holding all the items in the legend section.
+  /// (We want to preserve the order and don't care
+  /// much about speed here), so we don't use a hash
+  QVector<GeoSceneItem *> m_items;
 
-    QString m_name;
-    QString m_heading;
-    QString m_connectTo;
-    QString m_radio;
+  QString m_name;
+  QString m_heading;
+  QString m_connectTo;
+  QString m_radio;
 
-    bool    m_checkable;
-    int     m_spacing;
+  bool m_checkable;
+  int m_spacing;
 };
 
 }

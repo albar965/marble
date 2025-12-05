@@ -27,27 +27,26 @@
 #include "GeoDataFeature.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( visibility )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(visibility)
 
-GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlvisibilityTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_visibility ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_visibility));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.is<GeoDataFeature>() ) {
-        QString visibility = parser.readElementText().trimmed();
-        if( visibility == QString( "1" ) )
-            parentItem.nodeAs<GeoDataFeature>()->setVisible( true );
-        else
-            parentItem.nodeAs<GeoDataFeature>()->setVisible( false );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.is<GeoDataFeature>())
+  {
+    QString visibility = parser.readElementText().trimmed();
+    if(visibility == QString("1"))
+      parentItem.nodeAs<GeoDataFeature>()->setVisible(true);
+    else
+      parentItem.nodeAs<GeoDataFeature>()->setVisible(false);
+  }
+
+  return 0;
 }
 
 }

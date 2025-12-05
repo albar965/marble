@@ -17,81 +17,82 @@
 
 class QVariant;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataDataPrivate;
 
-class GEODATA_EXPORT GeoDataData : public GeoDataObject
+class GEODATA_EXPORT GeoDataData :
+  public GeoDataObject
 {
-  public:
-    GeoDataData();
+public:
+  GeoDataData();
 
-    /** Convenience constructor that sets name and value directly */
-    GeoDataData( const QString &name, const QVariant &value );
+  /** Convenience constructor that sets name and value directly */
+  GeoDataData(const QString& name, const QVariant& value);
 
-    GeoDataData( const GeoDataData& other );
-    bool operator==( const GeoDataData& other ) const;
-    bool operator!=( const GeoDataData& other ) const;
-    virtual ~GeoDataData();
+  GeoDataData(const GeoDataData& other);
+  bool operator==(const GeoDataData& other) const;
+  bool operator!=(const GeoDataData& other) const;
 
-    /**
-     * @brief assignment operator
-     */
-    GeoDataData& operator=( const GeoDataData& other );
+  virtual ~GeoDataData();
 
-    /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+  /**
+   * @brief assignment operator
+   */
+  GeoDataData& operator=(const GeoDataData& other);
 
-    /**
-    * @brief return a reference to the value of data;
-    */
-    QVariant& valueRef();
-    const QVariant& valueRef() const;
+  /// Provides type information for downcasting a GeoData
+  virtual const char *nodeType() const;
 
-    /**
-    * @brief return the value of data
-    */
-    QVariant value() const;
+  /**
+  * @brief return a reference to the value of data;
+  */
+  QVariant& valueRef();
+  const QVariant& valueRef() const;
 
-    /**
-    * @brief set the value of data
-    * @param value the value to be set
-    */
-    void setValue( const QVariant& value );
+  /**
+  * @brief return the value of data
+  */
+  QVariant value() const;
 
-    /**
-    * @brief return the name of data
-    */
-    QString name() const;
+  /**
+  * @brief set the value of data
+  * @param value the value to be set
+  */
+  void setValue(const QVariant& value);
 
-    /**
-    * @brief set the name of data
-    * @param name the name to be set
-    */
-    void setName( const QString& name );
+  /**
+  * @brief return the name of data
+  */
+  QString name() const;
 
-    /**
-    * @brief return the displayName of data
-    */
-    QString displayName() const;
+  /**
+  * @brief set the name of data
+  * @param name the name to be set
+  */
+  void setName(const QString& name);
 
-    /**
-    * @brief set the displayName of data
-    * @param value the displayName to be set
-    */
-    void setDisplayName( const QString& displayName );
+  /**
+  * @brief return the displayName of data
+  */
+  QString displayName() const;
 
-    /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
+  /**
+  * @brief set the displayName of data
+  * @param value the displayName to be set
+  */
+  void setDisplayName(const QString& displayName);
 
-    /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+  /// Serialize the contents of the feature to @p stream.
+  virtual void pack(QDataStream& stream) const;
 
-  private:
-    GeoDataDataPrivate * const d;
+  /// Unserialize the contents of the feature from @p stream.
+  virtual void unpack(QDataStream& stream);
+
+private:
+  GeoDataDataPrivate * const d;
 };
 
 }
 
-#endif //MARBLE_GEODATADATA_H
+#endif // MARBLE_GEODATADATA_H

@@ -10,7 +10,6 @@
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
-
 #include "GeoDataGeometry.h"
 #include "GeoDataGeometry_p.h"
 
@@ -23,125 +22,124 @@
 
 #include <QDataStream>
 
-
-namespace Marble
-{
+namespace Marble {
 
 GeoDataGeometry::GeoDataGeometry()
-    : d( new GeoDataGeometryPrivate() )
+  : d(new GeoDataGeometryPrivate())
 {
-    d->ref.ref();
+  d->ref.ref();
 }
 
-GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
-    : GeoDataObject(),
-      d( other.d )
+GeoDataGeometry::GeoDataGeometry(const GeoDataGeometry& other)
+  : GeoDataObject(),
+  d(other.d)
 {
-    d->ref.ref();
+  d->ref.ref();
 }
 
-GeoDataGeometry::GeoDataGeometry( GeoDataGeometryPrivate* priv )
-    : GeoDataObject(),
-      d( priv )
+GeoDataGeometry::GeoDataGeometry(GeoDataGeometryPrivate *priv)
+  : GeoDataObject(),
+  d(priv)
 {
-    d->ref.ref();
+  d->ref.ref();
 }
 
 GeoDataGeometry::~GeoDataGeometry()
 {
-    if (!d->ref.deref())
-        delete d;
+  if(!d->ref.deref())
+    delete d;
 }
 
 void GeoDataGeometry::detach()
 {
-    if(d->ref.load() == 1) {
-        return;
-    }
+  if(d->ref.load() == 1)
+  {
+    return;
+  }
 
-     GeoDataGeometryPrivate* new_d = d->copy();
+  GeoDataGeometryPrivate *new_d = d->copy();
 
-    if (!d->ref.deref())
-        delete d;
+  if(!d->ref.deref())
+    delete d;
 
-    d = new_d;
-    d->ref.ref();
+  d = new_d;
+  d->ref.ref();
 }
 
-const char* GeoDataGeometry::nodeType() const
+const char *GeoDataGeometry::nodeType() const
 {
-    return d->nodeType();
+  return d->nodeType();
 }
 
 EnumGeometryId GeoDataGeometry::geometryId() const
 {
-    return d->geometryId();
+  return d->geometryId();
 }
 
-GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
+GeoDataGeometry& GeoDataGeometry::operator=(const GeoDataGeometry& other)
 {
-    GeoDataObject::operator=( other );
+  GeoDataObject::operator=(other);
 
-    if (!d->ref.deref())
-        delete d;
+  if(!d->ref.deref())
+    delete d;
 
-    d = other.d;
-    d->ref.ref();
-    
-    return *this;
+  d = other.d;
+  d->ref.ref();
+
+  return *this;
 }
 
 bool GeoDataGeometry::extrude() const
 {
-    return d->m_extrude;
+  return d->m_extrude;
 }
 
-void GeoDataGeometry::setExtrude( bool extrude )
+void GeoDataGeometry::setExtrude(bool extrude)
 {
-    detach();
-    d->m_extrude = extrude;
+  detach();
+  d->m_extrude = extrude;
 }
 
 AltitudeMode GeoDataGeometry::altitudeMode() const
 {
-    return d->m_altitudeMode;
+  return d->m_altitudeMode;
 }
 
-void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
+void GeoDataGeometry::setAltitudeMode(const AltitudeMode altitudeMode)
 {
-    detach();
-    d->m_altitudeMode = altitudeMode;
+  detach();
+  d->m_altitudeMode = altitudeMode;
 }
 
 const GeoDataLatLonAltBox& GeoDataGeometry::latLonAltBox() const
 {
-    return d->m_latLonAltBox;
+  return d->m_latLonAltBox;
 }
 
-void GeoDataGeometry::pack( QDataStream& stream ) const
+void GeoDataGeometry::pack(QDataStream& stream) const
 {
-    GeoDataObject::pack( stream );
+  GeoDataObject::pack(stream);
 
-    stream << d->m_extrude;
-    stream << d->m_altitudeMode;
+  stream << d->m_extrude;
+  stream << d->m_altitudeMode;
 }
 
-void GeoDataGeometry::unpack( QDataStream& stream )
+void GeoDataGeometry::unpack(QDataStream& stream)
 {
-    detach();
-    GeoDataObject::unpack( stream );
+  detach();
+  GeoDataObject::unpack(stream);
 
-    int am;
-    stream >> d->m_extrude;
-    stream >> am;
-    d->m_altitudeMode = (AltitudeMode) am;
+  int am;
+  stream >> d->m_extrude;
+  stream >> am;
+  d->m_altitudeMode = (AltitudeMode)am;
 }
 
-bool GeoDataGeometry::equals(const GeoDataGeometry &other) const
+bool GeoDataGeometry::equals(const GeoDataGeometry& other) const
 {
-    return GeoDataObject::equals(other) &&
-           d->m_extrude == other.d->m_extrude &&
-           d->m_altitudeMode == other.d->m_altitudeMode;
+  return GeoDataObject::equals(other) &&
+         d->m_extrude == other.d->m_extrude &&
+         d->m_altitudeMode == other.d->m_altitudeMode;
 }
 
 }

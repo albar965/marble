@@ -16,60 +16,65 @@
 
 namespace Marble {
 
-bool KmzHandler::open(const QString &kmz, QString &error)
+bool KmzHandler::open(const QString& kmz, QString& error)
 {
-    MarbleZipReader zip( kmz );
-    if ( zip.status() != MarbleZipReader::NoError ) {
-        error = QString("Failed to extract %1: error code %2").arg(kmz).arg(zip.status());
-		mDebug() << error;
-		return false;
-    }
+  MarbleZipReader zip(kmz);
+  if(zip.status() != MarbleZipReader::NoError)
+  {
+    error = QString("Failed to extract %1: error code %2").arg(kmz).arg(zip.status());
+    mDebug() << error;
+    return false;
+  }
 
-	QString const uuid = QUuid::createUuid().toString().mid(1, 8);
-	QString const filename = QString("%1/marble-kmz-%2").arg(QDir::tempPath()).arg(uuid);
-	if (!QDir::root().mkpath(filename)) {
-        error = QString("Failed to create temporary storage %1 for extracting %2").arg(filename).arg(kmz);
-        mDebug() << error;
-        return false;
-    }
+  QString const uuid = QUuid::createUuid().toString().mid(1, 8);
+  QString const filename = QString("%1/marble-kmz-%2").arg(QDir::tempPath()).arg(uuid);
+  if(!QDir::root().mkpath(filename))
+  {
+    error = QString("Failed to create temporary storage %1 for extracting %2").arg(filename).arg(kmz);
+    mDebug() << error;
+    return false;
+  }
 
-    m_kmzPath = filename + '/';
-    if (!zip.extractAll( m_kmzPath ))
+  m_kmzPath = filename + '/';
+  if(!zip.extractAll(m_kmzPath))
+  {
+    error = QString("Failed to extract kmz file contents to %1").arg(m_kmzPath);
+    mDebug() << error;
+    return false;
+  }
+
+  foreach(const MarbleZipReader::FileInfo& fileInfo, zip.fileInfoList())
+  {
+    // if (!fileInfo.isFile) {
+    // continue;
+    // }
+    QString file = filename + '/' + fileInfo.filePath;
+    m_kmzFiles << fileInfo.filePath;
+    if(file.endsWith(".kml", Qt::CaseInsensitive))
     {
-        error = QString("Failed to extract kmz file contents to %1").arg(m_kmzPath);
-        mDebug() << error;
-        return false;
+      if(!m_kmlFile.isEmpty())
+      {
+        mDebug() << "File" << kmz << "contains more than one .kml files";
+      }
+      m_kmlFile = file;
     }
-
-    foreach(const MarbleZipReader::FileInfo &fileInfo, zip.fileInfoList()) {
-        //if (!fileInfo.isFile) {
-        //    continue;
-        //}
-        QString file = filename + '/' + fileInfo.filePath;
-        m_kmzFiles << fileInfo.filePath;
-        if (file.endsWith(".kml", Qt::CaseInsensitive)) {
-            if ( !m_kmlFile.isEmpty() ) {
-                mDebug() << "File" << kmz << "contains more than one .kml files";
-            }
-            m_kmlFile = file;
-        }
-    }
-    return true;
+  }
+  return true;
 }
 
 QString KmzHandler::kmlFile() const
 {
-    return m_kmlFile;
+  return m_kmlFile;
 }
 
 QString KmzHandler::kmzPath() const
 {
-    return m_kmzPath;
+  return m_kmzPath;
 }
 
 QStringList KmzHandler::kmzFiles() const
 {
-    return m_kmzFiles;
+  return m_kmzFiles;
 }
 
 }

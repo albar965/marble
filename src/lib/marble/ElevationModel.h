@@ -8,7 +8,6 @@
 // Copyright 2011 Niko Sams <niko.sams@gmail.com>
 //
 
-
 #ifndef MARBLE_ELEVATIONMODEL_H
 #define MARBLE_ELEVATIONMODEL_H
 
@@ -19,11 +18,10 @@
 
 class QImage;
 
-namespace Marble
-{
+namespace Marble {
 
 namespace {
-    unsigned int const invalidElevationData = 32768;
+unsigned int const invalidElevationData = 32768;
 }
 
 class TileId;
@@ -31,29 +29,31 @@ class ElevationModelPrivate;
 class HttpDownloadManager;
 class PluginManager;
 
-class MARBLE_EXPORT ElevationModel : public QObject
+class MARBLE_EXPORT ElevationModel :
+  public QObject
 {
-    Q_OBJECT
-public:
-    explicit ElevationModel( HttpDownloadManager *downloadManager, PluginManager* pluginManager, QObject *parent = 0 );
-    ~ElevationModel();
+  Q_OBJECT
 
-    qreal height( qreal lon, qreal lat ) const;
-    QVector<GeoDataCoordinates> heightProfile( qreal fromLon, qreal fromLat, qreal toLon, qreal toLat ) const;
+public:
+  explicit ElevationModel(HttpDownloadManager *downloadManager, PluginManager *pluginManager, QObject *parent = 0);
+  ~ElevationModel();
+
+  qreal height(qreal lon, qreal lat) const;
+  QVector<GeoDataCoordinates> heightProfile(qreal fromLon, qreal fromLat, qreal toLon, qreal toLat) const;
 
 Q_SIGNALS:
-    /**
-     * Elevation tiles loaded. You will get more accurate results when querying height
-     * for at least one that was queried before.
-     **/
-    void updateAvailable();
+  /**
+   * Elevation tiles loaded. You will get more accurate results when querying height
+   * for at least one that was queried before.
+   **/
+  void updateAvailable();
 
 private:
-    Q_PRIVATE_SLOT( d, void tileCompleted( const TileId&, const QImage& ) )
+  Q_PRIVATE_SLOT(d, void tileCompleted(const TileId&, const QImage&))
 
 private:
-    friend class ElevationModelPrivate;
-    ElevationModelPrivate *d;
+  friend class ElevationModelPrivate;
+  ElevationModelPrivate *d;
 };
 
 }

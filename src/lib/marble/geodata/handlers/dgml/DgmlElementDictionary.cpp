@@ -21,12 +21,10 @@
 
 #include "DgmlElementDictionary.h"
 
-namespace Marble
-{
+namespace Marble {
 
 // One static list of all tag names, to avoid string comparisons all-over-the-place
-namespace dgml
-{
+namespace dgml {
 
 const char dgmlTag_nameSpace20[] = "http://edu.kde.org/marble/dgml/2.0";
 

@@ -12,11 +12,10 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDataWait::GeoDataWait() :
-    m_duration(0.0)
+  m_duration(0.0)
 {
 }
 
@@ -26,27 +25,27 @@ GeoDataWait::~GeoDataWait()
 
 bool GeoDataWait::operator==(const GeoDataWait& other) const
 {
-    return this->m_duration == other.m_duration;
+  return this->m_duration == other.m_duration;
 }
 
 bool GeoDataWait::operator!=(const GeoDataWait& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
 const char *GeoDataWait::nodeType() const
 {
-    return GeoDataTypes::GeoDataWaitType;
+  return GeoDataTypes::GeoDataWaitType;
 }
 
 double GeoDataWait::duration() const
 {
-    return m_duration;
+  return m_duration;
 }
 
 void GeoDataWait::setDuration(double duration)
 {
-    m_duration = duration;
+  m_duration = duration;
 }
 
 } // namespace Marble

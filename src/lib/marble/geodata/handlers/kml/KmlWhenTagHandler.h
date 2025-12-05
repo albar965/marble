@@ -16,22 +16,22 @@
 
 class QString;
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-class KmlwhenTagHandler : public GeoTagHandler
+class KmlwhenTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+  virtual GeoNode *parse(GeoParser&) const;
 
-    static QDateTime parse( const QString &dateTime );
+  static QDateTime parse(const QString& dateTime);
 
-    static GeoDataTimeStamp parseTimestamp( const QString &dateTime );
+  static GeoDataTimeStamp parseTimestamp(const QString& dateTime);
 
 private:
-    static Marble::GeoDataTimeStamp::TimeResolution modify( QString& whenString );
+  static Marble::GeoDataTimeStamp::TimeResolution modify(QString& whenString);
+
 };
 
 }

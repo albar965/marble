@@ -15,8 +15,7 @@
 
 #include <QDebug>
 
-namespace Marble
-{
+namespace Marble {
 
 GeoTagWriter::GeoTagWriter()
 {
@@ -26,40 +25,44 @@ GeoTagWriter::~GeoTagWriter()
 {
 }
 
-bool GeoTagWriter::writeElement( const GeoNode *object,
-                                 GeoWriter &writer) const
+bool GeoTagWriter::writeElement(const GeoNode *object,
+                                GeoWriter& writer) const
 {
-    return writer.writeElement( object );
+  return writer.writeElement(object);
 }
 
 void GeoTagWriter::registerWriter(const QualifiedName& name,
-                                  const GeoTagWriter* writer )
+                                  const GeoTagWriter *writer)
 {
-    TagHash* tagHash = tagWriterHash();
+  TagHash *tagHash = tagWriterHash();
 
-    if ( tagHash->contains( name ) ) {
-        qWarning() << "Warning: The tag" << name << "is already registered. Often this indicates that multiple versions of the marblewidget library are loaded at the same time. This will likely lead to problems. Please check your installation, especially internal Marble plugins and external applications that install Marble plugins.";
-    }
-    Q_ASSERT( !tagHash->contains( name ) );
-    tagHash->insert( name, writer );
-    Q_ASSERT( tagHash->contains( name ) );
+  if(tagHash->contains(name))
+  {
+    qWarning() << "Warning: The tag" << name
+               <<
+      "is already registered. Often this indicates that multiple versions of the marblewidget library are loaded at the same time. This will likely lead to problems. Please check your installation, especially internal Marble plugins and external applications that install Marble plugins.";
+  }
+  Q_ASSERT(!tagHash->contains(name));
+  tagHash->insert(name, writer);
+  Q_ASSERT(tagHash->contains(name));
 }
 
-GeoTagWriter::TagHash* GeoTagWriter::tagWriterHash()
+GeoTagWriter::TagHash *GeoTagWriter::tagWriterHash()
 {
-    static TagHash s_tagWriterHash;
-    return &s_tagWriterHash;
+  static TagHash s_tagWriterHash;
+  return &s_tagWriterHash;
 }
 
-const GeoTagWriter* GeoTagWriter::recognizes( const QualifiedName &qname )
+const GeoTagWriter *GeoTagWriter::recognizes(const QualifiedName& qname)
 {
-    TagHash* hash = tagWriterHash();
+  TagHash *hash = tagWriterHash();
 
-    if( !hash->contains( qname ) ) {
-        return 0;
-    }
+  if(!hash->contains(qname))
+  {
+    return 0;
+  }
 
-    return hash->value( qname );
+  return hash->value(qname);
 }
 
 }

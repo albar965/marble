@@ -9,13 +9,12 @@
 
 #include "ParsingRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-ParsingRunner::ParsingRunner( QObject *parent )
-    : QObject( parent )
+ParsingRunner::ParsingRunner(QObject *parent)
+  : QObject(parent)
 {
-    // nothing to do
+  // nothing to do
 }
 
 }

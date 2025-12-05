@@ -19,33 +19,36 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(GroundOverlay)
+
+GeoNode *KmlGroundOverlayTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( GroundOverlay )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_GroundOverlay));
 
-GeoNode* KmlGroundOverlayTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_GroundOverlay ) );
+  GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
+  KmlObjectTagHandler::parseIdentifiers(parser, overlay);
 
-    GeoDataGroundOverlay *overlay = new GeoDataGroundOverlay;
-    KmlObjectTagHandler::parseIdentifiers( parser, overlay );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ||
-        parentItem.represents( kmlTag_Change ) || parentItem.represents( kmlTag_Create ) || parentItem.represents( kmlTag_Delete ) ) {
-        parentItem.nodeAs<GeoDataContainer>()->append( overlay );
-        return overlay;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
-        GeoDataDocument* doc = geoDataDoc( parser );
-        doc->append( overlay );
-        return overlay;
-    } else {
-        delete overlay;
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document) ||
+     parentItem.represents(kmlTag_Change) || parentItem.represents(kmlTag_Create) || parentItem.represents(kmlTag_Delete))
+  {
+    parentItem.nodeAs<GeoDataContainer>()->append(overlay);
+    return overlay;
+  }
+  else if(parentItem.qualifiedName().first == kmlTag_kml)
+  {
+    GeoDataDocument *doc = geoDataDoc(parser);
+    doc->append(overlay);
+    return overlay;
+  }
+  else
+  {
+    delete overlay;
+    return 0;
+  }
 }
 
 }

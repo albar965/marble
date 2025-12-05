@@ -25,30 +25,30 @@
 #include <geodata_export.h>
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short Zoom properties of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneZoom : public GeoNode
+class GEODATA_EXPORT GeoSceneZoom :
+  public GeoNode
 {
- public:
-    GeoSceneZoom();
+public:
+  GeoSceneZoom();
 
-    int minimum() const;
-    void setMinimum( int name );
-    int maximum() const;
-    void setMaximum( int target );
-    bool discrete() const;
-    void setDiscrete( bool theme );
+  int minimum() const;
+  void setMinimum(int name);
+  int maximum() const;
+  void setMaximum(int target);
+  bool discrete() const;
+  void setDiscrete(bool theme);
 
- private:
-    // FIXME: d-pointerfy
+private:
+  // FIXME: d-pointerfy
 
-    int  m_minimum;
-    int  m_maximum;
-    bool m_discrete;
+  int m_minimum;
+  int m_maximum;
+  bool m_discrete;
 };
 
 }

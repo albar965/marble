@@ -15,28 +15,28 @@
 
 #include <QString>
 
-namespace Marble
-{
+namespace Marble {
 
-class GEODATA_EXPORT GeoDataSoundCue : public GeoDataTourPrimitive
+class GEODATA_EXPORT GeoDataSoundCue :
+  public GeoDataTourPrimitive
 {
 public:
-    GeoDataSoundCue();
-    ~GeoDataSoundCue();
+  GeoDataSoundCue();
+  ~GeoDataSoundCue();
 
-    bool operator==( const GeoDataSoundCue &other ) const;
-    bool operator!=( const GeoDataSoundCue &other ) const;
-    const char *nodeType() const;
+  bool operator==(const GeoDataSoundCue& other) const;
+  bool operator!=(const GeoDataSoundCue& other) const;
+  const char *nodeType() const;
 
-    QString href() const;
-    void setHref(const QString &url);
+  QString href() const;
+  void setHref(const QString& url);
 
-    double delayedStart() const;
-    void setDelayedStart(double pause);
+  double delayedStart() const;
+  void setDelayedStart(double pause);
 
 private:
-    QString m_href;
-    double m_delayedStart;
+  QString m_href;
+  double m_delayedStart;
 };
 
 } // namespace Marble

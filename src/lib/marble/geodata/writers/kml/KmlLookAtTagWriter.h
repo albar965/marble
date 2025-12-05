@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -9,22 +8,21 @@
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 //
 
-
 #ifndef MARBLE_KMLLOOKATTAGWRITER_H
 #define MARBLE_KMLLOOKATTAGWRITER_H
 
 #include "GeoTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlLookAtTagWriter : public GeoTagWriter
+class KmlLookAtTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }
 
 #endif
-

@@ -15,37 +15,38 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataLinearRingPrivate :
+  public GeoDataLineStringPrivate
 {
+public:
+  explicit GeoDataLinearRingPrivate(TessellationFlags f)
+    : GeoDataLineStringPrivate(f)
+  {
+  }
 
-class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
-{
-  public:
-    explicit GeoDataLinearRingPrivate( TessellationFlags f )
-     : GeoDataLineStringPrivate( f )
-    {
-    }
+  GeoDataLinearRingPrivate()
+  {
+  }
 
-    GeoDataLinearRingPrivate()
-    {
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataLinearRingPrivate *copy = new GeoDataLinearRingPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-        GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataLinearRingType;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLinearRingType;
-    }
+  virtual EnumGeometryId geometryId() const
+  {
+    return GeoDataLinearRingId;
+  }
 
-    virtual EnumGeometryId geometryId() const
-    {
-        return GeoDataLinearRingId;
-    }
 };
 
 } // namespace Marble

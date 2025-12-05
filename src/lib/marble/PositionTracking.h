@@ -18,8 +18,7 @@
 
 #include <QObject>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataAccuracy;
 class GeoDataDocument;
@@ -28,109 +27,109 @@ class GeoDataTreeModel;
 class PositionProviderPlugin;
 class PositionTrackingPrivate;
 
-class MARBLE_EXPORT PositionTracking : public QObject
+class MARBLE_EXPORT PositionTracking :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
-    Q_PROPERTY( PositionProviderPlugin* positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged )
+  Q_PROPERTY(PositionProviderPlugin *
+             positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged)
 
 public:
-    explicit PositionTracking( GeoDataTreeModel* model );
-    ~PositionTracking();
+  explicit PositionTracking(GeoDataTreeModel *model);
+  ~PositionTracking();
 
-    /**
-      * Change the position provider to use. You can provide 0 to disable
-      * position tracking. Ownership of the provided plugin is taken.
-      */
-    void setPositionProviderPlugin( PositionProviderPlugin* plugin );
+  /**
+    * Change the position provider to use. You can provide 0 to disable
+    * position tracking. Ownership of the provided plugin is taken.
+    */
+  void setPositionProviderPlugin(PositionProviderPlugin *plugin);
 
-    /** @brief Returns the current position provider plugin, or 0 if none is in use */
-    PositionProviderPlugin* positionProviderPlugin();
+  /** @brief Returns the current position provider plugin, or 0 if none is in use */
+  PositionProviderPlugin *positionProviderPlugin();
 
-    /**
-      * @brief gives the error message from the current position provider
-      */
-    QString error() const;
+  /**
+    * @brief gives the error message from the current position provider
+    */
+  QString error() const;
 
-    /**
-     * @brief provides speed of the gps device
-     */
-    qreal speed() const;
+  /**
+   * @brief provides speed of the gps device
+   */
+  qreal speed() const;
 
-    /**
-     * @brief provides direction of the gps device in degrees with geographical north
-     */
-    qreal direction() const;
+  /**
+   * @brief provides direction of the gps device in degrees with geographical north
+   */
+  qreal direction() const;
 
-    /**
-     * @brief Returns the timestamp of last recent tracking point.
-     */
-    QDateTime timestamp() const;
+  /**
+   * @brief Returns the timestamp of last recent tracking point.
+   */
+  QDateTime timestamp() const;
 
-    /** @brief Returns the estimated accuracy of the current position */
-    GeoDataAccuracy accuracy() const;
+  /** @brief Returns the estimated accuracy of the current position */
+  GeoDataAccuracy accuracy() const;
 
-    /**
-     * @brief provides the visibility of the Position Tracking document
-     */
-    bool trackVisible() const;
+  /**
+   * @brief provides the visibility of the Position Tracking document
+   */
+  bool trackVisible() const;
 
-    /** @brief Returns the current position, if any */
-    GeoDataCoordinates currentLocation() const;
+  /** @brief Returns the current position, if any */
+  GeoDataCoordinates currentLocation() const;
 
-    /** @brief Returns the status of the current position provider plugin, if any */
-    PositionProviderStatus status() const;
+  /** @brief Returns the status of the current position provider plugin, if any */
+  PositionProviderStatus status() const;
 
-    /** @brief Returns true if there is no position in the track */
-    bool isTrackEmpty() const;
+  /** @brief Returns true if there is no position in the track */
+  bool isTrackEmpty() const;
 
-    /**
-     * @brief Returns the total track length
-     * @param planetRadius Scale factor, usually the radius of the underlying planet
-     * @return Length of all track segments on the unit sphere scaled by planetRadius
-     */
-    qreal length( qreal planetRadius ) const;
+  /**
+   * @brief Returns the total track length
+   * @param planetRadius Scale factor, usually the radius of the underlying planet
+   * @return Length of all track segments on the unit sphere scaled by planetRadius
+   */
+  qreal length(qreal planetRadius) const;
 
-    void readSettings();
+  void readSettings();
 
-    void writeSettings();
+  void writeSettings();
 
 public Q_SLOTS:
-    /**
-      * Toggles the visibility of the Position Tracking document
-      */
-    void setTrackVisible ( bool visible );
+  /**
+    * Toggles the visibility of the Position Tracking document
+    */
+  void setTrackVisible(bool visible);
 
-    /**
-      * Saves the track document to file
-      */
-    bool saveTrack( const QString& fileName );
+  /**
+    * Saves the track document to file
+    */
+  bool saveTrack(const QString& fileName);
 
-    /**
-      * Removes all track segments which were recorded
-      */
-    void clearTrack();
+  /**
+    * Removes all track segments which were recorded
+    */
+  void clearTrack();
 
 Q_SIGNALS:
-    void  gpsLocation( const GeoDataCoordinates&, qreal );
+  void  gpsLocation(const GeoDataCoordinates&, qreal);
 
-    void statusChanged( PositionProviderStatus status );
+  void statusChanged(PositionProviderStatus status);
 
-    /**
-     * @brief emits positionProviderPluginChanged(0) when provider is disabled
-     */
-    void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
+  /**
+   * @brief emits positionProviderPluginChanged(0) when provider is disabled
+   */
+  void positionProviderPluginChanged(PositionProviderPlugin *activePlugin);
 
- private:
-    Q_PRIVATE_SLOT( d, void updatePosition() )
-    Q_PRIVATE_SLOT( d, void updateStatus() )
+private:
+  Q_PRIVATE_SLOT(d, void updatePosition())
+  Q_PRIVATE_SLOT(d, void updateStatus())
 
-    friend class PositionTrackingPrivate;
-    PositionTrackingPrivate* const d;
+  friend class PositionTrackingPrivate;
+  PositionTrackingPrivate * const d;
 };
 
 }
-
-
 
 #endif

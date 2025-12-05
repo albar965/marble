@@ -16,26 +16,27 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(north)
+
+GeoNode *KmlnorthTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( north )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_north));
 
-GeoNode* KmlnorthTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_north ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  qreal const north = parser.readElementText().trimmed().toDouble();
+  if(parentItem.represents(kmlTag_LatLonAltBox))
+  {
+    parentItem.nodeAs<GeoDataLatLonAltBox>()->setNorth(north, GeoDataCoordinates::Degree);
+  }
+  else if(parentItem.represents(kmlTag_LatLonBox))
+  {
+    parentItem.nodeAs<GeoDataLatLonBox>()->setNorth(north, GeoDataCoordinates::Degree);
+  }
 
-    qreal const north = parser.readElementText().trimmed().toDouble();
-    if( parentItem.represents( kmlTag_LatLonAltBox ) ) {
-        parentItem.nodeAs<GeoDataLatLonAltBox>()->setNorth( north, GeoDataCoordinates::Degree );
-    } else if ( parentItem.represents( kmlTag_LatLonBox ) ) {
-        parentItem.nodeAs<GeoDataLatLonBox>()->setNorth( north, GeoDataCoordinates::Degree );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

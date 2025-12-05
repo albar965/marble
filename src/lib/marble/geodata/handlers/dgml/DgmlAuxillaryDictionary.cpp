@@ -29,10 +29,8 @@
 // tolower so if the values in this class are not lowercase
 // it wont see they are the same
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 const char dgmlValue_true[] = "true";
 const char dgmlValue_on[] = "on";
 const char dgmlValue_texture[] = "texture";

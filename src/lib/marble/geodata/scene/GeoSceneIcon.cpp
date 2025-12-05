@@ -21,12 +21,11 @@
 
 #include "GeoSceneIcon.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoSceneIcon::GeoSceneIcon()
-    : m_pixmap( "" ),
-      m_color()
+  : m_pixmap(""),
+  m_color()
 {
 }
 
@@ -36,22 +35,22 @@ GeoSceneIcon::~GeoSceneIcon()
 
 QString GeoSceneIcon::pixmap() const
 {
-    return m_pixmap;
+  return m_pixmap;
 }
 
-void GeoSceneIcon::setPixmap( const QString& pixmap )
+void GeoSceneIcon::setPixmap(const QString& pixmap)
 {
-    m_pixmap = pixmap;
+  m_pixmap = pixmap;
 }
 
 QColor GeoSceneIcon::color() const
 {
-    return m_color;
+  return m_color;
 }
 
-void GeoSceneIcon::setColor( const QColor& color )
+void GeoSceneIcon::setColor(const QColor& color)
 {
-    m_color = color;
+  m_color = color;
 }
 
 }

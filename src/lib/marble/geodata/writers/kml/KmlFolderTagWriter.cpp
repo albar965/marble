@@ -18,30 +18,30 @@
 
 #include <QVector>
 
-namespace Marble
+namespace Marble {
+
+static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataFolderType,
+                                                                          kml::kmlTag_nameSpaceOgc22),
+                                              new KmlFolderTagWriter());
+
+bool KmlFolderTagWriter::writeMid(const GeoNode *node, GeoWriter& writer) const
 {
+  const GeoDataFolder *folder = static_cast<const GeoDataFolder *>(node);
 
-static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataFolderType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlFolderTagWriter() );
+  // Write all containing features
+  QVector<GeoDataFeature *>::ConstIterator it = folder->constBegin();
+  QVector<GeoDataFeature *>::ConstIterator const end = folder->constEnd();
 
-bool KmlFolderTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
-{
-    const GeoDataFolder *folder = static_cast<const GeoDataFolder*>(node);
+  for(; it != end; ++it )
+  {
+    writeElement(*it, writer);
+  }
 
-    //Write all containing features
-    QVector<GeoDataFeature*>::ConstIterator it =  folder->constBegin();
-    QVector<GeoDataFeature*>::ConstIterator const end = folder->constEnd();
-
-    for ( ; it != end; ++it ) {
-        writeElement( *it, writer );
-    }
-
-    return true;
+  return true;
 }
 
 KmlFolderTagWriter::KmlFolderTagWriter() :
-  KmlFeatureTagWriter( kml::kmlTag_Folder )
+  KmlFeatureTagWriter(kml::kmlTag_Folder)
 {
   // nothing to do
 }

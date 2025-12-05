@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATALABELSTYLE_H
 #define MARBLE_GEODATALABELSTYLE_H
 
@@ -19,8 +18,7 @@
 
 class QFont;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataLabelStylePrivate;
 
@@ -32,99 +30,106 @@ class GeoDataLabelStylePrivate;
  * (both inherited from GeoDataColorStyle, and scale for the label
  * (name) can be specified.
  */
-class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
+class GEODATA_EXPORT GeoDataLabelStyle :
+  public GeoDataColorStyle
 {
-  public:
-    enum Alignment{Corner, Center, Right /*, Left, Below  */};
+public:
+  enum Alignment {Corner, Center, Right /*, Left, Below  */};
 
-    /// Construct a new GeoDataLabelStyle
-    GeoDataLabelStyle();
-    GeoDataLabelStyle( const GeoDataLabelStyle& other );
-    /**
-     * @brief Construct a new GeoDataLabelStyle
-     * @param  font   the font to use when showing the name
-     * @param  color  the color to use when showing the name @see GeoDataColorStyle
-     */
-    GeoDataLabelStyle( const QFont &font, const QColor &color );
+  /// Construct a new GeoDataLabelStyle
+  GeoDataLabelStyle();
+  GeoDataLabelStyle(const GeoDataLabelStyle& other);
+  /**
+   * @brief Construct a new GeoDataLabelStyle
+   * @param  font   the font to use when showing the name
+   * @param  color  the color to use when showing the name @see GeoDataColorStyle
+   */
+  GeoDataLabelStyle(const QFont& font, const QColor& color);
 
-    ~GeoDataLabelStyle();
-    
-    /**
-    * @brief assignment operator
-    */
-    GeoDataLabelStyle& operator=( const GeoDataLabelStyle& other );
+  ~GeoDataLabelStyle();
 
-    bool operator==( const GeoDataLabelStyle &other ) const;
-    bool operator!=( const GeoDataLabelStyle &other ) const;
+  /**
+  * @brief assignment operator
+  */
+  GeoDataLabelStyle& operator=(const GeoDataLabelStyle& other);
 
-    /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
+  bool operator==(const GeoDataLabelStyle& other) const;
+  bool operator!=(const GeoDataLabelStyle& other) const;
 
-    /**
-     * @brief Set the scale of the label
-     * @param  scale  the new scale
-     */
-    void setScale( const float &scale );
-    /**
-     * @brief Return the current scale of the label
-     * @return  the current scale
-     */
-    float scale() const;
-    /**
-     * @brief Set the alignment of the label
-     * @param  int the alignment
-     */
-    void setAlignment ( GeoDataLabelStyle::Alignment alignment );
-    /**
-     * @brief Return the alignment of the label
-     * @return  the current alignment
-     */
-    GeoDataLabelStyle::Alignment alignment() const;
-    /**
-     * @brief Set the font of the label
-     * @param  font  the new font
-     */
-    void setFont( const QFont &font );
-    /**
-     * @brief Return the current font of the label
-     * @return  the current font
-     */
-    QFont font() const;
+  /// Provides type information for downcasting a GeoData
+  virtual const char *nodeType() const;
 
-    /**
-     * @brief Return the scaled font of the label
-     * @return  the scaled font
-     */
-    QFont scaledFont() const;
+  /**
+   * @brief Set the scale of the label
+   * @param  scale  the new scale
+   */
+  void setScale(const float& scale);
 
-    /**
-     * @brief Return true if the text of the label should glow, false otherwise
-     * @see setGlow
-     */
-    bool glow() const;
+  /**
+   * @brief Return the current scale of the label
+   * @return  the current scale
+   */
+  float scale() const;
 
-    /**
-     * @brief Enable or disable a glow effect around the text of the label.
-     *
-     * The default is false.
-     *
-     * Note that this is not a KML property.
-     */
-    void setGlow( bool on );
+  /**
+   * @brief Set the alignment of the label
+   * @param  int the alignment
+   */
+  void setAlignment(GeoDataLabelStyle::Alignment alignment);
 
-    /**
-     * @brief  Serialize the style to a stream.
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
-    /**
-     * @brief  Unserialize the style from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+   * @brief Return the alignment of the label
+   * @return  the current alignment
+   */
+  GeoDataLabelStyle::Alignment alignment() const;
 
-  private:
-    GeoDataLabelStylePrivate * const d;
+  /**
+   * @brief Set the font of the label
+   * @param  font  the new font
+   */
+  void setFont(const QFont& font);
+
+  /**
+   * @brief Return the current font of the label
+   * @return  the current font
+   */
+  QFont font() const;
+
+  /**
+   * @brief Return the scaled font of the label
+   * @return  the scaled font
+   */
+  QFont scaledFont() const;
+
+  /**
+   * @brief Return true if the text of the label should glow, false otherwise
+   * @see setGlow
+   */
+  bool glow() const;
+
+  /**
+   * @brief Enable or disable a glow effect around the text of the label.
+   *
+   * The default is false.
+   *
+   * Note that this is not a KML property.
+   */
+  void setGlow(bool on);
+
+  /**
+   * @brief  Serialize the style to a stream.
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
+
+  /**
+   * @brief  Unserialize the style from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
+
+private:
+  GeoDataLabelStylePrivate * const d;
 };
 
 }

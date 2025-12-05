@@ -16,8 +16,7 @@
 
 class QLabel;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataCoordinates;
 class WidgetGraphicsItem;
@@ -28,42 +27,44 @@ class MarbleLocale;
  *
  */
 
-class License : public AbstractFloatItem
+class License :
+  public AbstractFloatItem
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.License")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( License )
-public:
-    explicit License( const MarbleModel *marbleModel=0 );
-    ~License();
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.License")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  MARBLE_PLUGIN(License)
 
-    QStringList backendTypes() const;
-    QString name() const;
-    QString guiString() const;
-    QString nameId() const;
-    QString version() const;
-    QString description() const;
-    QString copyrightYears() const;
-    QList<PluginAuthor> pluginAuthors() const;
-    QIcon icon () const;
-    void initialize ();
-    bool isInitialized () const;
+public:
+  explicit License(const MarbleModel *marbleModel = 0);
+  ~License();
+
+  QStringList backendTypes() const;
+  QString name() const;
+  QString guiString() const;
+  QString nameId() const;
+  QString version() const;
+  QString description() const;
+  QString copyrightYears() const;
+  QList<PluginAuthor> pluginAuthors() const;
+  QIcon icon() const;
+  void initialize();
+  bool isInitialized() const;
 
 private Q_SLOTS:
-    void updateLicenseText();
-    void toggleLicenseSize();
-    void showAboutDialog();
+  void updateLicenseText();
+  void toggleLicenseSize();
+  void showAboutDialog();
 
 protected:
-    bool eventFilter(QObject *, QEvent *e);
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+  bool eventFilter(QObject *, QEvent *e);
+  void contextMenuEvent(QWidget *w, QContextMenuEvent *e);
 
 private:
-    WidgetGraphicsItem* m_widgetItem;
-    QLabel* m_label;
-    bool m_showFullLicense;
-    QMenu* m_contextMenu;
+  WidgetGraphicsItem *m_widgetItem;
+  QLabel *m_label;
+  bool m_showFullLicense;
+  QMenu *m_contextMenu;
 };
 
 }

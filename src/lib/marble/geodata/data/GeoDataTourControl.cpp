@@ -12,11 +12,10 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDataTourControl::GeoDataTourControl() :
-    m_playMode(Play)
+  m_playMode(Play)
 {
 }
 
@@ -26,27 +25,27 @@ GeoDataTourControl::~GeoDataTourControl()
 
 bool GeoDataTourControl::operator==(const GeoDataTourControl& other) const
 {
-    return this->m_playMode == other.m_playMode;
+  return this->m_playMode == other.m_playMode;
 }
 
 bool GeoDataTourControl::operator!=(const GeoDataTourControl& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
 const char *GeoDataTourControl::nodeType() const
 {
-    return GeoDataTypes::GeoDataTourControlType;
+  return GeoDataTypes::GeoDataTourControlType;
 }
 
 GeoDataTourControl::PlayMode GeoDataTourControl::playMode() const
 {
-    return m_playMode;
+  return m_playMode;
 }
 
-void GeoDataTourControl::setPlayMode(const PlayMode &mode)
+void GeoDataTourControl::setPlayMode(const PlayMode& mode)
 {
-    m_playMode = mode;
+  m_playMode = mode;
 }
 
 } // namespace Marble

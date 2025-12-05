@@ -8,7 +8,6 @@
 // Copyright 2012      Dennis Nienhüser <nienhueser@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATAGROUNDOVERLAY_H
 #define MARBLE_GEODATAGROUNDOVERLAY_H
 
@@ -21,41 +20,43 @@ namespace Marble {
 
 class GeoDataGroundOverlayPrivate;
 
-class MARBLE_EXPORT GeoDataGroundOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataGroundOverlay :
+  public GeoDataOverlay
 {
 public:
-    GeoDataGroundOverlay();
+  GeoDataGroundOverlay();
 
-    GeoDataGroundOverlay( const GeoDataGroundOverlay &other );
+  GeoDataGroundOverlay(const GeoDataGroundOverlay& other);
 
-    GeoDataGroundOverlay& operator=( const GeoDataGroundOverlay &other );
-    bool operator==( const GeoDataGroundOverlay &other ) const;
-    bool operator!=( const GeoDataGroundOverlay &other ) const;
-    ~GeoDataGroundOverlay();
+  GeoDataGroundOverlay& operator=(const GeoDataGroundOverlay& other);
+  bool operator==(const GeoDataGroundOverlay& other) const;
+  bool operator!=(const GeoDataGroundOverlay& other) const;
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  ~GeoDataGroundOverlay();
 
-    double altitude() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    void setAltitude( double altitude );
+  double altitude() const;
 
-    AltitudeMode altitudeMode() const;
+  void setAltitude(double altitude);
 
-    void setAltitudeMode( const AltitudeMode altitudeMode );
+  AltitudeMode altitudeMode() const;
 
-    GeoDataLatLonBox& latLonBox() const;
+  void setAltitudeMode(const AltitudeMode altitudeMode);
 
-    void setLatLonBox( const GeoDataLatLonBox &box );
+  GeoDataLatLonBox& latLonBox() const;
 
-    const GeoDataLatLonQuad& latLonQuad() const;
+  void setLatLonBox(const GeoDataLatLonBox& box);
 
-    GeoDataLatLonQuad& latLonQuad();
+  const GeoDataLatLonQuad& latLonQuad() const;
 
-    void setLatLonQuad( const GeoDataLatLonQuad &quad );
+  GeoDataLatLonQuad& latLonQuad();
+
+  void setLatLonQuad(const GeoDataLatLonQuad& quad);
 
 private:
-    GeoDataGroundOverlayPrivate* const d;
+  GeoDataGroundOverlayPrivate * const d;
 };
 
 }

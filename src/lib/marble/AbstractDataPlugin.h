@@ -15,8 +15,7 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class ViewportParams;
 class GeoSceneLayer;
@@ -35,102 +34,103 @@ class AbstractDataPluginPrivate;
  * Additionally it should be useful to set standard values via setEnabled (often true)
  * and setVisible (often false) in the constructor of a subclass.
  **/
-class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
+class MARBLE_EXPORT AbstractDataPlugin :
+  public RenderPlugin
 {
-    Q_OBJECT
+  Q_OBJECT
 
-    Q_PROPERTY( bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged )
-    /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
-    Q_PROPERTY( QObject* favoritesModel READ favoritesModel NOTIFY favoritesModelChanged )
-    Q_PROPERTY( int numberOfItems READ numberOfItems WRITE setNumberOfItems NOTIFY changedNumberOfItems )
+  Q_PROPERTY(bool favoriteItemsOnly READ isFavoriteItemsOnly WRITE setFavoriteItemsOnly NOTIFY favoriteItemsOnlyChanged)
+  /** @todo FIXME Qt Quick segfaults if using the real class here instead of QObject */
+  Q_PROPERTY(QObject * favoritesModel READ favoritesModel NOTIFY favoritesModelChanged)
+  Q_PROPERTY(int numberOfItems READ numberOfItems WRITE setNumberOfItems NOTIFY changedNumberOfItems)
 
- public:
-    explicit AbstractDataPlugin( const MarbleModel *marbleModel );
+public:
+  explicit AbstractDataPlugin(const MarbleModel *marbleModel);
 
-    virtual ~AbstractDataPlugin();
+  virtual ~AbstractDataPlugin();
 
-    bool isInitialized() const;
+  bool isInitialized() const;
 
-    /**
-     * @brief Returns the name(s) of the backend that the plugin can render
-     */
-    QStringList backendTypes() const;
+  /**
+   * @brief Returns the name(s) of the backend that the plugin can render
+   */
+  QStringList backendTypes() const;
 
-    /**
-     * @brief Return how the plugin settings should be used.
-     */
-    QString renderPolicy() const;
+  /**
+   * @brief Return how the plugin settings should be used.
+   */
+  QString renderPolicy() const;
 
-    /**
-     * @brief Preferred level in the layer stack for the rendering
-     */
-    QStringList renderPosition() const;
+  /**
+   * @brief Preferred level in the layer stack for the rendering
+   */
+  QStringList renderPosition() const;
 
-    /**
-     * @brief Renders the content provided by the plugin on the viewport.
-     * @return @c true  Returns whether the rendering has been successful
-     */
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer * layer = 0 );
+  /**
+   * @brief Renders the content provided by the plugin on the viewport.
+   * @return @c true  Returns whether the rendering has been successful
+   */
+  bool render(GeoPainter *painter, ViewportParams *viewport,
+              const QString& renderPos = QLatin1String("NONE"), GeoSceneLayer *layer = 0);
 
-    /**
-     * @return The model associated with the plugin.
-     */
-    AbstractDataPluginModel *model();
-    const AbstractDataPluginModel *model() const;
+  /**
+   * @return The model associated with the plugin.
+   */
+  AbstractDataPluginModel *model();
+  const AbstractDataPluginModel *model() const;
 
-    /**
-     * Set the model of the plugin.
-     */
-    void setModel( AbstractDataPluginModel* model );
+  /**
+   * Set the model of the plugin.
+   */
+  void setModel(AbstractDataPluginModel *model);
 
-    /**
-     * Set the number of items to be shown at the same time.
-     */
-    void setNumberOfItems( quint32 number );
+  /**
+   * Set the number of items to be shown at the same time.
+   */
+  void setNumberOfItems(quint32 number);
 
-    /**
-     * @return The number of items to be shown at the same time.
-     */
-    quint32 numberOfItems() const;
+  /**
+   * @return The number of items to be shown at the same time.
+   */
+  quint32 numberOfItems() const;
 
-    /**
-     * This function returns all items at the position @p curpos. Depending on where they have
-     * been painted the last time.
-     *
-     * @return The items at the given position.
-     */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
+  /**
+   * This function returns all items at the position @p curpos. Depending on where they have
+   * been painted the last time.
+   *
+   * @return The items at the given position.
+   */
+  QList<AbstractDataPluginItem *> whichItemAt(const QPoint& curpos);
 
-    /**
-     * Function for returning the type of plugin this is for.
-     * This affects where in the menu tree the action() is placed.
-     *
-     * @return: The type of render plugin this is.
-     */
-    virtual RenderType renderType() const;
+  /**
+   * Function for returning the type of plugin this is for.
+   * This affects where in the menu tree the action() is placed.
+   *
+   * @return: The type of render plugin this is.
+   */
+  virtual RenderType renderType() const;
 
-    /** Convenience method to set the favorite item state on the current model */
-    void setFavoriteItemsOnly( bool favoriteOnly );
+  /** Convenience method to set the favorite item state on the current model */
+  void setFavoriteItemsOnly(bool favoriteOnly);
 
-    bool isFavoriteItemsOnly() const;
+  bool isFavoriteItemsOnly() const;
 
-    QObject* favoritesModel();
+  QObject *favoritesModel();
 
- private Q_SLOTS:
-    virtual void favoriteItemsChanged( const QStringList& favoriteItems );
+private Q_SLOTS:
+  virtual void favoriteItemsChanged(const QStringList& favoriteItems);
 
-    void delayedUpdate();
+  void delayedUpdate();
 
- Q_SIGNALS:
-    void changedNumberOfItems( quint32 number );
+Q_SIGNALS:
+  void changedNumberOfItems(quint32 number);
 
-    void favoriteItemsOnlyChanged();
+  void favoriteItemsOnlyChanged();
 
-    void favoritesModelChanged();
+  void favoritesModelChanged();
 
- private:
-    AbstractDataPluginPrivate * const d;
+private:
+  AbstractDataPluginPrivate * const d;
 };
 
 }

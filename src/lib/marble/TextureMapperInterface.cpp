@@ -14,10 +14,9 @@
 using namespace Marble;
 
 TextureMapperInterface::TextureMapperInterface() :
-    m_repaintNeeded( true )
+  m_repaintNeeded(true)
 {
 }
-
 
 TextureMapperInterface::~TextureMapperInterface()
 {
@@ -25,5 +24,5 @@ TextureMapperInterface::~TextureMapperInterface()
 
 void TextureMapperInterface::setRepaintNeeded()
 {
-    m_repaintNeeded = true;
+  m_repaintNeeded = true;
 }

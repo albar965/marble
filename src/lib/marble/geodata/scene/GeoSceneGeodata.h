@@ -18,54 +18,53 @@
 #include <QPen>
 #include <QBrush>
 
-namespace Marble
+namespace Marble {
+
+class GEODATA_EXPORT GeoSceneGeodata :
+  public GeoSceneAbstractDataset
 {
+public:
+  explicit GeoSceneGeodata(const QString& name);
+  virtual ~GeoSceneGeodata();
+  virtual const char *nodeType() const;
 
-class GEODATA_EXPORT GeoSceneGeodata : public GeoSceneAbstractDataset
-{
- public:
-    explicit GeoSceneGeodata( const QString& name );
-    virtual ~GeoSceneGeodata();
-    virtual const char* nodeType() const;
+  bool operator==(const GeoSceneGeodata& other) const;
 
-    bool operator==( const GeoSceneGeodata &other ) const;
+  QString property() const;
+  void setProperty(const QString& property);
 
-    QString property() const;
-    void setProperty( const QString& property );
+  QString sourceFile() const;
+  void setSourceFile(const QString& sourceFile);
 
-    QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
+  QString colorize() const;
+  void setColorize(const QString& colorize);
 
-    QString colorize() const;
-    void setColorize( const QString& colorize );
+  qreal alpha() const;
+  void setAlpha(const qreal& alpha);
 
-    qreal alpha() const;
-    void setAlpha( const qreal &alpha );
+  QPen pen() const;
+  void setPen(const QPen& pen);
 
-    QPen pen() const;
-    void setPen( const QPen& pen );
+  QBrush brush() const;
+  void setBrush(const QBrush& brush);
 
-    QBrush brush() const;
-    void setBrush( const QBrush& brush );
+  int renderOrder() const;
+  void setRenderOrder(int renderOrder);
 
-    int renderOrder() const;
-    void setRenderOrder( int renderOrder );
+  QList<QColor> colors() const;
+  void setColors(const QList<QColor>& colors);
 
-    QList<QColor> colors() const;
-    void setColors( const QList<QColor> &colors );
-
- private:
-    QString m_property;
-    QString m_sourceFile;
-    QString m_colorize;
-    qreal   m_alpha;
-    QPen    m_pen;
-    QBrush  m_brush;
-    int m_renderOrder;
-    QList<QColor> m_colors;
+private:
+  QString m_property;
+  QString m_sourceFile;
+  QString m_colorize;
+  qreal m_alpha;
+  QPen m_pen;
+  QBrush m_brush;
+  int m_renderOrder;
+  QList<QColor> m_colors;
 };
 
 }
-
 
 #endif

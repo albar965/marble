@@ -26,8 +26,7 @@ class QImage;
 class QString;
 class QSize;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataGroundOverlay;
 class SunLocator;
@@ -38,54 +37,54 @@ class TileLoader;
 
 class MergedLayerDecorator
 {
- public:
-    MergedLayerDecorator( TileLoader * const tileLoader, const SunLocator* sunLocator );
-    virtual ~MergedLayerDecorator();
+public:
+  MergedLayerDecorator(TileLoader * const tileLoader, const SunLocator *sunLocator);
+  virtual ~MergedLayerDecorator();
 
-    void setTextureLayers( const QVector<const GeoSceneTextureTileDataset *> &textureLayers );
-    void updateGroundOverlays( const QList<const GeoDataGroundOverlay *> &groundOverlays );
+  void setTextureLayers(const QVector<const GeoSceneTextureTileDataset *>& textureLayers);
+  void updateGroundOverlays(const QList<const GeoDataGroundOverlay *>& groundOverlays);
 
-    int textureLayersSize() const;
+  int textureLayersSize() const;
 
-    /**
-     * Returns the highest level in which some tiles are theoretically
-     * available for the current texture layers.
-     */
-    int maximumTileLevel() const;
+  /**
+   * Returns the highest level in which some tiles are theoretically
+   * available for the current texture layers.
+   */
+  int maximumTileLevel() const;
 
-    int tileColumnCount( int level ) const;
+  int tileColumnCount(int level) const;
 
-    int tileRowCount( int level ) const;
+  int tileRowCount(int level) const;
 
-    GeoSceneTextureTileDataset::Projection tileProjection() const;
+  GeoSceneTextureTileDataset::Projection tileProjection() const;
 
-    QSize tileSize() const;
+  QSize tileSize() const;
 
-    StackedTile *loadTile(const TileId &id , QHash<QString, QString> keys);
+  StackedTile *loadTile(const TileId& id, QHash<QString, QString> keys);
 
-    StackedTile *updateTile( const StackedTile &stackedTile, const TileId &tileId, const QImage &tileImage );
+  StackedTile *updateTile(const StackedTile& stackedTile, const TileId& tileId, const QImage& tileImage);
 
-    void downloadStackedTile(const TileId &id, DownloadUsage usage , QHash<QString, QString> keys);
+  void downloadStackedTile(const TileId& id, DownloadUsage usage, QHash<QString, QString> keys);
 
-    void setShowSunShading( bool show );
-    bool showSunShading() const;
-    void setSunShadingDimFactor(qreal dimFactor);
-    qreal sunShadingDimFactor();
+  void setShowSunShading(bool show);
+  bool showSunShading() const;
+  void setSunShadingDimFactor(qreal dimFactor);
+  qreal sunShadingDimFactor();
 
-    void setShowCityLights( bool show );
-    bool showCityLights() const;
+  void setShowCityLights(bool show);
+  bool showCityLights() const;
 
-    void setShowTileId(bool show);
+  void setShowTileId(bool show);
 
-    RenderState renderState( const TileId &stackedTileId ) const;
+  RenderState renderState(const TileId& stackedTileId) const;
 
-    bool hasTextureLayer() const;
+  bool hasTextureLayer() const;
 
 protected:
-    Q_DISABLE_COPY( MergedLayerDecorator )
+  Q_DISABLE_COPY(MergedLayerDecorator)
 
-    class Private;
-    Private *const d;
+  class Private;
+  Private *const d;
 };
 
 }

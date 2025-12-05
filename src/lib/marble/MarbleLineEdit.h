@@ -19,8 +19,7 @@
 
 #include <QLineEdit>
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleLineEditPrivate;
 
@@ -29,41 +28,42 @@ class MarbleLineEditPrivate;
   * in the line edit when clicked with the left mouse button. It replaces the line
   * edit input with the current clipboard content on a middle mouse button click.
   */
-class MARBLE_EXPORT MarbleLineEdit : public QLineEdit
+class MARBLE_EXPORT MarbleLineEdit :
+  public QLineEdit
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    /** Constructor */
-    explicit MarbleLineEdit( QWidget *parent = 0 );
+  /** Constructor */
+  explicit MarbleLineEdit(QWidget *parent = 0);
 
-    /** Destructor */
-    ~MarbleLineEdit();
+  /** Destructor */
+  ~MarbleLineEdit();
 
-    void setDecorator( const QPixmap &decorator );
+  void setDecorator(const QPixmap& decorator);
 
-    void setBusy( bool busy );
+  void setBusy(bool busy);
 
 Q_SIGNALS:
-    /** The clear button was clicked with the left mouse button */
-    void clearButtonClicked();
+  /** The clear button was clicked with the left mouse button */
+  void clearButtonClicked();
 
-    void decoratorButtonClicked();
+  void decoratorButtonClicked();
 
 protected:
-    virtual void mouseReleaseEvent( QMouseEvent* event );
+  virtual void mouseReleaseEvent(QMouseEvent *event);
 
-    virtual void resizeEvent( QResizeEvent* event );
+  virtual void resizeEvent(QResizeEvent *event);
 
 private Q_SLOTS:
-    void updateClearButtonIcon( const QString& text );
+  void updateClearButtonIcon(const QString& text);
 
-    void updateClearButton();
+  void updateClearButton();
 
-    void updateProgress();
+  void updateProgress();
 
 private:
-    MarbleLineEditPrivate* const d;
+  MarbleLineEditPrivate * const d;
 };
 
 } // namespace Marble

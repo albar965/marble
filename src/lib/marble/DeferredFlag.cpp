@@ -17,42 +17,41 @@
 
 using namespace Marble;
 
-DeferredFlag::DeferredFlag( QObject* parent )
-    : QObject(parent)
+DeferredFlag::DeferredFlag(QObject *parent)
+  : QObject(parent)
 {
-    QPixmapCache::setCacheLimit ( 384 );
+  QPixmapCache::setCacheLimit(384);
 }
 
-void DeferredFlag::setFlag( const QString& filename, const QSize& size )
+void DeferredFlag::setFlag(const QString& filename, const QSize& size)
 {
-    m_filename = filename;
-    m_size     = size;
+  m_filename = filename;
+  m_size = size;
 }
-
 
 void DeferredFlag::slotDrawFlag()
 {
-    QString  keystring = QString( m_filename ).remove( "flags/" );
+  QString keystring = QString(m_filename).remove("flags/");
 
-    if ( !QPixmapCache::find( keystring, m_pixmap ) ) {
-        QSvgRenderer  svgobj( m_filename, this );
-        QSize         flagsize = svgobj.viewBox().size();
-        flagsize.scale( m_size, Qt::KeepAspectRatio );
+  if(!QPixmapCache::find(keystring, m_pixmap))
+  {
+    QSvgRenderer svgobj(m_filename, this);
+    QSize flagsize = svgobj.viewBox().size();
+    flagsize.scale(m_size, Qt::KeepAspectRatio);
 
-        m_pixmap = QPixmap( flagsize );
-        m_pixmap.fill(Qt::transparent);
+    m_pixmap = QPixmap(flagsize);
+    m_pixmap.fill(Qt::transparent);
 
-        QPainter painter( &m_pixmap );
-        painter.setRenderHint( QPainter::Antialiasing, true );
+    QPainter painter(&m_pixmap);
+    painter.setRenderHint(QPainter::Antialiasing, true);
 
-        QRect  viewport( QPoint( 0, 0 ), flagsize );
-        painter.setViewport( viewport );
-        svgobj.render( &painter );
-        QPixmapCache::insert( keystring, m_pixmap );
-    }
+    QRect viewport(QPoint(0, 0), flagsize);
+    painter.setViewport(viewport);
+    svgobj.render(&painter);
+    QPixmapCache::insert(keystring, m_pixmap);
+  }
 
-    emit flagDone();
+  emit flagDone();
 }
-
 
 #include "moc_DeferredFlag.cpp"

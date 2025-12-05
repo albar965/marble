@@ -14,30 +14,29 @@
 #include "GeoParser.h"
 #include "GeoSceneTileDataset.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(TileSize)
 
-GeoNode* DgmlTileSizeTagHandler::parse( GeoParser& parser ) const
+GeoNode *DgmlTileSizeTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_TileSize ));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_TileSize));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile ))
-        return 0;
-
-    int width = parser.attribute(dgmlAttr_width).toInt();
-    int height = parser.attribute(dgmlAttr_height).toInt();
-    QSize const size( width, height );
-    if ( !size.isEmpty() ) {
-        parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize( size );
-    }
-
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(!parentItem.represents(dgmlTag_Texture) && !parentItem.represents(dgmlTag_Vectortile))
     return 0;
+
+  int width = parser.attribute(dgmlAttr_width).toInt();
+  int height = parser.attribute(dgmlAttr_height).toInt();
+  QSize const size(width, height);
+  if(!size.isEmpty())
+  {
+    parentItem.nodeAs<GeoSceneTileDataset>()->setTileSize(size);
+  }
+
+  return 0;
 }
 
 }

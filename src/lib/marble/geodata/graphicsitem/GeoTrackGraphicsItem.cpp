@@ -18,30 +18,31 @@
 
 using namespace Marble;
 
-GeoTrackGraphicsItem::GeoTrackGraphicsItem( const GeoDataFeature *feature, const GeoDataTrack *track )
-    : GeoLineStringGraphicsItem( feature, track->lineString() )
+GeoTrackGraphicsItem::GeoTrackGraphicsItem(const GeoDataFeature *feature, const GeoDataTrack *track)
+  : GeoLineStringGraphicsItem(feature, track->lineString())
 {
-    setTrack( track );
-    if (feature) {
-        QString const paintLayer = QString("Track/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
-        setPaintLayers(QStringList() << paintLayer);
-    }
+  setTrack(track);
+  if(feature)
+  {
+    QString const paintLayer = QString("Track/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
+    setPaintLayers(QStringList() << paintLayer);
+  }
 }
 
-void GeoTrackGraphicsItem::setTrack( const GeoDataTrack* track )
+void GeoTrackGraphicsItem::setTrack(const GeoDataTrack *track)
 {
-    m_track = track;
-    update();
+  m_track = track;
+  update();
 }
 
-void GeoTrackGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport , const QString &layer)
+void GeoTrackGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer)
 {
-    Q_UNUSED(layer);
-    update();
-    GeoLineStringGraphicsItem::paint(painter, viewport, layer);
+  Q_UNUSED(layer);
+  update();
+  GeoLineStringGraphicsItem::paint(painter, viewport, layer);
 }
 
 void GeoTrackGraphicsItem::update()
 {
-    setLineString( m_track->lineString() );
+  setLineString(m_track->lineString());
 }

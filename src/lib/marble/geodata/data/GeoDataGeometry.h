@@ -10,10 +10,8 @@
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
-
 #ifndef MARBLE_GEODATAGEOMETRY_H
 #define MARBLE_GEODATAGEOMETRY_H
-
 
 #include "GeoDataObject.h"
 #include "Serializable.h"
@@ -21,8 +19,7 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataGeometryPrivate;
 
@@ -44,47 +41,49 @@ class GeoDataOrientation;
  * @see GeoDataPolygon
  */
 
-class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
+class GEODATA_EXPORT GeoDataGeometry :
+  public GeoDataObject
 {
- public:
-    GeoDataGeometry();
-    GeoDataGeometry( const GeoDataGeometry& other );
-    GeoDataGeometry& operator=( const GeoDataGeometry& other );
-    
-    virtual ~GeoDataGeometry();
+public:
+  GeoDataGeometry();
+  GeoDataGeometry(const GeoDataGeometry& other);
+  GeoDataGeometry& operator=(const GeoDataGeometry& other);
 
-    /// Provides type information for downcasting a GeoData
-    virtual const char* nodeType() const;
-    virtual EnumGeometryId geometryId() const;
+  virtual ~GeoDataGeometry();
 
-    bool extrude() const;
-    void setExtrude( bool extrude );
+  /// Provides type information for downcasting a GeoData
+  virtual const char *nodeType() const;
+  virtual EnumGeometryId geometryId() const;
 
-    AltitudeMode altitudeMode() const;
-    void setAltitudeMode( const AltitudeMode altitudeMode );
+  bool extrude() const;
+  void setExtrude(bool extrude);
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  AltitudeMode altitudeMode() const;
+  void setAltitudeMode(const AltitudeMode altitudeMode);
 
-    /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
-    /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    void detach();
+  /// Serialize the contents of the feature to @p stream.
+  virtual void pack(QDataStream& stream) const;
 
- protected:
-    explicit GeoDataGeometry( GeoDataGeometryPrivate* priv );
+  /// Unserialize the contents of the feature from @p stream.
+  virtual void unpack(QDataStream& stream);
 
-    bool equals(const GeoDataGeometry &other) const;
+  void detach();
 
-    using GeoDataObject::equals;
+protected:
+  explicit GeoDataGeometry(GeoDataGeometryPrivate *priv);
 
- protected:
-    GeoDataGeometryPrivate *d;
+  bool equals(const GeoDataGeometry& other) const;
+
+  using GeoDataObject::equals;
+
+protected:
+  GeoDataGeometryPrivate *d;
 };
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataGeometry* )
+Q_DECLARE_METATYPE(Marble::GeoDataGeometry *)
 
 #endif

@@ -10,25 +10,24 @@
 
 #include "PositionProviderPluginInterface.h"
 
-namespace Marble
-{
+namespace Marble {
 
 PositionProviderPluginInterface::~PositionProviderPluginInterface()
 {
-    // nothing to do
+  // nothing to do
 }
 
 QString PositionProviderPluginInterface::error() const
 {
-    // Subclasses are expected to override this, but we provide
-    // a default implementation
+  // Subclasses are expected to override this, but we provide
+  // a default implementation
 
-    if ( status() == PositionProviderStatusError )
-    {
-        return QObject::tr( "Unknown error" );
-    }
+  if(status() == PositionProviderStatusError)
+  {
+    return QObject::tr("Unknown error");
+  }
 
-    return QString();
+  return QString();
 }
 
 } // namespace Marble

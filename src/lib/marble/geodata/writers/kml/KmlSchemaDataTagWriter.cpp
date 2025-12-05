@@ -20,27 +20,27 @@
 #include "GeoDataSchemaData.h"
 #include "GeoDataSimpleData.h"
 
-namespace Marble
-{
+namespace Marble {
 
 static GeoTagWriterRegistrar s_writerSchemaData(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataSchemaDataType,
-                                 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlSchemaDataTagWriter );
+  GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataSchemaDataType,
+                              kml::kmlTag_nameSpaceOgc22),
+  new KmlSchemaDataTagWriter);
 
-bool KmlSchemaDataTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlSchemaDataTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
-    const GeoDataSchemaData *schemaData = static_cast<const GeoDataSchemaData*>( node );
-    writer.writeStartElement( kml::kmlTag_SchemaData );
-    QString schemaUrl = schemaData->schemaUrl();
-    writer.writeAttribute( "schemaUrl", schemaUrl );
+  const GeoDataSchemaData *schemaData = static_cast<const GeoDataSchemaData *>(node);
+  writer.writeStartElement(kml::kmlTag_SchemaData);
+  QString schemaUrl = schemaData->schemaUrl();
+  writer.writeAttribute("schemaUrl", schemaUrl);
 
-    foreach( const GeoDataSimpleData& data, schemaData->simpleDataList() ) {
-        writeElement( &data, writer );
-    }
-    writer.writeEndElement();
+  foreach(const GeoDataSimpleData& data, schemaData->simpleDataList())
+  {
+    writeElement(&data, writer);
+  }
+  writer.writeEndElement();
 
-    return true;
+  return true;
 }
 
 }

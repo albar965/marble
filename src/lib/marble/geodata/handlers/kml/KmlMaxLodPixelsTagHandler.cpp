@@ -16,25 +16,24 @@
 #include "GeoDataLod.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(maxLodPixels)
+
+GeoNode *KmlmaxLodPixelsTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( maxLodPixels )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_maxLodPixels));
 
-GeoNode* KmlmaxLodPixelsTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxLodPixels ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Lod))
+  {
+    float maxLodPixels = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_Lod ) ) {
-        float maxLodPixels = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLod>()->setMaxLodPixels(maxLodPixels);
+  }
 
-        parentItem.nodeAs<GeoDataLod>()->setMaxLodPixels( maxLodPixels );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

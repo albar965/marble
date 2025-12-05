@@ -18,18 +18,18 @@
 
 class QTreeWidgetItem;
 
-namespace Marble
-{
+namespace Marble {
 
 class OsmRelationManagerWidgetPrivate;
 class GeoDataPlacemark;
 class GeoDataFeature;
 class OsmPlacemarkData;
 
-enum Column {
-    Name = 0,
-    Type = 1,
-    Role = 2
+enum Column
+{
+  Name = 0,
+  Type = 1,
+  Role = 2
 };
 
 /**
@@ -37,39 +37,40 @@ enum Column {
  * within the Annotate Plugin.
  * It can add the placemark to any relation the Annotate Plugin has loaded, or to newly created ones
  */
-class MARBLE_EXPORT OsmRelationManagerWidget : public QWidget
+class MARBLE_EXPORT OsmRelationManagerWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit OsmRelationManagerWidget( GeoDataPlacemark *placemark,
-                                       const QHash<qint64, OsmPlacemarkData> *relations,
-                                       QWidget *parent = 0 );
-    ~OsmRelationManagerWidget();
+  explicit OsmRelationManagerWidget(GeoDataPlacemark *placemark,
+                                    const QHash<qint64, OsmPlacemarkData> *relations,
+                                    QWidget *parent = 0);
+  ~OsmRelationManagerWidget();
 
 public Q_SLOTS:
-    /**
-     * @brief addRelation adds the placemark to the relation specified in the action->text();
-     * If the text is "New Relation", a new relation is added
-     */
-    void addRelation( QAction* action );
-    void handleItemChange( QTreeWidgetItem *item, int column );
-    void handleDoubleClick( QTreeWidgetItem * item, int column );
-    void handleRelationContextMenuRequest( const QPoint& point );
-    /**
-     * @brief update updates the relations list and the suggested relations drop menu
-     */
-    void update();
+  /**
+   * @brief addRelation adds the placemark to the relation specified in the action->text();
+   * If the text is "New Relation", a new relation is added
+   */
+  void addRelation(QAction *action);
+  void handleItemChange(QTreeWidgetItem *item, int column);
+  void handleDoubleClick(QTreeWidgetItem *item, int column);
+  void handleRelationContextMenuRequest(const QPoint& point);
+
+  /**
+   * @brief update updates the relations list and the suggested relations drop menu
+   */
+  void update();
 
 Q_SIGNALS:
-    void relationCreated( const OsmPlacemarkData &relationData );
+  void relationCreated(const OsmPlacemarkData& relationData);
 
 private:
-    friend class OsmRelationManagerWidgetPrivate;
-    OsmRelationManagerWidgetPrivate* const d;
+  friend class OsmRelationManagerWidgetPrivate;
+  OsmRelationManagerWidgetPrivate * const d;
 };
 
 }
 
 #endif
- 

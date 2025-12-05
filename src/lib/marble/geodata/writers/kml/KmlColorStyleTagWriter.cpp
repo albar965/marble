@@ -16,52 +16,52 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-KmlColorStyleTagWriter::KmlColorStyleTagWriter(const QString &elementName)
-    : m_elementName( elementName )
+KmlColorStyleTagWriter::KmlColorStyleTagWriter(const QString& elementName)
+  : m_elementName(elementName)
 {
-    // nothing to do
+  // nothing to do
 }
 
-bool KmlColorStyleTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer ) const
+bool KmlColorStyleTagWriter::write(const Marble::GeoNode *node, GeoWriter& writer) const
 {
-    GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle*>(node);
+  GeoDataColorStyle const *colorStyle = static_cast<const GeoDataColorStyle *>(node);
 
-    if ( colorStyle->id().isEmpty() &&
-         colorStyle->targetId().isEmpty() &&
-         colorStyle->color() == defaultColor() &&
-         colorStyle->colorMode() == GeoDataColorStyle::Normal &&
-         isEmpty( node ) ) {
-        return true;
-    }
+  if(colorStyle->id().isEmpty() &&
+     colorStyle->targetId().isEmpty() &&
+     colorStyle->color() == defaultColor() &&
+     colorStyle->colorMode() == GeoDataColorStyle::Normal &&
+     isEmpty(node))
+  {
+    return true;
+  }
 
-    writer.writeStartElement( m_elementName );
+  writer.writeStartElement(m_elementName);
 
-    KmlObjectTagWriter::writeIdentifiers( writer, colorStyle);
-    writer.writeOptionalElement( kml::kmlTag_color, formatColor( colorStyle->color() ), formatColor( defaultColor() ) );
-    QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
-    writer.writeOptionalElement( kml::kmlTag_colorMode, colorMode, "normal" );
+  KmlObjectTagWriter::writeIdentifiers(writer, colorStyle);
+  writer.writeOptionalElement(kml::kmlTag_color, formatColor(colorStyle->color()), formatColor(defaultColor()));
+  QString const colorMode = colorStyle->colorMode() == GeoDataColorStyle::Random ? "random" : "normal";
+  writer.writeOptionalElement(kml::kmlTag_colorMode, colorMode, "normal");
 
-    bool const result = writeMid( node, writer );
-    writer.writeEndElement();
-    return result;
+  bool const result = writeMid(node, writer);
+  writer.writeEndElement();
+  return result;
 }
 
-QString KmlColorStyleTagWriter::formatColor( const QColor &color )
+QString KmlColorStyleTagWriter::formatColor(const QColor& color)
 {
-    QChar const fill = QChar( '0' );
-    return QString( "%1%2%3%4" )
-                 .arg( color.alpha(), 2, 16, fill )
-                 .arg( color.blue(), 2, 16, fill )
-                 .arg( color.green(), 2, 16, fill )
-                 .arg( color.red(), 2, 16, fill );
+  QChar const fill = QChar('0');
+  return QString("%1%2%3%4")
+         .arg(color.alpha(), 2, 16, fill)
+         .arg(color.blue(), 2, 16, fill)
+         .arg(color.green(), 2, 16, fill)
+         .arg(color.red(), 2, 16, fill);
 }
 
 QColor KmlColorStyleTagWriter::defaultColor() const
 {
-    return QColor( Qt::white );
+  return QColor(Qt::white);
 }
 
 }

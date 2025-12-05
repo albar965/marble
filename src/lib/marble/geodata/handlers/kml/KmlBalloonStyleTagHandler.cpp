@@ -18,26 +18,25 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(BalloonStyle)
+
+GeoNode *KmlBalloonStyleTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( BalloonStyle )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_BalloonStyle));
 
-GeoNode* KmlBalloonStyleTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_BalloonStyle ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataBalloonStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
 
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataBalloonStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
-
-        parentItem.nodeAs<GeoDataStyle>()->setBalloonStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->balloonStyle();
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataStyle>()->setBalloonStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->balloonStyle();
+  }
+  return 0;
 }
 
 }

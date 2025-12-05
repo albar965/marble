@@ -12,7 +12,6 @@
 #ifndef MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
 #define MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
 
-
 #include "TextureMapperInterface.h"
 
 #include "MarbleGlobal.h"
@@ -20,42 +19,40 @@
 #include <QThreadPool>
 #include <QImage>
 
-
-namespace Marble
-{
+namespace Marble {
 
 class StackedTileLoader;
-
 
 /*
  * @short Texture mapping onto a sphere
  *
  * This class provides a fast way to map textures onto a sphere
- * without making use of hardware acceleration. 
+ * without making use of hardware acceleration.
  *
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-class SphericalScanlineTextureMapper : public TextureMapperInterface
+class SphericalScanlineTextureMapper :
+  public TextureMapperInterface
 {
- public:
-    explicit SphericalScanlineTextureMapper( StackedTileLoader *tileLoader );
+public:
+  explicit SphericalScanlineTextureMapper(StackedTileLoader *tileLoader);
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+  virtual void mapTexture(GeoPainter *painter,
+                          const ViewportParams *viewport,
+                          int tileZoomLevel,
+                          const QRect& dirtyRect,
+                          TextureColorizer *texColorizer);
 
- private:
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
+private:
+  void mapTexture(const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality);
 
- private:
-    class RenderJob;
-    StackedTileLoader *const m_tileLoader;
-    int m_radius;
-    QImage m_canvasImage;
-    QThreadPool m_threadPool;
+private:
+  class RenderJob;
+  StackedTileLoader *const m_tileLoader;
+  int m_radius;
+  QImage m_canvasImage;
+  QThreadPool m_threadPool;
 };
 
 }

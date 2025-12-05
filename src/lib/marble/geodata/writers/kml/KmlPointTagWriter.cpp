@@ -18,50 +18,50 @@
 #include "KmlGroundOverlayWriter.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
+namespace Marble {
+
+static GeoTagWriterRegistrar s_writerPoint(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPointType,
+                                                                       kml::kmlTag_nameSpaceOgc22),
+                                           new KmlPointTagWriter());
+
+bool KmlPointTagWriter::write(const GeoNode *node,
+                              GeoWriter& writer) const
 {
+  const GeoDataPoint *point = static_cast<const GeoDataPoint *>(node);
 
-static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPointType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlPointTagWriter() );
-
-
-bool KmlPointTagWriter::write( const GeoNode *node,
-                               GeoWriter& writer ) const
-{
-    const GeoDataPoint *point = static_cast<const GeoDataPoint*>(node);
-
-    if ( !point->coordinates().isValid() ){
-        return true;
-    }
-
-    writer.writeStartElement( kml::kmlTag_Point );
-    KmlObjectTagWriter::writeIdentifiers( writer, point );
-    writer.writeOptionalElement( kml::kmlTag_extrude, QString::number( point->extrude() ), "0" );
-    writer.writeStartElement("coordinates");
-
-    QString coordinateString;
-
-    //FIXME: this should be using the GeoDataCoordinates::toString but currently
-    // it is not including the altitude and is adding an extra space after commas
-
-    coordinateString += QString::number( point->coordinates().longitude( GeoDataCoordinates::Degree ), 'f', 10 );
-    coordinateString += ',' ;
-    coordinateString += QString::number( point->coordinates().latitude( GeoDataCoordinates::Degree ) , 'f', 10 );
-
-    if( point->coordinates().altitude() ) {
-        coordinateString += ',';
-        coordinateString += QString::number( point->coordinates().altitude() , 'f' , 10);
-    }
-
-    writer.writeCharacters( coordinateString );
-    writer.writeEndElement();
-
-    KmlGroundOverlayWriter::writeAltitudeMode( writer, point->altitudeMode() );
-
-    writer.writeEndElement();
-
+  if(!point->coordinates().isValid())
+  {
     return true;
+  }
+
+  writer.writeStartElement(kml::kmlTag_Point);
+  KmlObjectTagWriter::writeIdentifiers(writer, point);
+  writer.writeOptionalElement(kml::kmlTag_extrude, QString::number(point->extrude()), "0");
+  writer.writeStartElement("coordinates");
+
+  QString coordinateString;
+
+  // FIXME: this should be using the GeoDataCoordinates::toString but currently
+  // it is not including the altitude and is adding an extra space after commas
+
+  coordinateString += QString::number(point->coordinates().longitude(GeoDataCoordinates::Degree), 'f', 10);
+  coordinateString += ',';
+  coordinateString += QString::number(point->coordinates().latitude(GeoDataCoordinates::Degree), 'f', 10);
+
+  if(point->coordinates().altitude())
+  {
+    coordinateString += ',';
+    coordinateString += QString::number(point->coordinates().altitude(), 'f', 10);
+  }
+
+  writer.writeCharacters(coordinateString);
+  writer.writeEndElement();
+
+  KmlGroundOverlayWriter::writeAltitudeMode(writer, point->altitudeMode());
+
+  writer.writeEndElement();
+
+  return true;
 }
 
 }

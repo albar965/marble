@@ -52,146 +52,148 @@ class GeoDataLineString;
  * coordinates with the second time value, etc. This follows the way "coord"
  * and "when" tags inside the Track tag should be parsed.
  */
-class GEODATA_EXPORT GeoDataTrack : public GeoDataGeometry
+class GEODATA_EXPORT GeoDataTrack :
+  public GeoDataGeometry
 {
 
 public:
-    GeoDataTrack();
-    explicit GeoDataTrack( const GeoDataTrack &other );
+  GeoDataTrack();
+  explicit GeoDataTrack(const GeoDataTrack& other);
 
-    GeoDataTrack &operator=( const GeoDataTrack &other );
+  GeoDataTrack& operator=(const GeoDataTrack& other);
 
-    /**
-     * Returns the number of points in the track
-     */
-    int size() const;
+  /**
+   * Returns the number of points in the track
+   */
+  int size() const;
 
-    /**
-     * @brief: Equality operators.
-     */
-    bool operator==( const GeoDataTrack& other ) const;
-    bool operator!=( const GeoDataTrack& other ) const;
+  /**
+   * @brief: Equality operators.
+   */
+  bool operator==(const GeoDataTrack& other) const;
+  bool operator!=(const GeoDataTrack& other) const;
 
-    /**
-     * Returns true if coordinatesAt() should use interpolation, false otherwise.
-     * The default is false.
-     *
-     * @see setInterpolate, coordinatesAt
-     */
-    bool interpolate() const;
+  /**
+   * Returns true if coordinatesAt() should use interpolation, false otherwise.
+   * The default is false.
+   *
+   * @see setInterpolate, coordinatesAt
+   */
+  bool interpolate() const;
 
-    /**
-     * Set whether coordinatesAt() should use interpolation.
-     *
-     * @see interpolate, coordinatesAt
-     */
-    void setInterpolate(bool on);
+  /**
+   * Set whether coordinatesAt() should use interpolation.
+   *
+   * @see interpolate, coordinatesAt
+   */
+  void setInterpolate(bool on);
 
-    /**
-     * Return the time value of the first point in the track, or
-     * an invalid QDateTime if the track is empty.
-     */
-    QDateTime firstWhen() const;
+  /**
+   * Return the time value of the first point in the track, or
+   * an invalid QDateTime if the track is empty.
+   */
+  QDateTime firstWhen() const;
 
-    /**
-     * Return the time value of the last point in the track, or
-     * an invalid QDateTime if the track is empty.
-     */
-    QDateTime lastWhen() const;
+  /**
+   * Return the time value of the last point in the track, or
+   * an invalid QDateTime if the track is empty.
+   */
+  QDateTime lastWhen() const;
 
-    /**
-     * Returns the coordinates of all the points in the map, sorted by their
-     * time value
-     */
-    QVector<GeoDataCoordinates> coordinatesList() const;
+  /**
+   * Returns the coordinates of all the points in the map, sorted by their
+   * time value
+   */
+  QVector<GeoDataCoordinates> coordinatesList() const;
 
-    /**
-     * Returns the time value of all the points in the map, in chronological
-     * order.
-     */
-    QList<QDateTime> whenList() const;
+  /**
+   * Returns the time value of all the points in the map, in chronological
+   * order.
+   */
+  QList<QDateTime> whenList() const;
 
-    /**
-     * If interpolate() is true, return the coordinates interpolated from the
-     * time values before and after @p when, otherwise return the coordinates
-     * of the point with the closest time value less than or equal to @p when.
-     *
-     * @see interpolate
-     */
-    GeoDataCoordinates coordinatesAt( const QDateTime &when ) const;
+  /**
+   * If interpolate() is true, return the coordinates interpolated from the
+   * time values before and after @p when, otherwise return the coordinates
+   * of the point with the closest time value less than or equal to @p when.
+   *
+   * @see interpolate
+   */
+  GeoDataCoordinates coordinatesAt(const QDateTime& when) const;
 
-    /**
-     * Return coordinates at specified index. This is useful when the track contains
-     * coordinates without time information.
-     */
-    GeoDataCoordinates coordinatesAt( int index ) const;
+  /**
+   * Return coordinates at specified index. This is useful when the track contains
+   * coordinates without time information.
+   */
+  GeoDataCoordinates coordinatesAt(int index) const;
 
-    /**
-     * Add a new point with coordinates @p coord associated with the
-     * time value @p when
-     */
-    void addPoint( const QDateTime &when, const GeoDataCoordinates &coord );
+  /**
+   * Add a new point with coordinates @p coord associated with the
+   * time value @p when
+   */
+  void addPoint(const QDateTime& when, const GeoDataCoordinates& coord);
 
-    /**
-     * Add the coordinates part for a new point. See this class description
-     * for more information.
-     * @see appendWhen
-     */
-    void appendCoordinates( const GeoDataCoordinates &coord );
+  /**
+   * Add the coordinates part for a new point. See this class description
+   * for more information.
+   * @see appendWhen
+   */
+  void appendCoordinates(const GeoDataCoordinates& coord);
 
-    /**
-     * Add altitude information to the last appended coordinates
-     */
-    void appendAltitude( qreal altitude );
+  /**
+   * Add altitude information to the last appended coordinates
+   */
+  void appendAltitude(qreal altitude);
 
-    /**
-     * Add the time value part for a new point. See this class description
-     * for more information.
-     * @see appendCoordinates
-     */
-    void appendWhen( const QDateTime &when );
+  /**
+   * Add the time value part for a new point. See this class description
+   * for more information.
+   * @see appendCoordinates
+   */
+  void appendWhen(const QDateTime& when);
 
-    /**
-     * Remove all the points contained in the track.
-     */
-    void clear();
+  /**
+   * Remove all the points contained in the track.
+   */
+  void clear();
 
-    /**
-     * Remove all points from the track whose time value is less than @p when.
-     */
-    void removeBefore( const QDateTime &when );
+  /**
+   * Remove all points from the track whose time value is less than @p when.
+   */
+  void removeBefore(const QDateTime& when);
 
-    /**
-     * Remove all points from the track whose time value is greater than @p when.
-     */
-    void removeAfter( const QDateTime &when );
+  /**
+   * Remove all points from the track whose time value is greater than @p when.
+   */
+  void removeAfter(const QDateTime& when);
 
-    /**
-     * Return the GeoDataLineString representing the current track
-     */
-    const GeoDataLineString *lineString() const;
+  /**
+   * Return the GeoDataLineString representing the current track
+   */
+  const GeoDataLineString *lineString() const;
 
-    /**
-     * Return the ExtendedData assigned to the feature.
-     */
-    GeoDataExtendedData& extendedData() const;
+  /**
+   * Return the ExtendedData assigned to the feature.
+   */
+  GeoDataExtendedData& extendedData() const;
 
-    /**
-     * Sets the ExtendedData of the feature.
-     * @param  extendedData  the new ExtendedData to be used.
-     */
-    void setExtendedData( const GeoDataExtendedData& extendedData );
+  /**
+   * Sets the ExtendedData of the feature.
+   * @param  extendedData  the new ExtendedData to be used.
+   */
+  void setExtendedData(const GeoDataExtendedData& extendedData);
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
-    virtual void pack( QDataStream& stream ) const;
-    virtual void unpack( QDataStream& stream );
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  virtual void pack(QDataStream& stream) const;
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataTrackPrivate *p() const;
+  GeoDataTrackPrivate *p() const;
+
 };
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataTrack* )
+Q_DECLARE_METATYPE(Marble::GeoDataTrack *)
 
 #endif // MARBLE_GEODATATRACK_H

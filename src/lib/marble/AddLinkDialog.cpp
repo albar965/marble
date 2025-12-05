@@ -19,62 +19,68 @@
 
 namespace Marble {
 
-class Q_DECL_HIDDEN AddLinkDialog::Private : public Ui::UiAddLinkDialog
+class Q_DECL_HIDDEN AddLinkDialog::Private :
+  public Ui::UiAddLinkDialog
 {
 public:
-    Private();
-    ~Private();
+  Private();
+  ~Private();
 };
 
 AddLinkDialog::Private::Private() :
-    Ui::UiAddLinkDialog()
+  Ui::UiAddLinkDialog()
 {
-    // nothing to do
+  // nothing to do
 }
 
 AddLinkDialog::Private::~Private()
 {
 }
 
-AddLinkDialog::AddLinkDialog( QWidget *parent ) :
-    QDialog( parent ),
-    d( new Private() )
+AddLinkDialog::AddLinkDialog(QWidget *parent) :
+  QDialog(parent),
+  d(new Private())
 {
-    d->setupUi( this );
+  d->setupUi(this);
 
-    d->buttonBox->button( QDialogButtonBox::Ok )->setDefault( true );
-    connect( d->buttonBox->button( QDialogButtonBox::Ok ), SIGNAL(pressed()), this, SLOT(checkFields()) );
-    connect( this, SIGNAL(finished(int)), SLOT(deleteLater()) );
+  d->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
+  connect(d->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(checkFields()));
+  connect(this, SIGNAL(finished(int)), SLOT(deleteLater()));
 }
 
 AddLinkDialog::~AddLinkDialog()
 {
-    delete d;
+  delete d;
 }
 
 QString AddLinkDialog::name() const
 {
-    return d->m_name->text();
+  return d->m_name->text();
 }
 
 QString AddLinkDialog::url() const
 {
-    return d->m_url->text();
+  return d->m_url->text();
 }
 
 void AddLinkDialog::checkFields()
 {
-    if ( d->m_url->text().isEmpty() ) {
-            QMessageBox::warning( this,
-                                  tr( "No URL specified" ),
-                                  tr( "Please specify a URL for this link." ) );
-    } else if ( d->m_name->text().isEmpty() ) {
-        QMessageBox::warning( this,
-                              tr( "No name specified" ),
-                              tr( "Please specify a name for this link." ) );
-    } else {
-        accept();
-    }
+  if(d->m_url->text().isEmpty())
+  {
+    QMessageBox::warning(this,
+                         tr("No URL specified"),
+                         tr("Please specify a URL for this link."));
+  }
+  else if(d->m_name->text().isEmpty())
+  {
+    QMessageBox::warning(this,
+                         tr("No name specified"),
+                         tr("Please specify a name for this link."));
+  }
+  else
+  {
+    accept();
+  }
 }
 
 }

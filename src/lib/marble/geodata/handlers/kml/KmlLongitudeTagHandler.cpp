@@ -22,30 +22,33 @@
 #include "MarbleGlobal.h"
 #include "GeoDataLocation.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(longitude)
+
+GeoNode *KmllongitudeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-    KML_DEFINE_TAG_HANDLER( longitude )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_longitude));
 
-    GeoNode *KmllongitudeTagHandler::parse( GeoParser & parser ) const
-    {
-        Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_longitude ) );
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataLookAt>())
+  {
+    qreal longitude = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataLookAt>()->setLongitude(longitude, GeoDataCoordinates::Degree);
+  }
+  else if(parentItem.is<GeoDataCamera>())
+  {
+    qreal longitude = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataCamera>()->setLongitude(longitude, GeoDataCoordinates::Degree);
+  }
+  else if(parentItem.is<GeoDataLocation>())
+  {
+    qreal longitude = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataLocation>()->setLongitude(longitude, GeoDataCoordinates::Degree);
+  }
 
-        GeoStackItem parentItem = parser.parentElement();
-        if ( parentItem.is<GeoDataLookAt>() ) {
-            qreal longitude = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataLookAt>()->setLongitude(longitude, GeoDataCoordinates::Degree);
-        } else if ( parentItem.is<GeoDataCamera>() ) {
-            qreal longitude = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataCamera>()->setLongitude(longitude, GeoDataCoordinates::Degree);
-        } else if ( parentItem.is<GeoDataLocation>() ) {
-            qreal longitude = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataLocation>()->setLongitude(longitude, GeoDataCoordinates::Degree);
-        }
-
-      return 0;
-    }
+  return 0;
+}
 
 }
 }

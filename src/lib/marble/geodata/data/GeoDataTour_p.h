@@ -16,55 +16,56 @@
 #include "GeoDataTypes.h"
 #include "GeoDataPlaylist.h"
 
+namespace Marble {
 
-namespace Marble
-{
-
-class GeoDataTourPrivate : public GeoDataFeaturePrivate
+class GeoDataTourPrivate :
+  public GeoDataFeaturePrivate
 {
 public:
-    GeoDataTourPrivate()
-        : m_playlist( 0 )
+  GeoDataTourPrivate()
+    : m_playlist(0)
+  {
+    // nothing to do
+  }
+
+  virtual ~GeoDataTourPrivate()
+  {
+    delete m_playlist;
+  }
+
+  GeoDataTourPrivate& operator=(const GeoDataTourPrivate& other)
+  {
+    if(this == &other)
     {
-        // nothing to do
+      return *this;
     }
 
-    virtual ~GeoDataTourPrivate()
+    GeoDataFeaturePrivate::operator=(other);
+
+    GeoDataPlaylist *newPlaylist = 0;
+    if(other.m_playlist)
     {
-        delete m_playlist;
+      newPlaylist = new GeoDataPlaylist(*other.m_playlist);
     }
+    delete m_playlist;
+    m_playlist = newPlaylist;
 
-    GeoDataTourPrivate& operator=( const GeoDataTourPrivate &other )
-    {
-        if ( this == &other ) {
-            return *this;
-        }
+    return *this;
+  }
 
-        GeoDataFeaturePrivate::operator=( other );
+  virtual GeoDataTourPrivate *copy()
+  {
+    GeoDataTourPrivate *copy = new GeoDataTourPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-        GeoDataPlaylist *newPlaylist = 0;
-        if ( other.m_playlist ) {
-            newPlaylist = new GeoDataPlaylist( *other.m_playlist );
-        }
-        delete m_playlist;
-        m_playlist = newPlaylist;
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataTourType;
+  }
 
-        return *this;
-    }
-
-    virtual GeoDataTourPrivate* copy()
-    {
-        GeoDataTourPrivate *copy = new GeoDataTourPrivate;
-        *copy = *this;
-        return copy;
-    }
-
-    virtual const char *nodeType() const
-    {
-        return GeoDataTypes::GeoDataTourType;
-    }
-
-    GeoDataPlaylist *m_playlist;
+  GeoDataPlaylist *m_playlist;
 };
 
 }

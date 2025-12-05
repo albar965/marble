@@ -19,7 +19,6 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 // Own
 #include "GeoDataParser.h"
 
@@ -31,18 +30,16 @@
 #include "GeoDocument.h"
 #include "GeoTagHandler.h"
 
-
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"
 
 // KML support
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDataParser::GeoDataParser(GeoDataSourceType source, const QString& docPath)
-    : GeoParser(source, docPath)
+  : GeoParser(source, docPath)
 {
 }
 
@@ -52,62 +49,64 @@ GeoDataParser::~GeoDataParser()
 
 bool GeoDataParser::isValidRootElement()
 {
-    if (m_source == GeoData_UNKNOWN)
+  if(m_source == GeoData_UNKNOWN)
+  {
+    if(GeoParser::isValidElement(kml::kmlTag_kml))
     {
-        if (GeoParser::isValidElement(kml::kmlTag_kml))
-        {
-            m_source = GeoData_KML;
-        }
-        else
-        {
-            Q_ASSERT(false);
-            return false;
-        }
+      m_source = GeoData_KML;
     }
-    switch ((GeoDataSourceType) m_source) {
+    else
+    {
+      Q_ASSERT(false);
+      return false;
+    }
+  }
+  switch((GeoDataSourceType)m_source)
+  {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML:
-        return isValidElement(kml::kmlTag_kml);
+      return isValidElement(kml::kmlTag_kml);
     default:
-        Q_ASSERT(false);
-        return false;
-    }
+      Q_ASSERT(false);
+      return false;
+  }
 }
 
 bool GeoDataParser::isValidElement(const QString& tagName) const
 {
-    if (!GeoParser::isValidElement(tagName))
-        return false;
+  if(!GeoParser::isValidElement(tagName))
+    return false;
 
-    switch ((GeoDataSourceType) m_source) {
+  switch((GeoDataSourceType)m_source)
+  {
     // TODO: case GeoData_GeoRSS:
     case GeoData_KML:
-        return (namespaceUri() == kml::kmlTag_nameSpace20 ||
-                namespaceUri() == kml::kmlTag_nameSpace21 ||
-                namespaceUri() == kml::kmlTag_nameSpace22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
-                namespaceUri() == kml::kmlTag_nameSpaceMx );
+      return namespaceUri() == kml::kmlTag_nameSpace20 ||
+             namespaceUri() == kml::kmlTag_nameSpace21 ||
+             namespaceUri() == kml::kmlTag_nameSpace22 ||
+             namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
+             namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
+             namespaceUri() == kml::kmlTag_nameSpaceMx;
     default:
-        break;
-    }
+      break;
+  }
 
-    // Should never be reached.
-    Q_ASSERT(false);
-    return false;
+  // Should never be reached.
+  Q_ASSERT(false);
+  return false;
 }
 
-GeoDocument* GeoDataParser::createDocument() const
+GeoDocument *GeoDataParser::createDocument() const
 {
-    return new GeoDataDocument;
+  return new GeoDataDocument;
 }
 
 // Global helper function for the tag handlers
-GeoDataDocument* geoDataDoc(GeoParser& parser)
+GeoDataDocument *geoDataDoc(GeoParser& parser)
 {
-    GeoDocument* document = parser.activeDocument();
-    Q_ASSERT(document->isGeoDataDocument());
-    return static_cast<GeoDataDocument*>(document);
+  GeoDocument *document = parser.activeDocument();
+  Q_ASSERT(document->isGeoDataDocument());
+  return static_cast<GeoDataDocument *>(document);
 }
 
 }

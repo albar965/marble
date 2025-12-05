@@ -27,16 +27,14 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneParser.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Document)
 
-GeoNode* DgmlDocumentTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlDocumentTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));
-    return geoSceneDoc(parser);
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));
+  return geoSceneDoc(parser);
 }
 
 }

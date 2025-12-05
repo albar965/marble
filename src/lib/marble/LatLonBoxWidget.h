@@ -14,31 +14,31 @@
 
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 class GeoDataLatLonBox;
 
-class MARBLE_EXPORT LatLonBoxWidget: public QWidget
+class MARBLE_EXPORT LatLonBoxWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit LatLonBoxWidget( QWidget * const parent = 0, Qt::WindowFlags const f = 0 );
-    ~LatLonBoxWidget();
-    GeoDataLatLonBox latLonBox() const;
-    void setLatLonBox( GeoDataLatLonBox const & );
+public:
+  explicit LatLonBoxWidget(QWidget * const parent = 0, Qt::WindowFlags const f = 0);
+  ~LatLonBoxWidget();
+  GeoDataLatLonBox latLonBox() const;
+  void setLatLonBox(GeoDataLatLonBox const&);
 
- Q_SIGNALS:
-    void valueChanged();
+Q_SIGNALS:
+  void valueChanged();
 
- private Q_SLOTS:
-    void updateLatSingleStep();
-    void updateLonSingleStep();
+private Q_SLOTS:
+  void updateLatSingleStep();
+  void updateLonSingleStep();
 
- private:
-    Q_DISABLE_COPY( LatLonBoxWidget )
-    class Private;
-    Private * const d;
+private:
+  Q_DISABLE_COPY(LatLonBoxWidget)
+  class Private;
+  Private * const d;
 };
 
 }

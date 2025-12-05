@@ -15,8 +15,7 @@
 
 class QDialog;
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @brief This interface allows a plugin to provide a QWidget-based configuration
@@ -30,19 +29,20 @@ namespace Marble
  */
 class MARBLE_EXPORT DialogConfigurationInterface
 {
- public:
-    virtual ~DialogConfigurationInterface();
+public:
+  virtual ~DialogConfigurationInterface();
 
-    /**
-     * @brief Returns a pointer to the configuration dialog of the plugin.
-     *
-     * @return: Pointer to the configuration dialog, which must be non-zero.
-     */
-    virtual QDialog *configDialog() = 0;
+  /**
+   * @brief Returns a pointer to the configuration dialog of the plugin.
+   *
+   * @return: Pointer to the configuration dialog, which must be non-zero.
+   */
+  virtual QDialog *configDialog() = 0;
+
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::DialogConfigurationInterface, "org.kde.Marble.DialogConfigurationInterface/1.0" )
+Q_DECLARE_INTERFACE(Marble::DialogConfigurationInterface, "org.kde.Marble.DialogConfigurationInterface/1.0")
 
 #endif

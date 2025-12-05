@@ -19,54 +19,54 @@
 
 #include "GeoDataDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleModel;
 class PluginManager;
 
-class MARBLE_EXPORT ParsingRunnerManager : public QObject
+class MARBLE_EXPORT ParsingRunnerManager :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    /**
-     * Constructor.
-     * @param pluginManager The plugin manager that gives access to RunnerPlugins
-     * @param parent Optional parent object
-     */
-    explicit ParsingRunnerManager( const PluginManager *pluginManager, QObject *parent = 0 );
+  /**
+   * Constructor.
+   * @param pluginManager The plugin manager that gives access to RunnerPlugins
+   * @param parent Optional parent object
+   */
+  explicit ParsingRunnerManager(const PluginManager *pluginManager, QObject *parent = 0);
 
-    ~ParsingRunnerManager();
+  ~ParsingRunnerManager();
 
-    /**
-     * Parse the file using the runners for various formats
-     * @see parseFile is asynchronous with results returned using the
-     * @see parsingFinished signal.
-     * @see openFile is blocking.
-     * @see parsingFinished signal indicates all runners are finished.
-     */
-    void parseFile( const QString &fileName, DocumentRole role = UserDocument );
-    GeoDataDocument *openFile( const QString &fileName, DocumentRole role = UserDocument, int timeout = 30000 );
+  /**
+   * Parse the file using the runners for various formats
+   * @see parseFile is asynchronous with results returned using the
+   * @see parsingFinished signal.
+   * @see openFile is blocking.
+   * @see parsingFinished signal indicates all runners are finished.
+   */
+  void parseFile(const QString& fileName, DocumentRole role = UserDocument);
+  GeoDataDocument *openFile(const QString& fileName, DocumentRole role = UserDocument, int timeout = 30000);
 
 Q_SIGNALS:
-    /**
-     * The file was parsed and potential error message
-     */
-    void parsingFinished( GeoDataDocument *document, const QString &error = QString() );
+  /**
+   * The file was parsed and potential error message
+   */
+  void parsingFinished(GeoDataDocument *document, const QString& error = QString());
 
-    /**
-     * Emitted whenever all runners are finished for the query
-     */
-    void parsingFinished();
+  /**
+   * Emitted whenever all runners are finished for the query
+   */
+  void parsingFinished();
 
 private:
-    Q_PRIVATE_SLOT( d, void cleanupParsingTask() )
-    Q_PRIVATE_SLOT( d, void addParsingResult( GeoDataDocument *document, const QString &error ) )
+  Q_PRIVATE_SLOT(d, void cleanupParsingTask())
+  Q_PRIVATE_SLOT(d, void addParsingResult(GeoDataDocument * document, const QString& error))
 
-    class Private;
-    friend class Private;
-    Private *const d;
+  class Private;
+  friend class Private;
+  Private *const d;
 };
 
 }

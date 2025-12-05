@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -20,34 +19,34 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataFlyTo.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+
+KML_DEFINE_TAG_HANDLER(Camera)
+
+GeoNode *KmlCameraTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
+  Q_ASSERT(parser.isStartElement() &&
+           parser.isValidElement(kmlTag_Camera));
 
-KML_DEFINE_TAG_HANDLER( Camera )
+  GeoDataCamera *camera = 0;
+  GeoStackItem parentItem = parser.parentElement();
 
-GeoNode *KmlCameraTagHandler::parse( GeoParser & parser ) const
-{
-    Q_ASSERT (parser.isStartElement()
-              && parser.isValidElement( kmlTag_Camera ) );
+  if(parentItem.is<GeoDataFeature>())
+  {
+    camera = new GeoDataCamera;
+    KmlObjectTagHandler::parseIdentifiers(parser, camera);
+    parentItem.nodeAs<GeoDataFeature>()->setAbstractView(camera);
+  }
 
-    GeoDataCamera* camera = 0;
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataFlyTo>())
+  {
+    camera = new GeoDataCamera;
+    KmlObjectTagHandler::parseIdentifiers(parser, camera);
+    parentItem.nodeAs<GeoDataFlyTo>()->setView(camera);
+  }
 
-    if ( parentItem.is<GeoDataFeature>() ) {
-        camera = new GeoDataCamera;
-        KmlObjectTagHandler::parseIdentifiers( parser, camera );
-        parentItem.nodeAs<GeoDataFeature>()->setAbstractView( camera );
-    }
-
-    if ( parentItem.is<GeoDataFlyTo>() ) {
-        camera = new GeoDataCamera;
-        KmlObjectTagHandler::parseIdentifiers( parser, camera );
-        parentItem.nodeAs<GeoDataFlyTo>()->setView( camera );
-    }
-
-    return camera;
+  return camera;
 }
 
 }

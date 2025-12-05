@@ -26,8 +26,7 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneIcon;
 
@@ -35,42 +34,43 @@ class GeoSceneIcon;
  * @short The section item in a legend of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneItem : public GeoNode
+class GEODATA_EXPORT GeoSceneItem :
+  public GeoNode
 {
- public:
-    explicit GeoSceneItem( const QString& name );
-    ~GeoSceneItem();
-    
-    virtual const char* nodeType() const;
+public:
+  explicit GeoSceneItem(const QString& name);
+  ~GeoSceneItem();
 
-    QString name() const;
+  virtual const char *nodeType() const;
 
-    QString text() const;
-    void setText( const QString& text );
+  QString name() const;
 
-    bool checkable() const;
-    void setCheckable( bool checkable );
+  QString text() const;
+  void setText(const QString& text);
 
-    QString connectTo() const;
-    void setConnectTo( const QString& text );
+  bool checkable() const;
+  void setCheckable(bool checkable);
 
-    int  spacing() const;
-    void setSpacing( int spacing );
+  QString connectTo() const;
+  void setConnectTo(const QString& text);
 
-    const GeoSceneIcon* icon() const;
-    GeoSceneIcon* icon();
+  int  spacing() const;
+  void setSpacing(int spacing);
 
- private:
-    Q_DISABLE_COPY( GeoSceneItem )
+  const GeoSceneIcon *icon() const;
+  GeoSceneIcon *icon();
 
-    GeoSceneIcon* m_icon;
+private:
+  Q_DISABLE_COPY(GeoSceneItem)
 
-    QString m_name;
-    QString m_text;
-    QString m_connectTo;
+  GeoSceneIcon *m_icon;
 
-    bool    m_checkable;
-    int     m_spacing;
+  QString m_name;
+  QString m_text;
+  QString m_connectTo;
+
+  bool m_checkable;
+  int m_spacing;
 };
 
 }

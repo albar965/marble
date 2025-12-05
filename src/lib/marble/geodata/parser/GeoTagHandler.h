@@ -26,8 +26,7 @@
 #include "marble_export.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoNode;
 class GeoParser;
@@ -43,56 +42,60 @@ class GeoParser;
 class MARBLE_EXPORT GeoTagHandler
 {
 public:
-    // API to be implemented by child handlers.
-    virtual GeoNode* parse(GeoParser&) const = 0;
+  // API to be implemented by child handlers.
+  virtual GeoNode *parse(GeoParser&) const = 0;
 
-protected: // This base class is not directly constructable nor is it copyable.
-    GeoTagHandler();
-    virtual ~GeoTagHandler();
-
-private:
-    GeoTagHandler(const GeoTagHandler&);
-    GeoTagHandler& operator=(const GeoTagHandler&);
-
-private: // Only our registrar is allowed to register tag handlers.
-    friend struct GeoTagHandlerRegistrar;
-    static void registerHandler(const GeoParser::QualifiedName&, const GeoTagHandler*);
-    static void unregisterHandler(const GeoParser::QualifiedName&);
-
-private: // Only our parser is allowed to access tag handlers.
-    friend class GeoParser;
-    static const GeoTagHandler* recognizes(const GeoParser::QualifiedName&);
+protected:
+  // This base class is not directly constructable nor is it copyable.
+  GeoTagHandler();
+  virtual ~GeoTagHandler();
 
 private:
-    typedef QHash<GeoParser::QualifiedName, const GeoTagHandler*> TagHash;
+  GeoTagHandler(const GeoTagHandler&);
+  GeoTagHandler& operator=(const GeoTagHandler&);
 
-    static TagHash* tagHandlerHash();
-    static TagHash* s_tagHandlerHash;
+private:
+  // Only our registrar is allowed to register tag handlers.
+  friend struct GeoTagHandlerRegistrar;
+  static void registerHandler(const GeoParser::QualifiedName&, const GeoTagHandler *);
+  static void unregisterHandler(const GeoParser::QualifiedName&);
+
+private:
+  // Only our parser is allowed to access tag handlers.
+  friend class GeoParser;
+  static const GeoTagHandler *recognizes(const GeoParser::QualifiedName&);
+
+private:
+  typedef QHash<GeoParser::QualifiedName, const GeoTagHandler *> TagHash;
+
+  static TagHash *tagHandlerHash();
+
+  static TagHash *s_tagHandlerHash;
 };
 
 // Helper structure
 struct GeoTagHandlerRegistrar
 {
 public:
-    GeoTagHandlerRegistrar(const GeoParser::QualifiedName& name, const GeoTagHandler* handler)
-        :m_name( name )
-    {
-        GeoTagHandler::registerHandler(name, handler);
-    }
+  GeoTagHandlerRegistrar(const GeoParser::QualifiedName& name, const GeoTagHandler *handler)
+    :m_name(name)
+  {
+    GeoTagHandler::registerHandler(name, handler);
+  }
 
-    ~GeoTagHandlerRegistrar()
-    {
-        GeoTagHandler::unregisterHandler(m_name);
-    }
+  ~GeoTagHandlerRegistrar()
+  {
+    GeoTagHandler::unregisterHandler(m_name);
+  }
 
 private:
-    GeoParser::QualifiedName m_name;
+  GeoParser::QualifiedName m_name;
 };
 
 // Macros to ease registering new handlers
 #define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name, NameSpace) \
-    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoParser::QualifiedName(Module##Tag_##Name, NameSpace), \
-                                                             new UpperCaseModule##Name##TagHandler());
+        static GeoTagHandlerRegistrar s_handler ## Name ## NameSpace(GeoParser::QualifiedName(Module ## Tag_ ## Name, NameSpace), \
+                                                                     new UpperCaseModule ## Name ## TagHandler());
 
 }
 

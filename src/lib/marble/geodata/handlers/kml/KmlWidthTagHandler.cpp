@@ -27,25 +27,24 @@
 #include "GeoDataLineStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( width )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(width)
 
-GeoNode* KmlwidthTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlwidthTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_width ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_width));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_LineStyle ) ) {
-        float width = parser.readElementText().trimmed().toFloat();
-        
-        parentItem.nodeAs<GeoDataLineStyle>()->setWidth( width );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.represents(kmlTag_LineStyle))
+  {
+    float width = parser.readElementText().trimmed().toFloat();
+
+    parentItem.nodeAs<GeoDataLineStyle>()->setWidth(width);
+  }
+
+  return 0;
 }
 
 }

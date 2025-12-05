@@ -15,8 +15,7 @@
 
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
   * a class which takes all the settings and exposes them
@@ -24,19 +23,19 @@ namespace Marble
 class MARBLE_EXPORT MarbleDebug
 {
 public:
-    /**
-     * @brief isEnabled returns whether debug information output is generated
-     */
-    static bool isEnabled();
+  /**
+   * @brief isEnabled returns whether debug information output is generated
+   */
+  static bool isEnabled();
 
-    /**
-     * @brief setEnabled Toggle debug information output generation
-     * @param enabled Set to true to enable debug output, false to disable
-     */
-    static void setEnabled(bool enabled);
+  /**
+   * @brief setEnabled Toggle debug information output generation
+   * @param enabled Set to true to enable debug output, false to disable
+   */
+  static void setEnabled(bool enabled);
 
 private:
-    static bool m_enabled;
+  static bool m_enabled;
 
 };
 

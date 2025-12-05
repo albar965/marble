@@ -16,39 +16,36 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
 static GeoTagWriterRegistrar s_writerLookAt(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataLatLonBoxType,
-				 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlLatLonBoxWriter );
+  GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataLatLonBoxType,
+                              kml::kmlTag_nameSpaceOgc22),
+  new KmlLatLonBoxWriter);
 
-bool KmlLatLonBoxWriter::write( const GeoNode *node,
-				 GeoWriter& writer ) const
+bool KmlLatLonBoxWriter::write(const GeoNode *node,
+                               GeoWriter& writer) const
 {
-    const GeoDataLatLonBox *lat_lon_box =
-	static_cast<const GeoDataLatLonBox*>( node );
+  const GeoDataLatLonBox *lat_lon_box =
+    static_cast<const GeoDataLatLonBox *>(node);
 
-    writer.writeStartElement( kml::kmlTag_LatLonBox );
-    KmlObjectTagWriter::writeIdentifiers( writer, lat_lon_box );
+  writer.writeStartElement(kml::kmlTag_LatLonBox);
+  KmlObjectTagWriter::writeIdentifiers(writer, lat_lon_box);
 
-    writer.writeTextElement( "north",
-			     QString::number(lat_lon_box->north( GeoDataCoordinates::Degree )) );
-    writer.writeTextElement( "south",
-			     QString::number(lat_lon_box->south( GeoDataCoordinates::Degree )) );
-    writer.writeTextElement( "east",
-			     QString::number(lat_lon_box->east( GeoDataCoordinates::Degree )) );
-    writer.writeTextElement( "west",
-			     QString::number(lat_lon_box->west( GeoDataCoordinates::Degree )) );
-    writer.writeOptionalElement( "rotation",
-                             QString::number(lat_lon_box->rotation( GeoDataCoordinates::Degree )), "0" );
+  writer.writeTextElement("north",
+                          QString::number(lat_lon_box->north(GeoDataCoordinates::Degree)));
+  writer.writeTextElement("south",
+                          QString::number(lat_lon_box->south(GeoDataCoordinates::Degree)));
+  writer.writeTextElement("east",
+                          QString::number(lat_lon_box->east(GeoDataCoordinates::Degree)));
+  writer.writeTextElement("west",
+                          QString::number(lat_lon_box->west(GeoDataCoordinates::Degree)));
+  writer.writeOptionalElement("rotation",
+                              QString::number(lat_lon_box->rotation(GeoDataCoordinates::Degree)), "0");
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 
-    return true;
+  return true;
 }
 
 }
-
-

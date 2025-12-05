@@ -8,7 +8,6 @@
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>
 //
 
-
 #include "KmlExtendedDataTagWriter.h"
 
 #include "GeoDataTypes.h"
@@ -20,35 +19,35 @@
 
 #include <QHash>
 
-namespace Marble
+namespace Marble {
+
+static GeoTagWriterRegistrar s_writerExtendedData(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataExtendedDataType,
+                                                                              kml::kmlTag_nameSpaceOgc22),
+                                                  new KmlExtendedDataTagWriter());
+
+bool KmlExtendedDataTagWriter::write(const GeoNode *node,
+                                     GeoWriter& writer) const
 {
+  const GeoDataExtendedData *extended = static_cast<const GeoDataExtendedData *>(node);
 
-static GeoTagWriterRegistrar s_writerExtendedData( GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataExtendedDataType,
-                                                                            kml::kmlTag_nameSpaceOgc22 ),
-                                               new KmlExtendedDataTagWriter() );
+  writer.writeStartElement(kml::kmlTag_ExtendedData);
 
+  QHash<QString, GeoDataData>::const_iterator begin = extended->constBegin();
+  QHash<QString, GeoDataData>::const_iterator end = extended->constEnd();
 
-bool KmlExtendedDataTagWriter::write( const GeoNode *node,
-                               GeoWriter& writer ) const
-{
-    const GeoDataExtendedData *extended = static_cast<const GeoDataExtendedData*>( node );
+  for( QHash<QString, GeoDataData>::const_iterator i = begin; i != end; ++i )
+  {
+    writeElement(&i.value(), writer);
+  }
 
-    writer.writeStartElement( kml::kmlTag_ExtendedData );
-    
-    QHash< QString, GeoDataData >::const_iterator begin = extended->constBegin();
-    QHash< QString, GeoDataData >::const_iterator end = extended->constEnd();
+  foreach(const GeoDataSchemaData& schemaData, extended->schemaDataList())
+  {
+    writeElement(&schemaData, writer);
+  }
 
-    for( QHash< QString, GeoDataData >::const_iterator i = begin; i != end; ++i ){
-        writeElement( &i.value(), writer );
-    }
+  writer.writeEndElement();
 
-    foreach( const GeoDataSchemaData &schemaData, extended->schemaDataList() ) {
-        writeElement( &schemaData, writer );
-    }
-
-    writer.writeEndElement();
-
-    return true;
+  return true;
 }
 
 }

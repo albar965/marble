@@ -27,8 +27,7 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoScenePalette;
 
@@ -36,26 +35,27 @@ class GeoScenePalette;
  * @short Filter of a GeoScene document.
  */
 
-class GeoSceneFilter : public GeoNode
+class GeoSceneFilter :
+  public GeoNode
 {
- public:
-    explicit GeoSceneFilter( const QString& name );
-    ~GeoSceneFilter();
+public:
+  explicit GeoSceneFilter(const QString& name);
+  ~GeoSceneFilter();
 
-    QString name() const;
-    void setName( const QString& name );
+  QString name() const;
+  void setName(const QString& name);
 
-    QString type() const;
-    void setType( const QString& type );
+  QString type() const;
+  void setType(const QString& type);
 
-    QList<const GeoScenePalette*> palette() const;
-    void addPalette( const GeoScenePalette *palette );
-    int removePalette( const GeoScenePalette *palette ); //returns # of items removed
+  QList<const GeoScenePalette *> palette() const;
+  void addPalette(const GeoScenePalette *palette);
+  int removePalette(const GeoScenePalette *palette);     // returns # of items removed
 
- private:
-    QString m_name;
-    QString m_type;
-    QList<const GeoScenePalette*> m_palette;
+private:
+  QString m_name;
+  QString m_type;
+  QList<const GeoScenePalette *> m_palette;
 
 };
 

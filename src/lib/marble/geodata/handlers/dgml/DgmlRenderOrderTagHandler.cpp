@@ -15,27 +15,26 @@
 #include "GeoParser.h"
 #include "GeoSceneGeodata.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(RenderOrder)
 
-GeoNode* DgmlRenderOrderTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlRenderOrderTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_RenderOrder));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_RenderOrder));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.represents( dgmlTag_Vector )
-         || parentItem.represents( dgmlTag_Geodata ) ) {
-        GeoSceneGeodata *dataSource = 0;
-        dataSource = parentItem.nodeAs<GeoSceneGeodata>();
-        dataSource->setRenderOrder( parser.readElementText().trimmed().toInt() );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Vector) ||
+     parentItem.represents(dgmlTag_Geodata))
+  {
+    GeoSceneGeodata *dataSource = 0;
+    dataSource = parentItem.nodeAs<GeoSceneGeodata>();
+    dataSource->setRenderOrder(parser.readElementText().trimmed().toInt());
+  }
 
-    return 0;
+  return 0;
 }
 
 }

@@ -29,29 +29,29 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short Icon properties of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneIcon : public GeoNode
+class GEODATA_EXPORT GeoSceneIcon :
+  public GeoNode
 {
- public:
-    GeoSceneIcon();
-    ~GeoSceneIcon();
+public:
+  GeoSceneIcon();
+  ~GeoSceneIcon();
 
-    QString pixmap() const;
-    void setPixmap(const QString&);
+  QString pixmap() const;
+  void setPixmap(const QString&);
 
-    QColor color() const;
-    void setColor(const QColor&);
+  QColor color() const;
+  void setColor(const QColor&);
 
- private:
-    // FIXME: d-pointerfy
+private:
+  // FIXME: d-pointerfy
 
-    QString m_pixmap;
-    QColor  m_color;
+  QString m_pixmap;
+  QColor m_color;
 };
 
 }

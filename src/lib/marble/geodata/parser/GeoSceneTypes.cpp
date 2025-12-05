@@ -10,11 +10,9 @@
 
 #include "GeoSceneTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
-namespace GeoSceneTypes
-{
+namespace GeoSceneTypes {
 const char GeoSceneDocumentType[] = "GeoSceneDocument";
 const char GeoSceneFilterType[] = "GeoSceneFilter";
 const char GeoSceneGeodataType[] = "GeoSceneGeodata";

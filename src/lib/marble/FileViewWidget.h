@@ -19,8 +19,7 @@
 
 class QModelIndex;
 
-namespace Marble
-{
+namespace Marble {
 
 class FileManager;
 class GeoDataPlacemark;
@@ -30,33 +29,33 @@ class MarbleWidget;
 
 class FileViewWidgetPrivate;
 
-class MARBLE_EXPORT FileViewWidget : public QWidget
+class MARBLE_EXPORT FileViewWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit FileViewWidget( QWidget *parent = 0, Qt::WindowFlags f = 0 );
-    ~FileViewWidget();
+public:
+  explicit FileViewWidget(QWidget *parent = 0, Qt::WindowFlags f = 0);
+  ~FileViewWidget();
 
+  void setMarbleWidget(MarbleWidget *widget);
 
-    void setMarbleWidget( MarbleWidget *widget );
+Q_SIGNALS:
+  void centerOn(const GeoDataPlacemark&, bool animated);
+  void centerOn(const GeoDataLatLonBox&, bool animated);
 
- Q_SIGNALS:
-    void centerOn( const GeoDataPlacemark &, bool animated );
-    void centerOn( const GeoDataLatLonBox &, bool animated );
+private Q_SLOTS:
+  void mapCenterOnTreeViewModel(const QModelIndex&);
 
- private Q_SLOTS:
-    void mapCenterOnTreeViewModel( const QModelIndex & );
+private:
+  Q_PRIVATE_SLOT(d, void enableFileViewActions())
+  Q_PRIVATE_SLOT(d, void saveFile())
+  Q_PRIVATE_SLOT(d, void closeFile())
+  Q_PRIVATE_SLOT(d, void contextMenu(const QPoint&))
+  Q_PRIVATE_SLOT(d, void showPlacemarkDialog())
+  Q_DISABLE_COPY(FileViewWidget)
 
- private:
-    Q_PRIVATE_SLOT( d, void enableFileViewActions() )
-    Q_PRIVATE_SLOT( d, void saveFile() )
-    Q_PRIVATE_SLOT( d, void closeFile() )
-    Q_PRIVATE_SLOT( d, void contextMenu(const QPoint&) )
-    Q_PRIVATE_SLOT( d, void showPlacemarkDialog() )
-    Q_DISABLE_COPY( FileViewWidget )
-
-    FileViewWidgetPrivate * const d;
+  FileViewWidgetPrivate * const d;
 };
 
 }

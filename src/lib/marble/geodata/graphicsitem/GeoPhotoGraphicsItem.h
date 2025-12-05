@@ -17,26 +17,26 @@
 
 #include <QImage>
 
-namespace Marble
-{
+namespace Marble {
 
-class MARBLE_EXPORT GeoPhotoGraphicsItem : public GeoGraphicsItem
+class MARBLE_EXPORT GeoPhotoGraphicsItem :
+  public GeoGraphicsItem
 {
 public:
-    explicit GeoPhotoGraphicsItem( const GeoDataFeature *feature );
+  explicit GeoPhotoGraphicsItem(const GeoDataFeature *feature);
 
-    void setPoint( const GeoDataPoint& point );
+  void setPoint(const GeoDataPoint& point);
 
-    GeoDataPoint point() const;
+  GeoDataPoint point() const;
 
-    virtual void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+  virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer);
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
 protected:
-    GeoDataPoint m_point;
+  GeoDataPoint m_point;
 
-    QImage m_photo;
+  QImage m_photo;
 };
 
 }

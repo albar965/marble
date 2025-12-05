@@ -17,94 +17,93 @@
 #include <QTimer>
 #include <QIcon>
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @brief A float item that shows a pie-chart progress
  * indicator when downloads are active
  */
-class ProgressFloatItem  : public AbstractFloatItem
+class ProgressFloatItem :
+  public AbstractFloatItem
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.ProgressFloatItem")
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.ProgressFloatItem")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
+  Q_INTERFACES(Marble::RenderPluginInterface)
 
-    MARBLE_PLUGIN( ProgressFloatItem )
+  MARBLE_PLUGIN(ProgressFloatItem)
 
- public:
-    explicit ProgressFloatItem( const MarbleModel *marbleModel = 0 );
-    ~ProgressFloatItem ();
+public:
+  explicit ProgressFloatItem(const MarbleModel *marbleModel = 0);
+  ~ProgressFloatItem();
 
-    QStringList backendTypes() const;
+  QStringList backendTypes() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString guiString() const;
+  QString guiString() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    QIcon icon () const;
+  QIcon icon() const;
 
-    void initialize ();
+  void initialize();
 
-    bool isInitialized () const;
+  bool isInitialized() const;
 
-    QPainterPath backgroundShape() const;
+  QPainterPath backgroundShape() const;
 
-    void paintContent( QPainter *painter );
+  void paintContent(QPainter *painter);
 
 private Q_SLOTS:
-    void removeProgressItem();
+  void removeProgressItem();
 
-    void handleProgress( int active, int queued );
+  void handleProgress(int active, int queued);
 
-    void hideProgress();
+  void hideProgress();
 
-    void show();
+  void show();
 
-    void scheduleRepaint();
+  void scheduleRepaint();
 
- private:
-    Q_DISABLE_COPY( ProgressFloatItem )
+private:
+  Q_DISABLE_COPY(ProgressFloatItem)
 
-    bool active() const;
+  bool active() const;
 
-    void setActive( bool active );
+  void setActive(bool active);
 
-    bool m_isInitialized;
+  bool m_isInitialized;
 
-    int m_totalJobs;
+  int m_totalJobs;
 
-    int m_completedJobs;
+  int m_completedJobs;
 
-    qreal m_completed;
+  qreal m_completed;
 
-    QTimer m_progressHideTimer;
+  QTimer m_progressHideTimer;
 
-    QTimer m_progressShowTimer;
+  QTimer m_progressShowTimer;
 
-    QMutex m_jobMutex;
+  QMutex m_jobMutex;
 
-    bool m_active;
+  bool m_active;
 
-    QIcon m_icon;
+  QIcon m_icon;
 
-    int m_fontSize;
+  int m_fontSize;
 
-    QTimer m_repaintTimer;
+  QTimer m_repaintTimer;
 };
 
 }
 
 #endif
-

@@ -18,46 +18,47 @@ namespace Marble {
 
 class GeoDataOrientationPrivate;
 
-class MARBLE_EXPORT GeoDataOrientation: public GeoDataObject
+class MARBLE_EXPORT GeoDataOrientation :
+  public GeoDataObject
 {
 public:
-    GeoDataOrientation();
+  GeoDataOrientation();
 
-    GeoDataOrientation( const GeoDataOrientation &other );
+  GeoDataOrientation(const GeoDataOrientation& other);
 
-    GeoDataOrientation& operator=( const GeoDataOrientation &other );
+  GeoDataOrientation& operator=(const GeoDataOrientation& other);
 
-    bool operator==( const GeoDataOrientation &other ) const;
-    bool operator!=( const GeoDataOrientation &other ) const;
+  bool operator==(const GeoDataOrientation& other) const;
+  bool operator!=(const GeoDataOrientation& other) const;
 
-    ~GeoDataOrientation();
+  ~GeoDataOrientation();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    /** Returns by how much degrees the camera has been rotated about the normal.
-     *  Default value= 0. Range: 0-360 degrees
-     */
-    double heading() const;
-    void setHeading( double heading );
+  /** Returns by how much degrees the camera has been rotated about the normal.
+   *  Default value= 0. Range: 0-360 degrees
+   */
+  double heading() const;
+  void setHeading(double heading);
 
-    /** Returns the rotation of the camera in degrees, around the X axis.
-     *  Value ranges from 0 (indicating that the view is aimed straight down
-     *  toward the earth), through 90 (indicating that the view is aimed toward
-     *  the horizon) to values greater than 90 (indicating that the view is pointed
-     *  up into the sky. Values are clamped at +180 degrees.
-     */
-    double tilt() const;
-    void setTilt( double tilt );
+  /** Returns the rotation of the camera in degrees, around the X axis.
+   *  Value ranges from 0 (indicating that the view is aimed straight down
+   *  toward the earth), through 90 (indicating that the view is aimed toward
+   *  the horizon) to values greater than 90 (indicating that the view is pointed
+   *  up into the sky. Values are clamped at +180 degrees.
+   */
+  double tilt() const;
+  void setTilt(double tilt);
 
-    /** Returns the rotation of the camera in degrees around the Z axis.
-     *  Range: −180 to +180 degrees.
-     */
-    double roll() const;
-    void setRoll( double roll);
+  /** Returns the rotation of the camera in degrees around the Z axis.
+   *  Range: −180 to +180 degrees.
+   */
+  double roll() const;
+  void setRoll(double roll);
 
 protected:
-    GeoDataOrientationPrivate* const d;
+  GeoDataOrientationPrivate * const d;
 };
 
 }

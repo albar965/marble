@@ -29,19 +29,17 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( outerBoundaryIs )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(outerBoundaryIs)
 
-GeoNode* KmlouterBoundaryIsTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlouterBoundaryIsTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outerBoundaryIs ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_outerBoundaryIs));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    return parentItem.nodeAs<GeoDataPolygon>();
+  return parentItem.nodeAs<GeoDataPolygon>();
 }
 
 }

@@ -10,58 +10,57 @@
 #include "ShpPlugin.h"
 #include "ShpRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-ShpPlugin::ShpPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+ShpPlugin::ShpPlugin(QObject *parent) :
+  ParseRunnerPlugin(parent)
 {
 }
 
 QString ShpPlugin::name() const
 {
-    return tr( "Shp File Parser" );
+  return tr("Shp File Parser");
 }
 
 QString ShpPlugin::nameId() const
 {
-    return "Shp";
+  return "Shp";
 }
 
 QString ShpPlugin::version() const
 {
-    return "1.0";
+  return "1.0";
 }
 
 QString ShpPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Shp Files" );
+  return tr("Create GeoDataDocument from Shp Files");
 }
 
 QString ShpPlugin::copyrightYears() const
 {
-    return "2011";
+  return "2011";
 }
 
 QList<PluginAuthor> ShpPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Thibaut Gridel", "tgridel@free.fr");
 }
 
 QString ShpPlugin::fileFormatDescription() const
 {
-    return tr( "Shapefile Map Files" );
+  return tr("Shapefile Map Files");
 }
 
 QStringList ShpPlugin::fileExtensions() const
 {
-    return QStringList() << "shp";
+  return QStringList() << "shp";
 }
 
-ParsingRunner* ShpPlugin::newRunner() const
+ParsingRunner *ShpPlugin::newRunner() const
 {
-    return new ShpRunner;
+  return new ShpRunner;
 }
 
 }

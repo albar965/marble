@@ -31,16 +31,14 @@
 // tolower so if the values in this class are not lowercase
 // it wont see they are the same
 
-namespace Marble
-{
-namespace dgml
-{
-    extern const char dgmlValue_true[];
-    extern const char dgmlValue_on[];
-    extern const char dgmlValue_texture[];
-    extern const char dgmlValue_vector[];
-    extern const char dgmlValue_vectortile[];
-    extern const char dgmlValue_geodata[];
+namespace Marble {
+namespace dgml {
+extern const char dgmlValue_true[];
+extern const char dgmlValue_on[];
+extern const char dgmlValue_texture[];
+extern const char dgmlValue_vector[];
+extern const char dgmlValue_vectortile[];
+extern const char dgmlValue_geodata[];
 }
 }
 

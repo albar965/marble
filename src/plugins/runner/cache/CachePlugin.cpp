@@ -10,58 +10,57 @@
 #include "CachePlugin.h"
 #include "CacheRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-CachePlugin::CachePlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+CachePlugin::CachePlugin(QObject *parent) :
+  ParseRunnerPlugin(parent)
 {
 }
 
 QString CachePlugin::name() const
 {
-    return tr( "Cache File Parser" );
+  return tr("Cache File Parser");
 }
 
 QString CachePlugin::nameId() const
 {
-    return "Cache";
+  return "Cache";
 }
 
 QString CachePlugin::version() const
 {
-    return "1.0";
+  return "1.0";
 }
 
 QString CachePlugin::description() const
 {
-    return tr( "Create GeoDataDocument from Cache Files" );
+  return tr("Create GeoDataDocument from Cache Files");
 }
 
 QString CachePlugin::copyrightYears() const
 {
-    return "2011";
+  return "2011";
 }
 
 QList<PluginAuthor> CachePlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Thibaut Gridel", "tgridel@free.fr");
 }
 
 QString CachePlugin::fileFormatDescription() const
 {
-    return tr( "Marble Cache Files" );
+  return tr("Marble Cache Files");
 }
 
 QStringList CachePlugin::fileExtensions() const
 {
-    return QStringList() << "cache";
+  return QStringList() << "cache";
 }
 
-ParsingRunner* CachePlugin::newRunner() const
+ParsingRunner *CachePlugin::newRunner() const
 {
-    return new CacheRunner;
+  return new CacheRunner;
 }
 
 }

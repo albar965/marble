@@ -18,25 +18,24 @@
 #include "GeoDataFeature.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( TimeSpan )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(TimeSpan)
 
-GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlTimeSpanTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeSpan ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_TimeSpan));
 
-    GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataFeature>() ) {
-        GeoDataTimeSpan timeSpan;
-        KmlObjectTagHandler::parseIdentifiers( parser, &timeSpan );
-        parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );
-        return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
-    }
-    
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataFeature>())
+  {
+    GeoDataTimeSpan timeSpan;
+    KmlObjectTagHandler::parseIdentifiers(parser, &timeSpan);
+    parentItem.nodeAs<GeoDataFeature>()->setTimeSpan(timeSpan);
+    return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
+  }
+
+  return 0;
 }
 
 }

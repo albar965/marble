@@ -20,110 +20,113 @@ namespace Marble {
 class GeoDataAbstractViewPrivate
 {
 public:
-    GeoDataAbstractViewPrivate();
+  GeoDataAbstractViewPrivate();
 
-    GeoDataTimeSpan m_timeSpan;
-    GeoDataTimeStamp m_timeStamp;
-    AltitudeMode m_altitudeMode;
+  GeoDataTimeSpan m_timeSpan;
+  GeoDataTimeStamp m_timeStamp;
+  AltitudeMode m_altitudeMode;
 };
 
 GeoDataAbstractViewPrivate::GeoDataAbstractViewPrivate() :
-    m_timeSpan(),
-    m_timeStamp(),
-    m_altitudeMode( ClampToGround )
+  m_timeSpan(),
+  m_timeStamp(),
+  m_altitudeMode(ClampToGround)
 {
-    // do nothing
+  // do nothing
 }
 
 GeoDataAbstractView::GeoDataAbstractView() :
-    d( new GeoDataAbstractViewPrivate() )
+  d(new GeoDataAbstractViewPrivate())
 {
-    // do nothing
+  // do nothing
 }
 
 GeoDataAbstractView::~GeoDataAbstractView()
 {
-    delete d;
+  delete d;
 }
 
-GeoDataAbstractView::GeoDataAbstractView( const GeoDataAbstractView &other ) :
-    GeoDataObject( other ),
-    d( new GeoDataAbstractViewPrivate( *other.d ) )
+GeoDataAbstractView::GeoDataAbstractView(const GeoDataAbstractView& other) :
+  GeoDataObject(other),
+  d(new GeoDataAbstractViewPrivate(*other.d))
 {
-    // nothing to do
+  // nothing to do
 }
 
-GeoDataAbstractView &GeoDataAbstractView::operator =( const GeoDataAbstractView &other )
+GeoDataAbstractView& GeoDataAbstractView::operator=(const GeoDataAbstractView& other)
 {
-    GeoDataObject::operator=( other );
-    *d = *other.d;
-    return *this;
+  GeoDataObject::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
 GeoDataCoordinates GeoDataAbstractView::coordinates() const
 {
-    if ( nodeType() == GeoDataTypes::GeoDataLookAtType) {
-        const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt*>( this );
-        if( lookAt ){
-            return lookAt->coordinates();
-        }
+  if(nodeType() == GeoDataTypes::GeoDataLookAtType)
+  {
+    const GeoDataLookAt *lookAt = static_cast<const GeoDataLookAt *>(this);
+    if(lookAt)
+    {
+      return lookAt->coordinates();
     }
-    else if( nodeType() == GeoDataTypes::GeoDataCameraType ){
-        const GeoDataCamera *camera = static_cast<const GeoDataCamera*>( this );
-        if ( camera ){
-            return camera->coordinates();
-        }
+  }
+  else if(nodeType() == GeoDataTypes::GeoDataCameraType)
+  {
+    const GeoDataCamera *camera = static_cast<const GeoDataCamera *>(this);
+    if(camera)
+    {
+      return camera->coordinates();
     }
-    return GeoDataCoordinates();
+  }
+  return GeoDataCoordinates();
 }
 
-
-bool GeoDataAbstractView::equals(const GeoDataAbstractView &other) const
+bool GeoDataAbstractView::equals(const GeoDataAbstractView& other) const
 {
-    return GeoDataObject::equals(other) &&
-           d->m_timeSpan == other.d->m_timeSpan &&
-           d->m_timeStamp == other.d->m_timeStamp &&
-           d->m_altitudeMode == other.d->m_altitudeMode;
+  return GeoDataObject::equals(other) &&
+         d->m_timeSpan == other.d->m_timeSpan &&
+         d->m_timeStamp == other.d->m_timeStamp &&
+         d->m_altitudeMode == other.d->m_altitudeMode;
 }
 
-const GeoDataTimeSpan &GeoDataAbstractView::timeSpan() const
+const GeoDataTimeSpan& GeoDataAbstractView::timeSpan() const
 {
-    return d->m_timeSpan;
+  return d->m_timeSpan;
 }
 
-GeoDataTimeSpan &GeoDataAbstractView::timeSpan()
+GeoDataTimeSpan& GeoDataAbstractView::timeSpan()
 {
-    return d->m_timeSpan;
+  return d->m_timeSpan;
 }
 
-void GeoDataAbstractView::setTimeSpan( const GeoDataTimeSpan &timeSpan )
+void GeoDataAbstractView::setTimeSpan(const GeoDataTimeSpan& timeSpan)
 {
-    d->m_timeSpan = timeSpan;
+  d->m_timeSpan = timeSpan;
 }
 
-GeoDataTimeStamp &GeoDataAbstractView::timeStamp()
+GeoDataTimeStamp& GeoDataAbstractView::timeStamp()
 {
-    return d->m_timeStamp;
+  return d->m_timeStamp;
 }
 
-const GeoDataTimeStamp &GeoDataAbstractView::timeStamp() const
+const GeoDataTimeStamp& GeoDataAbstractView::timeStamp() const
 {
-    return d->m_timeStamp;
+  return d->m_timeStamp;
 }
 
-void GeoDataAbstractView::setTimeStamp( const GeoDataTimeStamp &timeStamp )
+void GeoDataAbstractView::setTimeStamp(const GeoDataTimeStamp& timeStamp)
 {
-    d->m_timeStamp = timeStamp;
+  d->m_timeStamp = timeStamp;
 }
 
 AltitudeMode GeoDataAbstractView::altitudeMode() const
 {
-    return d->m_altitudeMode;
+  return d->m_altitudeMode;
 }
 
 void GeoDataAbstractView::setAltitudeMode(const AltitudeMode altitudeMode)
 {
-    d->m_altitudeMode = altitudeMode;
+  d->m_altitudeMode = altitudeMode;
 }
 
 }

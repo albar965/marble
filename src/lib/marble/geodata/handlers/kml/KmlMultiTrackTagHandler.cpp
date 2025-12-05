@@ -19,32 +19,35 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+
+KML_DEFINE_TAG_HANDLER_GX22(MultiTrack)
+
+GeoNode *KmlMultiTrackTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_MultiTrack));
 
-KML_DEFINE_TAG_HANDLER_GX22( MultiTrack )
+  GeoStackItem parentItem = parser.parentElement();
 
-GeoNode* KmlMultiTrackTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MultiTrack ) );
+  GeoDataMultiTrack *geom = new GeoDataMultiTrack;
+  KmlObjectTagHandler::parseIdentifiers(parser, geom);
+  if(parentItem.represents(kmlTag_Placemark))
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->setGeometry(geom);
+    return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    GeoDataMultiTrack *geom = new GeoDataMultiTrack;
-    KmlObjectTagHandler::parseIdentifiers( parser, geom );
-    if( parentItem.represents( kmlTag_Placemark ) ) {
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
-        return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
-
-    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( geom );
-        return geom;
-    } else {
-        delete geom;
-        return 0;
-    }
+  }
+  else if(parentItem.represents(kmlTag_MultiGeometry))
+  {
+    parentItem.nodeAs<GeoDataMultiGeometry>()->append(geom);
+    return geom;
+  }
+  else
+  {
+    delete geom;
+    return 0;
+  }
 }
 
 }

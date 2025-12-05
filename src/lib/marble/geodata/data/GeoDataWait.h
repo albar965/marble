@@ -13,25 +13,24 @@
 
 #include "GeoDataTourPrimitive.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class GEODATA_EXPORT GeoDataWait : public GeoDataTourPrimitive
+class GEODATA_EXPORT GeoDataWait :
+  public GeoDataTourPrimitive
 {
 public:
+  GeoDataWait();
+  ~GeoDataWait();
 
-    GeoDataWait();
-    ~GeoDataWait();
+  bool operator==(const GeoDataWait& other) const;
+  bool operator!=(const GeoDataWait& other) const;
+  const char *nodeType() const;
 
-    bool operator==(const GeoDataWait &other) const;
-    bool operator!=(const GeoDataWait &other) const;
-    const char *nodeType() const;
-
-    double duration() const;
-    void setDuration(double duration);
+  double duration() const;
+  void setDuration(double duration);
 
 private:
-    double m_duration;
+  double m_duration;
 };
 
 } // namespace Marble

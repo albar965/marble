@@ -14,7 +14,7 @@
 namespace Marble {
 
 KmlParser::KmlParser()
-    : GeoParser( 0 , QString() )
+  : GeoParser(0, QString())
 {
 }
 
@@ -24,25 +24,25 @@ KmlParser::~KmlParser()
 
 bool KmlParser::isValidRootElement()
 {
-    return isValidElement(kml::kmlTag_kml);
+  return isValidElement(kml::kmlTag_kml);
 }
 
 bool KmlParser::isValidElement(const QString& tagName) const
 {
-    if (!GeoParser::isValidElement(tagName))
-        return false;
+  if(!GeoParser::isValidElement(tagName))
+    return false;
 
-    return (namespaceUri() == kml::kmlTag_nameSpace20   ||
-            namespaceUri() == kml::kmlTag_nameSpace21   ||
-            namespaceUri() == kml::kmlTag_nameSpace22   ||
-            namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
-            namespaceUri() == kml::kmlTag_nameSpaceOgc22||
-            namespaceUri() == kml::kmlTag_nameSpaceMx );
+  return namespaceUri() == kml::kmlTag_nameSpace20 ||
+         namespaceUri() == kml::kmlTag_nameSpace21 ||
+         namespaceUri() == kml::kmlTag_nameSpace22 ||
+         namespaceUri() == kml::kmlTag_nameSpaceGx22 ||
+         namespaceUri() == kml::kmlTag_nameSpaceOgc22 ||
+         namespaceUri() == kml::kmlTag_nameSpaceMx;
 }
 
-GeoDocument* KmlParser::createDocument() const
+GeoDocument *KmlParser::createDocument() const
 {
-    return new KmlDocument;
+  return new KmlDocument;
 }
 
 }

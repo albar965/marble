@@ -31,8 +31,7 @@
 class QColor;
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneLayer;
 class GeoSceneFilter;
@@ -42,84 +41,86 @@ class GeoSceneMapPrivate;
 /**
  * @short Map layer structure of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneMap : public GeoNode
+class GEODATA_EXPORT GeoSceneMap :
+  public GeoNode
 {
- public:
-    GeoSceneMap();
-    ~GeoSceneMap();
-    virtual const char* nodeType() const;
+public:
+  GeoSceneMap();
+  ~GeoSceneMap();
+  virtual const char *nodeType() const;
 
-    QColor backgroundColor() const;
-    void setBackgroundColor( const QColor& );
+  QColor backgroundColor() const;
+  void setBackgroundColor(const QColor&);
 
-    QColor labelColor() const;
-    void setLabelColor( const QColor& );
+  QColor labelColor() const;
+  void setLabelColor(const QColor&);
 
-    QColor highlightBrushColor() const;
-    void setHighlightBrushColor( const QColor& );
+  QColor highlightBrushColor() const;
+  void setHighlightBrushColor(const QColor&);
 
-    QColor highlightPenColor() const;
-    void setHighlightPenColor( const QColor& );
-    /**
-     * @brief  Add a new layer to the map
-     * @param  section  The new layer
-     */
-    void addLayer( GeoSceneLayer* );
+  QColor highlightPenColor() const;
+  void setHighlightPenColor(const QColor&);
 
-    /**
-     * @brief  Return a layer by its name
-     * @param  name  The name of the layer
-     * @return A pointer to the layer request by its name
-     */
-    GeoSceneLayer* layer( const QString& name );
-    const GeoSceneLayer* layer( const QString& name ) const;
+  /**
+   * @brief  Add a new layer to the map
+   * @param  section  The new layer
+   */
+  void addLayer(GeoSceneLayer *);
 
-    /**
-     * @brief  Return all layers
-     * @return A vector that contains pointers to all available layers
-     */
-    QVector<GeoSceneLayer*> layers() const;
+  /**
+   * @brief  Return a layer by its name
+   * @param  name  The name of the layer
+   * @return A pointer to the layer request by its name
+   */
+  GeoSceneLayer *layer(const QString& name);
+  const GeoSceneLayer *layer(const QString& name) const;
 
-    /**
-     * @brief  Add a new filter to the map
-     * @param  section  The new filter
-     */
-    void addFilter( GeoSceneFilter* );
+  /**
+   * @brief  Return all layers
+   * @return A vector that contains pointers to all available layers
+   */
+  QVector<GeoSceneLayer *> layers() const;
 
-    /**
-     * @brief  Return a filter by its name
-     * @param  name  The name of the filter
-     * @return A pointer to the filter request by its name
-     */
-    GeoSceneFilter* filter( const QString& name );
+  /**
+   * @brief  Add a new filter to the map
+   * @param  section  The new filter
+   */
+  void addFilter(GeoSceneFilter *);
 
-    /**
-     * @brief  Return all filters
-     * @return A vector that contains pointers to all available filters
-     */
-    QVector<GeoSceneFilter*> filters() const;
+  /**
+   * @brief  Return a filter by its name
+   * @param  name  The name of the filter
+   * @return A pointer to the filter request by its name
+   */
+  GeoSceneFilter *filter(const QString& name);
 
-    /**
-     * @brief  Checks for valid layers that contain texture data
-     * @return Whether a texture layer got created internally 
-     *
-     * NOTE: The existence of the file(s) that contain the actual data  
-     *       still needs to get checked at runtime!
-     */
-    bool hasTextureLayers() const;
+  /**
+   * @brief  Return all filters
+   * @return A vector that contains pointers to all available filters
+   */
+  QVector<GeoSceneFilter *> filters() const;
 
-    /**
-     * @brief  Checks for valid layers that contain vector data
-     * @return Whether a vector layer got created internally 
-     *
-     * NOTE: The existence of the file(s) that contain the actual data  
-     *       still needs to get checked at runtime!
-     */
-    bool hasVectorLayers() const;
+  /**
+   * @brief  Checks for valid layers that contain texture data
+   * @return Whether a texture layer got created internally
+   *
+   * NOTE: The existence of the file(s) that contain the actual data
+   *       still needs to get checked at runtime!
+   */
+  bool hasTextureLayers() const;
 
- private:
-    Q_DISABLE_COPY( GeoSceneMap )
-    GeoSceneMapPrivate * const d;
+  /**
+   * @brief  Checks for valid layers that contain vector data
+   * @return Whether a vector layer got created internally
+   *
+   * NOTE: The existence of the file(s) that contain the actual data
+   *       still needs to get checked at runtime!
+   */
+  bool hasVectorLayers() const;
+
+private:
+  Q_DISABLE_COPY(GeoSceneMap)
+  GeoSceneMapPrivate * const d;
 };
 
 }

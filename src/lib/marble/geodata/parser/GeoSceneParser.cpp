@@ -19,7 +19,6 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 // Own
 #include "GeoSceneParser.h"
 
@@ -34,58 +33,59 @@
 // DGML support
 #include "DgmlElementDictionary.h"
 
-namespace Marble
-{
+namespace Marble {
 
-GeoSceneParser::GeoSceneParser(GeoSceneSourceType source, const QString& docPath )
-    : GeoParser(source, docPath)
+GeoSceneParser::GeoSceneParser(GeoSceneSourceType source, const QString& docPath)
+  : GeoParser(source, docPath)
 {
 }
 
 GeoSceneParser::~GeoSceneParser()
 {
-    // nothing to do
+  // nothing to do
 }
 
 bool GeoSceneParser::isValidRootElement()
 {
-    switch ((GeoSceneSourceType) m_source) {
+  switch((GeoSceneSourceType)m_source)
+  {
     case GeoScene_DGML:
-        return isValidElement(dgml::dgmlTag_Dgml);
+      return isValidElement(dgml::dgmlTag_Dgml);
     default:
-        Q_ASSERT(false);
-        return false;
-    }
+      Q_ASSERT(false);
+      return false;
+  }
 }
 
 bool GeoSceneParser::isValidElement(const QString& tagName) const
 {
-    if (!GeoParser::isValidElement(tagName))
-        return false;
-
-    switch ((GeoSceneSourceType) m_source) {
-    case GeoScene_DGML:
-        return (namespaceUri() == dgml::dgmlTag_nameSpace20);
-    default:
-        break;
-    }
-
-    // Should never be reached.
-    Q_ASSERT(false);
+  if(!GeoParser::isValidElement(tagName))
     return false;
+
+  switch((GeoSceneSourceType)m_source)
+  {
+    case GeoScene_DGML:
+      return namespaceUri() == dgml::dgmlTag_nameSpace20;
+    default:
+      break;
+  }
+
+  // Should never be reached.
+  Q_ASSERT(false);
+  return false;
 }
 
-GeoDocument* GeoSceneParser::createDocument() const
+GeoDocument *GeoSceneParser::createDocument() const
 {
-    return new GeoSceneDocument;
+  return new GeoSceneDocument;
 }
 
 // Global helper function for the tag handlers
-GeoSceneDocument* geoSceneDoc(GeoParser& parser)
+GeoSceneDocument *geoSceneDoc(GeoParser& parser)
 {
-    GeoDocument* document = parser.activeDocument();
-    Q_ASSERT(document->isGeoSceneDocument());
-    return static_cast<GeoSceneDocument*>(document);
+  GeoDocument *document = parser.activeDocument();
+  Q_ASSERT(document->isGeoSceneDocument());
+  return static_cast<GeoSceneDocument *>(document);
 }
 
 }

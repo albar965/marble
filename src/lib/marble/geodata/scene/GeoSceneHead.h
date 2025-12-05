@@ -30,8 +30,7 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneIcon;
 class GeoSceneZoom;
@@ -42,46 +41,46 @@ class GeoSceneHeadPrivate;
 /**
  * @short General properties and identifiers of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneHead : public GeoNode
+class GEODATA_EXPORT GeoSceneHead :
+  public GeoNode
 {
- public:
-    GeoSceneHead();
-    ~GeoSceneHead();
-    
-    virtual const char* nodeType() const;
+public:
+  GeoSceneHead();
+  ~GeoSceneHead();
 
-    QString name() const;
-    void setName( const QString& name );
-    QString target() const;
-    void setTarget( const QString& target );
-    QString theme() const;
-    void setTheme( const QString& theme );
+  virtual const char *nodeType() const;
 
-    /** Planet radius, 0.0 if unknown */
-    qreal radius() const;
-    void setRadius( qreal radius );
+  QString name() const;
+  void setName(const QString& name);
+  QString target() const;
+  void setTarget(const QString& target);
+  QString theme() const;
+  void setTheme(const QString& theme);
 
-    QString mapThemeId() const;
+  /** Planet radius, 0.0 if unknown */
+  qreal radius() const;
+  void setRadius(qreal radius);
 
-    QString description() const;
-    void setDescription( const QString& );
+  QString mapThemeId() const;
 
-    bool visible() const;
-    void setVisible( bool visible );
+  QString description() const;
+  void setDescription(const QString&);
 
-    const GeoSceneZoom* zoom() const;
-    GeoSceneZoom* zoom();
+  bool visible() const;
+  void setVisible(bool visible);
 
-    const GeoSceneIcon* icon() const;
-    GeoSceneIcon* icon();
+  const GeoSceneZoom *zoom() const;
+  GeoSceneZoom *zoom();
 
-    const GeoSceneLicense* license() const;
-    GeoSceneLicense* license();
+  const GeoSceneIcon *icon() const;
+  GeoSceneIcon *icon();
 
+  const GeoSceneLicense *license() const;
+  GeoSceneLicense *license();
 
- private:
-    Q_DISABLE_COPY( GeoSceneHead )
-    GeoSceneHeadPrivate * const d;
+private:
+  Q_DISABLE_COPY(GeoSceneHead)
+  GeoSceneHeadPrivate * const d;
 };
 
 }

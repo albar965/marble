@@ -22,39 +22,41 @@
 #include "GeoParser.h"
 #include "GeoDocument.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( SimpleArrayData )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(SimpleArrayData)
 
-GeoNode* KmlSimpleArrayDataTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlSimpleArrayDataTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SimpleArrayData ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_SimpleArrayData));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataExtendedData>() ) {
-        GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData();
-        QString name = parser.attribute( "name" ).trimmed();
-        parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData( name, arrayData );
+  if(parentItem.is<GeoDataExtendedData>())
+  {
+    GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData();
+    QString name = parser.attribute("name").trimmed();
+    parentItem.nodeAs<GeoDataExtendedData>()->setSimpleArrayData(name, arrayData);
+    return arrayData;
+  }
+
+  if(parentItem.is<GeoDataSchemaData>())
+  {
+    GeoNode *parent = parentItem.nodeAs<GeoDataSchemaData>()->parent();
+    if(parent->nodeType() == GeoDataTypes::GeoDataExtendedDataType)
+    {
+      GeoDataExtendedData *extendedData = static_cast<GeoDataExtendedData *>(parent);
+      if(extendedData)
+      {
+        GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
+        QString name = parser.attribute("name").trimmed();
+        extendedData->setSimpleArrayData(name, arrayData);
         return arrayData;
+      }
     }
+  }
 
-    if ( parentItem.is<GeoDataSchemaData>() ) {
-        GeoNode *parent = parentItem.nodeAs<GeoDataSchemaData>()->parent();
-        if ( parent->nodeType() == GeoDataTypes::GeoDataExtendedDataType ) {
-            GeoDataExtendedData *extendedData = static_cast<GeoDataExtendedData*>( parent );
-            if ( extendedData ) {
-                GeoDataSimpleArrayData *arrayData = new GeoDataSimpleArrayData;
-                QString name = parser.attribute( "name" ).trimmed();
-                extendedData->setSimpleArrayData( name, arrayData );
-                return arrayData;
-            }
-        }
-    }
-
-    return 0;
+  return 0;
 }
 
 }

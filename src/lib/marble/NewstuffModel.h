@@ -17,119 +17,121 @@
 
 class QNetworkReply;
 
-namespace Marble
-{
+namespace Marble {
 
 class NewstuffModelPrivate;
 
-class MARBLE_EXPORT NewstuffModel : public QAbstractListModel
+class MARBLE_EXPORT NewstuffModel :
+  public QAbstractListModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QString provider READ provider WRITE setProvider NOTIFY providerChanged)
-    Q_PROPERTY(QString targetDirectory READ targetDirectory WRITE setTargetDirectory NOTIFY targetDirectoryChanged)
-    Q_PROPERTY(QString registryFile READ registryFile WRITE setRegistryFile NOTIFY registryFileChanged)
+  Q_PROPERTY(int count READ count NOTIFY countChanged)
+  Q_PROPERTY(QString provider READ provider WRITE setProvider NOTIFY providerChanged)
+  Q_PROPERTY(QString targetDirectory READ targetDirectory WRITE setTargetDirectory NOTIFY targetDirectoryChanged)
+  Q_PROPERTY(QString registryFile READ registryFile WRITE setRegistryFile NOTIFY registryFileChanged)
 
 public:
-    enum NewstuffRoles {
-        Name = Qt::UserRole + 1,
-        Author,
-        License,
-        Summary,
-        Version,
-        ReleaseDate,
-        Preview,
-        Payload,
-        InstalledVersion,
-        InstalledReleaseDate,
-        InstalledFiles,
-        IsInstalled,
-        IsUpgradable,
-        Category,
-        IsTransitioning,
-        PayloadSize,
-        DownloadedSize
-    };
+  enum NewstuffRoles
+  {
+    Name = Qt::UserRole + 1,
+    Author,
+    License,
+    Summary,
+    Version,
+    ReleaseDate,
+    Preview,
+    Payload,
+    InstalledVersion,
+    InstalledReleaseDate,
+    InstalledFiles,
+    IsInstalled,
+    IsUpgradable,
+    Category,
+    IsTransitioning,
+    PayloadSize,
+    DownloadedSize
+  };
 
-    enum IdTag {
-        PayloadTag,
-        NameTag
-    };
+  enum IdTag
+  {
+    PayloadTag,
+    NameTag
+  };
 
-    /** Constructor */
-    explicit NewstuffModel( QObject *parent = 0 );
+  /** Constructor */
+  explicit NewstuffModel(QObject *parent = 0);
 
-    /** Destructor */
-    ~NewstuffModel();
+  /** Destructor */
+  ~NewstuffModel();
 
-    /** Overload of QAbstractListModel */
-    int rowCount ( const QModelIndex &parent = QModelIndex() ) const;
+  /** Overload of QAbstractListModel */
+  int rowCount(const QModelIndex& parent = QModelIndex()) const;
 
-    /** Overload of QAbstractListModel */
-    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
+  /** Overload of QAbstractListModel */
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
-    /** Overload of QAbstractListModel */
-    QHash<int, QByteArray> roleNames() const;
+  /** Overload of QAbstractListModel */
+  QHash<int, QByteArray> roleNames() const;
 
-    /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
-    int count() const;
+  /** @todo FIXME https://bugreports.qt-project.org/browse/QTCOMPONENTS-1206 */
+  int count() const;
 
-    /**
-      * Add a newstuff provider
-      */
-    void setProvider( const QString &downloadUrl );
+  /**
+    * Add a newstuff provider
+    */
+  void setProvider(const QString& downloadUrl);
 
-    QString provider() const;
+  QString provider() const;
 
-    void setTargetDirectory( const QString &targetDirectory );
+  void setTargetDirectory(const QString& targetDirectory);
 
-    QString targetDirectory() const;
+  QString targetDirectory() const;
 
-    void setRegistryFile( const QString &registryFile, IdTag idTag = PayloadTag );
+  void setRegistryFile(const QString& registryFile, IdTag idTag = PayloadTag);
 
-    QString registryFile() const;
+  QString registryFile() const;
 
 public Q_SLOTS:
-    void install( int index );
+  void install(int index);
 
-    void uninstall( int index );
+  void uninstall(int index);
 
-    void cancel( int index );
+  void cancel(int index);
 
 Q_SIGNALS:
-    void countChanged();
+  void countChanged();
 
-    void providerChanged();
+  void providerChanged();
 
-    void targetDirectoryChanged();
+  void targetDirectoryChanged();
 
-    void registryFileChanged();
+  void registryFileChanged();
 
-    void installationProgressed( int newstuffindex, qreal progress );
+  void installationProgressed(int newstuffindex, qreal progress);
 
-    void installationFinished( int newstuffindex );
+  void installationFinished(int newstuffindex);
 
-    void installationFailed( int newstuffindex, const QString &error );
+  void installationFailed(int newstuffindex, const QString& error);
 
-    void uninstallationFinished( int newstuffindex );
+  void uninstallationFinished(int newstuffindex);
 
 private Q_SLOTS:
-    void updateProgress( qint64 bytesReceived, qint64 bytesTotal );
+  void updateProgress(qint64 bytesReceived, qint64 bytesTotal);
 
-    void retrieveData();
+  void retrieveData();
 
-    void mapInstalled( int exitStatus );
+  void mapInstalled(int exitStatus);
 
-    void mapUninstalled();
+  void mapUninstalled();
 
-    void contentsListed( int exitStatus );
+  void contentsListed(int exitStatus);
 
 private:
-    NewstuffModelPrivate* const d;
-    friend class NewstuffModelPrivate;
+  NewstuffModelPrivate * const d;
+  friend class NewstuffModelPrivate;
 
-    Q_PRIVATE_SLOT( d, void handleProviderData( QNetworkReply* ) )
+  Q_PRIVATE_SLOT(d, void handleProviderData(QNetworkReply *))
 };
 
 }

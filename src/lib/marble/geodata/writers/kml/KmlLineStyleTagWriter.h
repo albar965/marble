@@ -13,18 +13,19 @@
 
 #include "KmlColorStyleTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlLineStyleTagWriter : public KmlColorStyleTagWriter
+class KmlLineStyleTagWriter :
+  public KmlColorStyleTagWriter
 {
 public:
-    KmlLineStyleTagWriter();
+  KmlLineStyleTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const;
 
-    virtual bool isEmpty( const GeoNode *node ) const;
+  virtual bool isEmpty(const GeoNode *node) const;
+
 };
 
 }

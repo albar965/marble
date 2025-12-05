@@ -15,22 +15,21 @@
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( ImagePyramid )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(ImagePyramid)
 
-GeoNode* KmlImagePyramidTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlImagePyramidTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_ImagePyramid ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_ImagePyramid));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_PhotoOverlay ) ) {
-        return &parentItem.nodeAs<GeoDataPhotoOverlay>()->imagePyramid();
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_PhotoOverlay))
+  {
+    return &parentItem.nodeAs<GeoDataPhotoOverlay>()->imagePyramid();
+  }
+  return 0;
 }
 
 }

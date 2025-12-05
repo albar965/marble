@@ -14,26 +14,24 @@
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(linkName)
+
+GeoNode *KmllinkNameTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( linkName )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_linkName));
 
-GeoNode* KmllinkNameTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_linkName ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_NetworkLinkControl))
+  {
+    QString linkName = parser.readElementText();
 
-    if ( parentItem.represents( kmlTag_NetworkLinkControl ) )
-    {
-        QString linkName = parser.readElementText();
+    parentItem.nodeAs<GeoDataNetworkLinkControl>()->setLinkName(linkName);
+  }
 
-        parentItem.nodeAs<GeoDataNetworkLinkControl>()->setLinkName( linkName );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

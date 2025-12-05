@@ -14,20 +14,18 @@
 #include <GeoWriter.h>
 #include <GeoDataObject.h>
 
-namespace Marble
-{
+namespace Marble {
 
 class KmlObjectTagWriter
 {
 public:
-
-    /**
-     * Parses the id and targetId attributes and assign their values to the given object
-     */
-    static void writeIdentifiers( GeoWriter &writer, const GeoDataObject* object );
+  /**
+   * Parses the id and targetId attributes and assign their values to the given object
+   */
+  static void writeIdentifiers(GeoWriter& writer, const GeoDataObject *object);
 
 private:
-    KmlObjectTagWriter(); // not implemented
+  KmlObjectTagWriter();   // not implemented
 };
 
 }

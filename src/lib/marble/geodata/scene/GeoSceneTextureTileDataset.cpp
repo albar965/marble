@@ -12,31 +12,29 @@
  Copyright 2012 Ander Pijoan <ander.pijoan@deusto.es>
 */
 
-
 #include "GeoSceneTextureTileDataset.h"
 #include "GeoSceneTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
-GeoSceneTextureTileDataset::GeoSceneTextureTileDataset( const QString& name )
-    : GeoSceneTileDataset( name ){
+GeoSceneTextureTileDataset::GeoSceneTextureTileDataset(const QString& name)
+  : GeoSceneTileDataset(name)
+{
 }
 
-const char* GeoSceneTextureTileDataset::nodeType() const
+const char *GeoSceneTextureTileDataset::nodeType() const
 {
-    return GeoSceneTypes::GeoSceneTextureTileType;
+  return GeoSceneTypes::GeoSceneTextureTileType;
 }
 
 GeoDataLatLonBox GeoSceneTextureTileDataset::latLonBox() const
 {
-    return m_latLonBox;
+  return m_latLonBox;
 }
 
-void GeoSceneTextureTileDataset::setLatLonBox( const GeoDataLatLonBox &box )
+void GeoSceneTextureTileDataset::setLatLonBox(const GeoDataLatLonBox& box)
 {
-    m_latLonBox = box;
+  m_latLonBox = box;
 }
-
 
 }

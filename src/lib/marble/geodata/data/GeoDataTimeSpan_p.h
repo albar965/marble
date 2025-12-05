@@ -14,22 +14,20 @@
 #include "GeoDataTypes.h"
 #include "GeoDataTimeStamp.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimeSpanPrivate
 {
-  public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataTimeSpanType;
-    }
+public:
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataTimeSpanType;
+  }
 
-    GeoDataTimeStamp m_begin;
-    GeoDataTimeStamp m_end;
+  GeoDataTimeStamp m_begin;
+  GeoDataTimeStamp m_end;
 };
 
 } // namespace Marble
 
-#endif //GEODATATIMESPANPRIVATE_H
-
+#endif // GEODATATIMESPANPRIVATE_H

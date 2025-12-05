@@ -23,32 +23,35 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLocation.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(altitude)
+GeoNode *KmlaltitudeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( altitude )
-    GeoNode *KmlaltitudeTagHandler::parse(GeoParser & parser) const
-    {
-        Q_ASSERT ( parser.isStartElement()
-                   && parser.isValidElement( kmlTag_altitude ) );
+  Q_ASSERT(parser.isStartElement() &&
+           parser.isValidElement(kmlTag_altitude));
 
-        GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-        qreal const altitude = parser.readElementText().trimmed().toDouble();
-        if ( parentItem.is<GeoDataLookAt>() ){
-            parentItem.nodeAs<GeoDataLookAt>()->setAltitude( altitude );
-        } else if ( parentItem.is<GeoDataCamera>() ){
-            parentItem.nodeAs<GeoDataCamera>()->setAltitude( altitude );
-        } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
-            parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitude( altitude );
-        } else if ( parentItem.is<GeoDataLocation>() ) {
-	    parentItem.nodeAs<GeoDataLocation>()->setAltitude( altitude );
-        }
+  qreal const altitude = parser.readElementText().trimmed().toDouble();
+  if(parentItem.is<GeoDataLookAt>())
+  {
+    parentItem.nodeAs<GeoDataLookAt>()->setAltitude(altitude);
+  }
+  else if(parentItem.is<GeoDataCamera>())
+  {
+    parentItem.nodeAs<GeoDataCamera>()->setAltitude(altitude);
+  }
+  else if(parentItem.is<GeoDataGroundOverlay>())
+  {
+    parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitude(altitude);
+  }
+  else if(parentItem.is<GeoDataLocation>())
+  {
+    parentItem.nodeAs<GeoDataLocation>()->setAltitude(altitude);
+  }
 
-      return 0;
-    }
+  return 0;
 }
 }
-
-
+}

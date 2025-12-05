@@ -17,40 +17,39 @@
 
 #include "marble_export.h"
 
-namespace Ui
-{
-    class SunControlWidget;
+namespace Ui {
+class SunControlWidget;
 }
 
-namespace Marble
-{
+namespace Marble {
 class MarbleWidget;
 
-class MARBLE_EXPORT SunControlWidget : public QDialog
+class MARBLE_EXPORT SunControlWidget :
+  public QDialog
 {
-    Q_OBJECT
-	
- public:
-    explicit SunControlWidget( MarbleWidget *marbleWidget, QWidget* parent = 0 );
-    virtual ~SunControlWidget();
-    void setSunShading( bool );
+  Q_OBJECT
 
- private Q_SLOTS:
-    void apply();
-	
- Q_SIGNALS:
-    void showSun( bool show );
-    void isLockedToSubSolarPoint( bool show );
-    void isSubSolarPointIconVisible( bool show );
+public:
+  explicit SunControlWidget(MarbleWidget *marbleWidget, QWidget *parent = 0);
+  virtual ~SunControlWidget();
+  void setSunShading(bool);
 
- protected:
-    Q_DISABLE_COPY( SunControlWidget )
+private Q_SLOTS:
+  void apply();
 
-    void showEvent(QShowEvent* event);
+Q_SIGNALS:
+  void showSun(bool show);
+  void isLockedToSubSolarPoint(bool show);
+  void isSubSolarPointIconVisible(bool show);
 
-    Ui::SunControlWidget *m_uiWidget;
-    MarbleWidget         *const m_marbleWidget;
-    QString               m_shadow;
+protected:
+  Q_DISABLE_COPY(SunControlWidget)
+
+  void showEvent(QShowEvent *event);
+
+  Ui::SunControlWidget *m_uiWidget;
+  MarbleWidget *const m_marbleWidget;
+  QString m_shadow;
 };
 
 }

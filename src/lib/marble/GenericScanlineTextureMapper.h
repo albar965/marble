@@ -11,7 +11,6 @@
 #ifndef MARBLE_GENERICSCANLINETEXTUREMAPPER_H
 #define MARBLE_GENERICSCANLINETEXTUREMAPPER_H
 
-
 #include "TextureMapperInterface.h"
 
 #include <QThreadPool>
@@ -19,32 +18,31 @@
 
 #include <MarbleGlobal.h>
 
-
-namespace Marble
-{
+namespace Marble {
 
 class StackedTileLoader;
 
-class GenericScanlineTextureMapper : public TextureMapperInterface
+class GenericScanlineTextureMapper :
+  public TextureMapperInterface
 {
- public:
-    explicit GenericScanlineTextureMapper( StackedTileLoader *tileLoader );
+public:
+  explicit GenericScanlineTextureMapper(StackedTileLoader *tileLoader);
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+  virtual void mapTexture(GeoPainter *painter,
+                          const ViewportParams *viewport,
+                          int tileZoomLevel,
+                          const QRect& dirtyRect,
+                          TextureColorizer *texColorizer);
 
- private:
-    class RenderJob;
+private:
+  class RenderJob;
 
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
+  void mapTexture(const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality);
 
-    StackedTileLoader *const m_tileLoader;
-    int m_radius;
-    QImage m_canvasImage;
-    QThreadPool m_threadPool;
+  StackedTileLoader *const m_tileLoader;
+  int m_radius;
+  QImage m_canvasImage;
+  QThreadPool m_threadPool;
 };
 
 }

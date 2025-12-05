@@ -13,24 +13,23 @@
 
 #include "GeoTagHandler.h"
 
-namespace Marble
-{
+namespace Marble {
 class OsmPlacemarkData;
 class GeoDataLineString;
 class GeoDataPolygon;
 class GeoDataPlacemark;
 
-namespace kml
-{
+namespace kml {
 
-class KmlOsmPlacemarkDataTagHandler : public GeoTagHandler
+class KmlOsmPlacemarkDataTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse( GeoParser& parser ) const;
+  virtual GeoNode *parse(GeoParser& parser) const;
+
 };
 
 }
 }
 
 #endif
-

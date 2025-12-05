@@ -28,36 +28,35 @@
 #include "GeoParser.h"
 #include "GeoSceneTileDataset.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Projection)
 
-GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
+GeoNode *DgmlProjectionTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_Projection ));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Projection));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if ( !parentItem.represents( dgmlTag_Texture ) && !parentItem.represents( dgmlTag_Vectortile))
-        return 0;
-
-    // Attribute name, default to "Equirectangular"
-    const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
-    if ( !nameStr.isEmpty() ) {
-        GeoSceneTileDataset::Projection projection = GeoSceneTileDataset::Equirectangular;
-        if ( nameStr == "Equirectangular" )
-            projection = GeoSceneTileDataset::Equirectangular;
-        else if ( nameStr == "Mercator" )
-            projection = GeoSceneTileDataset::Mercator;
-        else
-            parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
-
-        parentItem.nodeAs<GeoSceneTileDataset>()->setProjection( projection );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(!parentItem.represents(dgmlTag_Texture) && !parentItem.represents(dgmlTag_Vectortile))
     return 0;
+
+  // Attribute name, default to "Equirectangular"
+  const QString nameStr = parser.attribute(dgmlAttr_name).trimmed();
+  if(!nameStr.isEmpty())
+  {
+    GeoSceneTileDataset::Projection projection = GeoSceneTileDataset::Equirectangular;
+    if(nameStr == "Equirectangular")
+      projection = GeoSceneTileDataset::Equirectangular;
+    else if(nameStr == "Mercator")
+      projection = GeoSceneTileDataset::Mercator;
+    else
+      parser.raiseWarning(QString("Value not allowed for attribute name: %1").arg(nameStr));
+
+    parentItem.nodeAs<GeoSceneTileDataset>()->setProjection(projection);
+  }
+  return 0;
 }
 
 }

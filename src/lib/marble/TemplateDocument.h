@@ -15,8 +15,7 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class TemplateDocumentPrivate;
 
@@ -39,47 +38,47 @@ class TemplateDocumentPrivate;
 class TemplateDocument
 {
 public:
-    TemplateDocument();
-    explicit TemplateDocument(const QString &templateText);
-    ~TemplateDocument();
+  TemplateDocument();
+  explicit TemplateDocument(const QString& templateText);
+  ~TemplateDocument();
 
-    /**
-     * @brief Returns the current template value of @p key
-     * @param key template key (%<here>%)
-     * @return value of the template
-     */
-    QString value(const QString &key) const;
+  /**
+   * @brief Returns the current template value of @p key
+   * @param key template key (%<here>%)
+   * @return value of the template
+   */
+  QString value(const QString& key) const;
 
-    /**
-     * @brief Change set template value into new one
-     * @param key template key
-     * @param value template value
-     */
-    void setValue(const QString &key, const QString &value);
+  /**
+   * @brief Change set template value into new one
+   * @param key template key
+   * @param value template value
+   */
+  void setValue(const QString& key, const QString& value);
 
-    /**
-     * @brief Set template text
-     * @param newTemplateText new template text
-     */
-    void setTemplate(const QString &newTemplateText);
+  /**
+   * @brief Set template text
+   * @param newTemplateText new template text
+   */
+  void setTemplate(const QString& newTemplateText);
 
-    /**
-     * @brief Indexator for template values
-     * @param key template value's index
-     * @return reference for the item
-     */
-    QString& operator[](const QString &key);
+  /**
+   * @brief Indexator for template values
+   * @param key template value's index
+   * @return reference for the item
+   */
+  QString& operator[](const QString& key);
 
-    /**
-     * @brief Final proceed text
-     *
-     * @return ready text with all variables and includes processed
-     */
-    QString finalText() const;
+  /**
+   * @brief Final proceed text
+   *
+   * @return ready text with all variables and includes processed
+   */
+  QString finalText() const;
 
 private:
-    Q_DISABLE_COPY(TemplateDocument)
-    TemplateDocumentPrivate *d;
+  Q_DISABLE_COPY(TemplateDocument)
+  TemplateDocumentPrivate *d;
 };
 
 } // namespace Marble

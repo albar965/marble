@@ -8,18 +8,15 @@
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAMULTIGEOMETRY_H
 #define MARBLE_GEODATAMULTIGEOMETRY_H
-
 
 #include "geodata_export.h"
 
 #include "GeoDataGeometry.h"
 #include <QVector>
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short A class that can contain other GeoDataGeometry objects
@@ -30,67 +27,71 @@ namespace Marble
  */
 class GeoDataMultiGeometryPrivate;
 
-class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
+class GEODATA_EXPORT GeoDataMultiGeometry :
+  public GeoDataGeometry
 {
- public:
-    GeoDataMultiGeometry();
-    explicit GeoDataMultiGeometry( const GeoDataGeometry& other );
+public:
+  GeoDataMultiGeometry();
+  explicit GeoDataMultiGeometry(const GeoDataGeometry& other);
 
-    virtual ~GeoDataMultiGeometry();
+  virtual ~GeoDataMultiGeometry();
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    int size() const;
-    GeoDataGeometry& at( int pos );
-    const GeoDataGeometry& at( int pos ) const;
-    GeoDataGeometry& operator[]( int pos );
-    const GeoDataGeometry& operator[]( int pos ) const;
+  int size() const;
+  GeoDataGeometry& at(int pos);
+  const GeoDataGeometry& at(int pos) const;
+  GeoDataGeometry& operator[](int pos);
+  const GeoDataGeometry& operator[](int pos) const;
 
-    GeoDataGeometry& first();
-    const GeoDataGeometry& first() const;
-    GeoDataGeometry& last();
-    const GeoDataGeometry& last() const;
+  GeoDataGeometry& first();
+  const GeoDataGeometry& first() const;
+  GeoDataGeometry& last();
+  const GeoDataGeometry& last() const;
 
-    /**
-     * @brief  returns the requested child item
-     */
-    GeoDataGeometry* child( int );
+  /**
+   * @brief  returns the requested child item
+   */
+  GeoDataGeometry *child(int);
 
-    /**
-     * @brief  returns the requested child item
-     */
-    const GeoDataGeometry* child( int ) const;
+  /**
+   * @brief  returns the requested child item
+   */
+  const GeoDataGeometry *child(int) const;
 
-    /**
-     * @brief returns the position of an item in the list
-     */
-    int childPosition( const GeoDataGeometry *child ) const;
+  /**
+   * @brief returns the position of an item in the list
+   */
+  int childPosition(const GeoDataGeometry *child) const;
 
-    /**
-    * @brief add an element
-    */
-    void append( GeoDataGeometry *other );
+  /**
+  * @brief add an element
+  */
+  void append(GeoDataGeometry *other);
 
-    GeoDataMultiGeometry& operator << ( const GeoDataGeometry& value );
-    
-    QVector<GeoDataGeometry*>::Iterator begin();
-    QVector<GeoDataGeometry*>::Iterator end();
-    QVector<GeoDataGeometry*>::ConstIterator constBegin() const;
-    QVector<GeoDataGeometry*>::ConstIterator constEnd() const;
-    void clear();
-    QVector<GeoDataGeometry> vector() const;
+  GeoDataMultiGeometry& operator<<(const GeoDataGeometry& value);
 
-    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator pos );
-    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator begin,
-                                                  QVector<GeoDataGeometry*>::Iterator end );
+  QVector<GeoDataGeometry *>::Iterator begin();
+  QVector<GeoDataGeometry *>::Iterator end();
+  QVector<GeoDataGeometry *>::ConstIterator constBegin() const;
+  QVector<GeoDataGeometry *>::ConstIterator constEnd() const;
+  void clear();
+  QVector<GeoDataGeometry> vector() const;
 
-    // Serialize the Placemark to @p stream
-    virtual void pack( QDataStream& stream ) const;
-    // Unserialize the Placemark from @p stream
-    virtual void unpack( QDataStream& stream );
- private:
-    GeoDataMultiGeometryPrivate *p();
-    const GeoDataMultiGeometryPrivate *p() const;
+  QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator pos);
+  QVector<GeoDataGeometry *>::Iterator erase(QVector<GeoDataGeometry *>::Iterator begin,
+                                             QVector<GeoDataGeometry *>::Iterator end);
+
+  // Serialize the Placemark to @p stream
+  virtual void pack(QDataStream& stream) const;
+
+  // Unserialize the Placemark from @p stream
+  virtual void unpack(QDataStream& stream);
+
+private:
+  GeoDataMultiGeometryPrivate *p();
+  const GeoDataMultiGeometryPrivate *p() const;
+
 };
 
 }

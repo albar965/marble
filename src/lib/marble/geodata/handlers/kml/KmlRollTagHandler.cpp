@@ -16,26 +16,27 @@
 #include "GeoParser.h"
 #include "GeoDataOrientation.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( roll )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(roll)
 
-GeoNode* KmlrollTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlrollTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_roll ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_roll));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataCamera>() ) {
-        qreal roll = parser.readElementText().trimmed().toDouble();
-        parentItem.nodeAs<GeoDataCamera>()->setRoll(roll);
-    } else if (parentItem.is<GeoDataOrientation>() ) {
-        qreal roll = parser.readElementText().trimmed().toDouble();
-        parentItem.nodeAs<GeoDataOrientation>()->setRoll(roll);
-    }
-    return 0;
+  if(parentItem.is<GeoDataCamera>())
+  {
+    qreal roll = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataCamera>()->setRoll(roll);
+  }
+  else if(parentItem.is<GeoDataOrientation>())
+  {
+    qreal roll = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataOrientation>()->setRoll(roll);
+  }
+  return 0;
 }
 
 }

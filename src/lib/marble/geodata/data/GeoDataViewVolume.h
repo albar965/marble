@@ -14,44 +14,44 @@
 #include "GeoDataObject.h"
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataViewVolumePrivate;
 
-class MARBLE_EXPORT GeoDataViewVolume : public GeoDataObject
+class MARBLE_EXPORT GeoDataViewVolume :
+  public GeoDataObject
 {
 public:
-    GeoDataViewVolume();
+  GeoDataViewVolume();
 
-    GeoDataViewVolume( const GeoDataViewVolume &other );
+  GeoDataViewVolume(const GeoDataViewVolume& other);
 
-    GeoDataViewVolume& operator=( const GeoDataViewVolume &other );
-    bool operator==( const GeoDataViewVolume &other ) const;
-    bool operator!=( const GeoDataViewVolume &other ) const;
+  GeoDataViewVolume& operator=(const GeoDataViewVolume& other);
+  bool operator==(const GeoDataViewVolume& other) const;
+  bool operator!=(const GeoDataViewVolume& other) const;
 
-    ~GeoDataViewVolume();
+  ~GeoDataViewVolume();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    qreal leftFov() const;
-    void setLeftFov( const qreal &leftFov );
+  qreal leftFov() const;
+  void setLeftFov(const qreal& leftFov);
 
-    qreal rightFov() const;
-    void setRightFov( const qreal &rightFov );
+  qreal rightFov() const;
+  void setRightFov(const qreal& rightFov);
 
-    qreal bottomFov() const;
-    void setBottomFov( const qreal &bottomFov );
+  qreal bottomFov() const;
+  void setBottomFov(const qreal& bottomFov);
 
-    qreal topFov() const;
-    void setTopFov( const qreal &topFov );
+  qreal topFov() const;
+  void setTopFov(const qreal& topFov);
 
-    qreal near() const;
-    void setNear( const qreal &near );
+  qreal near() const;
+  void setNear(const qreal& near);
 
 private:
-    GeoDataViewVolumePrivate* const d;
+  GeoDataViewVolumePrivate * const d;
 };
 
 }

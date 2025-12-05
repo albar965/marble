@@ -32,30 +32,29 @@
 #include "GeoSceneFilter.h"
 #include "GeoScenePalette.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Palette)
 
-GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlPaletteTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Palette));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Palette));
 
-    QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
-    QString file      = parser.readElementText().trimmed();
+  QString type = parser.attribute(dgmlAttr_type).toLower().trimmed();
+  QString file = parser.readElementText().trimmed();
 
-    GeoScenePalette *palette = 0;
+  GeoScenePalette *palette = 0;
 
-    // Checking for parent palette
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Filter)) {
-        palette = new GeoScenePalette( type, file );
-        parentItem.nodeAs<GeoSceneFilter>()->addPalette( palette );
-    }
+  // Checking for parent palette
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Filter))
+  {
+    palette = new GeoScenePalette(type, file);
+    parentItem.nodeAs<GeoSceneFilter>()->addPalette(palette);
+  }
 
-    return palette;
+  return palette;
 }
 
 }

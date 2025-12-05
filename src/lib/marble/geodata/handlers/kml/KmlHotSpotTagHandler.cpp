@@ -28,37 +28,42 @@
 #include "GeoDataHotSpot.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( hotSpot )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(hotSpot)
 
-GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlhotSpotTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_hotSpot ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_hotSpot));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        QPointF pf( parser.attribute( "x" ).trimmed().toFloat(), 
-                    parser.attribute( "y" ).trimmed().toFloat() );
-        QString xu = parser.attribute( "xunits" ).trimmed();
-        QString yu = parser.attribute( "yunits" ).trimmed();
+  GeoStackItem parentItem = parser.parentElement();
 
-        GeoDataHotSpot::Units xunits;
-        GeoDataHotSpot::Units yunits;
-        
-        if( xu == QString( "pixels" ) ) xunits = GeoDataHotSpot::Pixels;
-        else if( xu == QString( "insetPixels" ) ) xunits = GeoDataHotSpot::InsetPixels;
-        else xunits = GeoDataHotSpot::Fraction;
-        if( yu == QString( "pixels" ) ) yunits = GeoDataHotSpot::Pixels;
-        else if( yu == QString( "insetPixels" ) ) yunits = GeoDataHotSpot::InsetPixels;
-        else yunits = GeoDataHotSpot::Fraction;
-        
-        parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot( pf, xunits, yunits );
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_IconStyle))
+  {
+    QPointF pf(parser.attribute("x").trimmed().toFloat(),
+               parser.attribute("y").trimmed().toFloat());
+    QString xu = parser.attribute("xunits").trimmed();
+    QString yu = parser.attribute("yunits").trimmed();
+
+    GeoDataHotSpot::Units xunits;
+    GeoDataHotSpot::Units yunits;
+
+    if(xu == QString("pixels"))
+      xunits = GeoDataHotSpot::Pixels;
+    else if(xu == QString("insetPixels"))
+      xunits = GeoDataHotSpot::InsetPixels;
+    else
+      xunits = GeoDataHotSpot::Fraction;
+    if(yu == QString("pixels"))
+      yunits = GeoDataHotSpot::Pixels;
+    else if(yu == QString("insetPixels"))
+      yunits = GeoDataHotSpot::InsetPixels;
+    else
+      yunits = GeoDataHotSpot::Fraction;
+
+    parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot(pf, xunits, yunits);
+  }
+  return 0;
 }
 
 }

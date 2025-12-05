@@ -19,42 +19,44 @@ namespace Marble {
 
 class GeoDataScreenOverlayPrivate;
 
-class MARBLE_EXPORT GeoDataScreenOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataScreenOverlay :
+  public GeoDataOverlay
 {
 public:
-    GeoDataScreenOverlay();
+  GeoDataScreenOverlay();
 
-    GeoDataScreenOverlay( const GeoDataScreenOverlay &other );
+  GeoDataScreenOverlay(const GeoDataScreenOverlay& other);
 
-    GeoDataScreenOverlay& operator=( const GeoDataScreenOverlay &other );
-    bool operator==( const GeoDataScreenOverlay &other ) const;
-    bool operator!=( const GeoDataScreenOverlay &other ) const;
-    ~GeoDataScreenOverlay();
+  GeoDataScreenOverlay& operator=(const GeoDataScreenOverlay& other);
+  bool operator==(const GeoDataScreenOverlay& other) const;
+  bool operator!=(const GeoDataScreenOverlay& other) const;
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  ~GeoDataScreenOverlay();
 
-    GeoDataVec2 overlayXY() const;
-    void setOverlayXY( const GeoDataVec2 &vec2 );
-    void setOverlayXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    GeoDataVec2 screenXY() const;
-    void setScreenXY( const GeoDataVec2 &vec2 );
-    void setScreenXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+  GeoDataVec2 overlayXY() const;
+  void setOverlayXY(const GeoDataVec2& vec2);
+  void setOverlayXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit, const GeoDataVec2::Unit& yunit);
 
-    GeoDataVec2 rotationXY() const;
-    void setRotationXY( const GeoDataVec2 &vec2 );
-    void setRotationXY( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+  GeoDataVec2 screenXY() const;
+  void setScreenXY(const GeoDataVec2& vec2);
+  void setScreenXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit, const GeoDataVec2::Unit& yunit);
 
-    GeoDataVec2 size() const;
-    void setSize( const GeoDataVec2 &vec2 );
-    void setSize( const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit, const GeoDataVec2::Unit &yunit );
+  GeoDataVec2 rotationXY() const;
+  void setRotationXY(const GeoDataVec2& vec2);
+  void setRotationXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit, const GeoDataVec2::Unit& yunit);
 
-    qreal rotation() const;
-    void setRotation( qreal rotation );
+  GeoDataVec2 size() const;
+  void setSize(const GeoDataVec2& vec2);
+  void setSize(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit, const GeoDataVec2::Unit& yunit);
+
+  qreal rotation() const;
+  void setRotation(qreal rotation);
 
 private:
-    GeoDataScreenOverlayPrivate* const d;
+  GeoDataScreenOverlayPrivate * const d;
 };
 
 }

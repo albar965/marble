@@ -17,29 +17,29 @@
 
 #include "ui_ExternalEditor.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class ExternalEditorDialogPrivate;
 
-class MARBLE_EXPORT ExternalEditorDialog: public QDialog, private Ui::ExternalEditor
+class MARBLE_EXPORT ExternalEditorDialog :
+  public QDialog, private Ui::ExternalEditor
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit ExternalEditorDialog( QWidget * parent = 0, Qt::WindowFlags f = 0 );
+  explicit ExternalEditorDialog(QWidget *parent = 0, Qt::WindowFlags f = 0);
 
-    ~ExternalEditorDialog();
+  ~ExternalEditorDialog();
 
-    QString externalEditor() const;
+  QString externalEditor() const;
 
-    bool saveDefault() const;
+  bool saveDefault() const;
 
 private Q_SLOTS:
-    void updateDefaultEditor( int index );
+  void updateDefaultEditor(int index);
 
 private:
-    ExternalEditorDialogPrivate * const d;
+  ExternalEditorDialogPrivate * const d;
 };
 
 } // namespace Marble

@@ -17,7 +17,6 @@
 #ifndef MARBLE_PLACEMARKLAYER_H
 #define MARBLE_PLACEMARKLAYER_H
 
-
 #include <QObject>
 #include "LayerInterface.h"
 
@@ -29,8 +28,7 @@ class QAbstractItemModel;
 class QItemSelectionModel;
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoPainter;
 class GeoSceneLayer;
@@ -39,66 +37,68 @@ class ViewportParams;
 class VisiblePlacemark;
 class StyleBuilder;
 
-class PlacemarkLayer : public QObject, public LayerInterface
+class PlacemarkLayer :
+  public QObject, public LayerInterface
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    PlacemarkLayer( QAbstractItemModel *placemarkModel,
-                    QItemSelectionModel *selectionModel,
-                    MarbleClock *clock,
-                    const StyleBuilder *styleBuilder,
-                    QObject *parent = 0 );
-    ~PlacemarkLayer();
+public:
+  PlacemarkLayer(QAbstractItemModel *placemarkModel,
+                 QItemSelectionModel *selectionModel,
+                 MarbleClock *clock,
+                 const StyleBuilder *styleBuilder,
+                 QObject *parent = 0);
+  ~PlacemarkLayer();
 
-    /**
-     * @reimp
-     */
-    QStringList renderPosition() const;
+  /**
+   * @reimp
+   */
+  QStringList renderPosition() const;
 
-    /**
-     * @reimp
-     */
-    qreal zValue() const;
+  /**
+   * @reimp
+   */
+  qreal zValue() const;
 
-    /**
-     * @reimp
-     */
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString &renderPos = QLatin1String("NONE"),
-                 GeoSceneLayer *layer = 0 );
+  /**
+   * @reimp
+   */
+  bool render(GeoPainter *painter, ViewportParams *viewport,
+              const QString& renderPos = QLatin1String("NONE"),
+              GeoSceneLayer *layer = 0);
 
-    RenderState renderState() const;
+  RenderState renderState() const;
 
-    virtual QString runtimeTrace() const;
+  virtual QString runtimeTrace() const;
 
-    /**
-     * Returns a list of model indexes that are at position @p pos.
-     */
-    QVector<const GeoDataFeature *> whichPlacemarkAt( const QPoint &pos );
+  /**
+   * Returns a list of model indexes that are at position @p pos.
+   */
+  QVector<const GeoDataFeature *> whichPlacemarkAt(const QPoint& pos);
 
-    static bool m_useXWorkaround;  // Indicates need for an X windows workaround.
- public Q_SLOTS:
-   // earth
-   void setShowPlaces( bool show );
-   void setShowCities( bool show );
-   void setShowTerrain( bool show );
-   void setShowOtherPlaces( bool show );
+  static bool m_useXWorkaround;    // Indicates need for an X windows workaround.
 
-   // other planets
-   void setShowLandingSites( bool show );
-   void setShowCraters( bool show );
-   void setShowMaria( bool show );
+public Q_SLOTS:
+  // earth
+  void setShowPlaces(bool show);
+  void setShowCities(bool show);
+  void setShowTerrain(bool show);
+  void setShowOtherPlaces(bool show);
 
-   void requestStyleReset();
+  // other planets
+  void setShowLandingSites(bool show);
+  void setShowCraters(bool show);
+  void setShowMaria(bool show);
 
- Q_SIGNALS:
-   void repaintNeeded();
+  void requestStyleReset();
 
- private:
-    static bool testXBug();
+Q_SIGNALS:
+  void repaintNeeded();
 
-    PlacemarkLayout m_layout;
+private:
+  static bool testXBug();
+
+  PlacemarkLayout m_layout;
 };
 
 }

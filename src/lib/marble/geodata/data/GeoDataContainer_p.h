@@ -15,51 +15,51 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataContainerPrivate :
+  public GeoDataFeaturePrivate
 {
+public:
+  GeoDataContainerPrivate()
+  {
+  }
 
-class GeoDataContainerPrivate : public GeoDataFeaturePrivate
-{
-  public:
-    GeoDataContainerPrivate()
+  ~GeoDataContainerPrivate()
+  {
+    qDeleteAll(m_vector);
+  }
+
+  GeoDataContainerPrivate& operator=(const GeoDataContainerPrivate& other)
+  {
+    GeoDataFeaturePrivate::operator=(other);
+    qDeleteAll(m_vector);
+    m_vector.reserve(other.m_vector.size());
+    foreach(GeoDataFeature * feature, other.m_vector)
     {
+      m_vector.append(new GeoDataFeature(*feature));
     }
-    
-    ~GeoDataContainerPrivate()
-    {
-        qDeleteAll( m_vector );
-    }
+    return *this;
+  }
 
-    GeoDataContainerPrivate& operator=( const GeoDataContainerPrivate &other)
-    {
-        GeoDataFeaturePrivate::operator=( other );
-        qDeleteAll( m_vector );
-        m_vector.reserve(other.m_vector.size());
-        foreach( GeoDataFeature *feature, other.m_vector )
-        {
-            m_vector.append( new GeoDataFeature( *feature ) );
-        }
-        return *this;
-    }
+  virtual GeoDataFeaturePrivate *copy()
+  {
+    GeoDataContainerPrivate *copy = new GeoDataContainerPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual GeoDataFeaturePrivate* copy()
-    { 
-        GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataContainerType;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataContainerType;
-    }
+  virtual EnumFeatureId featureId() const
+  {
+    return GeoDataFolderId;
+  }
 
-    virtual EnumFeatureId featureId() const
-    {
-        return GeoDataFolderId;
-    }
-
-    QVector<GeoDataFeature*> m_vector;
+  QVector<GeoDataFeature *> m_vector;
 };
 
 } // namespace Marble

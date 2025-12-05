@@ -32,40 +32,52 @@
 #include "GeoDataItemIcon.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(href)
+
+GeoNode *KmlhrefTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( href )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_href));
 
-GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_href ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  QString content = parser.readElementText().trimmed();
 
-    QString content = parser.readElementText().trimmed();
-
-    if ( parentItem.represents( kmlTag_Icon ) ) {
-        // we need a more elaborate version of this part
-        if ( parentItem.is<GeoDataIconStyle>() ) {
-            parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
-        } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
-            parentItem.nodeAs<GeoDataGroundOverlay>()->setIconFile( content );
-        } else if ( parentItem.is<GeoDataPhotoOverlay>() ) {
-            parentItem.nodeAs<GeoDataPhotoOverlay>()->setIconFile( content );
-        } else if ( parentItem.is<GeoDataScreenOverlay>() ) {
-            parentItem.nodeAs<GeoDataScreenOverlay>()->setIconFile( content );
-        }
-    } else if ( parentItem.represents( kmlTag_ItemIcon ) ) {
-        parentItem.nodeAs<GeoDataItemIcon>()->setIconPath( content );
-    } else if ( parentItem.is<GeoDataLink>() ) {
-        parentItem.nodeAs<GeoDataLink>()->setHref( content );
-    } else if ( parentItem.is<GeoDataSoundCue>() ) {
-        parentItem.nodeAs<GeoDataSoundCue>()->setHref( content );
+  if(parentItem.represents(kmlTag_Icon))
+  {
+    // we need a more elaborate version of this part
+    if(parentItem.is<GeoDataIconStyle>())
+    {
+      parentItem.nodeAs<GeoDataIconStyle>()->setIconPath(content);
     }
+    else if(parentItem.is<GeoDataGroundOverlay>())
+    {
+      parentItem.nodeAs<GeoDataGroundOverlay>()->setIconFile(content);
+    }
+    else if(parentItem.is<GeoDataPhotoOverlay>())
+    {
+      parentItem.nodeAs<GeoDataPhotoOverlay>()->setIconFile(content);
+    }
+    else if(parentItem.is<GeoDataScreenOverlay>())
+    {
+      parentItem.nodeAs<GeoDataScreenOverlay>()->setIconFile(content);
+    }
+  }
+  else if(parentItem.represents(kmlTag_ItemIcon))
+  {
+    parentItem.nodeAs<GeoDataItemIcon>()->setIconPath(content);
+  }
+  else if(parentItem.is<GeoDataLink>())
+  {
+    parentItem.nodeAs<GeoDataLink>()->setHref(content);
+  }
+  else if(parentItem.is<GeoDataSoundCue>())
+  {
+    parentItem.nodeAs<GeoDataSoundCue>()->setHref(content);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

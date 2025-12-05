@@ -15,34 +15,35 @@
 
 #include <QDebug>
 
-namespace Marble
+namespace Marble {
+namespace kml {
+namespace gx {
+KML_DEFINE_TAG_HANDLER_GX22(balloonVisibility)
+
+GeoNode *KmlballoonVisibilityTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-namespace gx
-{
-KML_DEFINE_TAG_HANDLER_GX22( balloonVisibility )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_balloonVisibility));
 
-GeoNode* KmlballoonVisibilityTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_balloonVisibility ) );
+  QString content = parser.readElementText().trimmed();
 
-    QString content = parser.readElementText().trimmed();
+  bool visible;
+  if(content == QString("1"))
+  {
+    visible = true;
+  }
+  else
+  {
+    visible = false;
+  }
 
-    bool visible;
-    if( content == QString( "1" ) ){
-        visible = true;
-    } else {
-        visible = false;
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->setBalloonVisible(visible);
+  }
 
-    if( parentItem.is<GeoDataPlacemark>() ){
-        parentItem.nodeAs<GeoDataPlacemark>()->setBalloonVisible( visible );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

@@ -28,16 +28,16 @@ using namespace Marble;
 bool PlacemarkLayer::m_useXWorkaround = false;
 
 PlacemarkLayer::PlacemarkLayer(QAbstractItemModel *placemarkModel,
-                                QItemSelectionModel *selectionModel,
-                                MarbleClock *clock, const StyleBuilder *styleBuilder,
-                                QObject *parent ) :
-    QObject( parent ),
-    m_layout( placemarkModel, selectionModel, clock, styleBuilder )
+                               QItemSelectionModel *selectionModel,
+                               MarbleClock *clock, const StyleBuilder *styleBuilder,
+                               QObject *parent) :
+  QObject(parent),
+  m_layout(placemarkModel, selectionModel, clock, styleBuilder)
 {
-    m_useXWorkaround = testXBug();
-    mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
+  m_useXWorkaround = testXBug();
+  mDebug() << "Use workaround: " << (m_useXWorkaround ? "1" : "0");
 
-    connect( &m_layout, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()) );
+  connect(&m_layout, SIGNAL(repaintNeeded()), SIGNAL(repaintNeeded()));
 }
 
 PlacemarkLayer::~PlacemarkLayer()
@@ -46,151 +46,155 @@ PlacemarkLayer::~PlacemarkLayer()
 
 QStringList PlacemarkLayer::renderPosition() const
 {
-    return QStringList() << "HOVERS_ABOVE_SURFACE";
+  return QStringList() << "HOVERS_ABOVE_SURFACE";
 }
 
 qreal PlacemarkLayer::zValue() const
 {
-    return 2.0;
+  return 2.0;
 }
 
-bool PlacemarkLayer::render( GeoPainter *geoPainter, ViewportParams *viewport,
-                               const QString &renderPos, GeoSceneLayer *layer )
+bool PlacemarkLayer::render(GeoPainter *geoPainter, ViewportParams *viewport,
+                            const QString& renderPos, GeoSceneLayer *layer)
 {
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
+  Q_UNUSED(renderPos)
+  Q_UNUSED(layer)
 
-    QVector<VisiblePlacemark*> visiblePlacemarks = m_layout.generateLayout( viewport );
-    // draw placemarks less important first
-    QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
-    QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
+  QVector<VisiblePlacemark *> visiblePlacemarks = m_layout.generateLayout(viewport);
+  // draw placemarks less important first
+  QVector<VisiblePlacemark *>::const_iterator visit = visiblePlacemarks.constEnd();
+  QVector<VisiblePlacemark *>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
-    QPainter *const painter = geoPainter;
+  QPainter *const painter = geoPainter;
 
-    while ( visit != itEnd ) {
-        --visit;
+  while(visit != itEnd)
+  {
+    --visit;
 
-        VisiblePlacemark *const mark = *visit;
+    VisiblePlacemark *const mark = *visit;
 
-        QRect labelRect( mark->labelRect().toRect() );
-        QPoint symbolPos( mark->symbolPosition() );
+    QRect labelRect(mark->labelRect().toRect());
+    QPoint symbolPos(mark->symbolPosition());
 
-        // when the map is such zoomed out that a given place
-        // appears many times, we draw one placemark at each
-        if (viewport->currentProjection()->repeatableX() ) {
-            const int symbolX = mark->symbolPosition().x();
-            const int textX =   mark->labelRect().x();
+    // when the map is such zoomed out that a given place
+    // appears many times, we draw one placemark at each
+    if(viewport->currentProjection()->repeatableX())
+    {
+      const int symbolX = mark->symbolPosition().x();
+      const int textX = mark->labelRect().x();
 
-            for ( int i = symbolX % (4 * viewport->radius());
-                 i <= viewport->width();
-                 i += 4 * viewport->radius() )
-            {
-                labelRect.moveLeft(i - symbolX + textX );
-                symbolPos.setX( i );
+      for( int i = symbolX % (4 * viewport->radius());
+           i <= viewport->width();
+           i += 4 * viewport->radius())
+      {
+        labelRect.moveLeft(i - symbolX + textX);
+        symbolPos.setX(i);
 
-                painter->drawPixmap( symbolPos, mark->symbolPixmap() );
-                painter->drawPixmap( labelRect, mark->labelPixmap() );
-            }
-        } else { // simple case, one draw per placemark
-            painter->drawPixmap( symbolPos, mark->symbolPixmap() );
-            painter->drawPixmap( labelRect, mark->labelPixmap() );
-        }
+        painter->drawPixmap(symbolPos, mark->symbolPixmap());
+        painter->drawPixmap(labelRect, mark->labelPixmap());
+      }
     }
+    else         // simple case, one draw per placemark
+    {
+      painter->drawPixmap(symbolPos, mark->symbolPixmap());
+      painter->drawPixmap(labelRect, mark->labelPixmap());
+    }
+  }
 
-    return true;
+  return true;
 }
 
 RenderState PlacemarkLayer::renderState() const
 {
-    return RenderState( "Placemarks" );
+  return RenderState("Placemarks");
 }
 
 QString PlacemarkLayer::runtimeTrace() const
 {
-    return m_layout.runtimeTrace();
+  return m_layout.runtimeTrace();
 }
 
-QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt( const QPoint &pos )
+QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt(const QPoint& pos)
 {
-    return m_layout.whichPlacemarkAt( pos );
+  return m_layout.whichPlacemarkAt(pos);
 }
 
-void PlacemarkLayer::setShowPlaces( bool show )
+void PlacemarkLayer::setShowPlaces(bool show)
 {
-    m_layout.setShowPlaces( show );
+  m_layout.setShowPlaces(show);
 }
 
-void PlacemarkLayer::setShowCities( bool show )
+void PlacemarkLayer::setShowCities(bool show)
 {
-    m_layout.setShowCities( show );
+  m_layout.setShowCities(show);
 }
 
-void PlacemarkLayer::setShowTerrain( bool show )
+void PlacemarkLayer::setShowTerrain(bool show)
 {
-    m_layout.setShowTerrain( show );
+  m_layout.setShowTerrain(show);
 }
 
-void PlacemarkLayer::setShowOtherPlaces( bool show )
+void PlacemarkLayer::setShowOtherPlaces(bool show)
 {
-    m_layout.setShowOtherPlaces( show );
+  m_layout.setShowOtherPlaces(show);
 }
 
-void PlacemarkLayer::setShowLandingSites( bool show )
+void PlacemarkLayer::setShowLandingSites(bool show)
 {
-    m_layout.setShowLandingSites( show );
+  m_layout.setShowLandingSites(show);
 }
 
-void PlacemarkLayer::setShowCraters( bool show )
+void PlacemarkLayer::setShowCraters(bool show)
 {
-    m_layout.setShowCraters( show );
+  m_layout.setShowCraters(show);
 }
 
-void PlacemarkLayer::setShowMaria( bool show )
+void PlacemarkLayer::setShowMaria(bool show)
 {
-    m_layout.setShowMaria( show );
+  m_layout.setShowMaria(show);
 }
 
 void PlacemarkLayer::requestStyleReset()
 {
-    m_layout.requestStyleReset();
+  m_layout.requestStyleReset();
 }
 
-
-// Test if there a bug in the X server which makes 
-// text fully transparent if it gets written on 
-// QPixmaps that were initialized by filling them 
+// Test if there a bug in the X server which makes
+// text fully transparent if it gets written on
+// QPixmaps that were initialized by filling them
 // with Qt::transparent
 
 bool PlacemarkLayer::testXBug()
 {
-    QString  testchar( "K" );
-    QFont    font( "Sans Serif", 10 );
+  QString testchar("K");
+  QFont font("Sans Serif", 10);
 
-    int fontheight = QFontMetrics( font ).height();
-    int fontwidth  = QFontMetrics( font ).width(testchar);
-    int fontascent = QFontMetrics( font ).ascent();
+  int fontheight = QFontMetrics(font).height();
+  int fontwidth = QFontMetrics(font).width(testchar);
+  int fontascent = QFontMetrics(font).ascent();
 
-    QPixmap  pixmap( fontwidth, fontheight );
-    pixmap.fill( Qt::transparent );
+  QPixmap pixmap(fontwidth, fontheight);
+  pixmap.fill(Qt::transparent);
 
-    QPainter textpainter;
-    textpainter.begin( &pixmap );
-    textpainter.setPen( QColor( 0, 0, 0, 255 ) );
-    textpainter.setFont( font );
-    textpainter.drawText( 0, fontascent, testchar );
-    textpainter.end();
+  QPainter textpainter;
+  textpainter.begin(&pixmap);
+  textpainter.setPen(QColor(0, 0, 0, 255));
+  textpainter.setFont(font);
+  textpainter.drawText(0, fontascent, testchar);
+  textpainter.end();
 
-    QImage image = pixmap.toImage();
+  QImage image = pixmap.toImage();
 
-    for ( int x = 0; x < fontwidth; ++x ) {
-        for ( int y = 0; y < fontheight; ++y ) {
-            if ( qAlpha( image.pixel( x, y ) ) > 0 )
-                return false;
-        }
+  for( int x = 0; x < fontwidth; ++x )
+  {
+    for( int y = 0; y < fontheight; ++y )
+    {
+      if(qAlpha(image.pixel(x, y)) > 0)
+        return false;
     }
+  }
 
-    return true;
+  return true;
 }
 
 #include "moc_PlacemarkLayer.cpp"
-

@@ -30,32 +30,33 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(styleUrl)
+
+GeoNode *KmlstyleUrlTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( styleUrl )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_styleUrl));
 
-GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_styleUrl ) );
+  GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem grandParentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-    GeoStackItem grandParentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_Pair ) ) {
-        QString content = parser.readElementText().trimmed();
+  if(parentItem.represents(kmlTag_Pair))
+  {
+    QString content = parser.readElementText().trimmed();
 
-        QString key = parentItem.nodeAs<GeoDataStyleMap>()->lastKey();
-        (*parentItem.nodeAs<GeoDataStyleMap>())[ key ] = content;
-        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( "" );
+    QString key = parentItem.nodeAs<GeoDataStyleMap>()->lastKey();
+    (*parentItem.nodeAs<GeoDataStyleMap>())[key] = content;
+    parentItem.nodeAs<GeoDataStyleMap>()->setLastKey("");
 
-    } else if( parentItem.is<GeoDataFeature>() ) {
-        QString content = parser.readElementText().trimmed();
+  }
+  else if(parentItem.is<GeoDataFeature>())
+  {
+    QString content = parser.readElementText().trimmed();
 
-        parentItem.nodeAs<GeoDataFeature>()->setStyleUrl( content );
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataFeature>()->setStyleUrl(content);
+  }
+  return 0;
 }
 
 }

@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -20,38 +19,39 @@ namespace Marble {
 
 class GeoDataLocationPrivate;
 
-class MARBLE_EXPORT GeoDataLocation: public GeoDataObject
+class MARBLE_EXPORT GeoDataLocation :
+  public GeoDataObject
 {
 public:
-    GeoDataLocation();
+  GeoDataLocation();
 
-    GeoDataLocation( const GeoDataLocation &other );
+  GeoDataLocation(const GeoDataLocation& other);
 
-    GeoDataLocation& operator=( const GeoDataLocation &other );
+  GeoDataLocation& operator=(const GeoDataLocation& other);
 
-    bool operator==( const GeoDataLocation &other ) const;
-    bool operator!=( const GeoDataLocation &other ) const;
+  bool operator==(const GeoDataLocation& other) const;
+  bool operator!=(const GeoDataLocation& other) const;
 
-    ~GeoDataLocation();
+  ~GeoDataLocation();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    qreal latitude(GeoDataCoordinates::Unit) const;
+  qreal latitude(GeoDataCoordinates::Unit) const;
 
-    qreal longitude(GeoDataCoordinates::Unit) const;
+  qreal longitude(GeoDataCoordinates::Unit) const;
 
-    void setLatitude(qreal latitude, GeoDataCoordinates::Unit unit);
+  void setLatitude(qreal latitude, GeoDataCoordinates::Unit unit);
 
-    void setLongitude(qreal longitude, GeoDataCoordinates::Unit unit);
+  void setLongitude(qreal longitude, GeoDataCoordinates::Unit unit);
 
-    /** Returns the distance to earth's surface in meters, interpreted according to altitudeMode */
-    qreal altitude() const;
+  /** Returns the distance to earth's surface in meters, interpreted according to altitudeMode */
+  qreal altitude() const;
 
-    void setAltitude( qreal altitude );
+  void setAltitude(qreal altitude);
 
 protected:
-    GeoDataLocationPrivate* const d;
+  GeoDataLocationPrivate * const d;
 };
 
 }

@@ -11,59 +11,58 @@
 #include "KmlPlugin.h"
 #include "KmlRunner.h"
 
-namespace Marble
-{
+namespace Marble {
 
-KmlPlugin::KmlPlugin( QObject *parent ) :
-    ParseRunnerPlugin( parent )
+KmlPlugin::KmlPlugin(QObject *parent) :
+  ParseRunnerPlugin(parent)
 {
 }
 
 QString KmlPlugin::name() const
 {
-    return tr( "KML File Parser" );
+  return tr("KML File Parser");
 }
 
 QString KmlPlugin::nameId() const
 {
-    return "Kml";
+  return "Kml";
 }
 
 QString KmlPlugin::version() const
 {
-    return "1.2";
+  return "1.2";
 }
 
 QString KmlPlugin::description() const
 {
-    return tr( "Create GeoDataDocument from KML and KMZ Files" );
+  return tr("Create GeoDataDocument from KML and KMZ Files");
 }
 
 QString KmlPlugin::copyrightYears() const
 {
-    return "2011, 2013, 2015";
+  return "2011, 2013, 2015";
 }
 
 QList<PluginAuthor> KmlPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Thibaut Gridel", "tgridel@free.fr" )
-            << PluginAuthor( "Dennis Nienhüser", "nienhueser@kde.org" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Thibaut Gridel", "tgridel@free.fr")
+         << PluginAuthor("Dennis Nienhüser", "nienhueser@kde.org");
 }
 
 QString KmlPlugin::fileFormatDescription() const
 {
-    return tr( "Google Earth KML" );
+  return tr("Google Earth KML");
 }
 
 QStringList KmlPlugin::fileExtensions() const
 {
-    return QStringList() << "kml" << "kmz";
+  return QStringList() << "kml" << "kmz";
 }
 
-ParsingRunner* KmlPlugin::newRunner() const
+ParsingRunner *KmlPlugin::newRunner() const
 {
-    return new KmlRunner;
+  return new KmlRunner;
 }
 
 }

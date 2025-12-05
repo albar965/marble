@@ -12,7 +12,6 @@
 #ifndef MARBLE_MARBLEPLUGINSETTINGSWIDGET_H
 #define MARBLE_MARBLEPLUGINSETTINGSWIDGET_H
 
-
 /** @file
  * This file contains the multiple inheritance ui-wrapper for the
  * MarblePluginSettingsWidget ui file.
@@ -30,34 +29,34 @@ class QModelIndex;
  * @short A public class that adds methods to the UI Plugins Settings Widget.
  *
  */
-namespace Marble
-{
+namespace Marble {
 
 class MarblePluginSettingsWidgetPrivate;
 class RenderPluginModel;
 
-class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget
+class MARBLE_EXPORT MarblePluginSettingsWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit MarblePluginSettingsWidget( QWidget *parent = 0 );
-    ~MarblePluginSettingsWidget();
+public:
+  explicit MarblePluginSettingsWidget(QWidget *parent = 0);
+  ~MarblePluginSettingsWidget();
 
-    void setModel( RenderPluginModel* pluginModel );
+  void setModel(RenderPluginModel *pluginModel);
 
-    void setAboutIcon( const QIcon& icon );
-    void setConfigIcon( const QIcon& icon );
+  void setAboutIcon(const QIcon& icon);
+  void setConfigIcon(const QIcon& icon);
 
- Q_SIGNALS:
-    void pluginListViewClicked();
+Q_SIGNALS:
+  void pluginListViewClicked();
 
- private:
-    Q_PRIVATE_SLOT( d, void showPluginAboutDialog( const QModelIndex & ) )
-    Q_PRIVATE_SLOT( d, void showPluginConfigDialog( const QModelIndex & ) )
+private:
+  Q_PRIVATE_SLOT(d, void showPluginAboutDialog(const QModelIndex&))
+  Q_PRIVATE_SLOT(d, void showPluginConfigDialog(const QModelIndex&))
 
- private:
-    MarblePluginSettingsWidgetPrivate *d;
+private:
+  MarblePluginSettingsWidgetPrivate *d;
 };
 
 }

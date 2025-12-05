@@ -25,31 +25,33 @@
 #include <geodata_export.h>
 #include "GeoParser.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDocument;
 class GeoSceneDocument;
 
-enum GeoSceneSourceType {
-    GeoScene_DGML   = 0
+enum GeoSceneSourceType
+{
+  GeoScene_DGML = 0
 };
 
-class GEODATA_EXPORT GeoSceneParser : public GeoParser
+class GEODATA_EXPORT GeoSceneParser :
+  public GeoParser
 {
 public:
-    explicit GeoSceneParser(GeoSceneSourceType source, const QString& docPath);
-    virtual ~GeoSceneParser();
+  explicit GeoSceneParser(GeoSceneSourceType source, const QString& docPath);
+  virtual ~GeoSceneParser();
 
 private:
-    virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidRootElement();
+  virtual bool isValidElement(const QString& tagName) const;
+  virtual bool isValidRootElement();
 
-    virtual GeoDocument* createDocument() const;
+  virtual GeoDocument *createDocument() const;
+
 };
 
 // Global helper function for the tag handlers
-GeoSceneDocument* geoSceneDoc(GeoParser& parser);
+GeoSceneDocument *geoSceneDoc(GeoParser& parser);
 
 }
 

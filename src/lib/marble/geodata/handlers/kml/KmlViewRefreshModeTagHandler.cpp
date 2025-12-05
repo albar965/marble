@@ -14,33 +14,37 @@
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+
+KML_DEFINE_TAG_HANDLER(viewRefreshMode)
+
+GeoNode *KmlviewRefreshModeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_viewRefreshMode));
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataLink>())
+  {
+    QString content = parser.readElementText().trimmed();
 
-KML_DEFINE_TAG_HANDLER( viewRefreshMode )
-
-GeoNode* KmlviewRefreshModeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_viewRefreshMode ) );
-    GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataLink>() ) {
-        QString content = parser.readElementText().trimmed();
-
-        GeoDataLink::ViewRefreshMode mode = GeoDataLink::Never;
-        if( content == QString( "onStop" ) ) {
-            mode = GeoDataLink::OnStop;
-        } else if( content == QString( "onRegion" ) ) {
-            mode = GeoDataLink::OnRegion;
-        } else if(content == QString("onRequest")) {
-            mode = GeoDataLink::OnRequest;
-        }
-
-        parentItem.nodeAs<GeoDataLink>()->setViewRefreshMode( mode );
+    GeoDataLink::ViewRefreshMode mode = GeoDataLink::Never;
+    if(content == QString("onStop"))
+    {
+      mode = GeoDataLink::OnStop;
+    }
+    else if(content == QString("onRegion"))
+    {
+      mode = GeoDataLink::OnRegion;
+    }
+    else if(content == QString("onRequest"))
+    {
+      mode = GeoDataLink::OnRequest;
     }
 
-    return 0;
+    parentItem.nodeAs<GeoDataLink>()->setViewRefreshMode(mode);
+  }
+
+  return 0;
 }
 
 }

@@ -15,17 +15,18 @@
 
 namespace Marble {
 
-class KmlParser : public GeoParser
+class KmlParser :
+  public GeoParser
 {
 public:
-    KmlParser();
-    virtual ~KmlParser();
+  KmlParser();
+  virtual ~KmlParser();
 
 private:
-    virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidRootElement();
+  virtual bool isValidElement(const QString& tagName) const;
+  virtual bool isValidRootElement();
 
-    virtual GeoDocument* createDocument() const;
+  virtual GeoDocument *createDocument() const;
 
 };
 

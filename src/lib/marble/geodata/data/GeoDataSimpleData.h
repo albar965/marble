@@ -16,68 +16,68 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataSimpleDataPrivate;
 
-class GEODATA_EXPORT GeoDataSimpleData : public GeoNode
+class GEODATA_EXPORT GeoDataSimpleData :
+  public GeoNode
 {
 public:
-    GeoDataSimpleData();
-    GeoDataSimpleData( const GeoDataSimpleData &other );
-    virtual ~GeoDataSimpleData();
+  GeoDataSimpleData();
+  GeoDataSimpleData(const GeoDataSimpleData& other);
+  virtual ~GeoDataSimpleData();
 
-    /*
-     * @brief Returns the value of name attribute of SimpleData tag
-     */
-    QString name() const;
+  /*
+   * @brief Returns the value of name attribute of SimpleData tag
+   */
+  QString name() const;
 
-    /*
-     * @brief Set the name of SimpleData to @p name
-     */
-    void setName( const QString &name );
+  /*
+   * @brief Set the name of SimpleData to @p name
+   */
+  void setName(const QString& name);
 
-    /*
-     * @brief Returns the data defined by SimpleData
-     */
-    QString data() const;
+  /*
+   * @brief Returns the data defined by SimpleData
+   */
+  QString data() const;
 
-    /*
-     * @brief Set the value of data defined by SimpleData to @p data
-     */
-    void setData( const QString &data );
+  /*
+   * @brief Set the value of data defined by SimpleData to @p data
+   */
+  void setData(const QString& data);
 
-    /*
-     * Assignment operator
-     */
-    GeoDataSimpleData &operator=( const GeoDataSimpleData &rhs );
+  /*
+   * Assignment operator
+   */
+  GeoDataSimpleData& operator=(const GeoDataSimpleData& rhs);
 
-    /*
-     * @brief Equality operator
-     */
-    bool operator==( const GeoDataSimpleData &other ) const;
-    bool operator!=( const GeoDataSimpleData &other ) const;
+  /*
+   * @brief Equality operator
+   */
+  bool operator==(const GeoDataSimpleData& other) const;
+  bool operator!=(const GeoDataSimpleData& other) const;
 
-    /*
-     * Provides information for downcasting a GeoNode
-     */
-    virtual const char* nodeType() const;
+  /*
+   * Provides information for downcasting a GeoNode
+   */
+  virtual const char *nodeType() const;
 
-    /*
-     * Seriliaze SimpleData to stream @p stream
-     */
-    virtual void pack( QDataStream &stream ) const;
+  /*
+   * Seriliaze SimpleData to stream @p stream
+   */
+  virtual void pack(QDataStream& stream) const;
 
-    /*
-     * Unseriliaze SimpleData from stream @p stream
-     */
-    virtual void unpack( QDataStream &stream );
+  /*
+   * Unseriliaze SimpleData from stream @p stream
+   */
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataSimpleDataPrivate * const d;
+  GeoDataSimpleDataPrivate * const d;
 };
 
 } // namespace Marble
 
-#endif  // MARBLE_GEODATASIMPLEDATA_H
+#endif // MARBLE_GEODATASIMPLEDATA_H

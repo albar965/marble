@@ -18,61 +18,60 @@
 // Marble
 #include "marble_export.h"
 
-namespace Ui
-{
-    class TimeControlWidget;
+namespace Ui {
+class TimeControlWidget;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleClock;
 
-class MARBLE_EXPORT TimeControlWidget : public QDialog
+class MARBLE_EXPORT TimeControlWidget :
+  public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit TimeControlWidget( MarbleClock* clock, QWidget* parent = 0 );
-    virtual ~TimeControlWidget();
+public:
+  explicit TimeControlWidget(MarbleClock *clock, QWidget *parent = 0);
+  virtual ~TimeControlWidget();
 
- private Q_SLOTS:
-    /**
-    * @brief  apply the settings to internal clock
-    */
-    void apply();
+private Q_SLOTS:
+  /**
+  * @brief  apply the settings to internal clock
+  */
+  void apply();
 
-    /**
-    * @brief  set the newDateTimeEdit to current system time
-    */
-    void nowClicked();
+  /**
+  * @brief  set the newDateTimeEdit to current system time
+  */
+  void nowClicked();
 
-    /**
-     * @brief Set the refreshIntervalSpinBox value to @p seconds.
-     */
-    void updateRefreshRate( int seconds );
+  /**
+   * @brief Set the refreshIntervalSpinBox value to @p seconds.
+   */
+  void updateRefreshRate(int seconds);
 
-    /**
-    * @brief  set the text of speedLabel to @p speed
-    */
-    void updateSpeedLabel( int speed );
+  /**
+  * @brief  set the text of speedLabel to @p speed
+  */
+  void updateSpeedLabel(int speed);
 
-    /**
-    * @brief  update the currentDateTimeEdit to current internal time
-    */
-    void updateDateTime();
+  /**
+  * @brief  update the currentDateTimeEdit to current internal time
+  */
+  void updateDateTime();
 
- protected:
-    Q_DISABLE_COPY( TimeControlWidget )
+protected:
+  Q_DISABLE_COPY(TimeControlWidget)
 
-    void showEvent( QShowEvent* event );
+  void showEvent(QShowEvent *event);
 
-    Ui::TimeControlWidget *m_uiWidget;
+  Ui::TimeControlWidget *m_uiWidget;
 
-    MarbleClock *m_clock;
-    QDateTime    m_lastDateTime;
+  MarbleClock *m_clock;
+  QDateTime m_lastDateTime;
 };
 
 }
 
-#endif  //MARBLE_TIMECONTROLWIDGET_H
+#endif // MARBLE_TIMECONTROLWIDGET_H

@@ -21,8 +21,7 @@
 
 class QThreadPool;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataDocument;
 class GeoDataLatLonBox;
@@ -31,87 +30,90 @@ class GeoSceneVectorTileDataset;
 class GeoDataObject;
 class TileLoader;
 
-class TileRunner : public QObject, public QRunnable
+class TileRunner :
+  public QObject, public QRunnable
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    TileRunner( TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId &id );
-    void run();
+  TileRunner(TileLoader *loader, const GeoSceneVectorTileDataset *texture, const TileId& id);
+  void run();
 
 Q_SIGNALS:
-    void documentLoaded( const TileId &id, GeoDataDocument *document );
+  void documentLoaded(const TileId& id, GeoDataDocument *document);
 
 private:
-    TileLoader *const m_loader;
-    const GeoSceneVectorTileDataset *const m_texture;
-    const TileId m_id;
+  TileLoader *const m_loader;
+  const GeoSceneVectorTileDataset *const m_texture;
+  const TileId m_id;
 };
 
-class VectorTileModel : public QObject
+class VectorTileModel :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit VectorTileModel( TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel, QThreadPool *threadPool );
+  explicit VectorTileModel(TileLoader *loader, const GeoSceneVectorTileDataset *layer, GeoDataTreeModel *treeModel,
+                           QThreadPool *threadPool);
 
-    void setViewport( const GeoDataLatLonBox &bbox, int radius );
+  void setViewport(const GeoDataLatLonBox& bbox, int radius);
 
-    QString name() const;
+  QString name() const;
 
-    void removeTile(GeoDataDocument* document);
+  void removeTile(GeoDataDocument *document);
 
-    int tileZoomLevel() const;
+  int tileZoomLevel() const;
 
-    int cachedDocuments() const;
+  int cachedDocuments() const;
 
 public Q_SLOTS:
-    void updateTile( const TileId &id, GeoDataDocument *document );
+  void updateTile(const TileId& id, GeoDataDocument *document);
 
-    void clear();
+  void clear();
 
 Q_SIGNALS:
-    void tileCompleted( const TileId &tileId );
-    void tileAdded(GeoDataDocument *document);
-    void tileRemoved(GeoDataDocument *document);
+  void tileCompleted(const TileId& tileId);
+  void tileAdded(GeoDataDocument *document);
+  void tileRemoved(GeoDataDocument *document);
 
 private Q_SLOTS:
-    void cleanupTile(GeoDataObject* feature);
+  void cleanupTile(GeoDataObject *feature);
 
 private:
-    void removeTilesOutOfView(const GeoDataLatLonBox &boundingBox);
-    void queryTiles( int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY );
+  void removeTilesOutOfView(const GeoDataLatLonBox& boundingBox);
+  void queryTiles(int tileZoomLevel, unsigned int minX, unsigned int minY, unsigned int maxX, unsigned int maxY);
 
-    static unsigned int lon2tileX( qreal lon, unsigned int maxTileX );
-    static unsigned int lat2tileY( qreal lat, unsigned int maxTileY );
+  static unsigned int lon2tileX(qreal lon, unsigned int maxTileX);
+  static unsigned int lat2tileY(qreal lat, unsigned int maxTileY);
 
 private:
-    struct CacheDocument
-    {
-        /** The CacheDocument takes ownership of doc */
-        CacheDocument(GeoDataDocument *doc, VectorTileModel* vectorTileModel, const GeoDataLatLonBox &boundingBox);
+  struct CacheDocument
+  {
+    /** The CacheDocument takes ownership of doc */
+    CacheDocument(GeoDataDocument *doc, VectorTileModel *vectorTileModel, const GeoDataLatLonBox& boundingBox);
 
-        /** Remove the document from the tree and delete the document */
-        ~CacheDocument();
+    /** Remove the document from the tree and delete the document */
+    ~CacheDocument();
 
-        GeoDataDocument *const m_document;
-        VectorTileModel *m_vectorTileModel;
-        GeoDataLatLonBox m_boundingBox;
+    GeoDataDocument *const m_document;
+    VectorTileModel *m_vectorTileModel;
+    GeoDataLatLonBox m_boundingBox;
 
-    private:
-        Q_DISABLE_COPY( CacheDocument )
-    };
+private:
+    Q_DISABLE_COPY(CacheDocument)
+  };
 
-    TileLoader *const m_loader;
-    const GeoSceneVectorTileDataset *const m_layer;
-    GeoDataTreeModel *const m_treeModel;
-    QThreadPool *const m_threadPool;
-    int m_tileLoadLevel;
-    int m_tileZoomLevel;
-    QList<TileId> m_pendingDocuments;
-    QList<GeoDataDocument*> m_garbageQueue;
-    QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
-    bool m_deleteDocumentsLater;
+  TileLoader *const m_loader;
+  const GeoSceneVectorTileDataset *const m_layer;
+  GeoDataTreeModel *const m_treeModel;
+  QThreadPool *const m_threadPool;
+  int m_tileLoadLevel;
+  int m_tileZoomLevel;
+  QList<TileId> m_pendingDocuments;
+  QList<GeoDataDocument *> m_garbageQueue;
+  QMap<TileId, QSharedPointer<CacheDocument> > m_documents;
+  bool m_deleteDocumentsLater;
 };
 
 }

@@ -23,53 +23,52 @@
 
 #include "GeoScenePalette.h"
 
-namespace Marble
-{
+namespace Marble {
 
-GeoSceneFilter::GeoSceneFilter( const QString& name )
-    : m_name( name ),
-      m_type( "none" )
+GeoSceneFilter::GeoSceneFilter(const QString& name)
+  : m_name(name),
+  m_type("none")
 {
 }
 
 GeoSceneFilter::~GeoSceneFilter()
 {
-   qDeleteAll( m_palette );
+  qDeleteAll(m_palette);
 }
 
 QString GeoSceneFilter::name() const
 {
-    return m_name;
+  return m_name;
 }
 
-void GeoSceneFilter::setName( const QString& name )
+void GeoSceneFilter::setName(const QString& name)
 {
-    m_name = name;
+  m_name = name;
 }
 
 QString GeoSceneFilter::type() const
 {
-    return m_type;
+  return m_type;
 }
 
-void GeoSceneFilter::setType( const QString& type )
+void GeoSceneFilter::setType(const QString& type)
 {
-    m_type = type;
+  m_type = type;
 }
 
-QList<const GeoScenePalette*> GeoSceneFilter::palette() const
+QList<const GeoScenePalette *> GeoSceneFilter::palette() const
 {
-    return m_palette;
+  return m_palette;
 }
 
-void GeoSceneFilter::addPalette( const GeoScenePalette *palette )
+void GeoSceneFilter::addPalette(const GeoScenePalette *palette)
 {
-    m_palette.append( palette );
+  m_palette.append(palette);
 }
 
-int GeoSceneFilter::removePalette( const GeoScenePalette *palette )
+int GeoSceneFilter::removePalette(const GeoScenePalette *palette)
 {
-    return m_palette.removeAll( palette );
+  return m_palette.removeAll(palette);
 }
 
 }

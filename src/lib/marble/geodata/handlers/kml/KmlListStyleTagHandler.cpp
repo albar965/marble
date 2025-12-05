@@ -18,26 +18,25 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(ListStyle)
+
+GeoNode *KmlListStyleTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( ListStyle )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_ListStyle));
 
-GeoNode* KmlListStyleTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_ListStyle ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataListStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
 
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataListStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
-
-        parentItem.nodeAs<GeoDataStyle>()->setListStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->listStyle();
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataStyle>()->setListStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->listStyle();
+  }
+  return 0;
 }
 
 }

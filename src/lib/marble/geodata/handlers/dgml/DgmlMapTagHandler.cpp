@@ -30,37 +30,36 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneMap.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Map)
 
-GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlMapTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
 
-    QColor  labelColor  = parser.attribute(dgmlAttr_labelColor).trimmed();
+  QColor labelColor = parser.attribute(dgmlAttr_labelColor).trimmed();
 
-    if ( !labelColor.isValid() )
-        labelColor = Qt::black;
+  if(!labelColor.isValid())
+    labelColor = Qt::black;
 
-    QColor highlightBrushColor = QColor ( parser.attribute(dgmlAttr_highlightBrush).trimmed() );
-    QColor highlightPenColor = QColor ( parser.attribute(dgmlAttr_highlightPen).trimmed() );
+  QColor highlightBrushColor = QColor(parser.attribute(dgmlAttr_highlightBrush).trimmed());
+  QColor highlightPenColor = QColor(parser.attribute(dgmlAttr_highlightPen).trimmed());
 
-    GeoSceneMap* map = 0;
+  GeoSceneMap *map = 0;
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Document)) {
-        map = parentItem.nodeAs<GeoSceneDocument>()->map();
-        map->setBackgroundColor( QColor( parser.attribute( dgmlAttr_bgcolor ).trimmed() ) );
-        map->setLabelColor( labelColor );
-        map->setHighlightBrushColor( highlightBrushColor );
-        map->setHighlightPenColor( highlightPenColor );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Document))
+  {
+    map = parentItem.nodeAs<GeoSceneDocument>()->map();
+    map->setBackgroundColor(QColor(parser.attribute(dgmlAttr_bgcolor).trimmed()));
+    map->setLabelColor(labelColor);
+    map->setHighlightBrushColor(highlightBrushColor);
+    map->setHighlightPenColor(highlightPenColor);
+  }
 
-    return map;
+  return map;
 }
 
 }

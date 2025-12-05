@@ -13,20 +13,19 @@
 
 #include "GeoTagHandler.h"
 
-namespace Marble
-{
+namespace Marble {
 
-namespace kml
-{
+namespace kml {
 
-class KmlndTagHandler : public GeoTagHandler
+class KmlndTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse( GeoParser& ) const;
+  virtual GeoNode *parse(GeoParser&) const;
+
 };
 
 }
 }
 
 #endif
-

@@ -18,43 +18,42 @@
 
 class QTreeWidgetItem;
 
-namespace Marble
-{
+namespace Marble {
 
 class OsmTagEditorWidgetPrivate;
 class GeoDataPlacemark;
 class GeoDataFeature;
 
-class MARBLE_EXPORT OsmTagEditorWidget : public QWidget
+class MARBLE_EXPORT OsmTagEditorWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit OsmTagEditorWidget( GeoDataPlacemark *placemark, QWidget *parent = 0 );
-    ~OsmTagEditorWidget();
+  explicit OsmTagEditorWidget(GeoDataPlacemark *placemark, QWidget *parent = 0);
+  ~OsmTagEditorWidget();
 
 public Q_SLOTS:
-    void update();
-    void addSelectedTag();
-    void removeSelectedTag();
-    void handleDoubleClick( QTreeWidgetItem *item, int column );
-    void handleItemChanged( QTreeWidgetItem *item, int column );
+  void update();
+  void addSelectedTag();
+  void removeSelectedTag();
+  void handleDoubleClick(QTreeWidgetItem *item, int column);
+  void handleItemChanged(QTreeWidgetItem *item, int column);
 
-    /**
-     * @brief suitableTag returns the tag that fits best to represent the Visual Category
-     * of the placemark ( chosen from the current list of tags )
-     */
-    QString suitableTag();
+  /**
+   * @brief suitableTag returns the tag that fits best to represent the Visual Category
+   * of the placemark ( chosen from the current list of tags )
+   */
+  QString suitableTag();
 
 Q_SIGNALS:
-    void placemarkChanged( GeoDataFeature *);
+  void placemarkChanged(GeoDataFeature *);
 
 private:
-    friend class OsmTagEditorWidgetPrivate;
-    OsmTagEditorWidgetPrivate* const d;
+  friend class OsmTagEditorWidgetPrivate;
+  OsmTagEditorWidgetPrivate * const d;
 };
 
 }
 
 #endif
- 

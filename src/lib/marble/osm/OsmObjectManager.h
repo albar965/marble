@@ -14,8 +14,7 @@
 #include <marble_export.h>
 #include <QtGlobal>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataPlacemark;
 class OsmPlacemarkData;
@@ -28,28 +27,26 @@ class OsmPlacemarkData;
 class MARBLE_EXPORT OsmObjectManager
 {
 public:
+  /**
+   * @brief initializeOsmData assigns valid osmData
+   * to a placemark that does not have it.
+   */
+  static void initializeOsmData(GeoDataPlacemark *placemark);
 
-    /**
-     * @brief initializeOsmData assigns valid osmData
-     * to a placemark that does not have it.
-     */
-    static void initializeOsmData( GeoDataPlacemark *placemark );
-
-    /**
-     * @brief registerId is used to keep track of the minimum id @see m_minId
-     */
-    static void registerId( qint64 id );
+  /**
+   * @brief registerId is used to keep track of the minimum id @see m_minId
+   */
+  static void registerId(qint64 id);
 
 private:
-    /**
-     * @brief newly created placemarks are assigned negative unique IDs.
-     * In order to assure there are no duplicate IDs, they are assigned the
-     * minId - 1 id.
-     */
-    static qint64 m_minId;
+  /**
+   * @brief newly created placemarks are assigned negative unique IDs.
+   * In order to assure there are no duplicate IDs, they are assigned the
+   * minId - 1 id.
+   */
+  static qint64 m_minId;
 };
 
 }
 
 #endif
-

@@ -18,96 +18,95 @@
 
 class QDateTime;
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleClockPrivate;
 
-class GEODATA_EXPORT MarbleClock : public QObject
+class GEODATA_EXPORT MarbleClock :
+  public QObject
 {
-    Q_OBJECT
-
- public:
-    explicit MarbleClock( QObject* parent = 0 );
-
-    ~MarbleClock();
-
-    /**
-     * @brief Determine how much of the current day has elapsed
-     * @return A value between 0 and 1 corresponding to the fraction of the day that has elapsed
-     */
-    qreal dayFraction() const;
-
- Q_SIGNALS:
-    /**
-     * @brief the timeChanged signal will be triggered at updateInterval() rate
-     * or at most every second.
-     **/
-    void timeChanged();
-
-    /**
-     * @brief Emitted when setUpdateInterval() is called.
-     */
-    void updateIntervalChanged( int seconds );
+  Q_OBJECT
 
 public:
+  explicit MarbleClock(QObject *parent = 0);
 
-    /**
-     * @brief Sets the internal date and time a custom one
-     * @param datetime The custom date and time
-     **/
-    void setDateTime( const QDateTime& datetime );
+  ~MarbleClock();
 
-    /**
-     * @brief Returns the internal date and time
-     **/
-    QDateTime dateTime() const;
+  /**
+   * @brief Determine how much of the current day has elapsed
+   * @return A value between 0 and 1 corresponding to the fraction of the day that has elapsed
+   */
+  qreal dayFraction() const;
 
-    /**
-     * @brief Set the interval at which dateTime() is updated and timeChanged() is emitted.
-     * @param seconds The interval in seconds
-     * @see updateInterval
-     */
-    void setUpdateInterval( int seconds );
+Q_SIGNALS:
+  /**
+   * @brief the timeChanged signal will be triggered at updateInterval() rate
+   * or at most every second.
+   **/
+  void timeChanged();
 
-    /**
-     * @brief Returns the interval at which dateTime() is updated and timeChanged() is emitted,
-     * The default is 60 seconds.
-     * @return The interval in seconds.
-     * @see setUpdateInterval
-     */
-    int updateInterval() const;
+  /**
+   * @brief Emitted when setUpdateInterval() is called.
+   */
+  void updateIntervalChanged(int seconds);
 
-    /**
-     * @brief Sets the speed of the timer which is how fast the marble clock can run relative to actual speed of time.
-     * @param speed The new speed (integer)
-     **/
-    void setSpeed( int speed );
+public:
+  /**
+   * @brief Sets the internal date and time a custom one
+   * @param datetime The custom date and time
+   **/
+  void setDateTime(const QDateTime& datetime);
 
-    /**
-     * @brief Returns the speed of the timer
-     **/
-    int speed() const;
+  /**
+   * @brief Returns the internal date and time
+   **/
+  QDateTime dateTime() const;
 
-    /**
-     * @brief Sets the timezone of the clock
-     * @param timeInSec The new timezone ( in seconds w.r.t. UTC )
-     **/
-    void setTimezone( int timeInSec );
+  /**
+   * @brief Set the interval at which dateTime() is updated and timeChanged() is emitted.
+   * @param seconds The interval in seconds
+   * @see updateInterval
+   */
+  void setUpdateInterval(int seconds);
 
-    /**
-     * @brief Returns the timezone of the clock
-     **/
-    int timezone() const;
+  /**
+   * @brief Returns the interval at which dateTime() is updated and timeChanged() is emitted,
+   * The default is 60 seconds.
+   * @return The interval in seconds.
+   * @see setUpdateInterval
+   */
+  int updateInterval() const;
 
- private:
-    Q_DISABLE_COPY( MarbleClock )
+  /**
+   * @brief Sets the speed of the timer which is how fast the marble clock can run relative to actual speed of time.
+   * @param speed The new speed (integer)
+   **/
+  void setSpeed(int speed);
 
-    Q_PRIVATE_SLOT( d,  void timerTimeout() )
+  /**
+   * @brief Returns the speed of the timer
+   **/
+  int speed() const;
 
-    MarbleClockPrivate* const d;
+  /**
+   * @brief Sets the timezone of the clock
+   * @param timeInSec The new timezone ( in seconds w.r.t. UTC )
+   **/
+  void setTimezone(int timeInSec);
 
-    friend class MarbleClockPrivate;
+  /**
+   * @brief Returns the timezone of the clock
+   **/
+  int timezone() const;
+
+private:
+  Q_DISABLE_COPY(MarbleClock)
+
+  Q_PRIVATE_SLOT(d, void timerTimeout())
+
+  MarbleClockPrivate * const d;
+
+  friend class MarbleClockPrivate;
 };
 
 }

@@ -16,31 +16,30 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
 static GeoTagWriterRegistrar s_writerStyle(
-    GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataStyleType,
-                                 kml::kmlTag_nameSpaceOgc22 ),
-    new KmlStyleTagWriter );
+  GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataStyleType,
+                              kml::kmlTag_nameSpaceOgc22),
+  new KmlStyleTagWriter);
 
-bool KmlStyleTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlStyleTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
-    const GeoDataStyle *style = static_cast<const GeoDataStyle*>( node );
+  const GeoDataStyle *style = static_cast<const GeoDataStyle *>(node);
 
-    writer.writeStartElement( kml::kmlTag_Style );
-    KmlObjectTagWriter::writeIdentifiers( writer, style );
+  writer.writeStartElement(kml::kmlTag_Style);
+  KmlObjectTagWriter::writeIdentifiers(writer, style);
 
-    writeElement( &style->iconStyle(), writer );
-    writeElement( &style->labelStyle(), writer );
-    writeElement( &style->lineStyle(), writer );
-    writeElement( &style->polyStyle(), writer );
-    writeElement( &style->balloonStyle(), writer );
-    writeElement( &style->listStyle(), writer );
+  writeElement(&style->iconStyle(), writer);
+  writeElement(&style->labelStyle(), writer);
+  writeElement(&style->lineStyle(), writer);
+  writeElement(&style->polyStyle(), writer);
+  writeElement(&style->balloonStyle(), writer);
+  writeElement(&style->listStyle(), writer);
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 
-    return true;
+  return true;
 }
 
 }

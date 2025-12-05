@@ -16,26 +16,25 @@
 #include "GeoDataPlaylist.h"
 #include "GeoDataSoundCue.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(SoundCue)
+
+GeoNode *KmlSoundCueTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( SoundCue )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_SoundCue));
 
-GeoNode* KmlSoundCueTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SoundCue ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataPlaylist>())
+  {
+    GeoDataSoundCue *cue = new GeoDataSoundCue;
+    KmlObjectTagHandler::parseIdentifiers(parser, cue);
+    parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(cue);
+    return cue;
+  }
 
-    if (parentItem.is<GeoDataPlaylist>()) {
-        GeoDataSoundCue *cue = new GeoDataSoundCue;
-        KmlObjectTagHandler::parseIdentifiers( parser, cue );
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(cue);
-        return cue;
-    }
-
-    return 0;
+  return 0;
 }
 
 } // namespace kml

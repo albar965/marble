@@ -26,25 +26,24 @@
 #include "GeoParser.h"
 #include "GeoSceneZoom.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Discrete)
 
-GeoNode* DgmlDiscreteTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlDiscreteTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Discrete));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Discrete));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Zoom)) {
-        QString parsedText = parser.readElementText().toLower().trimmed();
-        parentItem.nodeAs<GeoSceneZoom>()->setDiscrete(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Zoom))
+  {
+    QString parsedText = parser.readElementText().toLower().trimmed();
+    parentItem.nodeAs<GeoSceneZoom>()->setDiscrete(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

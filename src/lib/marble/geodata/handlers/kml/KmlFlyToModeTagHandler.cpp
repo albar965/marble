@@ -14,35 +14,39 @@
 #include "KmlElementDictionary.h"
 #include "MarbleDebug.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(flyToMode)
+
+GeoNode *KmlflyToModeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( flyToMode )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_flyToMode));
 
-GeoNode* KmlflyToModeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_flyToMode ) );
+  QString content = parser.readElementText().trimmed();
 
-    QString content = parser.readElementText().trimmed();
+  GeoDataFlyTo::FlyToMode mode;
+  if(content == "smooth")
+  {
+    mode = GeoDataFlyTo::Smooth;
+  }
+  else if(content == "bounce")
+  {
+    mode = GeoDataFlyTo::Bounce;
+  }
+  else
+  {
+    mDebug() << "Unknown mode " << content << ", using 'bounce' instead.";
+    mode = GeoDataFlyTo::Bounce;
+  }
 
-    GeoDataFlyTo::FlyToMode mode;
-    if( content == "smooth" ) {
-        mode = GeoDataFlyTo::Smooth;
-    } else if( content == "bounce" ) {
-        mode = GeoDataFlyTo::Bounce;
-    } else {
-        mDebug() << "Unknown mode " << content << ", using 'bounce' instead.";
-        mode = GeoDataFlyTo::Bounce;
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataFlyTo>())
+  {
+    parentItem.nodeAs<GeoDataFlyTo>()->setFlyToMode(mode);
+  }
 
-    if ( parentItem.is<GeoDataFlyTo>() ) {
-         parentItem.nodeAs<GeoDataFlyTo>()->setFlyToMode( mode );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

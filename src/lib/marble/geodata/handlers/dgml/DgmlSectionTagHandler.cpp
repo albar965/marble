@@ -31,37 +31,36 @@
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Section)
 
-GeoNode* DgmlSectionTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlSectionTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Section));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Section));
 
-    QString name      = parser.attribute(dgmlAttr_name);
-    QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
-    QString connectTo = parser.attribute(dgmlAttr_connect).trimmed();
-    QString radio = parser.attribute(dgmlAttr_radio);
-    int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
+  QString name = parser.attribute(dgmlAttr_name);
+  QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
+  QString connectTo = parser.attribute(dgmlAttr_connect).trimmed();
+  QString radio = parser.attribute(dgmlAttr_radio);
+  int spacing = parser.attribute(dgmlAttr_spacing).toInt();
 
-    GeoSceneSection* section = 0;
+  GeoSceneSection *section = 0;
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Legend)) {
-        section = new GeoSceneSection( name );
-        section->setCheckable( checkable == dgmlValue_true || checkable == dgmlValue_on );
-        section->setConnectTo( connectTo );
-        section->setSpacing( spacing );
-        section->setRadio( radio );
-        parentItem.nodeAs<GeoSceneLegend>()->addSection( section );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Legend))
+  {
+    section = new GeoSceneSection(name);
+    section->setCheckable(checkable == dgmlValue_true || checkable == dgmlValue_on);
+    section->setConnectTo(connectTo);
+    section->setSpacing(spacing);
+    section->setRadio(radio);
+    parentItem.nodeAs<GeoSceneLegend>()->addSection(section);
+  }
 
-    return section;
+  return section;
 }
 
 }

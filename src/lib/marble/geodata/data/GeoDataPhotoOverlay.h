@@ -9,7 +9,6 @@
 // Copyright 2013      Mohammed Nafees  <nafees.technocool@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATAPHOTOOVERLAY_H
 #define MARBLE_GEODATAPHOTOOVERLAY_H
 
@@ -24,47 +23,50 @@ namespace Marble {
 
 class GeoDataPhotoOverlayPrivate;
 
-class MARBLE_EXPORT GeoDataPhotoOverlay: public GeoDataOverlay
+class MARBLE_EXPORT GeoDataPhotoOverlay :
+  public GeoDataOverlay
 {
 public:
-    GeoDataPhotoOverlay();
+  GeoDataPhotoOverlay();
 
-    GeoDataPhotoOverlay( const GeoDataPhotoOverlay &other );
+  GeoDataPhotoOverlay(const GeoDataPhotoOverlay& other);
 
-    GeoDataPhotoOverlay& operator=( const GeoDataPhotoOverlay &other );
-    bool operator==( const GeoDataPhotoOverlay &other ) const;
-    bool operator!=( const GeoDataPhotoOverlay &other ) const;
-    ~GeoDataPhotoOverlay();
+  GeoDataPhotoOverlay& operator=(const GeoDataPhotoOverlay& other);
+  bool operator==(const GeoDataPhotoOverlay& other) const;
+  bool operator!=(const GeoDataPhotoOverlay& other) const;
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  ~GeoDataPhotoOverlay();
 
-    enum Shape {
-        Rectangle,
-        Cylinder,
-        Sphere
-    };
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    qreal rotation() const;
-    void setRotation( const qreal rotation );
+  enum Shape
+  {
+    Rectangle,
+    Cylinder,
+    Sphere
+  };
 
-    GeoDataViewVolume &viewVolume();
-    const GeoDataViewVolume& viewVolume() const;
-    void setViewVolume( const GeoDataViewVolume &viewVolume );
+  qreal rotation() const;
+  void setRotation(const qreal rotation);
 
-    GeoDataImagePyramid& imagePyramid();
-    const GeoDataImagePyramid& imagePyramid() const;
-    void setImagePyramid( const GeoDataImagePyramid &imagePyramid );
+  GeoDataViewVolume& viewVolume();
+  const GeoDataViewVolume& viewVolume() const;
+  void setViewVolume(const GeoDataViewVolume& viewVolume);
 
-    GeoDataPoint& point();
-    const GeoDataPoint& point() const;
-    void setPoint( const GeoDataPoint &point );
+  GeoDataImagePyramid& imagePyramid();
+  const GeoDataImagePyramid& imagePyramid() const;
+  void setImagePyramid(const GeoDataImagePyramid& imagePyramid);
 
-    Shape shape() const;
-    void setShape( Shape shape );
+  GeoDataPoint& point();
+  const GeoDataPoint& point() const;
+  void setPoint(const GeoDataPoint& point);
+
+  Shape shape() const;
+  void setShape(Shape shape);
 
 private:
-    GeoDataPhotoOverlayPrivate* const d;
+  GeoDataPhotoOverlayPrivate * const d;
 };
 
 }

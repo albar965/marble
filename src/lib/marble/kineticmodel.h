@@ -36,43 +36,44 @@
 
 class KineticModelPrivate;
 
-class KineticModel: public QObject
+class KineticModel :
+  public QObject
 {
-    Q_OBJECT
-    Q_PROPERTY(int duration READ duration WRITE setDuration)
-    Q_PROPERTY(QPointF position READ position NOTIFY positionChanged)
-    Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
+  Q_OBJECT
+  Q_PROPERTY(int duration READ duration WRITE setDuration)
+  Q_PROPERTY(QPointF position READ position NOTIFY positionChanged)
+  Q_PROPERTY(int updateInterval READ updateInterval WRITE setUpdateInterval)
 
 public:
-    explicit KineticModel(QObject *parent = 0);
-    ~KineticModel();
+  explicit KineticModel(QObject *parent = 0);
+  ~KineticModel();
 
-    int duration() const;
-    QPointF position() const;
-    int updateInterval() const;
-    bool hasVelocity() const;
+  int duration() const;
+  QPointF position() const;
+  int updateInterval() const;
+  bool hasVelocity() const;
 
 public Q_SLOTS:
-    void setDuration(int ms);
-    void setPosition(const QPointF& position);
-    void setPosition(qreal posX, qreal posY);
-    void jumpToPosition(const QPointF& position);
-    void jumpToPosition(qreal posX, qreal posY);
-    void setUpdateInterval(int ms);
-    void stop();
-    void start();
+  void setDuration(int ms);
+  void setPosition(const QPointF& position);
+  void setPosition(qreal posX, qreal posY);
+  void jumpToPosition(const QPointF& position);
+  void jumpToPosition(qreal posX, qreal posY);
+  void setUpdateInterval(int ms);
+  void stop();
+  void start();
 
 Q_SIGNALS:
-    void positionChanged( qreal lon, qreal lat );
-    void finished();
+  void positionChanged(qreal lon, qreal lat);
+  void finished();
 
 private Q_SLOTS:
-    void update();
+  void update();
 
 private:
-    QScopedPointer<KineticModelPrivate> d_ptr;
-    Q_DECLARE_PRIVATE(KineticModel);
-    Q_DISABLE_COPY(KineticModel);
+  QScopedPointer<KineticModelPrivate> d_ptr;
+  Q_DECLARE_PRIVATE(KineticModel);
+  Q_DISABLE_COPY(KineticModel);
 };
 
 #endif

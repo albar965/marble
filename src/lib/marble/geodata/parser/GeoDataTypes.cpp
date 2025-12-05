@@ -21,11 +21,9 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
-namespace GeoDataTypes
-{
+namespace GeoDataTypes {
 const char GeoDataAnimatedUpdateType[] = "GeoDataAnimatedUpdate";
 const char GeoDataAliasType[] = "GeoDataAlias";
 const char GeoDataCameraType[] = "GeoDataCamera";

@@ -17,18 +17,18 @@ namespace Marble {
 class KmzHandler
 {
 public:
-    bool open(const QString &file, QString &error);
+  bool open(const QString& file, QString& error);
 
-    QString kmlFile() const;
+  QString kmlFile() const;
 
-    QString kmzPath() const;
+  QString kmzPath() const;
 
-    QStringList kmzFiles() const;
+  QStringList kmzFiles() const;
 
 private:
-    QString m_kmlFile;
-    QString m_kmzPath;
-    QStringList m_kmzFiles;
+  QString m_kmlFile;
+  QString m_kmzPath;
+  QStringList m_kmzFiles;
 };
 
 }

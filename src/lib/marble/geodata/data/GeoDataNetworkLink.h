@@ -8,7 +8,6 @@
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATANETWORKLINK_H
 #define MARBLE_GEODATANETWORKLINK_H
 
@@ -20,39 +19,40 @@ namespace Marble {
 
 class GeoDataNetworkLinkPrivate;
 
-class GEODATA_EXPORT GeoDataNetworkLink: public GeoDataFeature
+class GEODATA_EXPORT GeoDataNetworkLink :
+  public GeoDataFeature
 {
 public:
-    GeoDataNetworkLink();
+  GeoDataNetworkLink();
 
-    GeoDataNetworkLink( const GeoDataNetworkLink &other );
+  GeoDataNetworkLink(const GeoDataNetworkLink& other);
 
-    GeoDataNetworkLink& operator=( const GeoDataNetworkLink &other );
+  GeoDataNetworkLink& operator=(const GeoDataNetworkLink& other);
 
-    bool operator==( const GeoDataNetworkLink &other ) const;
-    bool operator!=( const GeoDataNetworkLink &other ) const;
+  bool operator==(const GeoDataNetworkLink& other) const;
+  bool operator!=(const GeoDataNetworkLink& other) const;
 
-    ~GeoDataNetworkLink();
+  ~GeoDataNetworkLink();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    bool refreshVisibility() const;
+  bool refreshVisibility() const;
 
-    void setRefreshVisibility( bool refreshVisibility );
+  void setRefreshVisibility(bool refreshVisibility);
 
-    bool flyToView() const;
+  bool flyToView() const;
 
-    void setFlyToView(bool flyToView);
+  void setFlyToView(bool flyToView);
 
-    GeoDataLink& link();
+  GeoDataLink& link();
 
-    const GeoDataLink& link() const;
+  const GeoDataLink& link() const;
 
-    void setLink(const GeoDataLink &link);
+  void setLink(const GeoDataLink& link);
 
 private:
-    GeoDataNetworkLinkPrivate* const d;
+  GeoDataNetworkLinkPrivate * const d;
 };
 
 }

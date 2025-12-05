@@ -18,27 +18,28 @@
 #include "GeoParser.h"
 #include "GeoDataRegion.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Region)
+
+GeoNode *KmlRegionTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Region )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Region));
 
-GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Region ) );
+  GeoDataRegion region;
+  KmlObjectTagHandler::parseIdentifiers(parser, &region);
 
-    GeoDataRegion region;
-    KmlObjectTagHandler::parseIdentifiers( parser, &region );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if( parentItem.is<GeoDataFeature>() ) {
-        parentItem.nodeAs<GeoDataFeature>()->setRegion( region );
-        return &parentItem.nodeAs<GeoDataFeature>()->region();
-    } else {
-        return 0;
-    }
+  if(parentItem.is<GeoDataFeature>())
+  {
+    parentItem.nodeAs<GeoDataFeature>()->setRegion(region);
+    return &parentItem.nodeAs<GeoDataFeature>()->region();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

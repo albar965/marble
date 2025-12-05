@@ -15,36 +15,38 @@
 
 #include <QColor>
 
-namespace Marble
+namespace Marble {
+
+class GroundLayer :
+  public LayerInterface
 {
+public:
+  GroundLayer();
 
-class GroundLayer : public LayerInterface
-{
- public:
+  ~GroundLayer();
 
-    GroundLayer();
+  virtual QStringList renderPosition() const;
 
-    ~GroundLayer();
+  virtual bool render(GeoPainter *painter, ViewportParams *viewport,
+                      const QString& renderPos = QLatin1String("NONE"),
+                      GeoSceneLayer *layer = 0);
 
-    virtual QStringList renderPosition() const;
+  virtual qreal zValue() const;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = 0 );
+  void setColor(const QColor& color);
 
-    virtual qreal zValue() const;
+  QColor color() const;
 
-    void setColor( const QColor &color );
+  RenderState renderState() const;
 
-    QColor color() const;
+  virtual QString runtimeTrace() const
+  {
+    return "GroundLayer";
+  }
 
-    RenderState renderState() const;
+private:
+  QColor m_color;    // Gets the color specified via DGML's <map bgcolor="">
 
-    virtual QString runtimeTrace() const { return "GroundLayer"; }
-
- private:
-    QColor m_color;  // Gets the color specified via DGML's <map bgcolor="">
-    
 };
 
 }

@@ -31,49 +31,61 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(tessellate)
+
+GeoNode *KmltessellateTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( tessellate )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_tessellate));
 
-GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_tessellate ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    QString content = parser.readElementText().trimmed();
+  QString content = parser.readElementText().trimmed();
 
-    if( parentItem.is<GeoDataLineString>() ) {
-        GeoDataLineString* lineString = parentItem.nodeAs<GeoDataLineString>();
+  if(parentItem.is<GeoDataLineString>())
+  {
+    GeoDataLineString *lineString = parentItem.nodeAs<GeoDataLineString>();
 
-        if( content == QString( "1" ) ) {
-            lineString->setTessellate( true );
-        } else {
-            lineString->setTessellate( false );
-        }
-
-    } else if( parentItem.is<GeoDataLinearRing>() ) {
-        GeoDataLinearRing* linearRing = parentItem.nodeAs<GeoDataLinearRing>();
-
-        if( content == QString( "1" ) ) {
-            linearRing->setTessellate( true );
-        } else {
-            linearRing->setTessellate( false );
-        }
-
-    } else if( parentItem.is<GeoDataPolygon>() ) {
-        GeoDataPolygon* polygon = parentItem.nodeAs<GeoDataPolygon>();
-
-        if( content == QString( "1" ) ) {
-            polygon->setTessellate( true );
-        } else {
-            polygon->setTessellate( false );
-        }
+    if(content == QString("1"))
+    {
+      lineString->setTessellate(true);
+    }
+    else
+    {
+      lineString->setTessellate(false);
     }
 
-    return 0;
+  }
+  else if(parentItem.is<GeoDataLinearRing>())
+  {
+    GeoDataLinearRing *linearRing = parentItem.nodeAs<GeoDataLinearRing>();
+
+    if(content == QString("1"))
+    {
+      linearRing->setTessellate(true);
+    }
+    else
+    {
+      linearRing->setTessellate(false);
+    }
+
+  }
+  else if(parentItem.is<GeoDataPolygon>())
+  {
+    GeoDataPolygon *polygon = parentItem.nodeAs<GeoDataPolygon>();
+
+    if(content == QString("1"))
+    {
+      polygon->setTessellate(true);
+    }
+    else
+    {
+      polygon->setTessellate(false);
+    }
+  }
+
+  return 0;
 }
 
 }

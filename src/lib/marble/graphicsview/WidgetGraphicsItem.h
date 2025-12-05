@@ -17,33 +17,33 @@
 
 class QWidget;
 
-namespace Marble
-{
+namespace Marble {
 
 class WidgetGraphicsItemPrivate;
 
-class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
+class MARBLE_EXPORT WidgetGraphicsItem :
+  public ScreenGraphicsItem
 {
- public:
-    explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = 0 );
+public:
+  explicit WidgetGraphicsItem(MarbleGraphicsItem *parent = 0);
 
-    virtual ~WidgetGraphicsItem();
+  virtual ~WidgetGraphicsItem();
 
-    void setWidget( QWidget *widget );
-    QWidget *widget() const;
+  void setWidget(QWidget *widget);
+  QWidget *widget() const;
 
- protected:
-    /**
-     * Paints the item in item coordinates.
-     */
-    virtual void paint( QPainter *painter );
+protected:
+  /**
+   * Paints the item in item coordinates.
+   */
+  virtual void paint(QPainter *painter);
 
-    virtual bool eventFilter( QObject *, QEvent * );
+  virtual bool eventFilter(QObject *, QEvent *);
 
- private:
-    Q_DISABLE_COPY( WidgetGraphicsItem )
+private:
+  Q_DISABLE_COPY(WidgetGraphicsItem)
 
-    WidgetGraphicsItemPrivate * const d;
+  WidgetGraphicsItemPrivate * const d;
 };
 
 } // Namespace Marble

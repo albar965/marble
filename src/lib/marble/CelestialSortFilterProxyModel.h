@@ -24,30 +24,31 @@ namespace Marble {
  * @brief The CelestialSortFilterProxyModel class is a proxy used by both
  * MapViewWidget's listview, and MapChangeEditDialog's listview.
  */
-class CelestialSortFilterProxyModel : public QSortFilterProxyModel
+class CelestialSortFilterProxyModel :
+  public QSortFilterProxyModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    CelestialSortFilterProxyModel();
-    ~CelestialSortFilterProxyModel();
-    /**
-     * @brief A small trick to change names for dwarfs and moons
-     */
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+  CelestialSortFilterProxyModel();
+  ~CelestialSortFilterProxyModel();
+  /**
+   * @brief A small trick to change names for dwarfs and moons
+   */
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
 private:
-    void setupPriorities();
-    void setupMoonsList();
-    void setupDwarfsList();
+  void setupPriorities();
+  void setupMoonsList();
+  void setupDwarfsList();
 
 protected:
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+  bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
 private:
-    QMap<QString, int> m_priority;
-    QList<QString> m_moons;
-    QList<QString> m_dwarfs;
+  QMap<QString, int> m_priority;
+  QList<QString> m_moons;
+  QList<QString> m_dwarfs;
 };
 }
 

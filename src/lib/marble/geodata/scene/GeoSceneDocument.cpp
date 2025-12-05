@@ -32,112 +32,109 @@
 
 #include <QFileInfo>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneDocumentPrivate
 {
-  public:
-    GeoSceneDocumentPrivate()
-        : m_head(new GeoSceneHead),
-          m_map(new GeoSceneMap),
-          m_settings(new GeoSceneSettings),
-          m_legend(new GeoSceneLegend),
-          m_documentFilePath()
-    {
-    }
+public:
+  GeoSceneDocumentPrivate()
+    : m_head(new GeoSceneHead),
+    m_map(new GeoSceneMap),
+    m_settings(new GeoSceneSettings),
+    m_legend(new GeoSceneLegend),
+    m_documentFilePath()
+  {
+  }
 
-    ~GeoSceneDocumentPrivate()
-    {
-        delete m_head;
-        delete m_map;
-        delete m_settings;
-        delete m_legend;
-    }
+  ~GeoSceneDocumentPrivate()
+  {
+    delete m_head;
+    delete m_map;
+    delete m_settings;
+    delete m_legend;
+  }
 
-    const char* nodeType() const
-    {
-        return GeoSceneTypes::GeoSceneDocumentType;
-    }
+  const char *nodeType() const
+  {
+    return GeoSceneTypes::GeoSceneDocumentType;
+  }
 
-    GeoSceneHead*     m_head;
-    GeoSceneMap*      m_map;
-    GeoSceneSettings* m_settings;
-    GeoSceneLegend*   m_legend;
-    QString m_documentFilePath;
+  GeoSceneHead *m_head;
+  GeoSceneMap *m_map;
+  GeoSceneSettings *m_settings;
+  GeoSceneLegend *m_legend;
+  QString m_documentFilePath;
 };
 
-
 GeoSceneDocument::GeoSceneDocument()
-    : GeoDocument(),
-      d( new GeoSceneDocumentPrivate )
+  : GeoDocument(),
+  d(new GeoSceneDocumentPrivate)
 {
-    // Establish connection of property changes to the outside, e.g. the LegendBrowser
-    connect ( d->m_settings, SIGNAL(valueChanged(QString,bool)),
-                          SIGNAL(valueChanged(QString,bool)) );
+  // Establish connection of property changes to the outside, e.g. the LegendBrowser
+  connect(d->m_settings, SIGNAL(valueChanged(QString,bool)),
+          SIGNAL(valueChanged(QString,bool)));
 }
 
 GeoSceneDocument::~GeoSceneDocument()
 {
-    delete d;
+  delete d;
 }
 
-const char* GeoSceneDocument::nodeType() const
+const char *GeoSceneDocument::nodeType() const
 {
-    return d->nodeType();
+  return d->nodeType();
 }
 
-const GeoSceneHead* GeoSceneDocument::head() const
+const GeoSceneHead *GeoSceneDocument::head() const
 {
-    return d->m_head;
+  return d->m_head;
 }
 
-GeoSceneHead* GeoSceneDocument::head()
+GeoSceneHead *GeoSceneDocument::head()
 {
-    return d->m_head;
+  return d->m_head;
 }
 
-const GeoSceneMap* GeoSceneDocument::map() const
+const GeoSceneMap *GeoSceneDocument::map() const
 {
-    return d->m_map;
+  return d->m_map;
 }
 
-GeoSceneMap* GeoSceneDocument::map()
+GeoSceneMap *GeoSceneDocument::map()
 {
-    return d->m_map;
+  return d->m_map;
 }
 
-const GeoSceneSettings* GeoSceneDocument::settings() const
+const GeoSceneSettings *GeoSceneDocument::settings() const
 {
-    return d->m_settings;
+  return d->m_settings;
 }
 
-GeoSceneSettings* GeoSceneDocument::settings()
+GeoSceneSettings *GeoSceneDocument::settings()
 {
-    return d->m_settings;
+  return d->m_settings;
 }
 
-const GeoSceneLegend* GeoSceneDocument::legend() const
+const GeoSceneLegend *GeoSceneDocument::legend() const
 {
-    return d->m_legend;
+  return d->m_legend;
 }
 
-GeoSceneLegend* GeoSceneDocument::legend()
+GeoSceneLegend *GeoSceneDocument::legend()
 {
-    return d->m_legend;
+  return d->m_legend;
 }
 
 const QString GeoSceneDocument::documentPath() const
 {
-    return d->m_documentFilePath;
+  return d->m_documentFilePath;
 }
 
 void GeoSceneDocument::documentPath(const QString& path)
 {
-    d->m_documentFilePath = path;
+  d->m_documentFilePath = path;
 }
 
 }
 
 #include "moc_GeoSceneDocument.cpp"
-

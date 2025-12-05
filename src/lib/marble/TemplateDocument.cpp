@@ -17,88 +17,95 @@
 
 #include "MarbleDebug.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class TemplateDocumentPrivate
 {
 public:
-    TemplateDocumentPrivate()
-    {
-    }
-    QString templateText;
-    QMap<QString, QString> templateEntries;
-    static void processTemplateIncludes(QString &input);
+  TemplateDocumentPrivate()
+  {
+  }
+
+  QString templateText;
+  QMap<QString, QString> templateEntries;
+  static void processTemplateIncludes(QString& input);
+
 };
 
-void TemplateDocumentPrivate::processTemplateIncludes(QString &input)
+void TemplateDocumentPrivate::processTemplateIncludes(QString& input)
 {
-    QRegExp rx("%!\\{([^}]*)\\}%");
+  QRegExp rx("%!\\{([^}]*)\\}%");
 
-    QStringList includes;
-    int pos = 0;
+  QStringList includes;
+  int pos = 0;
 
-    while ((pos = rx.indexIn(input, pos)) != -1) {
-        includes << rx.cap(1);
-        pos += rx.matchedLength();
+  while((pos = rx.indexIn(input, pos)) != -1)
+  {
+    includes << rx.cap(1);
+    pos += rx.matchedLength();
+  }
+
+  foreach(const QString& include, includes)
+  {
+    QFile includeFile(":/htmlfeatures/includes/" + include + ".inc");
+    if(includeFile.open(QIODevice::ReadOnly))
+    {
+      input.replace("%!{" + include + "}%", includeFile.readAll());
     }
-
-    foreach (const QString &include, includes) {
-        QFile includeFile(":/htmlfeatures/includes/"+include+".inc");
-        if (includeFile.open(QIODevice::ReadOnly)) {
-            input.replace("%!{" + include + "}%", includeFile.readAll());
-        } else {
-            mDebug() << "[WARNING] Can't process template include" << include;
-        }
+    else
+    {
+      mDebug() << "[WARNING] Can't process template include" << include;
     }
+  }
 }
 
 TemplateDocument::TemplateDocument() :
-    d(new TemplateDocumentPrivate)
+  d(new TemplateDocumentPrivate)
 {
 }
 
-TemplateDocument::TemplateDocument(const QString &templateText) :
-    d(new TemplateDocumentPrivate)
+TemplateDocument::TemplateDocument(const QString& templateText) :
+  d(new TemplateDocumentPrivate)
 {
-    setTemplate(templateText);
+  setTemplate(templateText);
 }
 
 TemplateDocument::~TemplateDocument()
 {
-    delete d;
+  delete d;
 }
 
-void TemplateDocument::setTemplate(const QString &newTemplateText)
+void TemplateDocument::setTemplate(const QString& newTemplateText)
 {
-    d->templateText = newTemplateText;
+  d->templateText = newTemplateText;
 }
 
-QString TemplateDocument::value(const QString &key) const
+QString TemplateDocument::value(const QString& key) const
 {
-    return d->templateEntries[key];
+  return d->templateEntries[key];
 }
 
-void TemplateDocument::setValue(const QString &key, const QString &value)
+void TemplateDocument::setValue(const QString& key, const QString& value)
 {
-    d->templateEntries[key] = value;
+  d->templateEntries[key] = value;
 }
 
-QString& TemplateDocument::operator[](const QString &key)
+QString& TemplateDocument::operator[](const QString& key)
 {
-    return d->templateEntries[key];
+  return d->templateEntries[key];
 }
 
 QString TemplateDocument::finalText() const
 {
-    QString ready = d->templateText;
-    typedef QMap<QString, QString>::ConstIterator ConstIterator;
-    ConstIterator end = d->templateEntries.constEnd();
-    for (ConstIterator i = d->templateEntries.constBegin(); i != end; i++) {
-        ready.replace('%' + i.key() + '%', i.value());
-    }
-    d->processTemplateIncludes(ready);
-    return ready;
+  QString ready = d->templateText;
+  typedef QMap<QString, QString>::ConstIterator ConstIterator;
+  ConstIterator end = d->templateEntries.constEnd();
+  for(ConstIterator i = d->templateEntries.constBegin(); i != end; i++)
+  {
+    ready.replace('%' + i.key() + '%', i.value());
+  }
+  d->processTemplateIncludes(ready);
+  return ready;
 }
 
 } // namespace Marble

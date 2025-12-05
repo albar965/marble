@@ -14,24 +14,22 @@
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-KML_DEFINE_TAG_HANDLER( httpQuery )
+KML_DEFINE_TAG_HANDLER(httpQuery)
 
-GeoNode* KmlhttpQueryTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlhttpQueryTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_httpQuery ) );
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(kmlTag_Link))
-    {
-        QString content = parser.readElementText().trimmed();
-        parentItem.nodeAs<GeoDataLink>()->setHttpQuery(content);
-    }
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_httpQuery));
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Link))
+  {
+    QString content = parser.readElementText().trimmed();
+    parentItem.nodeAs<GeoDataLink>()->setHttpQuery(content);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

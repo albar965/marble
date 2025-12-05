@@ -17,58 +17,60 @@
 
 class QDateTime;
 
-namespace Marble
+namespace Marble {
+
+enum PositionProviderStatus
 {
-  
-enum PositionProviderStatus {
-    PositionProviderStatusError = 0,
-    PositionProviderStatusUnavailable,
-    PositionProviderStatusAcquiring,
-    PositionProviderStatusAvailable
+  PositionProviderStatusError = 0,
+  PositionProviderStatusUnavailable,
+  PositionProviderStatusAcquiring,
+  PositionProviderStatusAvailable
 };
 
 /**
  * @short The interface for position provider plugins.
  *
  */
-class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
+class MARBLE_EXPORT PositionProviderPluginInterface :
+  public PluginInterface
 {
-  public:
-    virtual ~PositionProviderPluginInterface();
+public:
+  virtual ~PositionProviderPluginInterface();
 
-    virtual void initialize() = 0;
+  virtual void initialize() = 0;
 
-    virtual bool isInitialized() const = 0;
+  virtual bool isInitialized() const = 0;
 
-    virtual PositionProviderStatus status() const = 0;
-    virtual GeoDataCoordinates position() const = 0;
-    virtual GeoDataAccuracy accuracy() const = 0;
+  virtual PositionProviderStatus status() const = 0;
+  virtual GeoDataCoordinates position() const = 0;
+  virtual GeoDataAccuracy accuracy() const = 0;
 
-    /**
-     * Returns the speed of the gps device in meters per second
-     */
-    virtual qreal speed() const = 0;
+  /**
+   * Returns the speed of the gps device in meters per second
+   */
+  virtual qreal speed() const = 0;
 
-    /**
-     * Returns the direction in which the gps device is moving.
-     * The direction is an angle (in degrees) clockwise from geographical north
-     */
-    virtual qreal direction() const = 0;
+  /**
+   * Returns the direction in which the gps device is moving.
+   * The direction is an angle (in degrees) clockwise from geographical north
+   */
+  virtual qreal direction() const = 0;
 
-    virtual QDateTime timestamp() const = 0;
+  virtual QDateTime timestamp() const = 0;
 
-    /**
-      * Returns an error string to be presented to the user
-      * if the status is PositionProviderStatusError. For other
-      * states, the result value is undefined.
-      */
-    virtual QString error() const;
+  /**
+    * Returns an error string to be presented to the user
+    * if the status is PositionProviderStatusError. For other
+    * states, the result value is undefined.
+    */
+  virtual QString error() const;
+
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.02" )
+Q_DECLARE_INTERFACE(Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.02")
 
-Q_DECLARE_METATYPE( Marble::PositionProviderStatus )
+Q_DECLARE_METATYPE(Marble::PositionProviderStatus)
 
 #endif

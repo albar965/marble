@@ -21,8 +21,7 @@ class QAbstractItemModel;
 class QImage;
 class QSize;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoPainter;
 class GeoDataDocument;
@@ -33,115 +32,117 @@ class SunLocator;
 class ViewportParams;
 class PluginManager;
 
-class MARBLE_EXPORT TextureLayer : public QObject, public LayerInterface
+class MARBLE_EXPORT TextureLayer :
+  public QObject, public LayerInterface
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    TextureLayer( HttpDownloadManager *downloadManager,
-                  PluginManager* pluginManager,
-                  const SunLocator *sunLocator,
-                  QAbstractItemModel *groundOverlayModel);
+public:
+  TextureLayer(HttpDownloadManager *downloadManager,
+               PluginManager *pluginManager,
+               const SunLocator *sunLocator,
+               QAbstractItemModel *groundOverlayModel);
 
-    ~TextureLayer();
+  ~TextureLayer();
 
-    QStringList renderPosition() const;
+  QStringList renderPosition() const;
 
-    void addSeaDocument( const GeoDataDocument *seaDocument );
+  void addSeaDocument(const GeoDataDocument *seaDocument);
 
-    void addLandDocument( const GeoDataDocument *landDocument );
+  void addLandDocument(const GeoDataDocument *landDocument);
 
-    int textureLayerCount() const;
+  int textureLayerCount() const;
 
-    /**
-     * @brief Adds texture sublayer, taking ownership of the object's memory
-     *        Does nothing if a texture with the same source directory was already
-     *        added with this method.
-     * @return returned string is the key for the texture that can be later used to remove it
-     */
-    QString addTextureLayer(GeoSceneTextureTileDataset *texture);
+  /**
+   * @brief Adds texture sublayer, taking ownership of the object's memory
+   *        Does nothing if a texture with the same source directory was already
+   *        added with this method.
+   * @return returned string is the key for the texture that can be later used to remove it
+   */
+  QString addTextureLayer(GeoSceneTextureTileDataset *texture);
 
-    /**
-     * @brief Removes texture sublayer identified by a key.
-     *        Deletes the texture object. Does nothing if key is not found.
-     * @param A key to identify the texture, returned from addTextureLayer
-     */
-    void removeTextureLayer(const QString &key);
+  /**
+   * @brief Removes texture sublayer identified by a key.
+   *        Deletes the texture object. Does nothing if key is not found.
+   * @param A key to identify the texture, returned from addTextureLayer
+   */
+  void removeTextureLayer(const QString& key);
 
-    bool showSunShading() const;
-    void setSunShadingDimFactor(qreal dimFactor);
-    bool showCityLights() const;
+  bool showSunShading() const;
+  void setSunShadingDimFactor(qreal dimFactor);
+  bool showCityLights() const;
 
-    /**
-     * @brief Return the current tile zoom level. For example for OpenStreetMap
-     *        possible values are 1..18, for BlueMarble 0..6.
-     */
-    int tileZoomLevel() const;
+  /**
+   * @brief Return the current tile zoom level. For example for OpenStreetMap
+   *        possible values are 1..18, for BlueMarble 0..6.
+   */
+  int tileZoomLevel() const;
 
-    QSize tileSize() const;
+  QSize tileSize() const;
 
-    GeoSceneTileDataset::Projection tileProjection() const;
+  GeoSceneTileDataset::Projection tileProjection() const;
 
-    int tileColumnCount( int level ) const;
-    int tileRowCount( int level ) const;
+  int tileColumnCount(int level) const;
+  int tileRowCount(int level) const;
 
-    qint64 volatileCacheLimit() const;
+  qint64 volatileCacheLimit() const;
 
-    int preferredRadiusCeil( int radius ) const;
-    int preferredRadiusFloor( int radius ) const;
+  int preferredRadiusCeil(int radius) const;
+  int preferredRadiusFloor(int radius) const;
 
-    RenderState renderState() const;
+  RenderState renderState() const;
 
-    virtual QString runtimeTrace() const;
+  virtual QString runtimeTrace() const;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer *layer = 0 );
+  virtual bool render(GeoPainter *painter, ViewportParams *viewport,
+                      const QString& renderPos = QLatin1String("NONE"),
+                      GeoSceneLayer *layer = 0);
 
-    void setKeys(QHash<QString, QString> keys);
+  void setKeys(QHash<QString, QString> keys);
 
 public Q_SLOTS:
-    void setShowRelief( bool show );
+  void setShowRelief(bool show);
 
-    void setShowSunShading( bool show );
+  void setShowSunShading(bool show);
 
-    void setShowCityLights( bool show );
+  void setShowCityLights(bool show);
 
-    void setShowTileId( bool show );
+  void setShowTileId(bool show);
 
-    /**
-     * @brief  Set the Projection used for the map
-     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
-     */
-    void setProjection( Projection projection );
+  /**
+   * @brief  Set the Projection used for the map
+   * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
+   */
+  void setProjection(Projection projection);
 
-    void setNeedsUpdate();
+  void setNeedsUpdate();
 
-    void setMapTheme( const QVector<const GeoSceneTextureTileDataset *> &textures, const GeoSceneGroup *textureLayerSettings, const QString &seaFile, const QString &landFile );
+  void setMapTheme(const QVector<const GeoSceneTextureTileDataset *>& textures, const GeoSceneGroup *textureLayerSettings,
+                   const QString& seaFile, const QString& landFile);
 
-    void setVolatileCacheLimit( quint64 kilobytes );
+  void setVolatileCacheLimit(quint64 kilobytes);
 
-    void reset();
+  void reset();
 
-    void reload();
+  void reload();
 
-    void downloadStackedTile( const TileId &stackedTileId );
+  void downloadStackedTile(const TileId& stackedTileId);
 
- Q_SIGNALS:
-    void tileLevelChanged( int );
-    void repaintNeeded();
+Q_SIGNALS:
+  void tileLevelChanged(int);
+  void repaintNeeded();
 
- private:
-    Q_PRIVATE_SLOT( d, void requestDelayedRepaint() )
-    Q_PRIVATE_SLOT( d, void updateTextureLayers() )
-    Q_PRIVATE_SLOT( d, void updateTile( const TileId &tileId, const QImage &tileImage ) )
-    Q_PRIVATE_SLOT( d, void addGroundOverlays( const QModelIndex& parent, int first, int last ) )
-    Q_PRIVATE_SLOT( d, void removeGroundOverlays( const QModelIndex& parent, int first, int last ) )
-    Q_PRIVATE_SLOT( d, void resetGroundOverlaysCache() )
+private:
+  Q_PRIVATE_SLOT(d, void requestDelayedRepaint())
+  Q_PRIVATE_SLOT(d, void updateTextureLayers())
+  Q_PRIVATE_SLOT(d, void updateTile(const TileId& tileId, const QImage& tileImage))
+  Q_PRIVATE_SLOT(d, void addGroundOverlays(const QModelIndex& parent, int first, int last))
+  Q_PRIVATE_SLOT(d, void removeGroundOverlays(const QModelIndex& parent, int first, int last))
+  Q_PRIVATE_SLOT(d, void resetGroundOverlaysCache())
 
- private:
-    class Private;
-    Private *const d;
+private:
+  class Private;
+  Private *const d;
 };
 
 }

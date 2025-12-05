@@ -14,34 +14,33 @@
 
 #include <QIcon>
 
-namespace Marble
-{
+namespace Marble {
 
 class Q_DECL_HIDDEN ParseRunnerPlugin::Private
 {
 public:
-    Private();
+  Private();
 };
 
 ParseRunnerPlugin::Private::Private()
 {
-    // nothing to do
+  // nothing to do
 }
 
-ParseRunnerPlugin::ParseRunnerPlugin( QObject* parent ) :
-    QObject( parent ),
-    d( new Private )
+ParseRunnerPlugin::ParseRunnerPlugin(QObject *parent) :
+  QObject(parent),
+  d(new Private)
 {
 }
 
 ParseRunnerPlugin::~ParseRunnerPlugin()
 {
-    delete d;
+  delete d;
 }
 
 QIcon ParseRunnerPlugin::icon() const
 {
-    return QIcon();
+  return QIcon();
 }
 
 }

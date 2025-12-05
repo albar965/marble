@@ -18,18 +18,19 @@
 
 #include "MarbleGlobal.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlScreenOverlayWriter : public KmlOverlayTagWriter
+class KmlScreenOverlayWriter :
+  public KmlOverlayTagWriter
 {
 public:
-    KmlScreenOverlayWriter();
-    bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+  KmlScreenOverlayWriter();
+  bool writeMid(const GeoNode *node, GeoWriter& writer) const;
 
 private:
-    static void writeVec2( const QString &element, const GeoDataVec2 &vec2, GeoWriter& writer );
-    static QString unitToString( GeoDataVec2::Unit unit );
+  static void writeVec2(const QString& element, const GeoDataVec2& vec2, GeoWriter& writer);
+  static QString unitToString(GeoDataVec2::Unit unit);
+
 };
 
 }

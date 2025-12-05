@@ -19,27 +19,27 @@
 #include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Orientation )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Orientation)
 
-GeoNode* KmlOrientationTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlOrientationTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Orientation ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Orientation));
 
-    GeoDataOrientation orientation;
-    KmlObjectTagHandler::parseIdentifiers( parser, &orientation );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataOrientation orientation;
+  KmlObjectTagHandler::parseIdentifiers(parser, &orientation);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Model ) ) {
-        parentItem.nodeAs<GeoDataModel>()->setOrientation(orientation);
-        return &parentItem.nodeAs<GeoDataModel>()->orientation();
-    }
-    else{
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Model))
+  {
+    parentItem.nodeAs<GeoDataModel>()->setOrientation(orientation);
+    return &parentItem.nodeAs<GeoDataModel>()->orientation();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

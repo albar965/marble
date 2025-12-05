@@ -23,20 +23,20 @@
 
 class QIcon;
 
-namespace Marble
-{
+namespace Marble {
 
 struct MARBLE_EXPORT PluginAuthor
 {
-    PluginAuthor( const QString &name_, const QString &email_, const QString &task_ = QObject::tr( "Developer" ) ) :
-        name( name_ ),
-        task( task_ ),
-        email( email_ )
-    {}
+  PluginAuthor(const QString& name_, const QString& email_, const QString& task_ = QObject::tr("Developer")) :
+    name(name_),
+    task(task_),
+    email(email_)
+  {
+  }
 
-    QString name;
-    QString task;
-    QString email;
+  QString name;
+  QString task;
+  QString email;
 };
 
 /**
@@ -45,54 +45,55 @@ struct MARBLE_EXPORT PluginAuthor
 
 class MARBLE_EXPORT PluginInterface
 {
- public:
-    virtual ~PluginInterface();
+public:
+  virtual ~PluginInterface();
 
-    /**
-     * @brief Returns the user-visible name of the plugin.
-     *
-     * The user-visible name should be context free, i.e. the name should
-     * provide enough information as to what the plugin is about in the context
-     * of Marble.
-     *
-     * Example: "Starry Sky Background", "OpenRouteService Routing"
-     */
-    virtual QString name() const = 0;
+  /**
+   * @brief Returns the user-visible name of the plugin.
+   *
+   * The user-visible name should be context free, i.e. the name should
+   * provide enough information as to what the plugin is about in the context
+   * of Marble.
+   *
+   * Example: "Starry Sky Background", "OpenRouteService Routing"
+   */
+  virtual QString name() const = 0;
 
-    /**
-     * @brief Returns the unique name of the plugin.
-     *
-     * Examples: "starrysky", "openrouteservice"
-     */
-    virtual QString nameId() const = 0;
+  /**
+   * @brief Returns the unique name of the plugin.
+   *
+   * Examples: "starrysky", "openrouteservice"
+   */
+  virtual QString nameId() const = 0;
 
-    virtual QString version() const = 0;
+  virtual QString version() const = 0;
 
-    /**
-     * @brief Returns a user description of the plugin.
-     */
-    virtual QString description() const = 0;
+  /**
+   * @brief Returns a user description of the plugin.
+   */
+  virtual QString description() const = 0;
 
-    /**
-     * @brief Returns an icon for the plugin.
-     */
-    virtual QIcon icon() const = 0;
+  /**
+   * @brief Returns an icon for the plugin.
+   */
+  virtual QIcon icon() const = 0;
 
-    virtual QString copyrightYears() const = 0;
+  virtual QString copyrightYears() const = 0;
 
-    virtual QList<PluginAuthor> pluginAuthors() const = 0;
+  virtual QList<PluginAuthor> pluginAuthors() const = 0;
 
-    /**
-     * @brief Returns about text (credits) for external data the plugin uses.
-     *
-     * The default implementation returns the empty string. Please override
-     * this method to give credits for all data from 3rd-partys.
-     */
-    virtual QString aboutDataText() const;
+  /**
+   * @brief Returns about text (credits) for external data the plugin uses.
+   *
+   * The default implementation returns the empty string. Please override
+   * this method to give credits for all data from 3rd-partys.
+   */
+  virtual QString aboutDataText() const;
+
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::PluginInterface, "org.kde.Marble.PluginInterface/1.1" )
+Q_DECLARE_INTERFACE(Marble::PluginInterface, "org.kde.Marble.PluginInterface/1.1")
 
 #endif

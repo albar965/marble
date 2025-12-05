@@ -10,88 +10,87 @@
 
 #include "OpenCachingCacheLogEntry.h"
 
-namespace Marble
-{
+namespace Marble {
 
-OpenCachingCacheLogEntry::OpenCachingCacheLogEntry( const QHash<QString, QVariant>& properties )
+OpenCachingCacheLogEntry::OpenCachingCacheLogEntry(const QHash<QString, QVariant>& properties)
 {
-    m_cacheId = properties["cacheid"].toULongLong();
-    m_userName = properties["userid"].toString();
-    m_logType = properties["logtype"].toString();
-    m_text = properties["text"].toString();
-    m_logDate = properties["date"].toDateTime();
-    m_createdDate = properties["datecreated"].toDateTime();
-    m_lastModifiedDate = properties["lastmodified"].toDateTime();
+  m_cacheId = properties["cacheid"].toULongLong();
+  m_userName = properties["userid"].toString();
+  m_logType = properties["logtype"].toString();
+  m_text = properties["text"].toString();
+  m_logDate = properties["date"].toDateTime();
+  m_createdDate = properties["datecreated"].toDateTime();
+  m_lastModifiedDate = properties["lastmodified"].toDateTime();
 }
 
-void OpenCachingCacheLogEntry::setCacheId( int cacheId )
+void OpenCachingCacheLogEntry::setCacheId(int cacheId)
 {
-    m_cacheId = cacheId;
+  m_cacheId = cacheId;
 }
 
 int OpenCachingCacheLogEntry::cacheId() const
 {
-    return m_cacheId;
+  return m_cacheId;
 }
 
-void OpenCachingCacheLogEntry::setUserName( const QString& userName )
+void OpenCachingCacheLogEntry::setUserName(const QString& userName)
 {
-    m_userName = userName;
+  m_userName = userName;
 }
 
 const QString& OpenCachingCacheLogEntry::userName() const
 {
-    return m_userName;
+  return m_userName;
 }
 
-void OpenCachingCacheLogEntry::setLogType( const QString& logType )
+void OpenCachingCacheLogEntry::setLogType(const QString& logType)
 {
-    m_logType = logType;
+  m_logType = logType;
 }
 
 const QString& OpenCachingCacheLogEntry::logType() const
 {
-    return m_logType;
+  return m_logType;
 }
 
-void OpenCachingCacheLogEntry::setText( const QString& text )
+void OpenCachingCacheLogEntry::setText(const QString& text)
 {
-    m_text = text;
+  m_text = text;
 }
 
 const QString& OpenCachingCacheLogEntry::text() const
 {
-    return m_text;
+  return m_text;
 }
 
-void OpenCachingCacheLogEntry::setLogDate( const QDateTime& logDate )
+void OpenCachingCacheLogEntry::setLogDate(const QDateTime& logDate)
 {
-    m_logDate = logDate;
+  m_logDate = logDate;
 }
 
 const QDateTime& OpenCachingCacheLogEntry::logDate() const
 {
-    return m_logDate;
+  return m_logDate;
 }
 
-void OpenCachingCacheLogEntry::setCreatedDate( const QDateTime& createdDate )
+void OpenCachingCacheLogEntry::setCreatedDate(const QDateTime& createdDate)
 {
-    m_createdDate = createdDate;
+  m_createdDate = createdDate;
 }
 
 const QDateTime& OpenCachingCacheLogEntry::createdDate() const
 {
-    return m_createdDate;
+  return m_createdDate;
 }
 
-void OpenCachingCacheLogEntry::setLastModifiedDate( const QDateTime& lastModifiedDate )
+void OpenCachingCacheLogEntry::setLastModifiedDate(const QDateTime& lastModifiedDate)
 {
-    m_lastModifiedDate = lastModifiedDate;
+  m_lastModifiedDate = lastModifiedDate;
 }
 
 const QDateTime& OpenCachingCacheLogEntry::lastModifiedDate() const
 {
-    return m_lastModifiedDate;
+  return m_lastModifiedDate;
 }
 
 }

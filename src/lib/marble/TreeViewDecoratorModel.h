@@ -12,27 +12,26 @@
 
 #include <QSortFilterProxyModel>
 
-namespace Marble
-{
+namespace Marble {
 
-
-class TreeViewDecoratorModel : public QSortFilterProxyModel
+class TreeViewDecoratorModel :
+  public QSortFilterProxyModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public Q_SLOTS:
-    void trackExpandedState( const QModelIndex &index );
-    void trackCollapsedState( const QModelIndex &index );
+  void trackExpandedState(const QModelIndex& index);
+  void trackCollapsedState(const QModelIndex& index);
 
 public:
-    explicit TreeViewDecoratorModel( QObject *parent = 0 );
-    QVariant data( const QModelIndex & proxyIndex, int role = Qt::DisplayRole ) const;
+  explicit TreeViewDecoratorModel(QObject *parent = 0);
+  QVariant data(const QModelIndex& proxyIndex, int role = Qt::DisplayRole) const;
 
 protected:
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+  bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const;
 
 private:
-    QList<QPersistentModelIndex> m_expandedRows;
+  QList<QPersistentModelIndex> m_expandedRows;
 
 };
 

@@ -15,34 +15,37 @@
 #include "GeoDataParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(Tour)
+
+GeoNode *KmlTourTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( Tour )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Tour));
 
-GeoNode* KmlTourTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Tour ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataTour *tour = new GeoDataTour;
+  KmlObjectTagHandler::parseIdentifiers(parser, tour);
 
-    GeoDataTour *tour = new GeoDataTour;
-    KmlObjectTagHandler::parseIdentifiers( parser, tour );
-
-    if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document)) {
-        parentItem.nodeAs<GeoDataContainer>()->append(tour);
-        return tour;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
-        GeoDataDocument* doc = geoDataDoc(parser);
-        doc->append(tour);
-        return tour;
-    } else {
-        delete tour;
-        return 0;
-    }
-
+  if(parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
+  {
+    parentItem.nodeAs<GeoDataContainer>()->append(tour);
+    return tour;
+  }
+  else if(parentItem.qualifiedName().first == kmlTag_kml)
+  {
+    GeoDataDocument *doc = geoDataDoc(parser);
+    doc->append(tour);
+    return tour;
+  }
+  else
+  {
+    delete tour;
     return 0;
+  }
+
+  return 0;
 }
 
 } // namespace kml

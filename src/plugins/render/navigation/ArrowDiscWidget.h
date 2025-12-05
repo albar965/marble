@@ -15,45 +15,47 @@
 #include <QPixmap>
 #include <QTimer>
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleWidget;
 
-class ArrowDiscWidget : public QWidget
+class ArrowDiscWidget :
+  public QWidget
 {
-    Q_OBJECT
-public:
-    explicit ArrowDiscWidget( QWidget *parent = 0 );
-    ~ArrowDiscWidget();
+  Q_OBJECT
 
-    void setMarbleWidget( MarbleWidget *marbleWidget );
+public:
+  explicit ArrowDiscWidget(QWidget *parent = 0);
+  ~ArrowDiscWidget();
+
+  void setMarbleWidget(MarbleWidget *marbleWidget);
 
 Q_SIGNALS:
-    void repaintNeeded();
+  void repaintNeeded();
 
 protected:
-    void paintEvent( QPaintEvent * );
-    void mouseMoveEvent( QMouseEvent *mouseEvent );
-    void mousePressEvent( QMouseEvent *mouseEvent );
-    void mouseReleaseEvent( QMouseEvent *mouseEvent );
-    void leaveEvent( QEvent *event );
-    void repaint();
+  void paintEvent(QPaintEvent *);
+  void mouseMoveEvent(QMouseEvent *mouseEvent);
+  void mousePressEvent(QMouseEvent *mouseEvent);
+  void mouseReleaseEvent(QMouseEvent *mouseEvent);
+  void leaveEvent(QEvent *event);
+  void repaint();
 
 private Q_SLOTS:
-    void startPressRepeat();
-    void repeatPress();
+  void startPressRepeat();
+  void repeatPress();
 
 private:
-    static QPixmap pixmap(const QString &id );
-    Qt::ArrowType arrowUnderMouse( const QPoint &position ) const;
-    QTimer m_initialPressTimer;
-    QTimer m_repeatPressTimer;
-    Qt::ArrowType m_arrowPressed;
-    int m_repetitions;
+  static QPixmap pixmap(const QString& id);
+  Qt::ArrowType arrowUnderMouse(const QPoint& position) const;
 
-    MarbleWidget *m_marbleWidget;
-    QString m_imagePath;
+  QTimer m_initialPressTimer;
+  QTimer m_repeatPressTimer;
+  Qt::ArrowType m_arrowPressed;
+  int m_repetitions;
+
+  MarbleWidget *m_marbleWidget;
+  QString m_imagePath;
 };
 
 }

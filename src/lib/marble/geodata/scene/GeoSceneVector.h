@@ -28,37 +28,37 @@
 
 #include "GeoSceneAbstractDataset.h"
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short Vector dataset stored in a layer.
  */
 
-class GEODATA_EXPORT GeoSceneVector : public GeoSceneAbstractDataset
+class GEODATA_EXPORT GeoSceneVector :
+  public GeoSceneAbstractDataset
 {
- public:
-    explicit GeoSceneVector( const QString& name );
-    virtual const char* nodeType() const;
+public:
+  explicit GeoSceneVector(const QString& name);
+  virtual const char *nodeType() const;
 
-    QString sourceFile() const;
-    void setSourceFile( const QString& sourceFile );
+  QString sourceFile() const;
+  void setSourceFile(const QString& sourceFile);
 
-    QString feature() const;
-    void setFeature( const QString& feature );
+  QString feature() const;
+  void setFeature(const QString& feature);
 
-    QPen pen() const;
-    void setPen( const QPen& pen );
+  QPen pen() const;
+  void setPen(const QPen& pen);
 
-    QBrush brush() const;
-    void setBrush( const QBrush& brush );
+  QBrush brush() const;
+  void setBrush(const QBrush& brush);
 
- private:
-    QString m_sourceFile;
-    QString m_feature;
+private:
+  QString m_sourceFile;
+  QString m_feature;
 
-    QPen    m_pen;
-    QBrush  m_brush;
+  QPen m_pen;
+  QBrush m_brush;
 };
 
 }

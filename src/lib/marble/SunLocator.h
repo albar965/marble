@@ -16,48 +16,47 @@
 #ifndef MARBLE_SUNLOCATOR_H
 #define MARBLE_SUNLOCATOR_H
 
-
 #include <QObject>
 #include <QColor>
 
-//FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
+// FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 class MarbleClock;
 class SunLocatorPrivate;
 class Planet;
 
-class MARBLE_EXPORT SunLocator : public QObject
+class MARBLE_EXPORT SunLocator :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    SunLocator( const MarbleClock *clock, const Planet *planet );
-    virtual ~SunLocator();
+public:
+  SunLocator(const MarbleClock *clock, const Planet *planet);
+  virtual ~SunLocator();
 
-    qreal shading(qreal lon, qreal a, qreal c) const;
-    void  shadePixel(QRgb& pixcol, qreal shade, qreal dimFactor) const;
-    void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
+  qreal shading(qreal lon, qreal a, qreal c) const;
+  void  shadePixel(QRgb& pixcol, qreal shade, qreal dimFactor) const;
+  void  shadePixelComposite(QRgb& pixcol, const QRgb& dpixcol, qreal shade) const;
 
-    void  setPlanet( const Planet *planet );
+  void  setPlanet(const Planet *planet);
 
-    qreal getLon() const;
-    qreal getLat() const;
+  qreal getLon() const;
+  qreal getLat() const;
 
- public Q_SLOTS:
-    void update();
+public Q_SLOTS:
+  void update();
 
- Q_SIGNALS:
-    void positionChanged( qreal lon, qreal lat );
+Q_SIGNALS:
+  void positionChanged(qreal lon, qreal lat);
 
- private:
-    void updatePosition();
+private:
+  void updatePosition();
 
-    SunLocatorPrivate * const d;
+  SunLocatorPrivate * const d;
 
-    Q_DISABLE_COPY( SunLocator )
+  Q_DISABLE_COPY(SunLocator)
 };
 
 }

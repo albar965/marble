@@ -18,11 +18,10 @@
 #include <QFile>
 #include <QFileInfo>
 
-namespace Marble
-{
+namespace Marble {
 
 KmlRunner::KmlRunner(QObject *parent) :
-    ParsingRunner(parent)
+  ParsingRunner(parent)
 {
 }
 
@@ -30,52 +29,58 @@ KmlRunner::~KmlRunner()
 {
 }
 
-GeoDataDocument *KmlRunner::parseFile(const QString &fileName, DocumentRole role, QString &error)
+GeoDataDocument *KmlRunner::parseFile(const QString& fileName, DocumentRole role, QString& error)
 {
-    QString kmlFileName = fileName;
-    QString kmzPath;
-    QStringList kmzFiles;
+  QString kmlFileName = fileName;
+  QString kmzPath;
+  QStringList kmzFiles;
 
-    QFileInfo const kmzFile( fileName );
-    if ( kmzFile.exists() && kmzFile.suffix().toLower() == "kmz" ) {
-        KmzHandler kmzHandler;
-        if ( kmzHandler.open( fileName, error ) ) {
-            kmlFileName = kmzHandler.kmlFile();
-            kmzPath = kmzHandler.kmzPath();
-            kmzFiles = kmzHandler.kmzFiles();
-        } else {
-            mDebug() << error;
-            return nullptr;
-        }
+  QFileInfo const kmzFile(fileName);
+  if(kmzFile.exists() && kmzFile.suffix().toLower() == "kmz")
+  {
+    KmzHandler kmzHandler;
+    if(kmzHandler.open(fileName, error))
+    {
+      kmlFileName = kmzHandler.kmlFile();
+      kmzPath = kmzHandler.kmzPath();
+      kmzFiles = kmzHandler.kmzFiles();
     }
-
-    QFile file( kmlFileName );
-    if ( !file.exists() ) {
-        error = QString("File %1 does not exist").arg(kmlFileName);
-        mDebug() << error;
-        return nullptr;
+    else
+    {
+      mDebug() << error;
+      return nullptr;
     }
+  }
 
-    // Open file in right mode
-    file.open( QIODevice::ReadOnly );
+  QFile file(kmlFileName);
+  if(!file.exists())
+  {
+    error = QString("File %1 does not exist").arg(kmlFileName);
+    mDebug() << error;
+    return nullptr;
+  }
 
-    KmlParser parser;
+  // Open file in right mode
+  file.open(QIODevice::ReadOnly);
 
-    if ( !parser.read( &file ) ) {
-        error = parser.errorString();
-        mDebug() << error;
-        return nullptr;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-    KmlDocument* doc = static_cast<KmlDocument*>( document );
-    doc->setDocumentRole( role );
-    doc->setFileName( fileName );
-    doc->setBaseUri( kmlFileName );
-    doc->setFiles( kmzPath, kmzFiles );
+  KmlParser parser;
 
-    file.close();
-    return doc;
+  if(!parser.read(&file))
+  {
+    error = parser.errorString();
+    mDebug() << error;
+    return nullptr;
+  }
+  GeoDocument *document = parser.releaseDocument();
+  Q_ASSERT(document);
+  KmlDocument *doc = static_cast<KmlDocument *>(document);
+  doc->setDocumentRole(role);
+  doc->setFileName(fileName);
+  doc->setBaseUri(kmlFileName);
+  doc->setFiles(kmzPath, kmzFiles);
+
+  file.close();
+  return doc;
 }
 
 }

@@ -13,7 +13,6 @@
 #ifndef MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
 #define MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
 
-
 #include "TextureMapperInterface.h"
 
 #include "MarbleGlobal.h"
@@ -21,32 +20,31 @@
 #include <QThreadPool>
 #include <QImage>
 
+namespace Marble {
 
-namespace Marble
+class EquirectScanlineTextureMapper :
+  public TextureMapperInterface
 {
+public:
+  explicit EquirectScanlineTextureMapper(StackedTileLoader *tileLoader);
 
-class EquirectScanlineTextureMapper : public TextureMapperInterface
-{
- public:
-    explicit EquirectScanlineTextureMapper( StackedTileLoader *tileLoader );
+  virtual void mapTexture(GeoPainter *painter,
+                          const ViewportParams *viewport,
+                          int tileZoomLevel,
+                          const QRect& dirtyRect,
+                          TextureColorizer *texColorizer);
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+private:
+  void mapTexture(const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality);
 
- private:
-    void mapTexture( const ViewportParams *viewport, int tileZoomLevel, MapQuality mapQuality );
+private:
+  class RenderJob;
 
- private:
-    class RenderJob;
-
-    StackedTileLoader *const m_tileLoader;
-    int m_radius;
-    QImage m_canvasImage;
-    int    m_oldYPaintedTop;
-    QThreadPool m_threadPool;
+  StackedTileLoader *const m_tileLoader;
+  int m_radius;
+  QImage m_canvasImage;
+  int m_oldYPaintedTop;
+  QThreadPool m_threadPool;
 };
 
 }

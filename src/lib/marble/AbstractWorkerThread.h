@@ -17,8 +17,7 @@
 // Qt
 #include <QThread>
 
-namespace Marble
-{
+namespace Marble {
 
 class AbstractWorkerThreadPrivate;
 
@@ -33,24 +32,25 @@ class AbstractWorkerThreadPrivate;
  * want something to be worked on. You'll probably want to call this in your
  * addSchedule() function.
  */
-class MARBLE_EXPORT AbstractWorkerThread : public QThread
+class MARBLE_EXPORT AbstractWorkerThread :
+  public QThread
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit AbstractWorkerThread( QObject *parent = 0 );
-    virtual ~AbstractWorkerThread();
+public:
+  explicit AbstractWorkerThread(QObject *parent = 0);
+  virtual ~AbstractWorkerThread();
 
-    void ensureRunning();
+  void ensureRunning();
 
- protected:
-    virtual bool workAvailable() = 0;
-    virtual void work() = 0;
+protected:
+  virtual bool workAvailable() = 0;
+  virtual void work() = 0;
 
-    void run();
+  void run();
 
- private:
-    AbstractWorkerThreadPrivate * const d;
+private:
+  AbstractWorkerThreadPrivate * const d;
 };
 
 }

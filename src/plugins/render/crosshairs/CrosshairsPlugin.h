@@ -18,94 +18,92 @@
 
 #include <QPixmap>
 
-
 #include "RenderPlugin.h"
 #include "DialogConfigurationInterface.h"
 
 class QSvgRenderer;
 
 namespace Ui {
-    class CrosshairsConfigWidget;
+class CrosshairsConfigWidget;
 }
 
-namespace Marble
-{
-
+namespace Marble {
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
-class CrosshairsPlugin : public RenderPlugin, public DialogConfigurationInterface
+class CrosshairsPlugin :
+  public RenderPlugin, public DialogConfigurationInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.CrosshairsPlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN(CrosshairsPlugin)
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.CrosshairsPlugin")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  Q_INTERFACES(Marble::DialogConfigurationInterface)
+  MARBLE_PLUGIN(CrosshairsPlugin)
 
- public:
-    CrosshairsPlugin();
+public:
+  CrosshairsPlugin();
 
-    explicit CrosshairsPlugin( const MarbleModel *marbleModel );
+  explicit CrosshairsPlugin(const MarbleModel *marbleModel);
 
-    ~CrosshairsPlugin();
+  ~CrosshairsPlugin();
 
-    QStringList backendTypes() const;
+  QStringList backendTypes() const;
 
-    QString renderPolicy() const;
+  QString renderPolicy() const;
 
-    QStringList renderPosition() const;
+  QStringList renderPosition() const;
 
-    virtual RenderType renderType() const;
+  virtual RenderType renderType() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString guiString() const;
+  QString guiString() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    QIcon icon () const;
+  QIcon icon() const;
 
-    void initialize ();
+  void initialize();
 
-    bool isInitialized () const;
+  bool isInitialized() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+  bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0);
 
-    QDialog *configDialog();
+  QDialog *configDialog();
 
-    QHash<QString,QVariant> settings() const;
+  QHash<QString, QVariant> settings() const;
 
-    void setSettings( const QHash<QString,QVariant> &settings );
+  void setSettings(const QHash<QString, QVariant>& settings);
 
 private Q_SLOTS:
-   void readSettings();
+  void readSettings();
 
-   void writeSettings();
+  void writeSettings();
 
- private:
-    Q_DISABLE_COPY( CrosshairsPlugin )
+private:
+  Q_DISABLE_COPY(CrosshairsPlugin)
 
-    bool m_isInitialized;
+  bool m_isInitialized;
 
-    QSvgRenderer *m_svgobj;
-    QPixmap m_crosshairs;
-    int m_themeIndex;
+  QSvgRenderer *m_svgobj;
+  QPixmap m_crosshairs;
+  int m_themeIndex;
 
-    QString m_theme;
+  QString m_theme;
 
-    QDialog * m_configDialog;
-    Ui::CrosshairsConfigWidget * m_uiConfigWidget;
+  QDialog *m_configDialog;
+  Ui::CrosshairsConfigWidget *m_uiConfigWidget;
 };
 
 }

@@ -23,42 +23,40 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneVectorTileDataset.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Vectortile)
 
-GeoNode* DgmlVectortileTagHandler::parse( GeoParser& parser ) const
+GeoNode *DgmlVectortileTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( dgmlTag_Vectortile ) );
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vectortile));
 
-    const QString name = parser.attribute( dgmlAttr_name ).trimmed();
+  const QString name = parser.attribute(dgmlAttr_name).trimmed();
 
-    const QString expireStr = parser.attribute( dgmlAttr_expire ).trimmed();
-    int expire = std::numeric_limits<int>::max();
-    if ( !expireStr.isEmpty() )
-        expire = expireStr.toInt();
+  const QString expireStr = parser.attribute(dgmlAttr_expire).trimmed();
+  int expire = std::numeric_limits<int>::max();
+  if(!expireStr.isEmpty())
+    expire = expireStr.toInt();
 
-    GeoSceneTileDataset *texture = 0;
+  GeoSceneTileDataset *texture = 0;
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
 
-    // Check parent type and make sure that the dataSet type
-    // matches the backend of the parent layer
-    if ( parentItem.represents( dgmlTag_Layer )
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile ) {
+  // Check parent type and make sure that the dataSet type
+  // matches the backend of the parent layer
+  if(parentItem.represents(dgmlTag_Layer) &&
+     parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vectortile)
+  {
 
-        texture = new GeoSceneVectorTileDataset( name );
-        texture->setExpire( expire );
-        parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
-    }
+    texture = new GeoSceneVectorTileDataset(name);
+    texture->setExpire(expire);
+    parentItem.nodeAs<GeoSceneLayer>()->addDataset(texture);
+  }
 
-    return texture;
+  return texture;
 }
 
 }
 }
-

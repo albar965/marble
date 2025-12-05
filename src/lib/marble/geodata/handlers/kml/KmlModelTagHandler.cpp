@@ -18,36 +18,38 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Model)
+
+GeoNode *KmlModelTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Model )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Model));
 
-GeoNode* KmlModelTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Model ) );
+  GeoDataModel *model = new GeoDataModel;
+  KmlObjectTagHandler::parseIdentifiers(parser, model);
 
-    GeoDataModel *model = new GeoDataModel;
-    KmlObjectTagHandler::parseIdentifiers( parser, model );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Placemark))
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->setGeometry(model);
+    return model;
 
-    if( parentItem.represents( kmlTag_Placemark ) ) {
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( model );
-        return model;
+  }
+  else if(parentItem.represents(kmlTag_MultiGeometry))
+  {
+    parentItem.nodeAs<GeoDataMultiGeometry>()->append(model);
+    return model;
 
-    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( model );
-        return model;
-
-    } else {
-        delete model;
-        return 0;
-    }
+  }
+  else
+  {
+    delete model;
+    return 0;
+  }
 
 }
 
 }
 }
-

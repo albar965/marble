@@ -15,67 +15,66 @@
 #include "FrameGraphicsItem.h"
 
 // Qt
-#include<QDebug>
-#include<QBrush>
+#include <QDebug>
+#include <QBrush>
 
-namespace Marble
-{
+namespace Marble {
 
 class FrameGraphicsItemPrivate
 {
- public:
-    explicit FrameGraphicsItemPrivate( FrameGraphicsItem *parent )
-        : m_frame( FrameGraphicsItem::NoFrame ),
-          m_contentSize( 0.0, 0.0 ),
-          m_margin( 0.0 ),
-          m_marginTop( 0.0 ),
-          m_marginBottom( 0.0 ),
-          m_marginLeft( 0.0 ),
-          m_marginRight( 0.0 ),
-          m_padding( 0.0 ),
-          m_borderWidth( 1.0 ),
-          m_borderBrush( QBrush( Qt::black ) ),
-          m_borderStyle( Qt::SolidLine ),
-          m_backgroundBrush( QBrush( QColor( 192, 192, 192, 192 ) ) ),
-          m_parent( parent )
-    {
-        updateSize();
-    }
+public:
+  explicit FrameGraphicsItemPrivate(FrameGraphicsItem *parent)
+    : m_frame(FrameGraphicsItem::NoFrame),
+    m_contentSize(0.0, 0.0),
+    m_margin(0.0),
+    m_marginTop(0.0),
+    m_marginBottom(0.0),
+    m_marginLeft(0.0),
+    m_marginRight(0.0),
+    m_padding(0.0),
+    m_borderWidth(1.0),
+    m_borderBrush(QBrush(Qt::black)),
+    m_borderStyle(Qt::SolidLine),
+    m_backgroundBrush(QBrush(QColor(192, 192, 192, 192))),
+    m_parent(parent)
+  {
+    updateSize();
+  }
 
-    void updateSize()
-    {
-        qreal const border2 = 0.5 * m_borderWidth;
-        qreal marginTop = qMax( border2, ( m_marginTop == 0.0 ) ? m_margin : m_marginTop );
-        qreal marginBottom = qMax( border2, ( m_marginBottom == 0.0 ) ? m_margin : m_marginBottom );
-        qreal marginLeft = qMax( border2, ( m_marginLeft == 0.0 ) ? m_margin : m_marginLeft );
-        qreal marginRight = qMax( border2, ( m_marginRight == 0.0 ) ? m_margin : m_marginRight );
+  void updateSize()
+  {
+    qreal const border2 = 0.5 * m_borderWidth;
+    qreal marginTop = qMax(border2, (m_marginTop == 0.0) ? m_margin : m_marginTop);
+    qreal marginBottom = qMax(border2, (m_marginBottom == 0.0) ? m_margin : m_marginBottom);
+    qreal marginLeft = qMax(border2, (m_marginLeft == 0.0) ? m_margin : m_marginLeft);
+    qreal marginRight = qMax(border2, (m_marginRight == 0.0) ? m_margin : m_marginRight);
 
-        QSizeF totalSize = m_contentSize;
-        totalSize += QSizeF( marginLeft + marginRight, marginTop + marginBottom );
-        totalSize += QSizeF( m_padding * 2, m_padding * 2 );
+    QSizeF totalSize = m_contentSize;
+    totalSize += QSizeF(marginLeft + marginRight, marginTop + marginBottom);
+    totalSize += QSizeF(m_padding * 2, m_padding * 2);
 
-        m_parent->setSize( totalSize );
-    }
+    m_parent->setSize(totalSize);
+  }
 
-    FrameGraphicsItem::FrameType m_frame;
-    QSizeF m_contentSize;
+  FrameGraphicsItem::FrameType m_frame;
+  QSizeF m_contentSize;
 
-    // Margin
-    qreal m_margin;
-    qreal m_marginTop;
-    qreal m_marginBottom;
-    qreal m_marginLeft;
-    qreal m_marginRight;
-    // Padding
-    qreal m_padding;
+  // Margin
+  qreal m_margin;
+  qreal m_marginTop;
+  qreal m_marginBottom;
+  qreal m_marginLeft;
+  qreal m_marginRight;
+  // Padding
+  qreal m_padding;
 
-    // Background/Border painting
-    qreal m_borderWidth;
-    QBrush m_borderBrush;
-    Qt::PenStyle m_borderStyle;
-    QBrush m_backgroundBrush;
+  // Background/Border painting
+  qreal m_borderWidth;
+  QBrush m_borderBrush;
+  Qt::PenStyle m_borderStyle;
+  QBrush m_backgroundBrush;
 
-    FrameGraphicsItem * const m_parent;
+  FrameGraphicsItem * const m_parent;
 };
 
 } // namespace Marble

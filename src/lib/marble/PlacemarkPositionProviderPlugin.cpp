@@ -21,169 +21,180 @@
 
 using namespace Marble;
 
-PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin( MarbleModel *marbleModel )
-    : PositionProviderPlugin(),
-      m_marbleModel( marbleModel ),
-      m_placemark( 0 ),
-      m_speed( 0 ),
-      m_direction( 0.0 ),
-      m_status( PositionProviderStatusUnavailable ),
-      m_isInitialized( false )
+PlacemarkPositionProviderPlugin::PlacemarkPositionProviderPlugin(MarbleModel *marbleModel)
+  : PositionProviderPlugin(),
+  m_marbleModel(marbleModel),
+  m_placemark(0),
+  m_speed(0),
+  m_direction(0.0),
+  m_status(PositionProviderStatusUnavailable),
+  m_isInitialized(false)
 {
-    m_accuracy.level = GeoDataAccuracy::Detailed;
+  m_accuracy.level = GeoDataAccuracy::Detailed;
 }
 
 QString PlacemarkPositionProviderPlugin::name() const
 {
-    return tr( "Placemark position provider Plugin" );
+  return tr("Placemark position provider Plugin");
 }
 
 QString PlacemarkPositionProviderPlugin::nameId() const
 {
-    return QString::fromLatin1( "Placemark" );
+  return QString::fromLatin1("Placemark");
 }
 
 QString PlacemarkPositionProviderPlugin::guiString() const
 {
-    return tr( "Placemark" );
+  return tr("Placemark");
 }
 
 QString PlacemarkPositionProviderPlugin::version() const
 {
-    return "1.0";
+  return "1.0";
 }
 
 QString PlacemarkPositionProviderPlugin::description() const
 {
-    return tr( "Reports the position of a placemark" );
+  return tr("Reports the position of a placemark");
 }
 
 QString PlacemarkPositionProviderPlugin::copyrightYears() const
 {
-    return "2011, 2012";
+  return "2011, 2012";
 }
 
 QList<PluginAuthor> PlacemarkPositionProviderPlugin::pluginAuthors() const
 {
-    return QList<PluginAuthor>()
-            << PluginAuthor( "Guillaume Martres", "smarter@ubuntu.com" )
-            << PluginAuthor( "Bernhard Beschow", "bbeschow@cs.tu-berlin.de" );
+  return QList<PluginAuthor>()
+         << PluginAuthor("Guillaume Martres", "smarter@ubuntu.com")
+         << PluginAuthor("Bernhard Beschow", "bbeschow@cs.tu-berlin.de");
 }
 
 QIcon PlacemarkPositionProviderPlugin::icon() const
 {
-    return QIcon();
+  return QIcon();
 }
 
 void PlacemarkPositionProviderPlugin::initialize()
 {
-    if ( m_marbleModel ) {
-        setPlacemark( m_marbleModel->trackedPlacemark() );
-        connect( m_marbleModel, SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
-                 this, SLOT(setPlacemark(const GeoDataPlacemark*)) );
-    } else {
-        mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
-    }
-    m_isInitialized = true;
+  if(m_marbleModel)
+  {
+    setPlacemark(m_marbleModel->trackedPlacemark());
+    connect(m_marbleModel, SIGNAL(trackedPlacemarkChanged(const GeoDataPlacemark*)),
+            this, SLOT(setPlacemark(const GeoDataPlacemark*)));
+  }
+  else
+  {
+    mDebug() << "PlacemarkPositionProviderPlugin: MarbleModel not set, cannot track placemarks.";
+  }
+  m_isInitialized = true;
 }
 
 bool PlacemarkPositionProviderPlugin::isInitialized() const
 {
-    return m_isInitialized;
+  return m_isInitialized;
 }
 
-PositionProviderPlugin* PlacemarkPositionProviderPlugin::newInstance() const
+PositionProviderPlugin *PlacemarkPositionProviderPlugin::newInstance() const
 {
-    return new PlacemarkPositionProviderPlugin( m_marbleModel );
+  return new PlacemarkPositionProviderPlugin(m_marbleModel);
 }
 
 PositionProviderStatus PlacemarkPositionProviderPlugin::status() const
 {
-    return m_status;
+  return m_status;
 }
 
 GeoDataCoordinates PlacemarkPositionProviderPlugin::position() const
 {
-    return m_coordinates;
+  return m_coordinates;
 }
 
 GeoDataAccuracy PlacemarkPositionProviderPlugin::accuracy() const
 {
-    return m_accuracy;
+  return m_accuracy;
 }
 
 qreal PlacemarkPositionProviderPlugin::speed() const
 {
-    return m_speed;
+  return m_speed;
 }
 
 qreal PlacemarkPositionProviderPlugin::direction() const
 {
-    return m_direction;
+  return m_direction;
 }
 
 QDateTime PlacemarkPositionProviderPlugin::timestamp() const
 {
-    return m_marbleModel->clockDateTime();
+  return m_marbleModel->clockDateTime();
 }
 
-void PlacemarkPositionProviderPlugin::setPlacemark( const GeoDataPlacemark *placemark )
+void PlacemarkPositionProviderPlugin::setPlacemark(const GeoDataPlacemark *placemark)
 {
-    const GeoDataPlacemark *const oldPlacemark = m_placemark;
+  const GeoDataPlacemark *const oldPlacemark = m_placemark;
 
-    if ( oldPlacemark != 0 ) {
-        emit statusChanged( PositionProviderStatusUnavailable );
-    }
+  if(oldPlacemark != 0)
+  {
+    emit statusChanged(PositionProviderStatusUnavailable);
+  }
 
-    m_placemark   = placemark;
-    m_timestamp   = placemark ? m_marbleModel->clockDateTime() : QDateTime();
-    GeoDataCoordinates const newCoordinates = placemark ? placemark->coordinate( m_timestamp ) : GeoDataCoordinates();
-    if ( m_coordinates.isValid() && newCoordinates.isValid() ) {
-        m_direction = m_coordinates.bearing( newCoordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
-    }
-    m_coordinates = newCoordinates;
-    m_status      = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
-    m_speed       = 0.0;
+  m_placemark = placemark;
+  m_timestamp = placemark ? m_marbleModel->clockDateTime() : QDateTime();
+  GeoDataCoordinates const newCoordinates = placemark ? placemark->coordinate(m_timestamp) : GeoDataCoordinates();
+  if(m_coordinates.isValid() && newCoordinates.isValid())
+  {
+    m_direction = m_coordinates.bearing(newCoordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing);
+  }
+  m_coordinates = newCoordinates;
+  m_status = placemark ? PositionProviderStatusAvailable : PositionProviderStatusUnavailable;
+  m_speed = 0.0;
 
-    disconnect( m_marbleModel->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()) );
-    if ( placemark ) {
-        connect( m_marbleModel->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()) );
-    }
+  disconnect(m_marbleModel->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()));
+  if(placemark)
+  {
+    connect(m_marbleModel->clock(), SIGNAL(timeChanged()), this, SLOT(updatePosition()));
+  }
 
-    if ( oldPlacemark != m_placemark && m_placemark != 0 ) {
-        emit statusChanged( m_status );
-    }
+  if(oldPlacemark != m_placemark && m_placemark != 0)
+  {
+    emit statusChanged(m_status);
+  }
 
-    if ( m_status == PositionProviderStatusAvailable ) {
-        emit positionChanged( m_coordinates, m_accuracy );
-    }
+  if(m_status == PositionProviderStatusAvailable)
+  {
+    emit positionChanged(m_coordinates, m_accuracy);
+  }
 }
 
 void PlacemarkPositionProviderPlugin::updatePosition()
 {
-    if ( m_placemark == 0 ) {
-        return;
-    }
+  if(m_placemark == 0)
+  {
+    return;
+  }
 
-    Q_ASSERT( m_marbleModel && "MarbleModel missing in PlacemarkPositionProviderPlugin" );
+  Q_ASSERT(m_marbleModel && "MarbleModel missing in PlacemarkPositionProviderPlugin");
 
-    const GeoDataCoordinates previousCoordinates = m_coordinates;
-    m_coordinates = m_placemark->coordinate( m_marbleModel->clock()->dateTime() );
-    m_direction = previousCoordinates.bearing( m_coordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing );
+  const GeoDataCoordinates previousCoordinates = m_coordinates;
+  m_coordinates = m_placemark->coordinate(m_marbleModel->clock()->dateTime());
+  m_direction = previousCoordinates.bearing(m_coordinates, GeoDataCoordinates::Degree, GeoDataCoordinates::FinalBearing);
 
-    if ( m_timestamp.isValid() ) {
-        const qreal averageAltitude = ( m_coordinates.altitude() + m_coordinates.altitude() ) / 2.0 + m_marbleModel->planetRadius();
-        const qreal distance = distanceSphere( previousCoordinates, m_coordinates ) * averageAltitude;
-        const qreal seconds = m_timestamp.msecsTo( m_marbleModel->clockDateTime() ) / 1000.0;
-        m_speed = ( seconds > 0 ) ? ( distance / seconds ) : 0;
-    }
-    else {
-        m_speed = 0;
-    }
+  if(m_timestamp.isValid())
+  {
+    const qreal averageAltitude = (m_coordinates.altitude() + m_coordinates.altitude()) / 2.0 + m_marbleModel->planetRadius();
+    const qreal distance = distanceSphere(previousCoordinates, m_coordinates) * averageAltitude;
+    const qreal seconds = m_timestamp.msecsTo(m_marbleModel->clockDateTime()) / 1000.0;
+    m_speed = (seconds > 0) ? (distance / seconds) : 0;
+  }
+  else
+  {
+    m_speed = 0;
+  }
 
-    m_timestamp = m_marbleModel->clockDateTime();
+  m_timestamp = m_marbleModel->clockDateTime();
 
-    emit positionChanged( m_coordinates, m_accuracy );
+  emit positionChanged(m_coordinates, m_accuracy);
 }
 
 #include "moc_PlacemarkPositionProviderPlugin.cpp"

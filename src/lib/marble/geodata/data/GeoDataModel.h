@@ -26,54 +26,55 @@ namespace Marble {
 
 class GeoDataModelPrivate;
 
-class MARBLE_EXPORT GeoDataModel: public GeoDataGeometry
+class MARBLE_EXPORT GeoDataModel :
+  public GeoDataGeometry
 {
 public:
-    GeoDataModel();
+  GeoDataModel();
 
-    GeoDataModel( const GeoDataModel &other );
+  GeoDataModel(const GeoDataModel& other);
 
-    GeoDataModel& operator=( const GeoDataModel &other );
+  GeoDataModel& operator=(const GeoDataModel& other);
 
-    bool operator==( const GeoDataModel &other ) const;
-    bool operator!=( const GeoDataModel &other ) const;
+  bool operator==(const GeoDataModel& other) const;
+  bool operator!=(const GeoDataModel& other) const;
 
-    ~GeoDataModel();
+  ~GeoDataModel();
 
-    const GeoDataLink& link() const;
-    GeoDataLink& link();
-    void setLink( const GeoDataLink &link );
+  const GeoDataLink& link() const;
+  GeoDataLink& link();
+  void setLink(const GeoDataLink& link);
 
-    const GeoDataCoordinates& coordinates() const;
-    GeoDataCoordinates& coordinates();
-    void setCoordinates(const GeoDataCoordinates &coordinates);
+  const GeoDataCoordinates& coordinates() const;
+  GeoDataCoordinates& coordinates();
+  void setCoordinates(const GeoDataCoordinates& coordinates);
 
-    const GeoDataScale& scale() const;
-    GeoDataScale& scale();
-    void setScale(const GeoDataScale &scale);
+  const GeoDataScale& scale() const;
+  GeoDataScale& scale();
+  void setScale(const GeoDataScale& scale);
 
-    const GeoDataOrientation& orientation() const;
-    GeoDataOrientation& orientation();
-    void setOrientation( const GeoDataOrientation &orientation);
+  const GeoDataOrientation& orientation() const;
+  GeoDataOrientation& orientation();
+  void setOrientation(const GeoDataOrientation& orientation);
 
-    const GeoDataLocation& location() const;
-    GeoDataLocation& location();
-    void setLocation( const GeoDataLocation &location);
+  const GeoDataLocation& location() const;
+  GeoDataLocation& location();
+  void setLocation(const GeoDataLocation& location);
 
-    const GeoDataResourceMap& resourceMap() const;
-    GeoDataResourceMap& resourceMap();
-    void setResourceMap( const GeoDataResourceMap &map);
+  const GeoDataResourceMap& resourceMap() const;
+  GeoDataResourceMap& resourceMap();
+  void setResourceMap(const GeoDataResourceMap& map);
 
-    QString sourceHref() const;
-    QString targetHref() const;
-    void setSourceHref(const QString &sourceHref);
-    void setTargetHref(const QString &targetHref);
+  QString sourceHref() const;
+  QString targetHref() const;
+  void setSourceHref(const QString& sourceHref);
+  void setTargetHref(const QString& targetHref);
 
 private:
-    GeoDataModelPrivate *p() const;
+  GeoDataModelPrivate *p() const;
+
 };
 
 }
-
 
 #endif // GEODATAMODEL_H

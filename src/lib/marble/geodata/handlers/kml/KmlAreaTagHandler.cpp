@@ -29,29 +29,29 @@
 #include "GeoDataPlacemark.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( area )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(area)
 
-GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlareaTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_area ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_area));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.is<GeoDataPlacemark>() ) {
-        QString area = parser.readElementText().trimmed();
-        qreal ar = area.toDouble();
-        if( ar < 0.0 ) ar = 0.0;
-        parentItem.nodeAs<GeoDataPlacemark>()->setArea( ar );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    QString area = parser.readElementText().trimmed();
+    qreal ar = area.toDouble();
+    if(ar < 0.0)
+      ar = 0.0;
+    parentItem.nodeAs<GeoDataPlacemark>()->setArea(ar);
+  }
+
+  return 0;
 }
 
 }
 }
 
-#endif //KML_LAZY_IMP
+#endif // KML_LAZY_IMP

@@ -6,22 +6,22 @@
 // the source code.
 //
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
-// 
+//
 
 #ifndef MARBLE_KML_KMLLINKTAGHANDLER_H
 #define MARBLE_KML_KMLLINKTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-class KmlLinkTagHandler : public GeoTagHandler
+class KmlLinkTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+  virtual GeoNode *parse(GeoParser&) const;
+
 };
 
 }

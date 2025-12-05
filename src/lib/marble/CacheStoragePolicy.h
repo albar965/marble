@@ -20,64 +20,64 @@
 
 class QByteArray;
 
-namespace Marble
+namespace Marble {
+
+class MARBLE_EXPORT CacheStoragePolicy :
+  public StoragePolicy
 {
+  Q_OBJECT
 
-class MARBLE_EXPORT CacheStoragePolicy : public StoragePolicy
-{
-    Q_OBJECT
+public:
+  /**
+   * Creates a new cache storage policy.
+   *
+   * @param cacheDirectory The directory which shall be used for the cache.
+   */
+  explicit CacheStoragePolicy(const QString& cacheDirectory);
 
-    public:
-        /**
-         * Creates a new cache storage policy.
-         *
-         * @param cacheDirectory The directory which shall be used for the cache.
-         */
-        explicit CacheStoragePolicy( const QString &cacheDirectory );
+  /**
+   * Destroys the cache storage policy.
+   */
+  ~CacheStoragePolicy();
 
-        /**
-         * Destroys the cache storage policy.
-         */
-        ~CacheStoragePolicy();
+  /**
+   * Returns whether the @p fileName exists already.
+   */
+  bool fileExists(const QString& fileName) const;
 
-        /**
-         * Returns whether the @p fileName exists already.
-         */
-        bool fileExists( const QString &fileName ) const;
+  /**
+   * Updates the @p fileName with the given @p data.
+   */
+  bool updateFile(const QString& fileName, const QByteArray& data);
 
-        /**
-         * Updates the @p fileName with the given @p data.
-         */
-        bool updateFile( const QString &fileName, const QByteArray &data );
+  /**
+   * Clears the cache.
+   */
+  void clearCache();
 
-        /**
-         * Clears the cache.
-         */
-	void clearCache();
+  /**
+   * Returns the last error message.
+   */
+  QString lastErrorMessage() const;
 
-        /**
-         * Returns the last error message.
-         */
-        QString lastErrorMessage() const;
+  /**
+   * Returns the data of a file.
+   */
+  QByteArray data(const QString& fileName);
 
-        /**
-         * Returns the data of a file.
-         */
-        QByteArray data( const QString &fileName );
+  /**
+   * Sets the limit of the cache in @p bytes.
+   */
+  void setCacheLimit(quint64 bytes);
 
-        /**
-         * Sets the limit of the cache in @p bytes.
-         */
-        void setCacheLimit( quint64 bytes );
+  /**
+   * Returns the limit of the cache in bytes.
+   */
+  quint64 cacheLimit() const;
 
-        /**
-         * Returns the limit of the cache in bytes.
-         */
-        quint64 cacheLimit() const;
-
-    private:
-        DiscCache m_cache;
-        QString m_errorMsg;
+private:
+  DiscCache m_cache;
+  QString m_errorMsg;
 };
 
 }

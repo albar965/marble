@@ -15,27 +15,27 @@
 #include "GeoDataSimpleField.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( displayName )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(displayName)
 
-GeoNode* KmldisplayNameTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmldisplayNameTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_displayName ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_displayName));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_Data ) ) {
-        QString displayName = parser.readElementText().trimmed();
-        parentItem.nodeAs<GeoDataData>()->setDisplayName( displayName );
-    }
-    else if ( parentItem.represents( kmlTag_SimpleField ) ) {
-        QString displayName = parser.readElementText().trimmed();
-        parentItem.nodeAs<GeoDataSimpleField>()->setDisplayName( displayName );
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_Data))
+  {
+    QString displayName = parser.readElementText().trimmed();
+    parentItem.nodeAs<GeoDataData>()->setDisplayName(displayName);
+  }
+  else if(parentItem.represents(kmlTag_SimpleField))
+  {
+    QString displayName = parser.readElementText().trimmed();
+    parentItem.nodeAs<GeoDataSimpleField>()->setDisplayName(displayName);
+  }
+  return 0;
 }
 
 }

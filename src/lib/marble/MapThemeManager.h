@@ -21,8 +21,7 @@ class QStandardItemModel;
 class QString;
 class QStringList;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneDocument;
 class GeoDataPhotoOverlay;
@@ -44,70 +43,71 @@ class GeoDataPhotoOverlay;
  * @see GeoSceneDocument
  */
 
-class MARBLE_EXPORT MapThemeManager : public QObject
+class MARBLE_EXPORT MapThemeManager :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit MapThemeManager(QObject *parent = 0);
-    ~MapThemeManager();
+public:
+  explicit MapThemeManager(QObject *parent = 0);
+  ~MapThemeManager();
 
-    /**
-     * @brief Returns a list of all locally available map theme IDs
-     */
-    QStringList mapThemeIds() const;
+  /**
+   * @brief Returns a list of all locally available map theme IDs
+   */
+  QStringList mapThemeIds() const;
 
-    /**
-     * @brief Provides a model of the locally existing themes.
-     *
-     * This method provides a QStandardItemModel of all themes
-     * that are available via MarbleDirs.
-     */
-    QStandardItemModel* mapThemeModel();
+  /**
+   * @brief Provides a model of the locally existing themes.
+   *
+   * This method provides a QStandardItemModel of all themes
+   * that are available via MarbleDirs.
+   */
+  QStandardItemModel *mapThemeModel();
 
-    /**
-     * @brief Provides a model of all installed planets.
-     */
-    QStandardItemModel *celestialBodiesModel();
+  /**
+   * @brief Provides a model of all installed planets.
+   */
+  QStandardItemModel *celestialBodiesModel();
 
-    /**
-     * @brief Returns the map theme as a GeoSceneDocument object
-     * @param mapThemeStringID  the string ID that refers to the map theme
-     *
-     * This helper method should only get used by MarbleModel to load the
-     * current theme into memory or by the MapThemeManager.
-     */
-    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
+  /**
+   * @brief Returns the map theme as a GeoSceneDocument object
+   * @param mapThemeStringID  the string ID that refers to the map theme
+   *
+   * This helper method should only get used by MarbleModel to load the
+   * current theme into memory or by the MapThemeManager.
+   */
+  static GeoSceneDocument *loadMapTheme(const QString& mapThemeStringID);
 
-    /**
-     * @brief Returns a map as a GeoSceneDocument object created from a GeoDataPhotoOverlay
-     */
-    static GeoSceneDocument* createMapThemeFromOverlay( const GeoDataPhotoOverlay *overlayData );
+  /**
+   * @brief Returns a map as a GeoSceneDocument object created from a GeoDataPhotoOverlay
+   */
+  static GeoSceneDocument *createMapThemeFromOverlay(const GeoDataPhotoOverlay *overlayData);
 
-    /**
-     * @brief Deletes the map theme with the specified map theme ID.
-     * @param mapThemeId ID of the map theme to be deleted
-     *
-     * Deletion will only succeed for local map themes, that is, if the map
-     * theme's directory structure resides in the user's home directory.
-     */
-    static void deleteMapTheme( const QString &mapThemeId );
+  /**
+   * @brief Deletes the map theme with the specified map theme ID.
+   * @param mapThemeId ID of the map theme to be deleted
+   *
+   * Deletion will only succeed for local map themes, that is, if the map
+   * theme's directory structure resides in the user's home directory.
+   */
+  static void deleteMapTheme(const QString& mapThemeId);
 
- Q_SIGNALS:
-    /**
-     * @brief This signal will be emitted, when the themes change.
-     */
-    void themesChanged();
+Q_SIGNALS:
+  /**
+   * @brief This signal will be emitted, when the themes change.
+   */
+  void themesChanged();
 
- private:
-    Q_PRIVATE_SLOT( d, void directoryChanged( const QString& path ) )
-    Q_PRIVATE_SLOT( d, void fileChanged( const QString & path ) )
+private:
+  Q_PRIVATE_SLOT(d, void directoryChanged(const QString& path))
+  Q_PRIVATE_SLOT(d, void fileChanged(const QString& path))
 
-    Q_DISABLE_COPY( MapThemeManager )
+  Q_DISABLE_COPY(MapThemeManager)
 
-    class Private;
-    friend class Private;
-    Private * const d;
+  class Private;
+  friend class Private;
+  Private * const d;
 };
 
 }

@@ -16,24 +16,22 @@
 #include "GeoParser.h"
 #include "GeoDataScale.h"
 
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(y)
 
-namespace Marble
+GeoNode *KmlyTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( y )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_y));
 
-GeoNode* KmlyTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_y ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if ( parentItem.is<GeoDataScale>() ){
-        double y = parser.readElementText().trimmed().toDouble();
-	parentItem.nodeAs<GeoDataScale>()->setY( y );
-    }
-    return 0;
+  if(parentItem.is<GeoDataScale>())
+  {
+    double y = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataScale>()->setY(y);
+  }
+  return 0;
 }
 
 }

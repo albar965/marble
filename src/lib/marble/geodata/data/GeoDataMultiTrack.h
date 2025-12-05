@@ -16,76 +16,79 @@
 
 #include <QVector>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataMultiTrackPrivate;
 class GeoDataTrack;
 
-class GEODATA_EXPORT GeoDataMultiTrack : public GeoDataGeometry
+class GEODATA_EXPORT GeoDataMultiTrack :
+  public GeoDataGeometry
 {
 public:
-    GeoDataMultiTrack();
-    explicit GeoDataMultiTrack( const GeoDataGeometry& other );
+  GeoDataMultiTrack();
+  explicit GeoDataMultiTrack(const GeoDataGeometry& other);
 
-    virtual ~GeoDataMultiTrack();
+  virtual ~GeoDataMultiTrack();
 
-    bool operator==( const GeoDataMultiTrack& other ) const;
-    bool operator!=( const GeoDataMultiTrack& other ) const;
+  bool operator==(const GeoDataMultiTrack& other) const;
+  bool operator!=(const GeoDataMultiTrack& other) const;
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    int size() const;
-    GeoDataTrack& at( int pos );
-    const GeoDataTrack& at( int pos ) const;
-    GeoDataTrack& operator[]( int pos );
-    const GeoDataTrack& operator[]( int pos ) const;
+  int size() const;
+  GeoDataTrack& at(int pos);
+  const GeoDataTrack& at(int pos) const;
+  GeoDataTrack& operator[](int pos);
+  const GeoDataTrack& operator[](int pos) const;
 
-    GeoDataTrack& first();
-    const GeoDataTrack& first() const;
-    GeoDataTrack& last();
-    const GeoDataTrack& last() const;
+  GeoDataTrack& first();
+  const GeoDataTrack& first() const;
+  GeoDataTrack& last();
+  const GeoDataTrack& last() const;
 
-    /**
-     * @brief  returns the requested child item
-     */
-    GeoDataTrack* child( int );
+  /**
+   * @brief  returns the requested child item
+   */
+  GeoDataTrack *child(int);
 
-    /**
-     * @brief  returns the requested child item
-     */
-    const GeoDataTrack* child( int ) const;
+  /**
+   * @brief  returns the requested child item
+   */
+  const GeoDataTrack *child(int) const;
 
-    /**
-     * @brief returns the position of an item in the list
-     */
-    int childPosition( const GeoDataTrack *child ) const;
+  /**
+   * @brief returns the position of an item in the list
+   */
+  int childPosition(const GeoDataTrack *child) const;
 
-    /**
-    * @brief add an element
-    */
-    void append( GeoDataTrack *other );
+  /**
+  * @brief add an element
+  */
+  void append(GeoDataTrack *other);
 
-    GeoDataMultiTrack& operator << ( const GeoDataTrack& value );
+  GeoDataMultiTrack& operator<<(const GeoDataTrack& value);
 
-    QVector<GeoDataTrack*>::Iterator begin();
-    QVector<GeoDataTrack*>::Iterator end();
-    QVector<GeoDataTrack*>::ConstIterator constBegin() const;
-    QVector<GeoDataTrack*>::ConstIterator constEnd() const;
-    void clear();
-    QVector<GeoDataTrack> vector() const;
+  QVector<GeoDataTrack *>::Iterator begin();
+  QVector<GeoDataTrack *>::Iterator end();
+  QVector<GeoDataTrack *>::ConstIterator constBegin() const;
+  QVector<GeoDataTrack *>::ConstIterator constEnd() const;
+  void clear();
+  QVector<GeoDataTrack> vector() const;
 
-    QVector<GeoDataTrack*>::Iterator erase ( QVector<GeoDataTrack*>::Iterator pos );
-    QVector<GeoDataTrack*>::Iterator erase ( QVector<GeoDataTrack*>::Iterator begin,
-                                                  QVector<GeoDataTrack*>::Iterator end );
+  QVector<GeoDataTrack *>::Iterator erase(QVector<GeoDataTrack *>::Iterator pos);
+  QVector<GeoDataTrack *>::Iterator erase(QVector<GeoDataTrack *>::Iterator begin,
+                                          QVector<GeoDataTrack *>::Iterator end);
 
-    // Serialize the Placemark to @p stream
-    virtual void pack( QDataStream& stream ) const;
-    // Unserialize the Placemark from @p stream
-    virtual void unpack( QDataStream& stream );
- private:
-    GeoDataMultiTrackPrivate *p();
-    const GeoDataMultiTrackPrivate *p() const;
+  // Serialize the Placemark to @p stream
+  virtual void pack(QDataStream& stream) const;
+
+  // Unserialize the Placemark from @p stream
+  virtual void unpack(QDataStream& stream);
+
+private:
+  GeoDataMultiTrackPrivate *p();
+  const GeoDataMultiTrackPrivate *p() const;
+
 };
 
 }

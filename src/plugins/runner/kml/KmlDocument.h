@@ -16,24 +16,25 @@
 
 namespace Marble {
 
-class KmlDocument : public GeoDataDocument
+class KmlDocument :
+  public GeoDataDocument
 {
 public:
-    ~KmlDocument();
+  ~KmlDocument();
 
-    /**
-     * @brief Temporary files to delete at destruction
-     * @param path Empty subdirectories below this directory will be deleted at destruction
-     * @param files List of files to delete at destruction
-     */
-    void setFiles( const QString &path, const QStringList &files );
+  /**
+   * @brief Temporary files to delete at destruction
+   * @param path Empty subdirectories below this directory will be deleted at destruction
+   * @param files List of files to delete at destruction
+   */
+  void setFiles(const QString& path, const QStringList& files);
 
 private:
-    void cleanupTemporaryFiles( const QString &path );
-    void removeDirectoryRecursively( const QString &path );
+  void cleanupTemporaryFiles(const QString& path);
+  void removeDirectoryRecursively(const QString& path);
 
-    QString m_path;
-    QStringList m_files;
+  QString m_path;
+  QStringList m_files;
 };
 
 }

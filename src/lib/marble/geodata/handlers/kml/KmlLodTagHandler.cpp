@@ -18,27 +18,27 @@
 #include "GeoDataLod.h"
 #include "GeoDataRegion.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Lod )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Lod)
 
-GeoNode* KmlLodTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLodTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Lod ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Lod));
 
-    GeoDataLod lod;
-    KmlObjectTagHandler::parseIdentifiers( parser, &lod );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataLod lod;
+  KmlObjectTagHandler::parseIdentifiers(parser, &lod);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Region ) )
-    {
-        parentItem.nodeAs<GeoDataRegion>()->setLod( lod );
-        return &parentItem.nodeAs<GeoDataRegion>()->lod();
-    } else {
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Region))
+  {
+    parentItem.nodeAs<GeoDataRegion>()->setLod(lod);
+    return &parentItem.nodeAs<GeoDataRegion>()->lod();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

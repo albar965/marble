@@ -8,7 +8,6 @@
 // Copyright 2013      Sanjiban Bairagya <sanjiban22393@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATAALIAS_H
 #define MARBLE_GEODATAALIAS_H
 
@@ -19,36 +18,36 @@ namespace Marble {
 
 class GeoDataAliasPrivate;
 
-class MARBLE_EXPORT GeoDataAlias: public GeoNode
+class MARBLE_EXPORT GeoDataAlias :
+  public GeoNode
 {
 
 public:
+  GeoDataAlias();
 
-    GeoDataAlias();
+  GeoDataAlias(const GeoDataAlias& other);
 
-    GeoDataAlias( const GeoDataAlias &other );
+  GeoDataAlias& operator=(const GeoDataAlias& other);
 
-    GeoDataAlias& operator=( const GeoDataAlias &other );
+  bool operator==(const GeoDataAlias& other) const;
 
-    bool operator==( const GeoDataAlias &other ) const;
+  bool operator!=(const GeoDataAlias& other) const;
 
-    bool operator!=( const GeoDataAlias &other ) const;
+  ~GeoDataAlias();
 
-    ~GeoDataAlias();
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  QString sourceHref() const;
 
-    QString sourceHref() const;
+  void setSourceHref(const QString& sourceHref);
 
-    void setSourceHref( const QString& sourceHref );
+  QString targetHref() const;
 
-    QString targetHref() const;
-
-    void setTargetHref( const QString& targetHref );
+  void setTargetHref(const QString& targetHref);
 
 private:
-    GeoDataAliasPrivate* const d;
+  GeoDataAliasPrivate * const d;
 };
 
 }

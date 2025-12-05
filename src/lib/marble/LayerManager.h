@@ -22,8 +22,7 @@
 class QPoint;
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
@@ -40,91 +39,94 @@ class LayerInterface;
  *
  */
 
-class LayerManager : public QObject
+class LayerManager :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit LayerManager( const MarbleModel *model, QObject *parent = nullptr);
-    ~LayerManager();
+public:
+  explicit LayerManager(const MarbleModel *model, QObject *parent = nullptr);
+  ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewportParams *viewport );
+  void renderLayers(GeoPainter *painter, ViewportParams *viewport);
 
-    bool showBackground() const;
+  bool showBackground() const;
 
-    bool showRuntimeTrace() const;
+  bool showRuntimeTrace() const;
 
-    /**
-     * @brief Returns a list of all RenderPlugins on the layer, this includes float items
-     * @return the list of RenderPlugins
-     */
-    QList<RenderPlugin *>      renderPlugins() const;
-    /**
-     * @brief Returns a list of all FloatItems on the layer
-     * @return the list of the floatItems
-     */
-    QList<AbstractFloatItem *> floatItems()    const;
-    /**
-     * @brief Returns a list of all DataPlugins on the layer
-     * @return the list of DataPlugins
-     */
-    QList<AbstractDataPlugin *> dataPlugins()  const;
-    
-    /**
-     * @brief Returns all items of dataPlugins on the position curpos 
-     */
-    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+  /**
+   * @brief Returns a list of all RenderPlugins on the layer, this includes float items
+   * @return the list of RenderPlugins
+   */
+  QList<RenderPlugin *> renderPlugins() const;
 
-    /**
-     * @brief Add a layer to be included in rendering.
-     */
-    void addLayer(LayerInterface *layer);
+  /**
+   * @brief Returns a list of all FloatItems on the layer
+   * @return the list of the floatItems
+   */
+  QList<AbstractFloatItem *> floatItems()    const;
 
-    /**
-     * @brief Remove a layer from being included in rendering.
-     */
-    void removeLayer(LayerInterface *layer);
+  /**
+   * @brief Returns a list of all DataPlugins on the layer
+   * @return the list of DataPlugins
+   */
+  QList<AbstractDataPlugin *> dataPlugins()  const;
 
-    QList<LayerInterface *> internalLayers() const;
+  /**
+   * @brief Returns all items of dataPlugins on the position curpos
+   */
+  QList<AbstractDataPluginItem *> whichItemAt(const QPoint& curpos) const;
 
-    RenderState renderState() const;
+  /**
+   * @brief Add a layer to be included in rendering.
+   */
+  void addLayer(LayerInterface *layer);
 
- Q_SIGNALS:
-    /**
-     * @brief Signal that a render item has been initialized
-     */
-    void renderPluginInitialized( RenderPlugin *renderPlugin );
+  /**
+   * @brief Remove a layer from being included in rendering.
+   */
+  void removeLayer(LayerInterface *layer);
 
-    /**
-     * This signal is emitted when the settings of a plugin changed.
-     */
-    void pluginSettingsChanged();
+  QList<LayerInterface *> internalLayers() const;
 
-    /**
-     * This signal is emitted when the repaint of the view was requested by a plugin.
-     * If available with the @p dirtyRegion which is the region the view will change in.
-     * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
-     */
-    void repaintNeeded( const QRegion & dirtyRegion = QRegion() );
+  RenderState renderState() const;
 
-    void visibilityChanged( const QString &nameId, bool visible );
+Q_SIGNALS:
+  /**
+   * @brief Signal that a render item has been initialized
+   */
+  void renderPluginInitialized(RenderPlugin *renderPlugin);
 
- public Q_SLOTS:
-    void setShowBackground( bool show );
+  /**
+   * This signal is emitted when the settings of a plugin changed.
+   */
+  void pluginSettingsChanged();
 
-    void setShowRuntimeTrace( bool show );
+  /**
+   * This signal is emitted when the repaint of the view was requested by a plugin.
+   * If available with the @p dirtyRegion which is the region the view will change in.
+   * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
+   */
+  void repaintNeeded(const QRegion& dirtyRegion = QRegion());
 
- private:
-    Q_PRIVATE_SLOT( d, void updateVisibility( bool, const QString & ) )
+  void visibilityChanged(const QString& nameId, bool visible);
 
-    Q_PRIVATE_SLOT( d, void addPlugins() )
+public Q_SLOTS:
+  void setShowBackground(bool show);
 
- private:
-    Q_DISABLE_COPY( LayerManager )
+  void setShowRuntimeTrace(bool show);
 
-    class Private;
-    friend class Private;
-    Private  * const d;
+private:
+  Q_PRIVATE_SLOT(d, void updateVisibility(bool, const QString&))
+
+  Q_PRIVATE_SLOT(d, void addPlugins())
+
+private:
+  Q_DISABLE_COPY(LayerManager)
+
+  class Private;
+  friend class Private;
+  Private * const d;
 };
 
 }

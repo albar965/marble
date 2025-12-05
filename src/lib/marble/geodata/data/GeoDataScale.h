@@ -19,37 +19,38 @@ namespace Marble {
 
 class GeoDataScalePrivate;
 
-class MARBLE_EXPORT GeoDataScale: public GeoDataObject
+class MARBLE_EXPORT GeoDataScale :
+  public GeoDataObject
 {
 public:
-    GeoDataScale();
+  GeoDataScale();
 
-    GeoDataScale( const GeoDataScale &other );
+  GeoDataScale(const GeoDataScale& other);
 
-    GeoDataScale& operator=( const GeoDataScale &other );
+  GeoDataScale& operator=(const GeoDataScale& other);
 
-    bool operator==( const GeoDataScale &other ) const;
-    bool operator!=( const GeoDataScale &other ) const;
+  bool operator==(const GeoDataScale& other) const;
+  bool operator!=(const GeoDataScale& other) const;
 
-    ~GeoDataScale();
+  ~GeoDataScale();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    double x() const;
+  double x() const;
 
-    void setX( double x );
+  void setX(double x);
 
-    double y() const;
+  double y() const;
 
-    void setY( double y );
+  void setY(double y);
 
-    double z() const;
+  double z() const;
 
-    void setZ( double z);
+  void setZ(double z);
 
 private:
-    GeoDataScalePrivate* const d;
+  GeoDataScalePrivate * const d;
 };
 
 }

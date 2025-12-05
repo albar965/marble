@@ -7,7 +7,7 @@
 //
 // Copyright 2007       Inge Wallin  <ingwa@kde.org>
 // Copyright 2007-2012  Torsten Rahn  <rahn@kde.org>
-// Copyright 2012		Cezar Mocan	<mocancezar@gmail.com>
+// Copyright 2012   Cezar Mocan <mocancezar@gmail.com>
 //
 
 #ifndef MARBLE_CYLINDRICALPROJECTION_H
@@ -20,8 +20,7 @@
 
 #include "AbstractProjection.h"
 
-namespace Marble 
-{
+namespace Marble {
 
 class CylindricalProjectionPrivate;
 class AbstractProjectionPrivate;
@@ -30,39 +29,52 @@ class AbstractProjectionPrivate;
  * @short A base class for the Equirectangular and Mercator projections in Marble
  */
 
-class CylindricalProjection : public AbstractProjection
+class CylindricalProjection :
+  public AbstractProjection
 {
-    // Not a QObject so far because we don't need to send signals.	
-  public:
-	
-    CylindricalProjection();
+  // Not a QObject so far because we don't need to send signals.
 
-    virtual ~CylindricalProjection();
+public:
+  CylindricalProjection();
 
-    virtual bool repeatableX() const { return true; };
+  virtual ~CylindricalProjection();
 
-    virtual bool traversablePoles()  const { return false; }
-    virtual bool traversableDateLine()  const { return false; }
+  virtual bool repeatableX() const
+  {
+    return true;
+  }
 
-    virtual SurfaceType surfaceType() const { return Cylindrical; }
+  virtual bool traversablePoles()  const
+  {
+    return false;
+  }
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
+  virtual bool traversableDateLine()  const
+  {
+    return false;
+  }
 
-    using AbstractProjection::screenCoordinates;
+  virtual SurfaceType surfaceType() const
+  {
+    return Cylindrical;
+  }
 
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
+  virtual bool screenCoordinates(const GeoDataLineString& lineString,
+                                 const ViewportParams *viewport,
+                                 QVector<QPolygonF *>& polygons) const;
 
- protected: 
-    explicit CylindricalProjection( CylindricalProjectionPrivate* dd );
+  using AbstractProjection::screenCoordinates;
 
- private:
-    Q_DECLARE_PRIVATE( CylindricalProjection )
-    Q_DISABLE_COPY( CylindricalProjection )
+  virtual QPainterPath mapShape(const ViewportParams *viewport) const;
+
+protected:
+  explicit CylindricalProjection(CylindricalProjectionPrivate *dd);
+
+private:
+  Q_DECLARE_PRIVATE(CylindricalProjection)
+  Q_DISABLE_COPY(CylindricalProjection)
 };
 
 }
 
 #endif
-

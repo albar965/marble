@@ -9,10 +9,8 @@
 // Copyright 2007-2012 Torsten Rahn  <rahn@kde.org>
 //
 
-
 #ifndef MARBLE_ABSTRACTPROJECTION_H
 #define MARBLE_ABSTRACTPROJECTION_H
-
 
 /** @file
  * This file contains the headers for AbstractProjection.
@@ -33,8 +31,7 @@ class QPolygonF;
 class QRect;
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 // The manhattan distance in pixels at which extra nodes get created for tessellation.
 static const int tessellationPrecision = 10;
@@ -44,183 +41,184 @@ class GeoDataLineString;
 class ViewportParams;
 class AbstractProjectionPrivate;
 
-
 /**
  * @short A base class for all projections in Marble.
  */
 
 class MARBLE_EXPORT AbstractProjection
 {
-    // Not a QObject so far because we don't need to send signals.
- public:
-    enum SurfaceType {
-        Cylindrical,
-        Pseudocylindrical,
-        Hybrid,
-        Conical,
-        Pseudoconical,
-        Azimuthal
-    };
+  // Not a QObject so far because we don't need to send signals.
 
-    enum PreservationType {
-        NoPreservation,
-        Conformal,
-        EqualArea
-    };
+public:
+  enum SurfaceType
+  {
+    Cylindrical,
+    Pseudocylindrical,
+    Hybrid,
+    Conical,
+    Pseudoconical,
+    Azimuthal
+  };
 
-    /**
-     * @brief Construct a new AbstractProjection.
-     */
-    AbstractProjection();
+  enum PreservationType
+  {
+    NoPreservation,
+    Conformal,
+    EqualArea
+  };
 
-    virtual ~AbstractProjection();
+  /**
+   * @brief Construct a new AbstractProjection.
+   */
+  AbstractProjection();
 
-    /**
-     * @brief Returns the user-visible name of the projection.
-     *
-     * Example: "Mercator"
-     */
-    virtual QString name() const = 0;
+  virtual ~AbstractProjection();
 
-    /**
-     * @brief Returns a short user description of the projection
-     * that can be used in tooltips or dialogs.
-     */
-    virtual QString description() const = 0;
+  /**
+   * @brief Returns the user-visible name of the projection.
+   *
+   * Example: "Mercator"
+   */
+  virtual QString name() const = 0;
 
-    /**
-     * @brief Returns an icon for the projection.
-     */
-    virtual QIcon icon() const = 0;
+  /**
+   * @brief Returns a short user description of the projection
+   * that can be used in tooltips or dialogs.
+   */
+  virtual QString description() const = 0;
 
-    virtual qreal  maxValidLat() const;
+  /**
+   * @brief Returns an icon for the projection.
+   */
+  virtual QIcon icon() const = 0;
 
-    qreal  maxLat()  const;
-    void setMaxLat( qreal maxLat );
+  virtual qreal  maxValidLat() const;
 
-    virtual qreal  minValidLat() const;
+  qreal  maxLat()  const;
+  void setMaxLat(qreal maxLat);
 
-    qreal  minLat()  const;
-    void setMinLat( qreal minLat );
+  virtual qreal  minValidLat() const;
 
-    virtual bool   repeatableX() const;
-    virtual bool   traversablePoles()  const;
-    virtual bool   traversableDateLine()  const;
+  qreal  minLat()  const;
+  void setMinLat(qreal minLat);
 
-    virtual SurfaceType surfaceType() const = 0; 
+  virtual bool   repeatableX() const;
+  virtual bool   traversablePoles()  const;
+  virtual bool   traversableDateLine()  const;
 
-    virtual PreservationType preservationType() const;
+  virtual SurfaceType surfaceType() const = 0;
 
-    // The projection surface can have different orientations:
-    // - normal: the surface's axis of symmetry matches the Earth's axis
-    // - transverse: orthogonally oriented compared to the Earth's axis
-    // - oblique: somewhere in between
+  virtual PreservationType preservationType() const;
 
-    virtual bool isOrientedNormal() const;
+  // The projection surface can have different orientations:
+  // - normal: the surface's axis of symmetry matches the Earth's axis
+  // - transverse: orthogonally oriented compared to the Earth's axis
+  // - oblique: somewhere in between
 
-    virtual bool isClippedToSphere() const;
+  virtual bool isOrientedNormal() const;
 
-    virtual qreal clippingRadius() const;
+  virtual bool isClippedToSphere() const;
 
-    /**
-     * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     * @param lon    the lon coordinate of the requested pixel position in radians
-     * @param lat    the lat coordinate of the requested pixel position in radians
-     * @param viewport the viewport parameters
-     * @param x      the x coordinate of the pixel is returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     *
-     * @see ViewportParams
-     */
-    bool screenCoordinates( const qreal lon, const qreal lat,
-                            const ViewportParams *viewport,
-                            qreal& x, qreal& y ) const;
+  virtual qreal clippingRadius() const;
 
-    /**
-     * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     *
-     * @param geopoint the point on earth, including altitude, that we want the coordinates for.
-     * @param viewport the viewport parameters
-     * @param x      the x coordinate of the pixel is returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
-     *
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     *
-     * @see ViewportParams
-     */
-    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
-                                    const ViewportParams *viewport,
-                                    qreal &x, qreal &y, 
-                                    bool &globeHidesPoint ) const = 0;
+  /**
+   * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
+   * @param lon    the lon coordinate of the requested pixel position in radians
+   * @param lat    the lat coordinate of the requested pixel position in radians
+   * @param viewport the viewport parameters
+   * @param x      the x coordinate of the pixel is returned through this parameter
+   * @param y      the y coordinate of the pixel is returned through this parameter
+   * @return @c true  if the geographical coordinates are visible on the screen
+   *         @c false if the geographical coordinates are not visible on the screen
+   *
+   * @see ViewportParams
+   */
+  bool screenCoordinates(const qreal lon, const qreal lat,
+                         const ViewportParams *viewport,
+                         qreal& x, qreal& y) const;
 
-    // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
-                            const ViewportParams *viewport,
-                            qreal &x, qreal &y ) const;
-
-    /**
-     * @brief Get the coordinates of screen points for geographical coordinates in the map.
-     *
-     * @param coordinates the point on earth, including altitude, that we want the coordinates for.
-     * @param viewport the viewport parameters
-     * @param x      the x coordinates of the pixels are returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @param pointRepeatNum      the amount of times that a single geographical
-                                  point gets represented on the map
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
-     *
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     *
-     * @see ViewportParams
-     */
-    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                                    const ViewportParams *viewport,
-                                    qreal *x, qreal &y, int &pointRepeatNum,
-                                    const QSizeF& size,
-                                    bool &globeHidesPoint ) const = 0;
-
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const = 0;
-
-    /**
-     * @brief Get the earth coordinates corresponding to a pixel in the map.
-     * @param x      the x coordinate of the pixel
-     * @param y      the y coordinate of the pixel
-     * @param viewport the viewport parameters
-     * @param lon    the longitude angle is returned through this parameter
-     * @param lat    the latitude angle is returned through this parameter
-     * @param unit   the unit of the angles for lon and lat.
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
-     */
-    virtual bool geoCoordinates( const int x, const int y,
+  /**
+   * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
+   *
+   * @param geopoint the point on earth, including altitude, that we want the coordinates for.
+   * @param viewport the viewport parameters
+   * @param x      the x coordinate of the pixel is returned through this parameter
+   * @param y      the y coordinate of the pixel is returned through this parameter
+   * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
+   *
+   * @return @c true  if the geographical coordinates are visible on the screen
+   *         @c false if the geographical coordinates are not visible on the screen
+   *
+   * @see ViewportParams
+   */
+  virtual bool screenCoordinates(const GeoDataCoordinates& geopoint,
                                  const ViewportParams *viewport,
-                                 qreal& lon, qreal& lat,
-                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const = 0;
+                                 qreal& x, qreal& y,
+                                 bool& globeHidesPoint) const = 0;
 
+  // Will just call the virtual version with a dummy globeHidesPoint.
+  bool screenCoordinates(const GeoDataCoordinates& geopoint,
+                         const ViewportParams *viewport,
+                         qreal& x, qreal& y) const;
 
-    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                              const ViewportParams *viewport ) const;
+  /**
+   * @brief Get the coordinates of screen points for geographical coordinates in the map.
+   *
+   * @param coordinates the point on earth, including altitude, that we want the coordinates for.
+   * @param viewport the viewport parameters
+   * @param x      the x coordinates of the pixels are returned through this parameter
+   * @param y      the y coordinate of the pixel is returned through this parameter
+   * @param pointRepeatNum      the amount of times that a single geographical
+                                point gets represented on the map
+   * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
+   *
+   * @return @c true  if the geographical coordinates are visible on the screen
+   *         @c false if the geographical coordinates are not visible on the screen
+   *
+   * @see ViewportParams
+   */
+  virtual bool screenCoordinates(const GeoDataCoordinates& coordinates,
+                                 const ViewportParams *viewport,
+                                 qreal *x, qreal& y, int& pointRepeatNum,
+                                 const QSizeF& size,
+                                 bool& globeHidesPoint) const = 0;
 
-    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
+  virtual bool screenCoordinates(const GeoDataLineString& lineString,
+                                 const ViewportParams *viewport,
+                                 QVector<QPolygonF *>& polygons) const = 0;
 
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const = 0;
+  /**
+   * @brief Get the earth coordinates corresponding to a pixel in the map.
+   * @param x      the x coordinate of the pixel
+   * @param y      the y coordinate of the pixel
+   * @param viewport the viewport parameters
+   * @param lon    the longitude angle is returned through this parameter
+   * @param lat    the latitude angle is returned through this parameter
+   * @param unit   the unit of the angles for lon and lat.
+   * @return @c true  if the pixel (x, y) is within the globe
+   *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
+   */
+  virtual bool geoCoordinates(const int x, const int y,
+                              const ViewportParams *viewport,
+                              qreal& lon, qreal& lat,
+                              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree) const = 0;
 
-    QRegion mapRegion( const ViewportParams *viewport ) const;
+  virtual GeoDataLatLonAltBox latLonAltBox(const QRect& screenRect,
+                                           const ViewportParams *viewport) const;
 
- protected:
-     const QScopedPointer<AbstractProjectionPrivate> d_ptr;
-     explicit AbstractProjection( AbstractProjectionPrivate* dd );
+  virtual bool mapCoversViewport(const ViewportParams *viewport) const = 0;
 
- private:
-     Q_DECLARE_PRIVATE(AbstractProjection)
-     Q_DISABLE_COPY( AbstractProjection )
+  virtual QPainterPath mapShape(const ViewportParams *viewport) const = 0;
+
+  QRegion mapRegion(const ViewportParams *viewport) const;
+
+protected:
+  const QScopedPointer<AbstractProjectionPrivate> d_ptr;
+  explicit AbstractProjection(AbstractProjectionPrivate *dd);
+
+private:
+  Q_DECLARE_PRIVATE(AbstractProjection)
+  Q_DISABLE_COPY(AbstractProjection)
 };
 
 }

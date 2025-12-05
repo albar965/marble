@@ -16,24 +16,22 @@
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( text )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(text)
 
-GeoNode* KmltextTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmltextTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_text ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_text));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_BalloonStyle ) )
-    {
-        QString text = parser.readElementText().trimmed();
-        parentItem.nodeAs<GeoDataBalloonStyle>()->setText( text );
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_BalloonStyle))
+  {
+    QString text = parser.readElementText().trimmed();
+    parentItem.nodeAs<GeoDataBalloonStyle>()->setText(text);
+  }
+  return 0;
 }
 
 }

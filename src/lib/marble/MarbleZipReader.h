@@ -9,7 +9,6 @@
 // below, taken from
 // http://code.qt.io/cgit/qt/qt.git/plain/src/gui/text/qzipreader_p.h
 
-
 /****************************************************************************
 **
 ** Copyright (C) 2015 The Qt Company Ltd.
@@ -57,8 +56,8 @@
 #ifndef QT_NO_TEXTODFWRITER
 
 //
-//  W A R N I N G
-//  -------------
+// W A R N I N G
+// -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
 // of the QZipReader class.  This header file may change from
@@ -80,56 +79,58 @@ class MarbleZipReaderPrivate;
 class MARBLE_EXPORT MarbleZipReader
 {
 public:
-    MarbleZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
+  MarbleZipReader(const QString& fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly);
 
-    explicit MarbleZipReader(QIODevice *device);
-    ~MarbleZipReader();
+  explicit MarbleZipReader(QIODevice *device);
+  ~MarbleZipReader();
 
-    QIODevice* device() const;
+  QIODevice *device() const;
 
-    bool isReadable() const;
-    bool exists() const;
+  bool isReadable() const;
+  bool exists() const;
 
-    struct MARBLE_EXPORT FileInfo
-    {
-        FileInfo();
-        FileInfo(const FileInfo &other);
-        ~FileInfo();
-        FileInfo &operator=(const FileInfo &other);
-        bool isValid() const;
-        QString filePath;
-        uint isDir : 1;
-        uint isFile : 1;
-        uint isSymLink : 1;
-        QFile::Permissions permissions;
-        uint crc32;
-        qint64 size;
-        QDateTime lastModified;
-        void *d;
-    };
+  struct MARBLE_EXPORT FileInfo
+  {
+    FileInfo();
+    FileInfo(const FileInfo& other);
+    ~FileInfo();
+    FileInfo& operator=(const FileInfo& other);
+    bool isValid() const;
 
-    QList<FileInfo> fileInfoList() const;
-    int count() const;
+    QString filePath;
+    uint isDir : 1;
+    uint isFile : 1;
+    uint isSymLink : 1;
+    QFile::Permissions permissions;
+    uint crc32;
+    qint64 size;
+    QDateTime lastModified;
+    void *d;
+  };
 
-    FileInfo entryInfoAt(int index) const;
-    QByteArray fileData(const QString &fileName) const;
-    bool extractAll(const QString &destinationDir) const;
+  QList<FileInfo> fileInfoList() const;
+  int count() const;
 
-    enum Status {
-        NoError,
-        FileReadError,
-        FileOpenError,
-        FilePermissionsError,
-        FileError
-    };
+  FileInfo entryInfoAt(int index) const;
+  QByteArray fileData(const QString& fileName) const;
+  bool extractAll(const QString& destinationDir) const;
 
-    Status status() const;
+  enum Status
+  {
+    NoError,
+    FileReadError,
+    FileOpenError,
+    FilePermissionsError,
+    FileError
+  };
 
-    void close();
+  Status status() const;
+
+  void close();
 
 private:
-    MarbleZipReaderPrivate *d;
-    Q_DISABLE_COPY(MarbleZipReader)
+  MarbleZipReaderPrivate *d;
+  Q_DISABLE_COPY(MarbleZipReader)
 };
 
 }

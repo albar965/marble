@@ -10,10 +10,8 @@
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAPLACEMARK_H
 #define MARBLE_GEODATAPLACEMARK_H
-
 
 #include <QDateTime>
 
@@ -29,8 +27,7 @@
 
 class QXmlStreamWriter;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataPlacemarkPrivate;
 class OsmPlacemarkData;
@@ -52,196 +49,199 @@ class OsmPlacemarkData;
  * not provided in a KML file.
  */
 
-class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
+class GEODATA_EXPORT GeoDataPlacemark :
+  public GeoDataFeature
 {
- public:
-    /**
-     * Create a new placemark.
-     */
-    GeoDataPlacemark();
+public:
+  /**
+   * Create a new placemark.
+   */
+  GeoDataPlacemark();
 
-    /**
-     * Create a new placemark from existing placemark @p placemark
-     */
-    GeoDataPlacemark( const GeoDataPlacemark& placemark );
+  /**
+   * Create a new placemark from existing placemark @p placemark
+   */
+  GeoDataPlacemark(const GeoDataPlacemark& placemark);
 
-    /**
-     * Create a new placemark with the given @p name.
-     */
-    explicit GeoDataPlacemark( const QString &name );
+  /**
+   * Create a new placemark with the given @p name.
+   */
+  explicit GeoDataPlacemark(const QString& name);
 
-    /**
-    * Delete the placemark
+  /**
+  * Delete the placemark
+  */
+  ~GeoDataPlacemark();
+
+  GeoDataPlacemark& operator=(const GeoDataPlacemark& other);
+
+  /**
+  * Equality operators.
+  */
+  bool operator==(const GeoDataPlacemark& other) const;
+  bool operator!=(const GeoDataPlacemark& other) const;
+
+  /**
+   * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates
+   *
+   * The @p dateTime parameter should be used if the placemark geometry() is a
+   * GeoDataTrack and thus contains several coordinates associated with a date and time.
+   *
+   * The @p iconAtCoordinates boolean is set to true if an icon should be drawn to
+   * represent the placemark at these coordinates as described in
+   * https://code.google.com/apis/kml/documentation/kmlreference.html#placemark,
+   * it is set to false otherwise.
+   *
+   * @see GeoDataTrack::GeoDataTrack
+   */
+  GeoDataCoordinates coordinate(const QDateTime& dateTime = QDateTime(), bool *iconAtCoordinates = 0) const;
+
+  /**
+   * The geometry of the GeoDataPlacemark is to be rendered to the marble map
+   * along with the icon at the coordinate associated with this Placemark.
+   * @return a pointer to the current Geometry object
+   */
+  GeoDataGeometry *geometry();
+  const GeoDataGeometry *geometry() const;
+
+  /**
+    * @brief displays the name of a place in the locale language of the user
     */
-    ~GeoDataPlacemark();
+  QString displayName() const;
 
-    GeoDataPlacemark &operator=( const GeoDataPlacemark &other );
+  /**
+   * Return the coordinates of the placemark as @p longitude,
+   * @p latitude and @p altitude.
+   */
+  void coordinate(qreal& longitude, qreal& latitude, qreal& altitude) const;
 
-    /**
-    * Equality operators.
+  /**
+    * Quick, safe accessor to the placemark's OsmPlacemarkData stored within it's
+    * ExtendedData. If the extendedData does not contain osmData, the function
+    * inserts a default-constructed one, and returns a reference to it.
     */
-    bool operator==( const GeoDataPlacemark& other ) const;
-    bool operator!=( const GeoDataPlacemark& other ) const;
+  OsmPlacemarkData& osmData();
+  const OsmPlacemarkData& osmData() const;
 
-    /**
-     * Return the coordinates of the placemark at time @p dateTime as a GeoDataCoordinates
-     *
-     * The @p dateTime parameter should be used if the placemark geometry() is a
-     * GeoDataTrack and thus contains several coordinates associated with a date and time.
-     *
-     * The @p iconAtCoordinates boolean is set to true if an icon should be drawn to
-     * represent the placemark at these coordinates as described in
-     * https://code.google.com/apis/kml/documentation/kmlreference.html#placemark,
-     * it is set to false otherwise.
-     *
-     * @see GeoDataTrack::GeoDataTrack
-     */
-    GeoDataCoordinates coordinate( const QDateTime &dateTime = QDateTime(), bool *iconAtCoordinates = 0 ) const;
+  void setOsmData(const OsmPlacemarkData& osmData);
+  bool hasOsmData() const;
 
-    /**
-     * The geometry of the GeoDataPlacemark is to be rendered to the marble map
-     * along with the icon at the coordinate associated with this Placemark.
-     * @return a pointer to the current Geometry object
-     */
-    GeoDataGeometry* geometry();
-    const GeoDataGeometry* geometry() const;
+  /**
+   * Set the coordinate of the placemark in @p longitude and
+   * @p latitude.
+   */
+  void setCoordinate(qreal longitude, qreal latitude, qreal altitude = 0,
+                     GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian);
 
-    /**
-      * @brief displays the name of a place in the locale language of the user
-      */
-     QString displayName() const;
+  /**
+  * Set the coordinate of the placemark with an @p GeoDataPoint.
+  */
+  void setCoordinate(const GeoDataCoordinates& coordinate);
 
-    /**
-     * Return the coordinates of the placemark as @p longitude,
-     * @p latitude and @p altitude.
-     */
-    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
+  /**
+   * Sets the current Geometry of this Placemark. @see geometry() and the class
+   * overview for description of the geometry concept. The geometry can be set
+   * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
+   * @see GeoDataLinearRing and @see GeoDataMultiGeometry
+   */
+  void setGeometry(GeoDataGeometry *entry);
 
-    /**
-      * Quick, safe accessor to the placemark's OsmPlacemarkData stored within it's
-      * ExtendedData. If the extendedData does not contain osmData, the function
-      * inserts a default-constructed one, and returns a reference to it.
-      */
-    OsmPlacemarkData &osmData();
-    const OsmPlacemarkData &osmData() const;
+  /**
+   * Return the area size of the feature in square km.
+   *
+   * FIXME: Once we make Marble more area-aware we need to
+   * move this into the GeoDataArea class which will get
+   * inherited from GeoDataPlacemark (or GeoDataFeature).
+   */
+  qreal area() const;
 
-    void setOsmData( const OsmPlacemarkData &osmData );
-    bool hasOsmData() const;
+  /**
+   * Set the area size of the feature in square km.
+   */
+  void setArea(qreal area);
 
-    /**
-     * Set the coordinate of the placemark in @p longitude and
-     * @p latitude.
-     */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0,
-                        GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
+  /**
+   * Return the population of the placemark.
+   */
+  qint64 population() const;
 
-    /**
-    * Set the coordinate of the placemark with an @p GeoDataPoint.
-    */
-    void setCoordinate( const GeoDataCoordinates &coordinate );
+  /**
+   * Sets the @p population of the placemark.
+   * @param  population  the new population value
+   */
+  void setPopulation(qint64 population);
 
-    /**
-     * Sets the current Geometry of this Placemark. @see geometry() and the class 
-     * overview for description of the geometry concept. The geometry can be set 
-     * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
-     * @see GeoDataLinearRing and @see GeoDataMultiGeometry
-     */
-    void setGeometry( GeoDataGeometry *entry );
+  /**
+   * Return the state of the placemark.
+   */
+  const QString state() const;
 
-    /**
-     * Return the area size of the feature in square km.
-     *
-     * FIXME: Once we make Marble more area-aware we need to 
-     * move this into the GeoDataArea class which will get
-     * inherited from GeoDataPlacemark (or GeoDataFeature).
-     */
-    qreal area() const;
+  /**
+   * Set the state @p state of the placemark.
+   */
+  void setState(const QString& state);
 
-    /**
-     * Set the area size of the feature in square km.
-     */
-    void setArea( qreal area );
+  /**
+   * Return the country code of the placemark.
+   */
+  const QString countryCode() const;
 
-    /**
-     * Return the population of the placemark.
-     */
-    qint64 population() const;
-    /**
-     * Sets the @p population of the placemark.
-     * @param  population  the new population value
-     */
-    void setPopulation( qint64 population );
+  /**
+   * Set the country @p code of the placemark.
+   */
+  void setCountryCode(const QString& code);
 
-    /**
-     * Return the state of the placemark.
-     */
-    const QString state() const;
+  /**
+   * Returns whether balloon is visible or not
+   */
+  bool isBalloonVisible() const;
 
-    /**
-     * Set the state @p state of the placemark.
-     */
-    void setState( const QString &state );
+  /**
+   * Set visibility of the balloon
+   */
+  void setBalloonVisible(bool visible);
 
-    /**
-     * Return the country code of the placemark.
-     */
-    const QString countryCode() const;
+  /**
+   * Serialize the Placemark to a data stream. This is a binary serialisation
+   * and is deserialised using @see unpack()
+   * @param stream the QDataStream to serialise object to.
+   */
+  virtual void pack(QDataStream& stream) const;
 
-    /**
-     * Set the country @p code of the placemark.
-     */
-    void setCountryCode( const QString &code );
+  /**
+   * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
+   * the Qt documentation for more info. This will output the XML
+   * representation of this Placemark. The default XML format is KML, to have
+   * other formats supported you need to create a subclass and override this
+   * method.
+   * @param stream the XML Stream Reader to output to.
+   */
+  virtual QXmlStreamWriter& pack(QXmlStreamWriter& stream) const;
 
-    /**
-     * Returns whether balloon is visible or not
-     */
-    bool isBalloonVisible() const;
+  virtual QXmlStreamWriter& operator<<(QXmlStreamWriter& stream) const;
 
-    /**
-     * Set visibility of the balloon
-     */
-    void setBalloonVisible( bool visible );
+  /**
+   * Deserialize the Placemark from a data stream. This has the opposite effect
+   * from @see pack()
+   * @param stream the QDataStream to deserialise from.
+   */
+  virtual void unpack(QDataStream& stream);
 
-    /**
-     * Serialize the Placemark to a data stream. This is a binary serialisation
-     * and is deserialised using @see unpack()
-     * @param stream the QDataStream to serialise object to.
-     */
-    virtual void pack( QDataStream& stream ) const;
+  /**
+   * Returns GeoDataLookAt object if lookAt is setup earlier
+   * otherwise It will convert GeoDataCoordinates of Placemark
+   * to GeoDataLookAt with range equals to altitude of
+   * GeoDataCoordinate
+   */
+  const GeoDataLookAt *lookAt() const;
+  GeoDataLookAt *lookAt();
 
-    /**
-     * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
-     * the Qt documentation for more info. This will output the XML
-     * representation of this Placemark. The default XML format is KML, to have
-     * other formats supported you need to create a subclass and override this
-     * method.
-     * @param stream the XML Stream Reader to output to.
-     */
-    virtual QXmlStreamWriter& pack( QXmlStreamWriter& stream ) const;
+  static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark *b);
 
-    virtual QXmlStreamWriter& operator <<( QXmlStreamWriter& stream ) const;
+private:
+  GeoDataPlacemarkPrivate *p();
+  const GeoDataPlacemarkPrivate *p() const;
 
-    /**
-     * Deserialize the Placemark from a data stream. This has the opposite effect
-     * from @see pack()
-     * @param stream the QDataStream to deserialise from.
-     */
-    virtual void unpack( QDataStream& stream );
-
-    /**
-     * Returns GeoDataLookAt object if lookAt is setup earlier
-     * otherwise It will convert GeoDataCoordinates of Placemark
-     * to GeoDataLookAt with range equals to altitude of
-     * GeoDataCoordinate
-     */
-    const GeoDataLookAt *lookAt() const;
-    GeoDataLookAt *lookAt();
-
-    static bool placemarkLayoutOrderCompare(const GeoDataPlacemark *a, const GeoDataPlacemark* b);
-
- private:
-    GeoDataPlacemarkPrivate *p();
-    const GeoDataPlacemarkPrivate *p() const;
 };
 
 }

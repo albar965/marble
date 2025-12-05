@@ -15,8 +15,7 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimePrimitivePrivate;
 
@@ -29,31 +28,33 @@ class GeoDataTimePrimitivePrivate;
  * @See GeoDataTimeSpan
  * @See GeoDataTimeStamp
  */
-class GEODATA_EXPORT GeoDataTimePrimitive : public GeoDataObject
+class GEODATA_EXPORT GeoDataTimePrimitive :
+  public GeoDataObject
 {
-  public:
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+public:
+  /// Provides type information for downcasting a GeoNode
+  virtual const char *nodeType() const;
 
-    GeoDataTimePrimitive& operator=( const GeoDataTimePrimitive& other );
+  GeoDataTimePrimitive& operator=(const GeoDataTimePrimitive& other);
 
-    /**
-     * @brief Serialize the styleselector to a stream
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
+  /**
+   * @brief Serialize the styleselector to a stream
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
 
-    /**
-     * @brief  Unserialize the styleselector from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+   * @brief  Unserialize the styleselector from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
 
-    GeoDataTimePrimitive();
-    GeoDataTimePrimitive( const GeoDataTimePrimitive& other );
-    ~GeoDataTimePrimitive();
+  GeoDataTimePrimitive();
+  GeoDataTimePrimitive(const GeoDataTimePrimitive& other);
+  ~GeoDataTimePrimitive();
+
 private:
-    GeoDataTimePrimitivePrivate * const d;
+  GeoDataTimePrimitivePrivate * const d;
 };
 
 }

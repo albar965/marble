@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -18,28 +17,30 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-static GeoTagWriterRegistrar s_writerAnimatedUpdate( GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataAnimatedUpdateType,
-                                            kml::kmlTag_nameSpaceOgc22 ), new KmlAnimatedUpdateTagWriter );
+static GeoTagWriterRegistrar s_writerAnimatedUpdate(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataAnimatedUpdateType,
+                                                                                kml::kmlTag_nameSpaceOgc22),
+                                                    new KmlAnimatedUpdateTagWriter);
 
-bool KmlAnimatedUpdateTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlAnimatedUpdateTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
-    Q_ASSERT( node->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType );
-    const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate*>( node );
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_AnimatedUpdate );
-    KmlObjectTagWriter::writeIdentifiers( writer, animUpdate );
-    writer.writeOptionalElement( "gx:duration", animUpdate->duration(), 0.0 );
-    if ( animUpdate->update() ){
-        GeoDataUpdate const *update = dynamic_cast<const GeoDataUpdate*>( animUpdate->update() );
-        if( update ){
-            writeElement( update, writer );
-        }
+  Q_ASSERT(node->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType);
+  const GeoDataAnimatedUpdate *animUpdate = static_cast<const GeoDataAnimatedUpdate *>(node);
+  writer.writeStartElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_AnimatedUpdate);
+  KmlObjectTagWriter::writeIdentifiers(writer, animUpdate);
+  writer.writeOptionalElement("gx:duration", animUpdate->duration(), 0.0);
+  if(animUpdate->update())
+  {
+    GeoDataUpdate const *update = dynamic_cast<const GeoDataUpdate *>(animUpdate->update());
+    if(update)
+    {
+      writeElement(update, writer);
     }
-    writer.writeOptionalElement( "gx:delayedStart", animUpdate->delayedStart(), 0.0 );
-    writer.writeEndElement();
-    return true;
+  }
+  writer.writeOptionalElement("gx:delayedStart", animUpdate->delayedStart(), 0.0);
+  writer.writeEndElement();
+  return true;
 }
 
 }

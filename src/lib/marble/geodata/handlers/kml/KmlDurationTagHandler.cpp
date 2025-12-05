@@ -19,32 +19,32 @@
 #include "GeoDataAnimatedUpdate.h"
 #include "GeoParser.h"
 
+namespace Marble {
+namespace kml {
 
-namespace Marble
-{
-namespace kml
-{
-
-KML_DEFINE_TAG_HANDLER_GX22( duration )
+KML_DEFINE_TAG_HANDLER_GX22(duration)
 
 GeoNode *KmldurationTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT ( parser.isStartElement()
-               && parser.isValidElement( kmlTag_duration ) );
+  Q_ASSERT(parser.isStartElement() &&
+           parser.isValidElement(kmlTag_duration));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    qreal const duration = parser.readElementText().trimmed().toDouble();
-    if ( parentItem.is<GeoDataFlyTo>() ){
-        parentItem.nodeAs<GeoDataFlyTo>()->setDuration( duration );
-    }
-    if ( parentItem.is<GeoDataWait>() ){
-        parentItem.nodeAs<GeoDataWait>()->setDuration( duration );
-    }
-    if ( parentItem.is<GeoDataAnimatedUpdate>() ){
-		parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDuration( duration );
-	}
-    return 0;
+  qreal const duration = parser.readElementText().trimmed().toDouble();
+  if(parentItem.is<GeoDataFlyTo>())
+  {
+    parentItem.nodeAs<GeoDataFlyTo>()->setDuration(duration);
+  }
+  if(parentItem.is<GeoDataWait>())
+  {
+    parentItem.nodeAs<GeoDataWait>()->setDuration(duration);
+  }
+  if(parentItem.is<GeoDataAnimatedUpdate>())
+  {
+    parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDuration(duration);
+  }
+  return 0;
 }
 
 }

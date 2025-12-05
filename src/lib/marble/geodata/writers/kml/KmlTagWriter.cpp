@@ -13,25 +13,22 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
+namespace Marble {
 
-namespace Marble
+static GeoTagWriterRegistrar s_writerKml(GeoTagWriter::QualifiedName("",
+                                                                     kml::kmlTag_nameSpaceOgc22),
+                                         new KmlTagWriter());
+
+bool KmlTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
+  Q_UNUSED(node);
 
-static GeoTagWriterRegistrar s_writerKml( GeoTagWriter::QualifiedName( "",
-                                                                       kml::kmlTag_nameSpaceOgc22),
-                                               new KmlTagWriter() );
+  writer.writeDefaultNamespace(kml::kmlTag_nameSpaceOgc22);
+  writer.writeNamespace(kml::kmlTag_nameSpaceGx22, "gx");
+  writer.writeStartElement("kml");
 
-
-bool KmlTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
-{
-    Q_UNUSED(node);
-
-    writer.writeDefaultNamespace( kml::kmlTag_nameSpaceOgc22 );
-    writer.writeNamespace( kml::kmlTag_nameSpaceGx22, "gx" );
-    writer.writeStartElement( "kml" );
-
-    // Do not write an end element for document handlers
-    return true;
+  // Do not write an end element for document handlers
+  return true;
 }
 
 }

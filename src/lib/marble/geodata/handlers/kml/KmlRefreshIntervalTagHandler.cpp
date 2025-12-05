@@ -13,22 +13,21 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataLink.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-KML_DEFINE_TAG_HANDLER( refreshInterval )
-    GeoNode *KmlrefreshIntervalTagHandler::parse(GeoParser & parser) const
-    {
-        Q_ASSERT ( parser.isStartElement() && parser.isValidElement( kmlTag_refreshInterval ) );
-        GeoStackItem parentItem = parser.parentElement();
-        if ( parentItem.is<GeoDataLink>() ) {
-            qreal const refreshInterval = parser.readElementText().trimmed().toDouble();
-            parentItem.nodeAs<GeoDataLink>()->setRefreshInterval( refreshInterval );
-        }
+KML_DEFINE_TAG_HANDLER(refreshInterval)
+GeoNode *KmlrefreshIntervalTagHandler::parse(GeoParser & parser) const
+{
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_refreshInterval));
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataLink>())
+  {
+    qreal const refreshInterval = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataLink>()->setRefreshInterval(refreshInterval);
+  }
 
-      return 0;
-    }
+  return 0;
+}
 }
 }

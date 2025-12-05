@@ -17,36 +17,39 @@
 #ifndef MARBLE_DEFERREDFLAG_H
 #define MARBLE_DEFERREDFLAG_H
 
-
 #include <QObject>
 #include <QSize>
 #include <QString>
 #include <QPixmap>
 
-namespace Marble
+namespace Marble {
+
+class DeferredFlag :
+  public QObject
 {
 
-class DeferredFlag : public QObject
-{
+  Q_OBJECT
 
-    Q_OBJECT
+public:
+  explicit DeferredFlag(QObject *parent = 0);
 
- public:
-    explicit DeferredFlag( QObject *parent = 0 );
+  QPixmap& flag()
+  {
+    return m_pixmap;
+  }
 
-    QPixmap& flag(){ return m_pixmap; }
-    void setFlag( const QString& filename, const QSize& size );
+  void setFlag(const QString& filename, const QSize& size);
 
- public Q_SLOTS:
-    void slotDrawFlag();
+public Q_SLOTS:
+  void slotDrawFlag();
 
- Q_SIGNALS:
-    void flagDone();
+Q_SIGNALS:
+  void flagDone();
 
- private:
-    QString  m_filename;
-    QSize    m_size;
-    QPixmap  m_pixmap;
+private:
+  QString m_filename;
+  QSize m_size;
+  QPixmap m_pixmap;
 };
 
 }

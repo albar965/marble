@@ -29,75 +29,76 @@
 
 namespace Marble {
 
-
-OsmRelationEditorDialog::OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent ) :
-    QDialog( parent )
+OsmRelationEditorDialog::OsmRelationEditorDialog(OsmPlacemarkData *relationData, QWidget *parent) :
+  QDialog(parent)
 {
-    m_relationData = relationData;
-    QVBoxLayout *layout = new QVBoxLayout( this );
+  m_relationData = relationData;
+  QVBoxLayout *layout = new QVBoxLayout(this);
 
-    // Name input area
-    QHBoxLayout *nameLayout = new QHBoxLayout();
-    QLabel *nameLabel = new QLabel( tr( "Name" ), this );
-    m_nameLineEdit = new QLineEdit( this );
-    m_nameLineEdit->setText( relationData->tagValue( "name" ) );
-    nameLayout->addWidget( nameLabel );
-    nameLayout->addWidget( m_nameLineEdit );
-    layout->addLayout( nameLayout );
+  // Name input area
+  QHBoxLayout *nameLayout = new QHBoxLayout();
+  QLabel *nameLabel = new QLabel(tr("Name"), this);
+  m_nameLineEdit = new QLineEdit(this);
+  m_nameLineEdit->setText(relationData->tagValue("name"));
+  nameLayout->addWidget(nameLabel);
+  nameLayout->addWidget(m_nameLineEdit);
+  layout->addLayout(nameLayout);
 
-    // Tag editor area
-    // A dummy placemark is needed because the OsmTagEditorWidget works with placemarks
-    m_dummyPlacemark = new GeoDataPlacemark();
-    // "osmRelaation=yes" entry is added to its ExtendedData to let the widget know
-    // its special relation status
-    GeoDataExtendedData extendedData;
-    extendedData.addValue( GeoDataData( "osmRelation", "yes" ) );
-    m_dummyPlacemark->setExtendedData( extendedData );
-    m_dummyPlacemark->setOsmData( *m_relationData );
-    OsmObjectManager::initializeOsmData( m_dummyPlacemark );
-    m_tagEditor = new OsmTagEditorWidget( m_dummyPlacemark, this );
-    layout->addWidget( m_tagEditor );
+  // Tag editor area
+  // A dummy placemark is needed because the OsmTagEditorWidget works with placemarks
+  m_dummyPlacemark = new GeoDataPlacemark();
+  // "osmRelaation=yes" entry is added to its ExtendedData to let the widget know
+  // its special relation status
+  GeoDataExtendedData extendedData;
+  extendedData.addValue(GeoDataData("osmRelation", "yes"));
+  m_dummyPlacemark->setExtendedData(extendedData);
+  m_dummyPlacemark->setOsmData(*m_relationData);
+  OsmObjectManager::initializeOsmData(m_dummyPlacemark);
+  m_tagEditor = new OsmTagEditorWidget(m_dummyPlacemark, this);
+  layout->addWidget(m_tagEditor);
 
-    // Button box area
-    m_buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this );
-    layout->addWidget( m_buttonBox );
+  // Button box area
+  m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+  layout->addWidget(m_buttonBox);
 
-    QObject::connect( m_buttonBox, SIGNAL( accepted() ),
-                       this, SLOT( checkFields() ) );
+  QObject::connect(m_buttonBox, SIGNAL(accepted()),
+                   this, SLOT(checkFields()));
 }
 
 OsmRelationEditorDialog::~OsmRelationEditorDialog()
 {
-    delete m_dummyPlacemark;
+  delete m_dummyPlacemark;
 }
 
 void OsmRelationEditorDialog::finish()
 {
-    // Updating the relation data with the edited one
-    m_dummyPlacemark->osmData().addTag( "name", m_nameLineEdit->text() );
-    *m_relationData = m_dummyPlacemark->osmData();
-    accept();
-    deleteLater();
+  // Updating the relation data with the edited one
+  m_dummyPlacemark->osmData().addTag("name", m_nameLineEdit->text());
+  *m_relationData = m_dummyPlacemark->osmData();
+  accept();
+  deleteLater();
 }
 
 void OsmRelationEditorDialog::checkFields()
 {
-    if ( m_nameLineEdit->text().isEmpty() ) {
-        QMessageBox::warning( this,
-                              tr( "No name specified" ),
-                              tr( "Please specify a name for this relation." ) );
-    }
-    else if ( !m_dummyPlacemark->osmData().containsTagKey( "type" ) ) {
-        QMessageBox::warning( this,
-                              tr( "No type tag specified" ),
-                              tr( "Please add a type tag for this relation." ) );
-    }
-    else {
-        finish();
-    }
+  if(m_nameLineEdit->text().isEmpty())
+  {
+    QMessageBox::warning(this,
+                         tr("No name specified"),
+                         tr("Please specify a name for this relation."));
+  }
+  else if(!m_dummyPlacemark->osmData().containsTagKey("type"))
+  {
+    QMessageBox::warning(this,
+                         tr("No type tag specified"),
+                         tr("Please add a type tag for this relation."));
+  }
+  else
+  {
+    finish();
+  }
 }
 
 }
 
 #include "moc_OsmRelationEditorDialog.cpp"
-

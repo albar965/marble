@@ -16,102 +16,105 @@
 #include "MarbleGraphicsItem.h"
 
 // Qt
-#include<QDebug>
-#include<QList>
-#include<QSet>
-#include<QSize>
-#include<QSizeF>
-#include<QRect>
-#include<QPixmap>
+#include <QDebug>
+#include <QList>
+#include <QSet>
+#include <QSize>
+#include <QSizeF>
+#include <QRect>
+#include <QPixmap>
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleGraphicsItemPrivate
 {
- public:
-    explicit MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
-                                        MarbleGraphicsItem *parent = 0 )
-        : m_repaintNeeded( true ),
-          m_cacheMode( MarbleGraphicsItem::NoCache ),
-          m_visibility( true ),
-          m_parent( parent ),
-          m_children(),
-          m_layout( 0 ),
-          m_marbleGraphicsItem( marbleGraphicsItem )
+public:
+  explicit MarbleGraphicsItemPrivate(MarbleGraphicsItem *marbleGraphicsItem,
+                                     MarbleGraphicsItem *parent = 0)
+    : m_repaintNeeded(true),
+    m_cacheMode(MarbleGraphicsItem::NoCache),
+    m_visibility(true),
+    m_parent(parent),
+    m_children(),
+    m_layout(0),
+    m_marbleGraphicsItem(marbleGraphicsItem)
+  {
+    if(m_parent)
     {
-        if ( m_parent ) {
-            m_parent->p()->addChild( m_marbleGraphicsItem );
-        }
+      m_parent->p()->addChild(m_marbleGraphicsItem);
+    }
+  }
+
+  virtual ~MarbleGraphicsItemPrivate()
+  {
+    // Remove from parent
+    if(m_parent)
+    {
+      m_parent->p()->removeChild(m_marbleGraphicsItem);
     }
 
-    virtual ~MarbleGraphicsItemPrivate()
+    // Delete all children
+    qDeleteAll(m_children.toList());       // delete using a copy, since children may invalidate m_children's iterator
+
+    // Delete Layout
+    delete m_layout;
+  }
+
+  void addChild(MarbleGraphicsItem *child)
+  {
+    m_children.insert(child);
+  }
+
+  void removeChild(MarbleGraphicsItem *child)
+  {
+    m_children.remove(child);
+  }
+
+  virtual QList<QPointF> positions() const = 0;
+
+  virtual QList<QPointF> absolutePositions() const = 0;
+
+  /**
+   * @brief Used to get the set of screen bounding rects
+   */
+  QList<QRectF> boundingRects() const;
+
+  virtual void setProjection(const ViewportParams *viewport) = 0;
+
+  void updateChildPositions()
+  {
+    // This has to be done recursively because we need a correct size from all children.
+    foreach(MarbleGraphicsItem * item, m_children)
     {
-        // Remove from parent
-        if ( m_parent ) {
-            m_parent->p()->removeChild( m_marbleGraphicsItem );
-        }
-
-        // Delete all children
-        qDeleteAll( m_children.toList() ); // delete using a copy, since children may invalidate m_children's iterator
-
-        // Delete Layout
-        delete m_layout;
+      item->p()->updateChildPositions();
     }
 
-    void addChild( MarbleGraphicsItem *child )
+    // Adjust positions
+    if(m_layout)
     {
-        m_children.insert( child );
+      m_layout->updatePositions(m_marbleGraphicsItem);
     }
+  }
 
-    void removeChild( MarbleGraphicsItem *child )
-    {
-        m_children.remove( child );
-    }
+  QSizeF m_size;
 
-    virtual QList<QPointF> positions() const = 0;
+  bool m_repaintNeeded;
 
-    virtual QList<QPointF> absolutePositions() const = 0;
+  MarbleGraphicsItem::CacheMode m_cacheMode;
 
-    /**
-     * @brief Used to get the set of screen bounding rects
-     */
-    QList<QRectF> boundingRects() const;
+  QPixmap m_pixmap;
 
-    virtual void setProjection( const ViewportParams *viewport ) = 0;
+  bool m_visibility;
 
-    void updateChildPositions()
-    {
-        // This has to be done recursively because we need a correct size from all children.
-        foreach ( MarbleGraphicsItem *item, m_children ) {
-            item->p()->updateChildPositions();
-        }
+  // The parent of the item
+  MarbleGraphicsItem *const m_parent;
+  // The set of children.
+  QSet<MarbleGraphicsItem *> m_children;
 
-        // Adjust positions
-        if ( m_layout ) {
-            m_layout->updatePositions( m_marbleGraphicsItem );
-        }
-    }
+  // The layout handling the positions of the children
+  AbstractMarbleGraphicsLayout *m_layout;
 
-    QSizeF m_size;
-
-    bool m_repaintNeeded;
-
-    MarbleGraphicsItem::CacheMode m_cacheMode;
-
-    QPixmap m_pixmap;
-
-    bool m_visibility;
-
-    // The parent of the item
-    MarbleGraphicsItem *const m_parent;
-    // The set of children.
-    QSet<MarbleGraphicsItem *> m_children;
-
-    // The layout handling the positions of the children
-    AbstractMarbleGraphicsLayout *m_layout;
-
-    MarbleGraphicsItem *const m_marbleGraphicsItem;
+  MarbleGraphicsItem *const m_marbleGraphicsItem;
 };
 
 }

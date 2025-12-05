@@ -16,28 +16,27 @@
 
 #include <QList>
 
-namespace Marble
-{
+namespace Marble {
 
-class GEODATA_EXPORT GeoDataPlaylist : public GeoDataObject
+class GEODATA_EXPORT GeoDataPlaylist :
+  public GeoDataObject
 {
 public:
+  bool operator==(const GeoDataPlaylist& other) const;
+  bool operator!=(const GeoDataPlaylist& other) const;
+  const char *nodeType() const;
 
-    bool operator==( const GeoDataPlaylist &other ) const;
-    bool operator!=( const GeoDataPlaylist &other ) const;
-    const char *nodeType() const;
+  GeoDataTourPrimitive *primitive(int index);
+  const GeoDataTourPrimitive *primitive(int index) const;
+  void addPrimitive(GeoDataTourPrimitive *primitive);
+  void insertPrimitive(int index, GeoDataTourPrimitive *primitive);
+  void removePrimitiveAt(int index);
+  void swapPrimitives(int indexA, int indexB);
 
-    GeoDataTourPrimitive* primitive( int index );
-    const GeoDataTourPrimitive* primitive( int index ) const;
-    void addPrimitive( GeoDataTourPrimitive* primitive );
-    void insertPrimitive( int index, GeoDataTourPrimitive* primitive );
-    void removePrimitiveAt( int index );
-    void swapPrimitives( int indexA, int indexB );
-
-    int size() const;
+  int size() const;
 
 private:
-    QList<GeoDataTourPrimitive*> m_primitives;
+  QList<GeoDataTourPrimitive *> m_primitives;
 };
 
 } // namespace Marble

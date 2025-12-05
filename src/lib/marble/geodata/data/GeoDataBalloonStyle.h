@@ -15,51 +15,51 @@
 #include "GeoDataColorStyle.h"
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataBalloonStylePrivate;
 
-class GEODATA_EXPORT GeoDataBalloonStyle : public GeoDataColorStyle
+class GEODATA_EXPORT GeoDataBalloonStyle :
+  public GeoDataColorStyle
 {
 public:
-    GeoDataBalloonStyle();
+  GeoDataBalloonStyle();
 
-    GeoDataBalloonStyle( const GeoDataBalloonStyle &other );
+  GeoDataBalloonStyle(const GeoDataBalloonStyle& other);
 
-    GeoDataBalloonStyle& operator=( const GeoDataBalloonStyle &other );
-    bool operator==( const GeoDataBalloonStyle &other ) const;
-    bool operator!=( const GeoDataBalloonStyle &other ) const;
+  GeoDataBalloonStyle& operator=(const GeoDataBalloonStyle& other);
+  bool operator==(const GeoDataBalloonStyle& other) const;
+  bool operator!=(const GeoDataBalloonStyle& other) const;
 
+  ~GeoDataBalloonStyle();
 
-    ~GeoDataBalloonStyle();
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  enum DisplayMode
+  {
+    Default,
+    Hide
+  };
 
-    enum DisplayMode {
-        Default,
-        Hide
-    };
+  QColor backgroundColor() const;
+  void setBackgroundColor(const QColor& color);
 
-    QColor backgroundColor() const;
-    void setBackgroundColor( const QColor &color );
+  QColor textColor() const;
+  void setTextColor(const QColor& color);
 
-    QColor textColor() const;
-    void setTextColor( const QColor &color );
+  QString text() const;
+  void setText(const QString& text);
 
-    QString text() const;
-    void setText( const QString &text );
+  DisplayMode displayMode() const;
+  void setDisplayMode(const DisplayMode& mode);
 
-    DisplayMode displayMode() const;
-    void setDisplayMode( const DisplayMode &mode );
+  virtual void pack(QDataStream& stream) const;
 
-    virtual void pack( QDataStream& stream ) const;
-
-    virtual void unpack( QDataStream& stream );
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataBalloonStylePrivate* const d;
+  GeoDataBalloonStylePrivate * const d;
 };
 
 }

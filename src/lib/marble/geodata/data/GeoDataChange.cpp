@@ -11,13 +11,12 @@
 #include "GeoDataChange.h"
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataChangePrivate
 {
 public:
-    GeoDataChangePrivate();
+  GeoDataChangePrivate();
 };
 
 GeoDataChangePrivate::GeoDataChangePrivate()
@@ -25,43 +24,45 @@ GeoDataChangePrivate::GeoDataChangePrivate()
 }
 
 GeoDataChange::GeoDataChange() :
-    d( new GeoDataChangePrivate )
+  d(new GeoDataChangePrivate)
 {
 }
 
-GeoDataChange::GeoDataChange( const Marble::GeoDataChange &other ) :
-    GeoDataContainer(), d( new GeoDataChangePrivate( *other.d ) )
+GeoDataChange::GeoDataChange(const Marble::GeoDataChange& other) :
+  GeoDataContainer(), d(new GeoDataChangePrivate(*other.d))
 {
 }
 
-GeoDataChange &GeoDataChange::operator=( const GeoDataChange &other )
+GeoDataChange& GeoDataChange::operator=(const GeoDataChange& other)
 {
-    GeoDataContainer::operator =( other );
-    *d = *other.d;
-    return *this;
+  GeoDataContainer::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataChange::operator==( const GeoDataChange &other ) const
+bool GeoDataChange::operator==(const GeoDataChange& other) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+  if(!GeoDataContainer::equals(other))
+  {
+    return false;
+  }
+  return true;
 }
 
-bool GeoDataChange::operator!=( const GeoDataChange &other ) const
+bool GeoDataChange::operator!=(const GeoDataChange& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
+
 }
 
 GeoDataChange::~GeoDataChange()
 {
-    delete d;
+  delete d;
 }
 
 const char *GeoDataChange::nodeType() const
 {
-    return GeoDataTypes::GeoDataChangeType;
+  return GeoDataTypes::GeoDataChangeType;
 }
 
 }

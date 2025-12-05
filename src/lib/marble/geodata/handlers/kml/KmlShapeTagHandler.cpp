@@ -16,37 +16,42 @@
 #include "GeoDataPhotoOverlay.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( shape )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(shape)
 
-GeoNode* KmlshapeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlshapeTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_shape ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_shape));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if (parentItem.represents( kmlTag_PhotoOverlay ))
+  if(parentItem.represents(kmlTag_PhotoOverlay))
+  {
+    GeoDataPhotoOverlay::Shape shape;
+    QString shapeText = parser.readElementText();
+
+    if(shapeText == "rectangle")
     {
-        GeoDataPhotoOverlay::Shape shape;
-        QString shapeText = parser.readElementText();
-
-        if ( shapeText == "rectangle" ) {
-            shape = GeoDataPhotoOverlay::Rectangle;
-        } else if ( shapeText == "cylinder" ) {
-            shape = GeoDataPhotoOverlay::Cylinder;
-        } else if ( shapeText == "sphere" ) {
-            shape = GeoDataPhotoOverlay::Sphere;
-        } else {
-            mDebug() << "Unknown shape attribute" << shapeText << ", falling back to default value 'rectangle'";
-            shape = GeoDataPhotoOverlay::Rectangle;
-        }
-
-        parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape( shape );
+      shape = GeoDataPhotoOverlay::Rectangle;
     }
-    return 0;
+    else if(shapeText == "cylinder")
+    {
+      shape = GeoDataPhotoOverlay::Cylinder;
+    }
+    else if(shapeText == "sphere")
+    {
+      shape = GeoDataPhotoOverlay::Sphere;
+    }
+    else
+    {
+      mDebug() << "Unknown shape attribute" << shapeText << ", falling back to default value 'rectangle'";
+      shape = GeoDataPhotoOverlay::Rectangle;
+    }
+
+    parentItem.nodeAs<GeoDataPhotoOverlay>()->setShape(shape);
+  }
+  return 0;
 }
 
 }

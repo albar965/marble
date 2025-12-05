@@ -14,17 +14,18 @@
 #include "GeoTagWriter.h"
 #include "GeoDataListStyle.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlListStyleTagWriter : public GeoTagWriter
+class KmlListStyleTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
 
 private:
-    static QString itemTypeToString( GeoDataListStyle::ListItemType itemType );
-    static QString iconStateToString( GeoDataItemIcon::ItemIconStates state );
+  static QString itemTypeToString(GeoDataListStyle::ListItemType itemType);
+  static QString iconStateToString(GeoDataItemIcon::ItemIconStates state);
+
 };
 
 }

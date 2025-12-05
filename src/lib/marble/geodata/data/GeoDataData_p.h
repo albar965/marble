@@ -16,22 +16,21 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataDataPrivate
 {
-  public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataDataType;
-    }
+public:
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataDataType;
+  }
 
-    QVariant m_value;
-    QString  m_name;
-    QString  m_displayName;
+  QVariant m_value;
+  QString m_name;
+  QString m_displayName;
 };
 
 } // namespace Marble
 
-#endif //GEODATADATAPRIVATE_H
+#endif // GEODATADATAPRIVATE_H

@@ -16,138 +16,148 @@
 // Marble
 #include "ViewportParams.h"
 
-namespace Marble
+namespace Marble {
+
+class Q_DECL_HIDDEN BillboardGraphicsItem::Private :
+  public MarbleGraphicsItemPrivate
 {
+public:
+  Private(BillboardGraphicsItem *parent) :
+    MarbleGraphicsItemPrivate(parent),
+    m_alignment(Qt::AlignHCenter | Qt::AlignVCenter)
+  {
+  }
 
-class Q_DECL_HIDDEN BillboardGraphicsItem::Private : public MarbleGraphicsItemPrivate
-{
- public:
-    Private( BillboardGraphicsItem *parent ) :
-        MarbleGraphicsItemPrivate( parent ),
-        m_alignment( Qt::AlignHCenter | Qt::AlignVCenter )
+  QList<QPointF> positions() const
+  {
+    return m_positions;
+  }
+
+  QList<QPointF> absolutePositions() const
+  {
+    return m_positions;
+  }
+
+  Qt::Alignment m_alignment;
+
+  void setProjection(const ViewportParams *viewport)
+  {
+    m_positions.clear();
+
+    qreal x[100], y;
+    int pointRepeatNumber = 0;
+    bool globeHidesPoint;
+
+    viewport->screenCoordinates(m_coordinates, x, y, pointRepeatNumber,
+                                m_size, globeHidesPoint);
+
+    // Don't display items if they are on the far side of the globe.
+    if(globeHidesPoint)
+      return;
+
+    m_positions.reserve(pointRepeatNumber);
+    for( int i = 0; i < pointRepeatNumber; ++i )
     {
+      // handle vertical alignment
+      qint32 topY = (viewport->height() - m_size.height()) / 2;
+      if(m_alignment & Qt::AlignTop)
+      {
+        topY = y - m_size.height();
+      }
+      else if(m_alignment & Qt::AlignVCenter)
+      {
+        topY = y - (m_size.height() / 2);
+      }
+      else if(m_alignment & Qt::AlignBottom)
+      {
+        topY = y;
+      }
+
+      // handle horizontal alignment
+      qint32 leftX = (viewport->width() - m_size.width()) / 2;
+      if(m_alignment & Qt::AlignLeft)
+      {
+        leftX = x[i] - m_size.width();
+      }
+      else if(m_alignment & Qt::AlignHCenter)
+      {
+        leftX = x[i] - (m_size.width() / 2);
+      }
+      else if(m_alignment & Qt::AlignRight)
+      {
+        leftX = x[i];
+      }
+
+      m_positions.append(QPoint(leftX, topY));
     }
+  }
 
-    QList<QPointF> positions() const
-    {
-        return m_positions;
-    }
-
-    QList<QPointF> absolutePositions() const
-    {
-        return m_positions;
-    }
-
-    Qt::Alignment m_alignment;
-
-    void setProjection( const ViewportParams *viewport )
-    {
-        m_positions.clear();
-
-        qreal x[100], y;
-        int pointRepeatNumber = 0;
-        bool globeHidesPoint;
-
-        viewport->screenCoordinates( m_coordinates, x, y, pointRepeatNumber,
-                                         m_size, globeHidesPoint );
-
-        // Don't display items if they are on the far side of the globe.
-        if (globeHidesPoint) return;
-
-        m_positions.reserve(pointRepeatNumber);
-        for ( int i = 0; i < pointRepeatNumber; ++i ) {
-            // handle vertical alignment
-            qint32 topY = ( viewport->height() - m_size.height() ) / 2;
-            if ( m_alignment & Qt::AlignTop ) {
-                topY = y - m_size.height();
-            }
-            else if ( m_alignment & Qt::AlignVCenter ) {
-                topY = y - ( m_size.height() / 2 );
-            }
-            else if ( m_alignment & Qt::AlignBottom ) {
-                topY = y;
-            }
-
-            // handle horizontal alignment
-            qint32 leftX = ( viewport->width() - m_size.width() ) / 2;
-            if ( m_alignment & Qt::AlignLeft ) {
-                leftX =  x[i] - m_size.width();
-            }
-            else if ( m_alignment & Qt::AlignHCenter ) {
-                leftX = x[i] - ( m_size.width() / 2 );
-            }
-            else if ( m_alignment & Qt::AlignRight ) {
-                leftX = x[i];
-            }
-
-            m_positions.append( QPoint( leftX, topY ) );
-        }
-    }
-
-    GeoDataCoordinates m_coordinates;
-    QList<QPointF> m_positions;
+  GeoDataCoordinates m_coordinates;
+  QList<QPointF> m_positions;
 };
 
 BillboardGraphicsItem::BillboardGraphicsItem()
-    : MarbleGraphicsItem( new Private( this ) )
+  : MarbleGraphicsItem(new Private(this))
 {
 }
 
 GeoDataCoordinates BillboardGraphicsItem::coordinate() const
 {
-    return p()->m_coordinates;
+  return p()->m_coordinates;
 }
 
-void BillboardGraphicsItem::setCoordinate( const GeoDataCoordinates &coordinates )
+void BillboardGraphicsItem::setCoordinate(const GeoDataCoordinates& coordinates)
 {
-    p()->m_coordinates = coordinates;
+  p()->m_coordinates = coordinates;
 }
 
 QList<QPointF> BillboardGraphicsItem::positions() const
 {
-    return p()->positions();
+  return p()->positions();
 }
 
 QList<QRectF> BillboardGraphicsItem::boundingRects() const
 {
-    QList<QRectF> rects;
-    rects.reserve(p()->m_positions.size());
+  QList<QRectF> rects;
+  rects.reserve(p()->m_positions.size());
 
-    QSizeF const size = p()->m_size;
-    foreach(const QPointF &point, p()->m_positions) {
-        rects << QRectF(point, size);
-    }
-    return rects;
+  QSizeF const size = p()->m_size;
+  foreach(const QPointF& point, p()->m_positions)
+  {
+    rects << QRectF(point, size);
+  }
+  return rects;
 }
 
-QRectF BillboardGraphicsItem::containsRect( const QPointF &point ) const
+QRectF BillboardGraphicsItem::containsRect(const QPointF& point) const
 {
-    foreach( const QRectF &rect, boundingRects() ) {
-        if( rect.contains( point ) )
-            return rect;
-    }
+  foreach(const QRectF& rect, boundingRects())
+  {
+    if(rect.contains(point))
+      return rect;
+  }
 
-    return QRectF();
+  return QRectF();
 }
 
 Qt::Alignment BillboardGraphicsItem::alignment() const
 {
-    return p()->m_alignment;
+  return p()->m_alignment;
 }
 
 void BillboardGraphicsItem::setAlignment(Qt::Alignment alignment)
 {
-    p()->m_alignment = alignment;
+  p()->m_alignment = alignment;
 }
 
 BillboardGraphicsItem::Private *BillboardGraphicsItem::p()
 {
-    return static_cast<Private *>( d );
+  return static_cast<Private *>(d);
 }
 
 const BillboardGraphicsItem::Private *BillboardGraphicsItem::p() const
 {
-    return static_cast<Private *>( d );
+  return static_cast<Private *>(d);
 }
 
 } // Marble namespace

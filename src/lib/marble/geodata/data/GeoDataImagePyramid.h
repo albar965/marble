@@ -14,46 +14,47 @@
 #include "GeoDataObject.h"
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataImagePyramidPrivate;
 
-class MARBLE_EXPORT GeoDataImagePyramid : public GeoDataObject
+class MARBLE_EXPORT GeoDataImagePyramid :
+  public GeoDataObject
 {
 public:
-    GeoDataImagePyramid();
+  GeoDataImagePyramid();
 
-    GeoDataImagePyramid( const GeoDataImagePyramid &other );
+  GeoDataImagePyramid(const GeoDataImagePyramid& other);
 
-    GeoDataImagePyramid& operator=( const GeoDataImagePyramid &other );
-    bool operator==( const GeoDataImagePyramid &other ) const;
-    bool operator!=( const GeoDataImagePyramid &other ) const;
+  GeoDataImagePyramid& operator=(const GeoDataImagePyramid& other);
+  bool operator==(const GeoDataImagePyramid& other) const;
+  bool operator!=(const GeoDataImagePyramid& other) const;
 
-    ~GeoDataImagePyramid();
+  ~GeoDataImagePyramid();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    enum GridOrigin {
-        LowerLeft,
-        UpperLeft
-    };
+  enum GridOrigin
+  {
+    LowerLeft,
+    UpperLeft
+  };
 
-    int tileSize() const;
-    void setTileSize( const int &tileSize );
+  int tileSize() const;
+  void setTileSize(const int& tileSize);
 
-    int maxWidth() const;
-    void setMaxWidth( const int &maxWidth );
+  int maxWidth() const;
+  void setMaxWidth(const int& maxWidth);
 
-    int maxHeight() const;
-    void setMaxHeight( const int &maxHeight );
+  int maxHeight() const;
+  void setMaxHeight(const int& maxHeight);
 
-    GridOrigin gridOrigin() const;
-    void setGridOrigin( const GridOrigin &gridOrigin );
+  GridOrigin gridOrigin() const;
+  void setGridOrigin(const GridOrigin& gridOrigin);
 
 private:
-    GeoDataImagePyramidPrivate* const d;
+  GeoDataImagePyramidPrivate * const d;
 };
 
 }

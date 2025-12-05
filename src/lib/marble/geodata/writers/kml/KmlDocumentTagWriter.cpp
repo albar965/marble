@@ -26,41 +26,44 @@
 
 #include <QVector>
 
-namespace Marble
-{
+namespace Marble {
 
-static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDocumentType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlDocumentTagWriter() );
+static GeoTagWriterRegistrar s_writerDocument(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataDocumentType,
+                                                                          kml::kmlTag_nameSpaceOgc22),
+                                              new KmlDocumentTagWriter());
 
 KmlDocumentTagWriter::KmlDocumentTagWriter() :
-  KmlFeatureTagWriter( kml::kmlTag_Document )
+  KmlFeatureTagWriter(kml::kmlTag_Document)
 {
   // nothing to do
 }
 
-bool KmlDocumentTagWriter::writeMid( const GeoNode *node, GeoWriter& writer ) const
+bool KmlDocumentTagWriter::writeMid(const GeoNode *node, GeoWriter& writer) const
 {
-    const GeoDataDocument *document = static_cast<const GeoDataDocument*>(node);
+  const GeoDataDocument *document = static_cast<const GeoDataDocument *>(node);
 
-    foreach( const GeoDataStyle::ConstPtr &style, document->styles() ) {
-        writeElement( style.data(), writer );
-    }
-    foreach( const GeoDataStyleMap &map, document->styleMaps() ) {
-        writeElement( &map, writer );
-    }
-    foreach( const GeoDataSchema &schema, document->schemas() ) {
-        writeElement( &schema, writer );
-    }
+  foreach(const GeoDataStyle::ConstPtr& style, document->styles())
+  {
+    writeElement(style.data(), writer);
+  }
+  foreach(const GeoDataStyleMap& map, document->styleMaps())
+  {
+    writeElement(&map, writer);
+  }
+  foreach(const GeoDataSchema& schema, document->schemas())
+  {
+    writeElement(&schema, writer);
+  }
 
-    QVector<GeoDataFeature*>::ConstIterator it =  document->constBegin();
-    QVector<GeoDataFeature*>::ConstIterator const end = document->constEnd();
+  QVector<GeoDataFeature *>::ConstIterator it = document->constBegin();
+  QVector<GeoDataFeature *>::ConstIterator const end = document->constEnd();
 
-    for ( ; it != end; ++it ) {
-        writeElement( *it, writer );
-    }
+  for(; it != end; ++it )
+  {
+    writeElement(*it, writer);
+  }
 
-    return true;
+  return true;
 }
 
 }

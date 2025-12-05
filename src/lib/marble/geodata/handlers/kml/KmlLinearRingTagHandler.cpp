@@ -31,44 +31,50 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(LinearRing)
+
+GeoNode *KmlLinearRingTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( LinearRing )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_LinearRing));
 
-GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LinearRing ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
-        GeoDataLinearRing linearRing;
-        KmlObjectTagHandler::parseIdentifiers( parser, &linearRing );
-        parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
-        return &parentItem.nodeAs<GeoDataPolygon>()->outerBoundary();
+  if(parentItem.represents(kmlTag_outerBoundaryIs))
+  {
+    GeoDataLinearRing linearRing;
+    KmlObjectTagHandler::parseIdentifiers(parser, &linearRing);
+    parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary(linearRing);
+    return &parentItem.nodeAs<GeoDataPolygon>()->outerBoundary();
 
-    } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
-        GeoDataLinearRing linearRing;
-        KmlObjectTagHandler::parseIdentifiers( parser, &linearRing );
-        parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
-        return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
+  }
+  else if(parentItem.represents(kmlTag_innerBoundaryIs))
+  {
+    GeoDataLinearRing linearRing;
+    KmlObjectTagHandler::parseIdentifiers(parser, &linearRing);
+    parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary(linearRing);
+    return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
 
-    } else if( parentItem.represents( kmlTag_Placemark ) ) {
-        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
-        KmlObjectTagHandler::parseIdentifiers( parser, linearRing );
-        GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
-        placemark->setGeometry( linearRing );
-        return placemark->geometry();
+  }
+  else if(parentItem.represents(kmlTag_Placemark))
+  {
+    GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+    KmlObjectTagHandler::parseIdentifiers(parser, linearRing);
+    GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
+    placemark->setGeometry(linearRing);
+    return placemark->geometry();
 
-    } else if( parentItem.is<GeoDataMultiGeometry>() ) {
-        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
-        KmlObjectTagHandler::parseIdentifiers( parser, linearRing );
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
-        return linearRing;
-    } else
-        return 0;
+  }
+  else if(parentItem.is<GeoDataMultiGeometry>())
+  {
+    GeoDataLinearRing *linearRing = new GeoDataLinearRing;
+    KmlObjectTagHandler::parseIdentifiers(parser, linearRing);
+    parentItem.nodeAs<GeoDataMultiGeometry>()->append(linearRing);
+    return linearRing;
+  }
+  else
+    return 0;
 }
 
 }

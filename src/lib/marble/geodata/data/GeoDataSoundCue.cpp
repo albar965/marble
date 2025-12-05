@@ -11,22 +11,21 @@
 #include "GeoDataSoundCue.h"
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoDataSoundCue::GeoDataSoundCue() :
-    m_delayedStart(0)
+  m_delayedStart(0)
 {
 }
 
 bool GeoDataSoundCue::operator==(const GeoDataSoundCue& other) const
 {
-    return this->m_delayedStart == other.m_delayedStart && this->m_href == other.m_href;
+  return this->m_delayedStart == other.m_delayedStart && this->m_href == other.m_href;
 }
 
 bool GeoDataSoundCue::operator!=(const GeoDataSoundCue& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
 GeoDataSoundCue::~GeoDataSoundCue()
@@ -35,27 +34,27 @@ GeoDataSoundCue::~GeoDataSoundCue()
 
 const char *GeoDataSoundCue::nodeType() const
 {
-    return GeoDataTypes::GeoDataSoundCueType;
+  return GeoDataTypes::GeoDataSoundCueType;
 }
 
 QString GeoDataSoundCue::href() const
 {
-    return m_href;
+  return m_href;
 }
 
-void GeoDataSoundCue::setHref(const QString &url)
+void GeoDataSoundCue::setHref(const QString& url)
 {
-    m_href = url;
+  m_href = url;
 }
 
 double GeoDataSoundCue::delayedStart() const
 {
-    return m_delayedStart;
+  return m_delayedStart;
 }
 
 void GeoDataSoundCue::setDelayedStart(double pause)
 {
-    m_delayedStart = pause;
+  m_delayedStart = pause;
 }
 
 } // namespace Marble

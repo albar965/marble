@@ -13,29 +13,30 @@
 
 #include "GeoDataTourPrimitive.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class GEODATA_EXPORT GeoDataTourControl : public GeoDataTourPrimitive
+class GEODATA_EXPORT GeoDataTourControl :
+  public GeoDataTourPrimitive
 {
 public:
-    enum PlayMode {
-        Play,
-        Pause
-    };
+  enum PlayMode
+  {
+    Play,
+    Pause
+  };
 
-    GeoDataTourControl();
-    ~GeoDataTourControl();
+  GeoDataTourControl();
+  ~GeoDataTourControl();
 
-    bool operator==( const GeoDataTourControl &other ) const;
-    bool operator!=( const GeoDataTourControl &other ) const;
-    const char *nodeType() const;
+  bool operator==(const GeoDataTourControl& other) const;
+  bool operator!=(const GeoDataTourControl& other) const;
+  const char *nodeType() const;
 
-    PlayMode playMode() const;
-    void setPlayMode(const PlayMode &mode);
+  PlayMode playMode() const;
+  void setPlayMode(const PlayMode& mode);
 
 private:
-    PlayMode m_playMode;
+  PlayMode m_playMode;
 };
 
 } // namespace Marble

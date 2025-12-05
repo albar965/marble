@@ -11,7 +11,6 @@
 #ifndef MARBLE_TILESCALINGTEXTUREMAPPER_H
 #define MARBLE_TILESCALINGTEXTUREMAPPER_H
 
-
 #include <QObject>
 #include "TextureMapperInterface.h"
 
@@ -21,37 +20,37 @@
 #include <QImage>
 #include <QPixmap>
 
-namespace Marble
+namespace Marble {
+
+class TileScalingTextureMapper :
+  public QObject, public TextureMapperInterface
 {
+  Q_OBJECT
 
-class TileScalingTextureMapper : public QObject, public TextureMapperInterface
-{
-    Q_OBJECT
+public:
+  explicit TileScalingTextureMapper(StackedTileLoader *tileLoader, QObject *parent = 0);
 
- public:
-    explicit TileScalingTextureMapper( StackedTileLoader *tileLoader, QObject *parent = 0 );
+  virtual void mapTexture(GeoPainter *painter,
+                          const ViewportParams *viewport,
+                          int tileZoomLevel,
+                          const QRect& dirtyRect,
+                          TextureColorizer *texColorizer);
 
-    virtual void mapTexture( GeoPainter *painter,
-                             const ViewportParams *viewport,
-                             int tileZoomLevel,
-                             const QRect &dirtyRect,
-                             TextureColorizer *texColorizer );
+private Q_SLOTS:
+  void removePixmap(const TileId& tileId);
+  void clearPixmaps();
 
- private Q_SLOTS:
-    void removePixmap( const TileId &tileId );
-    void clearPixmaps();
+private:
+  void mapTexture(GeoPainter *painter,
+                  const ViewportParams *viewport,
+                  int tileZoomLevel,
+                  TextureColorizer *texColorizer);
 
- private:
-    void mapTexture( GeoPainter *painter,
-                     const ViewportParams *viewport,
-                     int tileZoomLevel,
-                     TextureColorizer *texColorizer );
-
- private:
-    StackedTileLoader *const m_tileLoader;
-    QCache<TileId, const QPixmap> m_cache;
-    QImage m_canvasImage;
-    int    m_radius;
+private:
+  StackedTileLoader *const m_tileLoader;
+  QCache<TileId, const QPixmap> m_cache;
+  QImage m_canvasImage;
+  int m_radius;
 };
 
 }

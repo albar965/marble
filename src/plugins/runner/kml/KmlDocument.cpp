@@ -14,34 +14,37 @@
 #include <QFile>
 #include <QDir>
 
-namespace Marble
-{
+namespace Marble {
 
 KmlDocument::~KmlDocument()
 {
-    foreach( const QString &file, m_files ) {
-        if ( !QFile::remove( file ) ) {
-            mDebug() << "Failed to remove temporary file" << file;
-        }
+  foreach(const QString& file, m_files)
+  {
+    if(!QFile::remove(file))
+    {
+      mDebug() << "Failed to remove temporary file" << file;
     }
-    if ( !m_path.isEmpty() ) {
-        removeDirectoryRecursively( m_path );
-    }
+  }
+  if(!m_path.isEmpty())
+  {
+    removeDirectoryRecursively(m_path);
+  }
 }
 
-void KmlDocument::setFiles( const QString &path, const QStringList &files )
+void KmlDocument::setFiles(const QString& path, const QStringList& files)
 {
-    m_path = path;
-    m_files = files;
+  m_path = path;
+  m_files = files;
 }
 
-void KmlDocument::removeDirectoryRecursively( const QString &path )
+void KmlDocument::removeDirectoryRecursively(const QString& path)
 {
-    QStringList const subdirs = QDir( path ).entryList( QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
-    foreach( const QString &subdir, subdirs ) {
-        removeDirectoryRecursively( path + '/' + subdir );
-    }
-    QDir::root().rmdir( path );
+  QStringList const subdirs = QDir(path).entryList(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+  foreach(const QString& subdir, subdirs)
+  {
+    removeDirectoryRecursively(path + '/' + subdir);
+  }
+  QDir::root().rmdir(path);
 }
 
 }

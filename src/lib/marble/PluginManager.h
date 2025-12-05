@@ -16,9 +16,7 @@
 #include <QList>
 #include "marble_export.h"
 
-
-namespace Marble
-{
+namespace Marble {
 
 class RenderPlugin;
 class PositionProviderPlugin;
@@ -40,108 +38,110 @@ class ParseRunnerPlugin;
  *
  */
 
-class MARBLE_EXPORT PluginManager : public QObject
+class MARBLE_EXPORT PluginManager :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
- public:
-    explicit PluginManager( QObject* parent = 0 );
+public:
+  explicit PluginManager(QObject *parent = 0);
 
-    ~PluginManager();
+  ~PluginManager();
 
-    /**
-     * @brief Returns all available RenderPlugins.
-     *
-     * Ownership of the items remains in PluginManager.
-     * In order to use the RenderPlugins, first create new instances using
-     * RenderPlugin::newInstance().
-     */
-    QList<const RenderPlugin *> renderPlugins() const;
+  /**
+   * @brief Returns all available RenderPlugins.
+   *
+   * Ownership of the items remains in PluginManager.
+   * In order to use the RenderPlugins, first create new instances using
+   * RenderPlugin::newInstance().
+   */
+  QList<const RenderPlugin *> renderPlugins() const;
 
-    /**
-     * @brief Add a RenderPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addRenderPlugin( const RenderPlugin *plugin );
+  /**
+   * @brief Add a RenderPlugin manually to the list of known plugins. Normally you
+   * don't need to call this method since all plugins are loaded automatically.
+   * @param plugin The plugin to add. Ownership retains with the caller.
+   */
+  void addRenderPlugin(const RenderPlugin *plugin);
 
-    /**
-     * @brief Returns all available PositionProviderPlugins.
-     *
-     * Ownership of the items remains in PluginManager.
-     * In order to use the PositionProviderPlugins, first create new instances using
-     * PositionProviderPlugin::newInstance().
-     */
-    QList<const PositionProviderPlugin *> positionProviderPlugins() const;
+  /**
+   * @brief Returns all available PositionProviderPlugins.
+   *
+   * Ownership of the items remains in PluginManager.
+   * In order to use the PositionProviderPlugins, first create new instances using
+   * PositionProviderPlugin::newInstance().
+   */
+  QList<const PositionProviderPlugin *> positionProviderPlugins() const;
 
-    /**
-     * @brief Add a PositionProviderPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addPositionProviderPlugin( const PositionProviderPlugin *plugin );
+  /**
+   * @brief Add a PositionProviderPlugin manually to the list of known plugins. Normally you
+   * don't need to call this method since all plugins are loaded automatically.
+   * @param plugin The plugin to add. Ownership retains with the caller.
+   */
+  void addPositionProviderPlugin(const PositionProviderPlugin *plugin);
 
-    /**
-     * Returns all search runner plugins.
-     * @note: Runner plugins are owned by the PluginManager, do not delete them.
-     */
-    QList<const SearchRunnerPlugin *> searchRunnerPlugins() const;
+  /**
+   * Returns all search runner plugins.
+   * @note: Runner plugins are owned by the PluginManager, do not delete them.
+   */
+  QList<const SearchRunnerPlugin *> searchRunnerPlugins() const;
 
-    /**
-     * @brief Add a SearchRunnerPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addSearchRunnerPlugin( const SearchRunnerPlugin *plugin );
+  /**
+   * @brief Add a SearchRunnerPlugin manually to the list of known plugins. Normally you
+   * don't need to call this method since all plugins are loaded automatically.
+   * @param plugin The plugin to add. Ownership retains with the caller.
+   */
+  void addSearchRunnerPlugin(const SearchRunnerPlugin *plugin);
 
-    /**
-     * Returns all parse runner plugins.
-     * @note: The runner plugins are owned by the PluginManager, do not delete them.
-     */
-    QList<const ParseRunnerPlugin *> parsingRunnerPlugins() const;
+  /**
+   * Returns all parse runner plugins.
+   * @note: The runner plugins are owned by the PluginManager, do not delete them.
+   */
+  QList<const ParseRunnerPlugin *> parsingRunnerPlugins() const;
 
-    /**
-     * @brief Add a ParseRunnerPlugin manually to the list of known plugins. Normally you
-     * don't need to call this method since all plugins are loaded automatically.
-     * @param plugin The plugin to add. Ownership retains with the caller.
-     */
-    void addParseRunnerPlugin( const ParseRunnerPlugin *plugin );
+  /**
+   * @brief Add a ParseRunnerPlugin manually to the list of known plugins. Normally you
+   * don't need to call this method since all plugins are loaded automatically.
+   * @param plugin The plugin to add. Ownership retains with the caller.
+   */
+  void addParseRunnerPlugin(const ParseRunnerPlugin *plugin);
 
-    /**
-     * @brief blacklistPlugin Prevent that a plugin is loaded from the given filename
-     * @param filename The name of the file (excluding prefix and file extension) to blacklist. E.g.
-     * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
-     */
-    static void blacklistPlugin(const QString &filename);
+  /**
+   * @brief blacklistPlugin Prevent that a plugin is loaded from the given filename
+   * @param filename The name of the file (excluding prefix and file extension) to blacklist. E.g.
+   * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
+   */
+  static void blacklistPlugin(const QString& filename);
 
-    /**
-     * @brief whitelistPlugin Add a plugin to the whitelist of plugins. If the whitelist is not
-     * empty, only whitelisted plugins are loaded. If a plugin is both whitelisted and blacklisted,
-     * it will not be loaded
-     * @param filename The name of the file (excluding prefix and file extension) to whitelist. E.g.
-     * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
-     */
-    static void whitelistPlugin(const QString &filename);
+  /**
+   * @brief whitelistPlugin Add a plugin to the whitelist of plugins. If the whitelist is not
+   * empty, only whitelisted plugins are loaded. If a plugin is both whitelisted and blacklisted,
+   * it will not be loaded
+   * @param filename The name of the file (excluding prefix and file extension) to whitelist. E.g.
+   * to ignore "libWikipedia.so" on Linux and "Wikipedia.dll" on Windows, pass "Wikipedia"
+   */
+  static void whitelistPlugin(const QString& filename);
 
 Q_SIGNALS:
-    void renderPluginsChanged();
+  void renderPluginsChanged();
 
-    void positionProviderPluginsChanged();
+  void positionProviderPluginsChanged();
 
-    void searchRunnerPluginsChanged();
+  void searchRunnerPluginsChanged();
 
-    void reverseGeocodingRunnerPluginsChanged();
+  void reverseGeocodingRunnerPluginsChanged();
 
-    void parseRunnerPluginsChanged();
+  void parseRunnerPluginsChanged();
 
- private:
-    Q_DISABLE_COPY( PluginManager )
+private:
+  Q_DISABLE_COPY(PluginManager)
 
 #ifdef Q_OS_ANDROID
-    void installPluginsFromAssets() const;
+  void installPluginsFromAssets() const;
+
 #endif
 
-    PluginManagerPrivate  * const d;
+  PluginManagerPrivate * const d;
 };
 
 }

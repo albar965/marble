@@ -16,23 +16,24 @@
 
 class QDateTime;
 
-namespace Marble
-{
+namespace Marble {
 
-class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
+class MapThemeSortFilterProxyModel :
+  public QSortFilterProxyModel
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MapThemeSortFilterProxyModel(QObject *parent = 0);
+  explicit MapThemeSortFilterProxyModel(QObject *parent = 0);
 
 protected:
-    bool lessThan( const QModelIndex &left, const QModelIndex &right ) const;
-    bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
+  bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
+  bool filterAcceptsRow(int sourceRow, const QModelIndex& sourceParent) const;
 
 private:
-    static bool isFavorite( const QModelIndex& index );
-    static QDateTime favoriteDateTime( const QModelIndex& index );
+  static bool isFavorite(const QModelIndex& index);
+  static QDateTime favoriteDateTime(const QModelIndex& index);
+
 };
 
 }

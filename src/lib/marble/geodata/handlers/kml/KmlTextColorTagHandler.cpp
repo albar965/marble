@@ -17,24 +17,22 @@
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( textColor )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(textColor)
 
-GeoNode* KmltextColorTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmltextColorTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_textColor ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_textColor));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_BalloonStyle ) )
-    {
-        QColor const color = KmlcolorTagHandler::parseColor( parser.readElementText().trimmed() );
-        parentItem.nodeAs<GeoDataBalloonStyle>()->setTextColor( color );
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_BalloonStyle))
+  {
+    QColor const color = KmlcolorTagHandler::parseColor(parser.readElementText().trimmed());
+    parentItem.nodeAs<GeoDataBalloonStyle>()->setTextColor(color);
+  }
+  return 0;
 }
 
 }

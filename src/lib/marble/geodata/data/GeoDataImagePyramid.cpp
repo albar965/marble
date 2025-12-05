@@ -12,109 +12,108 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataImagePyramidPrivate
 {
 public:
-    GeoDataImagePyramidPrivate();
+  GeoDataImagePyramidPrivate();
 
-    int m_tileSize;
-    int m_maxWidth;
-    int m_maxHeight;
-    GeoDataImagePyramid::GridOrigin m_gridOrigin;
+  int m_tileSize;
+  int m_maxWidth;
+  int m_maxHeight;
+  GeoDataImagePyramid::GridOrigin m_gridOrigin;
 };
 
 GeoDataImagePyramidPrivate::GeoDataImagePyramidPrivate() :
-    m_tileSize( 256 ),
-    m_maxWidth(),
-    m_maxHeight(),
-    m_gridOrigin()
+  m_tileSize(256),
+  m_maxWidth(),
+  m_maxHeight(),
+  m_gridOrigin()
 {
-    // nothing to do
+  // nothing to do
 }
 
-GeoDataImagePyramid::GeoDataImagePyramid() : d( new GeoDataImagePyramidPrivate )
+GeoDataImagePyramid::GeoDataImagePyramid() : d(new GeoDataImagePyramidPrivate)
 {
-    // nothing to do
+  // nothing to do
 }
 
-GeoDataImagePyramid::GeoDataImagePyramid( const Marble::GeoDataImagePyramid &other ) :
-    GeoDataObject(), d( new GeoDataImagePyramidPrivate( *other.d ) )
+GeoDataImagePyramid::GeoDataImagePyramid(const Marble::GeoDataImagePyramid& other) :
+  GeoDataObject(), d(new GeoDataImagePyramidPrivate(*other.d))
 {
-    // nothing to do
+  // nothing to do
 }
 
-GeoDataImagePyramid &GeoDataImagePyramid::operator=( const GeoDataImagePyramid &other )
+GeoDataImagePyramid& GeoDataImagePyramid::operator=(const GeoDataImagePyramid& other)
 {
-    GeoDataObject::operator=( other );
-    *d = *other.d;
-    return *this;
+  GeoDataObject::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataImagePyramid::operator==( const GeoDataImagePyramid& other ) const
+bool GeoDataImagePyramid::operator==(const GeoDataImagePyramid& other) const
 {
-    return equals(other) &&
-           d->m_tileSize == other.d->m_tileSize &&
-           d->m_maxWidth == other.d->m_maxWidth &&
-           d->m_maxHeight == other.d->m_maxHeight &&
-           d->m_gridOrigin == other.d->m_gridOrigin;
+  return equals(other) &&
+         d->m_tileSize == other.d->m_tileSize &&
+         d->m_maxWidth == other.d->m_maxWidth &&
+         d->m_maxHeight == other.d->m_maxHeight &&
+         d->m_gridOrigin == other.d->m_gridOrigin;
 }
 
-bool GeoDataImagePyramid::operator!=( const GeoDataImagePyramid& other ) const
+bool GeoDataImagePyramid::operator!=(const GeoDataImagePyramid& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
 GeoDataImagePyramid::~GeoDataImagePyramid()
 {
-    delete d;
+  delete d;
 }
 
 const char *GeoDataImagePyramid::nodeType() const
 {
-    return GeoDataTypes::GeoDataImagePyramidType;
+  return GeoDataTypes::GeoDataImagePyramidType;
 }
 
 int GeoDataImagePyramid::tileSize() const
 {
-    return d->m_tileSize;
+  return d->m_tileSize;
 }
 
-void GeoDataImagePyramid::setTileSize( const int &tileSize )
+void GeoDataImagePyramid::setTileSize(const int& tileSize)
 {
-    d->m_tileSize = tileSize;
+  d->m_tileSize = tileSize;
 }
 
 int GeoDataImagePyramid::maxWidth() const
 {
-    return d->m_maxWidth;
+  return d->m_maxWidth;
 }
 
-void GeoDataImagePyramid::setMaxWidth( const int &maxWidth )
+void GeoDataImagePyramid::setMaxWidth(const int& maxWidth)
 {
-    d->m_maxWidth = maxWidth;
+  d->m_maxWidth = maxWidth;
 }
 
 int GeoDataImagePyramid::maxHeight() const
 {
-    return d->m_maxHeight;
+  return d->m_maxHeight;
 }
 
-void GeoDataImagePyramid::setMaxHeight( const int &maxHeight )
+void GeoDataImagePyramid::setMaxHeight(const int& maxHeight)
 {
-    d->m_maxHeight = maxHeight;
+  d->m_maxHeight = maxHeight;
 }
 
 GeoDataImagePyramid::GridOrigin GeoDataImagePyramid::gridOrigin() const
 {
-    return d->m_gridOrigin;
+  return d->m_gridOrigin;
 }
 
-void GeoDataImagePyramid::setGridOrigin( const GridOrigin &gridOrigin )
+void GeoDataImagePyramid::setGridOrigin(const GridOrigin& gridOrigin)
 {
-    d->m_gridOrigin = gridOrigin;
+  d->m_gridOrigin = gridOrigin;
 }
 
 }

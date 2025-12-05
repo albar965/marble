@@ -12,14 +12,16 @@
 
 namespace Marble {
 
-void KmlObjectTagWriter::writeIdentifiers( GeoWriter &writer, const GeoDataObject *object )
+void KmlObjectTagWriter::writeIdentifiers(GeoWriter& writer, const GeoDataObject *object)
 {
-    if ( object && !object->id().isEmpty() ) {
-        writer.writeAttribute( "id", object->id().toUtf8() );
-    }
-    if ( object && !object->targetId().isEmpty() ) {
-        writer.writeAttribute( "targetId", object->targetId().toUtf8() );
-    }
+  if(object && !object->id().isEmpty())
+  {
+    writer.writeAttribute("id", object->id().toUtf8());
+  }
+  if(object && !object->targetId().isEmpty())
+  {
+    writer.writeAttribute("targetId", object->targetId().toUtf8());
+  }
 }
 
 }

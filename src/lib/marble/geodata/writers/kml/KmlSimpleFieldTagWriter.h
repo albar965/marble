@@ -16,16 +16,17 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlSimpleFieldTagWriter : public GeoTagWriter
+class KmlSimpleFieldTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
 
 private:
-    static QString resolveType( GeoDataSimpleField::SimpleFieldType type );
+  static QString resolveType(GeoDataSimpleField::SimpleFieldType type);
+
 };
 
 }

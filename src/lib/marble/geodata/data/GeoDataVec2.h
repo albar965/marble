@@ -19,30 +19,32 @@ namespace Marble {
 
 class GeoDataVec2Private;
 
-class MARBLE_EXPORT GeoDataVec2 : public QPointF
+class MARBLE_EXPORT GeoDataVec2 :
+  public QPointF
 {
 public:
-    enum Unit {Fraction, Pixels, InsetPixels};
+  enum Unit {Fraction, Pixels, InsetPixels};
 
-    GeoDataVec2();
+  GeoDataVec2();
 
-    GeoDataVec2( const qreal &x, const qreal &y, const QString &xunit, const QString &yunit );
+  GeoDataVec2(const qreal& x, const qreal& y, const QString& xunit, const QString& yunit);
 
-    GeoDataVec2( const GeoDataVec2 &other );
+  GeoDataVec2(const GeoDataVec2& other);
 
-    GeoDataVec2& operator=( const GeoDataVec2 &other );
-    bool operator==( const GeoDataVec2 &other ) const;
-    bool operator!=( const GeoDataVec2 &other ) const;
-    ~GeoDataVec2();
+  GeoDataVec2& operator=(const GeoDataVec2& other);
+  bool operator==(const GeoDataVec2& other) const;
+  bool operator!=(const GeoDataVec2& other) const;
 
-    Unit xunit() const;
-    void setXunits( Unit xunit );
+  ~GeoDataVec2();
 
-    Unit yunit() const;
-    void setYunits( Unit yunit );
+  Unit xunit() const;
+  void setXunits(Unit xunit);
+
+  Unit yunit() const;
+  void setYunits(Unit yunit);
 
 private:
-    GeoDataVec2Private* const d;
+  GeoDataVec2Private * const d;
 };
 
 }

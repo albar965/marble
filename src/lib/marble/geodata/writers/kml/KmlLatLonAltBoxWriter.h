@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -14,13 +13,14 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlLatLonAltBoxWriter : public GeoTagWriter
+class KmlLatLonAltBoxWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

@@ -14,26 +14,24 @@
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(minRefreshPeriod)
+
+GeoNode *KmlminRefreshPeriodTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( minRefreshPeriod )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_minRefreshPeriod));
 
-GeoNode* KmlminRefreshPeriodTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_minRefreshPeriod ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_NetworkLinkControl))
+  {
+    qreal minRefreshPeriod = parser.readElementText().toDouble();
 
-    if ( parentItem.represents( kmlTag_NetworkLinkControl ) )
-    {
-        qreal minRefreshPeriod = parser.readElementText().toDouble();
+    parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMinRefreshPeriod(minRefreshPeriod);
+  }
 
-        parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMinRefreshPeriod( minRefreshPeriod );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

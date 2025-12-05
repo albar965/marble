@@ -29,26 +29,24 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( PolyStyle )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(PolyStyle)
 
-GeoNode* KmlPolyStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlPolyStyleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_PolyStyle ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_PolyStyle));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataPolyStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
-        parentItem.nodeAs<GeoDataStyle>()->setPolyStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
-    }
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataPolyStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
+    parentItem.nodeAs<GeoDataStyle>()->setPolyStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
+  }
+  return 0;
 }
 
 }

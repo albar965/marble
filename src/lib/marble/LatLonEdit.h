@@ -17,41 +17,46 @@
 #include "MarbleGlobal.h"
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class LatLonEditPrivate;
 
-class MARBLE_EXPORT  LatLonEdit : public QWidget
+class MARBLE_EXPORT  LatLonEdit :
+  public QWidget
 {
-    Q_OBJECT
-    //FIXME: make the dimension enum work
-    //Q_PROPERTY( qreal value READ value WRITE setValue )
-    //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
+  Q_OBJECT
+  // FIXME: make the dimension enum work
+  // Q_PROPERTY( qreal value READ value WRITE setValue )
+  // Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 
 public:
-    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
-                        GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
-    ~LatLonEdit();
-    qreal value() const;
-    Dimension dimension() const;
-    GeoDataCoordinates::Notation notation() const;
+  explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude,
+                      GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS);
+  ~LatLonEdit();
+  qreal value() const;
+  Dimension dimension() const;
+  GeoDataCoordinates::Notation notation() const;
+
 public Q_SLOTS:
-    void setValue(qreal newvalue);
-    void setDimension( Dimension dimension );
-    void setNotation(GeoDataCoordinates::Notation notation);
+  void setValue(qreal newvalue);
+  void setDimension(Dimension dimension);
+  void setNotation(GeoDataCoordinates::Notation notation);
+
 Q_SIGNALS:
-    void valueChanged( qreal value );
+  void valueChanged(qreal value);
+
 private Q_SLOTS:
-    void checkIntValueOverflow();
-    void checkUIntValueOverflow();
-    void checkFloatValueOverflow();
-    void onSignChanged();
+  void checkIntValueOverflow();
+  void checkUIntValueOverflow();
+  void checkFloatValueOverflow();
+  void onSignChanged();
+
 private:
-    // recalculates m_value based on spinboxes
-    void recalculate();
+  // recalculates m_value based on spinboxes
+  void recalculate();
+
 private:
-    LatLonEditPrivate * const d;
+  LatLonEditPrivate * const d;
 };
 
 }

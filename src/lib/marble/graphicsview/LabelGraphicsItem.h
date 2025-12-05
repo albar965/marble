@@ -20,8 +20,7 @@
 class QImage;
 class QIcon;
 
-namespace Marble
-{
+namespace Marble {
 
 class LabelGraphicsItemPrivate;
 
@@ -30,35 +29,36 @@ class LabelGraphicsItemPrivate;
  * The text is displayed as plain text.
  * The item also provides frames.
  */
-class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
+class MARBLE_EXPORT LabelGraphicsItem :
+  public FrameGraphicsItem
 {
- public:
-    explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    ~LabelGraphicsItem();
+public:
+  explicit LabelGraphicsItem(MarbleGraphicsItem *parent = 0);
+  ~LabelGraphicsItem();
 
-    void setContentSize( const QSizeF &contentSize );
+  void setContentSize(const QSizeF& contentSize);
 
-    QString text() const;
-    void setText( const QString& text );
+  QString text() const;
+  void setText(const QString& text);
 
-    QImage image() const;
-    void setImage( const QImage& image, const QSize& size = QSize() );
+  QImage image() const;
+  void setImage(const QImage& image, const QSize& size = QSize());
 
-    QIcon icon() const;
-    void setIcon( const QIcon& icon, const QSize& size );
+  QIcon icon() const;
+  void setIcon(const QIcon& icon, const QSize& size);
 
-    void setMinimumSize( const QSizeF& size );
-    QSizeF minimumSize() const;
+  void setMinimumSize(const QSizeF& size);
+  QSizeF minimumSize() const;
 
-    void clear();
+  void clear();
 
- protected:
-    void paintContent( QPainter *painter );
+protected:
+  void paintContent(QPainter *painter);
 
- private:
-    Q_DISABLE_COPY( LabelGraphicsItem )
+private:
+  Q_DISABLE_COPY(LabelGraphicsItem)
 
-    LabelGraphicsItemPrivate * const d;
+  LabelGraphicsItemPrivate * const d;
 };
 
 } // namespace Marble

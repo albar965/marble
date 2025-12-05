@@ -10,43 +10,42 @@
 
 #include "GeoSceneLicense.h"
 
-namespace Marble
-{
+namespace Marble {
 
 GeoSceneLicense::GeoSceneLicense() :
-    m_attribution( OptOut )
+  m_attribution(OptOut)
 {
-    // nothing to do
+  // nothing to do
 }
 
 QString GeoSceneLicense::license() const
 {
-    return m_fullLicense.isEmpty() ? m_shortLicense : m_fullLicense;
+  return m_fullLicense.isEmpty() ? m_shortLicense : m_fullLicense;
 }
 
 QString GeoSceneLicense::shortLicense() const
 {
-    return m_shortLicense.isEmpty() ? m_fullLicense : m_shortLicense;
+  return m_shortLicense.isEmpty() ? m_fullLicense : m_shortLicense;
 }
 
 GeoSceneLicense::Attribution GeoSceneLicense::attribution() const
 {
-    return m_attribution;
+  return m_attribution;
 }
 
-void GeoSceneLicense::setLicense(const QString &license )
+void GeoSceneLicense::setLicense(const QString& license)
 {
-    m_fullLicense = license;
+  m_fullLicense = license;
 }
 
-void GeoSceneLicense::setShortLicense( const QString &license )
+void GeoSceneLicense::setShortLicense(const QString& license)
 {
-    m_shortLicense = license;
+  m_shortLicense = license;
 }
 
-void GeoSceneLicense::setAttribution(Attribution attr )
+void GeoSceneLicense::setAttribution(Attribution attr)
 {
-    m_attribution = attr;
+  m_attribution = attr;
 }
 
 }

@@ -15,31 +15,31 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+namespace gx {
+KML_DEFINE_TAG_HANDLER_GX22(AnimatedUpdate)
+
+GeoNode *KmlAnimatedUpdateTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-namespace gx
-{
-KML_DEFINE_TAG_HANDLER_GX22( AnimatedUpdate )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_AnimatedUpdate));
 
-GeoNode* KmlAnimatedUpdateTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_AnimatedUpdate ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
+  KmlObjectTagHandler::parseIdentifiers(parser, animatedUpdate);
 
-    GeoDataAnimatedUpdate *animatedUpdate = new GeoDataAnimatedUpdate;
-    KmlObjectTagHandler::parseIdentifiers( parser, animatedUpdate );
+  if(parentItem.is<GeoDataPlaylist>())
+  {
+    parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(animatedUpdate);
+    return animatedUpdate;
+  }
+  else
+  {
+    delete animatedUpdate;
+  }
 
-    if (parentItem.is<GeoDataPlaylist>()) {
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive( animatedUpdate );
-        return animatedUpdate;
-    } else {
-        delete animatedUpdate;
-    }
-
-    return 0;
+  return 0;
 }
 }
 }

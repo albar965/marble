@@ -29,8 +29,7 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoSceneAbstractDataset;
 class GeoSceneFilter;
@@ -40,64 +39,65 @@ class GeoSceneLayerPrivate;
  * @short Layer of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneLayer : public GeoNode
+class GEODATA_EXPORT GeoSceneLayer :
+  public GeoNode
 {
- public:
-    explicit GeoSceneLayer( const QString& name );
-    ~GeoSceneLayer();
-    
-    virtual const char* nodeType() const;
+public:
+  explicit GeoSceneLayer(const QString& name);
+  ~GeoSceneLayer();
 
-    /**
-     * @brief  Add a section to the legend
-     * @param  section  the new section
-     */
-    void addDataset( GeoSceneAbstractDataset* );
+  virtual const char *nodeType() const;
 
-    const GeoSceneAbstractDataset * dataset( const QString& ) const;
-    GeoSceneAbstractDataset * dataset( const QString& );
+  /**
+   * @brief  Add a section to the legend
+   * @param  section  the new section
+   */
+  void addDataset(GeoSceneAbstractDataset *);
 
-    const GeoSceneAbstractDataset * groundDataset() const;
-    GeoSceneAbstractDataset * groundDataset();
+  const GeoSceneAbstractDataset *dataset(const QString&) const;
+  GeoSceneAbstractDataset *dataset(const QString&);
 
-    QVector<GeoSceneAbstractDataset*> datasets() const;
+  const GeoSceneAbstractDataset *groundDataset() const;
+  GeoSceneAbstractDataset *groundDataset();
 
-    QString name() const;
+  QVector<GeoSceneAbstractDataset *> datasets() const;
 
-    QString backend() const;
-    void setBackend( const QString& plugin );
+  QString name() const;
 
-    /**
-     * @brief  returns whether the data is organized in quad tiles.
-     */
-    bool isTiled() const;
-    void setTiled( bool );
+  QString backend() const;
+  void setBackend(const QString& plugin);
 
-    QString role() const;
-    void setRole( const QString& type );
+  /**
+   * @brief  returns whether the data is organized in quad tiles.
+   */
+  bool isTiled() const;
+  void setTiled(bool);
 
-    const GeoSceneFilter * filter() const;
-    GeoSceneFilter * filter();
-    void addFilter( GeoSceneFilter * filter );
-    void removeFilter( GeoSceneFilter * filter );
+  QString role() const;
+  void setRole(const QString& type);
 
- private:
-    Q_DISABLE_COPY( GeoSceneLayer )
+  const GeoSceneFilter *filter() const;
+  GeoSceneFilter *filter();
+  void addFilter(GeoSceneFilter *filter);
+  void removeFilter(GeoSceneFilter *filter);
 
-    /// The vector holding all the data in the layer.
-    /// (We want to preserve the order and don't care 
-    /// much about speed here), so we don't use a hash
-    QVector<GeoSceneAbstractDataset *> m_datasets;
+private:
+  Q_DISABLE_COPY(GeoSceneLayer)
 
-    GeoSceneFilter  *m_filter;
+  /// The vector holding all the data in the layer.
+  /// (We want to preserve the order and don't care
+  /// much about speed here), so we don't use a hash
+  QVector<GeoSceneAbstractDataset *> m_datasets;
 
-    QString          m_name;
-    QString          m_backend;
-    QString          m_role;
+  GeoSceneFilter *m_filter;
 
-    bool             m_tiled;
-    
-    GeoSceneLayerPrivate * const d;
+  QString m_name;
+  QString m_backend;
+  QString m_role;
+
+  bool m_tiled;
+
+  GeoSceneLayerPrivate * const d;
 };
 
 }

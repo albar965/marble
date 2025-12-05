@@ -11,11 +11,9 @@
 #ifndef MARBLE_GEOSCENETYPES_H
 #define MARBLE_GEOSCENETYPES_H
 
-namespace Marble
-{
+namespace Marble {
 
-namespace GeoSceneTypes
-{
+namespace GeoSceneTypes {
 /**
  * Please keep alphabetic order to prevent mess
  */

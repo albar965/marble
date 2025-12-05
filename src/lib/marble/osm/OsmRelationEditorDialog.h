@@ -29,25 +29,27 @@ class GeoDataPlacemark;
  * @brief The OsmRelationEditorDialog class small dialog that is used to edit relations
  * The dialog has a line edit for name input, and a OsmTagEditorWidget for tag editing
  */
-class MARBLE_EXPORT OsmRelationEditorDialog : public QDialog
+class MARBLE_EXPORT OsmRelationEditorDialog :
+  public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit OsmRelationEditorDialog( OsmPlacemarkData *relationData, QWidget *parent = 0 );
-    ~OsmRelationEditorDialog();
+  explicit OsmRelationEditorDialog(OsmPlacemarkData *relationData, QWidget *parent = 0);
+  ~OsmRelationEditorDialog();
 
 private Q_SLOTS:
-    void checkFields();
+  void checkFields();
 
 private:
-    void finish();
-    friend class OsmRelationEditorDialogPrivate;
-    QDialogButtonBox *m_buttonBox;
-    QLineEdit *m_nameLineEdit;
-    OsmTagEditorWidget *m_tagEditor;
-    GeoDataPlacemark *m_dummyPlacemark;
-    OsmPlacemarkData *m_relationData;
+  void finish();
+
+  friend class OsmRelationEditorDialogPrivate;
+  QDialogButtonBox *m_buttonBox;
+  QLineEdit *m_nameLineEdit;
+  OsmTagEditorWidget *m_tagEditor;
+  GeoDataPlacemark *m_dummyPlacemark;
+  OsmPlacemarkData *m_relationData;
 };
 
 }

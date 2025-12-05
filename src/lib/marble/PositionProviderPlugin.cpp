@@ -10,25 +10,25 @@
 
 #include "PositionProviderPlugin.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class PositionProviderPluginPrivate
 {
 public:
-    PositionProviderPluginPrivate()
-    {
-    }
+  PositionProviderPluginPrivate()
+  {
+  }
+
 };
 
 PositionProviderPlugin::PositionProviderPlugin()
-    : d( new PositionProviderPluginPrivate() )
+  : d(new PositionProviderPluginPrivate())
 {
 }
 
 PositionProviderPlugin::~PositionProviderPlugin()
 {
-    delete d;
+  delete d;
 }
 
 }

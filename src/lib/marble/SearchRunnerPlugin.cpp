@@ -14,68 +14,68 @@
 
 #include <QIcon>
 
-namespace Marble
-{
+namespace Marble {
 
 class Q_DECL_HIDDEN SearchRunnerPlugin::Private
 {
 public:
-    QStringList m_supportedCelestialBodies;
+  QStringList m_supportedCelestialBodies;
 
-    bool m_canWorkOffline;
+  bool m_canWorkOffline;
 
-    Private();
+  Private();
 };
 
 SearchRunnerPlugin::Private::Private()
-    : m_canWorkOffline( true )
+  : m_canWorkOffline(true)
 {
-    // nothing to do
+  // nothing to do
 }
 
-SearchRunnerPlugin::SearchRunnerPlugin( QObject* parent ) :
-    QObject( parent ),
-    d( new Private )
+SearchRunnerPlugin::SearchRunnerPlugin(QObject *parent) :
+  QObject(parent),
+  d(new Private)
 {
 }
 
 SearchRunnerPlugin::~SearchRunnerPlugin()
 {
-    delete d;
+  delete d;
 }
 
 QIcon SearchRunnerPlugin::icon() const
 {
-    return QIcon();
+  return QIcon();
 }
 
-bool SearchRunnerPlugin::supportsCelestialBody( const QString &celestialBodyId ) const
+bool SearchRunnerPlugin::supportsCelestialBody(const QString& celestialBodyId) const
 {
-    if ( d->m_supportedCelestialBodies.isEmpty() ) {
-        return true;
-    }
+  if(d->m_supportedCelestialBodies.isEmpty())
+  {
+    return true;
+  }
 
-    return d->m_supportedCelestialBodies.contains( celestialBodyId );
+  return d->m_supportedCelestialBodies.contains(celestialBodyId);
 }
 
-void SearchRunnerPlugin::setSupportedCelestialBodies( const QStringList &celestialBodies )
+void SearchRunnerPlugin::setSupportedCelestialBodies(const QStringList& celestialBodies)
 {
-    d->m_supportedCelestialBodies = celestialBodies;
+  d->m_supportedCelestialBodies = celestialBodies;
 }
 
-void SearchRunnerPlugin::setCanWorkOffline( bool canWorkOffline )
+void SearchRunnerPlugin::setCanWorkOffline(bool canWorkOffline)
 {
-    d->m_canWorkOffline = canWorkOffline;
+  d->m_canWorkOffline = canWorkOffline;
 }
 
 bool SearchRunnerPlugin::canWorkOffline() const
 {
-    return d->m_canWorkOffline;
+  return d->m_canWorkOffline;
 }
 
 bool SearchRunnerPlugin::canWork() const
 {
-    return true;
+  return true;
 }
 
 }

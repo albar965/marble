@@ -14,10 +14,10 @@
 #include "GeoDataObject.h"
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class GEODATA_EXPORT GeoDataTourPrimitive : public GeoDataObject
+class GEODATA_EXPORT GeoDataTourPrimitive :
+  public GeoDataObject
 {
 };
 

@@ -17,33 +17,34 @@
 
 #include "GeoDocument.h"
 
-namespace Marble
+namespace Marble {
+
+class GEODATA_EXPORT GeoSceneLicense :
+  public GeoNode
 {
+public:
+  enum Attribution
+  {
+    Never,
+    OptOut,
+    OptIn,
+    Always
+  };
 
-class GEODATA_EXPORT GeoSceneLicense : public GeoNode
-{
- public:
-    enum Attribution {
-        Never,
-        OptOut,
-        OptIn,
-        Always
-    };
+  GeoSceneLicense();
 
-    GeoSceneLicense();
+  QString license() const;
+  QString shortLicense() const;
+  Attribution attribution() const;
 
-    QString license() const;
-    QString shortLicense() const;
-    Attribution attribution() const;
+  void setLicense(const QString& license);
+  void setShortLicense(const QString& license);
+  void setAttribution(Attribution attr);
 
-    void setLicense( const QString &license );
-    void setShortLicense( const QString &license );
-    void setAttribution(Attribution attr );
-
- private:
-    QString m_fullLicense;
-    QString m_shortLicense;
-    Attribution m_attribution;
+private:
+  QString m_fullLicense;
+  QString m_shortLicense;
+  Attribution m_attribution;
 
 };
 

@@ -18,64 +18,65 @@
 #include "GeoDataTrack.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(when)
+
+GeoNode *KmlwhenTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( when )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_when));
 
-GeoNode* KmlwhenTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_when ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  QString whenString = parser.readElementText().trimmed();
+  GeoDataTimeStamp::TimeResolution resolution = modify(whenString);
+  QDateTime when = QDateTime::fromString(whenString, Qt::ISODate);
+  if(parentItem.represents(kmlTag_TimeStamp))
+  {
+    parentItem.nodeAs<GeoDataTimeStamp>()->setWhen(when);
+    parentItem.nodeAs<GeoDataTimeStamp>()->setResolution(resolution);
+  }
+  else if(parentItem.represents(kmlTag_Track))
+  {
+    parentItem.nodeAs<GeoDataTrack>()->appendWhen(when);
+  }
 
-    QString whenString = parser.readElementText().trimmed();
-    GeoDataTimeStamp::TimeResolution resolution = modify( whenString );
-    QDateTime when = QDateTime::fromString( whenString, Qt::ISODate );
-    if( parentItem.represents( kmlTag_TimeStamp ) ) {
-        parentItem.nodeAs<GeoDataTimeStamp>()->setWhen( when );
-        parentItem.nodeAs<GeoDataTimeStamp>()->setResolution( resolution );
-    } else if ( parentItem.represents( kmlTag_Track ) ) {
-        parentItem.nodeAs<GeoDataTrack>()->appendWhen( when );
-    }
-
-    return 0;
+  return 0;
 }
 
-QDateTime KmlwhenTagHandler::parse( const QString &dateTime )
+QDateTime KmlwhenTagHandler::parse(const QString& dateTime)
 {
-    QString iso = dateTime;
-    modify( iso );
-    return QDateTime::fromString( iso, Qt::ISODate );
+  QString iso = dateTime;
+  modify(iso);
+  return QDateTime::fromString(iso, Qt::ISODate);
 }
 
-GeoDataTimeStamp KmlwhenTagHandler::parseTimestamp( const QString &dateTime )
+GeoDataTimeStamp KmlwhenTagHandler::parseTimestamp(const QString& dateTime)
 {
   GeoDataTimeStamp result;
   QString input = dateTime;
-  result.setResolution( modify( input ) );
-  result.setWhen( parse( input) );
+  result.setResolution(modify(input));
+  result.setWhen(parse(input));
   return result;
 }
 
-GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(  QString& whenString )
+GeoDataTimeStamp::TimeResolution KmlwhenTagHandler::modify(QString& whenString)
 {
-    switch( whenString.length() )
-    {
+  switch(whenString.length())
+  {
     case 4:
-        whenString.append( "-01-01" );
-        return GeoDataTimeStamp::YearResolution;
+      whenString.append("-01-01");
+      return GeoDataTimeStamp::YearResolution;
     case 7:
-        whenString.append( "-01" );
-        return GeoDataTimeStamp::MonthResolution;
+      whenString.append("-01");
+      return GeoDataTimeStamp::MonthResolution;
     case 10:
-        return GeoDataTimeStamp::DayResolution;
+      return GeoDataTimeStamp::DayResolution;
     default:
-        return GeoDataTimeStamp::SecondResolution;
-    }
+      return GeoDataTimeStamp::SecondResolution;
+  }
 
-    return GeoDataTimeStamp::SecondResolution;
+  return GeoDataTimeStamp::SecondResolution;
 }
 
 }

@@ -18,13 +18,11 @@
 
 #include "AbstractFloatItem.h"
 
-namespace Ui
-{
-    class Navigation;
+namespace Ui {
+class Navigation;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleWidget;
 class WidgetGraphicsItem;
@@ -33,85 +31,86 @@ class WidgetGraphicsItem;
  * @short Provides a float item with zoom and move controls
  *
  */
-class NavigationFloatItem: public AbstractFloatItem
+class NavigationFloatItem :
+  public AbstractFloatItem
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.NavigationFloatItem")
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.NavigationFloatItem")
 
-    Q_INTERFACES( Marble::RenderPluginInterface )
+  Q_INTERFACES(Marble::RenderPluginInterface)
 
-MARBLE_PLUGIN( NavigationFloatItem )
+  MARBLE_PLUGIN(NavigationFloatItem)
 
- public:
-    explicit NavigationFloatItem( const MarbleModel *marbleModel = 0 );
-    ~NavigationFloatItem();
+public:
+  explicit NavigationFloatItem(const MarbleModel *marbleModel = 0);
+  ~NavigationFloatItem();
 
-    QStringList backendTypes() const;
+  QStringList backendTypes() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString guiString() const;
+  QString guiString() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    QIcon icon () const;
+  QIcon icon() const;
 
-    void initialize ();
+  void initialize();
 
-    bool isInitialized () const;
+  bool isInitialized() const;
 
-    void setProjection( const ViewportParams *viewport );
+  void setProjection(const ViewportParams *viewport);
 
-    static QPixmap pixmap( const QString &Id );
+  static QPixmap pixmap(const QString& Id);
 
-    QHash<QString,QVariant> settings() const;
+  QHash<QString, QVariant> settings() const;
 
-    void setSettings( const QHash<QString, QVariant> &settings );
+  void setSettings(const QHash<QString, QVariant>& settings);
 
- protected:
-    bool eventFilter( QObject *object, QEvent *e );
-    void paintContent( QPainter *painter );
-    void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+protected:
+  bool eventFilter(QObject *object, QEvent *e);
+  void paintContent(QPainter *painter);
+  void contextMenuEvent(QWidget *w, QContextMenuEvent *e);
 
- private Q_SLOTS:
-    /** Map theme was changed, adjust controls */
-    void selectTheme( const QString& theme );
+private Q_SLOTS:
+  /** Map theme was changed, adjust controls */
+  void selectTheme(const QString& theme);
 
-    /** Enable/disable zoom in/out buttons */
-    void updateButtons( int zoomValue );
+  /** Enable/disable zoom in/out buttons */
+  void updateButtons(int zoomValue);
 
- private:
-    /** MarbleWidget this float item is installed as event filter for */
-    MarbleWidget *m_marbleWidget;
+private:
+  /** MarbleWidget this float item is installed as event filter for */
+  MarbleWidget *m_marbleWidget;
 
-    /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
-        of this */
-    WidgetGraphicsItem *m_widgetItem;
+  /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
+      of this */
+  WidgetGraphicsItem *m_widgetItem;
 
-    /** Navigation controls */
-    Ui::Navigation *m_navigationWidget;
+  /** Navigation controls */
+  Ui::Navigation *m_navigationWidget;
 
-    /** Used Profile */
-    MarbleGlobal::Profiles m_profiles;
+  /** Used Profile */
+  MarbleGlobal::Profiles m_profiles;
 
-    /** Radius of the viewport last time */
-    int m_oldViewportRadius;
+  /** Radius of the viewport last time */
+  int m_oldViewportRadius;
 
-    int m_maxZoom;
-    int m_minZoom;
+  int m_maxZoom;
+  int m_minZoom;
 
-    QMenu *m_contextMenu;
-    // QAction *m_activateCurrentPositionButtonAction;
-    // QAction *m_activateHomeButtonAction;
-    // bool m_showHomeButton;
+  QMenu *m_contextMenu;
+  // QAction *m_activateCurrentPositionButtonAction;
+  // QAction *m_activateHomeButtonAction;
+  // bool m_showHomeButton;
 };
 
 }

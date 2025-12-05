@@ -16,27 +16,28 @@
 #include "GeoDataParser.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Create )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Create)
 
-GeoNode* KmlCreateTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlCreateTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Create ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Create));
 
-    GeoDataCreate *create = new GeoDataCreate;
-    KmlObjectTagHandler::parseIdentifiers( parser, create );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataCreate *create = new GeoDataCreate;
+  KmlObjectTagHandler::parseIdentifiers(parser, create);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_Update ) ) {
-        parentItem.nodeAs<GeoDataUpdate>()->setCreate( create );
-        return create;
-    } else {
-        delete create;
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Update))
+  {
+    parentItem.nodeAs<GeoDataUpdate>()->setCreate(create);
+    return create;
+  }
+  else
+  {
+    delete create;
+    return 0;
+  }
 }
 
 }

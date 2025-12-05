@@ -18,65 +18,65 @@
 
 class QFont;
 
-namespace Ui
-{
-    class OpenCachingCacheDialog;
+namespace Ui {
+class OpenCachingCacheDialog;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * Item representing a single cache.
  */
-class OpenCachingItem : public AbstractDataPluginItem
+class OpenCachingItem :
+  public AbstractDataPluginItem
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    OpenCachingItem( const OpenCachingCache& cache, QObject *parent );
+  OpenCachingItem(const OpenCachingCache& cache, QObject *parent);
 
-    ~OpenCachingItem();
+  ~OpenCachingItem();
 
-    // Returns the item type of the item.
-    QString itemType() const;
+  // Returns the item type of the item.
+  QString itemType() const;
 
-    // Returns true if the item is paintable
-    bool initialized();
+  // Returns true if the item is paintable
+  bool initialized();
 
-    // Here the item gets painted
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
+  // Here the item gets painted
+  void paint(GeoPainter *painter, ViewportParams *viewport,
+             const QString& renderPos, GeoSceneLayer *layer = 0);
 
-    QAction *action();
+  QAction *action();
 
-    bool operator<( const AbstractDataPluginItem *other ) const;
+  bool operator<(const AbstractDataPluginItem *other) const;
 
 public Q_SLOTS:
-    void showInfoDialog();
+  void showInfoDialog();
 
 private:
-    void updateTooltip();
+  void updateTooltip();
 
-    QDialog *infoDialog();
+  QDialog *infoDialog();
 
-    OpenCachingCache m_cache;                             ///< Information about the cache.
+  OpenCachingCache m_cache;                               ///< Information about the cache.
 
-    Ui::OpenCachingCacheDialog *m_ui;                     ///< Dialog displaying information about the cache.
-    QDialog *m_infoDialog;
-    QAction *m_action;
+  Ui::OpenCachingCacheDialog *m_ui;                       ///< Dialog displaying information about the cache.
+  QDialog *m_infoDialog;
+  QAction *m_action;
 
-    int m_logIndex;                                       ///< Index of the currently displayed log entry.
+  int m_logIndex;                                         ///< Index of the currently displayed log entry.
 
-    static QFont s_font;
-    static QPixmap s_icon;
+  static QFont s_font;
+  static QPixmap s_icon;
 
 private Q_SLOTS:
-    void updateDescriptionLanguage( const QString& language );
+  void updateDescriptionLanguage(const QString& language);
 
-    void nextLogEntry();                                  ///< Display next log entry.
+  void nextLogEntry();                                    ///< Display next log entry.
 
-    void previousLogEntry();                              ///< Display previous log entry.
+  void previousLogEntry();                                ///< Display previous log entry.
+
 };
 
 }

@@ -10,8 +10,7 @@
 //
 #include "PluginInterface.h"
 
-namespace Marble
-{
+namespace Marble {
 
 PluginInterface::~PluginInterface()
 {
@@ -19,7 +18,7 @@ PluginInterface::~PluginInterface()
 
 QString PluginInterface::aboutDataText() const
 {
-    return QString();
+  return QString();
 }
 
 }

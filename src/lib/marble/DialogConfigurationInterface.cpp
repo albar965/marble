@@ -10,8 +10,7 @@
 
 #include "DialogConfigurationInterface.h"
 
-namespace Marble
-{
+namespace Marble {
 
 DialogConfigurationInterface::~DialogConfigurationInterface()
 {

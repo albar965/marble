@@ -19,42 +19,42 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataDocumentPrivate :
+  public GeoDataContainerPrivate
 {
+public:
+  GeoDataDocumentPrivate()
+    :  m_documentRole(UnknownDocument)
+  {
+  }
 
-class GeoDataDocumentPrivate : public GeoDataContainerPrivate
-{
-  public:
-    GeoDataDocumentPrivate()
-    :  m_documentRole( UnknownDocument )
-    {
-    }
-    
-    virtual GeoDataFeaturePrivate* copy()
-    { 
-        GeoDataDocumentPrivate* copy = new GeoDataDocumentPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual GeoDataFeaturePrivate *copy()
+  {
+    GeoDataDocumentPrivate *copy = new GeoDataDocumentPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataDocumentType;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataDocumentType;
+  }
 
-    virtual EnumFeatureId featureId() const
-    {
-        return GeoDataDocumentId;
-    }
+  virtual EnumFeatureId featureId() const
+  {
+    return GeoDataDocumentId;
+  }
 
-    QMap<QString, GeoDataStyle::Ptr> m_styleHash;
-    QMap<QString, GeoDataStyleMap> m_styleMapHash;
-    QMap<QString, GeoDataSchema> m_schemaHash;
-    QString m_filename;
-    QString m_baseUri;
-    GeoDataNetworkLinkControl m_networkLinkControl;
-    QString m_property;
-    DocumentRole m_documentRole;
+  QMap<QString, GeoDataStyle::Ptr> m_styleHash;
+  QMap<QString, GeoDataStyleMap> m_styleMapHash;
+  QMap<QString, GeoDataSchema> m_schemaHash;
+  QString m_filename;
+  QString m_baseUri;
+  GeoDataNetworkLinkControl m_networkLinkControl;
+  QString m_property;
+  DocumentRole m_documentRole;
 };
 
 } // namespace Marble

@@ -20,28 +20,29 @@
 
 class QListView;
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @brief The MapViewItemDelegate class is a delegate class for both the MapViewWidget's listView
  * and MapChangeEditDialog's listView.
  */
-class MapViewItemDelegate : public QStyledItemDelegate
+class MapViewItemDelegate :
+  public QStyledItemDelegate
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MapViewItemDelegate( QListView* view );
-    void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
-    QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+  explicit MapViewItemDelegate(QListView *view);
+  void paint(QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
 private:
-    static QString text( const QModelIndex &index );
-    QListView* m_view;
-    QIcon m_bookmarkIcon;
+  static QString text(const QModelIndex& index);
+
+  QListView *m_view;
+  QIcon m_bookmarkIcon;
 };
 
-} //Namespace: Marble
+} // Namespace: Marble
 
 #endif // MAPVIEWITEMDELEGATE_H

@@ -17,27 +17,28 @@
 #include "GeoDataParser.h"
 #include "KmlObjectTagHandler.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Update )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Update)
 
-GeoNode* KmlUpdateTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlUpdateTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Update ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Update));
 
-    GeoDataUpdate *update = new GeoDataUpdate;
-    KmlObjectTagHandler::parseIdentifiers( parser, update );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataUpdate *update = new GeoDataUpdate;
+  KmlObjectTagHandler::parseIdentifiers(parser, update);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_NetworkLinkControl ) ) {
-        return &parentItem.nodeAs<GeoDataNetworkLinkControl>()->update();
-    } else if ( parentItem.represents( kmlTag_AnimatedUpdate ) ) {
-        parentItem.nodeAs<GeoDataAnimatedUpdate>()->setUpdate( update );
-        return update;
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_NetworkLinkControl))
+  {
+    return &parentItem.nodeAs<GeoDataNetworkLinkControl>()->update();
+  }
+  else if(parentItem.represents(kmlTag_AnimatedUpdate))
+  {
+    parentItem.nodeAs<GeoDataAnimatedUpdate>()->setUpdate(update);
+    return update;
+  }
+  return 0;
 }
 
 }

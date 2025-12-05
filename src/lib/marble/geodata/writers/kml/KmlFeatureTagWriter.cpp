@@ -29,87 +29,100 @@
 
 #include <QDateTime>
 
-namespace Marble
-{
+namespace Marble {
 
-KmlFeatureTagWriter::KmlFeatureTagWriter(const QString &elementName)
-    : m_elementName( elementName )
+KmlFeatureTagWriter::KmlFeatureTagWriter(const QString& elementName)
+  : m_elementName(elementName)
 {
-    // nothing to do
+  // nothing to do
 }
 
-bool KmlFeatureTagWriter::write( const Marble::GeoNode *node, GeoWriter &writer ) const
+bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter& writer) const
 {
-    if ( node->nodeType() == GeoDataTypes::GeoDataDocumentType ) {
-        const GeoDataDocument *document = static_cast<const GeoDataDocument*>(node);
+  if(node->nodeType() == GeoDataTypes::GeoDataDocumentType)
+  {
+    const GeoDataDocument *document = static_cast<const GeoDataDocument *>(node);
 
-        // when a document has only one feature and no styling
-        // the document tag is excused
-        if( (document->id().isEmpty())
-            && (document->name().isEmpty())
-            && (document->targetId().isEmpty())
-            && (document->styles().count() == 0)
-            && (document->styleMaps().count() == 0)
-            && (document->extendedData().isEmpty())
-            && (document->featureList().count() == 1) ) {
-            writeElement( document->featureList()[0], writer );
-            return true;
-        }
+    // when a document has only one feature and no styling
+    // the document tag is excused
+    if((document->id().isEmpty()) &&
+       (document->name().isEmpty()) &&
+       (document->targetId().isEmpty()) &&
+       (document->styles().count() == 0) &&
+       (document->styleMaps().count() == 0) &&
+       (document->extendedData().isEmpty()) &&
+       (document->featureList().count() == 1))
+    {
+      writeElement(document->featureList()[0], writer);
+      return true;
     }
+  }
 
-    writer.writeStartElement( m_elementName );
+  writer.writeStartElement(m_elementName);
 
-    GeoDataFeature const *feature = static_cast<const GeoDataFeature*>(node);
-    KmlObjectTagWriter::writeIdentifiers( writer, feature );
+  GeoDataFeature const *feature = static_cast<const GeoDataFeature *>(node);
+  KmlObjectTagWriter::writeIdentifiers(writer, feature);
 
-    writer.writeOptionalElement( kml::kmlTag_name, feature->name() );
-    writer.writeOptionalElement( kml::kmlTag_visibility, QString::number( feature->isVisible() ), "1" );
-    writer.writeOptionalElement( "address", feature->address() );
+  writer.writeOptionalElement(kml::kmlTag_name, feature->name());
+  writer.writeOptionalElement(kml::kmlTag_visibility, QString::number(feature->isVisible()), "1");
+  writer.writeOptionalElement("address", feature->address());
 
-    if( !feature->description().isEmpty() ) {
-        writer.writeStartElement( "description" );
-        if( feature->descriptionIsCDATA() ) {
-            writer.writeCDATA( feature->description() );
-        } else {
-            writer.writeCharacters( feature->description() );
-        }
-        writer.writeEndElement();
+  if(!feature->description().isEmpty())
+  {
+    writer.writeStartElement("description");
+    if(feature->descriptionIsCDATA())
+    {
+      writer.writeCDATA(feature->description());
     }
-
-    GeoDataLookAt const * lookAt = dynamic_cast<const GeoDataLookAt*>( feature->abstractView() );
-    if ( lookAt ) {
-        writeElement( lookAt, writer );
+    else
+    {
+      writer.writeCharacters(feature->description());
     }
-    GeoDataCamera const * camera = dynamic_cast<const GeoDataCamera*>( feature->abstractView() );
-    if ( camera ) {
-        writeElement( camera, writer );
-    }
-
-    if( feature->timeStamp().when().isValid() ) {
-        writeElement( &feature->timeStamp(), writer );
-    }
-
-    if( feature->timeSpan().isValid() ) {
-        writeElement( &feature->timeSpan(), writer );
-    }
-
-    if ( !feature->region().latLonAltBox().isNull() ) {
-        writeElement( &feature->region(), writer );
-    }
-
-    bool const result = writeMid( node, writer );
-
-    if( !feature->extendedData().isEmpty() ) {
-        if ( feature->extendedData().contains( OsmPlacemarkData::osmHashKey() ) ) {
-             KmlOsmPlacemarkDataTagWriter::write( feature, writer );
-        }
-        else {
-            writeElement( &feature->extendedData(), writer );
-        }
-    }
-
     writer.writeEndElement();
-    return result;
+  }
+
+  GeoDataLookAt const *lookAt = dynamic_cast<const GeoDataLookAt *>(feature->abstractView());
+  if(lookAt)
+  {
+    writeElement(lookAt, writer);
+  }
+  GeoDataCamera const *camera = dynamic_cast<const GeoDataCamera *>(feature->abstractView());
+  if(camera)
+  {
+    writeElement(camera, writer);
+  }
+
+  if(feature->timeStamp().when().isValid())
+  {
+    writeElement(&feature->timeStamp(), writer);
+  }
+
+  if(feature->timeSpan().isValid())
+  {
+    writeElement(&feature->timeSpan(), writer);
+  }
+
+  if(!feature->region().latLonAltBox().isNull())
+  {
+    writeElement(&feature->region(), writer);
+  }
+
+  bool const result = writeMid(node, writer);
+
+  if(!feature->extendedData().isEmpty())
+  {
+    if(feature->extendedData().contains(OsmPlacemarkData::osmHashKey()))
+    {
+      KmlOsmPlacemarkDataTagWriter::write(feature, writer);
+    }
+    else
+    {
+      writeElement(&feature->extendedData(), writer);
+    }
+  }
+
+  writer.writeEndElement();
+  return result;
 }
 
 }

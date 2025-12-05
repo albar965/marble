@@ -33,48 +33,59 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( extrude )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(extrude)
 
-GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlextrudeTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_extrude ) );
-    GeoStackItem parentItem = parser.parentElement();
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_extrude));
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoDataGeometry* geometry;
-    bool validParents = false;
+  GeoDataGeometry *geometry;
+  bool validParents = false;
 
-    if( parentItem.is<GeoDataPoint>() ) {
-        geometry = parentItem.nodeAs<GeoDataPoint>();
-        validParents = true;
-    } else if( parentItem.is<GeoDataPlacemark>() ) {
-        geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
-        validParents = true;
-    } else if( parentItem.is<GeoDataPolygon>() ) {
-        geometry = parentItem.nodeAs<GeoDataPolygon>();
-        validParents = true;
-    } else if( parentItem.is<GeoDataLineString>() ) {
-        geometry = parentItem.nodeAs<GeoDataLineString>();
-        validParents = true;
-    } else if( parentItem.is<GeoDataLinearRing>() ) {
-        geometry = parentItem.nodeAs<GeoDataLinearRing>();
-        validParents = true;
+  if(parentItem.is<GeoDataPoint>())
+  {
+    geometry = parentItem.nodeAs<GeoDataPoint>();
+    validParents = true;
+  }
+  else if(parentItem.is<GeoDataPlacemark>())
+  {
+    geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+    validParents = true;
+  }
+  else if(parentItem.is<GeoDataPolygon>())
+  {
+    geometry = parentItem.nodeAs<GeoDataPolygon>();
+    validParents = true;
+  }
+  else if(parentItem.is<GeoDataLineString>())
+  {
+    geometry = parentItem.nodeAs<GeoDataLineString>();
+    validParents = true;
+  }
+  else if(parentItem.is<GeoDataLinearRing>())
+  {
+    geometry = parentItem.nodeAs<GeoDataLinearRing>();
+    validParents = true;
+  }
+
+  if(validParents)
+  {
+    QString content = parser.readElementText().trimmed();
+
+    if(content == QString("1"))
+    {
+      geometry->setExtrude(true);
     }
-
-    if( validParents ) {
-        QString content = parser.readElementText().trimmed();
-
-        if( content == QString( "1" ) ) {
-            geometry->setExtrude( true );
-        } else {
-            geometry->setExtrude( false );
-        }
+    else
+    {
+      geometry->setExtrude(false);
     }
+  }
 
-    return 0;
+  return 0;
 }
 
 }

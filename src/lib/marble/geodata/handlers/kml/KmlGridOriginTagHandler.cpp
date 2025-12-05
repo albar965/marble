@@ -14,32 +14,33 @@
 #include "GeoDataImagePyramid.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( gridOrigin )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(gridOrigin)
 
-GeoNode* KmlgridOriginTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlgridOriginTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_gridOrigin ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_gridOrigin));
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem parentItem = parser.parentElement();
 
-    if (parentItem.represents( kmlTag_ImagePyramid ))
+  if(parentItem.represents(kmlTag_ImagePyramid))
+  {
+    GeoDataImagePyramid::GridOrigin gridOrigin;
+    QString gridOriginText = parser.readElementText();
+
+    if(gridOriginText == "lowerLeft")
     {
-        GeoDataImagePyramid::GridOrigin gridOrigin;
-        QString gridOriginText = parser.readElementText();
-
-        if ( gridOriginText == "lowerLeft" ) {
-            gridOrigin = GeoDataImagePyramid::LowerLeft;
-        } else if ( gridOriginText == "upperLeft" ) {
-            gridOrigin = GeoDataImagePyramid::UpperLeft;
-        }
-
-        parentItem.nodeAs<GeoDataImagePyramid>()->setGridOrigin( gridOrigin );
+      gridOrigin = GeoDataImagePyramid::LowerLeft;
     }
-    return 0;
+    else if(gridOriginText == "upperLeft")
+    {
+      gridOrigin = GeoDataImagePyramid::UpperLeft;
+    }
+
+    parentItem.nodeAs<GeoDataImagePyramid>()->setGridOrigin(gridOrigin);
+  }
+  return 0;
 }
 
 }

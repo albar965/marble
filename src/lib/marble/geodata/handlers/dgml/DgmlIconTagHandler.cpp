@@ -33,40 +33,41 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneItem.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Icon)
 
-GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlIconTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
 
-    QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
+  QString pixmapRelativePath = parser.attribute(dgmlAttr_pixmap).trimmed();
 
-    QColor color;
-    if (pixmapRelativePath.isEmpty()) {
-        color.setNamedColor(parser.attribute(dgmlAttr_color).trimmed());
-    }
+  QColor color;
+  if(pixmapRelativePath.isEmpty())
+  {
+    color.setNamedColor(parser.attribute(dgmlAttr_color).trimmed());
+  }
 
-    GeoSceneIcon *icon = 0;
+  GeoSceneIcon *icon = 0;
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head)) {
-        icon = parentItem.nodeAs<GeoSceneHead>()->icon();
-        icon->setPixmap( pixmapRelativePath );
-        icon->setColor( color );
-    }
-    if (parentItem.represents(dgmlTag_Item)) {
-        icon = parentItem.nodeAs<GeoSceneItem>()->icon();
-        icon->setPixmap( pixmapRelativePath );
-        icon->setColor( color );
-    }
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Head))
+  {
+    icon = parentItem.nodeAs<GeoSceneHead>()->icon();
+    icon->setPixmap(pixmapRelativePath);
+    icon->setColor(color);
+  }
+  if(parentItem.represents(dgmlTag_Item))
+  {
+    icon = parentItem.nodeAs<GeoSceneItem>()->icon();
+    icon->setPixmap(pixmapRelativePath);
+    icon->setColor(color);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

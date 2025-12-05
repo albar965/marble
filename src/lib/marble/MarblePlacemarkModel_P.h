@@ -15,22 +15,21 @@
 #include <QRegExp>
 #include <QString>
 
-namespace Marble
+namespace Marble {
+
+namespace GeoString {
+static const QRegExp combiningDiacriticalMarks("[\\x0300-\\x036F]+");
+
+QString deaccent(const QString& accentString)
 {
+  QString result;
 
-namespace GeoString
-{
-    static const QRegExp combiningDiacriticalMarks("[\\x0300-\\x036F]+");
+  result = accentString.normalized(QString::NormalizationForm_D).remove(combiningDiacriticalMarks);
+  result = result.replace(QChar(0x00F8), 'o');
+  result = result.replace(QChar(0x0142), 'l');
+  return result;
+}
 
-    QString deaccent( const QString& accentString )
-    {
-        QString    result;
-
-        result = accentString.normalized( QString::NormalizationForm_D ).remove( combiningDiacriticalMarks );
-        result = result.replace(QChar(0x00F8),'o');
-        result = result.replace(QChar(0x0142),'l');
-        return result;
-    }
 }
 }
 

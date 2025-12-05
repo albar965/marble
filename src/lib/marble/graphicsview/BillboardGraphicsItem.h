@@ -20,8 +20,7 @@
 
 class QPointF;
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @brief Base class for all 2D labels (a.k.a. billboards) in 3D space.
@@ -30,41 +29,43 @@ namespace Marble
  * As a result, it may appear more than once on the map, depending on the projection and
  * the zoom level.
  */
-class MARBLE_EXPORT BillboardGraphicsItem : public MarbleGraphicsItem
+class MARBLE_EXPORT BillboardGraphicsItem :
+  public MarbleGraphicsItem
 {
- public:
-    BillboardGraphicsItem();
+public:
+  BillboardGraphicsItem();
 
-    GeoDataCoordinates coordinate() const;
-    void setCoordinate( const GeoDataCoordinates &coordinates );
+  GeoDataCoordinates coordinate() const;
+  void setCoordinate(const GeoDataCoordinates& coordinates);
 
-    Qt::Alignment alignment() const;
-    void setAlignment( Qt::Alignment alignment );
+  Qt::Alignment alignment() const;
+  void setAlignment(Qt::Alignment alignment);
 
-    /**
-     * @brief Returns the absolute screen positions of the item.
-     *
-     * All elements indicate the position of the topleft corner in screen coordinates and are
-     * based on the viewport of the last paintEvent(). Note that the result list may contain
-     * an unbound number of elements, including zero, depending on the item's visibility,
-     * the projection and zoom level.
-     */
-    QList<QPointF> positions() const;
+  /**
+   * @brief Returns the absolute screen positions of the item.
+   *
+   * All elements indicate the position of the topleft corner in screen coordinates and are
+   * based on the viewport of the last paintEvent(). Note that the result list may contain
+   * an unbound number of elements, including zero, depending on the item's visibility,
+   * the projection and zoom level.
+   */
+  QList<QPointF> positions() const;
 
-    /**
-     * @brief Returns the absolute screen bounding boxes of the item.
-     */
-    QList<QRectF> boundingRects() const;
+  /**
+   * @brief Returns the absolute screen bounding boxes of the item.
+   */
+  QList<QRectF> boundingRects() const;
 
-    /**
-     * Returns the rect of one representation of the object that is at the given position.
-     */
-    QRectF containsRect( const QPointF &point ) const;
+  /**
+   * Returns the rect of one representation of the object that is at the given position.
+   */
+  QRectF containsRect(const QPointF& point) const;
 
- private:
-    class Private;
-    Private *p();
-    const Private *p() const;
+private:
+  class Private;
+  Private *p();
+  const Private *p() const;
+
 };
 
 } // Marble namespace

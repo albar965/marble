@@ -16,25 +16,24 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(maxAltitude)
+
+GeoNode *KmlmaxAltitudeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( maxAltitude )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_maxAltitude));
 
-GeoNode* KmlmaxAltitudeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxAltitude ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_LatLonAltBox))
+  {
+    float maxAltitude = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_LatLonAltBox ) ) {
-        float maxAltitude = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLatLonAltBox>()->setMaxAltitude(maxAltitude);
+  }
 
-        parentItem.nodeAs<GeoDataLatLonAltBox>()->setMaxAltitude( maxAltitude );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

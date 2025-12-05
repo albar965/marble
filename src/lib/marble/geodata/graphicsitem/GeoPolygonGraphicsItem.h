@@ -22,53 +22,55 @@
 
 class QPointF;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataLinearRing;
 class GeoDataPolygon;
 
-class MARBLE_EXPORT GeoPolygonGraphicsItem : public GeoGraphicsItem
+class MARBLE_EXPORT GeoPolygonGraphicsItem :
+  public GeoGraphicsItem
 {
 public:
-    explicit GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataPolygon* polygon );
-    explicit GeoPolygonGraphicsItem( const GeoDataFeature *feature, const GeoDataLinearRing* ring );
+  explicit GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataPolygon *polygon);
+  explicit GeoPolygonGraphicsItem(const GeoDataFeature *feature, const GeoDataLinearRing *ring);
 
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    void paint(GeoPainter* painter, const ViewportParams *viewport, const QString &layer);
+  void paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer);
 
 private:
-    struct NamedEntry {
-        GeoDataCoordinates point;
-        QString label;
-    };
+  struct NamedEntry
+  {
+    GeoDataCoordinates point;
+    QString label;
+  };
 
-    void paintFrame( GeoPainter* painter, const ViewportParams *viewport );
-    void paintRoof( GeoPainter* painter, const ViewportParams *viewport );
+  void paintFrame(GeoPainter *painter, const ViewportParams *viewport);
+  void paintRoof(GeoPainter *painter, const ViewportParams *viewport);
 
-    QPointF buildingOffset(const QPointF &point, const ViewportParams *viewport, bool* isCameraAboveBuilding=0) const;
-    static double extractBuildingHeight(const GeoDataFeature *feature);
-    static QString extractBuildingLabel(const GeoDataFeature *feature);
-    static QList<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
-    static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon* polygon, QVector<QPolygonF*> &polygons,  QVector<QPolygonF*> &outlines);
-    QPen configurePainter(GeoPainter* painter, const ViewportParams *viewport, bool isBuildingFrame);
-    static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
-    void initializeBuildingPainting(const GeoPainter* painter, const ViewportParams *viewport,
-                                    bool &drawAccurate3D, bool &isCameraAboveBuilding, bool &hasInnerBoundaries,
-                                    QVector<QPolygonF*>& outlinePolygons,
-                                    QVector<QPolygonF*>& innerPolygons) const;
-    static QPointF centroid(const QPolygonF &polygon, double &area);
+  QPointF buildingOffset(const QPointF& point, const ViewportParams *viewport, bool *isCameraAboveBuilding = 0) const;
+  static double extractBuildingHeight(const GeoDataFeature *feature);
+  static QString extractBuildingLabel(const GeoDataFeature *feature);
+  static QList<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
+  static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon, QVector<QPolygonF *>& polygons,
+                             QVector<QPolygonF *>& outlines);
+  QPen configurePainter(GeoPainter *painter, const ViewportParams *viewport, bool isBuildingFrame);
+  static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
+  void initializeBuildingPainting(const GeoPainter *painter, const ViewportParams *viewport,
+                                  bool& drawAccurate3D, bool& isCameraAboveBuilding, bool& hasInnerBoundaries,
+                                  QVector<QPolygonF *>& outlinePolygons,
+                                  QVector<QPolygonF *>& innerPolygons) const;
+  static QPointF centroid(const QPolygonF& polygon, double& area);
 
-    const GeoDataPolygon *const m_polygon;
-    const GeoDataLinearRing *const m_ring;
-    double m_buildingHeight;
-    QString m_buildingLabel;
-    QString m_cachedTexturePath;
-    QColor m_cachedTextureColor;
-    QImage m_cachedTexture;
+  const GeoDataPolygon *const m_polygon;
+  const GeoDataLinearRing *const m_ring;
+  double m_buildingHeight;
+  QString m_buildingLabel;
+  QString m_cachedTexturePath;
+  QColor m_cachedTextureColor;
+  QImage m_cachedTexture;
 
-    QList<NamedEntry> m_entries;
+  QList<NamedEntry> m_entries;
 };
 
 }

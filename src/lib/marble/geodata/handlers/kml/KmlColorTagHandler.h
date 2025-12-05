@@ -26,17 +26,17 @@
 
 #include <QColor>
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-class KmlcolorTagHandler : public GeoTagHandler
+class KmlcolorTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse(GeoParser&) const;
+  virtual GeoNode *parse(GeoParser&) const;
 
-    static QColor parseColor( const QString &colorString );
+  static QColor parseColor(const QString& colorString);
+
 };
 
 }

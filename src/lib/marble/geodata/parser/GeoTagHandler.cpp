@@ -19,21 +19,18 @@
     Boston, MA 02110-1301, USA.
 */
 
-
 // Own
 #include "GeoTagHandler.h"
 
 // Marble
 #include "MarbleDebug.h"
 
-
-namespace Marble
-{
+namespace Marble {
 
 // Set to a value greater than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0
 
-GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;
+GeoTagHandler::TagHash *GeoTagHandler::s_tagHandlerHash = 0;
 
 GeoTagHandler::GeoTagHandler()
 {
@@ -43,45 +40,45 @@ GeoTagHandler::~GeoTagHandler()
 {
 }
 
-GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
+GeoTagHandler::TagHash *GeoTagHandler::tagHandlerHash()
 {
-    if (!s_tagHandlerHash)
-        s_tagHandlerHash = new TagHash();
+  if(!s_tagHandlerHash)
+    s_tagHandlerHash = new TagHash();
 
-    Q_ASSERT(s_tagHandlerHash);
-    return s_tagHandlerHash;
+  Q_ASSERT(s_tagHandlerHash);
+  return s_tagHandlerHash;
 }
 
-void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const GeoTagHandler* handler)
+void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const GeoTagHandler *handler)
 {
-    TagHash* hash = tagHandlerHash();
+  TagHash *hash = tagHandlerHash();
 
-    Q_ASSERT(!hash->contains(qName));
-    hash->insert(qName, handler);
-    Q_ASSERT(hash->contains(qName));
+  Q_ASSERT(!hash->contains(qName));
+  hash->insert(qName, handler);
+  Q_ASSERT(hash->contains(qName));
 
 #if DUMP_TAG_HANDLER_REGISTRATION > 0
-    mDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
+  mDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
 #endif
 }
 
 void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName& qName)
 {
-    TagHash* hash = tagHandlerHash();
+  TagHash *hash = tagHandlerHash();
 
-    Q_ASSERT(hash->contains(qName));
-    hash->remove(qName);
-    Q_ASSERT(!hash->contains(qName));
+  Q_ASSERT(hash->contains(qName));
+  hash->remove(qName);
+  Q_ASSERT(!hash->contains(qName));
 }
 
-const GeoTagHandler* GeoTagHandler::recognizes(const GeoParser::QualifiedName& qName)
+const GeoTagHandler *GeoTagHandler::recognizes(const GeoParser::QualifiedName& qName)
 {
-    TagHash* hash = tagHandlerHash();
+  TagHash *hash = tagHandlerHash();
 
-    if (!hash->contains(qName))
-        return 0;
+  if(!hash->contains(qName))
+    return 0;
 
-    return (*hash)[qName];
+  return (*hash)[qName];
 }
 
 }

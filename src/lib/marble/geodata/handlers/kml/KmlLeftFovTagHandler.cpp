@@ -14,25 +14,23 @@
 #include "GeoDataViewVolume.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(leftFov)
+
+GeoNode *KmlleftFovTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( leftFov )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_leftFov));
 
-GeoNode* KmlleftFovTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_leftFov ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_ViewVolume))
+  {
+    qreal leftFov = parser.readElementText().toDouble();
 
-    if (parentItem.represents( kmlTag_ViewVolume ))
-    {
-        qreal leftFov = parser.readElementText().toDouble();
-
-        parentItem.nodeAs<GeoDataViewVolume>()->setLeftFov( leftFov );
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataViewVolume>()->setLeftFov(leftFov);
+  }
+  return 0;
 }
 
 }

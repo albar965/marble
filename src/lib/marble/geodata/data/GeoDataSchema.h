@@ -22,61 +22,62 @@
 
 class QDataStream;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataSchemaPrivate;
 
-class GEODATA_EXPORT GeoDataSchema : public GeoDataObject
+class GEODATA_EXPORT GeoDataSchema :
+  public GeoDataObject
 {
 public:
-    GeoDataSchema();
-    explicit GeoDataSchema( const QHash<QString, GeoDataSimpleField>& simpleFields );
-    GeoDataSchema( const GeoDataSchema& other );
-    GeoDataSchema& operator=( const GeoDataSchema& other );
-    bool operator==( const GeoDataSchema& other ) const;
-    bool operator!=( const GeoDataSchema& other ) const;
-    ~GeoDataSchema();
+  GeoDataSchema();
+  explicit GeoDataSchema(const QHash<QString, GeoDataSimpleField>& simpleFields);
+  GeoDataSchema(const GeoDataSchema& other);
+  GeoDataSchema& operator=(const GeoDataSchema& other);
+  bool operator==(const GeoDataSchema& other) const;
+  bool operator!=(const GeoDataSchema& other) const;
 
-    /*
-     * @brief Returns the name attribute of schema
-     */
-    QString schemaName() const;
+  ~GeoDataSchema();
 
-    /*
-     * @brief Sets the name attribute of the schema
-     * @param name  The name to be set
-     */
-    void setSchemaName( const QString& name );
+  /*
+   * @brief Returns the name attribute of schema
+   */
+  QString schemaName() const;
 
-    /*
-     * @brief Returns the SimpleField child of schema
-     * @param name  The value of name attribute of SimpleField which is to be returned
-     */
-    GeoDataSimpleField& simpleField( const QString &name ) const;
+  /*
+   * @brief Sets the name attribute of the schema
+   * @param name  The name to be set
+   */
+  void setSchemaName(const QString& name);
 
-    /*
-     * @brief Adds a SimpleField to schema
-     * @param value  The SimpleField to be added
-     */
-    void addSimpleField( const GeoDataSimpleField& value );
+  /*
+   * @brief Returns the SimpleField child of schema
+   * @param name  The value of name attribute of SimpleField which is to be returned
+   */
+  GeoDataSimpleField& simpleField(const QString& name) const;
 
-    /*
-     * @brief dump a vector containing all simple fields of schema
-     */
-    QList<GeoDataSimpleField> simpleFields() const;
+  /*
+   * @brief Adds a SimpleField to schema
+   * @param value  The SimpleField to be added
+   */
+  void addSimpleField(const GeoDataSimpleField& value);
 
-    virtual const char* nodeType() const;
+  /*
+   * @brief dump a vector containing all simple fields of schema
+   */
+  QList<GeoDataSimpleField> simpleFields() const;
 
-    virtual void pack( QDataStream& stream ) const;
+  virtual const char *nodeType() const;
 
-    virtual void unpack( QDataStream& stream );
+  virtual void pack(QDataStream& stream) const;
+
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataSchemaPrivate * const d;
+  GeoDataSchemaPrivate * const d;
 
 };
 
 }
 
-#endif  // MARBLE_GEODATASCHEMA_H
+#endif // MARBLE_GEODATASCHEMA_H

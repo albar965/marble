@@ -15,33 +15,33 @@
 #include "GeoDataPlaylist.h"
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTourPrivate;
 class GeoDataPlaylist;
 class GeoDataSoundCue;
 
-class GEODATA_EXPORT GeoDataTour : public GeoDataFeature
+class GEODATA_EXPORT GeoDataTour :
+  public GeoDataFeature
 {
 public:
-    GeoDataTour();
-    virtual ~GeoDataTour();
+  GeoDataTour();
+  virtual ~GeoDataTour();
 
-    bool operator==(const GeoDataTour &other) const;
-    bool operator!=(const GeoDataTour &other) const;
+  bool operator==(const GeoDataTour& other) const;
+  bool operator!=(const GeoDataTour& other) const;
 
-    GeoDataPlaylist* playlist();
-    const GeoDataPlaylist* playlist() const;
-    void setPlaylist(GeoDataPlaylist* playlist);
+  GeoDataPlaylist *playlist();
+  const GeoDataPlaylist *playlist() const;
+  void setPlaylist(GeoDataPlaylist *playlist);
 
-    virtual const char* nodeType() const;
+  virtual const char *nodeType() const;
 
-    static const GeoDataTour null;
+  static const GeoDataTour null;
 
 private:
-    GeoDataTourPrivate *p();
-    const GeoDataTourPrivate *p() const;
+  GeoDataTourPrivate *p();
+  const GeoDataTourPrivate *p() const;
 
 };
 

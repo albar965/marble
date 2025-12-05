@@ -31,33 +31,36 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(LineString)
+
+GeoNode *KmlLineStringTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( LineString )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_LineString));
 
-GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineString ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    GeoDataLineString *lineString = new GeoDataLineString;
-    KmlObjectTagHandler::parseIdentifiers( parser, lineString );
+  GeoDataLineString *lineString = new GeoDataLineString;
+  KmlObjectTagHandler::parseIdentifiers(parser, lineString);
 
-    if( parentItem.represents( kmlTag_Placemark ) ) {
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
-        return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+  if(parentItem.represents(kmlTag_Placemark))
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->setGeometry(lineString);
+    return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
 
-    } else if(  parentItem.represents( kmlTag_MultiGeometry ) ) {
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
-        return lineString;
+  }
+  else if(parentItem.represents(kmlTag_MultiGeometry))
+  {
+    parentItem.nodeAs<GeoDataMultiGeometry>()->append(lineString);
+    return lineString;
 
-    } else {
-        delete lineString;
-        return 0;
-    }
+  }
+  else
+  {
+    delete lineString;
+    return 0;
+  }
 }
 
 }

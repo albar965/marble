@@ -18,8 +18,7 @@
 
 #include "AbstractProjection.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class AzimuthalProjectionPrivate;
 
@@ -27,53 +26,69 @@ class AzimuthalProjectionPrivate;
  * @short A base class for the Gnomonic and Orthographic (Globe) projections in Marble
  */
 
-class AzimuthalProjection : public AbstractProjection
+class AzimuthalProjection :
+  public AbstractProjection
 {
-    // Not a QObject so far because we don't need to send signals.
-  public:
+  // Not a QObject so far because we don't need to send signals.
 
-    AzimuthalProjection();
+public:
+  AzimuthalProjection();
 
-    virtual ~AzimuthalProjection();
+  virtual ~AzimuthalProjection();
 
-    virtual bool repeatableX() const { return false; }
-    virtual qreal  maxValidLat() const;
-    virtual qreal  minValidLat() const;
+  virtual bool repeatableX() const
+  {
+    return false;
+  }
 
-    virtual bool traversablePoles()  const { return true; }
-    virtual bool traversableDateLine()  const { return true; }
+  virtual qreal  maxValidLat() const;
+  virtual qreal  minValidLat() const;
 
-    virtual SurfaceType surfaceType() const { return Azimuthal; }
+  virtual bool traversablePoles()  const
+  {
+    return true;
+  }
 
-    virtual PreservationType preservationType() const { return NoPreservation; }
+  virtual bool traversableDateLine()  const
+  {
+    return true;
+  }
 
-    virtual bool isClippedToSphere() const;
+  virtual SurfaceType surfaceType() const
+  {
+    return Azimuthal;
+  }
 
-    virtual qreal clippingRadius() const;
+  virtual PreservationType preservationType() const
+  {
+    return NoPreservation;
+  }
 
-    bool  mapCoversViewport( const ViewportParams *viewport ) const;
+  virtual bool isClippedToSphere() const;
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons ) const;
+  virtual qreal clippingRadius() const;
 
-    using AbstractProjection::screenCoordinates;
+  bool  mapCoversViewport(const ViewportParams *viewport) const;
 
-    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
+  virtual bool screenCoordinates(const GeoDataLineString& lineString,
+                                 const ViewportParams *viewport,
+                                 QVector<QPolygonF *>& polygons) const;
 
-    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                      const ViewportParams *viewport ) const;
+  using AbstractProjection::screenCoordinates;
 
- protected:
-    explicit AzimuthalProjection( AzimuthalProjectionPrivate* dd );
+  virtual QPainterPath mapShape(const ViewportParams *viewport) const;
 
- private:
-    Q_DECLARE_PRIVATE( AzimuthalProjection )
-    Q_DISABLE_COPY( AzimuthalProjection )
+  virtual GeoDataLatLonAltBox latLonAltBox(const QRect& screenRect,
+                                           const ViewportParams *viewport) const;
+
+protected:
+  explicit AzimuthalProjection(AzimuthalProjectionPrivate *dd);
+
+private:
+  Q_DECLARE_PRIVATE(AzimuthalProjection)
+  Q_DISABLE_COPY(AzimuthalProjection)
 };
 
 }
 
 #endif
-
-

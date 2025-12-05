@@ -15,26 +15,25 @@
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-KML_DEFINE_TAG_HANDLER( refreshVisibility )
+KML_DEFINE_TAG_HANDLER(refreshVisibility)
 
 GeoNode *KmlrefreshVisibilityTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT ( parser.isStartElement()
-               && parser.isValidElement( kmlTag_refreshVisibility ) );
+  Q_ASSERT(parser.isStartElement() &&
+           parser.isValidElement(kmlTag_refreshVisibility));
 
-    GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.is<GeoDataNetworkLink>() ) {
-        QString content = parser.readElementText().trimmed();
-        GeoDataNetworkLink* networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
-        networkLink->setRefreshVisibility( content == QString( "1" ) );
-    }
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataNetworkLink>())
+  {
+    QString content = parser.readElementText().trimmed();
+    GeoDataNetworkLink *networkLink = parentItem.nodeAs<GeoDataNetworkLink>();
+    networkLink->setRefreshVisibility(content == QString("1"));
+  }
 
-    return 0;
+  return 0;
 }
 
 }

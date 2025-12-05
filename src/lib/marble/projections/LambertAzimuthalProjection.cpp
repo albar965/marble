@@ -27,160 +27,165 @@
 
 #define SAFE_DISTANCE
 
-namespace Marble
-{
+namespace Marble {
 
-class LambertAzimuthalProjectionPrivate : public AzimuthalProjectionPrivate
+class LambertAzimuthalProjectionPrivate :
+  public AzimuthalProjectionPrivate
 {
-  public:
-    explicit LambertAzimuthalProjectionPrivate( LambertAzimuthalProjection * parent );
+public:
+  explicit LambertAzimuthalProjectionPrivate(LambertAzimuthalProjection *parent);
 
-    Q_DECLARE_PUBLIC( LambertAzimuthalProjection )
+  Q_DECLARE_PUBLIC(LambertAzimuthalProjection)
 };
 
 LambertAzimuthalProjection::LambertAzimuthalProjection()
-    : AzimuthalProjection( new LambertAzimuthalProjectionPrivate( this ) )
+  : AzimuthalProjection(new LambertAzimuthalProjectionPrivate(this))
 {
-    setMinLat( minValidLat() );
-    setMaxLat( maxValidLat() );
+  setMinLat(minValidLat());
+  setMaxLat(maxValidLat());
 }
 
-LambertAzimuthalProjection::LambertAzimuthalProjection( LambertAzimuthalProjectionPrivate *dd )
-        : AzimuthalProjection( dd )
+LambertAzimuthalProjection::LambertAzimuthalProjection(LambertAzimuthalProjectionPrivate *dd)
+  : AzimuthalProjection(dd)
 {
-    setMinLat( minValidLat() );
-    setMaxLat( maxValidLat() );
+  setMinLat(minValidLat());
+  setMaxLat(maxValidLat());
 }
 
 LambertAzimuthalProjection::~LambertAzimuthalProjection()
 {
 }
 
-
-LambertAzimuthalProjectionPrivate::LambertAzimuthalProjectionPrivate( LambertAzimuthalProjection * parent )
-        : AzimuthalProjectionPrivate( parent )
+LambertAzimuthalProjectionPrivate::LambertAzimuthalProjectionPrivate(LambertAzimuthalProjection *parent)
+  : AzimuthalProjectionPrivate(parent)
 {
 }
 
 QString LambertAzimuthalProjection::name() const
 {
-    return QObject::tr( "Lambert Azimuthal Equal-Area" );
+  return QObject::tr("Lambert Azimuthal Equal-Area");
 }
 
 QString LambertAzimuthalProjection::description() const
 {
-    return QObject::tr( "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used in structural geology to plot directional data.</p>" );
+  return QObject::tr(
+    "<p><b>Lambert Azimuthal Equal-Area Projection</b></p><p>Applications: Used in structural geology to plot directional data.</p>");
 }
 
 QIcon LambertAzimuthalProjection::icon() const
 {
-    return QIcon(":/icons/map-globe.png");
+  return QIcon(":/icons/map-globe.png");
 }
 
 qreal LambertAzimuthalProjection::clippingRadius() const
 {
-    return 1;
+  return 1;
 }
 
-bool LambertAzimuthalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
-                                             const ViewportParams *viewport,
-                                             qreal &x, qreal &y, bool &globeHidesPoint ) const
+bool LambertAzimuthalProjection::screenCoordinates(const GeoDataCoordinates& coordinates,
+                                                   const ViewportParams *viewport,
+                                                   qreal& x, qreal& y, bool& globeHidesPoint) const
 {
-    const qreal lambda = coordinates.longitude();
-    const qreal phi = coordinates.latitude();
-    const qreal lambdaPrime = viewport->centerLongitude();
-    const qreal phi1 = viewport->centerLatitude();
+  const qreal lambda = coordinates.longitude();
+  const qreal phi = coordinates.latitude();
+  const qreal lambdaPrime = viewport->centerLongitude();
+  const qreal phi1 = viewport->centerLatitude();
 
-    qreal cosC = qSin( phi1 ) * qSin( phi ) + qCos( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime );
-    // Prevent division by zero
-    if (cosC <= 0) {
-        globeHidesPoint = true;
-        return false;
-    }
+  qreal cosC = qSin(phi1) * qSin(phi) + qCos(phi1) * qCos(phi) * qCos(lambda - lambdaPrime);
+  // Prevent division by zero
+  if(cosC <= 0)
+  {
+    globeHidesPoint = true;
+    return false;
+  }
 
-    qreal k = qSqrt(2 / (1 + cosC));
+  qreal k = qSqrt(2 / (1 + cosC));
 
-    // Let (x, y) be the position on the screen of the placemark..
-    x = ( qCos( phi ) * qSin( lambda - lambdaPrime ) ) * k;
-    y = ( qCos( phi1 ) * qSin( phi ) - qSin( phi1 ) * qCos( phi ) * qCos( lambda - lambdaPrime ) ) * k;
+  // Let (x, y) be the position on the screen of the placemark..
+  x = (qCos(phi) * qSin(lambda - lambdaPrime)) * k;
+  y = (qCos(phi1) * qSin(phi) - qSin(phi1) * qCos(phi) * qCos(lambda - lambdaPrime)) * k;
 
-    x *= viewport->radius() / qSqrt(2);
-    y *= viewport->radius() / qSqrt(2);
+  x *= viewport->radius() / qSqrt(2);
+  y *= viewport->radius() / qSqrt(2);
 
-    const qint64  radius  = clippingRadius() * viewport->radius();
+  const qint64 radius = clippingRadius() * viewport->radius();
 
-    if (x*x + y*y > radius * radius) {
-        globeHidesPoint = true;
-        return false;
-    }
+  if(x * x + y * y > radius * radius)
+  {
+    globeHidesPoint = true;
+    return false;
+  }
 
-    globeHidesPoint = false;
+  globeHidesPoint = false;
 
-    x += viewport->width() / 2;
-    y = viewport->height() / 2 - y;
+  x += viewport->width() / 2;
+  y = viewport->height() / 2 - y;
 
-    // Skip placemarks that are outside the screen area
-    if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
-        return false;
-    }
+  // Skip placemarks that are outside the screen area
+  if(x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height())
+  {
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
-bool LambertAzimuthalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
-                                             const ViewportParams *viewport,
-                                             qreal *x, qreal &y,
-                                             int &pointRepeatNum,
-                                             const QSizeF& size,
-                                             bool &globeHidesPoint ) const
+bool LambertAzimuthalProjection::screenCoordinates(const GeoDataCoordinates& coordinates,
+                                                   const ViewportParams *viewport,
+                                                   qreal *x, qreal& y,
+                                                   int& pointRepeatNum,
+                                                   const QSizeF& size,
+                                                   bool& globeHidesPoint) const
 {
-    pointRepeatNum = 0;
-    globeHidesPoint = false;
+  pointRepeatNum = 0;
+  globeHidesPoint = false;
 
-    bool visible = screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
+  bool visible = screenCoordinates(coordinates, viewport, *x, y, globeHidesPoint);
 
-    // Skip placemarks that are outside the screen area
-    if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0
-         || y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0 )
-    {
-        return false;
-    }
+  // Skip placemarks that are outside the screen area
+  if(*x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 ||
+     y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0)
+  {
+    return false;
+  }
 
-    // This projection doesn't have any repetitions,
-    // so the number of screen points referring to the geopoint is one.
-    pointRepeatNum = 1;
-    return visible;
+  // This projection doesn't have any repetitions,
+  // so the number of screen points referring to the geopoint is one.
+  pointRepeatNum = 1;
+  return visible;
 }
 
-
-bool LambertAzimuthalProjection::geoCoordinates( const int x, const int y,
-                                          const ViewportParams *viewport,
-                                          qreal& lon, qreal& lat,
-                                          GeoDataCoordinates::Unit unit ) const
+bool LambertAzimuthalProjection::geoCoordinates(const int x, const int y,
+                                                const ViewportParams *viewport,
+                                                qreal& lon, qreal& lat,
+                                                GeoDataCoordinates::Unit unit) const
 {
-    const qint64  radius  = viewport->radius();
-    // Calculate how many degrees are being represented per pixel.
-    const qreal centerLon = viewport->centerLongitude();
-    const qreal centerLat = viewport->centerLatitude();
-    const qreal rx = ( - viewport->width()  / 2 + x );
-    const qreal ry = (   viewport->height() / 2 - y );
-    const qreal p = qMax( qSqrt( rx*rx + ry*ry ), qreal(0.0001) ); // ensure we don't divide by zero
-    const qreal c = 2 * qAsin( p / (qSqrt(2) * radius)  );
-    const qreal sinc = qSin(c);
+  const qint64 radius = viewport->radius();
+  // Calculate how many degrees are being represented per pixel.
+  const qreal centerLon = viewport->centerLongitude();
+  const qreal centerLat = viewport->centerLatitude();
+  const qreal rx = (-viewport->width() / 2 + x);
+  const qreal ry = (viewport->height() / 2 - y);
+  const qreal p = qMax(qSqrt(rx * rx + ry * ry), qreal(0.0001));   // ensure we don't divide by zero
+  const qreal c = 2 * qAsin(p / (qSqrt(2) * radius));
+  const qreal sinc = qSin(c);
 
-    lon = centerLon + qAtan2( rx*sinc , ( p*qCos( centerLat )*qCos( c ) - ry*qSin( centerLat )*sinc  ) );
+  lon = centerLon + qAtan2(rx * sinc, (p * qCos(centerLat) * qCos(c) - ry * qSin(centerLat) * sinc));
 
-    while ( lon < -M_PI ) lon += 2 * M_PI;
-    while ( lon >  M_PI ) lon -= 2 * M_PI;
+  while(lon < -M_PI)
+    lon += 2 * M_PI;
+  while(lon > M_PI)
+    lon -= 2 * M_PI;
 
-    lat = qAsin( qCos(c)*qSin(centerLat) + (ry*sinc*qCos(centerLat))/p );
+  lat = qAsin(qCos(c) * qSin(centerLat) + (ry * sinc * qCos(centerLat)) / p);
 
-    if ( unit == GeoDataCoordinates::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
-    }
+  if(unit == GeoDataCoordinates::Degree)
+  {
+    lon *= RAD2DEG;
+    lat *= RAD2DEG;
+  }
 
-    return true;
+  return true;
 }
 
 }

@@ -13,24 +13,25 @@
 
 #include "GeoLineStringGraphicsItem.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTrack;
 
-class MARBLE_EXPORT GeoTrackGraphicsItem : public GeoLineStringGraphicsItem
+class MARBLE_EXPORT GeoTrackGraphicsItem :
+  public GeoLineStringGraphicsItem
 {
 
 public:
-    explicit GeoTrackGraphicsItem( const GeoDataFeature *feature, const GeoDataTrack *track );
+  explicit GeoTrackGraphicsItem(const GeoDataFeature *feature, const GeoDataTrack *track);
 
-    void setTrack( const GeoDataTrack *track );
+  void setTrack(const GeoDataTrack *track);
 
-    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer);
+  virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer);
 
 private:
-    const GeoDataTrack *m_track;
-    void update();
+  const GeoDataTrack *m_track;
+  void update();
+
 };
 
 }

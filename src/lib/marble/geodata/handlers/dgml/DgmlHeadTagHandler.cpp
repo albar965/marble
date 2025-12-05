@@ -28,22 +28,20 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Head)
 
-GeoNode* DgmlHeadTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlHeadTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Head));
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Head));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Document))
-        return parentItem.nodeAs<GeoSceneDocument>()->head();
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Document))
+    return parentItem.nodeAs<GeoSceneDocument>()->head();
 
-    return 0;
+  return 0;
 }
 
 }

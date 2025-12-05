@@ -16,25 +16,24 @@
 #include "GeoDataLod.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(minFadeExtent)
+
+GeoNode *KmlminFadeExtentTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( minFadeExtent )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_minFadeExtent));
 
-GeoNode* KmlminFadeExtentTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_minFadeExtent ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Lod))
+  {
+    float minFadeExtent = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_Lod ) ) {
-        float minFadeExtent = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLod>()->setMinFadeExtent(minFadeExtent);
+  }
 
-        parentItem.nodeAs<GeoDataLod>()->setMinFadeExtent( minFadeExtent );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

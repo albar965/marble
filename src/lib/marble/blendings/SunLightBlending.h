@@ -20,25 +20,26 @@
 
 #include "Blending.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class SunLocator;
 
-class SunLightBlending: public Blending
+class SunLightBlending :
+  public Blending
 {
- public:
-    explicit SunLightBlending( const SunLocator * sunLocator );
-    virtual ~SunLightBlending();
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const;
+public:
+  explicit SunLightBlending(const SunLocator *sunLocator);
+  virtual ~SunLightBlending();
+  virtual void blend(QImage * const bottom, TextureTile const * const top) const;
 
-    void setLevelZeroLayout( int levelZeroColumns, int levelZeroRows );
+  void setLevelZeroLayout(int levelZeroColumns, int levelZeroRows);
 
- private:
-    static int maxDivisor( int maximum, int fullLength );
-    const SunLocator * const m_sunLocator;
-    int m_levelZeroColumns;
-    int m_levelZeroRows;
+private:
+  static int maxDivisor(int maximum, int fullLength);
+
+  const SunLocator * const m_sunLocator;
+  int m_levelZeroColumns;
+  int m_levelZeroRows;
 };
 
 }

@@ -17,35 +17,36 @@ class QToolButton;
 class QComboBox;
 class QModelIndex;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataAnimatedUpdate;
 
-class RemoveItemEditWidget: public QWidget
+class RemoveItemEditWidget :
+  public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit RemoveItemEditWidget( const QModelIndex& index, QWidget* parent=0 );
-    bool editable() const;
+  explicit RemoveItemEditWidget(const QModelIndex& index, QWidget *parent = 0);
+  bool editable() const;
 
 Q_SIGNALS:
-    void editingDone( const QModelIndex& index );
+  void editingDone(const QModelIndex& index);
 
 public Q_SLOTS:
-    void setEditable( bool editable );
-    void setFeatureIds( const QStringList &ids );
-    void setDefaultFeatureId( const QString &featureId );
+  void setEditable(bool editable);
+  void setFeatureIds(const QStringList& ids);
+  void setDefaultFeatureId(const QString& featureId);
 
 private Q_SLOTS:
-    void save();
+  void save();
 
 private:
-    GeoDataAnimatedUpdate* animatedUpdateElement();
-    QPersistentModelIndex m_index;
-    QToolButton *m_button;
-    QComboBox* m_comboBox;
+  GeoDataAnimatedUpdate *animatedUpdateElement();
+
+  QPersistentModelIndex m_index;
+  QToolButton *m_button;
+  QComboBox *m_comboBox;
 };
 
 } // namespace Marble

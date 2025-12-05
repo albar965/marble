@@ -16,89 +16,94 @@
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
 static GeoTagWriterRegistrar s_writerPlaylist(
-        GeoTagWriter::QualifiedName( GeoDataTypes::GeoDataPlaylistType,
-                                     kml::kmlTag_nameSpaceOgc22 ),
-        new KmlPlaylistTagWriter );
+  GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlaylistType,
+                              kml::kmlTag_nameSpaceOgc22),
+  new KmlPlaylistTagWriter);
 
-bool KmlPlaylistTagWriter::write( const GeoNode *node, GeoWriter& writer ) const
+bool KmlPlaylistTagWriter::write(const GeoNode *node, GeoWriter& writer) const
 {
-    const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist*>( node );
+  const GeoDataPlaylist *playlist = static_cast<const GeoDataPlaylist *>(node);
 
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Playlist );
+  writer.writeStartElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_Playlist);
 
-    for ( int i = 0; i < playlist->size(); i++ ) {
-        writeTourPrimitive( playlist->primitive( i ), writer );
-    }
+  for( int i = 0; i < playlist->size(); i++ )
+  {
+    writeTourPrimitive(playlist->primitive(i), writer);
+  }
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 
-    return true;
+  return true;
 }
 
-void KmlPlaylistTagWriter::writeTourPrimitive( const GeoNode *primitive, GeoWriter& writer ) const
+void KmlPlaylistTagWriter::writeTourPrimitive(const GeoNode *primitive, GeoWriter& writer) const
 {
 
-    if ( primitive->nodeType() == GeoDataTypes::GeoDataTourControlType ) {
-        writeTourControl( static_cast<const GeoDataTourControl*>( primitive ), writer );
-    }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataWaitType ) {
-        writeWait( static_cast<const GeoDataWait*>( primitive ), writer );
-    }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataFlyToType ) {
-        writeElement( primitive, writer );
-    }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType ) {
-        writeSoundCue( static_cast<const GeoDataSoundCue*>(primitive), writer );
-    }
-    else if ( primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType ) {
-        writeElement( primitive, writer );
-    }
+  if(primitive->nodeType() == GeoDataTypes::GeoDataTourControlType)
+  {
+    writeTourControl(static_cast<const GeoDataTourControl *>(primitive), writer);
+  }
+  else if(primitive->nodeType() == GeoDataTypes::GeoDataWaitType)
+  {
+    writeWait(static_cast<const GeoDataWait *>(primitive), writer);
+  }
+  else if(primitive->nodeType() == GeoDataTypes::GeoDataFlyToType)
+  {
+    writeElement(primitive, writer);
+  }
+  else if(primitive->nodeType() == GeoDataTypes::GeoDataSoundCueType)
+  {
+    writeSoundCue(static_cast<const GeoDataSoundCue *>(primitive), writer);
+  }
+  else if(primitive->nodeType() == GeoDataTypes::GeoDataAnimatedUpdateType)
+  {
+    writeElement(primitive, writer);
+  }
 }
 
-void KmlPlaylistTagWriter::writeTourControl( const GeoDataTourControl* tourControl, GeoWriter& writer )
+void KmlPlaylistTagWriter::writeTourControl(const GeoDataTourControl *tourControl, GeoWriter& writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl );
-    KmlObjectTagWriter::writeIdentifiers( writer, tourControl );
+  writer.writeStartElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_TourControl);
+  KmlObjectTagWriter::writeIdentifiers(writer, tourControl);
 
-    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_playMode, playModeToString( tourControl->playMode() ) );
+  writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_playMode, playModeToString(tourControl->playMode()));
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 }
 
-void KmlPlaylistTagWriter::writeWait( const GeoDataWait* wait, GeoWriter& writer )
+void KmlPlaylistTagWriter::writeWait(const GeoDataWait *wait, GeoWriter& writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait );
-    KmlObjectTagWriter::writeIdentifiers( writer, wait );
+  writer.writeStartElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_Wait);
+  KmlObjectTagWriter::writeIdentifiers(writer, wait);
 
-    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number( wait->duration() ) );
+  writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_duration, QString::number(wait->duration()));
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 }
 
-void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter &writer)
+void KmlPlaylistTagWriter::writeSoundCue(const GeoDataSoundCue *cue, GeoWriter& writer)
 {
-    writer.writeStartElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue );
-    KmlObjectTagWriter::writeIdentifiers( writer, cue );
+  writer.writeStartElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_SoundCue);
+  KmlObjectTagWriter::writeIdentifiers(writer, cue);
 
-    writer.writeElement( kml::kmlTag_href, cue->href() );
-    writer.writeElement( kml::kmlTag_nameSpaceGx22, kml::kmlTag_delayedStart,
-                         QString::number(cue->delayedStart()) );
+  writer.writeElement(kml::kmlTag_href, cue->href());
+  writer.writeElement(kml::kmlTag_nameSpaceGx22, kml::kmlTag_delayedStart,
+                      QString::number(cue->delayedStart()));
 
-    writer.writeEndElement();
+  writer.writeEndElement();
 }
 
-QString KmlPlaylistTagWriter::playModeToString( GeoDataTourControl::PlayMode playMode )
+QString KmlPlaylistTagWriter::playModeToString(GeoDataTourControl::PlayMode playMode)
 {
-    switch (playMode)
-    {
+  switch(playMode)
+  {
     case GeoDataTourControl::Play:   return "play";
     case GeoDataTourControl::Pause:  return "pause";
     default:                         return "";
-    }
+  }
 }
 
 }

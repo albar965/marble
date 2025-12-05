@@ -15,24 +15,22 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_MX( tag )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_MX(tag)
 
-GeoNode* KmltagTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmltagTagHandler::parse(GeoParser & parser) const
 {
-    if ( parser.parentElement().is<OsmPlacemarkData>() ) {
-        QString key = parser.attribute( "k" );
-        QString value = parser.attribute( "v" );
-        OsmPlacemarkData *osmData = parser.parentElement().nodeAs<OsmPlacemarkData>();
-        osmData->addTag( key, value );
-    }
+  if(parser.parentElement().is<OsmPlacemarkData>())
+  {
+    QString key = parser.attribute("k");
+    QString value = parser.attribute("v");
+    OsmPlacemarkData *osmData = parser.parentElement().nodeAs<OsmPlacemarkData>();
+    osmData->addTag(key, value);
+  }
 
-    return 0;
+  return 0;
 }
 
 }
 }
-

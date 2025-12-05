@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
@@ -24,14 +23,14 @@
 #include <QStandardPaths>
 
 #ifdef Q_OS_WIN
-//for getting appdata path
-//mingw-w64 Internet Explorer 5.01
+// for getting appdata path
+// mingw-w64 Internet Explorer 5.01
 #define _WIN32_IE 0x0501
 #include <shlobj.h>
 #endif
 
 #ifdef Q_OS_MACX
-//for getting app bundle path
+// for getting app bundle path
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
@@ -39,204 +38,210 @@
 
 using namespace Marble;
 
-namespace
-{
-    QString runTimeMarbleDataPath = "";
+namespace {
+QString runTimeMarbleDataPath = "";
 
-    QString runTimeMarblePluginPath = "";
+QString runTimeMarblePluginPath = "";
 
-    QString runTimeMarbleLocalPath = "";
+QString runTimeMarbleLocalPath = "";
 }
 
 MarbleDirs::MarbleDirs()
-    : d( 0 )
+  : d(0)
 {
 }
 
-
-QString MarbleDirs::path( const QString& relativePath )
+QString MarbleDirs::path(const QString& relativePath)
 {
-    QString  localpath = localPath() + '/' + relativePath;	// local path
-    QString  systempath  = systemPath() + '/' + relativePath;	// system path
+  QString localpath = localPath() + '/' + relativePath;     // local path
+  QString systempath = systemPath() + '/' + relativePath;     // system path
 
-
-    QString fullpath = systempath;
-    if ( QFile::exists( localpath ) ) {
-        fullpath = localpath;
-    }
-    return QDir( fullpath ).canonicalPath();
+  QString fullpath = systempath;
+  if(QFile::exists(localpath))
+  {
+    fullpath = localpath;
+  }
+  return QDir(fullpath).canonicalPath();
 }
 
-
-QString MarbleDirs::pluginPath( const QString& relativePath )
+QString MarbleDirs::pluginPath(const QString& relativePath)
 {
-    QString  localpath = pluginLocalPath() + QDir::separator() + relativePath;    // local path
-    QString  systempath  = pluginSystemPath() + QDir::separator() + relativePath; // system path
+  QString localpath = pluginLocalPath() + QDir::separator() + relativePath;       // local path
+  QString systempath = pluginSystemPath() + QDir::separator() + relativePath;     // system path
 
+  QString fullpath = systempath;
+  if(QFile::exists(localpath))
+  {
+    fullpath = localpath;
+  }
 
-    QString fullpath = systempath;
-    if ( QFile::exists( localpath ) ) {
-        fullpath = localpath;
-    }
-
-    return QDir( fullpath ).canonicalPath();
+  return QDir(fullpath).canonicalPath();
 }
 
-QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters filters )
+QStringList MarbleDirs::entryList(const QString& relativePath, QDir::Filters filters)
 {
-    QStringList filesLocal = QDir( MarbleDirs::localPath() + '/' + relativePath ).entryList(filters);
-    QStringList filesSystem = QDir( MarbleDirs::systemPath() + '/' + relativePath ).entryList(filters);
-    QStringList allFiles( filesLocal );
-    allFiles << filesSystem;
+  QStringList filesLocal = QDir(MarbleDirs::localPath() + '/' + relativePath).entryList(filters);
+  QStringList filesSystem = QDir(MarbleDirs::systemPath() + '/' + relativePath).entryList(filters);
+  QStringList allFiles(filesLocal);
+  allFiles << filesSystem;
 
-    // remove duplicate entries
-    allFiles.sort();
-    for ( int i = 1; i < allFiles.size(); ++i ) {
-        if ( allFiles.at(i) == allFiles.at( i - 1 ) ) {
-            allFiles.removeAt(i);
-            --i;
-        }
+  // remove duplicate entries
+  allFiles.sort();
+  for( int i = 1; i < allFiles.size(); ++i )
+  {
+    if(allFiles.at(i) == allFiles.at(i - 1))
+    {
+      allFiles.removeAt(i);
+      --i;
     }
+  }
 
-    return allFiles;
+  return allFiles;
 }
 
-QStringList MarbleDirs::pluginEntryList( const QString& relativePath, QDir::Filters filters )
+QStringList MarbleDirs::pluginEntryList(const QString& relativePath, QDir::Filters filters)
 {
-    QStringList filesLocal = QDir( MarbleDirs::pluginLocalPath() + '/' + relativePath ).entryList(filters);
-    QStringList filesSystem = QDir( MarbleDirs::pluginSystemPath() + '/' + relativePath ).entryList(filters);
-    QStringList allFiles( filesLocal );
-    allFiles << filesSystem;
+  QStringList filesLocal = QDir(MarbleDirs::pluginLocalPath() + '/' + relativePath).entryList(filters);
+  QStringList filesSystem = QDir(MarbleDirs::pluginSystemPath() + '/' + relativePath).entryList(filters);
+  QStringList allFiles(filesLocal);
+  allFiles << filesSystem;
 
-    // remove duplicate entries
-    allFiles.sort();
-    for ( int i = 1; i < allFiles.size(); ++i ) {
-        if ( allFiles.at(i) == allFiles.at( i - 1 ) ) {
-            allFiles.removeAt(i);
-            --i;
-        }
+  // remove duplicate entries
+  allFiles.sort();
+  for( int i = 1; i < allFiles.size(); ++i )
+  {
+    if(allFiles.at(i) == allFiles.at(i - 1))
+    {
+      allFiles.removeAt(i);
+      --i;
     }
+  }
 
-    return allFiles;
+  return allFiles;
 }
 
 QString MarbleDirs::systemPath()
 {
-    if (!runTimeMarbleDataPath.isEmpty()) {
-        return runTimeMarbleDataPath;
-    }
+  if(!runTimeMarbleDataPath.isEmpty())
+  {
+    return runTimeMarbleDataPath;
+  }
 
-    QString systempath;
+  QString systempath;
 
 #ifdef Q_OS_WIN
   return QCoreApplication::applicationDirPath() + QDir::separator() + "data";
 #endif
 
 #ifdef Q_OS_MACX
-    //
-    // On OSX lets try to find any file first in the bundle
-    // before branching out to home and sys dirs
-    //
-    CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
-    const char *mypPathPtr = CFStringGetCStringPtr(myMacPath,CFStringGetSystemEncoding());
-    CFRelease(myBundleRef);
-    QString myPath(mypPathPtr);
-    CFRelease(myMacPath);
-    //do some magick so that we can still find data dir if
-    //marble was not built as a bundle
-    if (myPath.contains(".app"))  //its a bundle!
-    {
-      systempath = myPath + "/Contents/Resources/data";
-    }
+  //
+  // On OSX lets try to find any file first in the bundle
+  // before branching out to home and sys dirs
+  //
+  CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+  CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
+  const char *mypPathPtr = CFStringGetCStringPtr(myMacPath, CFStringGetSystemEncoding());
+  CFRelease(myBundleRef);
+  QString myPath(mypPathPtr);
+  CFRelease(myMacPath);
+  // do some magick so that we can still find data dir if
+  // marble was not built as a bundle
+  if(myPath.contains(".app"))     // its a bundle!
+  {
+    systempath = myPath + "/Contents/Resources/data";
+  }
 
-    if ( QFile::exists( systempath ) ){
-      return systempath;
-    }
-#endif   // mac bundle
+  if(QFile::exists(systempath))
+  {
+    return systempath;
+  }
+#endif // mac bundle
 
 #ifdef Q_OS_ANDROID
-    systempath = "assets:/data";
-    return systempath;
+  systempath = "assets:/data";
+  return systempath;
 #endif
 
 #ifdef MARBLE_DATA_PATH
-    //MARBLE_DATA_PATH is a compiler define set by cmake
-    QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
+  // MARBLE_DATA_PATH is a compiler define set by cmake
+  QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
 
-    if(QDir(compileTimeMarbleDataPath).exists())
-        return compileTimeMarbleDataPath;
-#endif  // MARBLE_DATA_PATH
+  if(QDir(compileTimeMarbleDataPath).exists())
+    return compileTimeMarbleDataPath;
+#endif // MARBLE_DATA_PATH
 
-    return QDir( QCoreApplication::applicationDirPath()
-                     + QLatin1String( "/data" )
-                     ).canonicalPath();
+  return QDir(QCoreApplication::applicationDirPath() +
+              QLatin1String("/data")
+              ).canonicalPath();
 }
 
 QString MarbleDirs::pluginSystemPath()
 {
-    if (!runTimeMarblePluginPath.isEmpty()) {
-        return runTimeMarblePluginPath;
-    }
+  if(!runTimeMarblePluginPath.isEmpty())
+  {
+    return runTimeMarblePluginPath;
+  }
 
-    QString systempath;
+  QString systempath;
 
 #ifdef Q_OS_MACX
-    //
-    // On OSX lets try to find any file first in the bundle
-    // before branching out to home and sys dirs
-    //
-    CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
-    const char *mypPathPtr = CFStringGetCStringPtr(myMacPath,CFStringGetSystemEncoding());
-    CFRelease(myBundleRef);
-    CFRelease(myMacPath);
-    QString myPath(mypPathPtr);
-    //do some magick so that we can still find data dir if
-    //marble was not built as a bundle
-    if (myPath.contains(".app"))  //its a bundle!
-    {
-      systempath = myPath + "/Contents/Resources/plugins";
-    }
+  //
+  // On OSX lets try to find any file first in the bundle
+  // before branching out to home and sys dirs
+  //
+  CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+  CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
+  const char *mypPathPtr = CFStringGetCStringPtr(myMacPath, CFStringGetSystemEncoding());
+  CFRelease(myBundleRef);
+  CFRelease(myMacPath);
+  QString myPath(mypPathPtr);
+  // do some magick so that we can still find data dir if
+  // marble was not built as a bundle
+  if(myPath.contains(".app"))     // its a bundle!
+  {
+    systempath = myPath + "/Contents/Resources/plugins";
+  }
 
-    if ( QFile::exists( systempath ) ){
-      return systempath;
-    }
-#endif   // mac bundle
+  if(QFile::exists(systempath))
+  {
+    return systempath;
+  }
+#endif // mac bundle
 
 #ifdef Q_OS_WIN
   return QCoreApplication::applicationDirPath() + QDir::separator() + "plugins";
 #endif
 
 #ifdef Q_OS_ANDROID
-    return "assets:/plugins";
+  return "assets:/plugins";
 #endif
 
 #ifdef MARBLE_PLUGIN_PATH
-    //MARBLE_PLUGIN_PATH is a compiler define set by cmake
-    QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
+  // MARBLE_PLUGIN_PATH is a compiler define set by cmake
+  QString compileTimeMarblePluginPath(MARBLE_PLUGIN_PATH);
 
-    if(QDir(compileTimeMarblePluginPath).exists())
-        return compileTimeMarblePluginPath;
-#endif  // MARBLE_PLUGIN_PATH
+  if(QDir(compileTimeMarblePluginPath).exists())
+    return compileTimeMarblePluginPath;
+#endif // MARBLE_PLUGIN_PATH
 
-    return QDir( QCoreApplication::applicationDirPath()
-                     + QLatin1String( "/plugins" )
-                     ).canonicalPath();
+  return QDir(QCoreApplication::applicationDirPath() +
+              QLatin1String("/plugins")
+              ).canonicalPath();
 }
 
 QString MarbleDirs::localPath()
 {
-  if (!runTimeMarbleLocalPath.isEmpty()) {
+  if(!runTimeMarbleLocalPath.isEmpty())
+  {
     return runTimeMarbleLocalPath;
   }
 
 #ifndef Q_OS_WIN
-    QString dataHome = getenv( "XDG_DATA_HOME" );
-    if( dataHome.isEmpty() )
-        dataHome = QDir::homePath() + "/.local/share";
+  QString dataHome = getenv("XDG_DATA_HOME");
+  if(dataHome.isEmpty())
+    dataHome = QDir::homePath() + "/.local/share";
 
-    runTimeMarbleLocalPath = dataHome + "/marble"; // local path
+  runTimeMarbleLocalPath = dataHome + "/marble";   // local path
 #else
   runTimeMarbleLocalPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/data";
 #endif
@@ -246,18 +251,18 @@ QString MarbleDirs::localPath()
 
 QStringList MarbleDirs::oldLocalPaths()
 {
-    QStringList possibleOldPaths;
+  QStringList possibleOldPaths;
 
 #ifndef Q_OS_WIN
-    QString oldDefault = QDir::homePath() + "/.marble/data";
-    possibleOldPaths.append( oldDefault );
+  QString oldDefault = QDir::homePath() + "/.marble/data";
+  possibleOldPaths.append(oldDefault);
 
-    QString xdgDefault = QDir::homePath() + "/.local/share/marble";
-    possibleOldPaths.append( xdgDefault );
+  QString xdgDefault = QDir::homePath() + "/.local/share/marble";
+  possibleOldPaths.append(xdgDefault);
 
-    QString xdg = getenv( "XDG_DATA_HOME" );
-    xdg += "/marble/";
-    possibleOldPaths.append( xdg );
+  QString xdg = getenv("XDG_DATA_HOME");
+  xdg += "/marble/";
+  possibleOldPaths.append(xdg);
 #endif
 
 #ifdef Q_OS_WIN
@@ -265,33 +270,36 @@ QStringList MarbleDirs::oldLocalPaths()
   WCHAR *appdata_path = new WCHAR[MAX_PATH + 1];
 
   SHGetSpecialFolderPathW(hwnd, appdata_path, CSIDL_APPDATA, 0);
-  QString appdata = QString::fromUtf16(reinterpret_cast<ushort*>(appdata_path));
+  QString appdata = QString::fromUtf16(reinterpret_cast<ushort *>(appdata_path));
   delete[] appdata_path;
   possibleOldPaths << QString(QDir::fromNativeSeparators(appdata) + "/.marble/data"); // local path
 #endif
 
-    QString currentLocalPath = QDir( MarbleDirs::localPath() ).canonicalPath();
-    QStringList oldPaths;
-    foreach( const QString& possibleOldPath, possibleOldPaths ) {
-        if( !QDir().exists( possibleOldPath ) ) {
-            continue;
-        }
-
-        QString canonicalPossibleOldPath = QDir( possibleOldPath ).canonicalPath();
-        if( canonicalPossibleOldPath == currentLocalPath ) {
-            continue;
-        }
-
-        oldPaths.append( canonicalPossibleOldPath );
+  QString currentLocalPath = QDir(MarbleDirs::localPath()).canonicalPath();
+  QStringList oldPaths;
+  foreach(const QString& possibleOldPath, possibleOldPaths)
+  {
+    if(!QDir().exists(possibleOldPath))
+    {
+      continue;
     }
 
-    return oldPaths;
+    QString canonicalPossibleOldPath = QDir(possibleOldPath).canonicalPath();
+    if(canonicalPossibleOldPath == currentLocalPath)
+    {
+      continue;
+    }
+
+    oldPaths.append(canonicalPossibleOldPath);
+  }
+
+  return oldPaths;
 }
 
 QString MarbleDirs::pluginLocalPath()
 {
 #ifndef Q_OS_WIN
-    return QString( QDir::homePath() + "/.marble/plugins" ); // local path
+  return QString(QDir::homePath() + "/.marble/plugins");     // local path
 #else
   return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/.marble/plugins";
 #endif
@@ -299,61 +307,60 @@ QString MarbleDirs::pluginLocalPath()
 
 QString MarbleDirs::marbleDataPath()
 {
-    return runTimeMarbleDataPath;
+  return runTimeMarbleDataPath;
 }
 
 QString MarbleDirs::marblePluginPath()
 {
-    return runTimeMarblePluginPath;
+  return runTimeMarblePluginPath;
 }
 
-void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
+void MarbleDirs::setMarbleDataPath(const QString& adaptedPath)
 {
-    if ( !QDir::root().exists( adaptedPath ) )
-    {
-        qWarning() << QString( "Invalid MarbleDataPath \"%1\". Using \"%2\" instead." ).arg( adaptedPath ).arg( systemPath() );
-        return;
-    }
+  if(!QDir::root().exists(adaptedPath))
+  {
+    qWarning() << QString("Invalid MarbleDataPath \"%1\". Using \"%2\" instead.").arg(adaptedPath).arg(systemPath());
+    return;
+  }
 
-    runTimeMarbleDataPath = adaptedPath;
+  runTimeMarbleDataPath = adaptedPath;
 }
 
-void MarbleDirs::setMarblePluginPath( const QString& adaptedPath )
+void MarbleDirs::setMarblePluginPath(const QString& adaptedPath)
 {
-    if ( !QDir::root().exists( adaptedPath ) )
-    {
-        qWarning() << QString( "Invalid MarblePluginPath \"%1\". Using \"%2\" instead." ).arg( adaptedPath ).arg( pluginSystemPath() );
-        return;
-    }
+  if(!QDir::root().exists(adaptedPath))
+  {
+    qWarning() << QString("Invalid MarblePluginPath \"%1\". Using \"%2\" instead.").arg(adaptedPath).arg(pluginSystemPath());
+    return;
+  }
 
-    runTimeMarblePluginPath = adaptedPath;
+  runTimeMarblePluginPath = adaptedPath;
 }
 
 void MarbleDirs::setMarbleLocalPath(const QString& adaptedPath)
 {
-    if ( !QDir::root().exists( adaptedPath ) )
-    {
-        qWarning() << QString( "Invalid MarbleLocalPath \"%1\". Using \"%2\" instead." ).arg( adaptedPath ).arg( localPath() );
-        return;
-    }
+  if(!QDir::root().exists(adaptedPath))
+  {
+    qWarning() << QString("Invalid MarbleLocalPath \"%1\". Using \"%2\" instead.").arg(adaptedPath).arg(localPath());
+    return;
+  }
 
-    runTimeMarbleLocalPath = adaptedPath;
+  runTimeMarbleLocalPath = adaptedPath;
 }
-
 
 void MarbleDirs::debug()
 {
-    mDebug() << "=== MarbleDirs: ===";
-    mDebug() << "Local Path:" << localPath();
-    mDebug() << "Plugin Local Path:" << pluginLocalPath();
-    mDebug() << "";
-    mDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath;
-    mDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH);
-    mDebug() << "";
-    mDebug() << "Marble Plugin Path (Run Time) :" << runTimeMarblePluginPath;
-    mDebug() << "Marble Plugin Path (Compile Time):" << QString(MARBLE_PLUGIN_PATH);
-    mDebug() << "";
-    mDebug() << "System Path:" << systemPath();
-    mDebug() << "Plugin System Path:" << pluginSystemPath();
-    mDebug() << "===================";
+  mDebug() << "=== MarbleDirs: ===";
+  mDebug() << "Local Path:" << localPath();
+  mDebug() << "Plugin Local Path:" << pluginLocalPath();
+  mDebug() << "";
+  mDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath;
+  mDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH);
+  mDebug() << "";
+  mDebug() << "Marble Plugin Path (Run Time) :" << runTimeMarblePluginPath;
+  mDebug() << "Marble Plugin Path (Compile Time):" << QString(MARBLE_PLUGIN_PATH);
+  mDebug() << "";
+  mDebug() << "System Path:" << systemPath();
+  mDebug() << "Plugin System Path:" << pluginSystemPath();
+  mDebug() << "===================";
 }

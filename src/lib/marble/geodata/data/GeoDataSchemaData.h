@@ -20,76 +20,77 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataSchemaDataPrivate;
 
-class GEODATA_EXPORT GeoDataSchemaData : public GeoNode
+class GEODATA_EXPORT GeoDataSchemaData :
+  public GeoNode
 {
 public:
-    GeoDataSchemaData();
-    GeoDataSchemaData( const GeoDataSchemaData& other );
-    GeoDataSchemaData& operator=( const GeoDataSchemaData& rhs );
-    bool operator==( const GeoDataSchemaData &other ) const;
-    bool operator!=( const GeoDataSchemaData &other ) const;
-    ~GeoDataSchemaData();
+  GeoDataSchemaData();
+  GeoDataSchemaData(const GeoDataSchemaData& other);
+  GeoDataSchemaData& operator=(const GeoDataSchemaData& rhs);
+  bool operator==(const GeoDataSchemaData& other) const;
+  bool operator!=(const GeoDataSchemaData& other) const;
 
-    /*
-     * @brief Returns the id for schema which defines custom data
-     */
-    QString schemaUrl() const;
+  ~GeoDataSchemaData();
 
-    /*
-     * @brief Set the schemaUrl attribute of SchemaData to @p schemaUrl
-     */
-    void setSchemaUrl( const QString& schemaUrl );
+  /*
+   * @brief Returns the id for schema which defines custom data
+   */
+  QString schemaUrl() const;
 
-    /*
-     * @brief Returns the SimpleData having name attribute @p name
-     */
-    GeoDataSimpleData& simpleData( const QString& name ) const;
+  /*
+   * @brief Set the schemaUrl attribute of SchemaData to @p schemaUrl
+   */
+  void setSchemaUrl(const QString& schemaUrl);
 
-    /*
-     * @brief Adds a SimpleData @p simpleData to schemaDataHash
-     */
-    void addSimpleData( const GeoDataSimpleData& simpleData );
+  /*
+   * @brief Returns the SimpleData having name attribute @p name
+   */
+  GeoDataSimpleData& simpleData(const QString& name) const;
 
-    /*
-     * @brief Dump a list containing all SimpleData values stored in schemaDataHash
-     */
-    QList<GeoDataSimpleData> simpleDataList() const;
+  /*
+   * @brief Adds a SimpleData @p simpleData to schemaDataHash
+   */
+  void addSimpleData(const GeoDataSimpleData& simpleData);
 
-    /*
-     * @brief Set the parent @parent
-     */
-    void setParent( GeoNode *parent );
+  /*
+   * @brief Dump a list containing all SimpleData values stored in schemaDataHash
+   */
+  QList<GeoDataSimpleData> simpleDataList() const;
 
-    /*
-     * @brief Get the parent
-     */
-    const GeoNode *parent() const;
-    GeoNode *parent();
+  /*
+   * @brief Set the parent @parent
+   */
+  void setParent(GeoNode *parent);
 
-    /*
-     * @brief Provides information for downcasting a GeoNode
-     */
-    virtual const char* nodeType() const;
+  /*
+   * @brief Get the parent
+   */
+  const GeoNode *parent() const;
+  GeoNode *parent();
 
-    /*
-     * @brief Serialize SchemaData to a stream @p stream
-     */
-    virtual void pack( QDataStream& stream ) const;
+  /*
+   * @brief Provides information for downcasting a GeoNode
+   */
+  virtual const char *nodeType() const;
 
-    /*
-     * @brief Unserialize SchemaData from a stream @p stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /*
+   * @brief Serialize SchemaData to a stream @p stream
+   */
+  virtual void pack(QDataStream& stream) const;
+
+  /*
+   * @brief Unserialize SchemaData from a stream @p stream
+   */
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataSchemaDataPrivate * const d;
+  GeoDataSchemaDataPrivate * const d;
 };
 
-}   // namespace Marble
+} // namespace Marble
 
-#endif  // MARBLE_GEODATASCHEMADATA_H
+#endif // MARBLE_GEODATASCHEMADATA_H

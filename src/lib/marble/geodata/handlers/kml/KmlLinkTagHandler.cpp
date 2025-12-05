@@ -20,27 +20,30 @@
 #include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Link )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Link)
 
-GeoNode* KmlLinkTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLinkTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Link ) );
-    GeoDataLink link;
-    KmlObjectTagHandler::parseIdentifiers( parser, &link );
-    GeoStackItem parentItem = parser.parentElement();
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Link));
+  GeoDataLink link;
+  KmlObjectTagHandler::parseIdentifiers(parser, &link);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.represents( kmlTag_NetworkLink )) {
-        return &parentItem.nodeAs<GeoDataNetworkLink>()->link();
-    } else if( parentItem.represents( kmlTag_Model ) ) {
-        parentItem.nodeAs<GeoDataModel>()->setLink(link);
-        return &parentItem.nodeAs<GeoDataModel>()->link();
-    }else{
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_NetworkLink))
+  {
+    return &parentItem.nodeAs<GeoDataNetworkLink>()->link();
+  }
+  else if(parentItem.represents(kmlTag_Model))
+  {
+    parentItem.nodeAs<GeoDataModel>()->setLink(link);
+    return &parentItem.nodeAs<GeoDataModel>()->link();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

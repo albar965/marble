@@ -17,10 +17,8 @@
 #include "marble_export.h"
 #include <QColor>
 
-namespace Marble
-{
-namespace Oxygen
-{
+namespace Marble {
+namespace Oxygen {
 
 MARBLE_EXPORT extern QColor const woodBrown6;
 MARBLE_EXPORT extern QColor const woodBrown5;

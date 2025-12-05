@@ -14,16 +14,17 @@
 #include "GeoTagWriter.h"
 #include "KmlFeatureTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlDocumentTagWriter : public KmlFeatureTagWriter
+class KmlDocumentTagWriter :
+  public KmlFeatureTagWriter
 {
 public:
   KmlDocumentTagWriter();
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

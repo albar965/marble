@@ -16,145 +16,145 @@ namespace Marble {
 class GeoDataScreenOverlayPrivate
 {
 public:
-    GeoDataScreenOverlayPrivate();
+  GeoDataScreenOverlayPrivate();
 
-    GeoDataVec2  m_overlayXY;
-    GeoDataVec2  m_screenXY;
-    GeoDataVec2  m_rotationXY;
-    GeoDataVec2  m_size;
-    qreal        m_rotation;
+  GeoDataVec2 m_overlayXY;
+  GeoDataVec2 m_screenXY;
+  GeoDataVec2 m_rotationXY;
+  GeoDataVec2 m_size;
+  qreal m_rotation;
 };
 
 GeoDataScreenOverlayPrivate::GeoDataScreenOverlayPrivate() :
-    m_rotation(0.0)
+  m_rotation(0.0)
 {
 }
 
 GeoDataScreenOverlay::GeoDataScreenOverlay() :
-    d( new GeoDataScreenOverlayPrivate )
+  d(new GeoDataScreenOverlayPrivate)
 {
 }
 
-GeoDataScreenOverlay::GeoDataScreenOverlay( const Marble::GeoDataScreenOverlay &other ) :
-    GeoDataOverlay( other ), d( new GeoDataScreenOverlayPrivate( *other.d ) )
+GeoDataScreenOverlay::GeoDataScreenOverlay(const Marble::GeoDataScreenOverlay& other) :
+  GeoDataOverlay(other), d(new GeoDataScreenOverlayPrivate(*other.d))
 {
 }
 
-GeoDataScreenOverlay &GeoDataScreenOverlay::operator=( const GeoDataScreenOverlay &other )
+GeoDataScreenOverlay& GeoDataScreenOverlay::operator=(const GeoDataScreenOverlay& other)
 {
-    *d = *other.d;
-    return *this;
+  *d = *other.d;
+  return *this;
 }
 
 bool GeoDataScreenOverlay::operator==(const GeoDataScreenOverlay& other) const
 {
-    return equals(other) &&
-           d->m_overlayXY == other.d->m_overlayXY &&
-           d->m_screenXY == other.d->m_screenXY &&
-           d->m_rotationXY == other.d->m_rotationXY &&
-           d->m_size == other.d->m_size &&
-           d->m_rotation == other.d->m_rotation;
+  return equals(other) &&
+         d->m_overlayXY == other.d->m_overlayXY &&
+         d->m_screenXY == other.d->m_screenXY &&
+         d->m_rotationXY == other.d->m_rotationXY &&
+         d->m_size == other.d->m_size &&
+         d->m_rotation == other.d->m_rotation;
 }
 
 bool GeoDataScreenOverlay::operator!=(const GeoDataScreenOverlay& other) const
 {
-    return !this->operator==(other);
+  return !this->operator==(other);
 }
 
 GeoDataScreenOverlay::~GeoDataScreenOverlay()
 {
-    delete d;
+  delete d;
 }
 
 const char *GeoDataScreenOverlay::nodeType() const
 {
-    return GeoDataTypes::GeoDataScreenOverlayType;
+  return GeoDataTypes::GeoDataScreenOverlayType;
 }
 
 GeoDataVec2 GeoDataScreenOverlay::overlayXY() const
 {
-    return d->m_overlayXY;
+  return d->m_overlayXY;
 }
 
-void GeoDataScreenOverlay::setOverlayXY(const GeoDataVec2 &vec2)
+void GeoDataScreenOverlay::setOverlayXY(const GeoDataVec2& vec2)
 {
-    d->m_overlayXY = vec2;
+  d->m_overlayXY = vec2;
 }
 
-void GeoDataScreenOverlay::setOverlayXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                        const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setOverlayXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit,
+                                        const GeoDataVec2::Unit& yunit)
 {
-    d->m_screenXY.setX(x);
-    d->m_screenXY.setY(y);
-    d->m_screenXY.setXunits(xunit);
-    d->m_screenXY.setYunits(yunit);
+  d->m_screenXY.setX(x);
+  d->m_screenXY.setY(y);
+  d->m_screenXY.setXunits(xunit);
+  d->m_screenXY.setYunits(yunit);
 }
 
 GeoDataVec2 GeoDataScreenOverlay::screenXY() const
 {
-    return d->m_screenXY;
+  return d->m_screenXY;
 }
 
-void GeoDataScreenOverlay::setScreenXY(const GeoDataVec2 &vec2)
+void GeoDataScreenOverlay::setScreenXY(const GeoDataVec2& vec2)
 {
-    d->m_screenXY = vec2;
+  d->m_screenXY = vec2;
 }
 
-void GeoDataScreenOverlay::setScreenXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                       const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setScreenXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit,
+                                       const GeoDataVec2::Unit& yunit)
 {
-    d->m_screenXY.setX(x);
-    d->m_screenXY.setY(y);
-    d->m_screenXY.setXunits(xunit);
-    d->m_screenXY.setYunits(yunit);
+  d->m_screenXY.setX(x);
+  d->m_screenXY.setY(y);
+  d->m_screenXY.setXunits(xunit);
+  d->m_screenXY.setYunits(yunit);
 }
 
 GeoDataVec2 GeoDataScreenOverlay::rotationXY() const
 {
-    return d->m_rotationXY;
+  return d->m_rotationXY;
 }
 
-void GeoDataScreenOverlay::setRotationXY(const GeoDataVec2 &vec2)
+void GeoDataScreenOverlay::setRotationXY(const GeoDataVec2& vec2)
 {
-    d->m_rotationXY = vec2;
+  d->m_rotationXY = vec2;
 }
 
-void GeoDataScreenOverlay::setRotationXY(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                         const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setRotationXY(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit,
+                                         const GeoDataVec2::Unit& yunit)
 {
-    d->m_rotationXY.setX(x);
-    d->m_rotationXY.setY(y);
-    d->m_rotationXY.setXunits(xunit);
-    d->m_rotationXY.setYunits(yunit);
+  d->m_rotationXY.setX(x);
+  d->m_rotationXY.setY(y);
+  d->m_rotationXY.setXunits(xunit);
+  d->m_rotationXY.setYunits(yunit);
 }
 
 GeoDataVec2 GeoDataScreenOverlay::size() const
 {
-    return d->m_size;
+  return d->m_size;
 }
 
-void GeoDataScreenOverlay::setSize(const GeoDataVec2 &vec2)
+void GeoDataScreenOverlay::setSize(const GeoDataVec2& vec2)
 {
-    d->m_size = vec2;
+  d->m_size = vec2;
 }
 
-void GeoDataScreenOverlay::setSize(const qreal &x, const qreal &y, const GeoDataVec2::Unit &xunit,
-                                   const GeoDataVec2::Unit &yunit)
+void GeoDataScreenOverlay::setSize(const qreal& x, const qreal& y, const GeoDataVec2::Unit& xunit,
+                                   const GeoDataVec2::Unit& yunit)
 {
-    d->m_size.setX(x);
-    d->m_size.setY(y);
-    d->m_size.setXunits(xunit);
-    d->m_size.setYunits(yunit);
+  d->m_size.setX(x);
+  d->m_size.setY(y);
+  d->m_size.setXunits(xunit);
+  d->m_size.setYunits(yunit);
 }
 
 qreal GeoDataScreenOverlay::rotation() const
 {
-    return d->m_rotation;
+  return d->m_rotation;
 }
 
 void GeoDataScreenOverlay::setRotation(qreal rotation)
 {
-    d->m_rotation = rotation;
+  d->m_rotation = rotation;
 }
 
 }

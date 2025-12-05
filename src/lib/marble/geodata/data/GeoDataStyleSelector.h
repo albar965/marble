@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin   <ingwa@kde.org>
 //
 
-
 #ifndef MARBLE_GEODATASTYLESELECTOR_H
 #define MARBLE_GEODATASTYLESELECTOR_H
 
@@ -17,8 +16,7 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataStyleSelectorPrivate;
 
@@ -34,37 +32,38 @@ class GeoDataStyleSelectorPrivate;
  * @See GeoDataStyle
  * @See GeoDataStyleMap
  */
-class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
+class GEODATA_EXPORT GeoDataStyleSelector :
+  public GeoDataObject
 {
-  public:
-    ~GeoDataStyleSelector();
+public:
+  ~GeoDataStyleSelector();
 
-    /**
-    * @brief assignment operator
-    */
-    GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );
+  /**
+  * @brief assignment operator
+  */
+  GeoDataStyleSelector& operator=(const GeoDataStyleSelector& other);
 
-    bool operator==( const GeoDataStyleSelector &other ) const;
-    bool operator!=( const GeoDataStyleSelector &other ) const;
+  bool operator==(const GeoDataStyleSelector& other) const;
+  bool operator!=(const GeoDataStyleSelector& other) const;
 
-    /**
-     * @brief Serialize the styleselector to a stream
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
+  /**
+   * @brief Serialize the styleselector to a stream
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
 
-    /**
-     * @brief  Unserialize the styleselector from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+   * @brief  Unserialize the styleselector from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
 
- protected:
-    GeoDataStyleSelector();
-    GeoDataStyleSelector( const GeoDataStyleSelector& other );
+protected:
+  GeoDataStyleSelector();
+  GeoDataStyleSelector(const GeoDataStyleSelector& other);
 
- private:
-    GeoDataStyleSelectorPrivate * const d;
+private:
+  GeoDataStyleSelectorPrivate * const d;
 };
 
 }

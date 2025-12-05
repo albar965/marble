@@ -29,29 +29,29 @@
 #include "GeoDataPlacemark.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( pop )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(pop)
 
-GeoNode* KmlpopTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlpopTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_pop ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_pop));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.is<GeoDataPlacemark>() ) {
-        QString population = parser.readElementText().trimmed();
-        qint64 pop = population.toLongLong();
-        if( pop < 0 ) pop = 0;
-        parentItem.nodeAs<GeoDataPlacemark>()->setPopulation( pop );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    QString population = parser.readElementText().trimmed();
+    qint64 pop = population.toLongLong();
+    if(pop < 0)
+      pop = 0;
+    parentItem.nodeAs<GeoDataPlacemark>()->setPopulation(pop);
+  }
+
+  return 0;
 }
 
 }
 }
 
-#endif //KML_LAZY_IMP
+#endif // KML_LAZY_IMP

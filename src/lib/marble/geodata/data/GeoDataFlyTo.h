@@ -8,7 +8,6 @@
 // Copyright 2013      Mayank Madan <maddiemadan@gmail.com>
 //
 
-
 #ifndef MARBLE_GEODATAFLYTO_H
 #define MARBLE_GEODATAFLYTO_H
 
@@ -20,43 +19,45 @@ namespace Marble {
 
 class GeoDataFlyToPrivate;
 
-class MARBLE_EXPORT GeoDataFlyTo: public GeoDataTourPrimitive
+class MARBLE_EXPORT GeoDataFlyTo :
+  public GeoDataTourPrimitive
 {
 public:
-    enum FlyToMode {
-        Bounce,
-        Smooth
-    };
+  enum FlyToMode
+  {
+    Bounce,
+    Smooth
+  };
 
-    GeoDataFlyTo();
+  GeoDataFlyTo();
 
-    GeoDataFlyTo( const GeoDataFlyTo &other );
+  GeoDataFlyTo(const GeoDataFlyTo& other);
 
-    GeoDataFlyTo& operator=( const GeoDataFlyTo &other );
-    bool operator==( const GeoDataFlyTo& other ) const;
-    bool operator!=( const GeoDataFlyTo& other ) const;
+  GeoDataFlyTo& operator=(const GeoDataFlyTo& other);
+  bool operator==(const GeoDataFlyTo& other) const;
+  bool operator!=(const GeoDataFlyTo& other) const;
 
-    ~GeoDataFlyTo();
+  ~GeoDataFlyTo();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    double duration() const;
+  double duration() const;
 
-    void setDuration( double duration );
+  void setDuration(double duration);
 
-    const GeoDataAbstractView *view() const;
+  const GeoDataAbstractView *view() const;
 
-    GeoDataAbstractView *view();
+  GeoDataAbstractView *view();
 
-    void setView( GeoDataAbstractView *view );
+  void setView(GeoDataAbstractView *view);
 
-    FlyToMode flyToMode() const;
+  FlyToMode flyToMode() const;
 
-    void setFlyToMode( const FlyToMode flyToMode );
+  void setFlyToMode(const FlyToMode flyToMode);
 
 private:
-    GeoDataFlyToPrivate* const d;
+  GeoDataFlyToPrivate * const d;
 };
 
 }

@@ -29,25 +29,24 @@
 #include "GeoDataLineStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( LineStyle )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(LineStyle)
 
-GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLineStyleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineStyle ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_LineStyle));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataLineStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
-        parentItem.nodeAs<GeoDataStyle>()->setLineStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->lineStyle();
-    }
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataLineStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
+    parentItem.nodeAs<GeoDataStyle>()->setLineStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->lineStyle();
+  }
+  return 0;
 }
 
 }

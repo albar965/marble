@@ -12,15 +12,15 @@
 
 #include "GeoTagHandler.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 
-class DgmlTileSizeTagHandler : public GeoTagHandler
+class DgmlTileSizeTagHandler :
+  public GeoTagHandler
 {
 public:
-    virtual GeoNode* parse( GeoParser& ) const;
+  virtual GeoNode *parse(GeoParser&) const;
+
 };
 
 }

@@ -17,8 +17,7 @@
 
 #include <marble_export.h>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataObject;
 class GeoNode;
@@ -33,52 +32,54 @@ class GeoWriter;
 class MARBLE_EXPORT GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const = 0;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const = 0;
 
-    /**
-     * @brief Object Name and Namespace Pair
-     * This type is intended to be used in a similar way to @see GeoParser::QualifiedName
-     * but in practice will act differently. The Namespace will not be an XML
-     * namespace directly but instead it will refere to a Document Type so that
-     * the GeoWriter will be able to identify what GeoTagWriter to use even in
-     * absence of an XML namespace. This also allows for the case where data
-     * using an internal representation of the KML classes can be outputted in
-     * alternative XML formats. For XML formats that have namespaces this
-     * document type will usually correspond with the XML namespace. Use in the
-     * order QPair<QString tagName, QString documentType>.
-     */
-    typedef QPair<QString, QString> QualifiedName;
+  /**
+   * @brief Object Name and Namespace Pair
+   * This type is intended to be used in a similar way to @see GeoParser::QualifiedName
+   * but in practice will act differently. The Namespace will not be an XML
+   * namespace directly but instead it will refere to a Document Type so that
+   * the GeoWriter will be able to identify what GeoTagWriter to use even in
+   * absence of an XML namespace. This also allows for the case where data
+   * using an internal representation of the KML classes can be outputted in
+   * alternative XML formats. For XML formats that have namespaces this
+   * document type will usually correspond with the XML namespace. Use in the
+   * order QPair<QString tagName, QString documentType>.
+   */
+  typedef QPair<QString, QString> QualifiedName;
 
 protected:
-    GeoTagWriter();
-    virtual ~GeoTagWriter();
+  GeoTagWriter();
+  virtual ~GeoTagWriter();
 
-    bool writeElement( const GeoNode* object, GeoWriter& writer ) const;
-
-private:
-    // Only our registrar is allowed to register tag writers.
-    friend struct GeoTagWriterRegistrar;
-    static void registerWriter(const QualifiedName&, const GeoTagWriter*);
+  bool writeElement(const GeoNode *object, GeoWriter& writer) const;
 
 private:
-    //Collect the Tag Writers and provide a singleton like accessor
-    typedef QHash<QualifiedName, const GeoTagWriter*> TagHash;
-    static TagHash* tagWriterHash();
+  // Only our registrar is allowed to register tag writers.
+  friend struct GeoTagWriterRegistrar;
+  static void registerWriter(const QualifiedName&, const GeoTagWriter *);
 
 private:
-    // Only our writer is allowed to access tag handlers.
-    friend class GeoWriter;
-    static const GeoTagWriter* recognizes(const QualifiedName&);
+  // Collect the Tag Writers and provide a singleton like accessor
+  typedef QHash<QualifiedName, const GeoTagWriter *> TagHash;
+  static TagHash *tagWriterHash();
+
+private:
+  // Only our writer is allowed to access tag handlers.
+  friend class GeoWriter;
+  static const GeoTagWriter *recognizes(const QualifiedName&);
+
 };
 
 // Helper structure
 struct GeoTagWriterRegistrar
 {
 public:
-    GeoTagWriterRegistrar(const GeoTagWriter::QualifiedName& name, const GeoTagWriter* writer)
-    {
-        GeoTagWriter::registerWriter(name, writer);
-    }
+  GeoTagWriterRegistrar(const GeoTagWriter::QualifiedName& name, const GeoTagWriter *writer)
+  {
+    GeoTagWriter::registerWriter(name, writer);
+  }
+
 };
 
 }

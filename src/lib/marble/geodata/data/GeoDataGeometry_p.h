@@ -18,61 +18,60 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataGeometryPrivate
 {
-  public:
-    GeoDataGeometryPrivate()
-        : m_extrude( false ),
-          m_altitudeMode( ClampToGround ),
-          ref( 0 )
-    {
-    }
+public:
+  GeoDataGeometryPrivate()
+    : m_extrude(false),
+    m_altitudeMode(ClampToGround),
+    ref(0)
+  {
+  }
 
-    GeoDataGeometryPrivate( const GeoDataGeometryPrivate& other )
-        : m_extrude( other.m_extrude ),
-          m_altitudeMode( other.m_altitudeMode ),
-          m_latLonAltBox(),
-          ref( 0 )
-    {
-    }
+  GeoDataGeometryPrivate(const GeoDataGeometryPrivate& other)
+    : m_extrude(other.m_extrude),
+    m_altitudeMode(other.m_altitudeMode),
+    m_latLonAltBox(),
+    ref(0)
+  {
+  }
 
-    virtual ~GeoDataGeometryPrivate()
-    {
-    }
+  virtual ~GeoDataGeometryPrivate()
+  {
+  }
 
-    GeoDataGeometryPrivate& operator=( const GeoDataGeometryPrivate &other )
-    {
-        m_extrude = other.m_extrude;
-        m_altitudeMode = other.m_altitudeMode;
-        m_latLonAltBox = other.m_latLonAltBox;
-        return *this;
-    }
+  GeoDataGeometryPrivate& operator=(const GeoDataGeometryPrivate& other)
+  {
+    m_extrude = other.m_extrude;
+    m_altitudeMode = other.m_altitudeMode;
+    m_latLonAltBox = other.m_latLonAltBox;
+    return *this;
+  }
 
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-        GeoDataGeometryPrivate* copy = new GeoDataGeometryPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataGeometryPrivate *copy = new GeoDataGeometryPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataGeometryType;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataGeometryType;
+  }
 
-    virtual EnumGeometryId geometryId() const
-    {
-        return InvalidGeometryId;
-    }
+  virtual EnumGeometryId geometryId() const
+  {
+    return InvalidGeometryId;
+  }
 
-    bool         m_extrude;
-    AltitudeMode m_altitudeMode;
-    mutable GeoDataLatLonAltBox m_latLonAltBox;
+  bool m_extrude;
+  AltitudeMode m_altitudeMode;
+  mutable GeoDataLatLonAltBox m_latLonAltBox;
 
-    QAtomicInt  ref;
+  QAtomicInt ref;
 };
 
 } // namespace Marble

@@ -16,61 +16,61 @@
 
 #include <QPixmap>
 
-namespace Marble
-{
+namespace Marble {
 
-class AtmospherePlugin : public RenderPlugin
+class AtmospherePlugin :
+  public RenderPlugin
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.AtmospherePlugin")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( AtmospherePlugin )
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.AtmospherePlugin")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  MARBLE_PLUGIN(AtmospherePlugin)
 
 public:
-    AtmospherePlugin();
+  AtmospherePlugin();
 
-    explicit AtmospherePlugin( const MarbleModel *marbleModel );
+  explicit AtmospherePlugin(const MarbleModel *marbleModel);
 
-    QStringList backendTypes() const;
+  QStringList backendTypes() const;
 
-    QString renderPolicy() const;
+  QString renderPolicy() const;
 
-    QStringList renderPosition() const;
+  QStringList renderPosition() const;
 
-    virtual RenderType renderType() const;
+  virtual RenderType renderType() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString guiString() const;
+  QString guiString() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QIcon icon() const;
+  QIcon icon() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    qreal zValue() const;
+  qreal zValue() const;
 
-    void initialize();
+  void initialize();
 
-    bool isInitialized() const;
+  bool isInitialized() const;
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
-    void repaintPixmap(const ViewportParams *viewParams);
+  bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0);
+  void repaintPixmap(const ViewportParams *viewParams);
 
 public Q_SLOTS:
-    void updateTheme();
+  void updateTheme();
 
 private:
-    QPixmap m_renderPixmap;
-    QColor m_renderColor;
-    int m_renderRadius;
+  QPixmap m_renderPixmap;
+  QColor m_renderColor;
+  int m_renderRadius;
 };
 
 }

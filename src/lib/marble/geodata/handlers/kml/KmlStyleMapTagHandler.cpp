@@ -31,29 +31,30 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( StyleMap )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(StyleMap)
 
-GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlStyleMapTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_StyleMap ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_StyleMap));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_Document ) ) {
-        GeoDataStyleMap styleMap;
-        KmlObjectTagHandler::parseIdentifiers( parser, &styleMap );
-        parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
-        return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleMap.id() );
-    } else if( parentItem.is<GeoDataFeature>() ) {
-/*        GeoDataStyleMap styleMap;
-        parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.represents(kmlTag_Document))
+  {
+    GeoDataStyleMap styleMap;
+    KmlObjectTagHandler::parseIdentifiers(parser, &styleMap);
+    parentItem.nodeAs<GeoDataDocument>()->addStyleMap(styleMap);
+    return &parentItem.nodeAs<GeoDataDocument>()->styleMap(styleMap.id());
+  }
+  else if(parentItem.is<GeoDataFeature>())
+  {
+    /*        GeoDataStyleMap styleMap;
+            parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
+  }
+
+  return 0;
 }
 
 }

@@ -8,10 +8,8 @@
 // Copyright 2008      Patrick Spendrin     <ps_ml@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATASTYLEMAP_H
 #define MARBLE_GEODATASTYLEMAP_H
-
 
 #include <QString>
 #include <QMap>
@@ -21,8 +19,7 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataStyleMapPrivate;
 /**
@@ -35,52 +32,54 @@ class GeoDataStyleMapPrivate;
  * @See GeoDataStyle
  * @See GeoDataStyleSelector
  */
-class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
-                                       public QMap<QString, QString>
+class GEODATA_EXPORT GeoDataStyleMap :
+  public GeoDataStyleSelector, public QMap<QString, QString>
 {
-  public:
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+public:
+  /// Provides type information for downcasting a GeoNode
+  virtual const char *nodeType() const;
 
-    /**
-    * @brief return the last key
-    */
-    QString lastKey() const;
-    /**
-    * @brief Set the last key
-    * this property is needed to set an entry in the kml parser
-    * after the parser has set the last key, it will read the value
-    * and add both to this map
-    * @param key the last key
-    */
-    void setLastKey( const QString& key );
-    
-    /**
-    * @brief assignment operator
-    * @param other the styleMap which gets duplicated.
-    */
-    GeoDataStyleMap& operator=( const GeoDataStyleMap& other );
+  /**
+  * @brief return the last key
+  */
+  QString lastKey() const;
 
-    bool operator==( const GeoDataStyleMap &other ) const;
-    bool operator!=( const GeoDataStyleMap &other ) const;
+  /**
+  * @brief Set the last key
+  * this property is needed to set an entry in the kml parser
+  * after the parser has set the last key, it will read the value
+  * and add both to this map
+  * @param key the last key
+  */
+  void setLastKey(const QString& key);
 
-    /**
-     * @brief Serialize the stylemap to a stream
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
-    /**
-     * @brief  Unserialize the stylemap from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+  * @brief assignment operator
+  * @param other the styleMap which gets duplicated.
+  */
+  GeoDataStyleMap& operator=(const GeoDataStyleMap& other);
 
-    GeoDataStyleMap();
-    GeoDataStyleMap( const GeoDataStyleMap& other );
-    ~GeoDataStyleMap();
+  bool operator==(const GeoDataStyleMap& other) const;
+  bool operator!=(const GeoDataStyleMap& other) const;
 
-  private:
-    GeoDataStyleMapPrivate * const d;
+  /**
+   * @brief Serialize the stylemap to a stream
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
+
+  /**
+   * @brief  Unserialize the stylemap from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
+
+  GeoDataStyleMap();
+  GeoDataStyleMap(const GeoDataStyleMap& other);
+  ~GeoDataStyleMap();
+
+private:
+  GeoDataStyleMapPrivate * const d;
 };
 
 }

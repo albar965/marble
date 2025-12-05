@@ -14,23 +14,22 @@
 #include "GeoParser.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble
-{
-namespace kml
-{
+namespace Marble {
+namespace kml {
 
-KML_DEFINE_TAG_HANDLER( viewBoundScale )
+KML_DEFINE_TAG_HANDLER(viewBoundScale)
 
 GeoNode *KmlviewBoundScaleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT ( parser.isStartElement() && parser.isValidElement( kmlTag_viewBoundScale ) );
-    GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataLink>() ){
-        qreal const viewBoundScale = parser.readElementText().trimmed().toDouble();
-        parentItem.nodeAs<GeoDataLink>()->setViewBoundScale( viewBoundScale );
-    }
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_viewBoundScale));
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataLink>())
+  {
+    qreal const viewBoundScale = parser.readElementText().trimmed().toDouble();
+    parentItem.nodeAs<GeoDataLink>()->setViewBoundScale(viewBoundScale);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

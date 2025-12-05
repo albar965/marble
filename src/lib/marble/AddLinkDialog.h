@@ -15,25 +15,25 @@
 
 #include <QDialog>
 
-
 namespace Marble {
 
-class MARBLE_EXPORT AddLinkDialog : public QDialog
+class MARBLE_EXPORT AddLinkDialog :
+  public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit AddLinkDialog(QWidget *parent = 0 );
-    ~AddLinkDialog();
-    QString name() const;
-    QString url() const;
+  explicit AddLinkDialog(QWidget *parent = 0);
+  ~AddLinkDialog();
+  QString name() const;
+  QString url() const;
 
 private Q_SLOTS:
-    void checkFields();
+  void checkFields();
 
 private:
-    class Private;
-    Private * const d;
+  class Private;
+  Private * const d;
 };
 
 }

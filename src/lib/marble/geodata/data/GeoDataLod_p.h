@@ -15,29 +15,28 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataLodPrivate
 {
-  public:
-    GeoDataLodPrivate()
-         : m_minLodPixels( 0 ),
-           m_maxLodPixels( -1 ),
-           m_minFadeExtent( 0 ),
-           m_maxFadeExtent( 0 )
-    {
-    }
+public:
+  GeoDataLodPrivate()
+    : m_minLodPixels(0),
+    m_maxLodPixels(-1),
+    m_minFadeExtent(0),
+    m_maxFadeExtent(0)
+  {
+  }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataLodType;
-    }
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataLodType;
+  }
 
-    qreal m_minLodPixels;
-    qreal m_maxLodPixels;
-    qreal m_minFadeExtent;
-    qreal m_maxFadeExtent;
+  qreal m_minLodPixels;
+  qreal m_maxLodPixels;
+  qreal m_minFadeExtent;
+  qreal m_maxFadeExtent;
 };
 
 } // namespace Marble

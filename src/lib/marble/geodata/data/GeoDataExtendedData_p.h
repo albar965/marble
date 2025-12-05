@@ -20,24 +20,22 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataExtendedDataPrivate
 {
-  public:
+public:
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataExtendedDataType;
+  }
 
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataExtendedDataType;
-    }
-
-    QHash< QString, GeoDataData > hash;
-    QHash< QString, GeoDataSimpleArrayData* > arrayHash;
-    QHash< QString, GeoDataSchemaData> schemaDataHash;
+  QHash<QString, GeoDataData> hash;
+  QHash<QString, GeoDataSimpleArrayData *> arrayHash;
+  QHash<QString, GeoDataSchemaData> schemaDataHash;
 
 };
 
 } // namespace Marble
 
-#endif //GEODATAEXTENDEDDATAPRIVATE_H
+#endif // GEODATAEXTENDEDDATAPRIVATE_H

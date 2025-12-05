@@ -29,26 +29,25 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( LabelStyle )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(LabelStyle)
 
-GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLabelStyleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LabelStyle ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_LabelStyle));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataLabelStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
+  GeoStackItem parentItem = parser.parentElement();
 
-        parentItem.nodeAs<GeoDataStyle>()->setLabelStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->labelStyle();
-    }
-    return 0;
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataLabelStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
+
+    parentItem.nodeAs<GeoDataStyle>()->setLabelStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->labelStyle();
+  }
+  return 0;
 }
 
 }

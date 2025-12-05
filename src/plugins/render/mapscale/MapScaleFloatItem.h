@@ -14,108 +14,107 @@
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"
 
-namespace Ui
-{
-    class MapScaleConfigWidget;
+namespace Ui {
+class MapScaleConfigWidget;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short The class that creates a map scale.
  *
  */
 
-class MapScaleFloatItem : public AbstractFloatItem, public DialogConfigurationInterface
+class MapScaleFloatItem :
+  public AbstractFloatItem, public DialogConfigurationInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.MapScaleFloatItem")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( MapScaleFloatItem )
- public:
-    explicit MapScaleFloatItem( const MarbleModel *marbleModel = 0 );
-    ~MapScaleFloatItem();
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.MapScaleFloatItem")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  Q_INTERFACES(Marble::DialogConfigurationInterface)
+  MARBLE_PLUGIN(MapScaleFloatItem)
 
-    QStringList backendTypes() const;
+public:
+  explicit MapScaleFloatItem(const MarbleModel *marbleModel = 0);
+  ~MapScaleFloatItem();
 
-    QString name() const;
+  QStringList backendTypes() const;
 
-    QString guiString() const;
+  QString name() const;
 
-    QString nameId() const;
+  QString guiString() const;
 
-    QString version() const;
+  QString nameId() const;
 
-    QString description() const;
+  QString version() const;
 
-    QString copyrightYears() const;
+  QString description() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QString copyrightYears() const;
 
-    QIcon icon () const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    void initialize ();
+  QIcon icon() const;
 
-    bool isInitialized () const;
+  void initialize();
 
-    void setProjection( const ViewportParams *viewport );
+  bool isInitialized() const;
 
-    void paintContent( QPainter *painter );
+  void setProjection(const ViewportParams *viewport);
 
+  void paintContent(QPainter *painter);
 
-    QDialog *configDialog();
+  QDialog *configDialog();
 
-    /**
-     * @return: The settings of the item.
-     */
-    virtual QHash<QString,QVariant> settings() const;
+  /**
+   * @return: The settings of the item.
+   */
+  virtual QHash<QString, QVariant> settings() const;
 
-    /**
-     * Set the settings of the item.
-     */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+  /**
+   * Set the settings of the item.
+   */
+  virtual void setSettings(const QHash<QString, QVariant>& settings);
 
- protected:
-    virtual void contextMenuEvent( QWidget *w, QContextMenuEvent *e );
+protected:
+  virtual void contextMenuEvent(QWidget *w, QContextMenuEvent *e);
 
- private Q_SLOTS:
-    void readSettings();
-    void writeSettings();
-    void toggleRatioScaleVisibility();
-    void toggleMinimized();
+private Q_SLOTS:
+  void readSettings();
+  void writeSettings();
+  void toggleRatioScaleVisibility();
+  void toggleMinimized();
 
 private:
-    void calcScaleBar();
+  void calcScaleBar();
 
- private:
-    QDialog *m_configDialog;
-    Ui::MapScaleConfigWidget *ui_configWidget;
+private:
+  QDialog *m_configDialog;
+  Ui::MapScaleConfigWidget *ui_configWidget;
 
-    int      m_radius;
+  int m_radius;
 
-    QString  m_target;
+  QString m_target;
 
-    int      m_leftBarMargin;
-    int      m_rightBarMargin;
-    int      m_scaleBarWidth;
-    int      m_viewportWidth;
-    int      m_scaleBarHeight;
-    qreal    m_scaleBarDistance;
+  int m_leftBarMargin;
+  int m_rightBarMargin;
+  int m_scaleBarWidth;
+  int m_viewportWidth;
+  int m_scaleBarHeight;
+  qreal m_scaleBarDistance;
 
-    qreal    m_pixel2Length;
-    int      m_bestDivisor;
-    int      m_pixelInterval;
-    int      m_valueInterval;
+  qreal m_pixel2Length;
+  int m_bestDivisor;
+  int m_pixelInterval;
+  int m_valueInterval;
 
-    bool     m_scaleInitDone;
+  bool m_scaleInitDone;
 
-    QMenu*   m_contextMenu;
+  QMenu *m_contextMenu;
 
-    QAction  *m_minimizeAction;
-    bool m_minimized;
-    int m_widthScaleFactor; // Width of view port / factor = content size
+  QAction *m_minimizeAction;
+  bool m_minimized;
+  int m_widthScaleFactor;   // Width of view port / factor = content size
 };
 
 }

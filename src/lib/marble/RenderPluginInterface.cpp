@@ -10,8 +10,7 @@
 
 #include "RenderPluginInterface.h"
 
-namespace Marble
-{
+namespace Marble {
 
 RenderPluginInterface::~RenderPluginInterface()
 {

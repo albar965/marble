@@ -15,27 +15,28 @@
 #include "GeoDataSoundCue.h"
 #include "GeoDataAnimatedUpdate.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(delayedStart)
+
+GeoNode *KmldelayedStartTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( delayedStart )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_delayedStart));
 
-GeoNode* KmldelayedStartTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_delayedStart ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataSoundCue>())
+  {
+    double const delay = parser.readElementText().toDouble();
+    parentItem.nodeAs<GeoDataSoundCue>()->setDelayedStart(delay);
+  }
+  else if(parentItem.is<GeoDataAnimatedUpdate>())
+  {
+    double const delay = parser.readElementText().toDouble();
+    parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDelayedStart(delay);
+  }
 
-    if (parentItem.is<GeoDataSoundCue>()) {
-        double const delay = parser.readElementText().toDouble();
-        parentItem.nodeAs<GeoDataSoundCue>()->setDelayedStart(delay);
-    } else if (parentItem.is<GeoDataAnimatedUpdate>()) {
-        double const delay = parser.readElementText().toDouble();
-        parentItem.nodeAs<GeoDataAnimatedUpdate>()->setDelayedStart(delay);
-    }
-
-    return 0;
+  return 0;
 }
 
 } // namespace kml

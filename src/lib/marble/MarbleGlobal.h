@@ -12,7 +12,6 @@
 #ifndef MARBLE_GLOBAL_H
 #define MARBLE_GLOBAL_H
 
-
 #include <math.h>
 
 #include <QString>
@@ -22,17 +21,16 @@
 
 // #define QT_STRICT_ITERATORS
 
+namespace Marble {
 
-namespace Marble
+enum TessellationFlag
 {
-
-enum TessellationFlag {
-    NoTessellation = 0x0,
-    Tessellate = 0x1,
-    RespectLatitudeCircle = 0x2,
-    FollowGround = 0x4,
-    RotationIndicatesFill = 0x8,
-    SkipLatLonNormalization = 0x10
+  NoTessellation = 0x0,
+  Tessellate = 0x1,
+  RespectLatitudeCircle = 0x2,
+  FollowGround = 0x4,
+  RotationIndicatesFill = 0x8,
+  SkipLatLonNormalization = 0x10
 };
 
 Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
@@ -40,25 +38,27 @@ Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
 /**
  * @brief This enum is used to choose the projection shown in the view.
  */
-enum Projection {
-    Spherical,          ///< Spherical projection ("Orthographic")
-    Equirectangular,    ///< Flat projection ("plate carree")
-    Mercator,           ///< Mercator projection
-    Gnomonic,           ///< Gnomonic projection
-    Stereographic,      ///< Stereographic projection
-    LambertAzimuthal,   ///< Lambert Azimuthal Equal-Area projection
-    AzimuthalEquidistant,   ///< Azimuthal Equidistant projection
-    VerticalPerspective ///< Vertical perspective projection
-    // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
-    // value above. Adjust that method if you do changes here
+enum Projection
+{
+  Spherical,            ///< Spherical projection ("Orthographic")
+  Equirectangular,      ///< Flat projection ("plate carree")
+  Mercator,             ///< Mercator projection
+  Gnomonic,             ///< Gnomonic projection
+  Stereographic,        ///< Stereographic projection
+  LambertAzimuthal,     ///< Lambert Azimuthal Equal-Area projection
+  AzimuthalEquidistant,     ///< Azimuthal Equidistant projection
+  VerticalPerspective   ///< Vertical perspective projection
+  // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
+  // value above. Adjust that method if you do changes here
 };
 
 /**
  * @brief This enum is used to choose the dimension.
  */
-enum Dimension {
-    Latitude,             ///< Latitude
-    Longitude            ///< Longitude
+enum Dimension
+{
+  Latitude,               ///< Latitude
+  Longitude              ///< Longitude
 };
 
 Q_DECLARE_FLAGS(Dimensions, Dimension)
@@ -66,50 +66,55 @@ Q_DECLARE_FLAGS(Dimensions, Dimension)
 /**
  * @brief This enum is used to choose the unit chosen to measure angles.
  */
-enum AngleUnit {
-    DMSDegree,          ///< Degrees in DMS notation
-    DecimalDegree,      ///< Degrees in decimal notation
-    UTM                 ///< UTM
+enum AngleUnit
+{
+  DMSDegree,            ///< Degrees in DMS notation
+  DecimalDegree,        ///< Degrees in decimal notation
+  UTM                   ///< UTM
 };
 
 /**
  * @brief This enum is used to choose context in which map quality gets used.
  */
-enum ViewContext {
-    Still,              ///< still image
-    Animation           ///< animated view (e.g. while rotating the globe)
+enum ViewContext
+{
+  Still,                ///< still image
+  Animation             ///< animated view (e.g. while rotating the globe)
 };
 
 /**
  * @brief This enum is used to choose the map quality shown in the view.
  */
-enum MapQuality {
-    OutlineQuality,     ///< Only a wire representation is drawn
-    LowQuality,         ///< Low resolution (e.g. interlaced)
-    NormalQuality,      ///< Normal quality
-    HighQuality,        ///< High quality (e.g. antialiasing for lines)
-    PrintQuality        ///< Print quality
+enum MapQuality
+{
+  OutlineQuality,       ///< Only a wire representation is drawn
+  LowQuality,           ///< Low resolution (e.g. interlaced)
+  NormalQuality,        ///< Normal quality
+  HighQuality,          ///< High quality (e.g. antialiasing for lines)
+  PrintQuality          ///< Print quality
 };
 
 /**
  * @brief This enum is used to specify the proxy that is used.
  */
-enum ProxyType {
-    HttpProxy,          ///< Uses an Http proxy
-    Socks5Proxy         ///< Uses a Socks5Proxy
+enum ProxyType
+{
+  HttpProxy,            ///< Uses an Http proxy
+  Socks5Proxy           ///< Uses a Socks5Proxy
 };
 
 /**
  * @brief This enum is used to choose the localization of the labels.
  */
-enum LabelPositionFlag {
-    NoLabel = 0x0,
-    LineStart = 0x1,
-    LineCenter = 0x2,
-    LineEnd = 0x4,
-    IgnoreXMargin = 0x8,
-    IgnoreYMargin = 0x10,
-    FollowLine = 0x20
+enum LabelPositionFlag
+{
+  NoLabel = 0x0,
+  LineStart = 0x1,
+  LineCenter = 0x2,
+  LineEnd = 0x4,
+  IgnoreXMargin = 0x8,
+  IgnoreYMargin = 0x10,
+  FollowLine = 0x20
 };
 
 Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
@@ -117,78 +122,87 @@ Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
 /**
  * @brief This enum is used to choose the localization of the labels.
  */
-enum LabelLocalization {
-    CustomAndNative,    ///< Custom and native labels
-    Custom,             ///< Shows the name in the user's language
-    Native              ///< Display the name in the official language and
-                        ///  glyphs of the labeled place.
+enum LabelLocalization
+{
+  CustomAndNative,      ///< Custom and native labels
+  Custom,               ///< Shows the name in the user's language
+  Native                ///< Display the name in the official language and
+                        /// glyphs of the labeled place.
 };
 
 /**
  * @brief This enum is used to choose how the globe behaves while dragging.
  */
-enum DragLocation {
-    KeepAxisVertically, ///< Keep planet axis vertically
-    FollowMousePointer  ///< Follow mouse pointer exactly
+enum DragLocation
+{
+  KeepAxisVertically,   ///< Keep planet axis vertically
+  FollowMousePointer    ///< Follow mouse pointer exactly
 };
 
 /**
  * @brief This enum is used to choose how the globe behaves while dragging.
  */
-enum OnStartup {
-    ShowHomeLocation,   ///< Show home location on startup
-    LastLocationVisited ///< Show last location visited on quit
+enum OnStartup
+{
+  ShowHomeLocation,     ///< Show home location on startup
+  LastLocationVisited   ///< Show last location visited on quit
 };
 
-enum AltitudeMode {
-    ClampToGround,      ///< Altitude always sticks to ground level
-    RelativeToGround,   ///< Altitude is always given relative to ground level
-    Absolute,            ///< Altitude is given relative to the sealevel
-    RelativeToSeaFloor,  ///< Altitude is given relative to the sea floor
-    ClampToSeaFloor      ///< Altitude always sticks to sea floor
+enum AltitudeMode
+{
+  ClampToGround,        ///< Altitude always sticks to ground level
+  RelativeToGround,     ///< Altitude is always given relative to ground level
+  Absolute,              ///< Altitude is given relative to the sealevel
+  RelativeToSeaFloor,    ///< Altitude is given relative to the sea floor
+  ClampToSeaFloor        ///< Altitude always sticks to sea floor
 };
 
-enum Pole {
-    AnyPole,             ///< Any pole
-    NorthPole,           ///< Only North Pole
-    SouthPole            ///< Only South Pole
+enum Pole
+{
+  AnyPole,               ///< Any pole
+  NorthPole,             ///< Only North Pole
+  SouthPole              ///< Only South Pole
 };
 
 /**
  * @brief This enum is used to describe the type of download
  */
-enum DownloadUsage {
-    DownloadBulk,       ///< Bulk download, for example "File/Download region"
-    DownloadBrowse      ///< Browsing mode, normal operation of Marble, like a web browser
+enum DownloadUsage
+{
+  DownloadBulk,         ///< Bulk download, for example "File/Download region"
+  DownloadBrowse        ///< Browsing mode, normal operation of Marble, like a web browser
 };
 
 /**
  * @brief Describes possible flight mode (interpolation between source
  *        and target camera positions)
  */
-enum FlyToMode {
-    Automatic, ///< A sane value is chosen automatically depending on animation settings and the action
-    Instant, ///< Change camera position immediately (no interpolation)
-    Linear, ///< Linear interpolation of lon, lat and distance to ground
-    Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases
+enum FlyToMode
+{
+  Automatic,   ///< A sane value is chosen automatically depending on animation settings and the action
+  Instant,   ///< Change camera position immediately (no interpolation)
+  Linear,   ///< Linear interpolation of lon, lat and distance to ground
+  Jump   ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases
 };
 
 /**
  * @brief Search mode: Global (worldwide) versus area (local, regional) search
  */
-enum SearchMode {
-    GlobalSearch, ///< Search a whole planet
-    AreaSearch ///< Search a certain region of a planet (e.g. visible region)
+enum SearchMode
+{
+  GlobalSearch,   ///< Search a whole planet
+  AreaSearch   ///< Search a certain region of a planet (e.g. visible region)
 };
 
 /**
  * @brief
  */
-enum RenderStatus {
-    Complete, ///< All data is there and up to date
-    WaitingForUpdate, ///< Rendering is based on complete, but outdated data, data update was requested
-    WaitingForData, ///< Rendering is based on no or partial data, more data was requested (e.g. pending network queries)
-    Incomplete ///< Data is missing and some error occurred when trying to retrieve it (e.g. network failure)
+enum RenderStatus
+{
+  Complete,   ///< All data is there and up to date
+  WaitingForUpdate,   ///< Rendering is based on complete, but outdated data, data update was requested
+  WaitingForData,   ///< Rendering is based on no or partial data, more data was requested (e.g. pending network queries)
+  Incomplete   ///< Data is missing and some error occurred when trying to retrieve it (e.g. network failure)
 };
 
 const int defaultLevelZeroColumns = 2;
@@ -231,15 +245,15 @@ const qreal RAD2DEG = 180.0 / M_PI;
 const qreal KM2METER = 1000.0;
 const qreal METER2KM = 1.0 / KM2METER;
 
-//Conversion hour vs minute
+// Conversion hour vs minute
 const qreal HOUR2MIN = 60.0;
 const qreal MIN2HOUR = 1.0 / HOUR2MIN;
 
-//Conversion (time) minute vs second
+// Conversion (time) minute vs second
 const qreal MIN2SEC = 60.0;
 const qreal SEC2MIN = 1.0 / MIN2SEC;
 
-//Conversion hour vs second
+// Conversion hour vs second
 const qreal HOUR2SEC = 3600.0;
 const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
@@ -248,13 +262,13 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
 // VERSION_NUMBER_TODO
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "1.0.0 (stable release for Little Navmap)" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1("1.0.0 (stable release for Little Navmap)");
 
 // API Version id:
 // form : 0xMMmmpp
-//        MM = major revision.
-//        mm = minor revision.
-//        pp = patch revision.
+// MM = major revision.
+// mm = minor revision.
+// pp = patch revision.
 #define MARBLE_VERSION 0x001902
 
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
@@ -274,41 +288,43 @@ const unsigned int c_defaultTileSize = 675;
 class MarbleGlobalPrivate;
 class MarbleLocale;
 
-class  MARBLE_EXPORT MarbleGlobal
+class MARBLE_EXPORT MarbleGlobal
 {
- public:
-    static MarbleGlobal * getInstance();
-    ~MarbleGlobal();
+public:
+  static MarbleGlobal *getInstance();
 
-    MarbleLocale * locale() const;
+  ~MarbleGlobal();
 
-    enum Profile {
-        Default = 0x0,
-        SmallScreen = 0x1,
-        HighResolution = 0x2
-    };
+  MarbleLocale *locale() const;
 
-    Q_DECLARE_FLAGS( Profiles, Profile )
+  enum Profile
+  {
+    Default = 0x0,
+    SmallScreen = 0x1,
+    HighResolution = 0x2
+  };
 
-    Profiles profiles() const;
-    void setProfiles( Profiles profiles );
+  Q_DECLARE_FLAGS(Profiles, Profile)
 
-    /**
-     * Automatically detects the profile.
-     */
-    static Profiles detectProfiles();
+  Profiles profiles() const;
+  void setProfiles(Profiles profiles);
 
- private:
-    MarbleGlobal();
+  /**
+   * Automatically detects the profile.
+   */
+  static Profiles detectProfiles();
 
-    Q_DISABLE_COPY( MarbleGlobal )
-    MarbleGlobalPrivate  * const d;
+private:
+  MarbleGlobal();
+
+  Q_DISABLE_COPY(MarbleGlobal)
+  MarbleGlobalPrivate * const d;
 };
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::TessellationFlags )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::LabelPositionFlags )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::MarbleGlobal::Profiles )
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::TessellationFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::LabelPositionFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::MarbleGlobal::Profiles)
 
 #endif

@@ -21,102 +21,102 @@
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"
 
-namespace Ui
-{
-    class OverviewMapConfigWidget;
+namespace Ui {
+class OverviewMapConfigWidget;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short The class that creates an overview map.
  *
  */
 
-class OverviewMap : public AbstractFloatItem, public DialogConfigurationInterface
+class OverviewMap :
+  public AbstractFloatItem, public DialogConfigurationInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.OverviewMap")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( OverviewMap )
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.OverviewMap")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  Q_INTERFACES(Marble::DialogConfigurationInterface)
+  MARBLE_PLUGIN(OverviewMap)
 
- public:
-    OverviewMap();
-    explicit OverviewMap( const MarbleModel *marbleModel );
-    ~OverviewMap();
+public:
+  OverviewMap();
+  explicit OverviewMap(const MarbleModel *marbleModel);
+  ~OverviewMap();
 
-    QStringList backendTypes() const;
+  QStringList backendTypes() const;
 
-    QString name() const;
+  QString name() const;
 
-    QString guiString() const;
+  QString guiString() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    QIcon icon () const;
+  QIcon icon() const;
 
-    QDialog *configDialog();
+  QDialog *configDialog();
 
-    void initialize ();
+  void initialize();
 
-    bool isInitialized () const;
+  bool isInitialized() const;
 
-    void setProjection( const ViewportParams *viewport );
+  void setProjection(const ViewportParams *viewport);
 
-    void paintContent( QPainter *painter );
+  void paintContent(QPainter *painter);
 
-    /**
-     * @return: The settings of the item.
-     */
-    virtual QHash<QString,QVariant> settings() const;
+  /**
+   * @return: The settings of the item.
+   */
+  virtual QHash<QString, QVariant> settings() const;
 
-    /**
-     * Set the settings of the item.
-     */
-    virtual void setSettings( const QHash<QString,QVariant> &settings );
+  /**
+   * Set the settings of the item.
+   */
+  virtual void setSettings(const QHash<QString, QVariant>& settings);
 
- public Q_SLOTS:
-    void readSettings();
-    void writeSettings();
-    void updateSettings();
+public Q_SLOTS:
+  void readSettings();
+  void writeSettings();
+  void updateSettings();
 
- protected:
-    bool eventFilter( QObject *object, QEvent *e );
+protected:
+  bool eventFilter(QObject *object, QEvent *e);
 
- private:
-    void changeBackground( const QString& target );
+private:
+  void changeBackground(const QString& target);
 
-    QString m_target;
-    QSvgRenderer   m_svgobj;
-    QHash<QString, QSvgWidget *> m_svgWidgets;
-    QHash<QString, QString> m_svgPaths;
-    QStringList    m_planetID;
-    QPixmap        m_worldmap;
-    QHash<QString,QVariant> m_settings;
-    QColor m_posColor;
-    QSizeF m_defaultSize;
+  QString m_target;
+  QSvgRenderer m_svgobj;
+  QHash<QString, QSvgWidget *> m_svgWidgets;
+  QHash<QString, QString> m_svgPaths;
+  QStringList m_planetID;
+  QPixmap m_worldmap;
+  QHash<QString, QVariant> m_settings;
+  QColor m_posColor;
+  QSizeF m_defaultSize;
 
-    Ui::OverviewMapConfigWidget *ui_configWidget;
-    QDialog *m_configDialog;
+  Ui::OverviewMapConfigWidget *ui_configWidget;
+  QDialog *m_configDialog;
 
-    GeoDataLatLonAltBox m_latLonAltBox;
-    qreal m_centerLat;
-    qreal m_centerLon;
-    bool m_mapChanged;
+  GeoDataLatLonAltBox m_latLonAltBox;
+  qreal m_centerLat;
+  qreal m_centerLon;
+  bool m_mapChanged;
 
- private Q_SLOTS:
-    void synchronizeSpinboxes();
-    void choosePositionIndicatorColor();
+private Q_SLOTS:
+  void synchronizeSpinboxes();
+  void choosePositionIndicatorColor();
+
 };
 
 }

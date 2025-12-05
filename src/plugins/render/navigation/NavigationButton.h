@@ -13,28 +13,29 @@
 
 #include <QAbstractButton>
 
-namespace Marble
-{
+namespace Marble {
 
-class NavigationButton : public QAbstractButton
+class NavigationButton :
+  public QAbstractButton
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    explicit NavigationButton( QWidget *parent = 0 );
+  explicit NavigationButton(QWidget *parent = 0);
 
 Q_SIGNALS:
-    void repaintNeeded();
+  void repaintNeeded();
 
 protected:
-    void mousePressEvent ( QMouseEvent *mouseEvent );
-    void mouseReleaseEvent ( QMouseEvent *mouseEvent );
-    void enterEvent( QEvent * e);
-    void leaveEvent( QEvent * e);
-    void changeEvent( QEvent *e );
-    void paintEvent( QPaintEvent * );
+  void mousePressEvent(QMouseEvent *mouseEvent);
+  void mouseReleaseEvent(QMouseEvent *mouseEvent);
+  void enterEvent(QEvent *e);
+  void leaveEvent(QEvent *e);
+  void changeEvent(QEvent *e);
+  void paintEvent(QPaintEvent *);
 
 private:
-    QIcon::Mode m_iconMode;
+  QIcon::Mode m_iconMode;
 };
 
 }

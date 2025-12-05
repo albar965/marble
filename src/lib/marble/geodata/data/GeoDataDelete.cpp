@@ -11,13 +11,12 @@
 #include "GeoDataDelete.h"
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataDeletePrivate
 {
 public:
-    GeoDataDeletePrivate();
+  GeoDataDeletePrivate();
 };
 
 GeoDataDeletePrivate::GeoDataDeletePrivate()
@@ -25,43 +24,45 @@ GeoDataDeletePrivate::GeoDataDeletePrivate()
 }
 
 GeoDataDelete::GeoDataDelete() :
-    d( new GeoDataDeletePrivate )
+  d(new GeoDataDeletePrivate)
 {
 }
 
-GeoDataDelete::GeoDataDelete( const Marble::GeoDataDelete &other ) :
-    GeoDataContainer(), d( new GeoDataDeletePrivate( *other.d ) )
+GeoDataDelete::GeoDataDelete(const Marble::GeoDataDelete& other) :
+  GeoDataContainer(), d(new GeoDataDeletePrivate(*other.d))
 {
 }
 
-GeoDataDelete &GeoDataDelete::operator=( const GeoDataDelete &other )
+GeoDataDelete& GeoDataDelete::operator=(const GeoDataDelete& other)
 {
-    GeoDataContainer::operator =( other );
-    *d = *other.d;
-    return *this;
+  GeoDataContainer::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataDelete::operator==( const GeoDataDelete &other ) const
+bool GeoDataDelete::operator==(const GeoDataDelete& other) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+  if(!GeoDataContainer::equals(other))
+  {
+    return false;
+  }
+  return true;
 }
 
-bool GeoDataDelete::operator!=( const GeoDataDelete &other ) const
+bool GeoDataDelete::operator!=(const GeoDataDelete& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
+
 }
 
 GeoDataDelete::~GeoDataDelete()
 {
-    delete d;
+  delete d;
 }
 
 const char *GeoDataDelete::nodeType() const
 {
-    return GeoDataTypes::GeoDataDeleteType;
+  return GeoDataTypes::GeoDataDeleteType;
 }
 
 }

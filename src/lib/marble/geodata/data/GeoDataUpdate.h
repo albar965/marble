@@ -17,41 +17,41 @@
 #include "GeoDataChange.h"
 #include "marble_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataUpdatePrivate;
 
-class MARBLE_EXPORT GeoDataUpdate : public GeoDataObject
+class MARBLE_EXPORT GeoDataUpdate :
+  public GeoDataObject
 {
 public:
-    GeoDataUpdate();
+  GeoDataUpdate();
 
-    GeoDataUpdate( const GeoDataUpdate &other );
+  GeoDataUpdate(const GeoDataUpdate& other);
 
-    GeoDataUpdate& operator=( const GeoDataUpdate &other );
-    bool operator==( const GeoDataUpdate &other ) const;
-    bool operator!=( const GeoDataUpdate &other ) const;
+  GeoDataUpdate& operator=(const GeoDataUpdate& other);
+  bool operator==(const GeoDataUpdate& other) const;
+  bool operator!=(const GeoDataUpdate& other) const;
 
-    ~GeoDataUpdate();
+  ~GeoDataUpdate();
 
-    /** Provides type information for downcasting a GeoNode */
-    virtual const char* nodeType() const;
+  /** Provides type information for downcasting a GeoNode */
+  virtual const char *nodeType() const;
 
-    QString targetHref() const;
-    void setTargetHref( const QString &targetHref );
+  QString targetHref() const;
+  void setTargetHref(const QString& targetHref);
 
-    GeoDataChange* change() const;
-    void setChange( GeoDataChange* change );
+  GeoDataChange *change() const;
+  void setChange(GeoDataChange *change);
 
-    GeoDataCreate* create() const;
-    void setCreate( GeoDataCreate* create );
+  GeoDataCreate *create() const;
+  void setCreate(GeoDataCreate *create);
 
-    GeoDataDelete* getDelete() const;
-    void setDelete( GeoDataDelete* dataDelete );
+  GeoDataDelete *getDelete() const;
+  void setDelete(GeoDataDelete *dataDelete);
 
 private:
-    GeoDataUpdatePrivate* const d;
+  GeoDataUpdatePrivate * const d;
 };
 
 }

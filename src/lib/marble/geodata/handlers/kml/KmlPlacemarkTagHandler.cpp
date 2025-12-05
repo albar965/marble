@@ -31,33 +31,36 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Placemark)
+
+GeoNode *KmlPlacemarkTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Placemark )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Placemark));
 
-GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Placemark ) );
+  GeoDataPlacemark *placemark = new GeoDataPlacemark;
+  KmlObjectTagHandler::parseIdentifiers(parser, placemark);
 
-    GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    KmlObjectTagHandler::parseIdentifiers( parser, placemark );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-
-    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ||
-        parentItem.represents( kmlTag_Change ) || parentItem.represents( kmlTag_Create ) || parentItem.represents( kmlTag_Delete ) ){
-        parentItem.nodeAs<GeoDataContainer>()->append( placemark );
-        return placemark;
-    } else if ( parentItem.qualifiedName().first == kmlTag_kml ) {
-        GeoDataDocument* doc = geoDataDoc(parser);
-        doc->append( placemark );
-        return placemark;
-    } else {
-        delete placemark;
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document) ||
+     parentItem.represents(kmlTag_Change) || parentItem.represents(kmlTag_Create) || parentItem.represents(kmlTag_Delete))
+  {
+    parentItem.nodeAs<GeoDataContainer>()->append(placemark);
+    return placemark;
+  }
+  else if(parentItem.qualifiedName().first == kmlTag_kml)
+  {
+    GeoDataDocument *doc = geoDataDoc(parser);
+    doc->append(placemark);
+    return placemark;
+  }
+  else
+  {
+    delete placemark;
+    return 0;
+  }
 }
 
 }

@@ -19,23 +19,22 @@
 // Qt
 #include <QAtomicInt>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataLookAtPrivate
 {
- public :
-    GeoDataLookAtPrivate()
-        : m_coordinates(),
-          m_range( 0.0 ),
-          ref( 1 )
-    {
-    }
-    
-    GeoDataCoordinates m_coordinates;
-    qreal m_range;
+public:
+  GeoDataLookAtPrivate()
+    : m_coordinates(),
+    m_range(0.0),
+    ref(1)
+  {
+  }
 
-    QAtomicInt ref;
+  GeoDataCoordinates m_coordinates;
+  qreal m_range;
+
+  QAtomicInt ref;
 };
 
 } // namespace Marble

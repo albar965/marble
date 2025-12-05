@@ -11,12 +11,10 @@
 #include "MarbleGlobal.h"
 #include "MarbleGlobal_p.h"
 
-
-namespace Marble
-{
+namespace Marble {
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
-    : m_profiles( MarbleGlobal::Default ) 
+  : m_profiles(MarbleGlobal::Default)
 {
 }
 
@@ -25,51 +23,54 @@ MarbleGlobalPrivate::~MarbleGlobalPrivate()
 }
 
 MarbleGlobal::MarbleGlobal()
-    : d ( new MarbleGlobalPrivate )
+  : d(new MarbleGlobalPrivate)
 {
 }
 
 MarbleGlobal::~MarbleGlobal()
 {
-    delete d;
+  delete d;
 }
 
-MarbleGlobal * MarbleGlobal::getInstance()
+MarbleGlobal *MarbleGlobal::getInstance()
 {
-    static MarbleGlobal instance; 
-    return &instance; 
+  static MarbleGlobal instance;
+  return &instance;
 }
 
-MarbleLocale * MarbleGlobal::locale() const
+MarbleLocale *MarbleGlobal::locale() const
 {
-    return &d->m_locale; 
+  return &d->m_locale;
 }
 
-MarbleGlobal::Profiles MarbleGlobal::profiles() const {
-    return d->m_profiles;
+MarbleGlobal::Profiles MarbleGlobal::profiles() const
+{
+  return d->m_profiles;
 }
 
-void MarbleGlobal::setProfiles( MarbleGlobal::Profiles profiles ) {
-    d->m_profiles = profiles;
+void MarbleGlobal::setProfiles(MarbleGlobal::Profiles profiles)
+{
+  d->m_profiles = profiles;
 }
 
-MarbleGlobal::Profiles MarbleGlobal::detectProfiles() {
-    MarbleGlobal::Profiles profile = MarbleGlobal::Default;
-    // Checking Qt for maemo flags to find out if we are on a small screen device.
+MarbleGlobal::Profiles MarbleGlobal::detectProfiles()
+{
+  MarbleGlobal::Profiles profile = MarbleGlobal::Default;
+  // Checking Qt for maemo flags to find out if we are on a small screen device.
 #ifdef Q_WS_HILDON // flag for Qt 4.5 (diablo and fremantle)
-    profile |= MarbleGlobal::SmallScreen;
-    profile |= MarbleGlobal::HighResolution;
+  profile |= MarbleGlobal::SmallScreen;
+  profile |= MarbleGlobal::HighResolution;
 #endif
 #ifdef Q_WS_MAEMO_5
-    profile |= MarbleGlobal::SmallScreen;
-    profile |= MarbleGlobal::HighResolution;
+  profile |= MarbleGlobal::SmallScreen;
+  profile |= MarbleGlobal::HighResolution;
 #endif
 #ifdef MEEGO_EDITION_HARMATTAN
-    profile |= MarbleGlobal::SmallScreen;
-    profile |= MarbleGlobal::HighResolution;
+  profile |= MarbleGlobal::SmallScreen;
+  profile |= MarbleGlobal::HighResolution;
 #endif
 
-    return profile;
+  return profile;
 }
 
 }

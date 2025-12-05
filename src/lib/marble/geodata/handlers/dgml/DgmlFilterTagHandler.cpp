@@ -33,35 +33,34 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneFilter.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Filter)
 
-GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlFilterTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Filter));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Filter));
 
-    QString name      = parser.attribute(dgmlAttr_name).trimmed();
-    QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
+  QString name = parser.attribute(dgmlAttr_name).trimmed();
+  QString type = parser.attribute(dgmlAttr_type).toLower().trimmed();
 
-    GeoSceneFilter *filter = 0;
+  GeoSceneFilter *filter = 0;
 
-    // Checking for parent layer
-    GeoStackItem parentItem = parser.parentElement();
-    GeoStackItem grandParentItem = parser.parentElement(1);
-    if (parentItem.represents(dgmlTag_Layer) &&
-        grandParentItem.represents(dgmlTag_Map) ) {
+  // Checking for parent layer
+  GeoStackItem parentItem = parser.parentElement();
+  GeoStackItem grandParentItem = parser.parentElement(1);
+  if(parentItem.represents(dgmlTag_Layer) &&
+     grandParentItem.represents(dgmlTag_Map))
+  {
 
-        filter = new GeoSceneFilter( name );
-        filter->setType( type );
-        parentItem.nodeAs<GeoSceneLayer>()->addFilter( filter );
-        grandParentItem.nodeAs<GeoSceneMap>()->addFilter( filter );
-    }
+    filter = new GeoSceneFilter(name);
+    filter->setType(type);
+    parentItem.nodeAs<GeoSceneLayer>()->addFilter(filter);
+    grandParentItem.nodeAs<GeoSceneMap>()->addFilter(filter);
+  }
 
-    return filter;
+  return filter;
 }
 
 }

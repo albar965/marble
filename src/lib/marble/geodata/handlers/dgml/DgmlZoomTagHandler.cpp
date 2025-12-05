@@ -28,22 +28,20 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Zoom)
 
-GeoNode* DgmlZoomTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlZoomTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
 
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head))
-        return parentItem.nodeAs<GeoSceneHead>()->zoom();
+  // Checking for parent item
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Head))
+    return parentItem.nodeAs<GeoSceneHead>()->zoom();
 
-    return 0;
+  return 0;
 }
 
 }

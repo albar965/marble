@@ -19,42 +19,44 @@ namespace Marble {
 
 class GeoDataSimpleArrayDataPrivate;
 
-class GEODATA_EXPORT GeoDataSimpleArrayData : public GeoDataObject
+class GEODATA_EXPORT GeoDataSimpleArrayData :
+  public GeoDataObject
 {
 
 public:
-    GeoDataSimpleArrayData();
-    GeoDataSimpleArrayData( const GeoDataSimpleArrayData& other );
-    bool operator==( const GeoDataSimpleArrayData &other ) const;
-    bool operator!=( const GeoDataSimpleArrayData &other) const;
-    ~GeoDataSimpleArrayData();
+  GeoDataSimpleArrayData();
+  GeoDataSimpleArrayData(const GeoDataSimpleArrayData& other);
+  bool operator==(const GeoDataSimpleArrayData& other) const;
+  bool operator!=(const GeoDataSimpleArrayData& other) const;
 
-    /**
-     * Returns the number of value in the array
-     */
-    int size() const;
+  ~GeoDataSimpleArrayData();
 
-    /**
-     * Returns the value at index @p index
-     */
-    QVariant valueAt( int index ) const;
+  /**
+   * Returns the number of value in the array
+   */
+  int size() const;
 
-    /**
-     * Returns all values in the array
-     */
-    QList< QVariant > valuesList() const;
+  /**
+   * Returns the value at index @p index
+   */
+  QVariant valueAt(int index) const;
 
-    /**
-     * Append a value to the array
-     */
-    void append( const QVariant& value );
+  /**
+   * Returns all values in the array
+   */
+  QList<QVariant> valuesList() const;
 
-    virtual const char* nodeType() const;
-    virtual void pack( QDataStream& stream ) const;
-    virtual void unpack( QDataStream& stream );
+  /**
+   * Append a value to the array
+   */
+  void append(const QVariant& value);
+
+  virtual const char *nodeType() const;
+  virtual void pack(QDataStream& stream) const;
+  virtual void unpack(QDataStream& stream);
 
 private:
-    GeoDataSimpleArrayDataPrivate *d;
+  GeoDataSimpleArrayDataPrivate *d;
 };
 
 }

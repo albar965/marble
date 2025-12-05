@@ -25,58 +25,58 @@ class OsmPlacemarkData;
 class MARBLE_EXPORT StyleParameters
 {
 public:
-    explicit StyleParameters(const GeoDataFeature* feature=nullptr, int tileLevel=0);
+  explicit StyleParameters(const GeoDataFeature *feature = nullptr, int tileLevel = 0);
 
-    const GeoDataFeature* feature;
-    int tileLevel;
+  const GeoDataFeature *feature;
+  int tileLevel;
 };
 
 class MARBLE_EXPORT StyleBuilder
 {
 public:
-    StyleBuilder();
-    ~StyleBuilder();
+  StyleBuilder();
+  ~StyleBuilder();
 
-    /**
-     * Return the label font of the placemark.
-     */
-    QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
+  /**
+   * Return the label font of the placemark.
+   */
+  QFont defaultFont() const;
+  void setDefaultFont(const QFont& font);
 
-    QColor defaultLabelColor() const;
-    void setDefaultLabelColor( const QColor& color );
+  QColor defaultLabelColor() const;
+  void setDefaultLabelColor(const QColor& color);
 
-    GeoDataStyle::ConstPtr createStyle(const StyleParameters &parameters) const;
-    GeoDataStyle::ConstPtr presetStyle(GeoDataFeature::GeoDataVisualCategory visualCategory) const;
+  GeoDataStyle::ConstPtr createStyle(const StyleParameters& parameters) const;
+  GeoDataStyle::ConstPtr presetStyle(GeoDataFeature::GeoDataVisualCategory visualCategory) const;
 
-    /**
-     * @brief Returns the order in which the visual categories used in the theme shall be painted on the map.
-     * @return order in which the visual categories shall be painted on the map
-     */
-    QStringList renderOrder() const;
+  /**
+   * @brief Returns the order in which the visual categories used in the theme shall be painted on the map.
+   * @return order in which the visual categories shall be painted on the map
+   */
+  QStringList renderOrder() const;
 
-    void reset();
+  void reset();
 
-    /**
-     * @brief Returns the zoom level from which on the given visual category will be visible.
-     * @param category the visual category for which the minimum zoom level shall be returned
-     * @return zoom level from which on the given visual category will be visible
-     */
-    int minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const;
+  /**
+   * @brief Returns the zoom level from which on the given visual category will be visible.
+   * @param category the visual category for which the minimum zoom level shall be returned
+   * @return zoom level from which on the given visual category will be visible
+   */
+  int minimumZoomLevel(GeoDataFeature::GeoDataVisualCategory category) const;
 
-    /**
-     * @brief Returns the maximum zoom level in the theme.
-     * @return maximum zoom level in the theme
-     */
-    int maximumZoomLevel() const;
+  /**
+   * @brief Returns the maximum zoom level in the theme.
+   * @return maximum zoom level in the theme
+   */
+  int maximumZoomLevel() const;
 
-    static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
+  static QString visualCategoryName(GeoDataFeature::GeoDataVisualCategory category);
 
 private:
-    Q_DISABLE_COPY(StyleBuilder)
+  Q_DISABLE_COPY(StyleBuilder)
 
-    class Private;
-    Private * const d;
+  class Private;
+  Private * const d;
 };
 
 }

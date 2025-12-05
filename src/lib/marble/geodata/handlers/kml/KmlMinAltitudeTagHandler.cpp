@@ -16,25 +16,24 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(minAltitude)
+
+GeoNode *KmlminAltitudeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( minAltitude )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_minAltitude));
 
-GeoNode* KmlminAltitudeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_minAltitude ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_LatLonAltBox))
+  {
+    float minAltitude = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_LatLonAltBox ) ) {
-        float minAltitude = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLatLonAltBox>()->setMinAltitude(minAltitude);
+  }
 
-        parentItem.nodeAs<GeoDataLatLonAltBox>()->setMinAltitude( minAltitude );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

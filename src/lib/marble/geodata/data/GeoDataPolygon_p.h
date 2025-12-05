@@ -15,47 +15,47 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
+namespace Marble {
+
+class GeoDataPolygonPrivate :
+  public GeoDataGeometryPrivate
 {
+public:
+  explicit GeoDataPolygonPrivate(TessellationFlags f)
+    : m_dirtyBox(true),
+    m_tessellationFlags(f)
+  {
+  }
 
-class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
-{
-  public:
-     explicit GeoDataPolygonPrivate( TessellationFlags f )
-         : m_dirtyBox( true ),
-           m_tessellationFlags( f )
-    {
-    }
+  GeoDataPolygonPrivate()
+    : m_dirtyBox(true)
+  {
+  }
 
-     GeoDataPolygonPrivate()
-         : m_dirtyBox( true )
-    {
-    }
+  virtual GeoDataGeometryPrivate *copy()
+  {
+    GeoDataPolygonPrivate *copy = new GeoDataPolygonPrivate;
+    *copy = *this;
+    return copy;
+  }
 
-    virtual GeoDataGeometryPrivate* copy()
-    { 
-         GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
-        *copy = *this;
-        return copy;
-    }
+  virtual const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataPolygonType;
+  }
 
-    virtual const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataPolygonType;
-    }
+  virtual EnumGeometryId geometryId() const
+  {
+    return GeoDataPolygonId;
+  }
 
-    virtual EnumGeometryId geometryId() const
-    {
-        return GeoDataPolygonId;
-    }
-
-    GeoDataLinearRing           outer;
-    QVector<GeoDataLinearRing>  inner;
-    bool                        m_dirtyBox; // tells whether there have been changes to the
-                                            // GeoDataPoints since the LatLonAltBox has 
-                                            // been calculated. Saves performance. 
-    TessellationFlags           m_tessellationFlags;
-    int                         m_renderOrder;
+  GeoDataLinearRing outer;
+  QVector<GeoDataLinearRing> inner;
+  bool m_dirtyBox;                          // tells whether there have been changes to the
+                                            // GeoDataPoints since the LatLonAltBox has
+                                            // been calculated. Saves performance.
+  TessellationFlags m_tessellationFlags;
+  int m_renderOrder;
 };
 
 } // namespace Marble

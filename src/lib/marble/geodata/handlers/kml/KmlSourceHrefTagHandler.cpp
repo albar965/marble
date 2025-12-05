@@ -14,26 +14,24 @@
 #include "GeoParser.h"
 #include "GeoDataAlias.h"
 
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(sourceHref)
 
-namespace Marble
+GeoNode *KmlsourceHrefTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( sourceHref )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_sourceHref));
 
-GeoNode* KmlsourceHrefTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_sourceHref ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  QString content = parser.readElementText().trimmed();
 
-    QString content = parser.readElementText().trimmed();
+  if(parentItem.is<GeoDataAlias>())
+  {
+    parentItem.nodeAs<GeoDataAlias>()->setSourceHref(content);
+  }
 
-    if ( parentItem.is<GeoDataAlias>() ){
-        parentItem.nodeAs<GeoDataAlias>()->setSourceHref( content );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

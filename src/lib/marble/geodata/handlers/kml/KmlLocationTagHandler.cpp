@@ -1,4 +1,3 @@
-
 //
 // This file is part of the Marble Virtual Globe.
 //
@@ -20,27 +19,27 @@
 #include "GeoDataModel.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Location )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Location)
 
-GeoNode* KmlLocationTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlLocationTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Location ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Location));
 
-    GeoDataLocation location;
-    KmlObjectTagHandler::parseIdentifiers( parser, &location );
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataLocation location;
+  KmlObjectTagHandler::parseIdentifiers(parser, &location);
+  GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Model ) ) {
-        parentItem.nodeAs<GeoDataModel>()->setLocation(location);
-	return &parentItem.nodeAs<GeoDataModel>()->location();
-    }
-    else{
-        return 0;
-    }
+  if(parentItem.represents(kmlTag_Model))
+  {
+    parentItem.nodeAs<GeoDataModel>()->setLocation(location);
+    return &parentItem.nodeAs<GeoDataModel>()->location();
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 }

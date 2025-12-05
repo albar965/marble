@@ -15,30 +15,30 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
 // No registration for this writer, ColorStyle is an abstract kml element
-class KmlColorStyleTagWriter: public GeoTagWriter
+class KmlColorStyleTagWriter :
+  public GeoTagWriter
 {
 public:
-    explicit KmlColorStyleTagWriter( const QString &elementName );
+  explicit KmlColorStyleTagWriter(const QString& elementName);
 
-    bool write( const GeoNode *node, GeoWriter& writer ) const;
+  bool write(const GeoNode *node, GeoWriter& writer) const;
 
-    static QString formatColor( const QColor &color );
+  static QString formatColor(const QColor& color);
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const = 0;
 
-    /** Returns true iff all properties have a default value */
-    virtual bool isEmpty( const GeoNode *node ) const = 0;
+  /** Returns true iff all properties have a default value */
+  virtual bool isEmpty(const GeoNode *node) const = 0;
 
-    /** Returns the default color **/
-    virtual QColor defaultColor() const;
+  /** Returns the default color **/
+  virtual QColor defaultColor() const;
 
 private:
-    QString const m_elementName;
+  QString const m_elementName;
 };
 
 }

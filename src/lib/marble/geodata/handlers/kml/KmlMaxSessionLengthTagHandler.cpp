@@ -14,26 +14,24 @@
 #include "GeoDataNetworkLinkControl.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(maxSessionLength)
+
+GeoNode *KmlmaxSessionLengthTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( maxSessionLength )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_maxSessionLength));
 
-GeoNode* KmlmaxSessionLengthTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxSessionLength ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_NetworkLinkControl))
+  {
+    qreal maxSessionLength = parser.readElementText().toDouble();
 
-    if ( parentItem.represents( kmlTag_NetworkLinkControl ) )
-    {
-        qreal maxSessionLength = parser.readElementText().toDouble();
+    parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMaxSessionLength(maxSessionLength);
+  }
 
-        parentItem.nodeAs<GeoDataNetworkLinkControl>()->setMaxSessionLength( maxSessionLength );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

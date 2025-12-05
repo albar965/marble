@@ -31,33 +31,32 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
 
-namespace Marble
-{
-namespace dgml
-{
+namespace Marble {
+namespace dgml {
 DGML_DEFINE_TAG_HANDLER(Layer)
 
-GeoNode* DgmlLayerTagHandler::parse(GeoParser& parser) const
+GeoNode *DgmlLayerTagHandler::parse(GeoParser & parser) const
 {
-    // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
+  // Check whether the tag is valid
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
 
-    QString name      = parser.attribute(dgmlAttr_name).trimmed();
-    QString backend    = parser.attribute(dgmlAttr_backend).toLower().trimmed();
-    QString role      = parser.attribute(dgmlAttr_role).toLower().trimmed();
+  QString name = parser.attribute(dgmlAttr_name).trimmed();
+  QString backend = parser.attribute(dgmlAttr_backend).toLower().trimmed();
+  QString role = parser.attribute(dgmlAttr_role).toLower().trimmed();
 
-    GeoSceneLayer *layer = 0;
+  GeoSceneLayer *layer = 0;
 
-    // Checking for parent layer
-    GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Map)) {
-        layer = new GeoSceneLayer( name );
-        layer->setBackend( backend );
-        layer->setRole( role );
-        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
-    }
+  // Checking for parent layer
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(dgmlTag_Map))
+  {
+    layer = new GeoSceneLayer(name);
+    layer->setBackend(backend);
+    layer->setRole(role);
+    parentItem.nodeAs<GeoSceneMap>()->addLayer(layer);
+  }
 
-    return layer;
+  return layer;
 }
 
 }

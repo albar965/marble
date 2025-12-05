@@ -18,15 +18,15 @@
 
 class QImage;
 
-namespace Marble
-{
+namespace Marble {
 class TextureTile;
 
 class Blending
 {
- public:
-    virtual ~Blending();
-    virtual void blend( QImage * const bottom, TextureTile const * const top ) const = 0;
+public:
+  virtual ~Blending();
+  virtual void blend(QImage * const bottom, TextureTile const * const top) const = 0;
+
 };
 
 }

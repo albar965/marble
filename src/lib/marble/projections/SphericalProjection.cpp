@@ -29,154 +29,160 @@
 
 #define SAFE_DISTANCE
 
-namespace Marble
+namespace Marble {
+
+class SphericalProjectionPrivate :
+  public AzimuthalProjectionPrivate
 {
+public:
+  explicit SphericalProjectionPrivate(SphericalProjection *parent);
 
-class SphericalProjectionPrivate : public AzimuthalProjectionPrivate
-{
-  public:
-
-    explicit SphericalProjectionPrivate( SphericalProjection * parent );
-
-    Q_DECLARE_PUBLIC( SphericalProjection )
+  Q_DECLARE_PUBLIC(SphericalProjection)
 };
 
 SphericalProjection::SphericalProjection()
-    : AzimuthalProjection( new SphericalProjectionPrivate( this ) )
+  : AzimuthalProjection(new SphericalProjectionPrivate(this))
 {
-    setMinLat( minValidLat() );
-    setMaxLat( maxValidLat() );
+  setMinLat(minValidLat());
+  setMaxLat(maxValidLat());
 }
 
-SphericalProjection::SphericalProjection( SphericalProjectionPrivate *dd )
-        : AzimuthalProjection( dd )
+SphericalProjection::SphericalProjection(SphericalProjectionPrivate *dd)
+  : AzimuthalProjection(dd)
 {
-    setMinLat( minValidLat() );
-    setMaxLat( maxValidLat() );
+  setMinLat(minValidLat());
+  setMaxLat(maxValidLat());
 }
 
 SphericalProjection::~SphericalProjection()
 {
 }
 
-SphericalProjectionPrivate::SphericalProjectionPrivate( SphericalProjection * parent )
-        : AzimuthalProjectionPrivate( parent )
+SphericalProjectionPrivate::SphericalProjectionPrivate(SphericalProjection *parent)
+  : AzimuthalProjectionPrivate(parent)
 {
 }
 
 QString SphericalProjection::name() const
 {
-    return QObject::tr( "Globe" );
+  return QObject::tr("Globe");
 }
 
 QString SphericalProjection::description() const
 {
-    return QObject::tr( "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A perspective projection that is used to display the hemisphere of a globe as it appears from outer space.</p>" );
+  return QObject::tr(
+    "<p><b>Orthographic Projection</b> (\"orthogonal\")</p><p>Applications: A perspective projection that is used to display the hemisphere of a globe as it appears from outer space.</p>");
 }
 
 QIcon SphericalProjection::icon() const
 {
-    return QIcon(":/icons/map-globe.png");
+  return QIcon(":/icons/map-globe.png");
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
-                                             const ViewportParams *viewport,
-                                             qreal &x, qreal &y, bool &globeHidesPoint ) const
+bool SphericalProjection::screenCoordinates(const GeoDataCoordinates& coordinates,
+                                            const ViewportParams *viewport,
+                                            qreal& x, qreal& y, bool& globeHidesPoint) const
 {
-    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = coordinates.quaternion();
+  qreal absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+  Quaternion qpos = coordinates.quaternion();
 
-    qpos.rotateAroundAxis( viewport->planetAxisMatrix() );
+  qpos.rotateAroundAxis(viewport->planetAxisMatrix());
 
-    qreal      pixelAltitude = ( ( viewport->radius() ) 
-                                  / EARTH_RADIUS * absoluteAltitude );
-    if ( coordinates.altitude() < 10000 ) {
-        // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
-    else {
-        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        qreal  radius         = viewport->radius();
-
-        // Don't draw high placemarks (e.g. satellites) that aren't visible.
-        if ( qpos.v[Q_Z] < 0
-             && ( ( earthCenteredX * earthCenteredX
-                    + earthCenteredY * earthCenteredY )
-                  < radius * radius ) ) {
-            globeHidesPoint = true;
-            return false;
-        }
-    }
-
-    // Let (x, y) be the position on the screen of the placemark..
-    x = ((qreal)(viewport->width())  / 2 + pixelAltitude * qpos.v[Q_X]);
-    y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
-
-    // Skip placemarks that are outside the screen area
-    if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
-        globeHidesPoint = false;
-        return false;
-    }
-
-    globeHidesPoint = false;
-    return true;
-}
-
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
-                                             const ViewportParams *viewport,
-                                             qreal *x, qreal &y,
-                                             int &pointRepeatNum,
-                                             const QSizeF& size,
-                                             bool &globeHidesPoint ) const
-{
-    pointRepeatNum = 0;
-    bool visible = screenCoordinates( coordinates, viewport, *x, y, globeHidesPoint );
-
-    // Skip placemarks that are outside the screen area
-    if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 
-         || y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0 )
+  qreal pixelAltitude = ((viewport->radius()) /
+                         EARTH_RADIUS * absoluteAltitude);
+  if(coordinates.altitude() < 10000)
+  {
+    // Skip placemarks at the other side of the earth.
+    if(qpos.v[Q_Z] < 0)
     {
-        globeHidesPoint = false;
-        return false;
+      globeHidesPoint = true;
+      return false;
     }
+  }
+  else
+  {
+    qreal earthCenteredX = pixelAltitude * qpos.v[Q_X];
+    qreal earthCenteredY = pixelAltitude * qpos.v[Q_Y];
+    qreal radius = viewport->radius();
 
-    // This projection doesn't have any repetitions, 
-    // so the number of screen points referring to the geopoint is one.
-    pointRepeatNum = 1;
-    return visible;
+    // Don't draw high placemarks (e.g. satellites) that aren't visible.
+    if(qpos.v[Q_Z] < 0 &&
+       ((earthCenteredX * earthCenteredX +
+         earthCenteredY * earthCenteredY) <
+        radius * radius))
+    {
+      globeHidesPoint = true;
+      return false;
+    }
+  }
+
+  // Let (x, y) be the position on the screen of the placemark..
+  x = ((qreal)(viewport->width()) / 2 + pixelAltitude * qpos.v[Q_X]);
+  y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
+
+  // Skip placemarks that are outside the screen area
+  if(x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height())
+  {
+    globeHidesPoint = false;
+    return false;
+  }
+
+  globeHidesPoint = false;
+  return true;
 }
 
-
-bool SphericalProjection::geoCoordinates( const int x, const int y,
-                                          const ViewportParams *viewport,
-                                          qreal& lon, qreal& lat,
-                                          GeoDataCoordinates::Unit unit ) const
+bool SphericalProjection::screenCoordinates(const GeoDataCoordinates& coordinates,
+                                            const ViewportParams *viewport,
+                                            qreal *x, qreal& y,
+                                            int& pointRepeatNum,
+                                            const QSizeF& size,
+                                            bool& globeHidesPoint) const
 {
-    const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
+  pointRepeatNum = 0;
+  bool visible = screenCoordinates(coordinates, viewport, *x, y, globeHidesPoint);
 
-    const qreal qx = +(qreal)( x - viewport->width()  / 2 ) * inverseRadius;
-    const qreal qy = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
+  // Skip placemarks that are outside the screen area
+  if(*x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 ||
+     y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0)
+  {
+    globeHidesPoint = false;
+    return false;
+  }
 
-    if ( 1 <= qx * qx + qy * qy ) {
-        return false;
-    }
+  // This projection doesn't have any repetitions,
+  // so the number of screen points referring to the geopoint is one.
+  pointRepeatNum = 1;
+  return visible;
+}
 
-    const qreal qz = sqrt( 1 - qx * qx - qy * qy );
+bool SphericalProjection::geoCoordinates(const int x, const int y,
+                                         const ViewportParams *viewport,
+                                         qreal& lon, qreal& lat,
+                                         GeoDataCoordinates::Unit unit) const
+{
+  const qreal inverseRadius = 1.0 / (qreal)(viewport->radius());
 
-    Quaternion  qpos( 0.0, qx, qy, qz );
-    qpos.rotateAroundAxis( viewport->planetAxis() );
-    qpos.getSpherical( lon, lat );
+  const qreal qx = +(qreal)(x - viewport->width() / 2) * inverseRadius;
+  const qreal qy = -(qreal)(y - viewport->height() / 2) * inverseRadius;
 
-    if ( unit == GeoDataCoordinates::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
-    }
+  if(1 <= qx * qx + qy * qy)
+  {
+    return false;
+  }
 
-    return true;
+  const qreal qz = sqrt(1 - qx * qx - qy * qy);
+
+  Quaternion qpos(0.0, qx, qy, qz);
+  qpos.rotateAroundAxis(viewport->planetAxis());
+  qpos.getSpherical(lon, lat);
+
+  if(unit == GeoDataCoordinates::Degree)
+  {
+    lon *= RAD2DEG;
+    lat *= RAD2DEG;
+  }
+
+  return true;
 }
 
 }

@@ -18,37 +18,35 @@
 #include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(rotation)
+
+GeoNode *KmlrotationTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( rotation )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_rotation));
 
-GeoNode* KmlrotationTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_rotation ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_ScreenOverlay))
+  {
+    qreal rotation = parser.readElementText().toFloat();
 
-    if (parentItem.represents( kmlTag_ScreenOverlay ))
-    {
-        qreal rotation = parser.readElementText().toFloat();
+    parentItem.nodeAs<GeoDataScreenOverlay>()->setRotation(rotation);
+  }
+  else if(parentItem.represents(kmlTag_LatLonBox))
+  {
+    qreal rotation = parser.readElementText().toFloat();
 
-        parentItem.nodeAs<GeoDataScreenOverlay>()->setRotation( rotation );
-    }
-    else if (parentItem.represents( kmlTag_LatLonBox ))
-    {
-        qreal rotation = parser.readElementText().toFloat();
+    parentItem.nodeAs<GeoDataLatLonBox>()->setRotation(rotation * DEG2RAD);
+  }
+  else if(parentItem.represents(kmlTag_PhotoOverlay))
+  {
+    qreal rotation = parser.readElementText().toFloat();
 
-        parentItem.nodeAs<GeoDataLatLonBox>()->setRotation( rotation * DEG2RAD );
-    }
-    else if (parentItem.represents( kmlTag_PhotoOverlay ))
-    {
-        qreal rotation = parser.readElementText().toFloat();
-
-        parentItem.nodeAs<GeoDataPhotoOverlay>()->setRotation( rotation );
-    }
-    return 0;
+    parentItem.nodeAs<GeoDataPhotoOverlay>()->setRotation(rotation);
+  }
+  return 0;
 }
 
 }

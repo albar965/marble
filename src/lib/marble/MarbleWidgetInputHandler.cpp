@@ -22,127 +22,147 @@
 #include "AbstractDataPluginItem.h"
 #include "RenderPlugin.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class MarbleWidgetInputHandlerPrivate
 {
-    class MarbleWidgetSelectionRubber : public AbstractSelectionRubber
+  class MarbleWidgetSelectionRubber :
+    public AbstractSelectionRubber
+  {
+public:
+    explicit MarbleWidgetSelectionRubber(MarbleWidget *widget)
+      : m_rubberBand(QRubberBand::Rectangle, widget)
     {
-        public:
-            explicit MarbleWidgetSelectionRubber(MarbleWidget *widget)
-                : m_rubberBand(QRubberBand::Rectangle, widget)
-            {
-                m_rubberBand.hide();
-            }
+      m_rubberBand.hide();
+    }
 
-            void show() { m_rubberBand.show(); }
-            void hide() { m_rubberBand.hide(); }
-            bool isVisible() const { return m_rubberBand.isVisible(); }
-            const QRect &geometry() const { return m_rubberBand.geometry(); }
-            void setGeometry(const QRect &geometry) { m_rubberBand.setGeometry(geometry); }
+    void show()
+    {
+      m_rubberBand.show();
+    }
 
-        private:
-            QRubberBand m_rubberBand;
-    };
+    void hide()
+    {
+      m_rubberBand.hide();
+    }
 
-    public:
-        MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget)
-            : m_inputHandler(handler)
-            ,m_marbleWidget(widget)
-            ,m_selectionRubber(widget)
-            ,m_debugModeEnabled(false)
-        {
-            foreach(RenderPlugin *renderPlugin, widget->renderPlugins())
-            {
-                if(renderPlugin->isInitialized())
-                {
-                    installPluginEventFilter(renderPlugin);
-                }
-            }
-            m_marbleWidget->grabGesture(Qt::PinchGesture);
-        }
+    bool isVisible() const
+    {
+      return m_rubberBand.isVisible();
+    }
 
-        void setCursor(const QCursor &cursor)
-        {
-            m_marbleWidget->setCursor(cursor);
-        }
+    const QRect& geometry() const
+    {
+      return m_rubberBand.geometry();
+    }
 
-        bool layersEventFilter(QObject *o, QEvent *e)
-        {   //FIXME - this should go up in hierarchy to MarbleInputHandler
-            return false;
-        }
+    void setGeometry(const QRect& geometry)
+    {
+      m_rubberBand.setGeometry(geometry);
+    }
 
-        void installPluginEventFilter(RenderPlugin *renderPlugin)
-        {
-            m_marbleWidget->installEventFilter(renderPlugin);
-        }
+private:
+    QRubberBand m_rubberBand;
+  };
 
-        MarbleWidgetInputHandler *m_inputHandler;
-        MarbleWidget *m_marbleWidget;
-        MarbleWidgetSelectionRubber m_selectionRubber;
-        bool m_debugModeEnabled;
+public:
+  MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget)
+    : m_inputHandler(handler)
+    , m_marbleWidget(widget)
+    , m_selectionRubber(widget)
+    , m_debugModeEnabled(false)
+  {
+    foreach(RenderPlugin * renderPlugin, widget->renderPlugins())
+    {
+      if(renderPlugin->isInitialized())
+      {
+        installPluginEventFilter(renderPlugin);
+      }
+    }
+    m_marbleWidget->grabGesture(Qt::PinchGesture);
+  }
+
+  void setCursor(const QCursor& cursor)
+  {
+    m_marbleWidget->setCursor(cursor);
+  }
+
+  bool layersEventFilter(QObject *o, QEvent *e)
+  {         // FIXME - this should go up in hierarchy to MarbleInputHandler
+    return false;
+  }
+
+  void installPluginEventFilter(RenderPlugin *renderPlugin)
+  {
+    m_marbleWidget->installEventFilter(renderPlugin);
+  }
+
+  MarbleWidgetInputHandler *m_inputHandler;
+  MarbleWidget *m_marbleWidget;
+  MarbleWidgetSelectionRubber m_selectionRubber;
+  bool m_debugModeEnabled;
 };
 
-
-void MarbleWidgetInputHandler::setCursor(const QCursor &cursor)
+void MarbleWidgetInputHandler::setCursor(const QCursor& cursor)
 {
-    d->setCursor(cursor);
+  d->setCursor(cursor);
 }
 
 bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
 {
-    if (d->m_debugModeEnabled) {
-        switch(event->key()) {
-        case Qt::Key_I:
-            MarbleDebug::setEnabled(!MarbleDebug::isEnabled());
-            break;
-        case Qt::Key_R:
-            d->m_marbleWidget->setShowRuntimeTrace(!d->m_marbleWidget->showRuntimeTrace());
-            break;
-        case Qt::Key_P:
-            d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
-            break;
-        }
+  if(d->m_debugModeEnabled)
+  {
+    switch(event->key())
+    {
+      case Qt::Key_I:
+        MarbleDebug::setEnabled(!MarbleDebug::isEnabled());
+        break;
+      case Qt::Key_R:
+        d->m_marbleWidget->setShowRuntimeTrace(!d->m_marbleWidget->showRuntimeTrace());
+        break;
+      case Qt::Key_P:
+        d->m_marbleWidget->setShowDebugPolygons(!d->m_marbleWidget->showDebugPolygons());
+        break;
     }
-    return MarbleDefaultInputHandler::handleKeyPress(event);
+  }
+  return MarbleDefaultInputHandler::handleKeyPress(event);
 }
 
 AbstractSelectionRubber *MarbleWidgetInputHandler::selectionRubber()
 {
-    return &d->m_selectionRubber;
+  return &d->m_selectionRubber;
 }
 
 bool MarbleWidgetInputHandler::layersEventFilter(QObject *o, QEvent *e)
 {
-    return d->layersEventFilter(o, e);
+  return d->layersEventFilter(o, e);
 }
 
 void MarbleWidgetInputHandler::installPluginEventFilter(RenderPlugin *renderPlugin)
 {
-    d->installPluginEventFilter(renderPlugin);
+  d->installPluginEventFilter(renderPlugin);
 }
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleAbstractPresenter *marblePresenter, MarbleWidget *widget)
-    : MarbleDefaultInputHandler(marblePresenter)
-    ,d(new MarbleWidgetInputHandlerPrivate(this, widget))
+  : MarbleDefaultInputHandler(marblePresenter)
+  , d(new MarbleWidgetInputHandlerPrivate(this, widget))
 {
 }
 
 void MarbleWidgetInputHandler::setDebugModeEnabled(bool enabled)
 {
-    d->m_debugModeEnabled = enabled;
+  d->m_debugModeEnabled = enabled;
 }
 
 void MarbleWidgetInputHandler::openItemToolTip()
 {
-    if (!lastToolTipItem().isNull())
-    {
-        QToolTip::showText(d->m_marbleWidget->mapToGlobal(toolTipPosition()),
-                            lastToolTipItem()->toolTip(),
-                            d->m_marbleWidget,
-                            lastToolTipItem()->containsRect(toolTipPosition()).toRect());
-    }
+  if(!lastToolTipItem().isNull())
+  {
+    QToolTip::showText(d->m_marbleWidget->mapToGlobal(toolTipPosition()),
+                       lastToolTipItem()->toolTip(),
+                       d->m_marbleWidget,
+                       lastToolTipItem()->containsRect(toolTipPosition()).toRect());
+  }
 }
 
 }

@@ -30,26 +30,26 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( role )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(role)
 
-GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlroleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_role ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_role));
 
-    GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.is<GeoDataPlacemark>() ) {
-        QString role = parser.readElementText().trimmed();
-        if ( role.isEmpty() ) {
-            role = ' ';
-        }        
-        parentItem.nodeAs<GeoDataPlacemark>()->setRole( role );
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    QString role = parser.readElementText().trimmed();
+    if(role.isEmpty())
+    {
+      role = ' ';
     }
+    parentItem.nodeAs<GeoDataPlacemark>()->setRole(role);
+  }
 
-    return 0;
+  return 0;
 }
 
 }

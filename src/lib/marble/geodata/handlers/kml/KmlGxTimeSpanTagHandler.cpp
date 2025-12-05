@@ -19,33 +19,33 @@
 #include "GeoDataAbstractView.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-namespace gx
-{
+namespace Marble {
+namespace kml {
+namespace gx {
 
-KML_DEFINE_TAG_HANDLER_GX22( TimeSpan )
+KML_DEFINE_TAG_HANDLER_GX22(TimeSpan)
 
-GeoNode* KmlTimeSpanTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlTimeSpanTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TimeSpan ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_TimeSpan));
 
-    GeoStackItem parentItem = parser.parentElement();
-    if ( parentItem.is<GeoDataFeature>() ) {
-        GeoDataTimeSpan timeSpan;
-        KmlObjectTagHandler::parseIdentifiers( parser, &timeSpan );
-        parentItem.nodeAs<GeoDataFeature>()->setTimeSpan( timeSpan );
-        return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
-    } else if ( parentItem.is<GeoDataAbstractView>() ) {
-        GeoDataTimeSpan timeSpan;
-        KmlObjectTagHandler::parseIdentifiers( parser, &timeSpan );
-        parentItem.nodeAs<GeoDataAbstractView>()->setTimeSpan( timeSpan );
-        return &parentItem.nodeAs<GeoDataAbstractView>()->timeSpan();
-    }
+  GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataFeature>())
+  {
+    GeoDataTimeSpan timeSpan;
+    KmlObjectTagHandler::parseIdentifiers(parser, &timeSpan);
+    parentItem.nodeAs<GeoDataFeature>()->setTimeSpan(timeSpan);
+    return &parentItem.nodeAs<GeoDataFeature>()->timeSpan();
+  }
+  else if(parentItem.is<GeoDataAbstractView>())
+  {
+    GeoDataTimeSpan timeSpan;
+    KmlObjectTagHandler::parseIdentifiers(parser, &timeSpan);
+    parentItem.nodeAs<GeoDataAbstractView>()->setTimeSpan(timeSpan);
+    return &parentItem.nodeAs<GeoDataAbstractView>()->timeSpan();
+  }
 
-    return 0;
+  return 0;
 }
 
 }

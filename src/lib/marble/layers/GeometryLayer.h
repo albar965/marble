@@ -21,8 +21,7 @@ class QAbstractItemModel;
 class QModelIndex;
 class QPoint;
 
-namespace Marble
-{
+namespace Marble {
 class GeoPainter;
 class GeoDataFeature;
 class GeoDataPlacemark;
@@ -31,55 +30,57 @@ class ViewportParams;
 
 class GeometryLayerPrivate;
 
-class GeometryLayer : public QObject, public LayerInterface
+class GeometryLayer :
+  public QObject, public LayerInterface
 {
-    Q_OBJECT
+  Q_OBJECT
+
 public:
-    explicit GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
-    ~GeometryLayer();
+  explicit GeometryLayer(const QAbstractItemModel *model, const StyleBuilder *styleBuilder);
+  ~GeometryLayer();
 
-    virtual QStringList renderPosition() const;
+  virtual QStringList renderPosition() const;
 
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = QLatin1String("NONE"),
-                         GeoSceneLayer * layer = 0 );
+  virtual bool render(GeoPainter *painter, ViewportParams *viewport,
+                      const QString& renderPos = QLatin1String("NONE"),
+                      GeoSceneLayer *layer = 0);
 
-    RenderState renderState() const;
+  RenderState renderState() const;
 
-    virtual QString runtimeTrace() const;
+  virtual QString runtimeTrace() const;
 
-    QVector<const GeoDataFeature*> whichFeatureAt( const QPoint& curpos, const ViewportParams * viewport );
+  QVector<const GeoDataFeature *> whichFeatureAt(const QPoint& curpos, const ViewportParams *viewport);
 
 public Q_SLOTS:
-    void addPlacemarks( const QModelIndex& index, int first, int last );
-    void removePlacemarks( const QModelIndex& index, int first, int last );
-    void resetCacheData();
+  void addPlacemarks(const QModelIndex& index, int first, int last);
+  void removePlacemarks(const QModelIndex& index, int first, int last);
+  void resetCacheData();
 
-    /**
-     * Finds all placemarks that contain the clicked point.
-     *
-     * The placemarks under the clicked position may
-     * have their styleUrl set to a style map which
-     * doesn't specify any highlight styleId. Such
-     * placemarks will be fletered out in GeoGraphicsScene
-     * and will not be highlighted.
-     */
-    void handleHighlight( qreal lon, qreal lat, GeoDataCoordinates::Unit unit );
+  /**
+   * Finds all placemarks that contain the clicked point.
+   *
+   * The placemarks under the clicked position may
+   * have their styleUrl set to a style map which
+   * doesn't specify any highlight styleId. Such
+   * placemarks will be fletered out in GeoGraphicsScene
+   * and will not be highlighted.
+   */
+  void handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit);
 
 Q_SIGNALS:
-    void repaintNeeded();
+  void repaintNeeded();
 
-    /**
-     * @p selectedPlacemarks may contain placemarks which don't have
-     * their styleUrl set to id of the style map which specifies
-     * a highlight styleId. Such placemarks will be filtered out
-     * in GeoGraphicsScene which will query for placemark->styleUrl()
-     * to decide whether the placemark should be highlighted ot not.
-     */
-    void highlightedPlacemarksChanged( const QVector<GeoDataPlacemark*>& clickedPlacemarks );
+  /**
+   * @p selectedPlacemarks may contain placemarks which don't have
+   * their styleUrl set to id of the style map which specifies
+   * a highlight styleId. Such placemarks will be filtered out
+   * in GeoGraphicsScene which will query for placemark->styleUrl()
+   * to decide whether the placemark should be highlighted ot not.
+   */
+  void highlightedPlacemarksChanged(const QVector<GeoDataPlacemark *>& clickedPlacemarks);
 
 private:
-    GeometryLayerPrivate *d;
+  GeometryLayerPrivate *d;
 };
 
 } // namespace Marble

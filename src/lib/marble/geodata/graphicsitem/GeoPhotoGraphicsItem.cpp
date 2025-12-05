@@ -18,63 +18,66 @@
 
 #include <QDebug>
 
-namespace Marble
-{
+namespace Marble {
 
-GeoPhotoGraphicsItem::GeoPhotoGraphicsItem( const GeoDataFeature *feature )
-    : GeoGraphicsItem( feature )
+GeoPhotoGraphicsItem::GeoPhotoGraphicsItem(const GeoDataFeature *feature)
+  : GeoGraphicsItem(feature)
 {
-    if (feature) {
-        QString const paintLayer = QString("Photo/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
-        setPaintLayers(QStringList() << paintLayer);
-    }
+  if(feature)
+  {
+    QString const paintLayer = QString("Photo/%1").arg(StyleBuilder::visualCategoryName(feature->visualCategory()));
+    setPaintLayers(QStringList() << paintLayer);
+  }
 }
 
-void GeoPhotoGraphicsItem::paint(GeoPainter* painter, const ViewportParams* viewport , const QString &layer)
+void GeoPhotoGraphicsItem::paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer)
 {
-    Q_UNUSED(layer);
-    /* The code below loads the image lazily (only
-    * when it will actually be displayed). Once it was
-    * loaded but moves out of the viewport, it is unloaded
-    * again. Otherwise memory consumption gets quite high
-    * for a large set of photos
-    */
-    bool unloadImage = true;
+  Q_UNUSED(layer);
+  /* The code below loads the image lazily (only
+  * when it will actually be displayed). Once it was
+  * loaded but moves out of the viewport, it is unloaded
+  * again. Otherwise memory consumption gets quite high
+  * for a large set of photos
+  */
+  bool unloadImage = true;
 
-    qreal x(0.0), y( 0.0 );
-    viewport->screenCoordinates( m_point.coordinates(), x, y );
+  qreal x(0.0), y(0.0);
+  viewport->screenCoordinates(m_point.coordinates(), x, y);
 
-    QRectF position( QPointF( x, y ), style()->iconStyle().icon().size() );
-    position.moveCenter( QPointF( x, y ) );
+  QRectF position(QPointF(x, y), style()->iconStyle().icon().size());
+  position.moveCenter(QPointF(x, y));
 
-    QRectF displayed = position & QRectF( QPointF( 0, 0 ), viewport->size() );
+  QRectF displayed = position & QRectF(QPointF(0, 0), viewport->size());
 
-    if ( !displayed.isEmpty() ) {
-        if ( m_photo.isNull() ) {
-            m_photo = style()->iconStyle().icon();
-        }
-        unloadImage = false;
-        painter->drawImage( position, m_photo );
+  if(!displayed.isEmpty())
+  {
+    if(m_photo.isNull())
+    {
+      m_photo = style()->iconStyle().icon();
     }
+    unloadImage = false;
+    painter->drawImage(position, m_photo);
+  }
 
-    if ( unloadImage ) {
-        m_photo = QImage();
-    }
+  if(unloadImage)
+  {
+    m_photo = QImage();
+  }
 }
 
 const GeoDataLatLonAltBox& GeoPhotoGraphicsItem::latLonAltBox() const
 {
-    return m_point.latLonAltBox();
+  return m_point.latLonAltBox();
 }
 
-void GeoPhotoGraphicsItem::setPoint( const GeoDataPoint &point )
+void GeoPhotoGraphicsItem::setPoint(const GeoDataPoint& point)
 {
-    m_point = point;
+  m_point = point;
 }
 
 GeoDataPoint GeoPhotoGraphicsItem::point() const
 {
-    return m_point;
+  return m_point;
 }
 
 }

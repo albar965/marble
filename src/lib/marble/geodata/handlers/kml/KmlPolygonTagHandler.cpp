@@ -30,32 +30,35 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(Polygon)
+
+GeoNode *KmlPolygonTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( Polygon )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Polygon));
 
-GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Polygon ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    GeoDataPolygon *polygon = new GeoDataPolygon;
-    KmlObjectTagHandler::parseIdentifiers( parser, polygon );
+  GeoDataPolygon *polygon = new GeoDataPolygon;
+  KmlObjectTagHandler::parseIdentifiers(parser, polygon);
 
-    if( parentItem.represents( kmlTag_Placemark ) ) {
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
-        return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+  if(parentItem.represents(kmlTag_Placemark))
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->setGeometry(polygon);
+    return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
 
-    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
+  }
+  else if(parentItem.represents(kmlTag_MultiGeometry))
+  {
+    parentItem.nodeAs<GeoDataMultiGeometry>()->append(polygon);
     return polygon;
-    } else {
-        delete polygon;
-        return 0;
-    }
+  }
+  else
+  {
+    delete polygon;
+    return 0;
+  }
 }
 
 }

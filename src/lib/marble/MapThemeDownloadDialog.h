@@ -20,18 +20,19 @@ namespace Marble {
 
 class MarbleWidget;
 
-class MARBLE_EXPORT MapThemeDownloadDialog : public QDialog
+class MARBLE_EXPORT MapThemeDownloadDialog :
+  public QDialog
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MapThemeDownloadDialog( MarbleWidget *marbleWidget );
-    ~MapThemeDownloadDialog();
+  explicit MapThemeDownloadDialog(MarbleWidget *marbleWidget);
+  ~MapThemeDownloadDialog();
 
 private:
-    Q_DISABLE_COPY( MapThemeDownloadDialog )
-    class Private;
-    Private *const d;
+  Q_DISABLE_COPY(MapThemeDownloadDialog)
+  class Private;
+  Private *const d;
 };
 
 }

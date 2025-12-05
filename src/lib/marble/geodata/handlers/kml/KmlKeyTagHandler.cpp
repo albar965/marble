@@ -29,25 +29,24 @@
 
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( key )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(key)
 
-GeoNode* KmlkeyTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlkeyTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_key ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_key));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.represents( kmlTag_Pair ) ) {
-        QString content = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( content );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.represents(kmlTag_Pair))
+  {
+    QString content = parser.readElementText().trimmed();
+
+    parentItem.nodeAs<GeoDataStyleMap>()->setLastKey(content);
+  }
+
+  return 0;
 }
 
 }

@@ -10,28 +10,26 @@
 
 #include "LayerInterface.h"
 
-namespace Marble
-{
+namespace Marble {
 
 LayerInterface::~LayerInterface()
 {
-    // nothing to do
+  // nothing to do
 }
-
 
 qreal LayerInterface::zValue() const
 {
-    return 0.0;
+  return 0.0;
 }
 
 RenderState LayerInterface::renderState() const
 {
-    return RenderState();
+  return RenderState();
 }
 
 QString LayerInterface::runtimeTrace() const
 {
-    return QString();
+  return QString();
 }
 
 } // namespace Marble

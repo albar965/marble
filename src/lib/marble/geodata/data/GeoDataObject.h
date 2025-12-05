@@ -9,19 +9,17 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
 #ifndef MARBLE_GEODATAOBJECT_H
 #define MARBLE_GEODATAOBJECT_H
 
 #include "geodata_export.h"
 
-#include "GeoDocument.h" 
+#include "GeoDocument.h"
 #include "Serializable.h"
 
 #include <QMetaType>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataObjectPrivate;
 
@@ -45,65 +43,69 @@ class GeoDataObjectPrivate;
  * mechanism of KML is used, which is currently not supported by
  * Marble.
  */
-class GEODATA_EXPORT GeoDataObject : public GeoNode,
-                      public Serializable
+class GEODATA_EXPORT GeoDataObject :
+  public GeoNode, public Serializable
 {
 public:
-    GeoDataObject();
-    GeoDataObject( const GeoDataObject & );
-    GeoDataObject & operator=( const GeoDataObject & );
-    virtual ~GeoDataObject();
+  GeoDataObject();
+  GeoDataObject(const GeoDataObject&);
+  GeoDataObject& operator=(const GeoDataObject&);
 
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const = 0;
+  virtual ~GeoDataObject();
 
-    /// Provides the parent of the object in GeoDataContainers
-    virtual GeoDataObject *parent() const;
+  /// Provides type information for downcasting a GeoNode
+  virtual const char *nodeType() const = 0;
 
-    /// Sets the parent of the object
-    virtual void setParent(GeoDataObject *parent);
+  /// Provides the parent of the object in GeoDataContainers
+  virtual GeoDataObject *parent() const;
 
-    /**
-     * @brief Get the id of the object.
-     */
-    QString id() const;
-    /**
-     * @brief Set the id of the object
-     * @param value the new id value
-     */
-    void setId( const QString &value );
+  /// Sets the parent of the object
+  virtual void setParent(GeoDataObject *parent);
 
-    /**
-     * @brief Get the targetId of the object to be replaced
-     */
-    QString targetId() const;
-    /**
-     * @brief set a new targetId of this object
-     * @param value the new targetId value
-     */
-    void setTargetId( const QString &value );
+  /**
+   * @brief Get the id of the object.
+   */
+  QString id() const;
 
-    QString resolvePath( const QString &relativePath ) const;
+  /**
+   * @brief Set the id of the object
+   * @param value the new id value
+   */
+  void setId(const QString& value);
 
-    /// Reimplemented from Serializable
-    virtual void pack( QDataStream& stream ) const;
-    /// Reimplemented from Serializable
-    virtual void unpack( QDataStream& steam );
+  /**
+   * @brief Get the targetId of the object to be replaced
+   */
+  QString targetId() const;
 
- private:
+  /**
+   * @brief set a new targetId of this object
+   * @param value the new targetId value
+   */
+  void setTargetId(const QString& value);
 
-    GeoDataObjectPrivate * d;
+  QString resolvePath(const QString& relativePath) const;
 
- protected:
-    /**
-     * @brief Compares the value of id and targetId of the two objects
-     * @return true if they these values are equal or false otherwise
-     */
-    virtual bool equals(const GeoDataObject &other) const;
+  /// Reimplemented from Serializable
+  virtual void pack(QDataStream& stream) const;
+
+  /// Reimplemented from Serializable
+  virtual void unpack(QDataStream& steam);
+
+private:
+  GeoDataObjectPrivate *d;
+
+protected:
+  /**
+   * @brief Compares the value of id and targetId of the two objects
+   * @return true if they these values are equal or false otherwise
+   */
+  virtual bool equals(const GeoDataObject& other) const;
+
 };
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataObject* )
+Q_DECLARE_METATYPE(Marble::GeoDataObject *)
 
 #endif

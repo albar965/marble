@@ -18,8 +18,7 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataFeature;
 class GeoDataLatLonAltBox;
@@ -31,129 +30,130 @@ class ViewportParams;
 class RenderContext
 {
 public:
-    bool operator==(const RenderContext &other) const;
-    bool operator!=(const RenderContext &other) const;
+  bool operator==(const RenderContext& other) const;
+  bool operator!=(const RenderContext& other) const;
 
-    explicit RenderContext(int tileLevel = -1);
-    int tileLevel() const;
+  explicit RenderContext(int tileLevel = -1);
+  int tileLevel() const;
 
 private:
-    int m_tileLevel;
+  int m_tileLevel;
 };
 
 class MARBLE_EXPORT GeoGraphicsItem
 {
- public:
-    explicit GeoGraphicsItem( const GeoDataFeature *feature );
-    virtual ~GeoGraphicsItem();
+public:
+  explicit GeoGraphicsItem(const GeoDataFeature *feature);
+  virtual ~GeoGraphicsItem();
 
-    enum GeoGraphicsItemFlag {
-        NoOptions = 0x0,
-        ItemIsMovable = 0x1,
-        ItemIsSelectable = 0x2,
-        ItemIsVisible = 0x4
-    };
+  enum GeoGraphicsItemFlag
+  {
+    NoOptions = 0x0,
+    ItemIsMovable = 0x1,
+    ItemIsSelectable = 0x2,
+    ItemIsVisible = 0x4
+  };
 
-    Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
+  Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
 
-    bool visible() const;
+  bool visible() const;
 
-    void setVisible( bool visible );
+  void setVisible(bool visible);
 
-    /**
-     * Get the GeoGraphicItemFlags value that describes which flags are set on
-     * this item. @see QFlags
-     */
-    GeoGraphicsItemFlags flags() const;
+  /**
+   * Get the GeoGraphicItemFlags value that describes which flags are set on
+   * this item. @see QFlags
+   */
+  GeoGraphicsItemFlags flags() const;
 
-    /**
-     * Set or unset a single flag
-     * @param enabled sets if the flag is to be set or unset
-     */
-    void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );
+  /**
+   * Set or unset a single flag
+   * @param enabled sets if the flag is to be set or unset
+   */
+  void setFlag(GeoGraphicsItemFlag flag, bool enabled = true);
 
-    /**
-     * Replace all of the current flags.
-     * @param flags is the new value for this item's flags.
-     */
-    void setFlags( GeoGraphicsItemFlags flags );
+  /**
+   * Replace all of the current flags.
+   * @param flags is the new value for this item's flags.
+   */
+  void setFlags(GeoGraphicsItemFlags flags);
 
-    /**
-     * Returns the minim zoom level on which item will be active.
-     */
-    int minZoomLevel() const;
+  /**
+   * Returns the minim zoom level on which item will be active.
+   */
+  int minZoomLevel() const;
 
-    /**
-     * Sets the minimum zoom level
-     */
-    void setMinZoomLevel( int zoomLevel );
+  /**
+   * Sets the minimum zoom level
+   */
+  void setMinZoomLevel(int zoomLevel);
 
-    /**
-     * Returns the placemark for that item.
-     */
-    const GeoDataFeature* feature() const;
+  /**
+   * Returns the placemark for that item.
+   */
+  const GeoDataFeature *feature() const;
 
-    /**
-     * Returns the bounding box covered by the item.
-     */
-    virtual const GeoDataLatLonAltBox& latLonAltBox() const;
+  /**
+   * Returns the bounding box covered by the item.
+   */
+  virtual const GeoDataLatLonAltBox& latLonAltBox() const;
 
-    /**
-     * Set the box used to determine if an item is active or inactive. If an empty box is passed
-     * the item will be shown in every case.
-     */
-    void setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox );
-    
-    /**
-     * Returns the style of item.
-     */
-    GeoDataStyle::ConstPtr style() const;
+  /**
+   * Set the box used to determine if an item is active or inactive. If an empty box is passed
+   * the item will be shown in every case.
+   */
+  void setLatLonAltBox(const GeoDataLatLonAltBox& latLonAltBox);
 
-    /**
-     * Set the style for the item.
-     */
-    void setStyleBuilder(const StyleBuilder *styleBuilder);
+  /**
+   * Returns the style of item.
+   */
+  GeoDataStyle::ConstPtr style() const;
 
-    /**
-     * Set the style which will be used when
-     * placemark is highlighted.
-     * GeoGraphicsItem takes ownership of the
-     * passed style and deletes it when appropriate.
-     */
-    void setHighlightStyle( const GeoDataStyle::ConstPtr &highlightStyle );
+  /**
+   * Set the style for the item.
+   */
+  void setStyleBuilder(const StyleBuilder *styleBuilder);
 
-    /**
-     * Returns the z value of the item
-     */
-    qreal zValue() const;
+  /**
+   * Set the style which will be used when
+   * placemark is highlighted.
+   * GeoGraphicsItem takes ownership of the
+   * passed style and deletes it when appropriate.
+   */
+  void setHighlightStyle(const GeoDataStyle::ConstPtr& highlightStyle);
 
-    /**
-     * Set the z value of the item
-     */
-    void setZValue( qreal z );
+  /**
+   * Returns the z value of the item
+   */
+  qreal zValue() const;
 
-    static bool zValueLessThan(GeoGraphicsItem* one, GeoGraphicsItem* two);
+  /**
+   * Set the z value of the item
+   */
+  void setZValue(qreal z);
 
-    /**
-     * Paints the item using the given GeoPainter.
-     *
-     * Note that depending on the projection and zoom level, the item may be visible more than once,
-     * which is taken care of by GeoPainter.
-     */
-    virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString &layer) = 0;
+  static bool zValueLessThan(GeoGraphicsItem *one, GeoGraphicsItem *two);
 
-    void setHighlighted( bool highlight );
+  /**
+   * Paints the item using the given GeoPainter.
+   *
+   * Note that depending on the projection and zoom level, the item may be visible more than once,
+   * which is taken care of by GeoPainter.
+   */
+  virtual void paint(GeoPainter *painter, const ViewportParams *viewport, const QString& layer) = 0;
 
-    bool isHighlighted() const;
+  void setHighlighted(bool highlight);
 
-    QStringList paintLayers() const;
+  bool isHighlighted() const;
 
-    void setPaintLayers(const QStringList &paintLayers);
+  QStringList paintLayers() const;
 
-    void setRenderContext(const RenderContext &renderContext);
+  void setPaintLayers(const QStringList& paintLayers);
 
- protected:
-    GeoGraphicsItemPrivate *const d;
+  void setRenderContext(const RenderContext& renderContext);
+
+protected:
+  GeoGraphicsItemPrivate *const d;
 };
 
 } // Namespace Marble

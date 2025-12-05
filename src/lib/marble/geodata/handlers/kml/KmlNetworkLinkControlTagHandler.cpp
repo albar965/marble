@@ -15,27 +15,28 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( NetworkLinkControl )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(NetworkLinkControl)
 
-GeoNode* KmlNetworkLinkControlTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlNetworkLinkControlTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_NetworkLinkControl ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_NetworkLinkControl));
 
-    GeoStackItem parentItem = parser.parentElement();
-    GeoDataNetworkLinkControl *networkLinkControl = new GeoDataNetworkLinkControl;
+  GeoStackItem parentItem = parser.parentElement();
+  GeoDataNetworkLinkControl *networkLinkControl = new GeoDataNetworkLinkControl;
 
-    if ( parentItem.qualifiedName().first == kmlTag_kml ) {
-        GeoDataDocument* doc = geoDataDoc( parser );
-        doc->append( networkLinkControl );
-        return networkLinkControl;
-    } else {
-        delete networkLinkControl;
-        return 0;
-    }
+  if(parentItem.qualifiedName().first == kmlTag_kml)
+  {
+    GeoDataDocument *doc = geoDataDoc(parser);
+    doc->append(networkLinkControl);
+    return networkLinkControl;
+  }
+  else
+  {
+    delete networkLinkControl;
+    return 0;
+  }
 }
 
 }

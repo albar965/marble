@@ -36,46 +36,62 @@
 
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(altitudeMode)
+
+GeoNode *KmlaltitudeModeTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( altitudeMode )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_altitudeMode));
 
-GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_altitudeMode ) );
+  QString content = parser.readElementText().trimmed();
 
-    QString content = parser.readElementText().trimmed();
+  AltitudeMode mode;
+  if(content == QString("relativeToGround"))
+  {
+    mode = RelativeToGround;
+  }
+  else if(content == QString("absolute"))
+  {
+    mode = Absolute;
+  }
+  else       // clampToGround is Standard
+  {
+    mode = ClampToGround;
+  }
 
-    AltitudeMode mode;
-    if( content == QString( "relativeToGround" ) ) {
-        mode = RelativeToGround;
-    } else if( content == QString( "absolute" ) ) {
-        mode = Absolute;
-    } else { // clampToGround is Standard
-        mode = ClampToGround;
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataPoint>())
+  {
+    parentItem.nodeAs<GeoDataPoint>()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataLatLonAltBox>())
+  {
+    parentItem.nodeAs<GeoDataLatLonAltBox>()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataTrack>())
+  {
+    parentItem.nodeAs<GeoDataTrack>()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataGroundOverlay>())
+  {
+    parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataAbstractView>())
+  {
+    parentItem.nodeAs<GeoDataAbstractView>()->setAltitudeMode(mode);
+  }
+  else if(parentItem.is<GeoDataModel>())
+  {
+    parentItem.nodeAs<GeoDataModel>()->setAltitudeMode(mode);
+  }
 
-    if ( parentItem.is<GeoDataPlacemark>() ) {
-         parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataPoint>() ) {
-        parentItem.nodeAs<GeoDataPoint>()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataLatLonAltBox>() ) {
-        parentItem.nodeAs<GeoDataLatLonAltBox>()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataTrack>() ) {
-        parentItem.nodeAs<GeoDataTrack>()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataGroundOverlay>() ) {
-        parentItem.nodeAs<GeoDataGroundOverlay>()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataAbstractView>() ) {
-        parentItem.nodeAs<GeoDataAbstractView>()->setAltitudeMode( mode );
-    } else if ( parentItem.is<GeoDataModel>() ) {
-        parentItem.nodeAs<GeoDataModel>()->setAltitudeMode( mode );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

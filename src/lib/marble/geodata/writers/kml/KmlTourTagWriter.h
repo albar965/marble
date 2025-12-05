@@ -13,15 +13,16 @@
 
 #include "KmlFeatureTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlTourTagWriter : public KmlFeatureTagWriter
+class KmlTourTagWriter :
+  public KmlFeatureTagWriter
 {
 public:
-    KmlTourTagWriter();
+  KmlTourTagWriter();
 
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

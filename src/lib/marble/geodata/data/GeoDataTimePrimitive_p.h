@@ -13,20 +13,18 @@
 
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimePrimitivePrivate
 {
-  public:
-    const char* nodeType() const
-    {
-        return GeoDataTypes::GeoDataTimePrimitiveType;
-    }
+public:
+  const char *nodeType() const
+  {
+    return GeoDataTypes::GeoDataTimePrimitiveType;
+  }
 
 };
 
 } // namespace Marble
 
-#endif //GEODATATIMEPRIMITIVEPRIVATE_H
-
+#endif // GEODATATIMEPRIMITIVEPRIVATE_H

@@ -16,17 +16,18 @@
 
 class QString;
 
-namespace Marble
-{
+namespace Marble {
 
 // No registration for this writer, ColorStyle is an abstract kml element
-class KmlOverlayTagWriter: public KmlFeatureTagWriter
+class KmlOverlayTagWriter :
+  public KmlFeatureTagWriter
 {
 public:
-    explicit KmlOverlayTagWriter( const QString &elementName );
+  explicit KmlOverlayTagWriter(const QString& elementName);
 
 protected:
-    virtual bool writeMid( const GeoNode *node, GeoWriter& writer ) const = 0;
+  virtual bool writeMid(const GeoNode *node, GeoWriter& writer) const = 0;
+
 };
 
 }

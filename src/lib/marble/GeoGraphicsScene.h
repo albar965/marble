@@ -18,8 +18,7 @@
 #include <QObject>
 #include <QList>
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoGraphicsItem;
 class GeoDataFeature;
@@ -32,68 +31,69 @@ class GeoDataPlacemark;
 /**
  * @short This is the home of all GeoGraphicsItems to be shown on the map.
  */
-class MARBLE_EXPORT GeoGraphicsScene : public QObject
+class MARBLE_EXPORT GeoGraphicsScene :
+  public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    /**
-     * Creates a new instance of GeoGraphicsScene
-     * @param parent the QObject parent of the Scene
-     */
-    explicit GeoGraphicsScene( QObject *parent = 0 );
-    ~GeoGraphicsScene();
+  /**
+   * Creates a new instance of GeoGraphicsScene
+   * @param parent the QObject parent of the Scene
+   */
+  explicit GeoGraphicsScene(QObject *parent = 0);
+  ~GeoGraphicsScene();
 
-    /**
-     * @brief Add an item to the GeoGraphicsScene
-     * Adds the item @p item to the GeoGraphicsScene
-     */
-    void addItem( GeoGraphicsItem *item );
+  /**
+   * @brief Add an item to the GeoGraphicsScene
+   * Adds the item @p item to the GeoGraphicsScene
+   */
+  void addItem(GeoGraphicsItem *item);
 
-    /**
-     * @brief Remove all concerned items from the GeoGraphicsScene
-     * Removes all items which are associated with @p object from the GeoGraphicsScene
-     */
-    void removeItem( const GeoDataFeature *feature );
+  /**
+   * @brief Remove all concerned items from the GeoGraphicsScene
+   * Removes all items which are associated with @p object from the GeoGraphicsScene
+   */
+  void removeItem(const GeoDataFeature *feature);
 
-    /**
-     * @brief Remove all items from the GeoGraphicsScene
-     */
-    void clear();
+  /**
+   * @brief Remove all items from the GeoGraphicsScene
+   */
+  void clear();
 
-    /**
-     * @brief Get the list of items in the specified Box
-     *
-     * @param box The box around the items.
-     * @param maxZoomLevel The max zoom level of tiling
-     * @return The list of items in the specified box in no specific order.
-     */
-    QList<GeoGraphicsItem *> items( const GeoDataLatLonBox &box, int maxZoomLevel ) const;
+  /**
+   * @brief Get the list of items in the specified Box
+   *
+   * @param box The box around the items.
+   * @param maxZoomLevel The max zoom level of tiling
+   * @return The list of items in the specified box in no specific order.
+   */
+  QList<GeoGraphicsItem *> items(const GeoDataLatLonBox& box, int maxZoomLevel) const;
 
-    /**
-     * @brief Get the list of items which belong to a placemark
-     * that has been clicked.
-     * @return Returns a list of selected Items
-     */
-    QList<GeoGraphicsItem*> selectedItems() const;
+  /**
+   * @brief Get the list of items which belong to a placemark
+   * that has been clicked.
+   * @return Returns a list of selected Items
+   */
+  QList<GeoGraphicsItem *> selectedItems() const;
 
-    /**
-     * @brief Set the GeoGraphicsItem @p graphicsItem
-     * to use highlight style.
-     * @return Returns true if highlight style is
-     * successfully applied to item @p item .
-     */
-    bool setHighlightStyle( GeoGraphicsItem *item, const GeoDataDocument *document,
-                            const GeoDataStyleMap &styleMap );
+  /**
+   * @brief Set the GeoGraphicsItem @p graphicsItem
+   * to use highlight style.
+   * @return Returns true if highlight style is
+   * successfully applied to item @p item .
+   */
+  bool setHighlightStyle(GeoGraphicsItem *item, const GeoDataDocument *document,
+                         const GeoDataStyleMap& styleMap);
 
 public Q_SLOTS:
-    void applyHighlight( const QVector<GeoDataPlacemark*>& );
+  void applyHighlight(const QVector<GeoDataPlacemark *>&);
 
 Q_SIGNALS:
-    void repaintNeeded();
+  void repaintNeeded();
 
 private:
-    GeoGraphicsScenePrivate * const d;
+  GeoGraphicsScenePrivate * const d;
 };
 }
 #endif // MARBLE_GEOGRAPHICSSCENE_H

@@ -14,18 +14,18 @@
 #include "GeoTagWriter.h"
 #include "GeoDataLink.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlLinkTagWriter : public GeoTagWriter
+class KmlLinkTagWriter :
+  public GeoTagWriter
 {
 public:
-    virtual bool write( const GeoNode *node, GeoWriter& writer ) const;
+  virtual bool write(const GeoNode *node, GeoWriter& writer) const;
 
-    static QString refreshModeToString( GeoDataLink::RefreshMode refreshMode) ;
+  static QString refreshModeToString(GeoDataLink::RefreshMode refreshMode);
 
 private:
-    static QString viewRefreshModeToString( GeoDataLink::ViewRefreshMode);
+  static QString viewRefreshModeToString(GeoDataLink::ViewRefreshMode);
 
 };
 

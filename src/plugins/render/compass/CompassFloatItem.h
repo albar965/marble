@@ -19,82 +19,83 @@
 class QSvgRenderer;
 
 namespace Ui {
-    class CompassConfigWidget;
+class CompassConfigWidget;
 }
 
-namespace Marble
-{
+namespace Marble {
 
 /**
  * @short The class that creates a compass
  *
  */
 
-class CompassFloatItem  : public AbstractFloatItem, public DialogConfigurationInterface
+class CompassFloatItem :
+  public AbstractFloatItem, public DialogConfigurationInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.CompassFloatItem")
-    Q_INTERFACES( Marble::RenderPluginInterface )
-    Q_INTERFACES( Marble::DialogConfigurationInterface )
-    MARBLE_PLUGIN( CompassFloatItem )
- public:
-    CompassFloatItem();
-    explicit CompassFloatItem( const MarbleModel *marbleModel );
-    ~CompassFloatItem ();
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.CompassFloatItem")
+  Q_INTERFACES(Marble::RenderPluginInterface)
+  Q_INTERFACES(Marble::DialogConfigurationInterface)
+  MARBLE_PLUGIN(CompassFloatItem)
 
-    QStringList backendTypes() const;
+public:
+  CompassFloatItem();
+  explicit CompassFloatItem(const MarbleModel *marbleModel);
+  ~CompassFloatItem();
 
-    QString name() const;
+  QStringList backendTypes() const;
 
-    QString guiString() const;
+  QString name() const;
 
-    QString nameId() const;
+  QString guiString() const;
 
-    QString version() const;
+  QString nameId() const;
 
-    QString description() const;
+  QString version() const;
 
-    QString copyrightYears() const;
+  QString description() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QString copyrightYears() const;
 
-    QIcon icon () const;
-    
-    void initialize ();
+  QList<PluginAuthor> pluginAuthors() const;
 
-    bool isInitialized () const;
+  QIcon icon() const;
 
-    QPainterPath backgroundShape() const;
+  void initialize();
 
-    void setProjection( const ViewportParams *viewport );
+  bool isInitialized() const;
 
-    void paintContent( QPainter *painter );
+  QPainterPath backgroundShape() const;
 
-    QDialog *configDialog();
+  void setProjection(const ViewportParams *viewport);
 
-    QHash<QString,QVariant> settings() const;
+  void paintContent(QPainter *painter);
 
-    void setSettings( const QHash<QString,QVariant> &settings );
+  QDialog *configDialog();
+
+  QHash<QString, QVariant> settings() const;
+
+  void setSettings(const QHash<QString, QVariant>& settings);
 
 private Q_SLOTS:
-   void readSettings();
+  void readSettings();
 
-   void writeSettings();
+  void writeSettings();
 
- private:
-    Q_DISABLE_COPY( CompassFloatItem )
+private:
+  Q_DISABLE_COPY(CompassFloatItem)
 
-    bool           m_isInitialized;
+  bool m_isInitialized;
 
-    QSvgRenderer  *m_svgobj;
-    QPixmap        m_compass;
+  QSvgRenderer *m_svgobj;
+  QPixmap m_compass;
 
-    /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
-    int            m_polarity;
+  /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
+  int m_polarity;
 
-    int m_themeIndex;
-    QDialog * m_configDialog;
-    Ui::CompassConfigWidget * m_uiConfigWidget;
+  int m_themeIndex;
+  QDialog *m_configDialog;
+  Ui::CompassConfigWidget *m_uiConfigWidget;
 };
 }
 

@@ -29,25 +29,24 @@
 #include "GeoDataIconStyle.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( IconStyle )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(IconStyle)
 
-GeoNode* KmlIconStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlIconStyleTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_IconStyle ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_IconStyle));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        GeoDataIconStyle style;
-        KmlObjectTagHandler::parseIdentifiers( parser, &style );
-        parentItem.nodeAs<GeoDataStyle>()->setIconStyle( style );
-        return &parentItem.nodeAs<GeoDataStyle>()->iconStyle();
-    }
-    return 0;
+  GeoStackItem parentItem = parser.parentElement();
+
+  if(parentItem.represents(kmlTag_Style))
+  {
+    GeoDataIconStyle style;
+    KmlObjectTagHandler::parseIdentifiers(parser, &style);
+    parentItem.nodeAs<GeoDataStyle>()->setIconStyle(style);
+    return &parentItem.nodeAs<GeoDataStyle>()->iconStyle();
+  }
+  return 0;
 }
 
 }

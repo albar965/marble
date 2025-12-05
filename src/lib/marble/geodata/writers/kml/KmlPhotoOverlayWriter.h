@@ -13,15 +13,16 @@
 
 #include "KmlOverlayTagWriter.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class KmlPhotoOverlayWriter : public KmlOverlayTagWriter
+class KmlPhotoOverlayWriter :
+  public KmlOverlayTagWriter
 {
 public:
-    KmlPhotoOverlayWriter();
+  KmlPhotoOverlayWriter();
 
-    bool writeMid( const GeoNode *node, GeoWriter &writer ) const;
+  bool writeMid(const GeoNode *node, GeoWriter& writer) const;
+
 };
 
 }

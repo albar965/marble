@@ -18,44 +18,43 @@
 
 #include <QDateTime>
 
-namespace Marble
+namespace Marble {
+
+static GeoTagWriterRegistrar s_writerTimeStamp(GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTimeStampType,
+                                                                           kml::kmlTag_nameSpaceOgc22),
+                                               new KmlTimeStampTagWriter());
+
+bool KmlTimeStampTagWriter::write(const GeoNode *node,
+                                  GeoWriter& writer) const
 {
+  const GeoDataTimeStamp *timestamp = static_cast<const GeoDataTimeStamp *>(node);
 
-static GeoTagWriterRegistrar s_writerTimeStamp( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataTimeStampType,
-                                                                            kml::kmlTag_nameSpaceOgc22),
-                                               new KmlTimeStampTagWriter() );
+  if(timestamp->when().isValid())
+  {
+    writer.writeStartElement(kml::kmlTag_TimeStamp);
+    KmlObjectTagWriter::writeIdentifiers(writer, timestamp);
 
+    writer.writeStartElement(kml::kmlTag_when);
+    writer.writeCharacters(toString(*timestamp));
+    writer.writeEndElement();
 
-bool KmlTimeStampTagWriter::write( const GeoNode *node,
-                               GeoWriter& writer ) const
-{
-    const GeoDataTimeStamp *timestamp = static_cast<const GeoDataTimeStamp*>(node);
-
-    if( timestamp->when().isValid() )
-    {
-        writer.writeStartElement( kml::kmlTag_TimeStamp );
-        KmlObjectTagWriter::writeIdentifiers( writer, timestamp );
-
-        writer.writeStartElement( kml::kmlTag_when);
-        writer.writeCharacters( toString( *timestamp ) );
-        writer.writeEndElement();
-
-        writer.writeEndElement();
-    }
-    return true;
+    writer.writeEndElement();
+  }
+  return true;
 }
 
-QString KmlTimeStampTagWriter::toString( const GeoDataTimeStamp &timestamp )
+QString KmlTimeStampTagWriter::toString(const GeoDataTimeStamp& timestamp)
 {
-    switch ( timestamp.resolution() ) {
-    case GeoDataTimeStamp::SecondResolution: return timestamp.when().toString( Qt::ISODate );
-    case GeoDataTimeStamp::DayResolution:    return timestamp.when().toString( "yyyy-MM-dd" );
-    case GeoDataTimeStamp::MonthResolution:  return timestamp.when().toString( "yyyy-MM" );
-    case GeoDataTimeStamp::YearResolution:   return timestamp.when().toString( "yyyy" );
-    }
+  switch(timestamp.resolution())
+  {
+    case GeoDataTimeStamp::SecondResolution: return timestamp.when().toString(Qt::ISODate);
+    case GeoDataTimeStamp::DayResolution:    return timestamp.when().toString("yyyy-MM-dd");
+    case GeoDataTimeStamp::MonthResolution:  return timestamp.when().toString("yyyy-MM");
+    case GeoDataTimeStamp::YearResolution:   return timestamp.when().toString("yyyy");
+  }
 
-    Q_ASSERT( false && "not reachable" );
-    return QString();
+  Q_ASSERT(false && "not reachable");
+  return QString();
 }
 
 }

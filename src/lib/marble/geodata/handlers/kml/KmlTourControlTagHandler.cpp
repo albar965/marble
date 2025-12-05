@@ -17,30 +17,31 @@
 #include "GeoDataPlaylist.h"
 #include "GeoDataTourControl.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER_GX22(TourControl)
+
+GeoNode *KmlTourControlTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER_GX22( TourControl )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_TourControl));
 
-GeoNode* KmlTourControlTagHandler::parse(GeoParser &parser) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_TourControl ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  GeoDataTourControl *tourControl = new GeoDataTourControl;
+  KmlObjectTagHandler::parseIdentifiers(parser, tourControl);
 
-    GeoDataTourControl *tourControl = new GeoDataTourControl;
-    KmlObjectTagHandler::parseIdentifiers( parser, tourControl );
+  if(parentItem.is<GeoDataPlaylist>())
+  {
+    // parentItem.nodeAs<GeoDataPlaylist>()->append(tourControl);
+    parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(tourControl);
+    return tourControl;
+  }
+  else
+  {
+    delete tourControl;
+  }
 
-    if (parentItem.is<GeoDataPlaylist>()) {
-        //parentItem.nodeAs<GeoDataPlaylist>()->append(tourControl);
-        parentItem.nodeAs<GeoDataPlaylist>()->addPrimitive(tourControl);
-        return tourControl;
-    } else {
-        delete tourControl;
-    }
-
-    return 0;
+  return 0;
 }
 
 } // namespace kml

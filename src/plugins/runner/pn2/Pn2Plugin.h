@@ -12,35 +12,36 @@
 
 #include "ParseRunnerPlugin.h"
 
-namespace Marble
-{
+namespace Marble {
 
-class Pn2Plugin : public ParseRunnerPlugin
+class Pn2Plugin :
+  public ParseRunnerPlugin
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.marble.Pn2Plugin")
-    Q_INTERFACES( Marble::ParseRunnerPlugin )
+  Q_OBJECT
+  Q_PLUGIN_METADATA(IID "org.kde.marble.Pn2Plugin")
+  Q_INTERFACES(Marble::ParseRunnerPlugin)
 
 public:
-    explicit Pn2Plugin( QObject *parent = 0 );
+  explicit Pn2Plugin(QObject *parent = 0);
 
-    QString name() const;
+  QString name() const;
 
-    QString nameId() const;
+  QString nameId() const;
 
-    QString version() const;
+  QString version() const;
 
-    QString description() const;
+  QString description() const;
 
-    QString copyrightYears() const;
+  QString copyrightYears() const;
 
-    QList<PluginAuthor> pluginAuthors() const;
+  QList<PluginAuthor> pluginAuthors() const;
 
-    QString fileFormatDescription() const;
+  QString fileFormatDescription() const;
 
-    QStringList fileExtensions() const;
+  QStringList fileExtensions() const;
 
-    virtual ParsingRunner* newRunner() const;
+  virtual ParsingRunner *newRunner() const;
+
 };
 
 }

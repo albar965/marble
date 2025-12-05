@@ -11,13 +11,12 @@
 #include "GeoDataCreate.h"
 #include "GeoDataTypes.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataCreatePrivate
 {
 public:
-    GeoDataCreatePrivate();
+  GeoDataCreatePrivate();
 };
 
 GeoDataCreatePrivate::GeoDataCreatePrivate()
@@ -25,43 +24,45 @@ GeoDataCreatePrivate::GeoDataCreatePrivate()
 }
 
 GeoDataCreate::GeoDataCreate() :
-    d( new GeoDataCreatePrivate )
+  d(new GeoDataCreatePrivate)
 {
 }
 
-GeoDataCreate::GeoDataCreate( const Marble::GeoDataCreate &other ) :
-    GeoDataContainer(), d( new GeoDataCreatePrivate( *other.d ) )
+GeoDataCreate::GeoDataCreate(const Marble::GeoDataCreate& other) :
+  GeoDataContainer(), d(new GeoDataCreatePrivate(*other.d))
 {
 }
 
-GeoDataCreate &GeoDataCreate::operator=( const GeoDataCreate &other )
+GeoDataCreate& GeoDataCreate::operator=(const GeoDataCreate& other)
 {
-    GeoDataContainer::operator =( other );
-    *d = *other.d;
-    return *this;
+  GeoDataContainer::operator=(other);
+  *d = *other.d;
+  return *this;
 }
 
-bool GeoDataCreate::operator==( const GeoDataCreate &other ) const
+bool GeoDataCreate::operator==(const GeoDataCreate& other) const
 {
-    if ( !GeoDataContainer::equals(other) ){
-        return false;
-    }
-    return true;
+  if(!GeoDataContainer::equals(other))
+  {
+    return false;
+  }
+  return true;
 }
 
-bool GeoDataCreate::operator!=( const GeoDataCreate &other ) const
+bool GeoDataCreate::operator!=(const GeoDataCreate& other) const
 {
-    return !this->operator==( other );
+  return !this->operator==(other);
+
 }
 
 GeoDataCreate::~GeoDataCreate()
 {
-    delete d;
+  delete d;
 }
 
 const char *GeoDataCreate::nodeType() const
 {
-    return GeoDataTypes::GeoDataCreateType;
+  return GeoDataTypes::GeoDataCreateType;
 }
 
 }

@@ -17,78 +17,77 @@
 
 #include "geodata_export.h"
 
-namespace Marble
-{
+namespace Marble {
 
 class GeoDataTimeSpanPrivate;
 
-class GEODATA_EXPORT GeoDataTimeSpan : public GeoDataTimePrimitive
+class GEODATA_EXPORT GeoDataTimeSpan :
+  public GeoDataTimePrimitive
 {
-  public:
+public:
+  GeoDataTimeSpan();
+  GeoDataTimeSpan(const GeoDataTimeSpan& other);
+  ~GeoDataTimeSpan();
 
-    GeoDataTimeSpan();
-    GeoDataTimeSpan( const GeoDataTimeSpan& other );
-    ~GeoDataTimeSpan();
+  /**
+  * @brief assignment operator
+  */
+  GeoDataTimeSpan& operator=(const GeoDataTimeSpan& other);
 
-    /**
-    * @brief assignment operator
-    */
-    GeoDataTimeSpan& operator=( const GeoDataTimeSpan& other );
+  /**
+   * @brief equality operators
+   */
+  bool operator==(const GeoDataTimeSpan& other) const;
+  bool operator!=(const GeoDataTimeSpan& other) const;
 
-    /**
-     * @brief equality operators
-     */
-    bool operator==( const GeoDataTimeSpan& other ) const;
-    bool operator!=( const GeoDataTimeSpan& other ) const;
+  /// Provides type information for downcasting a GeoNode
+  virtual const char *nodeType() const;
 
-    /// Provides type information for downcasting a GeoNode
-    virtual const char* nodeType() const;
+  /**
+  * @brief return the beginning instant of a timespan
+  */
+  const GeoDataTimeStamp& begin() const;
+  GeoDataTimeStamp& begin();
 
-    /**
-    * @brief return the beginning instant of a timespan
-    */
-    const GeoDataTimeStamp & begin() const;
-    GeoDataTimeStamp & begin();
+  /**
+  * @brief Set the beginning instant of a timespan
+  * @param begin the beginning instant of a timespan
+  */
+  void setBegin(const GeoDataTimeStamp& begin);
 
-    /**
-    * @brief Set the beginning instant of a timespan
-    * @param begin the beginning instant of a timespan
-    */
-    void setBegin( const GeoDataTimeStamp& begin );
-    
-    /**
-    * @brief return the ending instant of a timespan
-    */
-    const GeoDataTimeStamp & end() const;
-    GeoDataTimeStamp & end();
+  /**
+  * @brief return the ending instant of a timespan
+  */
+  const GeoDataTimeStamp& end() const;
+  GeoDataTimeStamp& end();
 
-    /**
-    * @brief Set the ending instant of a timespan
-    * @param begin the ending instant of a timespan
-    */
-    void setEnd( const GeoDataTimeStamp& end );
+  /**
+  * @brief Set the ending instant of a timespan
+  * @param begin the ending instant of a timespan
+  */
+  void setEnd(const GeoDataTimeStamp& end);
 
-    /**
-     * @return True iff either of begin or end is valid, or if begin and end are both valid and begin is <= end
-     */
-    bool isValid() const;
+  /**
+   * @return True iff either of begin or end is valid, or if begin and end are both valid and begin is <= end
+   */
+  bool isValid() const;
 
-    /**
-     * @brief Serialize the timespan to a stream
-     * @param  stream  the stream
-     */
-    virtual void pack( QDataStream& stream ) const;
+  /**
+   * @brief Serialize the timespan to a stream
+   * @param  stream  the stream
+   */
+  virtual void pack(QDataStream& stream) const;
 
-    /**
-     * @brief  Unserialize the timespan from a stream
-     * @param  stream  the stream
-     */
-    virtual void unpack( QDataStream& stream );
+  /**
+   * @brief  Unserialize the timespan from a stream
+   * @param  stream  the stream
+   */
+  virtual void unpack(QDataStream& stream);
 
-  private:
-    GeoDataTimeSpanPrivate * const d;
+private:
+  GeoDataTimeSpanPrivate * const d;
 };
 
 }
 
-#endif //MARBLE_GEODATATIMESPAN_H
+#endif // MARBLE_GEODATATIMESPAN_H

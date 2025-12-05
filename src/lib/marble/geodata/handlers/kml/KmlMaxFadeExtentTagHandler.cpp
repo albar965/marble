@@ -16,25 +16,24 @@
 #include "GeoDataLod.h"
 #include "GeoParser.h"
 
-namespace Marble
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(maxFadeExtent)
+
+GeoNode *KmlmaxFadeExtentTagHandler::parse(GeoParser & parser) const
 {
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( maxFadeExtent )
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_maxFadeExtent));
 
-GeoNode* KmlmaxFadeExtentTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_maxFadeExtent ) );
+  GeoStackItem parentItem = parser.parentElement();
 
-    GeoStackItem parentItem = parser.parentElement();
+  if(parentItem.represents(kmlTag_Lod))
+  {
+    float maxFadeExtent = parser.readElementText().trimmed().toFloat();
 
-    if( parentItem.represents( kmlTag_Lod ) ) {
-        float maxFadeExtent = parser.readElementText().trimmed().toFloat();
+    parentItem.nodeAs<GeoDataLod>()->setMaxFadeExtent(maxFadeExtent);
+  }
 
-        parentItem.nodeAs<GeoDataLod>()->setMaxFadeExtent( maxFadeExtent );
-    }
-
-    return 0;
+  return 0;
 }
 
 }

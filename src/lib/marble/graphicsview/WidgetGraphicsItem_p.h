@@ -15,19 +15,18 @@
 
 class QWidget;
 
-namespace Marble
-{
+namespace Marble {
 
 class WidgetGraphicsItemPrivate
 {
- public:
-    WidgetGraphicsItemPrivate();
-    
-    ~WidgetGraphicsItemPrivate();
-    
-    QWidget *m_widget;
-    QWidget *m_marbleWidget;
-    QWidget *m_activeWidget;
+public:
+  WidgetGraphicsItemPrivate();
+
+  ~WidgetGraphicsItemPrivate();
+
+  QWidget *m_widget;
+  QWidget *m_marbleWidget;
+  QWidget *m_activeWidget;
 };
 
 }

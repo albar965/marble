@@ -29,28 +29,27 @@
 #include "GeoDataPlacemark.h"
 #include "GeoParser.h"
 
-namespace Marble
-{
-namespace kml
-{
-KML_DEFINE_TAG_HANDLER( countrycode )
+namespace Marble {
+namespace kml {
+KML_DEFINE_TAG_HANDLER(countrycode)
 
-GeoNode* KmlcountrycodeTagHandler::parse( GeoParser& parser ) const
+GeoNode *KmlcountrycodeTagHandler::parse(GeoParser & parser) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_countrycode ) );
+  Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_countrycode));
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.is<GeoDataPlacemark>() ) {
-        QString countrycode = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode( countrycode );
-    }
+  GeoStackItem parentItem = parser.parentElement();
 
-    return 0;
+  if(parentItem.is<GeoDataPlacemark>())
+  {
+    QString countrycode = parser.readElementText().trimmed();
+
+    parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode(countrycode);
+  }
+
+  return 0;
 }
 
 }
 }
 
-#endif //KML_LAZY_IMP
+#endif // KML_LAZY_IMP
