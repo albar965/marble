@@ -24,7 +24,6 @@
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
-#include "SearchRunnerPlugin.h"
 #include "config-marble.h"
 
 namespace Marble {
@@ -44,7 +43,6 @@ public:
   bool m_pluginsLoaded;
   QList<const RenderPlugin *> m_renderPluginTemplates;
   QList<const PositionProviderPlugin *> m_positionProviderPluginTemplates;
-  QList<const SearchRunnerPlugin *> m_searchRunnerPlugins;
   QList<const ParseRunnerPlugin *> m_parsingRunnerPlugins;
   static QStringList m_blacklist;
   static QStringList m_whitelist;
@@ -100,19 +98,6 @@ void PluginManager::addPositionProviderPlugin(const PositionProviderPlugin *plug
   d->loadPlugins();
   d->m_positionProviderPluginTemplates << plugin;
   emit positionProviderPluginsChanged();
-}
-
-QList<const SearchRunnerPlugin *> PluginManager::searchRunnerPlugins() const
-{
-  d->loadPlugins();
-  return d->m_searchRunnerPlugins;
-}
-
-void PluginManager::addSearchRunnerPlugin(const SearchRunnerPlugin *plugin)
-{
-  d->loadPlugins();
-  d->m_searchRunnerPlugins << plugin;
-  emit searchRunnerPluginsChanged();
 }
 
 QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
@@ -191,7 +176,6 @@ void PluginManagerPrivate::loadPlugins()
 
   Q_ASSERT(m_renderPluginTemplates.isEmpty());
   Q_ASSERT(m_positionProviderPluginTemplates.isEmpty());
-  Q_ASSERT(m_searchRunnerPlugins.isEmpty());
   Q_ASSERT(m_parsingRunnerPlugins.isEmpty());
 
   foreach(const QString& fileName, pluginFileNameList)
@@ -229,8 +213,6 @@ void PluginManagerPrivate::loadPlugins()
                         (obj, loader, m_renderPluginTemplates);
       isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
                    (obj, loader, m_positionProviderPluginTemplates);
-      isPlugin = isPlugin || appendPlugin<SearchRunnerPlugin, SearchRunnerPlugin>
-                   (obj, loader, m_searchRunnerPlugins);       // intentionally T==U
       isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
                    (obj, loader, m_parsingRunnerPlugins);       // intentionally T==U
       if(!isPlugin)

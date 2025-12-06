@@ -26,30 +26,6 @@ class SearchRunner;
 class ParsingRunnerManager;
 class SearchRunnerManager;
 
-/** A RunnerTask that executes a placemark search */
-class SearchTask :
-  public QObject, public QRunnable
-{
-  Q_OBJECT
-
-public:
-  SearchTask(SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString& searchTerm,
-             const GeoDataLatLonBox& preferred);
-
-  /**
-   * @reimp
-   */
-  void run();
-
-Q_SIGNALS:
-  void finished(SearchTask *task);
-
-private:
-  SearchRunner *const m_runner;
-  QString m_searchTerm;
-  GeoDataLatLonBox m_preferredBbox;
-};
-
 /** A RunnerTask that executes a file Parsing */
 class ParsingTask :
   public QObject, public QRunnable

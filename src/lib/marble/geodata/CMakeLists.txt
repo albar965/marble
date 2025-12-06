@@ -100,7 +100,7 @@ SET ( geodata_scene_SRCS
         geodata/scene/GeoScenePalette.cpp
 )
 
-# handlers and writers sources 
+# handlers and writers sources
 SET ( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlFilterTagHandler.h
         geodata/handlers/dgml/DgmlHeadingTagHandler.h
@@ -398,7 +398,6 @@ geodata/handlers/kml/KmldelayedStartTagHandler.cpp
 geodata/handlers/kml/KmlBalloonVisibilityTagHandler.cpp
 geodata/handlers/kml/KmlCreateTagHandler.cpp
 geodata/handlers/kml/KmlDeleteTagHandler.cpp
-geodata/handlers/kml/KmlOsmPlacemarkDataTagHandler.cpp
 geodata/handlers/kml/KmlTagTagHandler.cpp
 geodata/handlers/kml/KmlMemberTagHandler.cpp
 geodata/handlers/kml/KmlNdTagHandler.cpp
@@ -455,10 +454,9 @@ geodata/writers/kml/KmlTimeStampTagWriter.cpp
 geodata/writers/kml/KmlTourTagWriter.cpp
 geodata/writers/kml/KmlTrackWriter.cpp
 geodata/writers/kml/KmlUpdateTagWriter.cpp
-geodata/writers/kml/KmlOsmPlacemarkDataTagWriter.cpp
 )
 
-# writer and the parser sources 
+# writer and the parser sources
 SET ( geodata_parser_SRCS
         geodata/parser/GeoDataParser.cpp
         geodata/parser/GeoDataTypes.cpp
@@ -477,7 +475,7 @@ SET( geodata_writer_SRCS
 SET( geodata_SRCS
         ${geodata_data_SRCS}
         ${geodata_graphicsitem_SRCS}
-        ${geodata_scene_SRCS} 
+        ${geodata_scene_SRCS}
         ${geodata_parser_SRCS}
         ${geodata_writer_SRCS}
         ${geodata_handlers_kml_SRCS}

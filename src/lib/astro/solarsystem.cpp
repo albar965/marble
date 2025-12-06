@@ -438,7 +438,6 @@ void SolarSystem::updateSolar()
 {
   // calculate all positions in mean ecliptic of epoch
 
-  const double ae = 23454.77992; // 149597870.0/6378.14 =  1AE -> Earth Radii
   double dt, eps2;
   Sun200 sun;
   Plan200 pln;

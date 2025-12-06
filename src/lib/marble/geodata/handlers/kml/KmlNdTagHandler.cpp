@@ -19,7 +19,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataTypes.h"
-#include "osm/OsmPlacemarkData.h"
 
 // Qt
 #include <QDebug>

@@ -24,7 +24,6 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
-#include "OsmPlacemarkData.h"
 
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
@@ -287,19 +286,6 @@ void PlacemarkLayout::addPlacemarks(const QModelIndex& parent, int first, int la
       continue;
     }
 
-    if(placemark->hasOsmData())
-    {
-      qint64 const osmId = placemark->osmData().id();
-      if(osmId > 0)
-      {
-        if(m_osmIds.contains(osmId))
-        {
-          continue;           // placemark is already shown
-        }
-        m_osmIds << osmId;
-      }
-    }
-
     int zoomLevel = placemark->zoomLevel();
     TileId key = TileId::fromCoordinates(coordinates, zoomLevel);
     m_placemarkCache[key].append(placemark);
@@ -326,14 +312,6 @@ void PlacemarkLayout::removePlacemarks(const QModelIndex& parent, int first, int
     int zoomLevel = placemark->zoomLevel();
     TileId key = TileId::fromCoordinates(coordinates, zoomLevel);
     m_placemarkCache[key].removeAll(placemark);
-    if(placemark->hasOsmData())
-    {
-      qint64 const osmId = placemark->osmData().id();
-      if(osmId > 0)
-      {
-        m_osmIds.remove(osmId);
-      }
-    }
   }
   emit repaintNeeded();
 }

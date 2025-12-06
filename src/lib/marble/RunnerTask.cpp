@@ -14,30 +14,8 @@
 #include "MarbleDebug.h"
 #include "ParsingRunner.h"
 #include "ParsingRunnerManager.h"
-#include "SearchRunner.h"
-#include "SearchRunnerManager.h"
 
 namespace Marble {
-
-SearchTask::SearchTask(SearchRunner *runner, SearchRunnerManager *manager, const MarbleModel *model, const QString& searchTerm,
-                       const GeoDataLatLonBox& preferred) :
-  QObject(),
-  m_runner(runner),
-  m_searchTerm(searchTerm),
-  m_preferredBbox(preferred)
-{
-  connect(m_runner, SIGNAL(searchFinished(QVector<GeoDataPlacemark*>)),
-          manager, SLOT(addSearchResult(QVector<GeoDataPlacemark*>)));
-  m_runner->setModel(model);
-}
-
-void SearchTask::run()
-{
-  m_runner->search(m_searchTerm, m_preferredBbox);
-  m_runner->deleteLater();
-
-  emit finished(this);
-}
 
 ParsingTask::ParsingTask(ParsingRunner *runner, ParsingRunnerManager *manager, const QString& fileName, DocumentRole role) :
   QObject(),

@@ -43,7 +43,6 @@
 #include "MarbleGraphicsItem.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataTreeModel.h"
-#include <OsmPlacemarkData.h>
 #include "StyleBuilder.h"
 
 // Qt
@@ -227,37 +226,11 @@ void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry 
   }
   else if(object->nodeType() == GeoDataTypes::GeoDataLinearRingType)
   {
-    if(avoidOsmDuplicates && placemark->hasOsmData())
-    {
-      qint64 const osmId = placemark->osmData().id();
-      if(osmId > 0)
-      {
-        m_osmWayItems[osmId] << placemark;
-        if(m_osmWayItems[osmId].size() > 1)
-        {
-          return;
-        }
-      }
-    }
-
     const GeoDataLinearRing *ring = static_cast<const GeoDataLinearRing *>(object);
     item = new GeoPolygonGraphicsItem(placemark, ring);
   }
   else if(object->nodeType() == GeoDataTypes::GeoDataPolygonType)
   {
-    if(avoidOsmDuplicates && placemark->hasOsmData())
-    {
-      qint64 const osmId = placemark->osmData().id();
-      if(osmId > 0)
-      {
-        m_osmRelationItems[osmId] << placemark;
-        if(m_osmRelationItems[osmId].size() > 1)
-        {
-          return;
-        }
-      }
-    }
-
     const GeoDataPolygon *poly = static_cast<const GeoDataPolygon *>(object);
     item = new GeoPolygonGraphicsItem(placemark, poly);
     item->setZValue(poly->renderOrder());
@@ -324,39 +297,6 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
   if(feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType)
   {
     GeoDataPlacemark const *placemark = static_cast<GeoDataPlacemark const *>(feature);
-    if(placemark->hasOsmData() && placemark->osmData().id() > 0)
-    {
-      QMap<qint64, OsmQueue> *osmItems = 0;
-      if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLinearRingType)
-      {
-        osmItems = &m_osmWayItems;
-      }
-      else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPolygonType)
-      {
-        osmItems = &m_osmRelationItems;
-      }
-      if(osmItems)
-      {
-        OsmQueue& items = (*osmItems)[placemark->osmData().id()];
-        Q_ASSERT(items.contains(placemark));
-        if(items.first() == placemark)
-        {
-          items.removeAt(0);
-          m_scene.removeItem(feature);             // the item was in use
-          if(!items.empty())
-          {
-            // we need to fill in a replacement now
-            createGraphicsItemFromGeometry(items.first()->geometry(), items.first(), false);
-          }
-        }
-        else
-        {
-          // the item was not used
-          items.removeOne(placemark);
-        }
-        return;
-      }
-    }
     m_scene.removeItem(feature);
   }
   else if(feature->nodeType() == GeoDataTypes::GeoDataFolderType ||

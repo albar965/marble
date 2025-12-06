@@ -14,7 +14,6 @@
 #include <QDataStream>
 
 #include "GeoDataTypes.h"
-#include "osm/OsmPlacemarkData.h"
 
 namespace Marble {
 

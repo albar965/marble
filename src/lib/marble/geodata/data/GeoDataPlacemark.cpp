@@ -18,7 +18,6 @@
 
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
-#include "osm/OsmPlacemarkData.h"
 
 // Qt
 #include <QDataStream>
@@ -196,35 +195,6 @@ const GeoDataGeometry *GeoDataPlacemark::geometry() const
   return p()->m_geometry;
 }
 
-const OsmPlacemarkData& GeoDataPlacemark::osmData() const
-{
-  QVariant& placemarkVariantData = extendedData().valueRef(OsmPlacemarkData::osmHashKey()).valueRef();
-  if(!placemarkVariantData.canConvert<OsmPlacemarkData>())
-  {
-    extendedData().addValue(GeoDataData(OsmPlacemarkData::osmHashKey(), QVariant::fromValue(OsmPlacemarkData())));
-    placemarkVariantData = extendedData().valueRef(OsmPlacemarkData::osmHashKey()).valueRef();
-  }
-
-  OsmPlacemarkData& osmData = *reinterpret_cast<OsmPlacemarkData *>(placemarkVariantData.data());
-  return osmData;
-}
-
-void GeoDataPlacemark::setOsmData(const OsmPlacemarkData& osmData)
-{
-  extendedData().addValue(GeoDataData(OsmPlacemarkData::osmHashKey(), QVariant::fromValue(osmData)));
-}
-
-OsmPlacemarkData& GeoDataPlacemark::osmData()
-{
-  return const_cast<OsmPlacemarkData&>((static_cast<const GeoDataPlacemark *>(this))->osmData());
-}
-
-bool GeoDataPlacemark::hasOsmData() const
-{
-  QVariant& placemarkVariantData = extendedData().valueRef(OsmPlacemarkData::osmHashKey()).valueRef();
-  return placemarkVariantData.canConvert<OsmPlacemarkData>();
-}
-
 const GeoDataLookAt *GeoDataPlacemark::lookAt() const
 {
   return dynamic_cast<const GeoDataLookAt *>(abstractView());
@@ -324,26 +294,6 @@ void GeoDataPlacemark::setGeometry(GeoDataGeometry *entry)
 
 QString GeoDataPlacemark::displayName() const
 {
-  if(hasOsmData())
-  {
-    OsmPlacemarkData const& data = osmData();
-    QStringList const uiLanguages = QLocale::system().uiLanguages();
-    foreach(const QString& uiLanguage, uiLanguages)
-    {
-      for(auto tagIter = data.tagsBegin(), end = data.tagsEnd(); tagIter != end; ++tagIter)
-      {
-        if(tagIter.key().startsWith(QLatin1String("name:")))
-        {
-          QStringRef const tagLanguage = tagIter.key().midRef(5);
-          if(tagLanguage == uiLanguage)
-          {
-            return tagIter.value();
-          }
-        }
-      }
-    }
-  }
-
   return name();
 }
 

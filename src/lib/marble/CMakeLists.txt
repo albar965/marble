@@ -14,7 +14,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
- ${CMAKE_CURRENT_SOURCE_DIR}/osm
  ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${ZLIB_INCLUDE_DIRS}
 )
@@ -22,7 +21,6 @@ INCLUDE_DIRECTORIES(
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
-INCLUDE(osm/CMakeLists.txt)
 
 # VERSION_NUMBER_TODO
 set(MARBLE_LIB_VERSION "0.25.5")
@@ -34,7 +32,6 @@ set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
     ${layers_SRCS}
-    ${osm_SRCS}
     blendings/Blending.cpp
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
@@ -46,10 +43,6 @@ set(marblewidget_SRCS
     MarbleModel.cpp
     MarbleMap.cpp
     MarbleColors.cpp
-    MapViewWidget.cpp
-    CelestialSortFilterProxyModel.cpp
-    FileViewWidget.cpp
-    FlyToEditWidget.cpp
     WaitEditWidget.cpp
     RemoveItemEditWidget.cpp
     MapViewItemDelegate.cpp
@@ -67,7 +60,6 @@ set(marblewidget_SRCS
     Tile.cpp
     TextureTile.cpp
     TileCoordsPyramid.cpp
-    TileLevelRangeWidget.cpp
     TileLoader.cpp
     ClipPainter.cpp
     DownloadPolicy.cpp
@@ -131,9 +123,6 @@ set(marblewidget_SRCS
     PositionTracking.cpp
     DataMigration.cpp
     ImageF.cpp
-    EditPlacemarkDialog.cpp
-    AddLinkDialog.cpp
-    FormattedTextWidget.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -169,26 +158,16 @@ set(marblewidget_SRCS
     TemplateDocument.cpp
 
     ParsingRunnerManager.cpp
-    SearchRunnerManager.cpp
 
-    AutoNavigation.cpp
-
-    SearchRunnerPlugin.cpp
     ParseRunnerPlugin.cpp
-    SearchRunner.cpp
     ParsingRunner.cpp
     RunnerTask.cpp
 
     PrintOptionsWidget.cpp
-    ExternalEditorDialog.cpp
 
-    MapWizard.cpp
     MapThemeDownloadDialog.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp
-    MarbleLineEdit.cpp
-    SearchInputWidget.cpp
-    SearchWidget.cpp
     kineticmodel.cpp
     NewstuffModel.cpp
     MarbleZip.cpp
@@ -199,10 +178,7 @@ set(marblewidget_SRCS
 
 
 set (marblewidget_UI
-    ${osm_UIS}
     LatLonBoxWidget.ui
-    MapViewWidget.ui
-    FileViewWidget.ui
     MarbleNavigator.ui
     MarbleCacheSettingsWidget.ui
     MarbleViewSettingsWidget.ui
@@ -211,7 +187,6 @@ set (marblewidget_UI
     MarbleTimeSettingsWidget.ui
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
-    TileLevelRangeWidget.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui
@@ -219,11 +194,7 @@ set (marblewidget_UI
     DataMigrationWidget.ui
     PrintOptions.ui
     ExternalEditor.ui
-    MapWizard.ui
     MapThemeDownloadDialog.ui
-    EditPlacemarkDialog.ui
-    AddLinkDialog.ui
-    FormattedTextWidget.ui
     ElevationWidget.ui
 )
 
@@ -314,16 +285,11 @@ endif()
 install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${graphicsview_HDRS}
-    AutoNavigation.h
     DownloadRegion.h
     LatLonBoxWidget.h
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
-    MapViewWidget.h
-    CelestialSortFilterProxyModel.h
-    FileViewWidget.h
-    FlyToEditWidget.h
     WaitEditWidget.h
     RemoveItemEditWidget.h
     MapViewItemDelegate.h
@@ -335,7 +301,6 @@ install( FILES
     MarbleWidgetInputHandler.h
     TileId.h
     TileCoordsPyramid.h
-    TileLevelRangeWidget.h
     global.h
     MarbleMath.h
     MarbleColors.h
@@ -408,19 +373,13 @@ install( FILES
     RenderPlugin.h
     RenderPluginInterface.h
     ParsingRunnerManager.h
-    SearchRunnerManager.h
     ParsingRunner.h
-    SearchRunner.h
-    SearchRunnerPlugin.h
     ParseRunnerPlugin.h
     LayerInterface.h
     RenderState.h
     PluginAboutDialog.h
     Planet.h
     PlanetFactory.h
-    EditPlacemarkDialog.h
-    AddLinkDialog.h
-    FormattedTextWidget.h
 
     AbstractDataPlugin.h
     AbstractDataPluginModel.h
@@ -429,7 +388,6 @@ install( FILES
 
     LatLonEdit.h
     PlacemarkEditHeader.h
-    MapWizard.h
     MapThemeDownloadDialog.h
     ElevationModel.h
 

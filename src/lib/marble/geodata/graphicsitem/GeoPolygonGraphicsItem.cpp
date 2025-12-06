@@ -19,7 +19,6 @@
 #include "GeoDataStyle.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "OsmPlacemarkData.h"
 #include "StyleBuilder.h"
 
 #include <qmath.h>
@@ -227,30 +226,6 @@ double GeoPolygonGraphicsItem::extractBuildingHeight(const GeoDataFeature *featu
 
   double height = 8.0;
 
-  if(feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType)
-  {
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
-
-    if(placemark->osmData().containsTagKey("height"))
-    {
-      /** @todo Also parse non-SI units, see https://wiki.openstreetmap.org/wiki/Key:height#Height_of_buildings */
-      QString const heightValue = placemark->osmData().tagValue("height").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-      bool extracted = false;
-      double extractedHeight = heightValue.toDouble(&extracted);
-      if(extracted)
-      {
-        height = extractedHeight;
-      }
-    }
-    else if(placemark->osmData().containsTagKey("building:levels"))
-    {
-      int const levels = placemark->osmData().tagValue("building:levels").toInt();
-      int const skipLevels = placemark->osmData().tagValue("building:min_level").toInt();
-      /** @todo Is 35 as an upper bound for the number of levels sane? */
-      height = 3.0 * qBound(1, 1 + levels - skipLevels, 35);
-    }
-  }
-
   return qBound(1.0, height, 1000.0);
 }
 
@@ -264,14 +239,6 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
     {
       return placemark->name();
     }
-    else if(placemark->osmData().containsTagKey("addr:housename"))
-    {
-      return placemark->osmData().tagValue("addr:housename");
-    }
-    else if(placemark->osmData().containsTagKey("addr:housenumber"))
-    {
-      return placemark->osmData().tagValue("addr:housenumber");
-    }
   }
 
   return QString();
@@ -280,24 +247,6 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
 QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
 {
   QList<NamedEntry> entries;
-
-  if(isBuilding(feature->visualCategory()) && feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType)
-  {
-    const GeoDataPlacemark *placemark = static_cast<const GeoDataPlacemark *>(feature);
-
-    const auto end = placemark->osmData().nodeReferencesEnd();
-    for(auto iter = placemark->osmData().nodeReferencesBegin(); iter != end; ++iter)
-    {
-      if(iter.value().containsTagKey("addr:housenumber"))
-      {
-        NamedEntry entry;
-        entry.point = iter.key();
-        entry.label = iter.value().tagValue("addr:housenumber");
-        entries.push_back(entry);
-      }
-    }
-  }
-
   return entries;
 }
 

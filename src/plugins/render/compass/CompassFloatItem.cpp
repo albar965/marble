@@ -30,7 +30,6 @@ CompassFloatItem::CompassFloatItem()
   m_svgobj(0),
   m_polarity(0),
   m_themeIndex(0),
-  m_configDialog(0),
   m_uiConfigWidget(0)
 {
 }
@@ -42,7 +41,6 @@ CompassFloatItem::CompassFloatItem(const MarbleModel *marbleModel)
   m_compass(),
   m_polarity(0),
   m_themeIndex(0),
-  m_configDialog(0),
   m_uiConfigWidget(0)
 {
 }
@@ -187,22 +185,7 @@ void CompassFloatItem::paintContent(QPainter *painter)
 
 QDialog *CompassFloatItem::configDialog()
 {
-  if(!m_configDialog)
-  {
-    m_configDialog = new QDialog();
-    m_uiConfigWidget = new Ui::CompassConfigWidget;
-    m_uiConfigWidget->setupUi(m_configDialog);
-    readSettings();
-    connect(m_uiConfigWidget->m_buttonBox, SIGNAL(accepted()),
-            SLOT(writeSettings()));
-    connect(m_uiConfigWidget->m_buttonBox, SIGNAL(rejected()),
-            SLOT(readSettings()));
-    QPushButton *applyButton = m_uiConfigWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-    connect(applyButton, SIGNAL(clicked()),
-            this, SLOT(writeSettings()));
-  }
-
-  return m_configDialog;
+  return nullptr;
 }
 
 QHash<QString, QVariant> CompassFloatItem::settings() const

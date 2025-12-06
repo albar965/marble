@@ -24,8 +24,6 @@
 #include "GeoDataRegion.h"
 #include "KmlElementDictionary.h"
 #include "KmlObjectTagWriter.h"
-#include "KmlOsmPlacemarkDataTagWriter.h"
-#include "OsmPlacemarkData.h"
 
 #include <QDateTime>
 
@@ -111,14 +109,7 @@ bool KmlFeatureTagWriter::write(const Marble::GeoNode *node, GeoWriter& writer) 
 
   if(!feature->extendedData().isEmpty())
   {
-    if(feature->extendedData().contains(OsmPlacemarkData::osmHashKey()))
-    {
-      KmlOsmPlacemarkDataTagWriter::write(feature, writer);
-    }
-    else
-    {
-      writeElement(&feature->extendedData(), writer);
-    }
+    writeElement(&feature->extendedData(), writer);
   }
 
   writer.writeEndElement();

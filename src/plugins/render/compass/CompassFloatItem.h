@@ -94,7 +94,6 @@ private:
   int m_polarity;
 
   int m_themeIndex;
-  QDialog *m_configDialog;
   Ui::CompassConfigWidget *m_uiConfigWidget;
 };
 }

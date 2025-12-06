@@ -13,10 +13,8 @@
 #include "StyleBuilder.h"
 
 #include "MarbleDirs.h"
-#include "OsmPlacemarkData.h"
 #include "GeoDataTypes.h"
 #include "GeoDataPlacemark.h"
-#include "OsmPresetLibrary.h"
 
 #include <QApplication>
 #include <QFont>
@@ -1068,7 +1066,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters& paramete
   }
 
   GeoDataPlacemark const *placemark = static_cast<GeoDataPlacemark const *>(parameters.feature);
-  OsmPlacemarkData const& osmData = placemark->osmData();
   if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataPointType)
   {
     if(visualCategory == GeoDataFeature::NaturalTree)
@@ -1123,57 +1120,13 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters& paramete
 
     GeoDataPolyStyle polyStyle = style->polyStyle();
     GeoDataLineStyle lineStyle = style->lineStyle();
-    if(visualCategory == GeoDataFeature::NaturalWater)
-    {
-      if(osmData.containsTag("salt", "yes"))
-      {
-        polyStyle.setColor("#ffff80");
-        lineStyle.setPenStyle(Qt::DashLine);
-        lineStyle.setWidth(2);
-        adjustStyle = true;
-      }
-    }
-    if(visualCategory == GeoDataFeature::AmenityGraveyard || visualCategory == GeoDataFeature::LanduseCemetery)
-    {
-      if(osmData.containsTag("religion", "jewish"))
-      {
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_jewish.png"));
-        adjustStyle = true;
-      }
-      else if(osmData.containsTag("religion", "christian"))
-      {
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_christian.png"));
-        adjustStyle = true;
-      }
-      else if(osmData.containsTag("religion", "INT-generic"))
-      {
-        polyStyle.setTexturePath(MarbleDirs::path("bitmaps/osmcarto/patterns/grave_yard_generic.png"));
-        adjustStyle = true;
-      }
-    }
+
     if(adjustStyle)
     {
       GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
       newStyle->setPolyStyle(polyStyle);
       newStyle->setLineStyle(lineStyle);
       style = newStyle;
-    }
-
-    if(style->iconStyle().iconPath().isEmpty())
-    {
-      for(auto iter = osmData.tagsBegin(), end = osmData.tagsEnd(); iter != end; ++iter)
-      {
-        const QString keyValue = QString("%1=%2").arg(iter.key()).arg(iter.value());
-        const GeoDataFeature::GeoDataVisualCategory category = OsmPresetLibrary::osmVisualCategory(keyValue);
-        const GeoDataStyle::ConstPtr categoryStyle = presetStyle(category);
-        if(category != GeoDataFeature::None && !categoryStyle->iconStyle().icon().isNull())
-        {
-          GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
-          newStyle->setIconStyle(categoryStyle->iconStyle());
-          style = newStyle;
-          break;
-        }
-      }
     }
   }
   else if(placemark->geometry()->nodeType() == GeoDataTypes::GeoDataLineStringType)
@@ -1184,15 +1137,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters& paramete
 
     if(visualCategory == GeoDataFeature::AdminLevel2)
     {
-      if(osmData.containsTag("maritime", "yes"))
-      {
-        lineStyle.setColor("#88b3bf");
-        polyStyle.setColor("#88b3bf");
-        if(osmData.containsTag("marble:disputed", "yes"))
-        {
-          lineStyle.setPenStyle(Qt::DashLine);
-        }
-      }
     }
     else if(visualCategory >= GeoDataFeature::HighwayService &&
             visualCategory <= GeoDataFeature::HighwayMotorway)
@@ -1210,38 +1154,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters& paramete
         lineStyle.setPhysicalWidth(0.0);
         lineStyle.setWidth(4.0);
       }
-      else
-      {
-        bool const isOneWay = osmData.containsTag("oneway", "yes") || osmData.containsTag("oneway", "-1");
-        int const lanes = isOneWay ? 1 : 2;         // also for motorway which implicitly is one way, but has two lanes and each direction has its own highway
-        double const laneWidth = 3.0;
-        double const margins = visualCategory == GeoDataFeature::HighwayMotorway ? 2.0 : (isOneWay ? 1.0 : 0.0);
-        double const physicalWidth = margins + lanes * laneWidth;
-        lineStyle.setPhysicalWidth(physicalWidth);
-      }
-
-      QString const accessValue = osmData.tagValue("access");
-      if(accessValue == "private" || accessValue == "no" || accessValue == "agricultural" || accessValue == "delivery" ||
-         accessValue == "forestry")
-      {
-        QColor polyColor = polyStyle.color();
-        qreal hue, sat, val;
-        polyColor.getHsvF(&hue, &sat, &val);
-        polyColor.setHsvF(0.98, qMin(1.0, 0.2 + sat), val);
-        polyStyle.setColor(polyColor);
-        lineStyle.setColor(lineStyle.color().darker(150));
-      }
-
-      if(osmData.containsTag("tunnel", "yes"))
-      {
-        QColor polyColor = polyStyle.color();
-        qreal hue, sat, val;
-        polyColor.getHsvF(&hue, &sat, &val);
-        polyColor.setHsvF(hue, 0.25 * sat, 0.95 * val);
-        polyStyle.setColor(polyColor);
-        lineStyle.setColor(lineStyle.color().lighter(115));
-      }
-
     }
     else if(visualCategory == GeoDataFeature::NaturalWater)
     {
@@ -1249,13 +1161,6 @@ GeoDataStyle::ConstPtr StyleBuilder::createStyle(const StyleParameters& paramete
       {
         lineStyle.setWidth(parameters.tileLevel <= 3 ? 1 : 2);
         lineStyle.setPhysicalWidth(0.0);
-      }
-      else
-      {
-        QString const widthValue = osmData.tagValue("width").remove(QStringLiteral(" meters")).remove(QStringLiteral(" m"));
-        bool ok;
-        float const width = widthValue.toFloat(&ok);
-        lineStyle.setPhysicalWidth(ok ? qBound(0.1f, width, 200.0f) : 0.0f);
       }
     }
     GeoDataStyle::Ptr newStyle(new GeoDataStyle(*style));
