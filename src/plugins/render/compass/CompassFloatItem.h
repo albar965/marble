@@ -92,9 +92,6 @@ private:
 
   /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
   int m_polarity;
-
-  int m_themeIndex;
-  Ui::CompassConfigWidget *m_uiConfigWidget;
 };
 }
 

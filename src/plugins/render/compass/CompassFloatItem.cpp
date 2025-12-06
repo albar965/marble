@@ -10,7 +10,6 @@
 //
 
 #include "CompassFloatItem.h"
-#include "ui_CompassConfigWidget.h"
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -28,9 +27,7 @@ namespace Marble {
 CompassFloatItem::CompassFloatItem()
   : AbstractFloatItem(0),
   m_svgobj(0),
-  m_polarity(0),
-  m_themeIndex(0),
-  m_uiConfigWidget(0)
+  m_polarity(0)
 {
 }
 
@@ -39,9 +36,7 @@ CompassFloatItem::CompassFloatItem(const MarbleModel *marbleModel)
   m_isInitialized(false),
   m_svgobj(0),
   m_compass(),
-  m_polarity(0),
-  m_themeIndex(0),
-  m_uiConfigWidget(0)
+  m_polarity(0)
 {
 }
 
@@ -192,7 +187,7 @@ QHash<QString, QVariant> CompassFloatItem::settings() const
 {
   QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
-  result.insert("theme", m_themeIndex);
+  result.insert("theme", 0);
 
   return result;
 }
@@ -201,43 +196,18 @@ void CompassFloatItem::setSettings(const QHash<QString, QVariant>& settings)
 {
   AbstractFloatItem::setSettings(settings);
 
-  m_themeIndex = settings.value("theme", 0).toInt();
-
   readSettings();
 }
 
 void CompassFloatItem::readSettings()
 {
-  if(m_uiConfigWidget && m_themeIndex >= 0 && m_themeIndex < m_uiConfigWidget->m_themeList->count())
-  {
-    m_uiConfigWidget->m_themeList->setCurrentRow(m_themeIndex);
-  }
-
-  QString theme = ":/compass.svg";
-  switch(m_themeIndex)
-  {
-    case 1:
-      theme = ":/compass-arrows.svg";
-      break;
-    case 2:
-      theme = ":/compass-atom.svg";
-      break;
-    case 3:
-      theme = ":/compass-magnet.svg";
-      break;
-  }
-
   delete m_svgobj;
-  m_svgobj = new QSvgRenderer(theme, this);
+  m_svgobj = new QSvgRenderer(QString(":/compass.svg"), this);
   m_compass = QPixmap();
 }
 
 void CompassFloatItem::writeSettings()
 {
-  if(m_uiConfigWidget)
-  {
-    m_themeIndex = m_uiConfigWidget->m_themeList->currentRow();
-  }
   readSettings();
   update();
   emit settingsChanged(nameId());
