@@ -22,7 +22,6 @@
 #include <QRegion>
 #include <QNetworkProxy>
 #include <QMetaMethod>
-#include "DataMigration.h"
 #include "FileManager.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
@@ -156,10 +155,6 @@ MarbleWidget::~MarbleWidget()
 
 void MarbleWidgetPrivate::construct()
 {
-  QPointer<DataMigration> dataMigration = new DataMigration(m_widget);
-  dataMigration->exec();
-  delete dataMigration;
-
   // Widget settings
   m_widget->setMinimumSize(200, 300);
   m_widget->setFocusPolicy(Qt::WheelFocus);

@@ -121,7 +121,6 @@ set(marblewidget_SRCS
     FileLoader.cpp
     FileManager.cpp
     PositionTracking.cpp
-    DataMigration.cpp
     ImageF.cpp
 
     AbstractDataPlugin.cpp
@@ -191,7 +190,6 @@ set (marblewidget_UI
     SunControlWidget.ui
     LatLonEdit.ui
     PlacemarkEditHeader.ui
-    DataMigrationWidget.ui
     PrintOptions.ui
     ExternalEditor.ui
     MapThemeDownloadDialog.ui
