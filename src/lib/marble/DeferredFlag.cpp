@@ -33,7 +33,7 @@ void DeferredFlag::slotDrawFlag()
 {
   QString keystring = QString(m_filename).remove("flags/");
 
-  if(!QPixmapCache::find(keystring, m_pixmap))
+  if(!QPixmapCache::find(keystring, &m_pixmap))
   {
     QSvgRenderer svgobj(m_filename, this);
     QSize flagsize = svgobj.viewBox().size();

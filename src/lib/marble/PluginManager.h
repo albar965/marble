@@ -65,22 +65,6 @@ public:
   void addRenderPlugin(const RenderPlugin *plugin);
 
   /**
-   * @brief Returns all available PositionProviderPlugins.
-   *
-   * Ownership of the items remains in PluginManager.
-   * In order to use the PositionProviderPlugins, first create new instances using
-   * PositionProviderPlugin::newInstance().
-   */
-  QList<const PositionProviderPlugin *> positionProviderPlugins() const;
-
-  /**
-   * @brief Add a PositionProviderPlugin manually to the list of known plugins. Normally you
-   * don't need to call this method since all plugins are loaded automatically.
-   * @param plugin The plugin to add. Ownership retains with the caller.
-   */
-  void addPositionProviderPlugin(const PositionProviderPlugin *plugin);
-
-  /**
    * Returns all search runner plugins.
    * @note: Runner plugins are owned by the PluginManager, do not delete them.
    */

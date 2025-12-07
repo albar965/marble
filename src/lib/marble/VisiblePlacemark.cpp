@@ -174,12 +174,12 @@ void VisiblePlacemark::drawLabelPixmap()
   if(m_style->labelStyle().glow())
   {
     labelFont.setWeight(75);       // Needed to calculate the correct pixmap size;
-    textWidth = (QFontMetrics(labelFont).width(labelName) +
+    textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelName) +
                  qRound(2 * s_labelOutlineWidth));
   }
   else
   {
-    textWidth = (QFontMetrics(labelFont).width(labelName));
+    textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelName));
   }
 
   // Due to some XOrg bug this requires a workaround via
@@ -222,7 +222,7 @@ void VisiblePlacemark::drawLabelText(QPainter& labelPainter, const QString& text
       {
         labelPainter.setPen(color);
         labelPainter.setFont(font);
-        QRect textRect(0, 0, metrics.width(text), metrics.height());
+        QRect textRect(0, 0, metrics.horizontalAdvance(text), metrics.height());
         labelPainter.fillRect(textRect, QApplication::palette().highlight());
         labelPainter.setPen(QPen(QApplication::palette().highlightedText(), 1));
         labelPainter.drawText(0, fontAscent, text);

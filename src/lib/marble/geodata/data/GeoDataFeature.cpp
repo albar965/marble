@@ -454,7 +454,7 @@ void GeoDataFeature::setPopularity(qint64 popularity)
 
 void GeoDataFeature::detach()
 {
-  if(d->ref.load() == 1)
+  if(d->ref.loadRelaxed() == 1)
   {
     return;
   }

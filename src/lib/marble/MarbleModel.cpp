@@ -27,7 +27,6 @@
 #include "kdescendantsproxymodel.h"
 
 #include "MapThemeManager.h"
-#include "MarbleGlobal.h"
 #include "MarbleDebug.h"
 
 #include "GeoSceneDocument.h"
@@ -35,9 +34,7 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
-#include "GeoScenePalette.h"
 #include "GeoSceneTileDataset.h"
-#include "GeoSceneVector.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
@@ -51,12 +48,10 @@
 #include "MarbleClock.h"
 #include "FileStoragePolicy.h"
 #include "FileStorageWatcher.h"
-#include "PositionTracking.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
-#include "PlacemarkPositionProviderPlugin.h"
 #include "Planet.h"
 #include "PlanetFactory.h"
 #include "PluginManager.h"
@@ -88,7 +83,6 @@ public:
     m_placemarkProxyModel(),
     m_placemarkSelectionModel(0),
     m_fileManager(&m_treeModel, &m_pluginManager),
-    m_positionTracking(&m_treeModel),
     m_trackedPlacemark(0),
     m_legend(0),
     m_workOffline(false),
@@ -169,9 +163,6 @@ public:
 
   FileManager m_fileManager;
 
-  // Gps Stuff
-  PositionTracking m_positionTracking;
-
   const GeoDataPlacemark *m_trackedPlacemark;
 
   QTextDocument *m_legend;
@@ -196,8 +187,6 @@ MarbleModel::MarbleModel(QObject *parent)
 
   connect(&d->m_clock, SIGNAL(timeChanged()),
           &d->m_sunLocator, SLOT(update()));
-
-  d->m_pluginManager.addPositionProviderPlugin(new PlacemarkPositionProviderPlugin(this));
 }
 
 MarbleModel::~MarbleModel()
@@ -571,11 +560,6 @@ const QAbstractItemModel *MarbleModel::groundOverlayModel() const
 QItemSelectionModel *MarbleModel::placemarkSelectionModel()
 {
   return &d->m_placemarkSelectionModel;
-}
-
-PositionTracking *MarbleModel::positionTracking() const
-{
-  return &d->m_positionTracking;
 }
 
 FileManager *MarbleModel::fileManager()

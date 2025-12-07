@@ -12,7 +12,6 @@
 
 #include "Quaternion.h"
 #include "MarbleAbstractPresenter.h"
-#include "MarbleDebug.h"
 #include "GeoDataLineString.h"
 #include "ViewportParams.h"
 
@@ -41,7 +40,7 @@ public:
     m_planetRadius(EARTH_RADIUS)
   {
     m_timeline.setDuration(2000);
-    m_timeline.setCurveShape(QTimeLine::EaseInOutCurve);
+    m_timeline.setEasingCurve(QEasingCurve::InOutSine);
   }
 
   void suggestedPos(qreal t, qreal& lon, qreal& lat) const
@@ -83,11 +82,11 @@ public:
       qreal jumpDuration = m_timeline.duration();
 
       // Purely cinematic approach to calculate the jump path
-      qreal g = qMin(m_source.range(), m_target.range());       // Min altitude
-      qreal k = qMax(m_source.range(), m_target.range());       // Base altitude
-      qreal d = t > 0.5 ? m_source.range() - g : m_target.range() - g;       // Base difference
-      qreal c = d * 2 * qAbs(t - 0.5);       // Correction factor
-      qreal h = qMin(1000 * 3000.0, totalDistance() / 2.0);     // Jump height
+      qreal g = qMin(m_source.range(), m_target.range()); // Min altitude
+      qreal k = qMax(m_source.range(), m_target.range()); // Base altitude
+      qreal d = t > 0.5 ? m_source.range() - g : m_target.range() - g; // Base difference
+      qreal c = d * 2 * qAbs(t - 0.5); // Correction factor
+      qreal h = qMin(1000 * 3000.0, totalDistance() / 2.0); // Jump height
 
       // Parameters for the parabolic function that has the maximum at
       // the point H ( 0.5 * m_jumpDuration, g + h )
@@ -95,7 +94,7 @@ public:
       qreal b = 2.0 * h / (qreal)(0.5 * jumpDuration);
 
       qreal x = jumpDuration * t;
-      qreal y = (a * x + b) * x + k - c;               // Parabolic function
+      qreal y = (a * x + b) * x + k - c; // Parabolic function
 
       return y;
     }
@@ -159,17 +158,20 @@ void MarblePhysics::flyTo(const GeoDataLookAt& target, FlyToMode mode)
       d->m_presenter->flyTo(target, Instant);
       return;
       break;
+
     case Linear:
       d->m_timeline.setDuration(300);
-      d->m_timeline.setCurveShape(QTimeLine::EaseOutCurve);
+      d->m_timeline.setEasingCurve(QEasingCurve::OutCurve);
       break;
+
     case Jump:
       {
         qreal duration = invisible ? 2000 : 1000;
         d->m_timeline.setDuration(duration);
-        d->m_timeline.setCurveShape(QTimeLine::EaseInOutCurve);
+        d->m_timeline.setEasingCurve(QEasingCurve::InOutSine);
       }
       break;
+
     case Automatic:
       Q_ASSERT(false);
       break;

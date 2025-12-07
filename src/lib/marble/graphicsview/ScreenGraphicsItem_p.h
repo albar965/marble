@@ -29,8 +29,7 @@ public:
     : MarbleGraphicsItemPrivate(screenGraphicsItem, parent),
     m_position(),
     m_viewportSize(),
-    m_floatItemMoving(false),
-    m_flags(0)
+    m_floatItemMoving(false)
   {
   }
 

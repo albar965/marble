@@ -468,7 +468,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex& index, int role) const
   }
   else if(role == MarblePlacemarkModel::ObjectPointerRole)
   {
-    return qVariantFromValue(object);
+    return QVariant::fromValue(object);
   }
   else if(role == MarblePlacemarkModel::PopularityIndexRole)
   {
@@ -491,7 +491,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex& index, int role) const
     if(object->nodeType() == GeoDataTypes::GeoDataPlacemarkType)
     {
       GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark *>(object);
-      return qVariantFromValue(placemark->coordinate());
+      return QVariant::fromValue(placemark->coordinate());
     }
     else if(object->nodeType() == GeoDataTypes::GeoDataFlyToType)
     {
@@ -768,7 +768,7 @@ Qt::ItemFlags GeoDataTreeModel::flags(const QModelIndex& index) const
       }
       else if(parentfolder->style()->listStyle().listItemType() == GeoDataListStyle::CheckHideChildren)
       {
-        return 0;
+        return Qt::ItemFlags();
       }
     }
   }

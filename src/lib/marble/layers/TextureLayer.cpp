@@ -144,7 +144,7 @@ void TextureLayer::Private::updateTextureLayers()
     if(m_textureLayerSettings)
     {
       const bool propertyExists = m_textureLayerSettings->propertyValue(candidate->name(), enabled);
-      enabled |= !propertyExists;       // if property doesn't exist, enable texture nevertheless
+      enabled |= !propertyExists; // if property doesn't exist, enable texture nevertheless
     }
     if(enabled)
     {
@@ -169,7 +169,7 @@ void TextureLayer::Private::updateTextureLayers()
 void TextureLayer::Private::updateTile(const TileId& tileId, const QImage& tileImage)
 {
   if(tileImage.isNull())
-    return;     // keep tiles in cache to improve performance
+    return; // keep tiles in cache to improve performance
 
   m_tileLoader.updateTile(tileId, tileImage);
 
@@ -194,8 +194,8 @@ void TextureLayer::Private::addGroundOverlays(const QModelIndex& parent, int fir
       continue;
     }
 
-    int pos = qLowerBound(m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay,
-                          drawOrderLessThan) - m_groundOverlayCache.begin();
+    int pos = std::lower_bound(m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay,
+                               drawOrderLessThan) - m_groundOverlayCache.begin();
     m_groundOverlayCache.insert(pos, overlay);
   }
 
@@ -212,8 +212,8 @@ void TextureLayer::Private::removeGroundOverlays(const QModelIndex& parent, int 
     const GeoDataGroundOverlay *overlay =
       static_cast<GeoDataGroundOverlay *>(qvariant_cast<GeoDataObject *>(index.data(MarblePlacemarkModel::ObjectPointerRole)));
 
-    int pos = qLowerBound(m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay,
-                          drawOrderLessThan) - m_groundOverlayCache.begin();
+    int pos = std::lower_bound(m_groundOverlayCache.begin(), m_groundOverlayCache.end(), overlay,
+                               drawOrderLessThan) - m_groundOverlayCache.begin();
     if(pos >= 0 && pos < m_groundOverlayCache.size())
     {
       m_groundOverlayCache.removeAt(pos);
@@ -355,9 +355,9 @@ bool TextureLayer::render(GeoPainter *painter, ViewportParams *viewport,
 
   // As our tile resolution doubles with each level we calculate
   // the tile level from tilesize and the globe radius via log(2)
-  const qreal tileLevelF = qLn(linearLevel) / qLn(2.0) * 1.00001;        // snap to the sharper tile level a tiny bit earlier
-                                                                         // to work around rounding errors when the radius
-                                                                         // roughly equals the global texture width
+  const qreal tileLevelF = qLn(linearLevel) / qLn(2.0) * 1.00001; // snap to the sharper tile level a tiny bit earlier
+                                                                  // to work around rounding errors when the radius
+                                                                  // roughly equals the global texture width
 
   const int tileLevel = qMin<int>(d->m_layerDecorator.maximumTileLevel(), tileLevelF);
 
@@ -605,11 +605,11 @@ RenderState TextureLayer::renderState() const
 QString TextureLayer::addTextureLayer(GeoSceneTextureTileDataset *texture)
 {
   if(!texture)
-    return QString();     // Not a sane call
+    return QString(); // Not a sane call
 
   QString sourceDir = texture->sourceDir();
   if(!d->m_customTextures.contains(sourceDir))
-  {     // Add if not present. For update, remove the old texture first.
+  { // Add if not present. For update, remove the old texture first.
     d->m_customTextures.insert(sourceDir, texture);
     d->m_textures.append(texture);
     d->updateTextureLayers();

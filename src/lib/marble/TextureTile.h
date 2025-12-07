@@ -96,7 +96,7 @@ inline Blending const *TextureTile::blending() const
 
 inline int TextureTile::byteCount() const
 {
-  return m_image.byteCount();
+  return m_image.sizeInBytes();
 }
 
 }

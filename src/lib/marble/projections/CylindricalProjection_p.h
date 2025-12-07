@@ -13,10 +13,16 @@
 #define MARBLE_CYLINDRICALPROJECTIONPRIVATE_H
 
 #include "AbstractProjection_p.h"
+#include "MarbleGlobal.h"
+
+#include <QPolygonF>
 
 namespace Marble {
 
 class CylindricalProjection;
+class GeoDataCoordinates;
+class GeoDataLineString;
+class ViewportParams;
 
 class CylindricalProjectionPrivate :
   public AbstractProjectionPrivate
@@ -36,7 +42,7 @@ public:
                             qreal bx, qreal by,
                             QVector<QPolygonF *>& polygons,
                             const ViewportParams *viewport,
-                            TessellationFlags f = 0,
+                            TessellationFlags f,
                             int mirrorCount = 0,
                             qreal repeatDistance = 0) const;
 
@@ -45,7 +51,7 @@ public:
                           int count,
                           QVector<QPolygonF *>& polygons,
                           const ViewportParams *viewport,
-                          TessellationFlags f = 0,
+                          TessellationFlags f,
                           int mirrorCount = 0,
                           qreal repeatDistance = 0) const;
 

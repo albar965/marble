@@ -13,6 +13,7 @@
 #include "PluginManager.h"
 
 // Qt
+#include <QElapsedTimer>
 #include <QList>
 #include <QPluginLoader>
 #include <QTime>
@@ -21,8 +22,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "RenderPlugin.h"
-#include "PositionProviderPlugin.h"
-#include "AbstractFloatItem.h"
 #include "ParseRunnerPlugin.h"
 #include "config-marble.h"
 
@@ -85,19 +84,6 @@ void PluginManager::addRenderPlugin(const RenderPlugin *plugin)
   d->loadPlugins();
   d->m_renderPluginTemplates << plugin;
   emit renderPluginsChanged();
-}
-
-QList<const PositionProviderPlugin *> PluginManager::positionProviderPlugins() const
-{
-  d->loadPlugins();
-  return d->m_positionProviderPluginTemplates;
-}
-
-void PluginManager::addPositionProviderPlugin(const PositionProviderPlugin *plugin)
-{
-  d->loadPlugins();
-  d->m_positionProviderPluginTemplates << plugin;
-  emit positionProviderPluginsChanged();
 }
 
 QList<const ParseRunnerPlugin *> PluginManager::parsingRunnerPlugins() const
@@ -166,7 +152,7 @@ void PluginManagerPrivate::loadPlugins()
     return;
   }
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
   mDebug() << "Starting to load Plugins.";
 
@@ -211,8 +197,6 @@ void PluginManagerPrivate::loadPlugins()
     {
       bool isPlugin = appendPlugin<RenderPlugin, RenderPluginInterface>
                         (obj, loader, m_renderPluginTemplates);
-      isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
-                   (obj, loader, m_positionProviderPluginTemplates);
       isPlugin = isPlugin || appendPlugin<ParseRunnerPlugin, ParseRunnerPlugin>
                    (obj, loader, m_parsingRunnerPlugins);       // intentionally T==U
       if(!isPlugin)
@@ -225,7 +209,7 @@ void PluginManagerPrivate::loadPlugins()
     }
     else
     {
-      qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << endl
+      qWarning() << "Ignoring to load the following file since it doesn't look like a valid Marble plugin:" << path << Qt::endl
                  << "Reason:" << loader->errorString();
       delete loader;
     }

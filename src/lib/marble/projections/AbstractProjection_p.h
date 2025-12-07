@@ -11,6 +11,8 @@
 #ifndef MARBLE_ABSTRACTPROJECTIONPRIVATE_H
 #define MARBLE_ABSTRACTPROJECTIONPRIVATE_H
 
+#include <QtGlobal>
+
 namespace Marble {
 
 class AbstractProjection;

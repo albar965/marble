@@ -480,7 +480,7 @@ void NewstuffModelPrivate::uninstall(int index)
     }
   }
 
-  qSort(directories.begin(), directories.end(), NewstuffItem::deeperThan);
+  std::sort(directories.begin(), directories.end(), NewstuffItem::deeperThan);
   foreach(const QString& dir, directories)
   {
     QDir::root().rmdir(dir);
@@ -925,7 +925,7 @@ void NewstuffModel::contentsListed(int exitStatus)
 {
   if(exitStatus == 0)
   {
-    QStringList const files = QString(d->m_unpackProcess->readAllStandardOutput()).split('\n', QString::SkipEmptyParts);
+    QStringList const files = QString(d->m_unpackProcess->readAllStandardOutput()).split('\n', Qt::SkipEmptyParts);
     d->updateRegistry(files);
 
     QObject::disconnect(d->m_unpackProcess, SIGNAL(finished(int)),

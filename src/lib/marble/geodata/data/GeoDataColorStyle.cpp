@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <QDataStream>
 #include <QColor>
+#include <QRandomGenerator>
 
 namespace Marble {
 
@@ -90,10 +91,9 @@ void GeoDataColorStyle::setColor(const QColor& value)
   qreal green = d->m_color.greenF();
   qreal blue = d->m_color.blueF();
   d->m_randomColor = d->m_color;
-  qreal const randMax = RAND_MAX;
-  d->m_randomColor.setRedF(red * (qrand() / randMax));
-  d->m_randomColor.setGreenF(green * (qrand() / randMax));
-  d->m_randomColor.setBlueF(blue * (qrand() / randMax));
+  d->m_randomColor.setRedF(red * (QRandomGenerator().generateDouble() * RAND_MAX));
+  d->m_randomColor.setGreenF(green * (QRandomGenerator().generateDouble() * RAND_MAX));
+  d->m_randomColor.setBlueF(blue * (QRandomGenerator().generateDouble() * RAND_MAX));
 }
 
 QColor GeoDataColorStyle::color() const

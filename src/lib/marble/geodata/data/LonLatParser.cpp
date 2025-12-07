@@ -67,10 +67,10 @@ void LonLatParser::initAll()
   // use a set to remove duplicates
   QSet<QString> dirs = QSet<QString>()
                        << m_north << m_east << m_south << m_west;
-  dirs += m_northLocale.toSet();
-  dirs += m_eastLocale.toSet();
-  dirs += m_southLocale.toSet();
-  dirs += m_westLocale.toSet();
+  dirs += QSet<QString>(m_northLocale.begin(), m_northLocale.end());
+  dirs += QSet<QString>(m_eastLocale.begin(), m_eastLocale.end());
+  dirs += QSet<QString>(m_southLocale.begin(), m_southLocale.end());
+  dirs += QSet<QString>(m_westLocale.begin(), m_westLocale.end());
 
   QString fullNamesExp;
   QString simpleLetters;
@@ -373,7 +373,7 @@ void LonLatParser::getLocaleList(QStringList& localeList, const QString& localeL
   const QString lowerLocaleListString = localeListString.toLower();
   if(lowerLocaleListString != placeholder)
   {
-    localeList = lowerLocaleListString.split(separator, QString::SkipEmptyParts);
+    localeList = lowerLocaleListString.split(separator, Qt::SkipEmptyParts);
   }
 }
 

@@ -18,9 +18,9 @@ namespace Marble {
 namespace kml {
 KML_DEFINE_TAG_HANDLER_MX(tag)
 
-GeoNode *KmltagTagHandler::parse(GeoParser & parser) const
+GeoNode *KmltagTagHandler::parse(GeoParser&) const
 {
-  return 0;
+  return nullptr;
 }
 
 }

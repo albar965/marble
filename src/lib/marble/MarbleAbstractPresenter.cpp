@@ -574,7 +574,7 @@ void MarbleAbstractPresenter::setSelection(const QRect& region)
   QPoint tl = region.topLeft();
   QPoint br = region.bottomRight();
   mDebug() << "Selection region: (" << tl.x() << ", " << tl.y() << ") ("
-           << br.x() << ", " << br.y() << ")" << endl;
+           << br.x() << ", " << br.y() << ")" << Qt::endl;
 
   GeoDataLatLonAltBox box = viewport()->latLonAltBox(region);
 
@@ -585,7 +585,7 @@ void MarbleAbstractPresenter::setSelection(const QRect& region)
               << box.east(GeoDataCoordinates::Degree) << box.south(GeoDataCoordinates::Degree);
 
   mDebug() << "West: " << coordinates[0] << " North: " << coordinates[1]
-           << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
+           << " East: " << coordinates[2] << " South: " << coordinates[3] << Qt::endl;
 
   emit regionSelected(coordinates);
 }

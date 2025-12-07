@@ -139,7 +139,7 @@ void GeoDataPlaylist::swapPrimitives(int positionA, int positionB)
 {
   if(qMin(positionA, positionB) >= 0 && qMax(positionA, positionB) < m_primitives.size())
   {
-    m_primitives.swap(positionA, positionB);
+    m_primitives.swapItemsAt(positionA, positionB);
   }
 }
 

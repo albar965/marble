@@ -298,7 +298,7 @@ void GeoPainter::drawText(const GeoDataCoordinates& position,
   qreal y;
   bool globeHidesPoint;
 
-  QSizeF textSize(fontMetrics().width(text), fontMetrics().height());
+  QSizeF textSize(fontMetrics().horizontalAdvance(text), fontMetrics().height());
 
   bool visible = d->m_viewport->screenCoordinates(position, d->m_x, y, pointRepeatNum, textSize, globeHidesPoint);
 
@@ -615,7 +615,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString& lineString,
         QFont font = labelFont;
         font.setPointSizeF(fontSize);
         setFont(font);
-        int labelWidth = fontMetrics().width(labelText);
+        int labelWidth = fontMetrics().horizontalAdvance(labelText);
 
         QPainterPath path;
         path.addPolygon(*itPolygon);
@@ -665,7 +665,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString& lineString,
               {
                 for(int i = 0; i < labelText.length(); ++i)
                 {
-                  qreal currentGlyphTextLength = fontMetrics().width(labelText.left(i)) / pathLength;
+                  qreal currentGlyphTextLength = fontMetrics().horizontalAdvance(labelText.left(i)) / pathLength;
 
                   if(!upsideDown)
                   {
@@ -690,7 +690,7 @@ void GeoPainter::drawPolyline(const GeoDataLineString& lineString,
   }
   else
   {
-    int labelWidth = fontMetrics().width(labelText);
+    int labelWidth = fontMetrics().horizontalAdvance(labelText);
     int labelAscent = fontMetrics().ascent();
 
     QVector<QPointF> labelNodes;

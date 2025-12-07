@@ -16,6 +16,7 @@
 // Qt
 #include <QTime>
 #include <QImage>
+#include <QElapsedTimer>
 
 // Marble
 #include "MarbleDebug.h"
@@ -117,11 +118,11 @@ QVariant MarblePlacemarkModel::data(const QModelIndex& index, int role) const
   }
   else if(role == Qt::DecorationRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->style()->iconStyle().icon());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->style()->iconStyle().icon());
   }
   else if(role == IconPathRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->style()->iconStyle().iconPath());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->style()->iconStyle().iconPath());
   }
   else if(role == PopularityIndexRole)
   {
@@ -165,35 +166,35 @@ QVariant MarblePlacemarkModel::data(const QModelIndex& index, int role) const
   }
   else if(role == CoordinateRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->coordinate());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->coordinate());
   }
   else if(role == StyleRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->style().data());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->style().data());
   }
   else if(role == GmtRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->extendedData().value("gmt").value());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->extendedData().value("gmt").value());
   }
   else if(role == DstRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->extendedData().value("dst").value());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->extendedData().value("dst").value());
   }
   else if(role == GeometryRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->geometry());
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->geometry());
   }
   else if(role == ObjectPointerRole)
   {
-    return qVariantFromValue(dynamic_cast<GeoDataObject *>(d->m_placemarkContainer->at(index.row())));
+    return QVariant::fromValue(dynamic_cast<GeoDataObject *>(d->m_placemarkContainer->at(index.row())));
   }
   else if(role == LongitudeRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->coordinate().longitude(GeoDataCoordinates::Degree));
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->coordinate().longitude(GeoDataCoordinates::Degree));
   }
   else if(role == LatitudeRole)
   {
-    return qVariantFromValue(d->m_placemarkContainer->at(index.row())->coordinate().latitude(GeoDataCoordinates::Degree));
+    return QVariant::fromValue(d->m_placemarkContainer->at(index.row())->coordinate().latitude(GeoDataCoordinates::Degree));
   }
   else
     return QVariant();
@@ -247,7 +248,7 @@ void MarblePlacemarkModel::addPlacemarks(int start,
   // MarbleControlBox::m_sortproxy as a sorting customer.
   // I leave the balance search as an exercise to the reader...
 
-  QTime t;
+  QElapsedTimer t;
   t.start();
   // beginInsertRows( QModelIndex(), start, start + length );
   d->m_size += length;
@@ -264,7 +265,7 @@ void MarblePlacemarkModel::removePlacemarks(const QString& containerName,
 {
   if(length > 0)
   {
-    QTime t;
+    QElapsedTimer t;
     t.start();
     beginRemoveRows(QModelIndex(), start, start + length);
     d->m_size -= length;

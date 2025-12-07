@@ -15,13 +15,10 @@
 
 // Marble
 #include "GeoDataDocument.h"
-#include "GeoDataFolder.h"
-#include "GeoDataLineStyle.h"
 #include "GeoDataMultiTrack.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
-#include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "GeoDataTrack.h"
@@ -159,7 +156,7 @@ bool GeometryLayer::render(GeoPainter *painter, ViewportParams *viewport,
   foreach(const QString& layer, d->m_styleBuilder->renderOrder())
   {
     QList<GeoGraphicsItem *>& layerItems = paintedFragments[layer];
-    qStableSort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
+    std::stable_sort(layerItems.begin(), layerItems.end(), GeoGraphicsItem::zValueLessThan);
     foreach(auto item, layerItems)
     {
       item->paint(painter, viewport, layer);
@@ -216,7 +213,7 @@ void GeometryLayerPrivate::createGraphicsItems(const GeoDataObject *object)
 }
 
 void GeometryLayerPrivate::createGraphicsItemFromGeometry(const GeoDataGeometry *object, const GeoDataPlacemark *placemark,
-                                                          bool avoidOsmDuplicates)
+                                                          bool /*avoidOsmDuplicates*/)
 {
   GeoGraphicsItem *item = 0;
   if(object->nodeType() == GeoDataTypes::GeoDataLineStringType)
@@ -295,10 +292,7 @@ void GeometryLayerPrivate::removeGraphicsItems(const GeoDataFeature *feature)
 {
 
   if(feature->nodeType() == GeoDataTypes::GeoDataPlacemarkType)
-  {
-    GeoDataPlacemark const *placemark = static_cast<GeoDataPlacemark const *>(feature);
     m_scene.removeItem(feature);
-  }
   else if(feature->nodeType() == GeoDataTypes::GeoDataFolderType ||
           feature->nodeType() == GeoDataTypes::GeoDataDocumentType)
   {

@@ -290,7 +290,7 @@ void GeoGraphicsScene::addItem(GeoGraphicsItem *item)
   const TileId key = TileId::fromCoordinates(GeoDataCoordinates(west, north, 0), zoomLevel);     // same as GeoDataCoordinates(east, south, 0), see above
 
   QList<GeoGraphicsItem *>& tileList = d->m_items[key];
-  QList<GeoGraphicsItem *>::iterator position = qLowerBound(tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan);
+  QList<GeoGraphicsItem *>::iterator position = std::lower_bound(tileList.begin(), tileList.end(), item, GeoGraphicsItem::zValueLessThan);
   tileList.insert(position, item);
   d->m_features.insert(item->feature(), key);
 }

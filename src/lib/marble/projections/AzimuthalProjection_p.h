@@ -58,7 +58,7 @@ public:
                              qreal bx, qreal by,
                              QVector<QPolygonF *>& polygons,
                              const ViewportParams *viewport,
-                             TessellationFlags f = 0,
+                             TessellationFlags f,
                              bool allowLatePolygonCut = false) const;
 
   void processTessellation(const GeoDataCoordinates& previousCoords,
@@ -66,7 +66,7 @@ public:
                            int count,
                            QVector<QPolygonF *>& polygons,
                            const ViewportParams *viewport,
-                           TessellationFlags f = 0,
+                           TessellationFlags f,
                            bool allowLatePolygonCut = false) const;
 
   void crossHorizon(const GeoDataCoordinates& bCoord,
@@ -86,7 +86,7 @@ public:
   GeoDataCoordinates findHorizon(const GeoDataCoordinates& previousCoords,
                                  const GeoDataCoordinates& currentCoords,
                                  const ViewportParams *viewport,
-                                 TessellationFlags f = 0,
+                                 TessellationFlags f,
                                  int recursionCounter = 0) const;
 
   bool globeHidesPoint(const GeoDataCoordinates& coordinates,

@@ -244,7 +244,7 @@ QString GeoPolygonGraphicsItem::extractBuildingLabel(const GeoDataFeature *featu
   return QString();
 }
 
-QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *feature)
+QList<GeoPolygonGraphicsItem::NamedEntry> GeoPolygonGraphicsItem::extractNamedEntries(const GeoDataFeature *)
 {
   QList<NamedEntry> entries;
   return entries;
@@ -399,7 +399,7 @@ void GeoPolygonGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams
     }
     else if(drawAccurate3D && !m_buildingLabel.isEmpty() && !roofCenter.isNull())
     {
-      double const w2 = 0.5 * painter->fontMetrics().width(m_buildingLabel);
+      double const w2 = 0.5 * painter->fontMetrics().horizontalAdvance(m_buildingLabel);
       double const ascent = painter->fontMetrics().ascent();
       double const descent = painter->fontMetrics().descent();
       double const a2 = 0.5 * painter->fontMetrics().ascent();
@@ -430,7 +430,7 @@ void GeoPolygonGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams
       viewport->screenCoordinates(entry.point, x, y);
       QPointF point(x, y);
       point += buildingOffset(point, viewport);
-      auto const width = painter->fontMetrics().width(entry.label);
+      auto const width = painter->fontMetrics().horizontalAdvance(entry.label);
       auto const height = painter->fontMetrics().height();
       QRectF rectangle(point, QSizeF(qMax(1.2 * width, 1.1 * height), 1.2 * height));
       rectangle.moveCenter(point);

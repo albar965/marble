@@ -23,6 +23,7 @@
 
 #include <QImage>
 #include <QUrl>
+#include <algorithm>
 
 namespace Marble {
 
@@ -170,7 +171,7 @@ void GeoSceneTileDataset::setTileLevels(const QString& tileLevels)
 
   if(!m_tileLevels.isEmpty())
   {
-    qSort(m_tileLevels);
+    std::sort(m_tileLevels.begin(), m_tileLevels.end());
     m_minimumTileLevel = m_tileLevels.first();
     m_maximumTileLevel = m_tileLevels.last();
   }
@@ -281,8 +282,6 @@ QString GeoSceneTileDataset::relativeTileFileName(const TileId& id) const
 
   switch(m_storageLayoutMode)
   {
-    default:
-      mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
     case GeoSceneTileDataset::Marble:
       relFileName = QString("%1/%2/%3/%3_%4.%5")
                     .arg(themeStr())
@@ -291,6 +290,7 @@ QString GeoSceneTileDataset::relativeTileFileName(const TileId& id) const
                     .arg(id.x(), tileDigits, 10, QChar('0'))
                     .arg(suffix);
       break;
+
     case GeoSceneTileDataset::OpenStreetMap:
       relFileName = QString("%1/%2/%3/%4.%5")
                     .arg(themeStr())
@@ -299,6 +299,7 @@ QString GeoSceneTileDataset::relativeTileFileName(const TileId& id) const
                     .arg(id.y())
                     .arg(suffix);
       break;
+
     case GeoSceneTileDataset::TileMapService:
       relFileName = QString("%1/%2/%3/%4.%5")
                     .arg(themeStr())
@@ -307,6 +308,9 @@ QString GeoSceneTileDataset::relativeTileFileName(const TileId& id) const
                     .arg((1 << id.zoomLevel()) - id.y() - 1) // Y coord in TMS runs from bottom to top
                     .arg(suffix);
       break;
+
+    default:
+      mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
   }
 
   return relFileName;
@@ -320,8 +324,6 @@ QString GeoSceneTileDataset::relativeTileFileNameNoPath(const TileId& id) const
 
   switch(m_storageLayoutMode)
   {
-    default:
-      mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
     case GeoSceneTileDataset::Marble:
       relFileName = QString("%1/%2/%2_%3.%4")
                     .arg(id.zoomLevel())
@@ -329,6 +331,7 @@ QString GeoSceneTileDataset::relativeTileFileNameNoPath(const TileId& id) const
                     .arg(id.x(), tileDigits, 10, QChar('0'))
                     .arg(suffix);
       break;
+
     case GeoSceneTileDataset::OpenStreetMap:
       relFileName = QString("%1/%2/%3.%4")
                     .arg(id.zoomLevel())
@@ -336,6 +339,7 @@ QString GeoSceneTileDataset::relativeTileFileNameNoPath(const TileId& id) const
                     .arg(id.y())
                     .arg(suffix);
       break;
+
     case GeoSceneTileDataset::TileMapService:
       relFileName = QString("%1/%2/%3.%4")
                     .arg(id.zoomLevel())
@@ -343,6 +347,9 @@ QString GeoSceneTileDataset::relativeTileFileNameNoPath(const TileId& id) const
                     .arg((1 << id.zoomLevel()) - id.y() - 1)          // Y coord in TMS runs from bottom to top
                     .arg(suffix);
       break;
+
+    default:
+      mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
   }
 
   return relFileName;

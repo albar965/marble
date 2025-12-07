@@ -7,6 +7,8 @@ project(marble)
 
 add_compile_options(-Wno-deprecated-copy -Wno-deprecated-declarations, -Wno-unknown-warning-option)
 
+# add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050F00)
+
 SET(CMAKE_COLOR_MAKEFILE ON)
 
 if( WIN32 )

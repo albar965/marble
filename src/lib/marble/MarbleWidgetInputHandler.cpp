@@ -87,7 +87,7 @@ public:
     m_marbleWidget->setCursor(cursor);
   }
 
-  bool layersEventFilter(QObject *o, QEvent *e)
+  bool layersEventFilter(QObject *, QEvent *)
   {         // FIXME - this should go up in hierarchy to MarbleInputHandler
     return false;
   }

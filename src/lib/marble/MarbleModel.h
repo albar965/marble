@@ -206,8 +206,6 @@ public:
 
   FileManager *fileManager();
 
-  PositionTracking *positionTracking() const;
-
   qreal                 planetRadius()   const;
   QString               planetName()     const;
   QString               planetId()       const;

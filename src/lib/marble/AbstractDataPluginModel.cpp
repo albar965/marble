@@ -315,8 +315,8 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::items(const ViewportPar
   if(d->m_needsSorting)
   {
     // Both the candidates list and the list of all items need to be sorted
-    qSort(candidates.begin(), candidates.end(), lessThanByPointer);
-    qSort(d->m_itemSet.begin(), d->m_itemSet.end(), lessThanByPointer);
+    std::sort(candidates.begin(), candidates.end(), lessThanByPointer);
+    std::sort(d->m_itemSet.begin(), d->m_itemSet.end(), lessThanByPointer);
     d->m_needsSorting = false;
   }
 
@@ -468,10 +468,10 @@ void AbstractDataPluginModel::addItemsToList(const QList<AbstractDataPluginItem 
     mDebug() << "New item " << item->id();
 
     // This find the right position in the sorted to insert the new item
-    QList<AbstractDataPluginItem *>::iterator i = qLowerBound(d->m_itemSet.begin(),
-                                                              d->m_itemSet.end(),
-                                                              item,
-                                                              lessThanByPointer);
+    QList<AbstractDataPluginItem *>::iterator i = std::lower_bound(d->m_itemSet.begin(),
+                                                                   d->m_itemSet.end(),
+                                                                   item,
+                                                                   lessThanByPointer);
     // Insert the item on the right position in the list
     d->m_itemSet.insert(i, item);
 

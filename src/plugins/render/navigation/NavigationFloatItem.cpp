@@ -22,10 +22,8 @@
 
 #include "ui_navigation.h"
 #include "ViewportParams.h"
-#include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "PositionTracking.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 
@@ -222,7 +220,7 @@ void NavigationFloatItem::updateButtons(int zoomValue)
 QPixmap NavigationFloatItem::pixmap(const QString& id)
 {
   QPixmap result;
-  if(!QPixmapCache::find(id, result))
+  if(!QPixmapCache::find(id, &result))
   {
     result = QPixmap(QString(":/%1.png").arg(id));
     QPixmapCache::insert(id, result);

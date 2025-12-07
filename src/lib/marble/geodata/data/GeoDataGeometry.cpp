@@ -52,7 +52,7 @@ GeoDataGeometry::~GeoDataGeometry()
 
 void GeoDataGeometry::detach()
 {
-  if(d->ref.load() == 1)
+  if(d->ref.loadRelaxed() == 1)
   {
     return;
   }

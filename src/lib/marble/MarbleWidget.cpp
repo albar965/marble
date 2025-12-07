@@ -22,6 +22,7 @@
 #include <QRegion>
 #include <QNetworkProxy>
 #include <QMetaMethod>
+#include <QElapsedTimer>
 #include "FileManager.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
@@ -357,7 +358,7 @@ Marble::TextureLayer *MarbleWidget::textureLayer() const
 
 QPixmap MarbleWidget::mapScreenShot()
 {
-  return QPixmap::grabWidget(this);
+  return this->grab();
 }
 
 RenderStatus MarbleWidget::renderStatus() const
@@ -660,7 +661,7 @@ QRegion MarbleWidget::mapRegion() const
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
-  QTime t;
+  QElapsedTimer t;
   t.start();
 
   QPaintDevice *paintDevice = this;

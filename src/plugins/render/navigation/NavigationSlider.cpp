@@ -39,7 +39,7 @@ NavigationSlider::~NavigationSlider()
 QPixmap NavigationSlider::pixmap(const QString& id)
 {
   QPixmap result;
-  if(!QPixmapCache::find(id, result))
+  if(!QPixmapCache::find(id, &result))
   {
     result = QPixmap(QString(":/%1.png").arg(id));
     QPixmapCache::insert(id, result);

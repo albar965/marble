@@ -37,7 +37,7 @@ MarbleServerLayout::MarbleServerLayout(GeoSceneTileDataset *textureLayer)
 {
 }
 
-QUrl MarbleServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> keys) const
+QUrl MarbleServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> ) const
 {
   const QString path = QString("%1/%2/%3/%3_%4.%5")
                        .arg(prototypeUrl.path())
@@ -67,7 +67,7 @@ OsmServerLayout::OsmServerLayout(GeoSceneTileDataset *textureLayer)
 {
 }
 
-QUrl OsmServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> keys) const
+QUrl OsmServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> ) const
 {
   const QString suffix = m_textureLayer->fileFormat().toLower();
   const QString path = QString("%1/%2/%3.%4").arg(id.zoomLevel())
@@ -126,7 +126,7 @@ WmsServerLayout::WmsServerLayout(GeoSceneTileDataset *texture)
 {
 }
 
-QUrl WmsServerLayout::downloadUrl(const QUrl& prototypeUrl, const Marble::TileId& tileId, QHash<QString, QString> keys) const
+QUrl WmsServerLayout::downloadUrl(const QUrl& prototypeUrl, const Marble::TileId& tileId, QHash<QString, QString> ) const
 {
   GeoDataLatLonBox box = tileId.toLatLonBox(m_textureLayer);
 
@@ -184,7 +184,7 @@ QuadTreeServerLayout::QuadTreeServerLayout(GeoSceneTileDataset *textureLayer)
 {
 }
 
-QUrl QuadTreeServerLayout::downloadUrl(const QUrl& prototypeUrl, const Marble::TileId& id, QHash<QString, QString> keys) const
+QUrl QuadTreeServerLayout::downloadUrl(const QUrl& prototypeUrl, const Marble::TileId& id, QHash<QString, QString> ) const
 {
   QString urlStr = prototypeUrl.toString(QUrl::DecodeReserved);
 
@@ -219,7 +219,7 @@ TmsServerLayout::TmsServerLayout(GeoSceneTileDataset *textureLayer)
 {
 }
 
-QUrl TmsServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> keys) const
+QUrl TmsServerLayout::downloadUrl(const QUrl& prototypeUrl, const TileId& id, QHash<QString, QString> ) const
 {
   const QString suffix = m_textureLayer->fileFormat().toLower();
   // y coordinate in TMS start at the bottom of the map (South) and go upwards,

@@ -455,7 +455,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
   {
     placemarkList += m_placemarkCache.value(tileId);
   }
-  qSort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
+  std::sort(placemarkList.begin(), placemarkList.end(), GeoDataPlacemark::placemarkLayoutOrderCompare);
 
   auto const viewLatLonAltBox = viewport->viewLatLonAltBox();
   foreach(const GeoDataPlacemark * placemark, placemarkList)
@@ -655,12 +655,12 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr& style,
   if(style->labelStyle().glow())
   {
     labelFont.setWeight(75);       // Needed to calculate the correct pixmap size;
-    textWidth = (QFontMetrics(labelFont).width(labelText) +
+    textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelText) +
                  qRound(2 * s_labelOutlineWidth));
   }
   else
   {
-    textWidth = (QFontMetrics(labelFont).width(labelText));
+    textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelText));
   }
 
   const QVector<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);

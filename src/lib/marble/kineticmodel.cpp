@@ -31,6 +31,7 @@
 
 #include <QTimer>
 #include <QTime>
+#include <QElapsedTimer>
 
 static const int KineticModelDefaultUpdateInterval = 15; // ms
 
@@ -44,7 +45,7 @@ public:
   QPointF velocity;
   QPointF deacceleration;
 
-  QTime timestamp;
+  QElapsedTimer timestamp;
   QPointF lastPosition;
 
   KineticModelPrivate();
@@ -182,7 +183,7 @@ void KineticModel::update()
 {
   Q_D(KineticModel);
 
-  int elapsed = qMin(d->timestamp.elapsed(), 100);     // limit to 100msec to reduce catapult effect (bug 294608)
+  int elapsed = std::min(d->timestamp.elapsed(), 100LL);     // limit to 100msec to reduce catapult effect (bug 294608)
   qreal delta = static_cast<qreal>(elapsed) / 1000.0;
 
   d->position += d->velocity * delta;

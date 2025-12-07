@@ -90,7 +90,7 @@ bool GeoDataCoordinates::isValid() const
  */
 void GeoDataCoordinates::detach()
 {
-  if(d->ref.load() == 1)
+  if(d->ref.loadRelaxed() == 1)
   {
     delete d->m_q;
     d->m_q = 0;

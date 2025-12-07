@@ -37,7 +37,7 @@ set(marblewidget_SRCS
     blendings/BlendingFactory.cpp
     blendings/SunLightBlending.cpp
     DownloadRegion.cpp
-    LatLonBoxWidget.cpp
+
     MarbleWidget.cpp
     MarbleAbstractPresenter.cpp
     MarbleModel.cpp
@@ -52,7 +52,6 @@ set(marblewidget_SRCS
     MarbleWidgetInputHandler.cpp
     MarblePlacemarkModel.cpp
     GeoDataTreeModel.cpp
-    GeoUriParser.cpp
     kdescendantsproxymodel.cpp
     BranchFilterProxyModel.cpp
     TreeViewDecoratorModel.cpp
@@ -120,7 +119,6 @@ set(marblewidget_SRCS
     #jsonparser.cpp
     FileLoader.cpp
     FileManager.cpp
-    PositionTracking.cpp
     ImageF.cpp
 
     AbstractDataPlugin.cpp
@@ -134,9 +132,6 @@ set(marblewidget_SRCS
     RenderState.cpp
     RenderPlugin.cpp
     RenderPluginInterface.cpp
-    PositionProviderPlugin.cpp
-    PositionProviderPluginInterface.cpp
-    PlacemarkPositionProviderPlugin.cpp
     MarblePluginSettingsWidget.cpp
     RenderPluginModel.cpp
     PluginAboutDialog.cpp
@@ -144,15 +139,10 @@ set(marblewidget_SRCS
 
     SunLocator.cpp
     MarbleClock.cpp
-    SunControlWidget.cpp
     MergedLayerDecorator.cpp
 
     MathHelper.cpp
 
-    LatLonEdit.cpp
-    PlacemarkEditHeader.cpp
-
-    MapThemeSortFilterProxyModel.cpp
 
     TemplateDocument.cpp
 
@@ -162,9 +152,6 @@ set(marblewidget_SRCS
     ParsingRunner.cpp
     RunnerTask.cpp
 
-    PrintOptionsWidget.cpp
-
-    MapThemeDownloadDialog.cpp
     GeoGraphicsScene.cpp
     ElevationModel.cpp
     kineticmodel.cpp
@@ -177,7 +164,6 @@ set(marblewidget_SRCS
 
 
 set (marblewidget_UI
-    LatLonBoxWidget.ui
     MarbleNavigator.ui
     MarbleCacheSettingsWidget.ui
     MarbleViewSettingsWidget.ui
@@ -187,12 +173,8 @@ set (marblewidget_UI
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
     MarbleAboutDialog.ui
-    SunControlWidget.ui
-    LatLonEdit.ui
-    PlacemarkEditHeader.ui
     PrintOptions.ui
     ExternalEditor.ui
-    MapThemeDownloadDialog.ui
     ElevationWidget.ui
 )
 
@@ -284,7 +266,6 @@ install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marble_export.h
     ${graphicsview_HDRS}
     DownloadRegion.h
-    LatLonBoxWidget.h
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
@@ -311,7 +292,6 @@ install( FILES
     TileCreatorDialog.h
     ViewportParams.h
     projections/AbstractProjection.h
-    PositionTracking.h
     Quaternion.h
     SunLocator.h
     ClipPainter.h
@@ -366,8 +346,6 @@ install( FILES
     PluginManager.h
     PluginInterface.h
     DialogConfigurationInterface.h
-    PositionProviderPlugin.h
-    PositionProviderPluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
     ParsingRunnerManager.h
@@ -384,9 +362,6 @@ install( FILES
     AbstractDataPluginItem.h
     AbstractWorkerThread.h
 
-    LatLonEdit.h
-    PlacemarkEditHeader.h
-    MapThemeDownloadDialog.h
     ElevationModel.h
 
     DESTINATION ${INCLUDE_INSTALL_DIR}/marble

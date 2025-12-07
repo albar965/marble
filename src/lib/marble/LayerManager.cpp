@@ -14,7 +14,6 @@
 #include "LayerManager.h"
 
 // Local dir
-#include "MarbleDebug.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
@@ -25,6 +24,7 @@
 #include "LayerInterface.h"
 #include "RenderState.h"
 
+#include <QElapsedTimer>
 #include <QTime>
 
 namespace Marble {
@@ -124,7 +124,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt(const QPoint& curpos) 
 void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
 {
   d->m_renderState = RenderState("Marble");
-  const QTime totalTime = QTime::currentTime();
+  const QElapsedTimer totalTime;
 
   QStringList renderPositions;
 
@@ -168,13 +168,13 @@ void LayerManager::renderLayers(GeoPainter *painter, ViewportParams *viewport)
     }
 
     // sort them according to their zValue()s
-    qSort(layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) -> bool {
+    std::sort(layers.begin(), layers.end(), [] ( const LayerInterface * const one, const LayerInterface * const two ) -> bool {
         Q_ASSERT(one && two);
         return one->zValue() < two->zValue();
       });
 
     // render the layers of the current renderPosition
-    QTime timer;
+    QElapsedTimer timer;
     foreach(auto *layer, layers)
     {
       timer.start();
