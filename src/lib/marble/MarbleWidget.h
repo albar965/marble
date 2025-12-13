@@ -26,6 +26,7 @@
 #include "MarbleGlobal.h" // types needed in all of marble.
 #include "marble_export.h"
 #include "RenderState.h"
+#include "TileCoordsPyramid.h"
 
 // Qt
 class QSettings;
@@ -48,7 +49,6 @@ class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class RenderPlugin;
 class TextureLayer;
-class TileCoordsPyramid;
 class TileCreator;
 class ViewportParams;
 class PopupLayer;
@@ -99,9 +99,6 @@ class MARBLE_EXPORT MarbleWidget :
   public QWidget
 {
   Q_OBJECT
-#ifdef MARBLE_DBUS
-  Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
-#endif
 
   Q_PROPERTY(int zoom READ zoom WRITE setZoom)
 
@@ -402,7 +399,7 @@ public:
   /// @name Placemark management
   //@{
 
-  QVector<const GeoDataFeature *> whichFeatureAt(const QPoint&) const;
+  QList<const GeoDataFeature *> whichFeatureAt(const QPoint&) const;
 
   //@}
 
@@ -997,7 +994,7 @@ public Q_SLOTS:
    */
   void reloadMap();
 
-  void downloadRegion(QVector<TileCoordsPyramid> const&);
+  void downloadRegion(QList<TileCoordsPyramid> const&);
 
   //@}
 

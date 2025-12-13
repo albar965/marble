@@ -40,7 +40,7 @@ public:
   }
 
   int m_size;
-  QVector<GeoDataPlacemark *> *m_placemarkContainer;
+  QList<GeoDataPlacemark *> *m_placemarkContainer;
 };
 
 // ---------------------------------------------------------------------------
@@ -78,7 +78,7 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
   delete d;
 }
 
-void MarblePlacemarkModel::setPlacemarkContainer(QVector<GeoDataPlacemark *> *container)
+void MarblePlacemarkModel::setPlacemarkContainer(QList<GeoDataPlacemark *> *container)
 {
   d->m_placemarkContainer = container;
 }

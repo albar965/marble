@@ -256,8 +256,8 @@ void FileLoaderPrivate::documentParsed(GeoDataDocument *doc, const QString& erro
 
 void FileLoaderPrivate::createFilterProperties(GeoDataContainer *container)
 {
-  QVector<GeoDataFeature *>::Iterator i = container->begin();
-  QVector<GeoDataFeature *>::Iterator const end = container->end();
+  QList<GeoDataFeature *>::Iterator i = container->begin();
+  QList<GeoDataFeature *>::Iterator const end = container->end();
   for(; i != end; ++i )
   {
     if((*i)->nodeType() == GeoDataTypes::GeoDataFolderType ||

@@ -454,7 +454,7 @@ bool MarbleMap::discreteZoom() const
   return false;
 }
 
-QVector<const GeoDataFeature *> MarbleMap::whichFeatureAt(const QPoint& curpos) const
+QList<const GeoDataFeature *> MarbleMap::whichFeatureAt(const QPoint& curpos) const
 {
   return d->m_placemarkLayer.whichPlacemarkAt(curpos) + d->m_geometryLayer.whichFeatureAt(curpos, viewport());
 }
@@ -464,7 +464,7 @@ void MarbleMap::reload()
   d->m_textureLayer.reload();
 }
 
-void MarbleMap::downloadRegion(QVector<TileCoordsPyramid> const& pyramid)
+void MarbleMap::downloadRegion(QList<TileCoordsPyramid> const& pyramid)
 {
   Q_ASSERT(textureLayer());
   Q_ASSERT(!pyramid.isEmpty());
@@ -855,8 +855,8 @@ void MarbleMapPrivate::updateMapTheme()
 
     // textures will contain texture layers and
     // vectorTiles vectortile layers
-    QVector<const GeoSceneTextureTileDataset *> textures;
-    QVector<const GeoSceneVectorTileDataset *> vectorTiles;
+    QList<const GeoSceneTextureTileDataset *> textures;
+    QList<const GeoSceneVectorTileDataset *> vectorTiles;
 
     foreach(GeoSceneLayer * layer, m_model->mapTheme()->map()->layers())
     {
@@ -1018,8 +1018,8 @@ void MarbleMapPrivate::updateMapTheme()
   else
   {
     m_layerManager.addLayer(&m_groundLayer);
-    m_textureLayer.setMapTheme(QVector<const GeoSceneTextureTileDataset *>(), 0, "", "");
-    m_vectorTileLayer.setMapTheme(QVector<const GeoSceneVectorTileDataset *>(), 0);
+    m_textureLayer.setMapTheme(QList<const GeoSceneTextureTileDataset *>(), 0, "", "");
+    m_vectorTileLayer.setMapTheme(QList<const GeoSceneVectorTileDataset *>(), 0);
   }
 
   // earth

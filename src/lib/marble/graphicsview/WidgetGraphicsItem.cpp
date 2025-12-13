@@ -14,7 +14,6 @@
 
 // Marble
 #include "MarbleWidget.h"
-#include "MarbleDebug.h"
 
 // Qt
 #include <QApplication>
@@ -137,7 +136,7 @@ bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
       {
         shiftedPos -= child->pos();         // transform to children's coordinates
         QMouseEvent shiftedEvent = QMouseEvent(e->type(), shiftedPos,
-                                               event->globalPos(), event->button(), event->buttons(),
+                                               event->globalPosition(), event->button(), event->buttons(),
                                                event->modifiers());
         if(QApplication::sendEvent(child, &shiftedEvent))
         {

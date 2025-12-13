@@ -20,7 +20,6 @@
 class QPoint;
 class QUrl;
 class QString;
-class QStringList;
 
 namespace Marble {
 

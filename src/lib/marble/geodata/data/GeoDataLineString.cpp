@@ -245,8 +245,8 @@ qreal GeoDataLineStringPrivate::resolutionForLevel(int level) const
 void GeoDataLineStringPrivate::optimize(GeoDataLineString& lineString) const
 {
 
-  QVector<GeoDataCoordinates>::iterator itCoords = lineString.begin();
-  QVector<GeoDataCoordinates>::const_iterator itEnd = lineString.constEnd();
+  QList<GeoDataCoordinates>::iterator itCoords = lineString.begin();
+  QList<GeoDataCoordinates>::const_iterator itEnd = lineString.constEnd();
 
   if(lineString.size() < 2)
     return;
@@ -368,34 +368,34 @@ const GeoDataCoordinates& GeoDataLineString::first() const
   return p()->m_vector.first();
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::begin()
+QList<GeoDataCoordinates>::Iterator GeoDataLineString::begin()
 {
   GeoDataGeometry::detach();
   return p()->m_vector.begin();
 }
 
-QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::begin() const
+QList<GeoDataCoordinates>::ConstIterator GeoDataLineString::begin() const
 {
   return p()->m_vector.constBegin();
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::end()
+QList<GeoDataCoordinates>::Iterator GeoDataLineString::end()
 {
   GeoDataGeometry::detach();
   return p()->m_vector.end();
 }
 
-QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::end() const
+QList<GeoDataCoordinates>::ConstIterator GeoDataLineString::end() const
 {
   return p()->m_vector.constEnd();
 }
 
-QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBegin() const
+QList<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBegin() const
 {
   return p()->m_vector.constBegin();
 }
 
-QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
+QList<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 {
   return p()->m_vector.constEnd();
 }
@@ -422,7 +422,7 @@ void GeoDataLineString::append(const GeoDataCoordinates& value)
   d->m_vector.append(value);
 }
 
-void GeoDataLineString::append(const QVector<GeoDataCoordinates>& values)
+void GeoDataLineString::append(const QList<GeoDataCoordinates>& values)
 {
   GeoDataGeometry::detach();
   GeoDataLineStringPrivate *d = p();
@@ -463,8 +463,8 @@ GeoDataLineString& GeoDataLineString::operator<<(const GeoDataLineString& value)
   d->m_dirtyRange = true;
   d->m_dirtyBox = true;
 
-  QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
-  QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
+  QList<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
+  QList<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
 
   d->m_vector.reserve(d->m_vector.size() + value.size());
   for(; itCoords != itEnd; ++itCoords )
@@ -487,10 +487,10 @@ bool GeoDataLineString::operator==(const GeoDataLineString& other) const
   const GeoDataLineStringPrivate *d = p();
   const GeoDataLineStringPrivate *other_d = other.p();
 
-  QVector<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
-  QVector<GeoDataCoordinates>::const_iterator otherItCoords = other_d->m_vector.constBegin();
-  QVector<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
-  QVector<GeoDataCoordinates>::const_iterator otherItEnd = other_d->m_vector.constEnd();
+  QList<GeoDataCoordinates>::const_iterator itCoords = d->m_vector.constBegin();
+  QList<GeoDataCoordinates>::const_iterator otherItCoords = other_d->m_vector.constBegin();
+  QList<GeoDataCoordinates>::const_iterator itEnd = d->m_vector.constEnd();
+  QList<GeoDataCoordinates>::const_iterator otherItEnd = other_d->m_vector.constEnd();
 
   for(; itCoords != itEnd && otherItCoords != otherItEnd; ++itCoords, ++otherItCoords )
   {
@@ -572,8 +572,8 @@ GeoDataLineString GeoDataLineString::toNormalized() const
 
   // FIXME: Think about how we can avoid unnecessary copies
   // if the linestring stays the same.
-  QVector<GeoDataCoordinates>::const_iterator end = p()->m_vector.constEnd();
-  for( QVector<GeoDataCoordinates>::const_iterator itCoords =
+  QList<GeoDataCoordinates>::const_iterator end = p()->m_vector.constEnd();
+  for( QList<GeoDataCoordinates>::const_iterator itCoords =
          p()->m_vector.constBegin();
        itCoords != end;
        ++itCoords )
@@ -612,9 +612,9 @@ GeoDataLineString GeoDataLineString::toRangeCorrected() const
   return *p()->m_rangeCorrected;
 }
 
-QVector<GeoDataLineString *> GeoDataLineString::toDateLineCorrected() const
+QList<GeoDataLineString *> GeoDataLineString::toDateLineCorrected() const
 {
-  QVector<GeoDataLineString *> lineStrings;
+  QList<GeoDataLineString *> lineStrings;
 
   p()->toDateLineCorrected(*this, lineStrings);
 
@@ -656,8 +656,8 @@ void GeoDataLineStringPrivate::toPoleCorrected(const GeoDataLineString& q, GeoDa
     }
   }
 
-  QVector<GeoDataCoordinates>::const_iterator itCoords = m_vector.constBegin();
-  QVector<GeoDataCoordinates>::const_iterator itEnd = m_vector.constEnd();
+  QList<GeoDataCoordinates>::const_iterator itCoords = m_vector.constBegin();
+  QList<GeoDataCoordinates>::const_iterator itEnd = m_vector.constEnd();
 
   for(; itCoords != itEnd; ++itCoords )
   {
@@ -716,14 +716,14 @@ void GeoDataLineStringPrivate::toPoleCorrected(const GeoDataLineString& q, GeoDa
 }
 
 void GeoDataLineStringPrivate::toDateLineCorrected(const GeoDataLineString& q,
-                                                   QVector<GeoDataLineString *>& lineStrings) const
+                                                   QList<GeoDataLineString *>& lineStrings) const
 {
   const bool isClosed = q.isClosed();
 
-  const QVector<GeoDataCoordinates>::const_iterator itStartPoint = q.constBegin();
-  const QVector<GeoDataCoordinates>::const_iterator itEndPoint = q.constEnd();
-  QVector<GeoDataCoordinates>::const_iterator itPoint = itStartPoint;
-  QVector<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
+  const QList<GeoDataCoordinates>::const_iterator itStartPoint = q.constBegin();
+  const QList<GeoDataCoordinates>::const_iterator itEndPoint = q.constEnd();
+  QList<GeoDataCoordinates>::const_iterator itPoint = itStartPoint;
+  QList<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
 
   TessellationFlags f = q.tessellationFlags();
 
@@ -846,7 +846,7 @@ qreal GeoDataLineString::length(qreal planetRadius, int offset) const
   }
 
   qreal length = 0.0;
-  QVector<GeoDataCoordinates> const& vector = p()->m_vector;
+  QList<GeoDataCoordinates> const& vector = p()->m_vector;
   int const start = qMax(offset + 1, 1);
   int const end = p()->m_vector.size();
   for( int i = start; i < end; ++i )
@@ -857,7 +857,7 @@ qreal GeoDataLineString::length(qreal planetRadius, int offset) const
   return planetRadius * length;
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase(QVector<GeoDataCoordinates>::Iterator pos)
+QList<GeoDataCoordinates>::Iterator GeoDataLineString::erase(QList<GeoDataCoordinates>::Iterator pos)
 {
   GeoDataGeometry::detach();
   GeoDataLineStringPrivate *d = p();
@@ -868,8 +868,8 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase(QVector<GeoDataCo
   return d->m_vector.erase(pos);
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase(QVector<GeoDataCoordinates>::Iterator begin,
-                                                               QVector<GeoDataCoordinates>::Iterator end)
+QList<GeoDataCoordinates>::Iterator GeoDataLineString::erase(QList<GeoDataCoordinates>::Iterator begin,
+                                                               QList<GeoDataCoordinates>::Iterator end)
 {
   GeoDataGeometry::detach();
   GeoDataLineStringPrivate *d = p();
@@ -912,7 +912,7 @@ void GeoDataLineString::pack(QDataStream& stream) const
   stream << size();
   stream << (qint32)(p()->m_tessellationFlags);
 
-  for( QVector<GeoDataCoordinates>::const_iterator iterator =
+  for( QList<GeoDataCoordinates>::const_iterator iterator =
          p()->m_vector.constBegin();
        iterator != p()->m_vector.constEnd();
        ++iterator )

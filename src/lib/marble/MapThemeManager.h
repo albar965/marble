@@ -19,7 +19,6 @@
 
 class QStandardItemModel;
 class QString;
-class QStringList;
 
 namespace Marble {
 

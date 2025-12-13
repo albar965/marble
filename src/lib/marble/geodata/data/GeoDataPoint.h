@@ -14,7 +14,7 @@
 #define MARBLE_GEODATAPOINT_H
 
 #include <QMetaType>
-#include <QVector>
+#include <QList>
 
 #include <cmath>
 
@@ -77,7 +77,7 @@ public:
   virtual const char *nodeType() const;
 
   // Type definitions
-  typedef QVector<GeoDataPoint> Vector;
+  typedef QList<GeoDataPoint> Vector;
 
   // Serialize the Placemark to @p stream
   virtual void pack(QDataStream& stream) const;

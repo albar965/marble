@@ -18,17 +18,11 @@ target_link_libraries (
     marbleui
     LINK_PUBLIC
         marblewidget
-        Qt5::Widgets
-        Qt5::PrintSupport
+        Qt6::Widgets
+        Qt6::PrintSupport
     LINK_PRIVATE
-        Qt5::Network
+        Qt6::Network
 )
-if (NOT MARBLE_NO_DBUS)
-    target_link_libraries( marbleui
-        LINK_PRIVATE
-            Qt5::DBus
-    )
-endif ()
 
 if(WIN32)
   # TODO: PUBLIC or can be PRIVATE?

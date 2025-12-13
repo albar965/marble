@@ -61,7 +61,7 @@ public:
     return GeoDataMultiTrackId;
   }
 
-  QVector<GeoDataTrack *> m_vector;
+  QList<GeoDataTrack *> m_vector;
 };
 
 } // namespace Marble

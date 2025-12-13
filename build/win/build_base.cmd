@@ -34,7 +34,6 @@ IF ERRORLEVEL 1 goto :err
 rem Copy all headers into the C:\Projekte\marble-release\include\marble|astro dir flat. Also from build-marble-release\src\lib\astro|marble.
 
 mkdir %DEPLOYDIR%\include\astro
-xcopy /I /F /Y %BUILDDIR%\src\lib\astro\astrolib_export.h %DEPLOYDIR%\include\astro
 xcopy /I /F /Y %%APROJECTS%\marble\src\lib\astro\*.h %DEPLOYDIR%\include\astro
 
 mkdir %DEPLOYDIR%\include\marble

@@ -43,7 +43,6 @@ int main( int argc, char** argv )
     QFile poFile( po.absoluteFilePath() );
     poFile.open( QFile::ReadOnly );
     QTextStream poStream( &poFile );
-    poStream.setCodec( "UTF-8" );
     poStream.setAutoDetectUnicode( true );
     QString source;
     bool ignore = false;
@@ -72,14 +71,12 @@ int main( int argc, char** argv )
     }
 
     QTextStream console( stdout );
-    console.setCodec( "UTF-8" );
 
     // Open the .ts file and replace source strings with translations
     // The modified .to file is dumped to stdout
     QFile tsFile( ts.absoluteFilePath() );
     tsFile.open( QFile::ReadOnly );
     QTextStream tsStream( &tsFile );
-    tsStream.setCodec( "UTF-8" );
     tsStream.setAutoDetectUnicode( true );
     source.clear();
     while( !tsStream.atEnd() ) {

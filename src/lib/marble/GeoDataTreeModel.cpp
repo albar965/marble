@@ -378,7 +378,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex& index, int role) const
         if(folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder)
         {
           bool anyVisible = false;
-          QVector<GeoDataFeature *>::Iterator i = folder->begin();
+          QList<GeoDataFeature *>::Iterator i = folder->begin();
           for(; i < folder->end(); ++i)
           {
             if((*i)->isVisible())
@@ -398,7 +398,7 @@ QVariant GeoDataTreeModel::data(const QModelIndex& index, int role) const
         }
         else if(folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly)
         {
-          QVector<GeoDataFeature *>::Iterator i = folder->begin();
+          QList<GeoDataFeature *>::Iterator i = folder->begin();
           bool anyVisible = false;
           bool allVisible = true;
           for(; i < folder->end(); ++i)
@@ -688,7 +688,7 @@ bool GeoDataTreeModel::setData(const QModelIndex& index, const QVariant& value, 
         {
           if(bValue)
           {
-            QVector<GeoDataFeature *>::Iterator i = pfolder->begin();
+            QList<GeoDataFeature *>::Iterator i = pfolder->begin();
             for(; i < pfolder->end(); ++i)
             {
               (*i)->setVisible(false);
@@ -707,7 +707,7 @@ bool GeoDataTreeModel::setData(const QModelIndex& index, const QVariant& value, 
           if(folder->style()->listStyle().listItemType() == GeoDataListStyle::RadioFolder ||
              folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly)
           {
-            QVector<GeoDataFeature *>::Iterator i = folder->begin();
+            QList<GeoDataFeature *>::Iterator i = folder->begin();
             for(; i < folder->end(); ++i)
             {
               (*i)->setVisible(false);
@@ -781,7 +781,7 @@ Qt::ItemFlags GeoDataTreeModel::flags(const QModelIndex& index) const
     }
     else if(folder->style()->listStyle().listItemType() == GeoDataListStyle::CheckOffOnly)
     {
-      QVector<GeoDataFeature *>::Iterator i = folder->begin();
+      QList<GeoDataFeature *>::Iterator i = folder->begin();
       bool allVisible = true;
       for(; i < folder->end(); ++i)
       {

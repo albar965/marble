@@ -110,7 +110,7 @@ public:
     return GeoDataMultiGeometryId;
   }
 
-  QVector<GeoDataGeometry *> m_vector;
+  QList<GeoDataGeometry *> m_vector;
 };
 
 } // namespace Marble

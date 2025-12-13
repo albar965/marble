@@ -60,10 +60,10 @@ bool PlacemarkLayer::render(GeoPainter *geoPainter, ViewportParams *viewport,
   Q_UNUSED(renderPos)
   Q_UNUSED(layer)
 
-  QVector<VisiblePlacemark *> visiblePlacemarks = m_layout.generateLayout(viewport);
+  QList<VisiblePlacemark *> visiblePlacemarks = m_layout.generateLayout(viewport);
   // draw placemarks less important first
-  QVector<VisiblePlacemark *>::const_iterator visit = visiblePlacemarks.constEnd();
-  QVector<VisiblePlacemark *>::const_iterator itEnd = visiblePlacemarks.constBegin();
+  QList<VisiblePlacemark *>::const_iterator visit = visiblePlacemarks.constEnd();
+  QList<VisiblePlacemark *>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
   QPainter *const painter = geoPainter;
 
@@ -114,7 +114,7 @@ QString PlacemarkLayer::runtimeTrace() const
   return m_layout.runtimeTrace();
 }
 
-QVector<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt(const QPoint& pos)
+QList<const GeoDataFeature *> PlacemarkLayer::whichPlacemarkAt(const QPoint& pos)
 {
   return m_layout.whichPlacemarkAt(pos);
 }

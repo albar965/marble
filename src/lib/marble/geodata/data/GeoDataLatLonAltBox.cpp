@@ -236,8 +236,8 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(const GeoDataLineString&
     return temp;
   }
 
-  QVector<GeoDataCoordinates>::ConstIterator it(lineString.constBegin());
-  QVector<GeoDataCoordinates>::ConstIterator itEnd(lineString.constEnd());
+  QList<GeoDataCoordinates>::ConstIterator it(lineString.constBegin());
+  QList<GeoDataCoordinates>::ConstIterator itEnd(lineString.constEnd());
 
   for(; it != itEnd; ++it )
   {

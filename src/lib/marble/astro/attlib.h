@@ -19,12 +19,13 @@
   Author: Gerhard HOLTKAMP                   14-JAN-2012
  ***********************************************************************/
 
+#include "marble_export.h"
+
 #include <iostream>
-#include "astrolib_export.h"
 
-ASTROLIB_EXPORT double atan20(double y, double x);
+MARBLE_EXPORT double atan20(double y, double x);
 
-class ASTROLIB_EXPORT Vec3
+class MARBLE_EXPORT Vec3
 {
 private:
   double v[3];
@@ -60,7 +61,7 @@ public:
 /********************************************************************/
 
 // class Mat3: public Vec3
-class ASTROLIB_EXPORT Mat3
+class MARBLE_EXPORT Mat3
 {
 public:
   double m[3][3];

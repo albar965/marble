@@ -72,7 +72,7 @@ public:
 
   virtual bool screenCoordinates(const GeoDataLineString& lineString,
                                  const ViewportParams *viewport,
-                                 QVector<QPolygonF *>& polygons) const;
+                                 QList<QPolygonF *>& polygons) const;
 
   using AbstractProjection::screenCoordinates;
 

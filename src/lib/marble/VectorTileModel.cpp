@@ -94,7 +94,7 @@ void VectorTileModel::setViewport(const GeoDataLatLonBox& latLonBox, int radius)
 
   // Determine available tile levels in the layer and thereby
   // select the tileZoomLevel that is actually used:
-  QVector<int> tileLevels = m_layer->tileLevels();
+  QList<int> tileLevels = m_layer->tileLevels();
   if(tileLevels.isEmpty() /* || tileZoomLevel < tileLevels.first() */)
   {
     // if there is no (matching) tile level then show nothing

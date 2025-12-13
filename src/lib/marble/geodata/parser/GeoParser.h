@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoParser :
   public QXmlStreamReader
 {
 public:
-  typedef QPair<QString, QString> QualifiedName;   // Tag Name & Namespace pair
+  typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
 
   explicit GeoParser(GeoDataGenericSourceType sourceType, const QString& docPath);
   virtual ~GeoParser();
@@ -122,6 +122,11 @@ public:
 
   // Fast path for tag handlers
   bool represents(const char *tagName) const
+  {
+    return m_node && tagName == m_qualifiedName.first;
+  }
+
+  bool represents(const QString& tagName) const
   {
     return m_node && tagName == m_qualifiedName.first;
   }

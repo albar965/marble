@@ -24,7 +24,7 @@
 
 #include "GeoDataTypes.h"
 
-#include <QVector>
+#include <QList>
 
 namespace Marble {
 
@@ -55,8 +55,8 @@ bool KmlDocumentTagWriter::writeMid(const GeoNode *node, GeoWriter& writer) cons
     writeElement(&schema, writer);
   }
 
-  QVector<GeoDataFeature *>::ConstIterator it = document->constBegin();
-  QVector<GeoDataFeature *>::ConstIterator const end = document->constEnd();
+  QList<GeoDataFeature *>::ConstIterator it = document->constBegin();
+  QList<GeoDataFeature *>::ConstIterator const end = document->constEnd();
 
   for(; it != end; ++it )
   {

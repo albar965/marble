@@ -22,7 +22,7 @@
 #include "KmlCoordinatesTagHandler.h"
 
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
@@ -33,7 +33,6 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataMultiGeometry.h"
-#include "GeoDataPhotoOverlay.h"
 #include "GeoDataLatLonQuad.h"
 #include "GeoParser.h"
 #include "MarbleGlobal.h"
@@ -210,7 +209,7 @@ GeoNode *KmlcoordinatesTagHandler::parse(GeoParser& parser) const
     QString input = parser.readElementText().trimmed();
     if(!kmlStrictSpecs)
     {
-      input = input.replace(QRegExp("\\s*,\\s*"), ",");
+      input = input.replace(QRegularExpression("\\s*,\\s*"), ",");
     }
     QStringList coordinates = input.split(' ');
 

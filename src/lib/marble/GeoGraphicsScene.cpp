@@ -170,7 +170,7 @@ QList<GeoGraphicsItem *> GeoGraphicsScene::selectedItems() const
   return d->m_selectedItems;
 }
 
-void GeoGraphicsScene::applyHighlight(const QVector<GeoDataPlacemark *>& selectedPlacemarks)
+void GeoGraphicsScene::applyHighlight(const QList<GeoDataPlacemark *>& selectedPlacemarks)
 {
   /**
    * First set the items, which were selected previously, to

@@ -48,8 +48,8 @@ const GeoDataMultiGeometryPrivate *GeoDataMultiGeometry::p() const
 
 const GeoDataLatLonAltBox& GeoDataMultiGeometry::latLonAltBox() const
 {
-  QVector<GeoDataGeometry *>::const_iterator it = p()->m_vector.constBegin();
-  QVector<GeoDataGeometry *>::const_iterator end = p()->m_vector.constEnd();
+  QList<GeoDataGeometry *>::const_iterator it = p()->m_vector.constBegin();
+  QList<GeoDataGeometry *>::const_iterator end = p()->m_vector.constEnd();
 
   p()->m_latLonAltBox.clear();
   for(; it != end; ++it)
@@ -74,12 +74,12 @@ int GeoDataMultiGeometry::size() const
   return p()->m_vector.size();
 }
 
-QVector<GeoDataGeometry> GeoDataMultiGeometry::vector() const
+QList<GeoDataGeometry> GeoDataMultiGeometry::vector() const
 {
-  QVector<GeoDataGeometry> results;
+  QList<GeoDataGeometry> results;
 
-  QVector<GeoDataGeometry *>::const_iterator it = p()->m_vector.constBegin();
-  QVector<GeoDataGeometry *>::const_iterator end = p()->m_vector.constEnd();
+  QList<GeoDataGeometry *>::const_iterator it = p()->m_vector.constBegin();
+  QList<GeoDataGeometry *>::const_iterator end = p()->m_vector.constEnd();
 
   for(; it != end; ++it)
   {
@@ -135,24 +135,24 @@ const GeoDataGeometry& GeoDataMultiGeometry::first() const
   return *(p()->m_vector.first());
 }
 
-QVector<GeoDataGeometry *>::Iterator GeoDataMultiGeometry::begin()
+QList<GeoDataGeometry *>::Iterator GeoDataMultiGeometry::begin()
 {
   detach();
   return p()->m_vector.begin();
 }
 
-QVector<GeoDataGeometry *>::Iterator GeoDataMultiGeometry::end()
+QList<GeoDataGeometry *>::Iterator GeoDataMultiGeometry::end()
 {
   detach();
   return p()->m_vector.end();
 }
 
-QVector<GeoDataGeometry *>::ConstIterator GeoDataMultiGeometry::constBegin() const
+QList<GeoDataGeometry *>::ConstIterator GeoDataMultiGeometry::constBegin() const
 {
   return p()->m_vector.constBegin();
 }
 
-QVector<GeoDataGeometry *>::ConstIterator GeoDataMultiGeometry::constEnd() const
+QList<GeoDataGeometry *>::ConstIterator GeoDataMultiGeometry::constEnd() const
 {
   return p()->m_vector.constEnd();
 }
@@ -218,7 +218,7 @@ void GeoDataMultiGeometry::pack(QDataStream& stream) const
 
   stream << p()->m_vector.size();
 
-  for( QVector<GeoDataGeometry *>::const_iterator iterator =
+  for( QList<GeoDataGeometry *>::const_iterator iterator =
          p()->m_vector.constBegin();
        iterator != p()->m_vector.constEnd();
        ++iterator )

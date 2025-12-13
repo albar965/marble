@@ -23,7 +23,7 @@
 #define MARBLE_GEOSCENESECTION_H
 
 #include <QString>
-#include <QVector>
+#include <QList>
 
 #include "GeoDocument.h"
 
@@ -50,7 +50,7 @@ public:
    */
   void addItem(GeoSceneItem *);
   GeoSceneItem *item(const QString&);
-  QVector<GeoSceneItem *> items() const;
+  QList<GeoSceneItem *> items() const;
 
   QString name() const;
 
@@ -75,7 +75,7 @@ private:
   /// The vector holding all the items in the legend section.
   /// (We want to preserve the order and don't care
   /// much about speed here), so we don't use a hash
-  QVector<GeoSceneItem *> m_items;
+  QList<GeoSceneItem *> m_items;
 
   QString m_name;
   QString m_heading;

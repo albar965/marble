@@ -237,8 +237,8 @@ GeoDataCoordinates GeoDataPlacemark::coordinate(const QDateTime& dateTime, bool 
     {
       const GeoDataMultiGeometry *multiGeometry = static_cast<const GeoDataMultiGeometry *>(p()->m_geometry);
 
-      QVector<GeoDataGeometry *>::ConstIterator it = multiGeometry->constBegin();
-      QVector<GeoDataGeometry *>::ConstIterator end = multiGeometry->constEnd();
+      QList<GeoDataGeometry *>::ConstIterator it = multiGeometry->constBegin();
+      QList<GeoDataGeometry *>::ConstIterator end = multiGeometry->constEnd();
       for(; it != end; ++it )
       {
         if((*it)->nodeType() == GeoDataTypes::GeoDataPointType)

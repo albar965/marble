@@ -20,7 +20,7 @@
 #include <QObject>
 #include "LayerInterface.h"
 
-#include <QVector>
+#include <QList>
 
 #include "PlacemarkLayout.h"
 
@@ -74,7 +74,7 @@ public:
   /**
    * Returns a list of model indexes that are at position @p pos.
    */
-  QVector<const GeoDataFeature *> whichPlacemarkAt(const QPoint& pos);
+  QList<const GeoDataFeature *> whichPlacemarkAt(const QPoint& pos);
 
   static bool m_useXWorkaround;    // Indicates need for an X windows workaround.
 

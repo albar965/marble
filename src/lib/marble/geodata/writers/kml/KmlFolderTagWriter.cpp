@@ -16,7 +16,7 @@
 
 #include "GeoDataTypes.h"
 
-#include <QVector>
+#include <QList>
 
 namespace Marble {
 
@@ -29,8 +29,8 @@ bool KmlFolderTagWriter::writeMid(const GeoNode *node, GeoWriter& writer) const
   const GeoDataFolder *folder = static_cast<const GeoDataFolder *>(node);
 
   // Write all containing features
-  QVector<GeoDataFeature *>::ConstIterator it = folder->constBegin();
-  QVector<GeoDataFeature *>::ConstIterator const end = folder->constEnd();
+  QList<GeoDataFeature *>::ConstIterator it = folder->constBegin();
+  QList<GeoDataFeature *>::ConstIterator const end = folder->constEnd();
 
   for(; it != end; ++it )
   {

@@ -12,7 +12,7 @@
 #ifndef MARBLE_GEODATAPOLYGON_H
 #define MARBLE_GEODATAPOLYGON_H
 
-#include <QVector>
+#include <QList>
 
 #include "MarbleGlobal.h"
 
@@ -53,7 +53,7 @@ class GeoDataPolygonPrivate;
 
 
     The API which provides access to the nodes is similar to the API of
-    QVector.
+    QList.
 
     GeoDataPolygon allows Polygons to be tessellated in order to make them
     follow the terrain and the curvature of the earth. The tessellation options
@@ -169,14 +169,14 @@ public:
 
       \see GeoDataLinearRing
   */
-  QVector<GeoDataLinearRing>& innerBoundaries();
+  QList<GeoDataLinearRing>& innerBoundaries();
 
   /*!
       \brief Returns a set of inner boundaries which are represented as LinearRings.
 
       \see GeoDataLinearRing
   */
-  const QVector<GeoDataLinearRing>& innerBoundaries() const;
+  const QList<GeoDataLinearRing>& innerBoundaries() const;
 
   /*!
       \brief Appends a given LinearRing as an inner boundary of the Polygon.

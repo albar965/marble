@@ -15,7 +15,6 @@ if(NOT ZLIB_FOUND)
 endif()
 
 add_subdirectory( lib/marble )
-add_subdirectory( lib/astro )
 
 add_subdirectory( plugins )
 

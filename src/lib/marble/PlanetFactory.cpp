@@ -15,6 +15,8 @@
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 
+#include <QObject>
+
 namespace Marble {
 
 QList<QString> PlanetFactory::planetList()

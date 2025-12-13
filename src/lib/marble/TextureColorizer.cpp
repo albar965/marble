@@ -17,7 +17,7 @@
 #include <QFile>
 #include <QSharedPointer>
 #include <QString>
-#include <QVector>
+#include <QList>
 #include <QTime>
 #include <QColor>
 #include <QImage>
@@ -189,8 +189,8 @@ void TextureColorizer::setShowRelief(bool show)
 
 void TextureColorizer::drawIndividualDocument(GeoPainter *painter, const GeoDataDocument *document)
 {
-  QVector<GeoDataFeature *>::ConstIterator i = document->constBegin();
-  QVector<GeoDataFeature *>::ConstIterator end = document->constEnd();
+  QList<GeoDataFeature *>::ConstIterator i = document->constBegin();
+  QList<GeoDataFeature *>::ConstIterator end = document->constEnd();
 
   for(; i != end; ++i )
   {

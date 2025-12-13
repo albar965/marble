@@ -14,7 +14,7 @@
 
 #include "GeoDataGeometry.h"
 
-#include <QVector>
+#include <QList>
 
 namespace Marble {
 
@@ -68,16 +68,16 @@ public:
 
   GeoDataMultiTrack& operator<<(const GeoDataTrack& value);
 
-  QVector<GeoDataTrack *>::Iterator begin();
-  QVector<GeoDataTrack *>::Iterator end();
-  QVector<GeoDataTrack *>::ConstIterator constBegin() const;
-  QVector<GeoDataTrack *>::ConstIterator constEnd() const;
+  QList<GeoDataTrack *>::Iterator begin();
+  QList<GeoDataTrack *>::Iterator end();
+  QList<GeoDataTrack *>::ConstIterator constBegin() const;
+  QList<GeoDataTrack *>::ConstIterator constEnd() const;
   void clear();
-  QVector<GeoDataTrack> vector() const;
+  QList<GeoDataTrack> vector() const;
 
-  QVector<GeoDataTrack *>::Iterator erase(QVector<GeoDataTrack *>::Iterator pos);
-  QVector<GeoDataTrack *>::Iterator erase(QVector<GeoDataTrack *>::Iterator begin,
-                                          QVector<GeoDataTrack *>::Iterator end);
+  QList<GeoDataTrack *>::Iterator erase(QList<GeoDataTrack *>::Iterator pos);
+  QList<GeoDataTrack *>::Iterator erase(QList<GeoDataTrack *>::Iterator begin,
+                                          QList<GeoDataTrack *>::Iterator end);
 
   // Serialize the Placemark to @p stream
   virtual void pack(QDataStream& stream) const;

@@ -9,7 +9,7 @@ include_directories(
 set( ${TARGET}_SRC merge_ts_po.cpp )
 add_executable( ${TARGET} ${${TARGET}_SRC} )
 
-target_link_libraries( ${TARGET} Qt5::Core )
+target_link_libraries( ${TARGET} Qt6::Core )
 
 # MARBLE_WRAP_PO(qmfiles pofile1 pofile2 ... )
 MACRO(MARBLE_WRAP_PO qmfiles)

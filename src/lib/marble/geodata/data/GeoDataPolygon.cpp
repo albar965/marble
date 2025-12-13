@@ -61,10 +61,10 @@ bool GeoDataPolygon::operator==(const GeoDataPolygon& other) const
     return false;
   }
 
-  QVector<GeoDataLinearRing>::const_iterator itBound = d->inner.constBegin();
-  QVector<GeoDataLinearRing>::const_iterator itEnd = d->inner.constEnd();
-  QVector<GeoDataLinearRing>::const_iterator otherItBound = other_d->inner.constBegin();
-  QVector<GeoDataLinearRing>::const_iterator otherItEnd = other_d->inner.constEnd();
+  QList<GeoDataLinearRing>::const_iterator itBound = d->inner.constBegin();
+  QList<GeoDataLinearRing>::const_iterator itEnd = d->inner.constEnd();
+  QList<GeoDataLinearRing>::const_iterator otherItBound = other_d->inner.constBegin();
+  QList<GeoDataLinearRing>::const_iterator otherItEnd = other_d->inner.constEnd();
 
   for(; itBound != itEnd && otherItBound != otherItEnd; ++itBound, ++otherItBound )
   {
@@ -144,13 +144,13 @@ void GeoDataPolygon::setOuterBoundary(const GeoDataLinearRing& boundary)
   p()->outer = boundary;
 }
 
-QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries()
+QList<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries()
 {
   detach();
   return p()->inner;
 }
 
-const QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
+const QList<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
 {
   return p()->inner;
 }
@@ -181,7 +181,7 @@ void GeoDataPolygon::pack(QDataStream& stream) const
   stream << p()->inner.size();
   stream << (qint32)(p()->m_tessellationFlags);
 
-  for( QVector<GeoDataLinearRing>::const_iterator iterator =
+  for( QList<GeoDataLinearRing>::const_iterator iterator =
          p()->inner.constBegin();
        iterator != p()->inner.constEnd();
        ++iterator )
@@ -207,7 +207,7 @@ void GeoDataPolygon::unpack(QDataStream& stream)
 
   p()->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
 
-  QVector<GeoDataLinearRing>& inner = p()->inner;
+  QList<GeoDataLinearRing>& inner = p()->inner;
   inner.reserve(inner.size() + size);
   for(qint32 i = 0; i < size; i++ )
   {

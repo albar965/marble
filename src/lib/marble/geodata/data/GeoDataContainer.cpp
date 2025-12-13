@@ -66,10 +66,10 @@ bool GeoDataContainer::equals(const GeoDataContainer& other) const
     return false;
   }
 
-  QVector<GeoDataFeature *>::const_iterator thisBegin = p()->m_vector.constBegin();
-  QVector<GeoDataFeature *>::const_iterator thisEnd = p()->m_vector.constEnd();
-  QVector<GeoDataFeature *>::const_iterator otherBegin = other.p()->m_vector.constBegin();
-  QVector<GeoDataFeature *>::const_iterator otherEnd = other.p()->m_vector.constEnd();
+  QList<GeoDataFeature *>::const_iterator thisBegin = p()->m_vector.constBegin();
+  QList<GeoDataFeature *>::const_iterator thisEnd = p()->m_vector.constEnd();
+  QList<GeoDataFeature *>::const_iterator otherBegin = other.p()->m_vector.constBegin();
+  QList<GeoDataFeature *>::const_iterator otherEnd = other.p()->m_vector.constEnd();
 
   for(; thisBegin != thisEnd && otherBegin != otherEnd; ++thisBegin, ++otherBegin)
   {
@@ -186,8 +186,8 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
 {
   GeoDataLatLonAltBox result;
 
-  QVector<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
-  QVector<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
+  QList<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
+  QList<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
   for(; it != end; ++it)
   {
 
@@ -228,12 +228,12 @@ GeoDataLatLonAltBox GeoDataContainer::latLonAltBox() const
   return result;
 }
 
-QVector<GeoDataFolder *> GeoDataContainer::folderList() const
+QList<GeoDataFolder *> GeoDataContainer::folderList() const
 {
-  QVector<GeoDataFolder *> results;
+  QList<GeoDataFolder *> results;
 
-  QVector<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
-  QVector<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
+  QList<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
+  QList<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
 
   for(; it != end; ++it)
   {
@@ -247,12 +247,12 @@ QVector<GeoDataFolder *> GeoDataContainer::folderList() const
   return results;
 }
 
-QVector<GeoDataPlacemark *> GeoDataContainer::placemarkList() const
+QList<GeoDataPlacemark *> GeoDataContainer::placemarkList() const
 {
-  QVector<GeoDataPlacemark *> results;
+  QList<GeoDataPlacemark *> results;
 
-  QVector<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
-  QVector<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
+  QList<GeoDataFeature *>::const_iterator it = p()->m_vector.constBegin();
+  QList<GeoDataFeature *>::const_iterator end = p()->m_vector.constEnd();
 
   for(; it != end; ++it)
   {
@@ -266,7 +266,7 @@ QVector<GeoDataPlacemark *> GeoDataContainer::placemarkList() const
   return results;
 }
 
-QVector<GeoDataFeature *> GeoDataContainer::featureList() const
+QList<GeoDataFeature *> GeoDataContainer::featureList() const
 {
   return p()->m_vector;
 }
@@ -339,8 +339,8 @@ int GeoDataContainer::removeAll(GeoDataFeature *feature)
 #else
   int count = 0;
 
-  QVector<GeoDataFeature *>& vector = p()->m_vector;
-  QVector<GeoDataFeature *>::iterator it = vector.begin();
+  QList<GeoDataFeature *>& vector = p()->m_vector;
+  QList<GeoDataFeature *>::iterator it = vector.begin();
 
   while(it != vector.end())
   {
@@ -383,7 +383,7 @@ bool GeoDataContainer::removeOne(GeoDataFeature *feature)
 #if QT_VERSION >= 0x050400
   return p()->m_vector.removeOne(feature);
 #else
-  QVector<GeoDataFeature *>& vector = p()->m_vector;
+  QList<GeoDataFeature *>& vector = p()->m_vector;
 
   const int i = vector.indexOf(feature);
   if(i < 0)
@@ -442,24 +442,24 @@ void GeoDataContainer::clear()
   p()->m_vector.clear();
 }
 
-QVector<GeoDataFeature *>::Iterator GeoDataContainer::begin()
+QList<GeoDataFeature *>::Iterator GeoDataContainer::begin()
 {
   detach();
   return p()->m_vector.begin();
 }
 
-QVector<GeoDataFeature *>::Iterator GeoDataContainer::end()
+QList<GeoDataFeature *>::Iterator GeoDataContainer::end()
 {
   detach();
   return p()->m_vector.end();
 }
 
-QVector<GeoDataFeature *>::ConstIterator GeoDataContainer::constBegin() const
+QList<GeoDataFeature *>::ConstIterator GeoDataContainer::constBegin() const
 {
   return p()->m_vector.constBegin();
 }
 
-QVector<GeoDataFeature *>::ConstIterator GeoDataContainer::constEnd() const
+QList<GeoDataFeature *>::ConstIterator GeoDataContainer::constEnd() const
 {
   return p()->m_vector.constEnd();
 }
@@ -470,7 +470,7 @@ void GeoDataContainer::pack(QDataStream& stream) const
 
   stream << p()->m_vector.count();
 
-  for( QVector<GeoDataFeature *>::const_iterator iterator = p()->m_vector.constBegin();
+  for( QList<GeoDataFeature *>::const_iterator iterator = p()->m_vector.constBegin();
        iterator != p()->m_vector.constEnd();
        ++iterator )
   {

@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_CURRENT_SOURCE_DIR}/projections
+ ${CMAKE_CURRENT_SOURCE_DIR}/astro
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/graphicsitem
@@ -14,7 +15,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${CMAKE_CURRENT_SOURCE_DIR}/layers
- ${CMAKE_SOURCE_DIR}/src/lib/astro
  ${ZLIB_INCLUDE_DIRS}
 )
 
@@ -23,8 +23,8 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
 # VERSION_NUMBER_TODO
-set(MARBLE_LIB_VERSION "0.25.5")
-set(MARBLE_ABI_VERSION "25")
+set(MARBLE_LIB_VERSION "1.0.0")
+set(MARBLE_ABI_VERSION "1")
 
 ########### next target ###############
 
@@ -36,6 +36,12 @@ set(marblewidget_SRCS
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
     blendings/SunLightBlending.cpp
+
+    astro/astr2lib.cpp
+    astro/astrolib.cpp
+    astro/attlib.cpp
+    astro/solarsystem.cpp
+
     DownloadRegion.cpp
 
     MarbleWidget.cpp
@@ -143,9 +149,6 @@ set(marblewidget_SRCS
 
     MathHelper.cpp
 
-
-    TemplateDocument.cpp
-
     ParsingRunnerManager.cpp
 
     ParseRunnerPlugin.cpp
@@ -155,7 +158,6 @@ set(marblewidget_SRCS
     GeoGraphicsScene.cpp
     ElevationModel.cpp
     kineticmodel.cpp
-    NewstuffModel.cpp
     MarbleZip.cpp
 
     StyleBuilder.cpp
@@ -191,23 +193,19 @@ generate_export_header(marblewidget BASE_NAME marble)
 # TODO: use PUBLIC/PRIVATE everywhere instead of LINK_PUBLIC/LINK_PRIVATE
 # once SailfishOS has cmake >= 2.8.12
 
-# link with libastro
-target_link_libraries(marblewidget LINK_PRIVATE astro)
-
 # link against zlib
 target_link_libraries(marblewidget LINK_PRIVATE ${ZLIB_LIBRARIES})
 
 # link with release version of Qt libs
 target_link_libraries(marblewidget
     LINK_PUBLIC
-        Qt5::Xml
-        Qt5::Gui
-        Qt5::Widgets
-        Qt5::Network
+        Qt6::Xml
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::Network
     LINK_PRIVATE
-        Qt5::Svg
-        Qt5::PrintSupport
-        Qt5::Concurrent
+        Qt6::Svg
+        Qt6::Concurrent
 )
 
 if (APPLE)
@@ -235,7 +233,7 @@ endif()
 
 set_target_properties(marblewidget  PROPERTIES
     EXPORT_NAME "Marble"
-    OUTPUT_NAME marblewidget-qt5
+    OUTPUT_NAME marblewidget-lnm-qt6
     COMPILE_FLAGS "-DKML_LAZY_IMP"
 )
 
@@ -269,6 +267,10 @@ install( FILES
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
+    astro/astr2lib.h
+    astro/astrolib.h
+    astro/attlib.h
+    astro/solarsystem.h
     WaitEditWidget.h
     RemoveItemEditWidget.h
     MapViewItemDelegate.h

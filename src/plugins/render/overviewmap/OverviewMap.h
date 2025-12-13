@@ -14,8 +14,8 @@
 #include <QHash>
 #include <QColor>
 #include <QPixmap>
-#include <QSvgWidget>
 #include <QSvgRenderer>
+#include <QtSvgWidgets/QSvgWidget>
 
 #include "GeoDataLatLonAltBox.h"
 #include "AbstractFloatItem.h"

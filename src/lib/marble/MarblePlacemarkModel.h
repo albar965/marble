@@ -78,7 +78,7 @@ public:
    */
   ~MarblePlacemarkModel();
 
-  void setPlacemarkContainer(QVector<GeoDataPlacemark *> *container);
+  void setPlacemarkContainer(QList<GeoDataPlacemark *> *container);
 
   /**
    * Return the number of Placemarks in the Model.

@@ -216,7 +216,7 @@ public:
    */
   qreal centerLatitude() const;
 
-  QVector<const GeoDataFeature *> whichFeatureAt(const QPoint&) const;
+  QList<const GeoDataFeature *> whichFeatureAt(const QPoint&) const;
 
   /**
    * @brief  Return the property value by name.
@@ -664,7 +664,7 @@ public Q_SLOTS:
    */
   void reload();
 
-  void downloadRegion(QVector<TileCoordsPyramid> const&);
+  void downloadRegion(QList<TileCoordsPyramid> const&);
 
 Q_SIGNALS:
   void tileLevelChanged(int level);

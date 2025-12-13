@@ -52,14 +52,14 @@ private:
   static double extractBuildingHeight(const GeoDataFeature *feature);
   static QString extractBuildingLabel(const GeoDataFeature *feature);
   static QList<NamedEntry> extractNamedEntries(const GeoDataFeature *feature);
-  static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon, QVector<QPolygonF *>& polygons,
-                             QVector<QPolygonF *>& outlines);
+  static void screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon, QList<QPolygonF *>& polygons,
+                             QList<QPolygonF *>& outlines);
   QPen configurePainter(GeoPainter *painter, const ViewportParams *viewport, bool isBuildingFrame);
   static bool isBuilding(GeoDataFeature::GeoDataVisualCategory visualCategory);
   void initializeBuildingPainting(const GeoPainter *painter, const ViewportParams *viewport,
                                   bool& drawAccurate3D, bool& isCameraAboveBuilding, bool& hasInnerBoundaries,
-                                  QVector<QPolygonF *>& outlinePolygons,
-                                  QVector<QPolygonF *>& innerPolygons) const;
+                                  QList<QPolygonF *>& outlinePolygons,
+                                  QList<QPolygonF *>& innerPolygons) const;
   static QPointF centroid(const QPolygonF& polygon, double& area);
 
   const GeoDataPolygon *const m_polygon;

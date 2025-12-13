@@ -1113,7 +1113,7 @@ QPointF GeoDataCoordinatesPrivate::mapLonLatToXY(qreal lambda, qreal phi, qreal 
    * follow the meaningful nomenclature in equation 10.15
    * (coef[n] corresponds to qPow(l,n) factor)
    */
-  QVector<qreal> coef(9);
+  QList<qreal> coef(9);
 
   coef[0] = coef[1] = coef[2] = 1.0;
 

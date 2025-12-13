@@ -5,6 +5,8 @@ project(marble)
 ####################################################
 # CMake Settings
 
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
+
 add_compile_options(-Wno-deprecated-copy -Wno-deprecated-declarations, -Wno-unknown-warning-option)
 
 # add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050F00)
@@ -35,9 +37,9 @@ if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_C_COMPILER_ID}" STREQUAL
     set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -std=iso9899:1990")
 endif()
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel" AND NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 endif()
 # Default to hidden visibility for symbols
 set(CMAKE_C_VISIBILITY_PRESET hidden)
@@ -79,17 +81,16 @@ set(REQUIRED_QT_VERSION 5.3.0)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
    # TODO: still needed with ECM toolchain?
-   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt5_android}/bin/qmake")
+   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt6_android}/bin/qmake")
 endif()
 
-find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Network ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Widgets ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Svg ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Sql ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5Concurrent ${REQUIRED_QT_VERSION} REQUIRED)
-find_package(Qt5PrintSupport ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Core ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Xml ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Network ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Widgets ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Svg ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Sql ${REQUIRED_QT_VERSION} REQUIRED)
+find_package(Qt6Concurrent ${REQUIRED_QT_VERSION} REQUIRED)
 
 SET(CMAKE_AUTOMOC TRUE)
 
@@ -209,6 +210,7 @@ endif(WIN32)
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/marble
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/marble/astro
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/marble/projections
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/marble/geodata
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/marble/geodata/data

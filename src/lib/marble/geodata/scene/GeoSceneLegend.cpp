@@ -37,7 +37,7 @@ public:
   /// The vector holding all the sections in the legend.
   /// (We want to preserve the order and don't care
   /// much about speed here), so we don't use a hash
-  QVector<const GeoSceneSection *> m_sections;
+  QList<const GeoSceneSection *> m_sections;
 
   const char *nodeType() const
   {
@@ -64,7 +64,7 @@ const char *GeoSceneLegend::nodeType() const
 void GeoSceneLegend::addSection(const GeoSceneSection *section)
 {
   // Remove any section that has the same name
-  QVector<const GeoSceneSection *>::iterator it = d->m_sections.begin();
+  QList<const GeoSceneSection *>::iterator it = d->m_sections.begin();
   while(it != d->m_sections.end())
   {
     const GeoSceneSection *currentSection = *it;
@@ -86,7 +86,7 @@ void GeoSceneLegend::addSection(const GeoSceneSection *section)
   }
 }
 
-QVector<const GeoSceneSection *> GeoSceneLegend::sections() const
+QList<const GeoSceneSection *> GeoSceneLegend::sections() const
 {
   return d->m_sections;
 }

@@ -15,7 +15,6 @@
 #include "PluginInterface.h"
 #include "LayerInterface.h"
 
-class QStringList;
 
 namespace Marble {
 

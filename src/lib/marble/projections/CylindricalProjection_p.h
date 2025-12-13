@@ -40,7 +40,7 @@ public:
                             qreal ax, qreal ay,
                             const GeoDataCoordinates& bCoords,
                             qreal bx, qreal by,
-                            QVector<QPolygonF *>& polygons,
+                            QList<QPolygonF *>& polygons,
                             const ViewportParams *viewport,
                             TessellationFlags f,
                             int mirrorCount = 0,
@@ -49,7 +49,7 @@ public:
   int processTessellation(const GeoDataCoordinates& previousCoords,
                           const GeoDataCoordinates& currentCoords,
                           int count,
-                          QVector<QPolygonF *>& polygons,
+                          QList<QPolygonF *>& polygons,
                           const ViewportParams *viewport,
                           TessellationFlags f,
                           int mirrorCount = 0,
@@ -59,20 +59,20 @@ public:
                            const GeoDataCoordinates& bCoord,
                            qreal bx,
                            qreal by,
-                           QVector<QPolygonF *>& polygons,
+                           QList<QPolygonF *>& polygons,
                            int mirrorCount = 0,
                            qreal repeatDistance = 0);
 
   bool lineStringToPolygon(const GeoDataLineString& lineString,
                            const ViewportParams *viewport,
-                           QVector<QPolygonF *>& polygons) const;
+                           QList<QPolygonF *>& polygons) const;
 
-  static void translatePolygons(const QVector<QPolygonF *>& polygons,
-                                QVector<QPolygonF *>& translatedPolygons,
+  static void translatePolygons(const QList<QPolygonF *>& polygons,
+                                QList<QPolygonF *>& translatedPolygons,
                                 qreal xOffset);
 
   void repeatPolygons(const ViewportParams *viewport,
-                      QVector<QPolygonF *>& polygons) const;
+                      QList<QPolygonF *>& polygons) const;
 
   qreal repeatDistance(const ViewportParams *viewport) const;
 

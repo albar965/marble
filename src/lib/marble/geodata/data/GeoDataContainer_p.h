@@ -59,7 +59,7 @@ public:
     return GeoDataFolderId;
   }
 
-  QVector<GeoDataFeature *> m_vector;
+  QList<GeoDataFeature *> m_vector;
 };
 
 } // namespace Marble

@@ -23,7 +23,7 @@
 #define MARBLE_GEOSCENESETTINGS_H
 
 #include <QObject>
-#include <QVector>
+#include <QList>
 
 #include <geodata_export.h>
 
@@ -81,12 +81,12 @@ public:
   /**
    * @brief  Get the whole list of properties stored in the settings
    */
-  QVector<GeoSceneProperty *> allProperties();
+  QList<GeoSceneProperty *> allProperties();
 
   /**
    * @brief  Get the whole list of properties stored in the settings
    */
-  QVector<const GeoSceneProperty *> allProperties() const;
+  QList<const GeoSceneProperty *> allProperties() const;
 
   /**
    * @brief  Add a group to the settings
@@ -118,9 +118,9 @@ public:
    * @brief  Get the properties that are categorized into groups
    *
    * NOTE: If you want all the properties distributed among groups
-   *       then please use:  QVector<GeoSceneProperty*> allProperties().
+   *       then please use:  QList<GeoSceneProperty*> allProperties().
    */
-  QVector<GeoSceneProperty *> rootProperties();
+  QList<GeoSceneProperty *> rootProperties();
 
 Q_SIGNALS:
   void valueChanged(const QString&, bool);

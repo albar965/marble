@@ -783,7 +783,7 @@ void MarbleZipWriterPrivate::addEntry(EntryType type, const QString& fileName,
 */
 MarbleZipReader::MarbleZipReader(const QString& archive, QIODevice::OpenMode mode)
 {
-  QScopedPointer<QFile> f(new QFile(archive));
+  std::unique_ptr<QFile> f(new QFile(archive));
   f->open(mode);
   MarbleZipReader::Status status;
   if(f->error() == QFile::NoError)
@@ -800,8 +800,8 @@ MarbleZipReader::MarbleZipReader(const QString& archive, QIODevice::OpenMode mod
       status = FileError;
   }
 
-  d = new MarbleZipReaderPrivate(f.data(), /*ownDevice=*/ true);
-  f.take();
+  d = new MarbleZipReaderPrivate(f.get(), /*ownDevice=*/ true);
+  f.release();
   d->status = status;
 }
 
@@ -1082,7 +1082,7 @@ void MarbleZipReader::close()
 */
 MarbleZipWriter::MarbleZipWriter(const QString& fileName, QIODevice::OpenMode mode)
 {
-  QScopedPointer<QFile> f(new QFile(fileName));
+  std::unique_ptr<QFile> f(new QFile(fileName));
   f->open(mode);
   MarbleZipWriter::Status status;
   if(f->error() == QFile::NoError)
@@ -1099,8 +1099,8 @@ MarbleZipWriter::MarbleZipWriter(const QString& fileName, QIODevice::OpenMode mo
       status = MarbleZipWriter::FileError;
   }
 
-  d = new MarbleZipWriterPrivate(f.data(), /*ownDevice=*/ true);
-  f.take();
+  d = new MarbleZipWriterPrivate(f.get(), /*ownDevice=*/ true);
+  f.release();
   d->status = status;
 }
 

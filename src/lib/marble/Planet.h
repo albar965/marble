@@ -16,7 +16,6 @@
 
 #include <QtGlobal>
 
-class QStringList;
 class QColor;
 
 namespace Marble {

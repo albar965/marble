@@ -477,8 +477,8 @@ void MarbleModelPrivate::assignNewStyle(const QString& filePath, const GeoDataSt
 
   addHighlightStyle(doc);
 
-  QVector<GeoDataFeature *>::iterator iter = doc->begin();
-  QVector<GeoDataFeature *>::iterator const end = doc->end();
+  QList<GeoDataFeature *>::iterator iter = doc->begin();
+  QList<GeoDataFeature *>::iterator const end = doc->end();
 
   for(; iter != end; ++iter )
   {
@@ -823,8 +823,8 @@ void MarbleModelPrivate::assignFillColors(const QString& filePath)
             if(!colors.isEmpty())
             {
               qreal alpha = data->alpha();
-              QVector<GeoDataFeature *>::iterator it = doc->begin();
-              QVector<GeoDataFeature *>::iterator const itEnd = doc->end();
+              QList<GeoDataFeature *>::iterator it = doc->begin();
+              QList<GeoDataFeature *>::iterator const itEnd = doc->end();
               for(; it != itEnd; ++it )
               {
                 GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark *>(*it);
@@ -870,8 +870,8 @@ void MarbleModelPrivate::assignFillColors(const QString& filePath)
               doc->addStyle(style);
               doc->addStyleMap(styleMap);
 
-              QVector<GeoDataFeature *>::iterator iter = doc->begin();
-              QVector<GeoDataFeature *>::iterator const end = doc->end();
+              QList<GeoDataFeature *>::iterator iter = doc->begin();
+              QList<GeoDataFeature *>::iterator const end = doc->end();
 
               for(; iter != end; ++iter )
               {

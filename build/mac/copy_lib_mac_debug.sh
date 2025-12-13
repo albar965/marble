@@ -11,10 +11,6 @@ mkdir $APROJECTS/Marble-debug/lib
 mkdir $APROJECTS/Marble-debug/lib/plugins
 
 
-for i in `find $APROJECTS/marble/src/lib/astro -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/astro ;done
-
-for i in `find $APROJECTS/build-marble-release/src/lib/astro -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/astro ;done
-
 for i in `find $APROJECTS/marble/src/lib/marble -name *.h` ; do cp -v $i $APROJECTS/Marble-debug/include/marble ;done
 
 for i in `find $APROJECTS/build-marble-debug/src/lib/marble -name *.h` ; do cp -av $i $APROJECTS/Marble-debug/include/marble ;done

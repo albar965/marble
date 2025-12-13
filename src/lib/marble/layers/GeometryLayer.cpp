@@ -91,8 +91,8 @@ GeometryLayer::GeometryLayer(const QAbstractItemModel *model, const StyleBuilder
           this, SLOT(removePlacemarks(QModelIndex,int,int)));
   connect(model, SIGNAL(modelReset()),
           this, SLOT(resetCacheData()));
-  connect(this, SIGNAL(highlightedPlacemarksChanged(QVector<GeoDataPlacemark*>)),
-          &d->m_scene, SLOT(applyHighlight(QVector<GeoDataPlacemark*>)));
+  connect(this, SIGNAL(highlightedPlacemarksChanged(QList<GeoDataPlacemark*>)),
+          &d->m_scene, SLOT(applyHighlight(QList<GeoDataPlacemark*>)));
   connect(&d->m_scene, SIGNAL(repaintNeeded()),
           this, SIGNAL(repaintNeeded()));
 }
@@ -367,10 +367,10 @@ void GeometryLayer::resetCacheData()
   emit repaintNeeded();
 }
 
-QVector<const GeoDataFeature *> GeometryLayer::whichFeatureAt(const QPoint& curpos, const ViewportParams *viewport)
+QList<const GeoDataFeature *> GeometryLayer::whichFeatureAt(const QPoint& curpos, const ViewportParams *viewport)
 {
   const int maxZoom = qMin<int>(qMax<int>(qLn(viewport->radius() * 4 / 256) / qLn(2.0), 1), d->m_styleBuilder->maximumZoomLevel());
-  QVector<const GeoDataFeature *> result;
+  QList<const GeoDataFeature *> result;
   foreach(GeoGraphicsItem * item, d->m_scene.items(viewport->viewLatLonAltBox(), maxZoom))
   {
     if(item->feature()->nodeType() == GeoDataTypes::GeoDataPhotoOverlayType)
@@ -407,7 +407,7 @@ QVector<const GeoDataFeature *> GeometryLayer::whichFeatureAt(const QPoint& curp
 void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Unit unit)
 {
   GeoDataCoordinates clickedPoint(lon, lat, 0, unit);
-  QVector<GeoDataPlacemark *> selectedPlacemarks;
+  QList<GeoDataPlacemark *> selectedPlacemarks;
 
   for( int i = 0; i < d->m_model->rowCount(); ++i )
   {
@@ -438,8 +438,8 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
        */
       if(isHighlight)
       {
-        QVector<GeoDataFeature *>::Iterator iter = doc->begin();
-        QVector<GeoDataFeature *>::Iterator const end = doc->end();
+        QList<GeoDataFeature *>::Iterator iter = doc->begin();
+        QList<GeoDataFeature *>::Iterator const end = doc->end();
 
         for(; iter != end; ++iter )
         {
@@ -467,8 +467,8 @@ void GeometryLayer::handleHighlight(qreal lon, qreal lat, GeoDataCoordinates::Un
 
             if(multiGeometry)
             {
-              QVector<GeoDataGeometry *>::Iterator multiIter = multiGeometry->begin();
-              QVector<GeoDataGeometry *>::Iterator const multiEnd = multiGeometry->end();
+              QList<GeoDataGeometry *>::Iterator multiIter = multiGeometry->begin();
+              QList<GeoDataGeometry *>::Iterator const multiEnd = multiGeometry->end();
 
               for(; multiIter != multiEnd; ++multiIter )
               {

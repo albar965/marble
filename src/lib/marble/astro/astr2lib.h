@@ -12,7 +12,6 @@
 #define __astr2lib_h
 
 #include "attlib.h"
-#include "astrolib_export.h"
 
 /***********************************************************************
   Definitions of Astr2lib Functions
@@ -21,7 +20,7 @@
   Author: Gerhard HOLTKAMP                   25-MAR-2014
  ***********************************************************************/
 
-class ASTROLIB_EXPORT Plan200 // Calculating the Planets in epoch J2000.0 coordinates
+class MARBLE_EXPORT Plan200 // Calculating the Planets in epoch J2000.0 coordinates
 {
 public:
   Plan200();
@@ -52,22 +51,22 @@ private:
 
 };
 
-ASTROLIB_EXPORT void MarPhobos(double t, Vec3& rs, Vec3& vs);     // State vector of Phobos
-ASTROLIB_EXPORT void MarDeimos(double t, Vec3& rs, Vec3& vs);     // State vector of Deimos
-ASTROLIB_EXPORT Vec3 PosJIo(double t);          // Position of Io
-ASTROLIB_EXPORT Vec3 PosEuropa(double t);       // Position of Europa
-ASTROLIB_EXPORT Vec3 PosGanymede(double t);     // Position of Ganymede
-ASTROLIB_EXPORT Vec3 PosCallisto(double t);     // Position of Callisto
-ASTROLIB_EXPORT Vec3 PosSMimas(double t);     // Position of Mimas
-ASTROLIB_EXPORT Vec3 PosSEnceladus(double t);     // Position of Enceladus
-ASTROLIB_EXPORT Vec3 PosSDione(double t);     // Position of Dione
-ASTROLIB_EXPORT void JupIo(double t, Vec3& rs, Vec3& vs);           // state vector of Io
-ASTROLIB_EXPORT void JupEuropa(double t, Vec3& rs, Vec3& vs);       // state vector of Europa
-ASTROLIB_EXPORT void JupGanymede(double t, Vec3& rs, Vec3& vs);     // state vector of Ganymede
-ASTROLIB_EXPORT void JupCallisto(double t, Vec3& rs, Vec3& vs);     // state vector of Callisto
-ASTROLIB_EXPORT void SatRhea(double t, Vec3& rs, Vec3& vs);       // state vector of Rhea
-ASTROLIB_EXPORT void SatTitan(double t, Vec3& rs, Vec3& vs);      // state vector of Titan
-ASTROLIB_EXPORT void NepTriton(double t, Vec3& rs, Vec3& vs);     // state vector of Triton
-ASTROLIB_EXPORT void PluCharon(double t, Vec3& rs, Vec3& vs);     // state vector of Charon
+MARBLE_EXPORT void MarPhobos(double t, Vec3& rs, Vec3& vs);     // State vector of Phobos
+MARBLE_EXPORT void MarDeimos(double t, Vec3& rs, Vec3& vs);     // State vector of Deimos
+MARBLE_EXPORT Vec3 PosJIo(double t);          // Position of Io
+MARBLE_EXPORT Vec3 PosEuropa(double t);       // Position of Europa
+MARBLE_EXPORT Vec3 PosGanymede(double t);     // Position of Ganymede
+MARBLE_EXPORT Vec3 PosCallisto(double t);     // Position of Callisto
+MARBLE_EXPORT Vec3 PosSMimas(double t);     // Position of Mimas
+MARBLE_EXPORT Vec3 PosSEnceladus(double t);     // Position of Enceladus
+MARBLE_EXPORT Vec3 PosSDione(double t);     // Position of Dione
+MARBLE_EXPORT void JupIo(double t, Vec3& rs, Vec3& vs);           // state vector of Io
+MARBLE_EXPORT void JupEuropa(double t, Vec3& rs, Vec3& vs);       // state vector of Europa
+MARBLE_EXPORT void JupGanymede(double t, Vec3& rs, Vec3& vs);     // state vector of Ganymede
+MARBLE_EXPORT void JupCallisto(double t, Vec3& rs, Vec3& vs);     // state vector of Callisto
+MARBLE_EXPORT void SatRhea(double t, Vec3& rs, Vec3& vs);       // state vector of Rhea
+MARBLE_EXPORT void SatTitan(double t, Vec3& rs, Vec3& vs);      // state vector of Titan
+MARBLE_EXPORT void NepTriton(double t, Vec3& rs, Vec3& vs);     // state vector of Triton
+MARBLE_EXPORT void PluCharon(double t, Vec3& rs, Vec3& vs);     // state vector of Charon
 
 #endif // __astr2lib_h sentry.

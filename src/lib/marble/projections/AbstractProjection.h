@@ -19,7 +19,7 @@
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-#include <QVector>
+#include <QList>
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
@@ -185,7 +185,7 @@ public:
 
   virtual bool screenCoordinates(const GeoDataLineString& lineString,
                                  const ViewportParams *viewport,
-                                 QVector<QPolygonF *>& polygons) const = 0;
+                                 QList<QPolygonF *>& polygons) const = 0;
 
   /**
    * @brief Get the earth coordinates corresponding to a pixel in the map.

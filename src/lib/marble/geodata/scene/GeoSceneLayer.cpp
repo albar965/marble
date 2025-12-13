@@ -69,7 +69,7 @@ const char *GeoSceneLayer::nodeType() const
 void GeoSceneLayer::addDataset(GeoSceneAbstractDataset *dataset)
 {
   // Remove any dataset that has the same name
-  QVector<GeoSceneAbstractDataset *>::iterator it = m_datasets.begin();
+  QList<GeoSceneAbstractDataset *>::iterator it = m_datasets.begin();
   while(it != m_datasets.end())
   {
     GeoSceneAbstractDataset *currentAbstractDataset = *it;
@@ -95,8 +95,8 @@ const GeoSceneAbstractDataset *GeoSceneLayer::dataset(const QString& name) const
 {
   GeoSceneAbstractDataset *dataset = 0;
 
-  QVector<GeoSceneAbstractDataset *>::const_iterator it = m_datasets.constBegin();
-  QVector<GeoSceneAbstractDataset *>::const_iterator end = m_datasets.constEnd();
+  QList<GeoSceneAbstractDataset *>::const_iterator it = m_datasets.constBegin();
+  QList<GeoSceneAbstractDataset *>::const_iterator end = m_datasets.constEnd();
   for(; it != end; ++it)
   {
     if((*it)->name() == name)
@@ -132,7 +132,7 @@ GeoSceneAbstractDataset *GeoSceneLayer::groundDataset()
          (static_cast<GeoSceneLayer const *>(this)->groundDataset());
 }
 
-QVector<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
+QList<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
 {
   return m_datasets;
 }

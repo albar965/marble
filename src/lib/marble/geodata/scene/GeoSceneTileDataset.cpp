@@ -177,12 +177,12 @@ void GeoSceneTileDataset::setTileLevels(const QString& tileLevels)
   }
 }
 
-QVector<int> GeoSceneTileDataset::tileLevels() const
+QList<int> GeoSceneTileDataset::tileLevels() const
 {
   return m_tileLevels;
 }
 
-QVector<QUrl> GeoSceneTileDataset::downloadUrls() const
+QList<QUrl> GeoSceneTileDataset::downloadUrls() const
 {
   return m_downloadUrls;
 }
@@ -379,8 +379,8 @@ QStringList GeoSceneTileDataset::hostNames() const
   QStringList result;
   result.reserve(m_downloadUrls.size());
 
-  QVector<QUrl>::const_iterator pos = m_downloadUrls.constBegin();
-  QVector<QUrl>::const_iterator const end = m_downloadUrls.constEnd();
+  QList<QUrl>::const_iterator pos = m_downloadUrls.constBegin();
+  QList<QUrl>::const_iterator const end = m_downloadUrls.constEnd();
   for(; pos != end; ++pos )
     result.append((*pos).host());
   return result;

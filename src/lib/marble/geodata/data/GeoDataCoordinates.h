@@ -16,7 +16,7 @@
 
 #include <QCoreApplication>
 #include <QMetaType>
-#include <QVector>
+#include <QList>
 
 #include <cmath>
 
@@ -102,8 +102,8 @@ public:
   };
 
   // Type definitions
-  typedef QVector<GeoDataCoordinates> Vector;
-  typedef QVector<GeoDataCoordinates *> PtrVector;
+  typedef QList<GeoDataCoordinates> Vector;
+  typedef QList<GeoDataCoordinates *> PtrVector;
 
   GeoDataCoordinates(const GeoDataCoordinates& other);
 

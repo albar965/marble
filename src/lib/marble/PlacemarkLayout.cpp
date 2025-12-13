@@ -23,10 +23,8 @@
 
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
-#include "GeoDataTypes.h"
 
 #include "MarbleDebug.h"
-#include "MarbleGlobal.h"
 #include "PlacemarkLayer.h"
 #include "MarbleClock.h"
 #include "MarblePlacemarkModel.h"
@@ -35,15 +33,14 @@
 #include "TileId.h"
 #include "TileCoordsPyramid.h"
 #include "VisiblePlacemark.h"
-#include "MathHelper.h"
 #include <StyleBuilder.h>
 
 namespace { // Helper function that checks for available room for the label
-bool hasRoomFor(const QVector<Marble::VisiblePlacemark *>& placemarks, const QRectF& labelRect)
+bool hasRoomFor(const QList<Marble::VisiblePlacemark *>& placemarks, const QRectF& labelRect)
 {
   // Check if there is another label or symbol that overlaps.
-  QVector<Marble::VisiblePlacemark *>::const_iterator beforeItEnd = placemarks.constEnd();
-  for( QVector<Marble::VisiblePlacemark *>::ConstIterator beforeIt = placemarks.constBegin();
+  QList<Marble::VisiblePlacemark *>::const_iterator beforeItEnd = placemarks.constEnd();
+  for( QList<Marble::VisiblePlacemark *>::ConstIterator beforeIt = placemarks.constBegin();
        beforeIt != beforeItEnd; ++beforeIt )
   {
     if(labelRect.intersects((*beforeIt)->labelRect()))
@@ -242,14 +239,14 @@ void PlacemarkLayout::styleReset()
   m_styleResetRequested = false;
 }
 
-QVector<const GeoDataFeature *> PlacemarkLayout::whichPlacemarkAt(const QPoint& curpos)
+QList<const GeoDataFeature *> PlacemarkLayout::whichPlacemarkAt(const QPoint& curpos)
 {
   if(m_styleResetRequested)
   {
     styleReset();
   }
 
-  QVector<const GeoDataFeature *> ret;
+  QList<const GeoDataFeature *> ret;
 
   foreach(VisiblePlacemark * mark, m_paintOrder)
   {
@@ -341,7 +338,7 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams *viewport)
   qreal north, south, east, west;
   viewport->viewLatLonAltBox().boundaries(north, south, east, west);
   QSet<TileId> tileIdSet;
-  QVector<QRectF> geoRects;
+  QList<QRectF> geoRects;
   if(west <= east)
   {
     geoRects << QRectF(west, north, east - west, south - north);
@@ -386,11 +383,11 @@ QSet<TileId> PlacemarkLayout::visibleTiles(const ViewportParams *viewport)
   return tileIdSet;
 }
 
-QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *viewport)
+QList<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams *viewport)
 {
   m_runtimeTrace.clear();
   if(m_placemarkModel->rowCount() <= 0)
-    return QVector<VisiblePlacemark *>();
+    return QList<VisiblePlacemark *>();
 
   if(m_styleResetRequested)
   {
@@ -399,7 +396,7 @@ QVector<VisiblePlacemark *> PlacemarkLayout::generateLayout(const ViewportParams
 
   if(m_maxLabelHeight == 0)
   {
-    return QVector<VisiblePlacemark *>();
+    return QList<VisiblePlacemark *>();
   }
 
   const int secnumber = viewport->height() / m_maxLabelHeight + 1;
@@ -654,7 +651,7 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr& style,
   int textWidth;
   if(style->labelStyle().glow())
   {
-    labelFont.setWeight(75);       // Needed to calculate the correct pixmap size;
+    labelFont.setWeight(QFont::Thin);       // Needed to calculate the correct pixmap size;
     textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelText) +
                  qRound(2 * s_labelOutlineWidth));
   }
@@ -663,7 +660,7 @@ QRectF PlacemarkLayout::roomForLabel(const GeoDataStyle::ConstPtr& style,
     textWidth = (QFontMetrics(labelFont).horizontalAdvance(labelText));
   }
 
-  const QVector<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
+  const QList<VisiblePlacemark *> currentsec = m_rowsection.at(y / m_maxLabelHeight);
 
   if(style->labelStyle().alignment() == GeoDataLabelStyle::Corner)
   {

@@ -52,26 +52,26 @@ public:
   inline void initClipRect();
 
   inline void clipPolyObject(const QPolygonF& sourcePolygon,
-                             QVector<QPolygonF>& clippedPolyObjects,
+                             QList<QPolygonF>& clippedPolyObjects,
                              bool isClosed);
 
   inline void clipMultiple(QPolygonF& clippedPolyObject,
-                           QVector<QPolygonF>& clippedPolyObjects,
+                           QList<QPolygonF>& clippedPolyObjects,
                            bool isClosed);
   inline void clipOnce(QPolygonF& clippedPolyObject,
-                       QVector<QPolygonF>& clippedPolyObjects,
+                       QList<QPolygonF>& clippedPolyObjects,
                        bool isClosed);
   inline void clipOnceCorner(QPolygonF& clippedPolyObject,
-                             QVector<QPolygonF>& clippedPolyObjects,
+                             QList<QPolygonF>& clippedPolyObjects,
                              const QPointF& corner,
                              const QPointF& point,
                              bool isClosed) const;
   inline void clipOnceEdge(QPolygonF& clippedPolyObject,
-                           QVector<QPolygonF>& clippedPolyObjects,
+                           QList<QPolygonF>& clippedPolyObjects,
                            const QPointF& point,
                            bool isClosed) const;
 
-  void labelPosition(const QPolygonF& polygon, QVector<QPointF>& labelNodes,
+  void labelPosition(const QPolygonF& polygon, QList<QPointF>& labelNodes,
                      LabelPositionFlags labelPositionFlags);
 
   bool pointAllowsLabel(const QPointF& point);
@@ -129,7 +129,7 @@ void ClipPainter::drawPolygon(const QPolygonF& polygon,
   if(d->m_doClip)
   {
     d->initClipRect();
-    QVector<QPolygonF> clippedPolyObjects;
+    QList<QPolygonF> clippedPolyObjects;
 
     d->clipPolyObject(polygon, clippedPolyObjects, true);
 
@@ -189,7 +189,7 @@ void ClipPainter::drawPolyline(const QPolygonF& polygon)
   if(d->m_doClip)
   {
     d->initClipRect();
-    QVector<QPolygonF> clippedPolyObjects;
+    QList<QPolygonF> clippedPolyObjects;
 
     d->clipPolyObject(polygon, clippedPolyObjects, false);
 
@@ -243,13 +243,13 @@ void ClipPainter::drawPolyline(const QPolygonF& polygon)
   }
 }
 
-void ClipPainter::drawPolyline(const QPolygonF& polygon, QVector<QPointF>& labelNodes,
+void ClipPainter::drawPolyline(const QPolygonF& polygon, QList<QPointF>& labelNodes,
                                LabelPositionFlags positionFlags)
 {
   if(d->m_doClip)
   {
     d->initClipRect();
-    QVector<QPolygonF> clippedPolyObjects;
+    QList<QPolygonF> clippedPolyObjects;
 
     d->clipPolyObject(polygon, clippedPolyObjects, false);
 
@@ -302,7 +302,7 @@ void ClipPainter::drawPolyline(const QPolygonF& polygon, QVector<QPointF>& label
   }
 }
 
-void ClipPainterPrivate::labelPosition(const QPolygonF& polygon, QVector<QPointF>& labelNodes,
+void ClipPainterPrivate::labelPosition(const QPolygonF& polygon, QList<QPointF>& labelNodes,
                                        LabelPositionFlags labelPositionFlags)
 {
   bool currentAllowsLabel = false;
@@ -527,7 +527,7 @@ int ClipPainterPrivate::sector(const QPointF& point) const
 }
 
 void ClipPainterPrivate::clipPolyObject(const QPolygonF& polygon,
-                                        QVector<QPolygonF>& clippedPolyObjects,
+                                        QList<QPolygonF>& clippedPolyObjects,
                                         bool isClosed)
 {
   // mDebug() << "ClipPainter enabled." ;
@@ -536,9 +536,9 @@ void ClipPainterPrivate::clipPolyObject(const QPolygonF& polygon,
   // the current point is on the screen.
   QPolygonF clippedPolyObject = QPolygonF();
 
-  const QVector<QPointF>::const_iterator itStartPoint = polygon.constBegin();
-  const QVector<QPointF>::const_iterator itEndPoint = polygon.constEnd();
-  QVector<QPointF>::const_iterator itPoint = itStartPoint;
+  const QList<QPointF>::const_iterator itStartPoint = polygon.constBegin();
+  const QList<QPointF>::const_iterator itEndPoint = polygon.constEnd();
+  QList<QPointF>::const_iterator itPoint = itStartPoint;
 
   // We use a while loop to be able to cover linestrings as well as linear rings:
   // Linear rings require to tessellate the path from the last node to the first node
@@ -629,7 +629,7 @@ void ClipPainterPrivate::clipPolyObject(const QPolygonF& polygon,
 }
 
 void ClipPainterPrivate::clipMultiple(QPolygonF& clippedPolyObject,
-                                      QVector<QPolygonF>& clippedPolyObjects,
+                                      QList<QPolygonF>& clippedPolyObjects,
                                       bool isClosed)
 {
   Q_UNUSED(clippedPolyObjects)
@@ -1216,7 +1216,7 @@ void ClipPainterPrivate::clipMultiple(QPolygonF& clippedPolyObject,
 }
 
 void ClipPainterPrivate::clipOnceCorner(QPolygonF& clippedPolyObject,
-                                        QVector<QPolygonF>& clippedPolyObjects,
+                                        QList<QPolygonF>& clippedPolyObjects,
                                         const QPointF& corner,
                                         const QPointF& point,
                                         bool isClosed) const
@@ -1239,7 +1239,7 @@ void ClipPainterPrivate::clipOnceCorner(QPolygonF& clippedPolyObject,
 }
 
 void ClipPainterPrivate::clipOnceEdge(QPolygonF& clippedPolyObject,
-                                      QVector<QPolygonF>& clippedPolyObjects,
+                                      QList<QPolygonF>& clippedPolyObjects,
                                       const QPointF& point,
                                       bool isClosed) const
 {
@@ -1264,7 +1264,7 @@ void ClipPainterPrivate::clipOnceEdge(QPolygonF& clippedPolyObject,
 }
 
 void ClipPainterPrivate::clipOnce(QPolygonF& clippedPolyObject,
-                                  QVector<QPolygonF>& clippedPolyObjects,
+                                  QList<QPolygonF>& clippedPolyObjects,
                                   bool isClosed)
 {
   // Interpolate border points (linear interpolation)
@@ -1347,9 +1347,9 @@ void ClipPainterPrivate::debugDrawNodes(const QPolygonF& polygon)
   q->setPen(Qt::red);
   q->setBrush(QBrush("#40FF0000"));
 
-  const QVector<QPointF>::const_iterator itStartPoint = polygon.constBegin();
-  const QVector<QPointF>::const_iterator itEndPoint = polygon.constEnd();
-  QVector<QPointF>::const_iterator itPoint = itStartPoint;
+  const QList<QPointF>::const_iterator itStartPoint = polygon.constBegin();
+  const QList<QPointF>::const_iterator itEndPoint = polygon.constEnd();
+  QList<QPointF>::const_iterator itPoint = itStartPoint;
 
   int i = 0;
 

@@ -62,7 +62,7 @@ public:
                    Qt::FillRule fillRule = Qt::OddEvenFill);
 
   void drawPolyline(const QPolygonF&);
-  void drawPolyline(const QPolygonF&, QVector<QPointF>& labelNodes,
+  void drawPolyline(const QPolygonF&, QList<QPointF>& labelNodes,
                     LabelPositionFlags labelPositionFlag = LineCenter);
 
   void setDebugPolygonsLevel(int);

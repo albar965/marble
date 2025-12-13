@@ -22,7 +22,7 @@
 
 #include "MarbleDebug.h"
 
-#include "src/lib/astro/solarsystem.h"
+#include "astro/solarsystem.h"
 
 #include <QDateTime>
 

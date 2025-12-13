@@ -23,7 +23,7 @@
 #define MARBLE_GEOSCENELAYER_H
 
 #include <QString>
-#include <QVector>
+#include <QList>
 
 #include <geodata_export.h>
 
@@ -60,7 +60,7 @@ public:
   const GeoSceneAbstractDataset *groundDataset() const;
   GeoSceneAbstractDataset *groundDataset();
 
-  QVector<GeoSceneAbstractDataset *> datasets() const;
+  QList<GeoSceneAbstractDataset *> datasets() const;
 
   QString name() const;
 
@@ -87,7 +87,7 @@ private:
   /// The vector holding all the data in the layer.
   /// (We want to preserve the order and don't care
   /// much about speed here), so we don't use a hash
-  QVector<GeoSceneAbstractDataset *> m_datasets;
+  QList<GeoSceneAbstractDataset *> m_datasets;
 
   GeoSceneFilter *m_filter;
 

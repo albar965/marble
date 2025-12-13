@@ -16,13 +16,12 @@
 #define MARBLE_GEOSCENETILEDATASET_H
 
 #include <QList>
-#include <QVector>
+#include <QList>
 #include <QSize>
 
 #include "GeoSceneAbstractDataset.h"
 #include "MarbleGlobal.h"
 
-class QStringList;
 class QUrl;
 
 /**
@@ -81,9 +80,9 @@ public:
   void setMinimumTileLevel(int level);
 
   void setTileLevels(const QString& tileLevels);
-  QVector<int> tileLevels() const;
+  QList<int> tileLevels() const;
 
-  QVector<QUrl> downloadUrls() const;
+  QList<QUrl> downloadUrls() const;
 
   const QSize tileSize() const;
   void setTileSize(const QSize& tileSize);
@@ -124,16 +123,16 @@ private:
   int m_levelZeroRows;
   int m_minimumTileLevel;
   int m_maximumTileLevel;
-  QVector<int> m_tileLevels;
+  QList<int> m_tileLevels;
   mutable QSize m_tileSize;
   Projection m_projection;
   QString m_blending;
 
   /// List of Urls which are used in a round robin fashion
-  QVector<QUrl> m_downloadUrls;
+  QList<QUrl> m_downloadUrls;
 
   /// Points to next Url for the round robin algorithm
-  mutable QVector<QUrl>::const_iterator m_nextUrl;
+  mutable QList<QUrl>::const_iterator m_nextUrl;
   QList<const DownloadPolicy *> m_downloadPolicies;
 };
 

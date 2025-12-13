@@ -169,7 +169,7 @@ public:
                          bool& globeHidesPoint) const;
 
   bool screenCoordinates(const GeoDataLineString& lineString,
-                         QVector<QPolygonF *>& polygons) const;
+                         QList<QPolygonF *>& polygons) const;
 
   /**
    * @brief Get the earth coordinates corresponding to a pixel in the map.

@@ -49,7 +49,7 @@ public:
 
   virtual QString runtimeTrace() const;
 
-  QVector<const GeoDataFeature *> whichFeatureAt(const QPoint& curpos, const ViewportParams *viewport);
+  QList<const GeoDataFeature *> whichFeatureAt(const QPoint& curpos, const ViewportParams *viewport);
 
 public Q_SLOTS:
   void addPlacemarks(const QModelIndex& index, int first, int last);
@@ -77,7 +77,7 @@ Q_SIGNALS:
    * in GeoGraphicsScene which will query for placemark->styleUrl()
    * to decide whether the placemark should be highlighted ot not.
    */
-  void highlightedPlacemarksChanged(const QVector<GeoDataPlacemark *>& clickedPlacemarks);
+  void highlightedPlacemarksChanged(const QList<GeoDataPlacemark *>& clickedPlacemarks);
 
 private:
   GeometryLayerPrivate *d;

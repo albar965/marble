@@ -13,7 +13,7 @@
 #ifndef MARBLE_GEODATACONTAINER_H
 #define MARBLE_GEODATACONTAINER_H
 
-#include <QVector>
+#include <QList>
 
 #include "geodata_export.h"
 
@@ -36,7 +36,7 @@ class GeoDataLatLonAltBox;
  * class.
  *
  * It is based on GeoDataFeature, and it only adds a
- * QVector<GeodataFeature *> to it, making it a Feature that can hold
+ * QList<GeodataFeature *> to it, making it a Feature that can hold
  * other Features.
  *
  * @see GeoDataFolder
@@ -63,27 +63,27 @@ public:
 
   /**
    * @brief A convenience function that returns all folders in this container.
-   * @return A QVector of GeoDataFolder
+   * @return A QList of GeoDataFolder
    *
    * @see GeoDataFolder
    */
-  QVector<GeoDataFolder *> folderList() const;
+  QList<GeoDataFolder *> folderList() const;
 
   /**
    * @brief A convenience function that returns all features in this container.
-   * @return A QVector of GeoDataFeature
+   * @return A QList of GeoDataFeature
    *
    * @see GeoDataFeature
    */
-  QVector<GeoDataFeature *> featureList() const;
+  QList<GeoDataFeature *> featureList() const;
 
   /**
    * @brief A convenience function that returns all placemarks in this container.
-   * @return A QVector of GeoDataPlacemark
+   * @return A QList of GeoDataPlacemark
    *
    * @see GeoDataPlacemark
    */
-  QVector<GeoDataPlacemark *> placemarkList() const;
+  QList<GeoDataPlacemark *> placemarkList() const;
 
   /**
    * @brief  returns the requested child item
@@ -149,10 +149,10 @@ public:
   GeoDataFeature& first();
   const GeoDataFeature& first() const;
 
-  QVector<GeoDataFeature *>::Iterator begin();
-  QVector<GeoDataFeature *>::Iterator end();
-  QVector<GeoDataFeature *>::ConstIterator constBegin() const;
-  QVector<GeoDataFeature *>::ConstIterator constEnd() const;
+  QList<GeoDataFeature *>::Iterator begin();
+  QList<GeoDataFeature *>::Iterator end();
+  QList<GeoDataFeature *>::ConstIterator constBegin() const;
+  QList<GeoDataFeature *>::ConstIterator constEnd() const;
   void clear();
 
   /**

@@ -22,7 +22,6 @@
 // Marble
 #include "DialogConfigurationInterface.h"
 #include "GeoPainter.h"
-#include "MarbleDebug.h"
 
 namespace Marble {
 
@@ -77,7 +76,7 @@ QHash<QString, QVariant> AbstractFloatItem::settings() const
 
 void AbstractFloatItem::setSettings(const QHash<QString, QVariant>& settings)
 {
-  if(settings.value("position").type() == QVariant::String)
+  if(settings.value("position").typeId() == QMetaType::QString)
   {
     // work around KConfig turning QPointFs into QStrings
     const QStringList coordinates = settings.value("position").toString().split(QLatin1Char(','));
@@ -98,23 +97,23 @@ RenderPlugin::RenderType AbstractFloatItem::renderType() const
 
 QPen AbstractFloatItem::pen() const
 {
-  return d->s_pen;
+  return AbstractFloatItemPrivate::s_pen;
 }
 
 void AbstractFloatItem::setPen(const QPen& pen)
 {
-  d->s_pen = pen;
+  AbstractFloatItemPrivate::s_pen = pen;
   update();
 }
 
 QFont AbstractFloatItem::font() const
 {
-  return d->s_font;
+  return AbstractFloatItemPrivate::s_font;
 }
 
 void AbstractFloatItem::setFont(const QFont& font)
 {
-  d->s_font = font;
+  AbstractFloatItemPrivate::s_font = font;
   update();
 }
 

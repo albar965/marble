@@ -135,8 +135,8 @@ bool GeoPolygonGraphicsItem::isBuilding(GeoDataFeature::GeoDataVisualCategory vi
 
 void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter *painter, const ViewportParams *viewport,
                                                         bool& drawAccurate3D, bool& isCameraAboveBuilding, bool& hasInnerBoundaries,
-                                                        QVector<QPolygonF *>& outlinePolygons,
-                                                        QVector<QPolygonF *>& innerPolygons) const
+                                                        QList<QPolygonF *>& outlinePolygons,
+                                                        QList<QPolygonF *>& innerPolygons) const
 {
   drawAccurate3D = false;
   isCameraAboveBuilding = false;
@@ -165,9 +165,9 @@ void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter *painte
 
 QPointF GeoPolygonGraphicsItem::centroid(const QPolygonF& polygon, double& area)
 {
-  auto centroid = QPointF(0.0, 0.0);
+  QPointF centroid(0.0, 0.0);
   area = 0.0;
-  for(auto i = 0, n = polygon.size(); i < n; ++i)
+  for(qsizetype i = 0, n = polygon.size(); i < n; ++i)
   {
     auto const x0 = polygon[i].x();
     auto const y0 = polygon[i].y();
@@ -308,8 +308,8 @@ void GeoPolygonGraphicsItem::paintRoof(GeoPainter *painter, const ViewportParams
   bool drawAccurate3D;
   bool isCameraAboveBuilding;
   bool hasInnerBoundaries;
-  QVector<QPolygonF *> outlinePolygons;
-  QVector<QPolygonF *> innerPolygons;
+  QList<QPolygonF *> outlinePolygons;
+  QList<QPolygonF *> innerPolygons;
   initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding, hasInnerBoundaries, outlinePolygons, innerPolygons);
   if(!isCameraAboveBuilding)
   {
@@ -491,8 +491,8 @@ void GeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParam
   bool drawAccurate3D;
   bool isCameraAboveBuilding;
   bool hasInnerBoundaries;
-  QVector<QPolygonF *> outlinePolygons;
-  QVector<QPolygonF *> innerPolygons;
+  QList<QPolygonF *> outlinePolygons;
+  QList<QPolygonF *> innerPolygons;
   initializeBuildingPainting(painter, viewport, drawAccurate3D, isCameraAboveBuilding, hasInnerBoundaries, outlinePolygons, innerPolygons);
 
   configurePainter(painter, viewport, true);
@@ -545,19 +545,19 @@ void GeoPolygonGraphicsItem::paintFrame(GeoPainter *painter, const ViewportParam
 }
 
 void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, const GeoDataPolygon *polygon,
-                                            QVector<QPolygonF *>& innerPolygons, QVector<QPolygonF *>& outlines)
+                                            QList<QPolygonF *>& innerPolygons, QList<QPolygonF *>& outlines)
 {
   Q_ASSERT(polygon);
 
-  QVector<QPolygonF *> outerPolygons;
+  QList<QPolygonF *> outerPolygons;
   viewport->screenCoordinates(polygon->outerBoundary(), outerPolygons);
 
   outlines << outerPolygons;
 
-  QVector<GeoDataLinearRing> innerBoundaries = polygon->innerBoundaries();
+  QList<GeoDataLinearRing> innerBoundaries = polygon->innerBoundaries();
   foreach(const GeoDataLinearRing& innerBoundary, innerBoundaries)
   {
-    QVector<QPolygonF *> innerPolygonsPerBoundary;
+    QList<QPolygonF *> innerPolygonsPerBoundary;
     viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
 
     outlines << innerPolygonsPerBoundary;

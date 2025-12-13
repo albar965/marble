@@ -12,7 +12,7 @@
 #ifndef MARBLE_GEODATALINESTRING_H
 #define MARBLE_GEODATALINESTRING_H
 
-#include <QVector>
+#include <QList>
 #include <QMetaType>
 
 #include "MarbleGlobal.h"
@@ -47,7 +47,7 @@ class GeoDataLineStringPrivate;
     objects.
 
     The API which provides access to the nodes is similar to the API of
-    QVector.
+    QList.
 
     GeoDataLineString allows LineStrings to be tessellated in order to make them
     follow the terrain and the curvature of the earth. The tessellation options
@@ -73,9 +73,9 @@ class GEODATA_EXPORT GeoDataLineString :
 {
 
 public:
-  typedef QVector<GeoDataCoordinates>::Iterator Iterator;
-  typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
-  typedef QVector<GeoDataCoordinates>::const_iterator const_iterator;
+  typedef QList<GeoDataCoordinates>::Iterator Iterator;
+  typedef QList<GeoDataCoordinates>::ConstIterator ConstIterator;
+  typedef QList<GeoDataCoordinates>::const_iterator const_iterator;
 
   /*!
       \brief Creates a new LineString.
@@ -184,9 +184,9 @@ public:
 
       Deprecation Warning: This method will likely be removed from the public API.
   */
-  virtual QVector<GeoDataLineString *> toDateLineCorrected() const;
+  virtual QList<GeoDataLineString *> toDateLineCorrected() const;
 
-  // "Reimplementation" of QVector API
+  // "Reimplementation" of QList API
   /*!
       \brief Returns whether the LineString has no nodes at all.
 
@@ -260,7 +260,7 @@ public:
   /*!
       \brief Appends a given geodesic position as new nodes to the LineString.
   */
-  void append(const QVector<GeoDataCoordinates>& values);
+  void append(const QList<GeoDataCoordinates>& values);
 
   /*!
       \brief Appends a given geodesic position as a new node to the LineString.
@@ -281,24 +281,24 @@ public:
   /*!
       \brief Returns an iterator that points to the begin of the LineString.
   */
-  QVector<GeoDataCoordinates>::Iterator begin();
-  QVector<GeoDataCoordinates>::ConstIterator begin() const;
+  QList<GeoDataCoordinates>::Iterator begin();
+  QList<GeoDataCoordinates>::ConstIterator begin() const;
 
   /*!
       \brief Returns an iterator that points to the end of the LineString.
   */
-  QVector<GeoDataCoordinates>::Iterator end();
-  QVector<GeoDataCoordinates>::ConstIterator end() const;
+  QList<GeoDataCoordinates>::Iterator end();
+  QList<GeoDataCoordinates>::ConstIterator end() const;
 
   /*!
       \brief Returns a const iterator that points to the begin of the LineString.
   */
-  QVector<GeoDataCoordinates>::ConstIterator constBegin() const;
+  QList<GeoDataCoordinates>::ConstIterator constBegin() const;
 
   /*!
       \brief Returns a const iterator that points to the end of the LineString.
   */
-  QVector<GeoDataCoordinates>::ConstIterator constEnd() const;
+  QList<GeoDataCoordinates>::ConstIterator constEnd() const;
 
   /*!
       \brief Destroys all nodes in a LineString.
@@ -308,13 +308,13 @@ public:
   /*!
       \brief Removes the node at the given position and returns it.
   */
-  QVector<GeoDataCoordinates>::Iterator erase(QVector<GeoDataCoordinates>::Iterator position);
+  QList<GeoDataCoordinates>::Iterator erase(QList<GeoDataCoordinates>::Iterator position);
 
   /*!
       \brief Removes the nodes within the given range and returns them.
   */
-  QVector<GeoDataCoordinates>::Iterator erase(QVector<GeoDataCoordinates>::Iterator begin,
-                                              QVector<GeoDataCoordinates>::Iterator end);
+  QList<GeoDataCoordinates>::Iterator erase(QList<GeoDataCoordinates>::Iterator begin,
+                                              QList<GeoDataCoordinates>::Iterator end);
 
   /*!
       \brief Removes the node at the given position and destroys it.

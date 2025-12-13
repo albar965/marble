@@ -8,6 +8,6 @@ INCLUDE_DIRECTORIES(
 set( compass_SRCS CompassFloatItem.cpp )
 qt_add_resources( compass_SRCS compass.qrc )
 
-set( CompassFloatItem_LIBS Qt5::Svg )
+set( CompassFloatItem_LIBS Qt6::Svg )
 
 marble_add_plugin( CompassFloatItem ${compass_SRCS} )

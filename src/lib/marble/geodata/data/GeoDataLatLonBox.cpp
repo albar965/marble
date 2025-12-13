@@ -595,7 +595,7 @@ GeoDataLatLonBox GeoDataLatLonBox::united(const GeoDataLatLonBox& other) const
 
 GeoDataLatLonBox GeoDataLatLonBox::toCircumscribedRectangle() const
 {
-  QVector<GeoDataCoordinates> coordinates;
+  QList<GeoDataCoordinates> coordinates;
   coordinates.reserve(4);
 
   coordinates.append(GeoDataCoordinates(west(), north()));
@@ -760,8 +760,8 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(const GeoDataLineString& lineS
   int currentSign = (lon < 0) ? -1 : +1;
   int previousSign = currentSign;
 
-  QVector<GeoDataCoordinates>::ConstIterator it(lineString.constBegin());
-  QVector<GeoDataCoordinates>::ConstIterator itEnd(lineString.constEnd());
+  QList<GeoDataCoordinates>::ConstIterator it(lineString.constBegin());
+  QList<GeoDataCoordinates>::ConstIterator itEnd(lineString.constEnd());
 
   bool processingLastNode = false;
 
