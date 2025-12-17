@@ -77,7 +77,7 @@ endif()
 # Find Qt dependencies
 
 # Minimum Qt version
-set(REQUIRED_QT_VERSION 5.3.0)
+set(REQUIRED_QT_VERSION 6.5.0)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
    # TODO: still needed with ECM toolchain?
