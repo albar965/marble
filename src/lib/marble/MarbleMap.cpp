@@ -21,6 +21,7 @@
 // Qt
 #include <QTime>
 #include <QRegion>
+#include <QElapsedTimer>
 
 // Marble
 #include "layers/GeometryLayer.h"

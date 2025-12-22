@@ -550,7 +550,7 @@ QString GeoDataCoordinates::lonToString(qreal lon, GeoDataCoordinates::Notation 
       // Includes -1 case!
       if(precision < 5)
       {
-        lonString += QString(" %3\"").arg(lonSec, 2, 'f', 0, QChar('0'));
+        lonString += QString(" %3\"").arg(lonSec, 2, 10, QChar('0'));
         return lonString + weString;
       }
 
@@ -626,7 +626,7 @@ QString GeoDataCoordinates::lonToString(qreal lon, GeoDataCoordinates::Notation 
     // Includes -1 case!
     if(precision < 5)
     {
-      lonString += QString(" %3\"").arg(lonSec, 2, 'f', 0, QChar('0'));
+      lonString += QString(" %3\"").arg(lonSec, 2, 10, QChar('0'));
       return lonString;
     }
 
@@ -757,7 +757,7 @@ QString GeoDataCoordinates::latToString(qreal lat, GeoDataCoordinates::Notation 
       // Includes -1 case!
       if(precision < 5)
       {
-        latString += QString(" %3\"").arg(latSec, 2, 'f', 0, QChar('0'));
+        latString += QString(" %3\"").arg(latSec, 2, 10, QChar('0'));
         return latString + nsString;
       }
 

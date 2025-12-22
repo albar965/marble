@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# Echo all commands and exit on failure
+set -e
+set -x
+
 BUILDTYPE=debug
 export QT_PATH=${QT_PATH:-"$HOME/Qt"}
-export QT_PREFIX_PATH="${QT_PATH}/6.5.3/gcc_64"
+export QT_PREFIX_PATH="${QT_PATH}/${QT_VERSION}/gcc_64"
 
   echo QT_PREFIX_PATH: ${QT_PREFIX_PATH}
 

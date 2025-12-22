@@ -14,6 +14,7 @@
 #include <QFileInfo>
 #include <QTime>
 #include <QMessageBox>
+#include <QElapsedTimer>
 
 #include "FileLoader.h"
 #include "MarbleDebug.h"
