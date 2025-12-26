@@ -4,7 +4,6 @@
 # Run it to copy all required files to $APROJECTS/Marble-release
 
 mkdir $APROJECTS/Marble-release/include
-mkdir $APROJECTS/Marble-release/include/astro
 mkdir $APROJECTS/Marble-release/include/marble
 
 mkdir $APROJECTS/Marble-release/lib

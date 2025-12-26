@@ -19,6 +19,11 @@ if( WIN32 )
   add_compile_options(-fdiagnostics-color=never)
 endif()
 
+if( APPLE )
+  set(CMAKE_OSX_ARCHITECTURES arm64 x86_64)
+endif()
+
+
 # SET(CMAKE_SKIP_RPATH ON)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -111,7 +116,7 @@ if(WIN32)
     set(data_dir data)
     set(plugin_dir plugins)
 elseif(APPLE)
-#    set(CMAKE_OSX_DEPLOYMENT_TARGET 10.13)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0)
     # needed for finding bundle path in e.g. katlasdir.h
     FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
     MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)

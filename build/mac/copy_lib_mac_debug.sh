@@ -4,7 +4,6 @@
 # Run it to copy all required files to $APROJECTS/Marble-debug
 
 mkdir $APROJECTS/Marble-debug/include
-mkdir $APROJECTS/Marble-debug/include/astro
 mkdir $APROJECTS/Marble-debug/include/marble
 
 mkdir $APROJECTS/Marble-debug/lib
