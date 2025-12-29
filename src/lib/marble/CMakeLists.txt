@@ -23,7 +23,7 @@ INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
 # VERSION_NUMBER_TODO
-set(MARBLE_LIB_VERSION "1.0.0")
+set(MARBLE_LIB_VERSION "1.0.1")
 set(MARBLE_ABI_VERSION "1")
 
 ########### next target ###############
