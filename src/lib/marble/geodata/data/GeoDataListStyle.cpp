@@ -10,8 +10,8 @@
 
 #include "GeoDataListStyle.h"
 #include "GeoDataTypes.h"
-#include "MarbleDirs.h"
 
+#include <QColor>
 #include <QDataStream>
 
 namespace Marble {

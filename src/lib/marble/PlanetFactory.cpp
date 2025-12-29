@@ -11,6 +11,7 @@
 // Copyright 2014 Dennis Nienhüser <nienhueser@kde.org>
 
 #include "PlanetFactory.h"
+#include "MarbleColors.h"
 #include "Planet.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

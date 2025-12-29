@@ -20,6 +20,7 @@
 #include <QMenu>
 #include <QToolTip>
 
+#include "MarbleColors.h"
 #include "ui_MapScaleConfigWidget.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"

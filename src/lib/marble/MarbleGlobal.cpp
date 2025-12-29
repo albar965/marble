@@ -13,6 +13,9 @@
 
 namespace Marble {
 
+// Define program version here VERSION_NUMBER_TODO
+QString MarbleGlobal::VERSION_NUMBER_MARBLE_STRING = QStringLiteral("1.0.1");
+
 MarbleGlobalPrivate::MarbleGlobalPrivate()
   : m_profiles(MarbleGlobal::Default)
 {

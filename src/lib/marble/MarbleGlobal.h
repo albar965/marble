@@ -15,11 +15,9 @@
 #include <math.h>
 
 #include <QString>
+#include <QStringLiteral>
 
 #include "marble_export.h"
-#include "MarbleColors.h"
-
-// #define QT_STRICT_ITERATORS
 
 namespace Marble {
 
@@ -40,14 +38,14 @@ Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
  */
 enum Projection
 {
-  Spherical,            ///< Spherical projection ("Orthographic")
-  Equirectangular,      ///< Flat projection ("plate carree")
-  Mercator,             ///< Mercator projection
-  Gnomonic,             ///< Gnomonic projection
-  Stereographic,        ///< Stereographic projection
-  LambertAzimuthal,     ///< Lambert Azimuthal Equal-Area projection
-  AzimuthalEquidistant,     ///< Azimuthal Equidistant projection
-  VerticalPerspective   ///< Vertical perspective projection
+  Spherical, ///< Spherical projection ("Orthographic")
+  Equirectangular, ///< Flat projection ("plate carree")
+  Mercator, ///< Mercator projection
+  Gnomonic, ///< Gnomonic projection
+  Stereographic, ///< Stereographic projection
+  LambertAzimuthal, ///< Lambert Azimuthal Equal-Area projection
+  AzimuthalEquidistant, ///< Azimuthal Equidistant projection
+  VerticalPerspective ///< Vertical perspective projection
   // NOTE: MarbleWidget::setProjection(int) relies on VerticalPerspective being the last
   // value above. Adjust that method if you do changes here
 };
@@ -57,8 +55,8 @@ enum Projection
  */
 enum Dimension
 {
-  Latitude,               ///< Latitude
-  Longitude              ///< Longitude
+  Latitude, ///< Latitude
+  Longitude ///< Longitude
 };
 
 Q_DECLARE_FLAGS(Dimensions, Dimension)
@@ -68,9 +66,9 @@ Q_DECLARE_FLAGS(Dimensions, Dimension)
  */
 enum AngleUnit
 {
-  DMSDegree,            ///< Degrees in DMS notation
-  DecimalDegree,        ///< Degrees in decimal notation
-  UTM                   ///< UTM
+  DMSDegree, ///< Degrees in DMS notation
+  DecimalDegree, ///< Degrees in decimal notation
+  UTM ///< UTM
 };
 
 /**
@@ -78,8 +76,8 @@ enum AngleUnit
  */
 enum ViewContext
 {
-  Still,                ///< still image
-  Animation             ///< animated view (e.g. while rotating the globe)
+  Still, ///< still image
+  Animation ///< animated view (e.g. while rotating the globe)
 };
 
 /**
@@ -87,11 +85,11 @@ enum ViewContext
  */
 enum MapQuality
 {
-  OutlineQuality,       ///< Only a wire representation is drawn
-  LowQuality,           ///< Low resolution (e.g. interlaced)
-  NormalQuality,        ///< Normal quality
-  HighQuality,          ///< High quality (e.g. antialiasing for lines)
-  PrintQuality          ///< Print quality
+  OutlineQuality, ///< Only a wire representation is drawn
+  LowQuality, ///< Low resolution (e.g. interlaced)
+  NormalQuality, ///< Normal quality
+  HighQuality, ///< High quality (e.g. antialiasing for lines)
+  PrintQuality ///< Print quality
 };
 
 /**
@@ -99,8 +97,8 @@ enum MapQuality
  */
 enum ProxyType
 {
-  HttpProxy,            ///< Uses an Http proxy
-  Socks5Proxy           ///< Uses a Socks5Proxy
+  HttpProxy, ///< Uses an Http proxy
+  Socks5Proxy ///< Uses a Socks5Proxy
 };
 
 /**
@@ -124,10 +122,10 @@ Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
  */
 enum LabelLocalization
 {
-  CustomAndNative,      ///< Custom and native labels
-  Custom,               ///< Shows the name in the user's language
-  Native                ///< Display the name in the official language and
-                        /// glyphs of the labeled place.
+  CustomAndNative, ///< Custom and native labels
+  Custom, ///< Shows the name in the user's language
+  Native ///< Display the name in the official language and
+         /// glyphs of the labeled place.
 };
 
 /**
@@ -135,8 +133,8 @@ enum LabelLocalization
  */
 enum DragLocation
 {
-  KeepAxisVertically,   ///< Keep planet axis vertically
-  FollowMousePointer    ///< Follow mouse pointer exactly
+  KeepAxisVertically, ///< Keep planet axis vertically
+  FollowMousePointer ///< Follow mouse pointer exactly
 };
 
 /**
@@ -144,24 +142,24 @@ enum DragLocation
  */
 enum OnStartup
 {
-  ShowHomeLocation,     ///< Show home location on startup
-  LastLocationVisited   ///< Show last location visited on quit
+  ShowHomeLocation, ///< Show home location on startup
+  LastLocationVisited ///< Show last location visited on quit
 };
 
 enum AltitudeMode
 {
-  ClampToGround,        ///< Altitude always sticks to ground level
-  RelativeToGround,     ///< Altitude is always given relative to ground level
-  Absolute,              ///< Altitude is given relative to the sealevel
-  RelativeToSeaFloor,    ///< Altitude is given relative to the sea floor
-  ClampToSeaFloor        ///< Altitude always sticks to sea floor
+  ClampToGround, ///< Altitude always sticks to ground level
+  RelativeToGround, ///< Altitude is always given relative to ground level
+  Absolute, ///< Altitude is given relative to the sealevel
+  RelativeToSeaFloor, ///< Altitude is given relative to the sea floor
+  ClampToSeaFloor ///< Altitude always sticks to sea floor
 };
 
 enum Pole
 {
-  AnyPole,               ///< Any pole
-  NorthPole,             ///< Only North Pole
-  SouthPole              ///< Only South Pole
+  AnyPole, ///< Any pole
+  NorthPole, ///< Only North Pole
+  SouthPole ///< Only South Pole
 };
 
 /**
@@ -169,8 +167,8 @@ enum Pole
  */
 enum DownloadUsage
 {
-  DownloadBulk,         ///< Bulk download, for example "File/Download region"
-  DownloadBrowse        ///< Browsing mode, normal operation of Marble, like a web browser
+  DownloadBulk, ///< Bulk download, for example "File/Download region"
+  DownloadBrowse ///< Browsing mode, normal operation of Marble, like a web browser
 };
 
 /**
@@ -179,10 +177,10 @@ enum DownloadUsage
  */
 enum FlyToMode
 {
-  Automatic,   ///< A sane value is chosen automatically depending on animation settings and the action
-  Instant,   ///< Change camera position immediately (no interpolation)
-  Linear,   ///< Linear interpolation of lon, lat and distance to ground
-  Jump   ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases
+  Automatic, ///< A sane value is chosen automatically depending on animation settings and the action
+  Instant, ///< Change camera position immediately (no interpolation)
+  Linear, ///< Linear interpolation of lon, lat and distance to ground
+  Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases
 };
 
 /**
@@ -190,8 +188,8 @@ enum FlyToMode
  */
 enum SearchMode
 {
-  GlobalSearch,   ///< Search a whole planet
-  AreaSearch   ///< Search a certain region of a planet (e.g. visible region)
+  GlobalSearch, ///< Search a whole planet
+  AreaSearch ///< Search a certain region of a planet (e.g. visible region)
 };
 
 /**
@@ -199,10 +197,10 @@ enum SearchMode
  */
 enum RenderStatus
 {
-  Complete,   ///< All data is there and up to date
-  WaitingForUpdate,   ///< Rendering is based on complete, but outdated data, data update was requested
-  WaitingForData,   ///< Rendering is based on no or partial data, more data was requested (e.g. pending network queries)
-  Incomplete   ///< Data is missing and some error occurred when trying to retrieve it (e.g. network failure)
+  Complete, ///< All data is there and up to date
+  WaitingForUpdate, ///< Rendering is based on complete, but outdated data, data update was requested
+  WaitingForData, ///< Rendering is based on no or partial data, more data was requested (e.g. pending network queries)
+  Incomplete ///< Data is missing and some error occurred when trying to retrieve it (e.g. network failure)
 };
 
 const int defaultLevelZeroColumns = 2;
@@ -259,18 +257,6 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
 // Version definitions to use with an external application (as digiKam)
 
-// String for about dialog and http user agent
-// FIXME: check if blanks are allowed in user agent version numbers
-// VERSION_NUMBER_TODO
-const QString MARBLE_VERSION_STRING = QString::fromLatin1("1.0.0 (stable release for Little Navmap)");
-
-// API Version id:
-// form : 0xMMmmpp
-// MM = major revision.
-// mm = minor revision.
-// pp = patch revision.
-#define MARBLE_VERSION 0x001902
-
 static const char NOT_AVAILABLE[] = QT_TRANSLATE_NOOP("Marble", "not available");
 
 const int tileDigits = 6;
@@ -314,8 +300,18 @@ public:
    */
   static Profiles detectProfiles();
 
+  static const QString& getVersionNumber()
+  {
+    return VERSION_NUMBER_MARBLE_STRING;
+  }
+
 private:
   MarbleGlobal();
+
+  // String for about dialog and http user agent
+  // FIXME: check if blanks are allowed in user agent version numbers
+  // VERSION_NUMBER_TODO
+  static QString VERSION_NUMBER_MARBLE_STRING;
 
   Q_DISABLE_COPY(MarbleGlobal)
   MarbleGlobalPrivate * const d;

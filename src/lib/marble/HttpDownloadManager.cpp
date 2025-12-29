@@ -241,7 +241,7 @@ QByteArray HttpDownloadManager::userAgent(const QString& platform, const QString
   QString result("Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4)");
   bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
   QString const device = smallScreen ? "MobileDevice" : "DesktopDevice";
-  result = result.arg(MARBLE_VERSION_STRING, device, platform, component);
+  result = result.arg(MarbleGlobal::getVersionNumber(), device, platform, component);
   return result.toLatin1();
 }
 

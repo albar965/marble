@@ -11,6 +11,7 @@
 #include "GeoDataBalloonStyle.h"
 #include "GeoDataTypes.h"
 
+#include <QColor>
 #include <QDataStream>
 
 namespace Marble {
