@@ -5,11 +5,8 @@ project(marble)
 ####################################################
 # CMake Settings
 
-add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
-
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x060500)
 add_compile_options(-Wno-deprecated-copy -Wno-deprecated-declarations, -Wno-unknown-warning-option)
-
-# add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050F00)
 
 SET(CMAKE_COLOR_MAKEFILE ON)
 
@@ -50,9 +47,6 @@ endif()
 set(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-if (POLICY CMP0063)
-    cmake_policy(SET CMP0063 NEW)
-endif()
 
 ####################################################
 # Where to look first for cmake modules,
@@ -73,21 +67,11 @@ include( MarbleMacros )
 #######################################################
 # Specific options for building for different platforms
 
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
-   add_definitions(-DANDROID)
-endif()
-
-
 #######################################################
 # Find Qt dependencies
 
 # Minimum Qt version
 set(REQUIRED_QT_VERSION 6.5.0)
-
-if(CMAKE_SYSTEM_NAME STREQUAL Android)
-   # TODO: still needed with ECM toolchain?
-   SET(QT_QMAKE_EXECUTABLE "$ENV{Qt6_android}/bin/qmake")
-endif()
 
 find_package(Qt6Core ${REQUIRED_QT_VERSION} REQUIRED)
 find_package(Qt6Xml ${REQUIRED_QT_VERSION} REQUIRED)
@@ -130,9 +114,6 @@ elseif(APPLE)
       #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
       SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
       SET (plugin_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/plugins)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Android)
-      set(plugin_dir "${CMAKE_INSTALL_PREFIX}/assets/plugins")
-      set(data_dir "${CMAKE_INSTALL_PREFIX}/assets/data")
 else() # Linux / bsd etc...
       set(data_dir ${CMAKE_INSTALL_FULL_DATAROOTDIR}/marble/data)
       set(plugin_dir ${CMAKE_INSTALL_FULL_LIBDIR}/marble/plugins)

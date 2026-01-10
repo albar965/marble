@@ -29,12 +29,12 @@ Q_SIGNALS:
   void repaintNeeded();
 
 protected:
-  void enterEvent(QEvent *);
-  void mouseMoveEvent(QMouseEvent *mouseEvent);
-  void mousePressEvent(QMouseEvent *);
-  void mouseReleaseEvent(QMouseEvent *);
-  void leaveEvent(QEvent *);
-  void paintEvent(QPaintEvent *);
+  virtual void enterEvent(QEnterEvent *) override;
+  virtual void mouseMoveEvent(QMouseEvent *mouseEvent) override;
+  virtual void mousePressEvent(QMouseEvent *) override;
+  virtual void mouseReleaseEvent(QMouseEvent *) override;
+  virtual void leaveEvent(QEvent *) override;
+  virtual void paintEvent(QPaintEvent *) override;
   void repaint();
 
 private:

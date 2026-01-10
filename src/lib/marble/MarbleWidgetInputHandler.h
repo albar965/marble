@@ -40,7 +40,6 @@ private Q_SLOTS:
 
 private:
   bool handleKeyPress(QKeyEvent *event);
-  AbstractSelectionRubber *selectionRubber();
   bool layersEventFilter(QObject *o, QEvent *e);
 
   typedef QSharedPointer<MarbleWidgetInputHandlerPrivate> MarbleWidgetInputHandlerPrivatePtr;

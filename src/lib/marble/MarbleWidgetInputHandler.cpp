@@ -26,50 +26,10 @@ namespace Marble {
 
 class MarbleWidgetInputHandlerPrivate
 {
-  class MarbleWidgetSelectionRubber :
-    public AbstractSelectionRubber
-  {
-public:
-    explicit MarbleWidgetSelectionRubber(MarbleWidget *widget)
-      : m_rubberBand(QRubberBand::Rectangle, widget)
-    {
-      m_rubberBand.hide();
-    }
-
-    void show()
-    {
-      m_rubberBand.show();
-    }
-
-    void hide()
-    {
-      m_rubberBand.hide();
-    }
-
-    bool isVisible() const
-    {
-      return m_rubberBand.isVisible();
-    }
-
-    const QRect& geometry() const
-    {
-      return m_rubberBand.geometry();
-    }
-
-    void setGeometry(const QRect& geometry)
-    {
-      m_rubberBand.setGeometry(geometry);
-    }
-
-private:
-    QRubberBand m_rubberBand;
-  };
-
 public:
   MarbleWidgetInputHandlerPrivate(MarbleWidgetInputHandler *handler, MarbleWidget *widget)
     : m_inputHandler(handler)
     , m_marbleWidget(widget)
-    , m_selectionRubber(widget)
     , m_debugModeEnabled(false)
   {
     foreach(RenderPlugin * renderPlugin, widget->renderPlugins())
@@ -99,7 +59,6 @@ public:
 
   MarbleWidgetInputHandler *m_inputHandler;
   MarbleWidget *m_marbleWidget;
-  MarbleWidgetSelectionRubber m_selectionRubber;
   bool m_debugModeEnabled;
 };
 
@@ -126,11 +85,6 @@ bool MarbleWidgetInputHandler::handleKeyPress(QKeyEvent *event)
     }
   }
   return MarbleDefaultInputHandler::handleKeyPress(event);
-}
-
-AbstractSelectionRubber *MarbleWidgetInputHandler::selectionRubber()
-{
-  return &d->m_selectionRubber;
 }
 
 bool MarbleWidgetInputHandler::layersEventFilter(QObject *o, QEvent *e)

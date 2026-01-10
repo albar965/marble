@@ -44,53 +44,37 @@ class OverviewMap :
 public:
   OverviewMap();
   explicit OverviewMap(const MarbleModel *marbleModel);
-  ~OverviewMap();
+  virtual ~OverviewMap();
 
-  QStringList backendTypes() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  QIcon icon() const;
-
-  QDialog *configDialog();
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  void setProjection(const ViewportParams *viewport);
-
-  void paintContent(QPainter *painter);
+  virtual QStringList backendTypes() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual QIcon icon() const override;
+  virtual QDialog *configDialog() override;
+  virtual void initialize() override;
+  virtual bool isInitialized() const override;
+  virtual void setProjection(const ViewportParams *viewport) override;
+  virtual void paintContent(QPainter *painter) override;
 
   /**
    * @return: The settings of the item.
    */
-  virtual QHash<QString, QVariant> settings() const;
+  virtual QHash<QString, QVariant> settings() const override;
 
   /**
    * Set the settings of the item.
    */
-  virtual void setSettings(const QHash<QString, QVariant>& settings);
+  virtual void setSettings(const QHash<QString, QVariant>& settings) override;
 
 public Q_SLOTS:
   void readSettings();
   void writeSettings();
   void updateSettings();
-
-protected:
-  bool eventFilter(QObject *object, QEvent *e);
 
 private:
   void changeBackground(const QString& target);

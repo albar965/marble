@@ -57,41 +57,24 @@ public:
 
   explicit GraticulePlugin(const MarbleModel *marbleModel);
 
-  QStringList backendTypes() const;
-
-  QString renderPolicy() const;
-
-  QStringList renderPosition() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  QIcon icon() const;
-
-  virtual QDialog *configDialog();
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  virtual bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0);
-
-  virtual qreal zValue() const;
-
-  virtual QHash<QString, QVariant> settings() const;
-
-  virtual void setSettings(const QHash<QString, QVariant>& settings);
+  virtual QStringList backendTypes() const override;
+  virtual QString renderPolicy() const override;
+  virtual QStringList renderPosition() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual QIcon icon() const override;
+  virtual QDialog *configDialog() override;
+  virtual void initialize() override;
+  virtual bool isInitialized() const override;
+  virtual bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0) override;
+  virtual qreal zValue() const override;
+  virtual QHash<QString, QVariant> settings() const override;
+  virtual void setSettings(const QHash<QString, QVariant>& settings) override;
 
 public Q_SLOTS:
   void readSettings();

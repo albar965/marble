@@ -31,37 +31,23 @@ public:
 
   explicit AtmospherePlugin(const MarbleModel *marbleModel);
 
-  QStringList backendTypes() const;
+  virtual QStringList backendTypes() const override;
+  virtual QString renderPolicy() const override;
+  virtual QStringList renderPosition() const override;
+  virtual RenderType renderType() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QIcon icon() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual qreal zValue() const override;
+  virtual void initialize() override;
+  virtual bool isInitialized() const override;
 
-  QString renderPolicy() const;
-
-  QStringList renderPosition() const;
-
-  virtual RenderType renderType() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QIcon icon() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  qreal zValue() const;
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0);
+  virtual bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer = 0) override;
   void repaintPixmap(const ViewportParams *viewParams);
 
 public Q_SLOTS:

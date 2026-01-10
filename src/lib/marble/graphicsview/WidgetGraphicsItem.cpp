@@ -127,7 +127,7 @@ bool WidgetGraphicsItem::eventFilter(QObject *object, QEvent *e)
 
       if(child && d->m_activeWidget != child)
       {
-        QEvent enterEvent(QEvent::Enter);
+        QEvent enterEvent(QEnterEvent::Enter);
         QApplication::sendEvent(child, &enterEvent);
       }
       d->m_activeWidget = child;

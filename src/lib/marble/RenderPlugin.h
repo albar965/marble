@@ -341,7 +341,7 @@ private:
 
 #define MARBLE_PLUGIN(T) \
 public: \
-        virtual RenderPlugin *newInstance(const MarbleModel * marbleModel) const {return new T(marbleModel);}
+        virtual RenderPlugin *newInstance(const MarbleModel * marbleModel) const  override {return new T(marbleModel);}
 }
 
 #endif

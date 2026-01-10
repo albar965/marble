@@ -339,7 +339,7 @@ void OverviewMap::setSettings(const QHash<QString, QVariant>& settings)
 
   m_settings.insert("posColor", settings.value("posColor", QColor(Qt::white).name()));
 
-  m_target.clear();   // FIXME: forces execution of changeBackground() in changeViewport()
+  m_target.clear(); // FIXME: forces execution of changeBackground() in changeViewport()
 
   readSettings();
   emit settingsChanged(nameId());
@@ -396,56 +396,6 @@ void OverviewMap::updateSettings()
   }
 
   setContentSize(QSizeF(ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value()));
-}
-
-bool OverviewMap::eventFilter(QObject *object, QEvent *e)
-{
-  if(!enabled() || !visible())
-  {
-    return false;
-  }
-
-  MarbleWidget *widget = dynamic_cast<MarbleWidget *>(object);
-  if(!widget)
-  {
-    return AbstractFloatItem::eventFilter(object, e);
-  }
-
-  if(e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove)
-  {
-    QMouseEvent *event = static_cast<QMouseEvent *>(e);
-    QRectF floatItemRect = QRectF(positivePosition(), size());
-
-    bool cursorAboveFloatItem(false);
-    if(floatItemRect.contains(event->pos()))
-    {
-      cursorAboveFloatItem = true;
-
-      // Double click triggers recentering the map at the specified position
-      if(e->type() == QEvent::MouseButtonDblClick)
-      {
-        QRectF mapRect(contentRect());
-        QPointF pos = event->pos() - floatItemRect.topLeft() -
-                      QPointF(padding(), padding());
-
-        qreal lon = (pos.x() - mapRect.width() / 2.0) / mapRect.width() * 360.0;
-        qreal lat = (mapRect.height() / 2.0 - pos.y()) / mapRect.height() * 180.0;
-        widget->centerOn(lon, lat, true);
-
-        return true;
-      }
-    }
-
-    if(cursorAboveFloatItem && e->type() == QEvent::MouseMove &&
-       !(event->buttons() & Qt::LeftButton))
-    {
-      // Cross hair cursor when moving above the float item without pressing a button
-      widget->setCursor(QCursor(Qt::CrossCursor));
-      return true;
-    }
-  }
-
-  return AbstractFloatItem::eventFilter(object, e);
 }
 
 void OverviewMap::changeBackground(const QString& target)

@@ -43,39 +43,23 @@ public:
   explicit CompassFloatItem(const MarbleModel *marbleModel);
   ~CompassFloatItem();
 
-  QStringList backendTypes() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  QIcon icon() const;
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  QPainterPath backgroundShape() const;
-
-  void setProjection(const ViewportParams *viewport);
-
-  void paintContent(QPainter *painter);
-
-  QDialog *configDialog();
-
-  QHash<QString, QVariant> settings() const;
-
-  void setSettings(const QHash<QString, QVariant>& settings);
+  virtual QStringList backendTypes() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual QIcon icon() const override;
+  virtual void initialize()  override;
+  virtual bool isInitialized() const override;
+  virtual QPainterPath backgroundShape() const override;
+  virtual void setProjection(const ViewportParams *viewport)  override;
+  virtual void paintContent(QPainter *painter)  override;
+  virtual QDialog *configDialog()  override;
+  virtual QHash<QString, QVariant> settings() const override;
+  virtual void setSettings(const QHash<QString, QVariant>& settings)  override;
 
 private Q_SLOTS:
   void readSettings();

@@ -107,21 +107,6 @@ private:
   Q_DISABLE_COPY(MarbleInputHandler)
 };
 
-class AbstractSelectionRubber
-{
-public:
-  virtual ~AbstractSelectionRubber()
-  {
-  }
-
-  virtual void show() = 0;
-  virtual void hide() = 0;
-  virtual bool isVisible() const = 0;
-  virtual const QRect& geometry() const = 0;
-  virtual void setGeometry(const QRect& geometry) = 0;
-
-};
-
 class MARBLE_EXPORT MarbleDefaultInputHandler :
   public MarbleInputHandler
 {
@@ -154,7 +139,6 @@ private Q_SLOTS:
   void lmbTimeout();
 
 private:
-  virtual AbstractSelectionRubber *selectionRubber() = 0;
   virtual bool layersEventFilter(QObject *, QEvent *) = 0;
 
   virtual bool handleTouch(QTouchEvent *e);
@@ -168,7 +152,6 @@ private:
   virtual void handleMiddleMouseButtonPress(QMouseEvent *e);
   virtual void handleMouseButtonRelease(QMouseEvent *e);
 
-  virtual void hideSelectionIfCtrlReleased(QEvent *e);
   virtual void checkReleasedMove(QMouseEvent *e);
 
   // Returns whatever should be returned from mouse event handling loop
@@ -176,7 +159,7 @@ private:
 
   void notifyPosition(bool isAboveMap, qreal mouseLon, qreal mouseLat);
   QPoint mouseMovedOutside(QMouseEvent *event);
-  void adjustCursorShape(const QPoint& mousePosition, const QPoint& mouseDirection);
+  void adjustCursorShape(const QPoint& mousePosition, const QPoint&);
 
   Q_DISABLE_COPY(MarbleDefaultInputHandler)
   class Private;

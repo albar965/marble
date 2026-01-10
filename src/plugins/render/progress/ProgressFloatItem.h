@@ -37,31 +37,19 @@ public:
   explicit ProgressFloatItem(const MarbleModel *marbleModel = 0);
   ~ProgressFloatItem();
 
-  QStringList backendTypes() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  QIcon icon() const;
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  QPainterPath backgroundShape() const;
-
-  void paintContent(QPainter *painter);
+  virtual QStringList backendTypes() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual QIcon icon() const override;
+  virtual void initialize()  override;
+  virtual bool isInitialized() const override;
+  virtual QPainterPath backgroundShape() const override;
+  virtual void paintContent(QPainter *painter)  override;
 
 private Q_SLOTS:
   void removeProgressItem();

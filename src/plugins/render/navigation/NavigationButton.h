@@ -27,12 +27,12 @@ Q_SIGNALS:
   void repaintNeeded();
 
 protected:
-  void mousePressEvent(QMouseEvent *mouseEvent);
-  void mouseReleaseEvent(QMouseEvent *mouseEvent);
-  void enterEvent(QEvent *e);
-  void leaveEvent(QEvent *e);
-  void changeEvent(QEvent *e);
-  void paintEvent(QPaintEvent *);
+  virtual void mousePressEvent(QMouseEvent *mouseEvent) override;
+  virtual void mouseReleaseEvent(QMouseEvent *mouseEvent) override;
+  virtual void enterEvent(QEnterEvent *e) override;
+  virtual void leaveEvent(QEvent *e) override;
+  virtual void changeEvent(QEvent *e) override;
+  virtual void paintEvent(QPaintEvent *) override;
 
 private:
   QIcon::Mode m_iconMode;

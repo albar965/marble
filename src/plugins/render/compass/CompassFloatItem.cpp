@@ -143,13 +143,12 @@ void CompassFloatItem::paintContent(QPainter *painter)
   int fontheight = QFontMetrics(font()).ascent();
   int fontwidth = QFontMetrics(font()).boundingRect(dirstr).width();
 
-  QPen outlinepen(background().color());
-  outlinepen.setWidth(2);
+  QPen outlinepen(Qt::white);
+  outlinepen.setWidth(4);
   QBrush outlinebrush(pen().color());
 
   QPainterPath outlinepath;
-  const QPointF baseline(0.5 * (qreal)(compassRect.width() - fontwidth),
-                         (qreal)(fontheight) + 2.0);
+  const QPointF baseline(0.5 * (qreal)(compassRect.width() - fontwidth), (qreal)(fontheight) + 2.0);
 
   outlinepath.addText(baseline, font(), dirstr);
 

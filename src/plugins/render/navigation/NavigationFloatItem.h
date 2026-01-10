@@ -43,42 +43,29 @@ class NavigationFloatItem :
 
 public:
   explicit NavigationFloatItem(const MarbleModel *marbleModel = 0);
-  ~NavigationFloatItem();
+  virtual ~NavigationFloatItem();
 
-  QStringList backendTypes() const;
-
-  QString name() const;
-
-  QString guiString() const;
-
-  QString nameId() const;
-
-  QString version() const;
-
-  QString description() const;
-
-  QString copyrightYears() const;
-
-  QList<PluginAuthor> pluginAuthors() const;
-
-  QIcon icon() const;
-
-  void initialize();
-
-  bool isInitialized() const;
-
-  void setProjection(const ViewportParams *viewport);
+  virtual QStringList backendTypes() const override;
+  virtual QString name() const override;
+  virtual QString guiString() const override;
+  virtual QString nameId() const override;
+  virtual QString version() const override;
+  virtual QString description() const override;
+  virtual QString copyrightYears() const override;
+  virtual QList<PluginAuthor> pluginAuthors() const override;
+  virtual QIcon icon() const override;
+  virtual void initialize()  override;
+  virtual bool isInitialized() const override;
+  virtual void setProjection(const ViewportParams *viewport)  override;
+  virtual QHash<QString, QVariant> settings() const override;
+  virtual void setSettings(const QHash<QString, QVariant>& settings)  override;
 
   static QPixmap pixmap(const QString& Id);
 
-  QHash<QString, QVariant> settings() const;
-
-  void setSettings(const QHash<QString, QVariant>& settings);
-
 protected:
-  bool eventFilter(QObject *object, QEvent *e);
-  void paintContent(QPainter *painter);
-  void contextMenuEvent(QWidget *w, QContextMenuEvent *e);
+  virtual bool eventFilter(QObject *object, QEvent *e) override;
+  virtual void paintContent(QPainter *painter) override;
+  virtual void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
 private Q_SLOTS:
   /** Map theme was changed, adjust controls */
