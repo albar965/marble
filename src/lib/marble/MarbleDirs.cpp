@@ -270,7 +270,7 @@ QStringList MarbleDirs::oldLocalPaths()
   WCHAR *appdata_path = new WCHAR[MAX_PATH + 1];
 
   SHGetSpecialFolderPathW(hwnd, appdata_path, CSIDL_APPDATA, 0);
-  QString appdata = QString::fromUtf16(static_cast<const char16_t*>(appdata_path));
+  QString appdata = QString::fromUtf16(reinterpret_cast<const char16_t*>(appdata_path));
   delete[] appdata_path;
   possibleOldPaths << QString(QDir::fromNativeSeparators(appdata) + "/.marble/data"); // local path
 #endif
