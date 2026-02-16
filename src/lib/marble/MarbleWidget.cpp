@@ -173,47 +173,47 @@ void MarbleWidgetPrivate::construct()
   m_map.setShowFrameRate(false);      // never let the map draw the frame rate,
                                       // we do this differently here in the widget
 
-  m_widget->connect(&m_presenter, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)));
+  MarbleWidget::connect(&m_presenter, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)));
 
-  m_widget->connect(&m_presenter, SIGNAL(zoomChanged(int)), m_widget, SIGNAL(zoomChanged(int)));
-  m_widget->connect(&m_presenter, SIGNAL(distanceChanged(QString)), m_widget, SIGNAL(distanceChanged(QString)));
+  MarbleWidget::connect(&m_presenter, SIGNAL(zoomChanged(int)), m_widget, SIGNAL(zoomChanged(int)));
+  MarbleWidget::connect(&m_presenter, SIGNAL(distanceChanged(QString)), m_widget, SIGNAL(distanceChanged(QString)));
 
   // forward some signals of m_map
-  m_widget->connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+  MarbleWidget::connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                     m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)));
-  m_widget->connect(&m_map, SIGNAL(projectionChanged(Projection)),
+  MarbleWidget::connect(&m_map, SIGNAL(projectionChanged(Projection)),
                     m_widget, SIGNAL(projectionChanged(Projection)));
-  m_widget->connect(&m_map, SIGNAL(tileLevelChanged(int)),
+  MarbleWidget::connect(&m_map, SIGNAL(tileLevelChanged(int)),
                     m_widget, SIGNAL(tileLevelChanged(int)));
-  m_widget->connect(&m_map, SIGNAL(framesPerSecond(qreal)),
+  MarbleWidget::connect(&m_map, SIGNAL(framesPerSecond(qreal)),
                     m_widget, SIGNAL(framesPerSecond(qreal)));
-  m_widget->connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
+  MarbleWidget::connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
                     m_widget, SLOT(setViewContext(ViewContext)));
 
-  m_widget->connect(&m_map, SIGNAL(pluginSettingsChanged()),
+  MarbleWidget::connect(&m_map, SIGNAL(pluginSettingsChanged()),
                     m_widget, SIGNAL(pluginSettingsChanged()));
-  m_widget->connect(&m_map, SIGNAL(renderPluginInitialized(RenderPlugin*)),
+  MarbleWidget::connect(&m_map, SIGNAL(renderPluginInitialized(RenderPlugin*)),
                     m_widget, SIGNAL(renderPluginInitialized(RenderPlugin*)));
 
   // react to some signals of m_map
-  m_widget->connect(&m_map, SIGNAL(themeChanged(QString)),
+  MarbleWidget::connect(&m_map, SIGNAL(themeChanged(QString)),
                     m_widget, SLOT(updateMapTheme()));
-  m_widget->connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
+  MarbleWidget::connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
                     m_widget, SIGNAL(viewContextChanged(ViewContext)));
-  m_widget->connect(&m_map, SIGNAL(repaintNeeded(QRegion)),
+  MarbleWidget::connect(&m_map, SIGNAL(repaintNeeded(QRegion)),
                     m_widget, SLOT(update()));
-  m_widget->connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
+  MarbleWidget::connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
                     m_widget, SLOT(updateSystemBackgroundAttribute()));
-  m_widget->connect(&m_map, SIGNAL(renderStatusChanged(RenderStatus)),
+  MarbleWidget::connect(&m_map, SIGNAL(renderStatusChanged(RenderStatus)),
                     m_widget, SIGNAL(renderStatusChanged(RenderStatus)));
-  m_widget->connect(&m_map, SIGNAL(renderStateChanged(RenderState)),
+  MarbleWidget::connect(&m_map, SIGNAL(renderStateChanged(RenderState)),
                     m_widget, SIGNAL(renderStateChanged(RenderState)));
 
-  m_widget->connect(m_model.fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
+  MarbleWidget::connect(m_model.fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
                     m_widget, SLOT(centerOn(GeoDataLatLonBox)));
 
   // Show a progress dialog when the model calculates new map tiles.
-  m_widget->connect(&m_model, SIGNAL(creatingTilesStart(TileCreator*,const QString&,
+  MarbleWidget::connect(&m_model, SIGNAL(creatingTilesStart(TileCreator*,const QString&,
                                                         const QString&)),
                     m_widget, SLOT(creatingTilesStart(TileCreator*,const QString&,
                                                       const QString&)));
@@ -223,7 +223,7 @@ void MarbleWidgetPrivate::construct()
 
   m_map.addLayer(&m_customPaintLayer);
 
-  m_widget->connect(m_inputhandler, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)),
+  MarbleWidget::connect(m_inputhandler, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)),
                     m_widget, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)));
   m_widget->setHighlightEnabled(true);
 

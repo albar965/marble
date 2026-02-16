@@ -72,7 +72,7 @@ public:
     m_planet(PlanetFactory::construct("earth")),
     m_sunLocator(&m_clock, &m_planet),
     m_pluginManager(),
-    m_homePoint(-9.4, 54.8, 0.0, GeoDataCoordinates::Degree),          // Some point that tackat defined. :-)
+    m_homePoint(-9.4, 54.8, 0.0, GeoDataCoordinates::Degree), // Some point that tackat defined. :-)
     m_homeZoom(1050),
     m_mapTheme(0),
     m_storagePolicy(MarbleDirs::localPath()),
@@ -842,7 +842,7 @@ void MarbleModelPrivate::assignFillColors(const QString& filePath)
                   Q_ASSERT(colors.size());
                   if(colorIndex > colors.size() || (colorIndex - 1) < 0)
                   {
-                    color = colors[0];                          // Assign the first color as default
+                    color = colors[0]; // Assign the first color as default
                   }
                   else
                   {
@@ -918,6 +918,11 @@ ElevationModel *MarbleModel::elevationModel()
 const ElevationModel *MarbleModel::elevationModel() const
 {
   return &d->m_elevationModel;
+}
+
+int MarbleModel::pendingFileManagerTasks() const
+{
+  return d->m_fileManager.pendingFiles();
 }
 
 }

@@ -83,17 +83,18 @@ void FileManager::addFile(const QString& filepath, const QString& property, cons
 {
   if(d->m_fileItemHash.contains(filepath))
   {
-    return;          // already loaded
+    return; // already loaded
   }
 
   foreach(const FileLoader * loader, d->m_loaderList)
   {
     if(loader->path() == filepath)
-      return;        // currently loading
+      return; // currently loading
   }
 
   mDebug() << "adding container:" << filepath;
   mDebug() << "Starting placemark loading timer";
+  mDebug() << "pendingFiles:" << pendingFiles();
   d->m_timer.start();
   FileLoader *loader = new FileLoader(this, d->m_pluginManager, recenter, filepath, property, style, role, renderOrder);
   d->appendLoader(loader);
@@ -199,6 +200,8 @@ int FileManager::pendingFiles() const
 
 void FileManagerPrivate::cleanupLoader(FileLoader *loader)
 {
+  mDebug() << "cleanupLoader" << q->pendingFiles();
+
   GeoDataDocument *doc = loader->document();
   m_loaderList.removeAll(loader);
   if(loader->isFinished())
@@ -239,6 +242,7 @@ void FileManagerPrivate::cleanupLoader(FileLoader *loader)
     }
     m_latLonBox.clear();
   }
+  mDebug() << "cleanupLoader" << q->pendingFiles();
 }
 
 #include "moc_FileManager.cpp"

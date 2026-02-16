@@ -273,6 +273,8 @@ public:
    */
   const GeoDataPlacemark *trackedPlacemark() const;
 
+  int pendingFileManagerTasks() const;
+
 public Q_SLOTS:
   void clearPersistentTileCache();
 
