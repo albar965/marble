@@ -16,7 +16,7 @@ mkdir -p ${APROJECTS}/Marble-${CONF_TYPE}
 (
   cd ${APROJECTS}/build-marble-${CONF_TYPE}
   ${QT_PATH}/Tools/CMake/CMake.app/Contents/bin/cmake -DCMAKE_BUILD_TYPE=${CONF_BUILD_TYPE} -DCMAKE_PREFIX_PATH=${QT_PREFIX_PATH} -DCMAKE_INSTALL_PREFIX=${APROJECTS}/Marble-${CONF_TYPE} -DEXEC_INSTALL_PREFIX=${APROJECTS}/Marble-${CONF_TYPE} ../marble/
-  ${QT_PATH}/Tools/CMake/CMake.app/Contents/bin/cmake --build . -j 4
+  ${QT_PATH}/Tools/CMake/CMake.app/Contents/bin/cmake --build .
   ${QT_PATH}/Tools/CMake/CMake.app/Contents/bin/cmake --install .
 )
 
