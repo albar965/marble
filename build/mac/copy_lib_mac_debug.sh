@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Echo all commands and exit on failure
+set -euxo pipefail
+
 # This script replaces the broken deploy step in the Marble build
 # Run it to copy all required files to $APROJECTS/Marble-debug
 

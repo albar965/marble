@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Echo all commands and exit on failure
-set -e
-set -x
+set -euxo pipefail
 
 BUILDTYPE=debug
 export QT_PATH=${QT_PATH:-"$HOME/Qt"}

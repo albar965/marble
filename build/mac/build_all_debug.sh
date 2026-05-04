@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -e
+# Echo all commands and exit on failure
+set -euxo pipefail
 
 export CONF_TYPE=debug
 export CONF_BUILD_TYPE=Debug
