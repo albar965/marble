@@ -22,7 +22,7 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 INCLUDE(layers/CMakeLists.txt)
 
-# VERSION_NUMBER_TODO
+# Define program version here VERSION_NUMBER_TODO
 set(MARBLE_LIB_VERSION "1.0.3")
 set(MARBLE_ABI_VERSION "1")
 

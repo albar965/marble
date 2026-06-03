@@ -71,6 +71,15 @@ public:
 
   void setInertialEarthRotationEnabled(bool enabled);
 
+  void setHandleMouseEvents(bool value);
+  bool isHandleMouseEvents() const;
+
+  void setHandleWheelEvents(bool value);
+  bool isHandleWheelEvents() const;
+
+  void setHandleKeyEvents(bool value);
+  bool isHandleKeyEvents() const;
+
   /**
    * @brief Returns true iff dragging the map with the mouse keeps spinning
    * in the chosen direction for a slightly longer time than the mouse is
