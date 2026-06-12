@@ -14,13 +14,8 @@
 #include <QPixmap>
 
 #include "AbstractFloatItem.h"
-#include "DialogConfigurationInterface.h"
 
 class QSvgRenderer;
-
-namespace Ui {
-class CompassConfigWidget;
-}
 
 namespace Marble {
 
@@ -30,12 +25,11 @@ namespace Marble {
  */
 
 class CompassFloatItem :
-  public AbstractFloatItem, public DialogConfigurationInterface
+  public AbstractFloatItem
 {
   Q_OBJECT
   Q_PLUGIN_METADATA(IID "org.kde.marble.CompassFloatItem")
   Q_INTERFACES(Marble::RenderPluginInterface)
-  Q_INTERFACES(Marble::DialogConfigurationInterface)
   MARBLE_PLUGIN(CompassFloatItem)
 
 public:
@@ -57,7 +51,6 @@ public:
   virtual QPainterPath backgroundShape() const override;
   virtual void setProjection(const ViewportParams *viewport)  override;
   virtual void paintContent(QPainter *painter)  override;
-  virtual QDialog *configDialog()  override;
   virtual QHash<QString, QVariant> settings() const override;
   virtual void setSettings(const QHash<QString, QVariant>& settings)  override;
 

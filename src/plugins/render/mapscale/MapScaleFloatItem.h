@@ -12,7 +12,6 @@
 #define MAPSCALEFLOATITEM_H
 
 #include "AbstractFloatItem.h"
-#include "DialogConfigurationInterface.h"
 
 namespace Marble {
 
@@ -22,12 +21,11 @@ namespace Marble {
  */
 
 class MapScaleFloatItem :
-  public AbstractFloatItem, public DialogConfigurationInterface
+  public AbstractFloatItem
 {
   Q_OBJECT
   Q_PLUGIN_METADATA(IID "org.kde.marble.MapScaleFloatItem")
   Q_INTERFACES(Marble::RenderPluginInterface)
-  Q_INTERFACES(Marble::DialogConfigurationInterface)
   MARBLE_PLUGIN(MapScaleFloatItem)
 
 public:
@@ -47,7 +45,6 @@ public:
   virtual bool isInitialized() const override;
   virtual void setProjection(const ViewportParams *viewport)  override;
   virtual void paintContent(QPainter *painter)  override;
-  virtual QDialog *configDialog()  override;
 
   /**
    * @return: The settings of the item.

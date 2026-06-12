@@ -177,11 +177,6 @@ void CompassFloatItem::paintContent(QPainter *painter)
   painter->restore();
 }
 
-QDialog *CompassFloatItem::configDialog()
-{
-  return nullptr;
-}
-
 QHash<QString, QVariant> CompassFloatItem::settings() const
 {
   QHash<QString, QVariant> result = AbstractFloatItem::settings();

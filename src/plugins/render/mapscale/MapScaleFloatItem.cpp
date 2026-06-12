@@ -343,11 +343,6 @@ void MapScaleFloatItem::calcScaleBar()
   }
 }
 
-QDialog *MapScaleFloatItem::configDialog()
-{
-  return nullptr;
-}
-
 QHash<QString, QVariant> MapScaleFloatItem::settings() const
 {
   QHash<QString, QVariant> settings = AbstractFloatItem::settings();
