@@ -31,38 +31,60 @@ IF ERRORLEVEL 1 goto :err
 cmake --install .
 IF ERRORLEVEL 1 goto :err
 
+mkdir %DEPLOYDIR%\translations
+IF ERRORLEVEL 1 goto :err
+
+xcopy /I /F /Y %BUILDDIR%\translations\*.qm %DEPLOYDIR%\translations
+IF ERRORLEVEL 1 goto :err
+
 mkdir %DEPLOYDIR%\include\marble
+IF ERRORLEVEL 1 goto :err
 
 xcopy /I /F /Y %BUILDDIR%\src\lib\marble\marble_export.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\blendings\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\data\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\graphicsitem\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\handlers\kml\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\handlers\dgml\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\parser\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\scene\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\writer\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\writers\kml\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\geodata\writers\dgml\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\graphicsview\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\layers\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
+
 xcopy /I /F /Y %APROJECTS%\marble\src\lib\marble\projections\*.h %DEPLOYDIR%\include\marble
 IF ERRORLEVEL 1 goto :err
 

@@ -219,6 +219,7 @@ include(DistTarget)
 
 ####################################################
 # Install extra files
+install(DIRECTORY translations DESTINATION ${CMAKE_INSTALL_PREFIX} FILES_MATCHING PATTERN "*.qm")
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 ############################################################

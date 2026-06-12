@@ -1,0 +1,316 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:48+0000\n"
+"PO-Revision-Date: 2024-04-22 16:05\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf6-trunk/messages/marble/marble-maps.pot\n"
+"X-Crowdin-File-ID: 56160\n"
+
+#: Bookmarks.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Bookmarks"
+msgstr "书签"
+
+#: Bookmarks.qml:69
+#, kde-format
+msgid "Your bookmarks will appear here."
+msgstr "您的书签将显示在这里。"
+
+#. i18n: ectx: label, entry (MapThemeId), group (General)
+#: config.kcfg:14
+#, kde-format
+msgid "The marble theme id"
+msgstr "Marble 主题 ID"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:20
+#, kde-format
+msgid "Routing profile"
+msgstr "路线方案"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:23
+#, kde-format
+msgid "Car"
+msgstr "汽车"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:26 ProfileSelectorMenu.qml:134
+#, kde-format
+msgid "Bicycle"
+msgstr "自行车"
+
+#. i18n: ectx: label, entry (Profile), group (Routing)
+#: config.kcfg:29 ProfileSelectorMenu.qml:144
+#, kde-format
+msgid "Pedestrian"
+msgstr "步行"
+
+#: CurrentPosition.qml:54
+#, kde-format
+msgctxt "@option:check"
+msgid "Follow Current Position"
+msgstr "跟随当前位置"
+
+#: main.cpp:44 MainScreen.qml:21 MainScreen.qml:190
+#, kde-format
+msgid "Marble Maps"
+msgstr "Marble 地图"
+
+#: main.cpp:46
+#, kde-format
+msgid "Maps"
+msgstr "地图"
+
+#: main.cpp:48
+#, kde-format
+msgid "© KDE Community"
+msgstr "© KDE Community"
+
+#: main.cpp:54
+#, kde-format
+msgid "Carl Schwan"
+msgstr "Carl Schwan"
+
+#: main.cpp:55
+#, kde-format
+msgid "Developer"
+msgstr "开发者"
+
+#: main.cpp:60
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Guo Yunhe, Tyson Tan"
+
+#: main.cpp:60
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "i@guoyunhe.me, tds00@qq.com"
+
+#: MainScreen.qml:87
+#, kde-format
+msgid "Public Transport"
+msgstr "公共交通"
+
+#: MainScreen.qml:102
+#, kde-format
+msgid "Outdoor Activities"
+msgstr "户外活动"
+
+#: MainScreen.qml:114
+#, kde-format
+msgctxt "@action:button"
+msgid "Accessibility"
+msgstr "无障碍"
+
+#: MainScreen.qml:123
+#, kde-format
+msgctxt "@action:button"
+msgid "About"
+msgstr "关于"
+
+#: MainScreen.qml:134
+#, kde-format
+msgctxt "@action:button"
+msgid "Bookmarks"
+msgstr "书签"
+
+#: MainScreen.qml:145
+#, kde-format
+msgctxt "@action:button"
+msgid "Layer Options"
+msgstr "图层选项"
+
+#: MainScreen.qml:156
+#, kde-format
+msgctxt "@action:button"
+msgid "Theme Options"
+msgstr "主题选项"
+
+#: MainScreen.qml:167
+#, kde-format
+msgid "Routing"
+msgstr "路线"
+
+#: MainScreen.qml:458
+#, kde-format
+msgid "%1 km"
+msgstr "%1 公里"
+
+#: NavigationInfoBar.qml:20
+#, kde-format
+msgctxt "distance in km"
+msgid "%1 km"
+msgstr "%1 公里"
+
+#: NavigationInfoBar.qml:22
+#, kde-format
+msgctxt "distance in m"
+msgid "%1 m"
+msgstr "%1 米"
+
+#: NavigationInfoBar.qml:24
+#, kde-format
+msgctxt "distance in m with decimals"
+msgid "%1 m"
+msgstr "%1 米"
+
+#: Options.qml:20
+#, kde-format
+msgctxt "@title:window"
+msgid "Layer Options"
+msgstr "图层选项"
+
+#: Options.qml:23
+#, kde-format
+msgctxt "@title:group"
+msgid "Public Transport Layers"
+msgstr "公共交通图层"
+
+#: Options.qml:28
+#, kde-format
+msgctxt "@option:check"
+msgid "Train"
+msgstr "火车"
+
+#: Options.qml:35
+#, kde-format
+msgctxt "@option:check"
+msgid "Subway"
+msgstr "地铁"
+
+#: Options.qml:42
+#, kde-format
+msgctxt "@option:check"
+msgid "Tram"
+msgstr "有轨电车"
+
+#: Options.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Bus"
+msgstr "公交车"
+
+#: Options.qml:56
+#, kde-format
+msgctxt "@option:check"
+msgid "Trolley Bus"
+msgstr "无轨电车"
+
+#: Options.qml:64
+#, kde-format
+msgid "Outdoor Activities Layers"
+msgstr "户外活动图层"
+
+#: Options.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Walkways"
+msgstr "人行道"
+
+#: Options.qml:76
+#, kde-format
+msgctxt "@option:check"
+msgid "Hiking Routes"
+msgstr "徒步道"
+
+#: Options.qml:83
+#, kde-format
+msgctxt "@option:check"
+msgid "Bicycle Routes"
+msgstr "自行车道"
+
+#: Options.qml:90
+#, kde-format
+msgctxt "@option:check"
+msgid "Mountainbike Routes"
+msgstr "山地车道"
+
+#: Options.qml:97
+#, kde-format
+msgctxt "@option:check"
+msgid "Inline Skating Routes"
+msgstr "旱冰道"
+
+#: Options.qml:104
+#, kde-format
+msgctxt "@option:check"
+msgid "Bridleways"
+msgstr "马道"
+
+#: PlacemarkDialog.qml:48
+#, kde-format
+msgctxt "placeholder"
+msgid "No Name"
+msgstr "无名称"
+
+#: PlacemarkDialog.qml:168
+#, kde-format
+msgctxt "@title:group"
+msgid "Tags:"
+msgstr "标签："
+
+#: ProfileSelectorMenu.qml:124
+#, kde-format
+msgid "Car (fastest)"
+msgstr "汽车 (耗时最少)"
+
+#: RouteEditorPage.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Routing"
+msgstr "路线"
+
+#: RouteEditorPage.qml:102
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Departure:"
+msgstr "出发时间："
+
+#: RouteEditorPage.qml:104
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Arrival:"
+msgstr "到达时间："
+
+#: RouteEditorPage.qml:106
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Waypoint:"
+msgstr "途径点："
+
+#: RouteEditorPage.qml:194
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Alternatives:"
+msgstr "备选方案："
+
+#: SettingsDialog.qml:48
+#, kde-format
+msgid "Network Settings"
+msgstr "网络设置"
+
+#: SettingsDialog.qml:53
+#, kde-format
+msgid "Download Maps via WLAN only"
+msgstr "仅通过 WLAN 下载地图"
+
+#: ThemeConfigPage.qml:19
+#, kde-format
+msgctxt "@title:window"
+msgid "Themes"
+msgstr "主题"
