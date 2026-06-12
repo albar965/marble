@@ -14,10 +14,6 @@
 #include "AbstractFloatItem.h"
 #include "DialogConfigurationInterface.h"
 
-namespace Ui {
-class MapScaleConfigWidget;
-}
-
 namespace Marble {
 
 /**
@@ -70,14 +66,12 @@ private Q_SLOTS:
   void readSettings();
   void writeSettings();
   void toggleRatioScaleVisibility();
-  void toggleMinimized();
+  void toggleMinimized(bool checked);
 
 private:
   void calcScaleBar();
 
 private:
-  QDialog *m_configDialog;
-  Ui::MapScaleConfigWidget *ui_configWidget;
 
   int m_radius;
 

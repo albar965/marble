@@ -22,6 +22,7 @@
 
 // Qt
 #include <QAction>
+#include <QPushButton>
 #include <QStandardItem>
 
 namespace Marble {
@@ -249,6 +250,31 @@ bool RenderPlugin::setSetting(const QString& key, const QVariant& value)
 QVariant RenderPlugin::setting(const QString& name) const
 {
   return settings().value(name, QVariant());
+}
+
+void RenderPlugin::changeWidgetColor(QPushButton *button, QColor backgroundColor)
+{
+#if !defined(Q_OS_MACOS)
+  if(button->isEnabled())
+  {
+    button->setStyleSheet(QStringLiteral("background-color: %1; color: %2;").
+                          arg(backgroundColor.name()).
+                          arg(QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black).name()));
+    QPalette palette = button->palette();
+    palette.setColor(QPalette::Button, backgroundColor);
+    palette.setColor(QPalette::ButtonText, QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black));
+    button->setPalette(palette);
+  }
+  else
+    button->setStyleSheet(QStringLiteral());
+#else
+  QPalette palette = button->palette();
+  palette.setColor(QPalette::Button, backgroundColor);
+  palette.setColor(QPalette::ButtonText, QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black));
+  button->setPalette(palette);
+  button->update();
+#endif
+  button->update();
 }
 
 } // namespace Marble

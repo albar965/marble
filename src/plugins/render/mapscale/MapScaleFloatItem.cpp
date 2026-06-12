@@ -21,7 +21,6 @@
 #include <QToolTip>
 
 #include "MarbleColors.h"
-#include "ui_MapScaleConfigWidget.h"
 #include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "projections/AbstractProjection.h"
@@ -34,7 +33,6 @@ namespace Marble {
 
 MapScaleFloatItem::MapScaleFloatItem(const MarbleModel *marbleModel)
   : AbstractFloatItem(marbleModel, QPointF(10.5, -10.5), QSizeF(0.0, 40.0)),
-  m_configDialog(0),
   m_radius(0),
   m_target(QString()),
   m_leftBarMargin(0),
@@ -55,10 +53,10 @@ MapScaleFloatItem::MapScaleFloatItem(const MarbleModel *marbleModel)
   setPosition(QPointF(220.0, 10.5));
 #endif // Q_WS_MAEMO_5
 
-  m_minimizeAction = new QAction(tr("Minimize"), this);
+  m_minimizeAction = new QAction(tr("&Minimize"), this);
   m_minimizeAction->setCheckable(true);
   m_minimizeAction->setChecked(m_minimized);
-  connect(m_minimizeAction, SIGNAL(triggered()), this, SLOT(toggleMinimized()));
+  connect(m_minimizeAction, &QAction::triggered, this, &MapScaleFloatItem::toggleMinimized);
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
@@ -347,25 +345,7 @@ void MapScaleFloatItem::calcScaleBar()
 
 QDialog *MapScaleFloatItem::configDialog()
 {
-  if(!m_configDialog)
-  {
-    // Initializing configuration dialog
-    m_configDialog = new QDialog();
-    ui_configWidget = new Ui::MapScaleConfigWidget;
-    ui_configWidget->setupUi(m_configDialog);
-
-    readSettings();
-
-    connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()),
-            SLOT(writeSettings()));
-    connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()),
-            SLOT(readSettings()));
-
-    QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-    connect(applyButton, SIGNAL(clicked()),
-            this, SLOT(writeSettings()));
-  }
-  return m_configDialog;
+  return nullptr;
 }
 
 QHash<QString, QVariant> MapScaleFloatItem::settings() const
@@ -406,20 +386,16 @@ void MapScaleFloatItem::contextMenuEvent(QWidget *w, QContextMenuEvent *e)
 
 void MapScaleFloatItem::readSettings()
 {
-  if(!m_configDialog)
-    return;
-
-  ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
+  m_minimizeAction->setChecked(m_minimized);
+  if(m_minimized)
+    m_widthScaleFactor = 4;
+  else
+    m_widthScaleFactor = 2;
 }
 
 void MapScaleFloatItem::writeSettings()
 {
-  if(m_minimized != ui_configWidget->m_minimizeCheckBox->isChecked())
-  {
-    toggleMinimized();
-  }
-
-  emit settingsChanged(nameId());
+  toggleMinimized(m_minimizeAction->isChecked());
 }
 
 void MapScaleFloatItem::toggleRatioScaleVisibility()
@@ -428,22 +404,16 @@ void MapScaleFloatItem::toggleRatioScaleVisibility()
   emit settingsChanged(nameId());
 }
 
-void MapScaleFloatItem::toggleMinimized()
+void MapScaleFloatItem::toggleMinimized(bool checked)
 {
-  m_minimized = !m_minimized;
-  ui_configWidget->m_minimizeCheckBox->setChecked(m_minimized);
-  m_minimizeAction->setChecked(m_minimized);
+  m_minimized = checked;
   readSettings();
   emit settingsChanged(nameId());
 
-  if(m_minimized == true)
-  {
+  if(m_minimized)
     m_widthScaleFactor = 4;
-  }
   else
-  {
     m_widthScaleFactor = 2;
-  }
 }
 
 }

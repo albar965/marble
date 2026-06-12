@@ -18,6 +18,7 @@
 #include <QDialog>
 #include <QHelpEvent>
 #include <QPen>
+#include <QPushButton>
 
 // Marble
 #include "DialogConfigurationInterface.h"
@@ -71,6 +72,7 @@ QHash<QString, QVariant> AbstractFloatItem::settings() const
 {
   QHash<QString, QVariant> updated = RenderPlugin::settings();
   updated["position"] = position();
+  updated["locked"] = positionLocked();
   return updated;
 }
 
@@ -83,9 +85,9 @@ void AbstractFloatItem::setSettings(const QHash<QString, QVariant>& settings)
     setPosition(QPointF(coordinates.at(0).toFloat(), coordinates.at(1).toFloat()));
   }
   else
-  {
     setPosition(settings.value("position", position()).toPointF());
-  }
+
+  setPositionLocked(settings.value("locked", true).toBool());
 
   RenderPlugin::setSettings(settings);
 }
@@ -146,13 +148,9 @@ void AbstractFloatItem::setPositionLocked(bool lock)
   ScreenGraphicsItem::GraphicsItemFlags flags = this->flags();
 
   if(lock)
-  {
     flags &= ~ScreenGraphicsItem::ItemIsMovable;
-  }
   else
-  {
     flags |= ScreenGraphicsItem::ItemIsMovable;
-  }
 
   setFlags(flags);
 }

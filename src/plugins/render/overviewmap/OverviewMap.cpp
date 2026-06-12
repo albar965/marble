@@ -20,11 +20,9 @@
 #include <QColorDialog>
 
 #include "MarbleDirs.h"
-#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "ui_OverviewMapConfigWidget.h"
 
-#include "GeoDataPoint.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
 #include "Planet.h"
@@ -43,7 +41,7 @@ OverviewMap::OverviewMap()
 OverviewMap::OverviewMap(const MarbleModel *marbleModel)
   : AbstractFloatItem(marbleModel, QPointF(10.5, 10.5), QSizeF(166.0, 86.0)),
   m_target(),
-  m_planetID(PlanetFactory::planetList()),
+  m_planetID("earth"),
   m_defaultSize(AbstractFloatItem::size()),
   ui_configWidget(0),
   m_configDialog(0),
@@ -56,6 +54,7 @@ OverviewMap::OverviewMap(const MarbleModel *marbleModel)
   connect(this, SIGNAL(settingsChanged(QString)),
           this, SLOT(updateSettings()));
 
+  configDialog();
   restoreDefaultSettings();
 }
 
@@ -123,7 +122,6 @@ QDialog *OverviewMap::configDialog()
     m_configDialog = new QDialog();
     ui_configWidget = new Ui::OverviewMapConfigWidget;
     ui_configWidget->setupUi(m_configDialog);
-    readSettings();
     connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()),
             SLOT(writeSettings()));
     connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()),
@@ -140,6 +138,9 @@ QDialog *OverviewMap::configDialog()
     connect(ui_configWidget->m_colorChooserButton, SIGNAL(clicked()),
             SLOT(choosePositionIndicatorColor()));
   }
+
+  readSettings();
+
   return m_configDialog;
 }
 
@@ -210,13 +211,9 @@ void OverviewMap::paintContent(QPainter *painter)
     for( int y = 1; y < 4; ++y )
     {
       if(y == 2)
-      {
         painter->setPen(QPen(Qt::DashLine));
-      }
       else
-      {
         painter->setPen(QPen(Qt::DotLine));
-      }
 
       painter->drawLine(0.0, 0.25 * y * mapRect.height(),
                         mapRect.width(), 0.25 * y * mapRect.height());
@@ -224,28 +221,19 @@ void OverviewMap::paintContent(QPainter *painter)
     for( int x = 1; x < 8; ++x )
     {
       if(x == 4)
-      {
         painter->setPen(QPen(Qt::DashLine));
-      }
       else
-      {
         painter->setPen(QPen(Qt::DotLine));
-      }
 
-      painter->drawLine(0.125 * x * mapRect.width(), 0,
-                        0.125 * x * mapRect.width(), mapRect.height());
+      painter->drawLine(0.125 * x * mapRect.width(), 0, 0.125 * x * mapRect.width(), mapRect.height());
     }
   }
 
   // Now draw the latitude longitude bounding box
-  qreal xWest = mapRect.width() / 2.0 +
-                mapRect.width() / (2.0 * M_PI) * m_latLonAltBox.west();
-  qreal xEast = mapRect.width() / 2.0 +
-                mapRect.width() / (2.0 * M_PI) * m_latLonAltBox.east();
-  qreal xNorth = mapRect.height() / 2.0 -
-                 mapRect.height() / M_PI * m_latLonAltBox.north();
-  qreal xSouth = mapRect.height() / 2.0 -
-                 mapRect.height() / M_PI * m_latLonAltBox.south();
+  qreal xWest = mapRect.width() / 2.0 + mapRect.width() / (2.0 * M_PI) * m_latLonAltBox.west();
+  qreal xEast = mapRect.width() / 2.0 + mapRect.width() / (2.0 * M_PI) * m_latLonAltBox.east();
+  qreal xNorth = mapRect.height() / 2.0 - mapRect.height() / M_PI * m_latLonAltBox.north();
+  qreal xSouth = mapRect.height() / 2.0 - mapRect.height() / M_PI * m_latLonAltBox.south();
 
   qreal lon = m_centerLon;
   qreal lat = m_centerLat;
@@ -325,17 +313,7 @@ void OverviewMap::setSettings(const QHash<QString, QVariant>& settings)
   m_settings.insert("width", settings.value("width", m_defaultSize.toSize().width()));
   m_settings.insert("height", settings.value("height", m_defaultSize.toSize().height()));
 
-  foreach(const QString& planet, PlanetFactory::planetList())
-  {
-    QString mapFile = MarbleDirs::path(QString("svg/%1map.svg").arg(planet));
-
-    if(planet == "earth" || mapFile.isEmpty())
-    {
-      mapFile = MarbleDirs::path("svg/worldmap.svg");
-    }
-
-    m_settings.insert("path_" + planet, settings.value("path_" + planet, mapFile));
-  }
+  svgPath = MarbleDirs::path("svg/worldmap.svg");
 
   m_settings.insert("posColor", settings.value("posColor", QColor(Qt::white).name()));
 
@@ -348,33 +326,21 @@ void OverviewMap::setSettings(const QHash<QString, QVariant>& settings)
 void OverviewMap::readSettings()
 {
   if(!m_configDialog)
-  {
     return;
-  }
 
   ui_configWidget->m_widthBox->setValue(m_settings.value("width").toInt());
   ui_configWidget->m_heightBox->setValue(m_settings.value("height").toInt());
-  QPalette palette = ui_configWidget->m_colorChooserButton->palette();
-  palette.setColor(QPalette::Button, QColor(m_settings.value("posColor").toString()));
-  ui_configWidget->m_colorChooserButton->setPalette(palette);
+
+  changeWidgetColor(ui_configWidget->m_colorChooserButton, QColor(m_settings.value("posColor", "#ffffff").toString()));
 }
 
 void OverviewMap::writeSettings()
 {
   if(!m_configDialog)
-  {
     return;
-  }
 
-  m_settings.insert("width", contentRect().width());
-  m_settings.insert("height", contentRect().height());
-
-  QStringList const planets = PlanetFactory::planetList();
-  foreach(const QString& planet, planets)
-  {
-    m_settings.insert("path_" + planet, m_svgPaths[planet]);
-  }
-
+  m_settings.insert("width", ui_configWidget->m_widthBox->value());
+  m_settings.insert("height", ui_configWidget->m_heightBox->value());
   m_settings.insert("posColor", m_posColor.name());
 
   emit settingsChanged(nameId());
@@ -382,38 +348,27 @@ void OverviewMap::writeSettings()
 
 void OverviewMap::updateSettings()
 {
-  QStringList const planets = PlanetFactory::planetList();
-  foreach(const QString& planet, planets)
-  {
-    m_svgPaths.insert(planet, m_settings.value("path_" + planet, QString()).toString());
-  }
-
   m_posColor = QColor(m_settings.value("posColor").toString());
 
   if(!m_configDialog)
-  {
     return;
-  }
 
   setContentSize(QSizeF(ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value()));
 }
 
 void OverviewMap::changeBackground(const QString& target)
 {
-  m_svgobj.load(m_svgPaths[target]);
+  Q_UNUSED(target)
+  m_svgobj.load(svgPath);
   m_mapChanged = true;
 }
 
 void OverviewMap::synchronizeSpinboxes()
 {
   if(sender() == ui_configWidget->m_widthBox)
-  {
     ui_configWidget->m_heightBox->setValue(ui_configWidget->m_widthBox->value() / 2);
-  }
   else if(sender() == ui_configWidget->m_heightBox)
-  {
     ui_configWidget->m_widthBox->setValue(ui_configWidget->m_heightBox->value() * 2);
-  }
 }
 
 void OverviewMap::choosePositionIndicatorColor()
@@ -424,9 +379,7 @@ void OverviewMap::choosePositionIndicatorColor()
   if(c.isValid())
   {
     m_posColor = c;
-    QPalette palette = ui_configWidget->m_colorChooserButton->palette();
-    palette.setColor(QPalette::Button, m_posColor);
-    ui_configWidget->m_colorChooserButton->setPalette(palette);
+    changeWidgetColor(ui_configWidget->m_colorChooserButton, m_posColor);
   }
 }
 

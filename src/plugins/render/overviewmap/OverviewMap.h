@@ -82,8 +82,8 @@ private:
   QString m_target;
   QSvgRenderer m_svgobj;
   QHash<QString, QSvgWidget *> m_svgWidgets;
-  QHash<QString, QString> m_svgPaths;
-  QStringList m_planetID;
+  QString m_planetID;
+  QString svgPath;
   QPixmap m_worldmap;
   QHash<QString, QVariant> m_settings;
   QColor m_posColor;

@@ -165,7 +165,7 @@ QHash<QString, QVariant> GraticulePlugin::settings() const
   settings.insert("gridLabelColor", m_gridLabelColor.name());
   settings.insert("tropicsColor", m_tropicsCirclePen.color().name());
   settings.insert("equatorColor", m_equatorCirclePen.color().name());
-  settings.insert("primarylabels", m_showPrimaryLabels);
+  settings.insert("primaryLabels", m_showPrimaryLabels);
   settings.insert("secondaryLabels", m_showSecondaryLabels);
 
   return settings;
@@ -198,21 +198,11 @@ void GraticulePlugin::readSettings()
   if(!m_configDialog)
     return;
 
-  QPalette gridPalette;
-  gridPalette.setColor(QPalette::Button, m_gridCirclePen.color());
-  ui_configWidget->gridPushButton->setPalette(gridPalette);
+  changeWidgetColor(ui_configWidget->gridPushButton, m_gridCirclePen.color());
+  changeWidgetColor(ui_configWidget->gridLabelPushButton, m_gridLabelColor);
+  changeWidgetColor(ui_configWidget->tropicsPushButton, m_tropicsCirclePen.color());
+  changeWidgetColor(ui_configWidget->equatorPushButton, m_equatorCirclePen.color());
 
-  QPalette gridLabelPalette;
-  gridLabelPalette.setColor(QPalette::Button, m_gridLabelColor);
-  ui_configWidget->gridLabelPushButton->setPalette(gridLabelPalette);
-
-  QPalette tropicsPalette;
-  tropicsPalette.setColor(QPalette::Button, m_tropicsCirclePen.color());
-  ui_configWidget->tropicsPushButton->setPalette(tropicsPalette);
-
-  QPalette equatorPalette;
-  equatorPalette.setColor(QPalette::Button, m_equatorCirclePen.color());
-  ui_configWidget->equatorPushButton->setPalette(equatorPalette);
   ui_configWidget->primaryCheckBox->setChecked(m_showPrimaryLabels);
   ui_configWidget->secondaryCheckBox->setChecked(m_showSecondaryLabels);
 }
@@ -222,11 +212,7 @@ void GraticulePlugin::gridGetColor()
   const QColor c = QColorDialog::getColor(m_gridCirclePen.color(), 0, tr("Please choose the color for the coordinate grid."));
 
   if(c.isValid())
-  {
-    QPalette palette = ui_configWidget->gridPushButton->palette();
-    palette.setColor(QPalette::Button, c);
-    ui_configWidget->gridPushButton->setPalette(palette);
-  }
+    changeWidgetColor(ui_configWidget->gridPushButton, c);
 }
 
 void GraticulePlugin::gridLabelGetColor()
@@ -234,11 +220,7 @@ void GraticulePlugin::gridLabelGetColor()
   const QColor c = QColorDialog::getColor(m_gridLabelColor, 0, tr("Please choose the color for the coordinate grid labels."));
 
   if(c.isValid())
-  {
-    QPalette palette = ui_configWidget->gridLabelPushButton->palette();
-    palette.setColor(QPalette::Button, c);
-    ui_configWidget->gridLabelPushButton->setPalette(palette);
-  }
+    changeWidgetColor(ui_configWidget->gridLabelPushButton, c);
 }
 
 void GraticulePlugin::tropicsGetColor()
@@ -246,11 +228,7 @@ void GraticulePlugin::tropicsGetColor()
   const QColor c = QColorDialog::getColor(m_tropicsCirclePen.color(), 0, tr("Please choose the color for the tropic circles."));
 
   if(c.isValid())
-  {
-    QPalette palette = ui_configWidget->tropicsPushButton->palette();
-    palette.setColor(QPalette::Button, c);
-    ui_configWidget->tropicsPushButton->setPalette(palette);
-  }
+    changeWidgetColor(ui_configWidget->tropicsPushButton, c);
 }
 
 void GraticulePlugin::equatorGetColor()
@@ -258,11 +236,7 @@ void GraticulePlugin::equatorGetColor()
   const QColor c = QColorDialog::getColor(m_equatorCirclePen.color(), 0, tr("Please choose the color for the equator."));
 
   if(c.isValid())
-  {
-    QPalette palette = ui_configWidget->equatorPushButton->palette();
-    palette.setColor(QPalette::Button, c);
-    ui_configWidget->equatorPushButton->setPalette(palette);
-  }
+    changeWidgetColor(ui_configWidget->equatorPushButton, c);
 }
 
 void GraticulePlugin::writeSettings()
@@ -650,19 +624,19 @@ void GraticulePlugin::initLineMaps(GeoDataCoordinates::Notation notation)
 
   if(marbleModel()->planet()->id() == "sky" || notation == GeoDataCoordinates::Astro)
   {
-    m_normalLineMap[100] = 4;                  // 6h
-    m_normalLineMap[1000] = 12;                 // 2h
-    m_normalLineMap[2000] = 24;               // 1h
-    m_normalLineMap[4000] = 48;               // 30 min
-    m_normalLineMap[8000] = 96;               // 15 min
-    m_normalLineMap[16000] = 288;             // 5 min
-    m_normalLineMap[100000] = 24 * 60;          // 1 min
-    m_normalLineMap[200000] = 24 * 60 * 2;      // 30 sec
-    m_normalLineMap[400000] = 24 * 60 * 4;      // 15 sec
-    m_normalLineMap[1200000] = 24 * 60 * 12;     // 5 sec
-    m_normalLineMap[6000000] = 24 * 60 * 60;     // 1 sec
-    m_normalLineMap[12000000] = 24 * 60 * 60 * 2;     // 0.5 sec
-    m_normalLineMap[24000000] = 24 * 60 * 60 * 4;     // 0.25 sec
+    m_normalLineMap[100] = 4; // 6h
+    m_normalLineMap[1000] = 12; // 2h
+    m_normalLineMap[2000] = 24; // 1h
+    m_normalLineMap[4000] = 48; // 30 min
+    m_normalLineMap[8000] = 96; // 15 min
+    m_normalLineMap[16000] = 288; // 5 min
+    m_normalLineMap[100000] = 24 * 60; // 1 min
+    m_normalLineMap[200000] = 24 * 60 * 2; // 30 sec
+    m_normalLineMap[400000] = 24 * 60 * 4; // 15 sec
+    m_normalLineMap[1200000] = 24 * 60 * 12; // 5 sec
+    m_normalLineMap[6000000] = 24 * 60 * 60; // 1 sec
+    m_normalLineMap[12000000] = 24 * 60 * 60 * 2; // 0.5 sec
+    m_normalLineMap[24000000] = 24 * 60 * 60 * 4; // 0.25 sec
 
     return;
   }
@@ -680,28 +654,28 @@ void GraticulePlugin::initLineMaps(GeoDataCoordinates::Notation notation)
   {
     case GeoDataCoordinates::Decimal:
 
-      m_normalLineMap[512000] = 360 * 10;              // 0.1 deg
-      m_normalLineMap[2048000] = 360 * 20;             // 0.05 deg
-      m_normalLineMap[8192000] = 360 * 100;            // 0.01 deg
-      m_normalLineMap[16384000] = 360 * 200;            // 0.005 deg
-      m_normalLineMap[32768000] = 360 * 1000;          // 0.001 deg
-      m_normalLineMap[131072000] = 360 * 2000;          // 0.0005 deg
-      m_normalLineMap[524288000] = 360 * 10000;        // 0.00001 deg
+      m_normalLineMap[512000] = 360 * 10; // 0.1 deg
+      m_normalLineMap[2048000] = 360 * 20; // 0.05 deg
+      m_normalLineMap[8192000] = 360 * 100; // 0.01 deg
+      m_normalLineMap[16384000] = 360 * 200; // 0.005 deg
+      m_normalLineMap[32768000] = 360 * 1000; // 0.001 deg
+      m_normalLineMap[131072000] = 360 * 2000; // 0.0005 deg
+      m_normalLineMap[524288000] = 360 * 10000; // 0.00001 deg
 
       break;
     default:
     case GeoDataCoordinates::DMS:
-      m_normalLineMap[512000] = 360 * 6;                // 10'
-      m_normalLineMap[1024000] = 360 * 12;              // 5'
-      m_normalLineMap[4096000] = 360 * 60;              // 1'
-      m_normalLineMap[8192000] = 360 * 60 * 2;          // 30"
-      m_normalLineMap[16384000] = 360 * 60 * 6;         // 10"
-      m_normalLineMap[65535000] = 360 * 60 * 12;        // 5"
-      m_normalLineMap[524288000] = 360 * 60 * 60;       // 1"
+      m_normalLineMap[512000] = 360 * 6; // 10'
+      m_normalLineMap[1024000] = 360 * 12; // 5'
+      m_normalLineMap[4096000] = 360 * 60; // 1'
+      m_normalLineMap[8192000] = 360 * 60 * 2; // 30"
+      m_normalLineMap[16384000] = 360 * 60 * 6; // 10"
+      m_normalLineMap[65535000] = 360 * 60 * 12; // 5"
+      m_normalLineMap[524288000] = 360 * 60 * 60; // 1"
 
       break;
   }
-  m_normalLineMap[999999999] = m_normalLineMap.value(262144000);       // last
+  m_normalLineMap[999999999] = m_normalLineMap.value(262144000); // last
 
   m_currentNotation = notation;
 }

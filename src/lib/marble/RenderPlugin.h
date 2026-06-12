@@ -25,6 +25,8 @@ class QAction;
 class QActionGroup;
 class QStandardItem;
 
+
+class QPushButton;
 namespace Marble {
 
 class MarbleModel;
@@ -324,6 +326,8 @@ Q_SIGNALS:
 
 protected:
   bool eventFilter(QObject *, QEvent *);
+
+  void changeWidgetColor(QPushButton *button, QColor backgroundColor);
 
 private:
   friend class RenderPluginModel;
