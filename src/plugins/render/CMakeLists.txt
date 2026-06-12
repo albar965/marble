@@ -9,7 +9,6 @@ add_subdirectory( overviewmap )
 add_subdirectory( progress )
 
 # Display geographical information on the map
-add_subdirectory( crosshairs )
 add_subdirectory( graticule )
 add_subdirectory( atmosphere )
 
