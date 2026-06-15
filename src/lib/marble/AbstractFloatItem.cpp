@@ -58,7 +58,7 @@ AbstractFloatItem::AbstractFloatItem(const MarbleModel *marbleModel, const QPoin
 {
   setCacheMode(ItemCoordinateCache);
   setFrame(RectFrame);
-  setPadding(4.0);
+  setPadding(1.0);
   setContentSize(size);
   setPosition(point);
 }
@@ -90,6 +90,14 @@ void AbstractFloatItem::setSettings(const QHash<QString, QVariant>& settings)
   setPositionLocked(settings.value("locked", true).toBool());
 
   RenderPlugin::setSettings(settings);
+}
+
+void AbstractFloatItem::setText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam)
+{
+  Q_UNUSED(textParam)
+  Q_UNUSED(tooltipTextParam)
+  Q_UNUSED(foregroundParam)
+  Q_UNUSED(backgroundParam)
 }
 
 RenderPlugin::RenderType AbstractFloatItem::renderType() const

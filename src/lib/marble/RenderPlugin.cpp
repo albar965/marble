@@ -17,7 +17,6 @@
 // Marble
 #include "DialogConfigurationInterface.h"
 #include "MarbleModel.h"
-#include "MarbleDebug.h"
 #include "RenderPluginModel.h"
 
 // Qt

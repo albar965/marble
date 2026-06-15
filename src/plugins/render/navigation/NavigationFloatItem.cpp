@@ -12,7 +12,6 @@
 
 #include "NavigationFloatItem.h"
 
-#include <qmath.h>
 #include <QContextMenuEvent>
 #include <QRect>
 #include <QSlider>
@@ -31,7 +30,7 @@ using namespace Marble;
 /* TRANSLATOR Marble::NavigationFloatItem */
 
 NavigationFloatItem::NavigationFloatItem(const MarbleModel *marbleModel)
-  : AbstractFloatItem(marbleModel, QPointF(-10, -30)),
+  : AbstractFloatItem(marbleModel, QPointF(-1., -1.)),
   m_marbleWidget(0),
   m_widgetItem(0),
   m_navigationWidget(0),
@@ -233,18 +232,6 @@ void NavigationFloatItem::paintContent(QPainter *painter)
   painter->drawPixmap(0, 0, pixmap("marble/navigation/navigational_backdrop_top"));
   painter->drawPixmap(0, 70, 70, 200, pixmap("marble/navigation/navigational_backdrop_center"));
   painter->drawPixmap(0, 270, pixmap("marble/navigation/navigational_backdrop_bottom"));
-}
-
-void NavigationFloatItem::contextMenuEvent(QWidget *w, QContextMenuEvent *e)
-{
-  if(!m_contextMenu)
-  {
-    m_contextMenu = contextMenu();
-
-  }
-
-  Q_ASSERT(m_contextMenu);
-  m_contextMenu->exec(w->mapToGlobal(e->pos()));
 }
 
 QHash<QString, QVariant> NavigationFloatItem::settings() const

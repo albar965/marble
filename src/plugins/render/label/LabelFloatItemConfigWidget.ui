@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>OverviewMapConfigWidget</class>
- <widget class="QDialog" name="OverviewMapConfigWidget">
+ <class>LabelFloatItemConfigWidget</class>
+ <widget class="QDialog" name="LabelFloatItemConfigWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Overview Map Configuration</string>
+   <string>Help Label Configuration</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Map &amp;Image</string>
+      <string>Label Size</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -59,7 +59,7 @@
          <number>16</number>
         </property>
         <property name="maximum">
-         <number>512</number>
+         <number>256</number>
         </property>
         <property name="value">
          <number>128</number>
@@ -85,25 +85,35 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>C&amp;olors</string>
+      <string>Font Size</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="m_colorChooserButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>25</height>
-         </size>
-        </property>
+       <widget class="QLabel" name="labelFontSize">
         <property name="text">
-         <string>Position I&amp;ndicator</string>
+         <string>&amp;Scale:</string>
+        </property>
+        <property name="buddy">
+         <cstring>m_spinBoxFontSize</cstring>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="m_spinBoxFontSize">
+        <property name="suffix">
+         <string> %</string>
+        </property>
+        <property name="minimum">
+         <number>20</number>
+        </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="value">
+         <number>100</number>
         </property>
        </widget>
       </item>
@@ -148,12 +158,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>m_widthBox</tabstop>
+  <tabstop>m_heightBox</tabstop>
+  <tabstop>m_spinBoxFontSize</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
    <sender>m_buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>OverviewMapConfigWidget</receiver>
+   <receiver>LabelFloatItemConfigWidget</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -169,7 +184,7 @@
   <connection>
    <sender>m_buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>OverviewMapConfigWidget</receiver>
+   <receiver>LabelFloatItemConfigWidget</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

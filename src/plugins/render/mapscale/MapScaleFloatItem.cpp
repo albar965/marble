@@ -21,7 +21,6 @@
 #include <QToolTip>
 
 #include "MarbleColors.h"
-#include "MarbleDebug.h"
 #include "MarbleGlobal.h"
 #include "projections/AbstractProjection.h"
 #include "MarbleLocale.h"
@@ -32,22 +31,10 @@
 namespace Marble {
 
 MapScaleFloatItem::MapScaleFloatItem(const MarbleModel *marbleModel)
-  : AbstractFloatItem(marbleModel, QPointF(10.5, -10.5), QSizeF(0.0, 40.0)),
-  m_radius(0),
-  m_target(QString()),
-  m_leftBarMargin(0),
-  m_rightBarMargin(0),
-  m_scaleBarWidth(0),
-  m_viewportWidth(0),
-  m_scaleBarHeight(5),
-  m_scaleBarDistance(0.0),
-  m_bestDivisor(0),
-  m_pixelInterval(0),
-  m_valueInterval(0),
-  m_scaleInitDone(false),
-  m_contextMenu(0),
-  m_minimized(false),
-  m_widthScaleFactor(2)
+  : AbstractFloatItem(marbleModel, QPointF(1., -1.), QSizeF(0.0, 40.0)),
+  m_radius(0), m_target(QString()), m_leftBarMargin(0), m_rightBarMargin(0), m_scaleBarWidth(0), m_viewportWidth(0), m_scaleBarHeight(5),
+  m_scaleBarDistance(0.0), m_bestDivisor(0), m_pixelInterval(0), m_valueInterval(0), m_isInitialized(false), m_scaleInitDone(false),
+  m_contextMenu(0), m_minimized(false), m_widthScaleFactor(2)
 {
 #ifdef Q_WS_MAEMO_5
   setPosition(QPointF(220.0, 10.5));
@@ -114,11 +101,13 @@ QIcon MapScaleFloatItem::icon() const
 
 void MapScaleFloatItem::initialize()
 {
+  readSettings();
+  m_isInitialized = true;
 }
 
 bool MapScaleFloatItem::isInitialized() const
 {
-  return true;
+  return m_isInitialized;
 }
 
 void MapScaleFloatItem::setProjection(const ViewportParams *viewport)

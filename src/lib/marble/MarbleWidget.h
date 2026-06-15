@@ -911,6 +911,9 @@ public Q_SLOTS:
 
   void setShowBackground(bool visible);
 
+  /* Set HTML label and tooltip text. Implemented in LabelFloatItem. Colors are for label. */
+  void setLabelText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam);
+
   /**
    * @brief Set whether the is tile is visible
    *

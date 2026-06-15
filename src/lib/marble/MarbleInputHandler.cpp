@@ -23,7 +23,6 @@
 
 #include "kineticmodel.h"
 #include "MarbleGlobal.h"
-#include "MarbleDebug.h"
 #include "MarbleMap.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleAbstractPresenter.h"
@@ -754,18 +753,24 @@ bool MarbleDefaultInputHandler::eventFilter(QObject *o, QEvent *e)
     case QEvent::TouchUpdate:
     case QEvent::TouchEnd:
       return handleTouch(static_cast<QTouchEvent *>(e));
+
     case QEvent::KeyPress:
       return handleKeyPress(static_cast<QKeyEvent *>(e));
+
     case QEvent::Gesture:
       return handleGesture(static_cast<QGestureEvent *>(e));
+
     case QEvent::Wheel:
       return handleWheel(static_cast<QWheelEvent *>(e));
+
     case QEvent::MouseButtonDblClick:
       return handleDoubleClick(static_cast<QMouseEvent *>(e));
+
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease:
     case QEvent::MouseMove:
       return handleMouseEvent(static_cast<QMouseEvent *>(e));
+
     default:
       return false;
   }

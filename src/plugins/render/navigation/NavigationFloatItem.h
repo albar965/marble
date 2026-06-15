@@ -65,7 +65,6 @@ public:
 protected:
   virtual bool eventFilter(QObject *object, QEvent *e) override;
   virtual void paintContent(QPainter *painter) override;
-  virtual void contextMenuEvent(QWidget *w, QContextMenuEvent *e) override;
 
 private Q_SLOTS:
   /** Map theme was changed, adjust controls */

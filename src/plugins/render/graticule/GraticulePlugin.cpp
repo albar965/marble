@@ -11,13 +11,11 @@
 #include "GraticulePlugin.h"
 #include "ui_GraticuleConfigWidget.h"
 
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataLineString.h"
 #include "Planet.h"
 #include "MarbleModel.h"
-#include "PluginAboutDialog.h"
 
 #include "ViewportParams.h"
 #include "GeoDataLatLonAltBox.h"
@@ -133,6 +131,7 @@ QDialog *GraticulePlugin::configDialog()
     m_configDialog = new QDialog();
     ui_configWidget = new Ui::GraticuleConfigWidget;
     ui_configWidget->setupUi(m_configDialog);
+    m_configDialog->setWindowTitle(tr("%1 - Coordinate Grid Configuration").arg(QApplication::applicationName()));
 
     connect(ui_configWidget->gridPushButton, SIGNAL(clicked()), this,
             SLOT(gridGetColor()));

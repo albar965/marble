@@ -96,6 +96,7 @@ private:
   qreal m_centerLat;
   qreal m_centerLon;
   bool m_mapChanged;
+  bool m_isInitialized;
 
 private Q_SLOTS:
   void synchronizeSpinboxes();

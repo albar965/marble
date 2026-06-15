@@ -496,6 +496,9 @@ public Q_SLOTS:
    */
   void setShowOverviewMap(bool visible);
 
+  /* Show label overlay or not */
+  void setShowLabel(bool visible);
+
   /**
    * @brief  Set whether the scale bar overlay is visible
    * @param  visible  visibility of the scale bar
@@ -552,6 +555,9 @@ public Q_SLOTS:
    * @param  visible  visibility of the atmospheric glow
    */
   void setShowAtmosphere(bool visible);
+
+  /* Set HTML label and tooltip text. Implemented in LabelFloatItem. Colors are for label. */
+  void setLabelText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam);
 
   /**
    * @brief  Set whether the crosshairs are visible

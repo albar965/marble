@@ -32,11 +32,8 @@ CompassFloatItem::CompassFloatItem()
 }
 
 CompassFloatItem::CompassFloatItem(const MarbleModel *marbleModel)
-  : AbstractFloatItem(marbleModel, QPointF(-1.0, 10.0), QSizeF(75.0, 75.0)),
-  m_isInitialized(false),
-  m_svgobj(0),
-  m_compass(),
-  m_polarity(0)
+  : AbstractFloatItem(marbleModel, QPointF(-1., 1.), QSizeF(75.0, 75.0)),
+  m_isInitialized(false), m_svgobj(0), m_compass(), m_polarity(0)
 {
 }
 

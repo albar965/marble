@@ -85,6 +85,7 @@ private:
   int m_bestDivisor;
   int m_pixelInterval;
   int m_valueInterval;
+  bool m_isInitialized;
 
   bool m_scaleInitDone;
 

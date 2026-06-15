@@ -294,7 +294,7 @@ MarbleMap::~MarbleMap()
   d->m_layerManager.removeLayer(&d->m_groundLayer);
   delete d;
 
-  delete model;    // delete the model after private data
+  delete model; // delete the model after private data
 }
 
 MarbleModel *MarbleMap::model() const
@@ -1079,6 +1079,11 @@ void MarbleMap::setShowOverviewMap(bool visible)
   setPropertyValue("overviewmap", visible);
 }
 
+void MarbleMap::setShowLabel(bool visible)
+{
+  setPropertyValue("label", visible);
+}
+
 void MarbleMap::setShowScaleBar(bool visible)
 {
   setPropertyValue("scalebar", visible);
@@ -1087,6 +1092,18 @@ void MarbleMap::setShowScaleBar(bool visible)
 void MarbleMap::setShowCompass(bool visible)
 {
   setPropertyValue("compass", visible);
+}
+
+void MarbleMap::setLabelText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam)
+{
+  for(Marble::AbstractFloatItem *item : floatItems())
+  {
+    if(item->nameId() == "label")
+    {
+      item->setText(textParam, tooltipTextParam, foregroundParam, backgroundParam);
+      break;
+    }
+  }
 }
 
 void MarbleMap::setShowAtmosphere(bool visible)
@@ -1350,7 +1367,7 @@ AbstractFloatItem *MarbleMap::floatItem(const QString& nameId) const
     }
   }
 
-  return 0;   // No item found
+  return 0; // No item found
 }
 
 QList<AbstractDataPlugin *> MarbleMap::dataPlugins()  const

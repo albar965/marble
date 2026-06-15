@@ -13,7 +13,6 @@
 
 #include "MarbleWidget.h"
 
-#include <qmath.h>
 #include <QHash>
 #include <QSettings>
 #include <QTime>
@@ -24,19 +23,15 @@
 #include <QMetaMethod>
 #include <QElapsedTimer>
 #include "FileManager.h"
-#include "GeoDataLatLonAltBox.h"
 #include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
-#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleLocale.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
-#include "SunLocator.h"
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
 #include "MarbleAbstractPresenter.h"
@@ -170,8 +165,8 @@ void MarbleWidgetPrivate::construct()
 
   // Initialize the map and forward some signals.
   m_map.setSize(m_widget->width(), m_widget->height());
-  m_map.setShowFrameRate(false);      // never let the map draw the frame rate,
-                                      // we do this differently here in the widget
+  m_map.setShowFrameRate(false); // never let the map draw the frame rate,
+                                 // we do this differently here in the widget
 
   MarbleWidget::connect(&m_presenter, SIGNAL(regionSelected(QList<double>)), m_widget, SIGNAL(regionSelected(QList<double>)));
 
@@ -180,43 +175,43 @@ void MarbleWidgetPrivate::construct()
 
   // forward some signals of m_map
   MarbleWidget::connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
-                    m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)));
+                        m_widget, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)));
   MarbleWidget::connect(&m_map, SIGNAL(projectionChanged(Projection)),
-                    m_widget, SIGNAL(projectionChanged(Projection)));
+                        m_widget, SIGNAL(projectionChanged(Projection)));
   MarbleWidget::connect(&m_map, SIGNAL(tileLevelChanged(int)),
-                    m_widget, SIGNAL(tileLevelChanged(int)));
+                        m_widget, SIGNAL(tileLevelChanged(int)));
   MarbleWidget::connect(&m_map, SIGNAL(framesPerSecond(qreal)),
-                    m_widget, SIGNAL(framesPerSecond(qreal)));
+                        m_widget, SIGNAL(framesPerSecond(qreal)));
   MarbleWidget::connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
-                    m_widget, SLOT(setViewContext(ViewContext)));
+                        m_widget, SLOT(setViewContext(ViewContext)));
 
   MarbleWidget::connect(&m_map, SIGNAL(pluginSettingsChanged()),
-                    m_widget, SIGNAL(pluginSettingsChanged()));
+                        m_widget, SIGNAL(pluginSettingsChanged()));
   MarbleWidget::connect(&m_map, SIGNAL(renderPluginInitialized(RenderPlugin*)),
-                    m_widget, SIGNAL(renderPluginInitialized(RenderPlugin*)));
+                        m_widget, SIGNAL(renderPluginInitialized(RenderPlugin*)));
 
   // react to some signals of m_map
   MarbleWidget::connect(&m_map, SIGNAL(themeChanged(QString)),
-                    m_widget, SLOT(updateMapTheme()));
+                        m_widget, SLOT(updateMapTheme()));
   MarbleWidget::connect(&m_map, SIGNAL(viewContextChanged(ViewContext)),
-                    m_widget, SIGNAL(viewContextChanged(ViewContext)));
+                        m_widget, SIGNAL(viewContextChanged(ViewContext)));
   MarbleWidget::connect(&m_map, SIGNAL(repaintNeeded(QRegion)),
-                    m_widget, SLOT(update()));
+                        m_widget, SLOT(update()));
   MarbleWidget::connect(&m_map, SIGNAL(visibleLatLonAltBoxChanged(GeoDataLatLonAltBox)),
-                    m_widget, SLOT(updateSystemBackgroundAttribute()));
+                        m_widget, SLOT(updateSystemBackgroundAttribute()));
   MarbleWidget::connect(&m_map, SIGNAL(renderStatusChanged(RenderStatus)),
-                    m_widget, SIGNAL(renderStatusChanged(RenderStatus)));
+                        m_widget, SIGNAL(renderStatusChanged(RenderStatus)));
   MarbleWidget::connect(&m_map, SIGNAL(renderStateChanged(RenderState)),
-                    m_widget, SIGNAL(renderStateChanged(RenderState)));
+                        m_widget, SIGNAL(renderStateChanged(RenderState)));
 
   MarbleWidget::connect(m_model.fileManager(), SIGNAL(centeredDocument(GeoDataLatLonBox)),
-                    m_widget, SLOT(centerOn(GeoDataLatLonBox)));
+                        m_widget, SLOT(centerOn(GeoDataLatLonBox)));
 
   // Show a progress dialog when the model calculates new map tiles.
   MarbleWidget::connect(&m_model, SIGNAL(creatingTilesStart(TileCreator*,const QString&,
-                                                        const QString&)),
-                    m_widget, SLOT(creatingTilesStart(TileCreator*,const QString&,
-                                                      const QString&)));
+                                                            const QString&)),
+                        m_widget, SLOT(creatingTilesStart(TileCreator*,const QString&,
+                                                          const QString&)));
 
   setInputHandler();
   m_widget->setMouseTracking(true);
@@ -224,7 +219,7 @@ void MarbleWidgetPrivate::construct()
   m_map.addLayer(&m_customPaintLayer);
 
   MarbleWidget::connect(m_inputhandler, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)),
-                    m_widget, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)));
+                        m_widget, SIGNAL(highlightedPlacemarksChanged(qreal,qreal,GeoDataCoordinates::Unit)));
   m_widget->setHighlightEnabled(true);
 
 }
@@ -726,7 +721,7 @@ void MarbleWidget::setMapThemeId(const QString& mapThemeId)
 
 void MarbleWidgetPrivate::updateMapTheme()
 {
-  m_widget->setRadius(m_widget->radius());     // Corrects zoom range, if needed
+  m_widget->setRadius(m_widget->radius()); // Corrects zoom range, if needed
 
   emit m_widget->themeChanged(m_map.mapThemeId());
 
@@ -784,7 +779,7 @@ void MarbleWidget::setShowCityLights(bool visible)
 
 void MarbleWidget::setLockToSubSolarPoint(bool visible)
 {
-  if(d->m_map.isLockedToSubSolarPoint() != visible)        // Toggling input modifies event filters, so avoid that if not needed
+  if(d->m_map.isLockedToSubSolarPoint() != visible) // Toggling input modifies event filters, so avoid that if not needed
   {
     d->m_map.setLockToSubSolarPoint(visible);
     setInputEnabled(!d->m_map.isLockedToSubSolarPoint());
@@ -880,6 +875,11 @@ void MarbleWidget::setShowFrameRate(bool visible)
 void MarbleWidget::setShowBackground(bool visible)
 {
   d->m_map.setShowBackground(visible);
+}
+
+void MarbleWidget::setLabelText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam)
+{
+  d->m_map.setLabelText(textParam, tooltipTextParam, foregroundParam, backgroundParam);
 }
 
 void MarbleWidget::setShowRuntimeTrace(bool visible)
@@ -1033,7 +1033,7 @@ void MarbleWidget::setInputEnabled(bool enabled)
       installEventFilter(d->m_inputhandler);
     }
   }
-  else   // input is disabled
+  else // input is disabled
   {
     mDebug() << "MarbleWidget::disableInput";
     removeEventFilter(d->m_inputhandler);

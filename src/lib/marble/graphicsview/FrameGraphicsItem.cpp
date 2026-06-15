@@ -213,8 +213,7 @@ QPainterPath FrameGraphicsItem::backgroundShape() const
   else if(d->m_frame == RoundedRectFrame)
   {
     QSizeF paintedSize = paintedRect().size();
-    path.addRoundedRect(QRectF(0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1),
-                        6, 6);
+    path.addRoundedRect(QRectF(0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1), 6, 6);
   }
   return path;
 }

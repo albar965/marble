@@ -56,6 +56,9 @@ public:
 
   virtual RenderType renderType() const;
 
+  /* Set HTML label and tooltip text. Implemented in LabelFloatItem. Colors are for label. */
+  virtual void setText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam);
+
   /**
    * @brief current pen for rendering
    * @return pen

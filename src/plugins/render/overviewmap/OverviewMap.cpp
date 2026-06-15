@@ -39,20 +39,15 @@ OverviewMap::OverviewMap()
 }
 
 OverviewMap::OverviewMap(const MarbleModel *marbleModel)
-  : AbstractFloatItem(marbleModel, QPointF(10.5, 10.5), QSizeF(166.0, 86.0)),
-  m_target(),
-  m_planetID("earth"),
-  m_defaultSize(AbstractFloatItem::size()),
-  ui_configWidget(0),
-  m_configDialog(0),
-  m_mapChanged(false)
+  : AbstractFloatItem(marbleModel, QPointF(1., 1.), QSizeF(140.0, 70.0)),
+  m_target(), m_planetID("earth"), m_defaultSize(AbstractFloatItem::size()), ui_configWidget(0), m_configDialog(0), m_mapChanged(false),
+  m_isInitialized(false)
 {
   // cache is no needed because:
   // (1) the SVG overview map is already rendered and stored in m_worldmap pixmap
   // (2) bounding box and location dot keep changing during navigation
   setCacheMode(NoCache);
-  connect(this, SIGNAL(settingsChanged(QString)),
-          this, SLOT(updateSettings()));
+  connect(this, SIGNAL(settingsChanged(QString)), this, SLOT(updateSettings()));
 
   configDialog();
   restoreDefaultSettings();
@@ -122,6 +117,7 @@ QDialog *OverviewMap::configDialog()
     m_configDialog = new QDialog();
     ui_configWidget = new Ui::OverviewMapConfigWidget;
     ui_configWidget->setupUi(m_configDialog);
+    m_configDialog->setWindowTitle(tr("%1 - Overview Map Configuration").arg(QApplication::applicationName()));
     connect(ui_configWidget->m_buttonBox, SIGNAL(accepted()),
             SLOT(writeSettings()));
     connect(ui_configWidget->m_buttonBox, SIGNAL(rejected()),
@@ -146,11 +142,13 @@ QDialog *OverviewMap::configDialog()
 
 void OverviewMap::initialize()
 {
+  readSettings();
+  m_isInitialized = true;
 }
 
 bool OverviewMap::isInitialized() const
 {
-  return true;
+  return m_isInitialized;
 }
 
 void OverviewMap::setProjection(const ViewportParams *viewport)
@@ -241,7 +239,7 @@ void OverviewMap::paintContent(QPainter *painter)
   qreal x = mapRect.width() / 2.0 + mapRect.width() / (2.0 * M_PI) * lon;
   qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
 
-  painter->setPen(QPen(Qt::white));
+  painter->setPen(m_posColor);
   painter->setBrush(QBrush(Qt::transparent));
   painter->setRenderHint(QPainter::Antialiasing, false);
 
@@ -299,9 +297,7 @@ QHash<QString, QVariant> OverviewMap::settings() const
   typedef QHash<QString, QVariant>::ConstIterator Iterator;
   Iterator end = m_settings.constEnd();
   for( Iterator iter = m_settings.constBegin(); iter != end; ++iter )
-  {
     result.insert(iter.key(), iter.value());
-  }
 
   return result;
 }
