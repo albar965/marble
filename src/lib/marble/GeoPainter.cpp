@@ -57,8 +57,8 @@ void GeoPainterPrivate::createAnnotationLayout(qreal x, qreal y,
   qreal width = bubbleSize.width();
   qreal height = bubbleSize.height();
 
-  qreal dx = (bubbleOffsetX > 0) ? 1.0 : -1.0;      // x-Mirror
-  qreal dy = (bubbleOffsetY < 0) ? 1.0 : -1.0;      // y-Mirror
+  qreal dx = (bubbleOffsetX > 0) ? 1.0 : -1.0; // x-Mirror
+  qreal dy = (bubbleOffsetY < 0) ? 1.0 : -1.0; // y-Mirror
 
   qreal x0 = (x + bubbleOffsetX) - dx * (1.0 - arrowPosition) * (width - 2.0 * xRnd) - xRnd * dx;
   qreal x1 = (x + bubbleOffsetX) - dx * (1.0 - arrowPosition) * (width - 2.0 * xRnd);
@@ -76,7 +76,7 @@ void GeoPainterPrivate::createAnnotationLayout(qreal x, qreal y,
   qreal y6 = (y + bubbleOffsetY) - dy * (height - yRnd);
   qreal y7 = (y + bubbleOffsetY) - dy * height;
 
-  QPointF p1(x, y);      // pointing point
+  QPointF p1(x, y); // pointing point
   QPointF p2(x4, y0);
   QPointF p3(x6, y0);
   QPointF p4(x7, y1);
@@ -837,8 +837,7 @@ void GeoPainter::drawPolygon(const GeoDataPolygon& polygon,
   // If the object is not visible in the viewport return
   if(!d->m_viewport->viewLatLonAltBox().intersects(polygon.outerBoundary().latLonAltBox()) ||
      // If the size of the object is below the resolution of the viewport then return
-     !d->m_viewport->resolves(polygon.outerBoundary().latLonAltBox())
-     )
+     !d->m_viewport->resolves(polygon.outerBoundary().latLonAltBox()))
   {
     // mDebug() << "Polygon doesn't get displayed on the viewport";
     return;
@@ -849,24 +848,19 @@ void GeoPainter::drawPolygon(const GeoDataPolygon& polygon,
   QList<QPolygonF *> innerPolygons;
   d->m_viewport->screenCoordinates(polygon.outerBoundary(), outerPolygons);
 
-  QPen const oldPen = pen();
+  QPen const currentPen = pen();
 
-  // When inner boundaries exist, the outline of the polygon must be painted
-  // separately to avoid connections between the outer and inner boundaries
-  // To avoid performance penalties the separate painting is only done when
-  // it's really needed. See review 105019 for details.
   bool const hasInnerBoundaries = !polygon.innerBoundaries().isEmpty();
   bool innerBoundariesOnScreen = false;
 
   if(hasInnerBoundaries)
   {
-    QList<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries();
+    QList<GeoDataLinearRing> const& innerBoundaries = polygon.innerBoundaries();
 
     const GeoDataLatLonAltBox& viewLatLonAltBox = d->m_viewport->viewLatLonAltBox();
-    foreach(const GeoDataLinearRing& itInnerBoundary, innerBoundaries)
+    for(const GeoDataLinearRing& itInnerBoundary : innerBoundaries)
     {
-      if(viewLatLonAltBox.intersects(itInnerBoundary.latLonAltBox()) &&
-         d->m_viewport->resolves(itInnerBoundary.latLonAltBox()))
+      if(viewLatLonAltBox.intersects(itInnerBoundary.latLonAltBox()) && d->m_viewport->resolves(itInnerBoundary.latLonAltBox()), 4)
       {
         innerBoundariesOnScreen = true;
         break;
@@ -875,59 +869,78 @@ void GeoPainter::drawPolygon(const GeoDataPolygon& polygon,
 
     if(innerBoundariesOnScreen)
     {
-      // Cut the outer polygons to the viewport
-      QList<QPointF> viewportPolygon = QPolygonF(QRectF(0, 0, d->m_viewport->width(), d->m_viewport->height()));
-      foreach(QPolygonF * outerPolygon, outerPolygons)
-      {
-        *outerPolygon = outerPolygon->intersected(QPolygonF(viewportPolygon));
-      }
-
-      setPen(QPen(Qt::NoPen));
-
       // Create the inner screen polygons
-      foreach(const GeoDataLinearRing& itInnerBoundary, innerBoundaries)
+      for(const GeoDataLinearRing& itInnerBoundary : innerBoundaries)
       {
         QList<QPolygonF *> innerPolygonsPerBoundary;
 
         d->m_viewport->screenCoordinates(itInnerBoundary, innerPolygonsPerBoundary);
 
-        foreach(QPolygonF * innerPolygonPerBoundary, innerPolygonsPerBoundary)
+        for(QPolygonF *innerPolygonPerBoundary : std::as_const(innerPolygonsPerBoundary))
         {
           innerPolygons << innerPolygonPerBoundary;
         }
       }
-    }
-  }
 
-  foreach(QPolygonF * outerPolygon, outerPolygons)
-  {
-    if(hasInnerBoundaries && innerBoundariesOnScreen)
-    {
-      QRegion clip(outerPolygon->toPolygon());
+      setPen(Qt::NoPen);
+      QList<QPolygonF *> fillPolygons = createFillPolygons(outerPolygons, innerPolygons);
 
-      foreach(QPolygonF * innerPolygon, innerPolygons)
+      for(const QPolygonF *fillPolygon : std::as_const(fillPolygons))
       {
-        clip -= QRegion(innerPolygon->toPolygon());
+        ClipPainter::drawPolygon(*fillPolygon, fillRule);
       }
-      ClipPainter::setClipRegion(clip);
+
+      setPen(currentPen);
+
+      for(const QPolygonF *outerPolygon : std::as_const(outerPolygons))
+      {
+        ClipPainter::drawPolyline(*outerPolygon);
+      }
+      for(const QPolygonF *innerPolygon : std::as_const(innerPolygons))
+      {
+        ClipPainter::drawPolyline(*innerPolygon);
+      }
+
+      qDeleteAll(fillPolygons);
     }
-    ClipPainter::drawPolygon(*outerPolygon, fillRule);
   }
 
-  if(hasInnerBoundaries && innerBoundariesOnScreen)
+  if(!hasInnerBoundaries || !innerBoundariesOnScreen)
   {
-    setPen(oldPen);
-    foreach(const QPolygonF * outerPolygon, outerPolygons)
-    {
-      ClipPainter::drawPolyline(*outerPolygon);
-    }
-    foreach(const QPolygonF * innerPolygon, innerPolygons)
-    {
-      ClipPainter::drawPolyline(*innerPolygon);
-    }
+    drawPolygon(polygon.outerBoundary(), fillRule);
   }
+
   qDeleteAll(outerPolygons);
   qDeleteAll(innerPolygons);
+}
+
+QList<QPolygonF *> GeoPainter::createFillPolygons(const QList<QPolygonF *>& outerPolygons, const QList<QPolygonF *>& innerPolygons) const
+{
+  QList<QPolygonF *> fillPolygons;
+  fillPolygons.reserve(outerPolygons.size());
+
+  for(const QPolygonF *outerPolygon : outerPolygons)
+  {
+    auto fillPolygon = new QPolygonF;
+    *fillPolygon << *outerPolygon;
+    *fillPolygon << outerPolygon->first();
+
+    for(const QPolygonF *innerPolygon : innerPolygons)
+    {
+      if(!innerPolygon->isEmpty())
+      {
+        *fillPolygon << *innerPolygon;
+        *fillPolygon << innerPolygon->first();
+      }
+
+      if(!outerPolygon->isEmpty())
+        *fillPolygon << outerPolygon->first();
+    }
+
+    fillPolygons << fillPolygon;
+  }
+
+  return fillPolygons;
 }
 
 void GeoPainter::drawRect(const GeoDataCoordinates& centerCoordinates,
@@ -956,8 +969,7 @@ void GeoPainter::drawRect(const GeoDataCoordinates& centerCoordinates,
   }
   else
   {
-    drawPolygon(d->createLinearRingFromGeoRect(centerCoordinates, width, height),
-                Qt::OddEvenFill);
+    drawPolygon(GeoPainterPrivate::createLinearRingFromGeoRect(centerCoordinates, width, height), Qt::OddEvenFill);
   }
 }
 

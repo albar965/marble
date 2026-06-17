@@ -449,6 +449,7 @@ public:
 private:
   Q_DISABLE_COPY(GeoPainter)
   GeoPainterPrivate * const d;
+  QList<QPolygonF*> createFillPolygons(const QList<QPolygonF*>& outerPolygons, const QList<QPolygonF*>& innerPolygons) const;
 };
 
 }
