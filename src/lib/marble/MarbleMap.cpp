@@ -465,58 +465,6 @@ void MarbleMap::reload()
   d->m_textureLayer.reload();
 }
 
-void MarbleMap::downloadRegion(QList<TileCoordsPyramid> const& pyramid)
-{
-  Q_ASSERT(textureLayer());
-  Q_ASSERT(!pyramid.isEmpty());
-  QElapsedTimer t;
-  t.start();
-
-  // When downloading a region (the author of these lines thinks) most users probably expect
-  // the download to begin with the low resolution tiles and then procede level-wise to
-  // higher resolution tiles. In order to achieve this, we start requesting downloads of
-  // high resolution tiles and request the low resolution tiles at the end because
-  // DownloadQueueSet (silly name) is implemented as stack.
-
-  int const first = 0;
-  int tilesCount = 0;
-
-  for( int level = pyramid[first].bottomLevel(); level >= pyramid[first].topLevel(); --level )
-  {
-    QSet<TileId> tileIdSet;
-    for( int i = 0; i < pyramid.size(); ++i )
-    {
-      QRect const coords = pyramid[i].coords(level);
-      mDebug() << "MarbleMap::downloadRegion level:" << level << "tile coords:" << coords;
-      int x1, y1, x2, y2;
-      coords.getCoords(&x1, &y1, &x2, &y2);
-      for( int x = x1; x <= x2; ++x )
-      {
-        for( int y = y1; y <= y2; ++y )
-        {
-          TileId const stackedTileId(0, level, x, y);
-          tileIdSet.insert(stackedTileId);
-          // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
-          // this can take considerable time even on very fast systems
-          // in contrast generating the TileIds on the fly when they are needed
-          // does not seem to affect download speed.
-        }
-      }
-    }
-    QSetIterator<TileId> i(tileIdSet);
-    while(i.hasNext())
-    {
-      TileId const tileId = i.next();
-      d->m_textureLayer.downloadStackedTile(tileId);
-    }
-    tilesCount += tileIdSet.count();
-  }
-  // Needed for downloading unique tiles only. Much faster than if tiles for each level is downloaded separately
-
-  int const elapsedMs = t.elapsed();
-  mDebug() << "MarbleMap::downloadRegion:" << tilesCount << "tiles, " << elapsedMs << "ms";
-}
-
 bool MarbleMap::propertyValue(const QString& name) const
 {
   bool value;

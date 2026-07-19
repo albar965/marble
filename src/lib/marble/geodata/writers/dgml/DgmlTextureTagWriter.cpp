@@ -78,11 +78,6 @@ bool DgmlTextureTagWriter::write(const GeoNode *node, GeoWriter& writer) const
       writer.writeAttribute("usage", "Browse");
       writer.writeAttribute("maximumConnections", QString::number(policy->maximumConnections()));
     }
-    else if(policy->key().usage() == DownloadBulk)
-    {
-      writer.writeAttribute("usage", "Bulk");
-      writer.writeAttribute("maximumConnections", QString::number(policy->maximumConnections()));
-    }
 
     writer.writeEndElement();
   }

@@ -122,25 +122,23 @@ void HttpJob::setUserAgentPluginId(const QString& pluginId) const
 
 QByteArray HttpJob::userAgent() const
 {
-  switch(d->m_downloadUsage)
-  {
-    case DownloadBrowse:
-      return HttpDownloadManager::userAgent("Browser", d->m_userAgent);
-      break;
-    case DownloadBulk:
-      return HttpDownloadManager::userAgent("BulkDownloader", d->m_userAgent);
-      break;
-    default:
-      qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
-      return HttpDownloadManager::userAgent("unknown", d->m_userAgent);
-  }
+  return HttpDownloadManager::userAgent();
 }
 
 void HttpJob::execute()
 {
+  static bool useragentLogged = false;
   QNetworkRequest request(d->m_sourceUrl);
   request.setAttribute(QNetworkRequest::HttpPipeliningAllowedAttribute, true);
-  request.setRawHeader("User-Agent", userAgent());
+
+  QByteArray useragent = userAgent();
+  request.setRawHeader("User-Agent", useragent);
+
+  if(!useragentLogged)
+  {
+    qDebug() << Q_FUNC_INFO << "User agent" << useragent;
+    useragentLogged = true;
+  }
 
   QString lang = QLocale().uiLanguages().join(",");
   if(lang.isEmpty())

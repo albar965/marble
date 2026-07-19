@@ -25,6 +25,8 @@
 
 using namespace Marble;
 
+QString HttpDownloadManager::userAgentOverride;
+
 // Time before a failed download job is requeued in ms
 const quint32 requeueTime = 60000;
 
@@ -67,11 +69,8 @@ HttpDownloadManager::Private::Private(HttpDownloadManager *parent, StoragePolicy
 {
   // setup default download policy and associated queue set
   DownloadPolicy defaultBrowsePolicy;
-  defaultBrowsePolicy.setMaximumConnections(20);
+  defaultBrowsePolicy.setMaximumConnections(2);
   m_defaultQueueSets[DownloadBrowse] = new DownloadQueueSet(defaultBrowsePolicy);
-  DownloadPolicy defaultBulkDownloadPolicy;
-  defaultBulkDownloadPolicy.setMaximumConnections(2);
-  m_defaultQueueSets[DownloadBulk] = new DownloadQueueSet(defaultBulkDownloadPolicy);
 }
 
 HttpDownloadManager::Private::~Private()
@@ -236,13 +235,14 @@ bool HttpDownloadManager::Private::hasDownloadPolicy(const DownloadPolicy& polic
   return found;
 }
 
-QByteArray HttpDownloadManager::userAgent(const QString& platform, const QString& component)
+QByteArray HttpDownloadManager::userAgent()
 {
-  QString result("Mozilla/5.0 (compatible; Marble/%1; %2; %3; %4)");
-  bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
-  QString const device = smallScreen ? "MobileDevice" : "DesktopDevice";
-  result = result.arg(MarbleGlobal::getVersionNumber(), device, platform, component);
-  return result.toLatin1();
+  // Mozilla/5.0 (compatible; Marble/23.8.5; DesktopDevice; Browser; QNamNetworkPlugin; marble)
+  if(userAgentOverride.isEmpty())
+    return QStringLiteral("Mozilla/5.0 (compatible; Marble/%1; DesktopDevice; Browser; QNamNetworkPlugin; marble)").
+           arg(MarbleGlobal::getVersionNumber2()).toLatin1();
+  else
+    return userAgentOverride.toLatin1();
 }
 
 #include "moc_HttpDownloadManager.cpp"

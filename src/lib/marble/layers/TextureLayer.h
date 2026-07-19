@@ -126,8 +126,6 @@ public Q_SLOTS:
 
   void reload();
 
-  void downloadStackedTile(const TileId& stackedTileId);
-
 Q_SIGNALS:
   void tileLevelChanged(int);
   void repaintNeeded();

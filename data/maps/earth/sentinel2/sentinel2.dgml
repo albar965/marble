@@ -26,8 +26,7 @@
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" maximumTileLevel="14" mode="OpenStreetMap" />
                     <projection name="Mercator" />
                     <downloadUrl protocol="http" host="maps.kde.org" path="/earth/sentinel2/" />
-                    <downloadPolicy usage="Browse" maximumConnections="20" />
-                    <downloadPolicy usage="Bulk" maximumConnections="2" />
+                    <downloadPolicy usage="Browse" maximumConnections="2" />
                 </texture>
             </layer>
             <layer name="standardplaces" backend="geodata">
@@ -52,7 +51,7 @@
                     <sourcefile format="KML">boundaryplacemarks</sourcefile>
                     <pick>placemark</pick>
                 </geodata>
-            </layer>            
+            </layer>
         </map>
         <settings>
             <property name="coordinate-grid">

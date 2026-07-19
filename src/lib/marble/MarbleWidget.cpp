@@ -1114,11 +1114,6 @@ void MarbleWidget::reloadMap()
   d->m_map.reload();
 }
 
-void MarbleWidget::downloadRegion(QList<TileCoordsPyramid> const& pyramid)
-{
-  d->m_map.downloadRegion(pyramid);
-}
-
 GeoDataLookAt MarbleWidget::lookAt() const
 {
   return d->m_presenter.lookAt();

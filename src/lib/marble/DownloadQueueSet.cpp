@@ -87,8 +87,7 @@ void DownloadQueueSet::addJob(HttpJob * const job)
 
 void DownloadQueueSet::activateJobs()
 {
-  while(!m_jobs.isEmpty() &&
-        m_activeJobs.count() < m_downloadPolicy.maximumConnections())
+  while(!m_jobs.isEmpty() && m_activeJobs.count() < m_downloadPolicy.maximumConnections())
   {
     HttpJob * const job = m_jobs.pop();
     activateJob(job);
@@ -160,8 +159,7 @@ void DownloadQueueSet::retryOrBlacklistJob(HttpJob *job, const int errorCode)
 
   if(job->tryAgain())
   {
-    mDebug() << QString("Download of %1 to %2 failed, but trying again soon")
-      .arg(job->sourceUrl().toString()).arg(job->destinationFileName());
+    mDebug() << QString("Download of %1 to %2 failed, but trying again soon").arg(job->sourceUrl().toString(), job->destinationFileName());
     m_retryQueue.enqueue(job);
     emit jobRetry();
   }
@@ -207,10 +205,10 @@ void DownloadQueueSet::deactivateJob(HttpJob * const job)
 {
   const bool disconnected = job->disconnect();
   Q_ASSERT(disconnected);
-  Q_UNUSED(disconnected);     // for Q_ASSERT in release mode
+  Q_UNUSED(disconnected); // for Q_ASSERT in release mode
   const bool removed = m_activeJobs.removeOne(job);
   Q_ASSERT(removed);
-  Q_UNUSED(removed);     // for Q_ASSERT in release mode
+  Q_UNUSED(removed); // for Q_ASSERT in release mode
   emit progressChanged(m_activeJobs.size(), m_jobs.count());
 }
 
@@ -273,7 +271,7 @@ inline HttpJob *DownloadQueueSet::JobStack::pop()
 {
   HttpJob * const job = m_jobs.pop();
   bool const removed = m_jobsContent.remove(job->destinationFileName());
-  Q_UNUSED(removed);     // for Q_ASSERT in release mode
+  Q_UNUSED(removed); // for Q_ASSERT in release mode
   Q_ASSERT(removed);
   return job;
 }

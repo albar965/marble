@@ -249,9 +249,7 @@ QUrl GeoSceneTileDataset::downloadUrl(const TileId& id, QHash<QString, QString> 
   // default download url
   if(m_downloadUrls.empty())
   {
-    QUrl const defaultUrl = QUrl(QString("%1/%2")
-                                 .arg("https://maps.kde.org")
-                                 .arg(m_serverLayout->sourceDir()));
+    QUrl const defaultUrl = QUrl(QStringLiteral("%1/%2").arg(QStringLiteral("https://maps.kde.org"), m_serverLayout->sourceDir()));
     mDebug() << "No download URL specified for tiles stored in "
              << m_sourceDir << ", falling back to " << defaultUrl.toString();
     return m_serverLayout->downloadUrl(defaultUrl, id, keys);
@@ -344,7 +342,7 @@ QString GeoSceneTileDataset::relativeTileFileNameNoPath(const TileId& id) const
       relFileName = QString("%1/%2/%3.%4")
                     .arg(id.zoomLevel())
                     .arg(id.x())
-                    .arg((1 << id.zoomLevel()) - id.y() - 1)          // Y coord in TMS runs from bottom to top
+                    .arg((1 << id.zoomLevel()) - id.y() - 1) // Y coord in TMS runs from bottom to top
                     .arg(suffix);
       break;
 
@@ -369,7 +367,10 @@ QList<const DownloadPolicy *> GeoSceneTileDataset::downloadPolicies() const
 void GeoSceneTileDataset::addDownloadPolicy(const DownloadUsage usage, const int maximumConnections)
 {
   DownloadPolicy * const policy = new DownloadPolicy(DownloadPolicyKey(hostNames(), usage));
-  policy->setMaximumConnections(maximumConnections);
+
+  // Limit to maximum of two connections
+  policy->setMaximumConnections(std::min(maximumConnections, 2));
+
   m_downloadPolicies.append(policy);
   mDebug() << "added download policy" << hostNames() << usage << maximumConnections;
 }

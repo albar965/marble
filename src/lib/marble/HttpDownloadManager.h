@@ -66,7 +66,12 @@ public:
   void setDownloadEnabled(const bool enable);
   void addDownloadPolicy(const DownloadPolicy&);
 
-  static QByteArray userAgent(const QString& platform, const QString& plugin);
+  static QByteArray userAgent();
+
+  static void setUserAgent(const QString& userAgentParam)
+  {
+    userAgentOverride = userAgentParam;
+  }
 
 public Q_SLOTS:
   /**
@@ -110,6 +115,8 @@ private:
   Q_PRIVATE_SLOT(d, void finishJob(const QByteArray&, const QString&, const QString& id))
   Q_PRIVATE_SLOT(d, void requeue())
   Q_PRIVATE_SLOT(d, void startRetryTimer())
+
+  static QString userAgentOverride;
 };
 
 }

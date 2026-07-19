@@ -997,8 +997,6 @@ public Q_SLOTS:
    */
   void reloadMap();
 
-  void downloadRegion(QList<TileCoordsPyramid> const&);
-
   //@}
 
   /// @name Miscellaneous slots

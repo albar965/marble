@@ -23,7 +23,6 @@ Copyright 2009, 2010  Jens-Michael Hoffmann <jmho@c-xx.com>
 #include "GeoSceneTileDataset.h"
 
 #include "MarbleGlobal.h"
-#include "MarbleDebug.h"
 
 namespace Marble {
 namespace dgml {
@@ -53,8 +52,6 @@ GeoNode *DgmlDownloadPolicyTagHandler::parse(GeoParser& parser) const
   const QString usageStr = parser.attribute(dgmlAttr_usage).trimmed();
   if(usageStr == "Browse")
     usage = DownloadBrowse;
-  else if(usageStr == "Bulk")
-    usage = DownloadBulk;
   else
   {
     qCritical("Parse error: invalid attribute downloadPolicy/@usage");

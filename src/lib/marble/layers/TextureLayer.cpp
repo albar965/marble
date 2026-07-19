@@ -502,11 +502,6 @@ void TextureLayer::reload()
   }
 }
 
-void TextureLayer::downloadStackedTile(const TileId& stackedTileId)
-{
-  d->m_layerDecorator.downloadStackedTile(stackedTileId, DownloadBulk, d->m_tileLoader.getKeys());
-}
-
 void TextureLayer::setMapTheme(const QList<const GeoSceneTextureTileDataset *>& textures, const GeoSceneGroup *textureLayerSettings,
                                const QString& seaFile, const QString& landFile)
 {

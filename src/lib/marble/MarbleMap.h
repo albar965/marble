@@ -670,8 +670,6 @@ public Q_SLOTS:
    */
   void reload();
 
-  void downloadRegion(QList<TileCoordsPyramid> const&);
-
 Q_SIGNALS:
   void tileLevelChanged(int level);
 

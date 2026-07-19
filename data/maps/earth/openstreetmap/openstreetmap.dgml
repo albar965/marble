@@ -36,8 +36,7 @@
           <downloadUrl protocol="https" host="a.tile.openstreetmap.org" path="/"/>
           <downloadUrl protocol="https" host="b.tile.openstreetmap.org" path="/"/>
           <downloadUrl protocol="https" host="c.tile.openstreetmap.org" path="/"/>
-          <downloadPolicy usage="Browse" maximumConnections="20"/>
-          <downloadPolicy usage="Bulk" maximumConnections="2"/>
+          <downloadPolicy usage="Browse" maximumConnections="2"/>
         </texture>
         <texture name="hillshading" expire="31536000">
           <sourcedir format="PNG"> earth/hillshading </sourcedir>
