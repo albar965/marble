@@ -73,6 +73,11 @@ public:
     userAgentOverride = userAgentParam;
   }
 
+  static const QString& getUserAgent()
+  {
+    return userAgentOverride;
+  }
+
 public Q_SLOTS:
   /**
    * Adds a new job with a sourceUrl, destination file name and given id.

@@ -12,13 +12,11 @@
 #include "MarbleGlobal_p.h"
 
 #include <QDateTime>
-#include <QRandomGenerator>
 
 namespace Marble {
 
 // Define program version here VERSION_NUMBER_TODO
 QString MarbleGlobal::VERSION_NUMBER_MARBLE_STRING = QStringLiteral("1.0.5");
-QString MarbleGlobal::VERSION_NUMBER2_MARBLE_STRING;
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
   : m_profiles(MarbleGlobal::Default)
@@ -32,9 +30,6 @@ MarbleGlobalPrivate::~MarbleGlobalPrivate()
 MarbleGlobal::MarbleGlobal()
   : d(new MarbleGlobalPrivate)
 {
-  QRandomGenerator r(QDateTime::currentSecsSinceEpoch());
-  VERSION_NUMBER2_MARBLE_STRING = QStringLiteral("%1.%2.%3").
-                                  arg(QString::number(r.bounded(22, 25)), QString::number(r.bounded(0, 9)), QString::number(r.bounded(0, 9)));
 }
 
 MarbleGlobal::~MarbleGlobal()

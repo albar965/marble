@@ -127,18 +127,11 @@ QByteArray HttpJob::userAgent() const
 
 void HttpJob::execute()
 {
-  static bool useragentLogged = false;
   QNetworkRequest request(d->m_sourceUrl);
   request.setAttribute(QNetworkRequest::HttpPipeliningAllowedAttribute, true);
 
   QByteArray useragent = userAgent();
   request.setRawHeader("User-Agent", useragent);
-
-  if(!useragentLogged)
-  {
-    qDebug() << Q_FUNC_INFO << "User agent" << useragent;
-    useragentLogged = true;
-  }
 
   QString lang = QLocale().uiLanguages().join(",");
   if(lang.isEmpty())

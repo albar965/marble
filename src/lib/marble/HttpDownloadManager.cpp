@@ -240,7 +240,7 @@ QByteArray HttpDownloadManager::userAgent()
   // Mozilla/5.0 (compatible; Marble/23.8.5; DesktopDevice; Browser; QNamNetworkPlugin; marble)
   if(userAgentOverride.isEmpty())
     return QStringLiteral("Mozilla/5.0 (compatible; Marble/%1; DesktopDevice; Browser; QNamNetworkPlugin; marble)").
-           arg(MarbleGlobal::getVersionNumber2()).toLatin1();
+           arg(MarbleGlobal::getVersionNumber()).toLatin1();
   else
     return userAgentOverride.toLatin1();
 }

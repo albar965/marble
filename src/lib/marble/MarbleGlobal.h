@@ -305,18 +305,13 @@ public:
     return VERSION_NUMBER_MARBLE_STRING;
   }
 
-  static const QString& getVersionNumber2()
-  {
-    return VERSION_NUMBER2_MARBLE_STRING;
-  }
-
 private:
   MarbleGlobal();
 
   // String for about dialog and http user agent
   // FIXME: check if blanks are allowed in user agent version numbers
   // VERSION_NUMBER_TODO
-  static QString VERSION_NUMBER_MARBLE_STRING, VERSION_NUMBER2_MARBLE_STRING;
+  static QString VERSION_NUMBER_MARBLE_STRING;
 
   Q_DISABLE_COPY(MarbleGlobal)
   MarbleGlobalPrivate * const d;
