@@ -15,9 +15,11 @@ popd
 
 rmdir /s/q "%DEPLOYDIR%"
 mkdir "%DEPLOYDIR%"
+IF ERRORLEVEL 1 goto :err
 
 rmdir /s/q "%BUILDDIR%"
 mkdir "%BUILDDIR%"
+IF ERRORLEVEL 1 goto :err
 
 pushd "%BUILDDIR%"
 IF ERRORLEVEL 1 goto :err
@@ -32,9 +34,9 @@ cmake --install .
 IF ERRORLEVEL 1 goto :err
 
 mkdir %DEPLOYDIR%\translations
-IF ERRORLEVEL 1 goto :err
+rem IF ERRORLEVEL 1 goto :err
 
-xcopy /I /F /Y %BUILDDIR%\translations\*.qm %DEPLOYDIR%\translations
+xcopy /I /F /Y  %APROJECTS%\marble\translations\*.qm %DEPLOYDIR%\translations
 IF ERRORLEVEL 1 goto :err
 
 mkdir %DEPLOYDIR%\include\marble
