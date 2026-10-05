@@ -257,8 +257,7 @@ void RenderPlugin::changeWidgetColor(QPushButton *button, QColor backgroundColor
   if(button->isEnabled())
   {
     button->setStyleSheet(QStringLiteral("background-color: %1; color: %2;").
-                          arg(backgroundColor.name()).
-                          arg(QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black).name()));
+                          arg(backgroundColor.name(), QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black).name()));
     QPalette palette = button->palette();
     palette.setColor(QPalette::Button, backgroundColor);
     palette.setColor(QPalette::ButtonText, QColor(backgroundColor.value() < 180 ? Qt::white : Qt::black));

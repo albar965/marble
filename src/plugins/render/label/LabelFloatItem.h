@@ -77,12 +77,12 @@ private:
   Q_DISABLE_COPY(LabelFloatItem)
 
   QString text, tooltipText;
-  QColor foreground, background;
+  QColor foreground = Qt::black, background = QColor(255, 255, 255, 200);
 
   QSizeF m_defaultSize;
-  int m_defaultFontScale;
+  int m_defaultFontScale = 100;
 
-  bool m_isInitialized;
+  bool m_isInitialized = false;
 
   Ui::LabelFloatItemConfigWidget *ui_configWidget = nullptr;
   QDialog *m_configDialog = nullptr;

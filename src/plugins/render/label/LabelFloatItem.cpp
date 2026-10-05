@@ -32,9 +32,7 @@ LabelFloatItem::LabelFloatItem()
 }
 
 LabelFloatItem::LabelFloatItem(const MarbleModel *marbleModel)
-  : AbstractFloatItem(marbleModel, QPointF(155., 1.), QSizeF(300.0, 70.0)),
-  foreground(Qt::black), background(255, 255, 255, 200), m_defaultSize(AbstractFloatItem::size()),
-  m_defaultFontScale(100), m_isInitialized(false)
+  : AbstractFloatItem(marbleModel, QPointF(155., 1.), QSizeF(300.0, 70.0)), m_defaultSize(AbstractFloatItem::size())
 {
   setMargin(0);
   setPadding(0);
@@ -59,6 +57,7 @@ void LabelFloatItem::setText(const QString& textParam, const QString& tooltipTex
     update();
   }
 
+  // Read by tooltip event
   tooltipText = tooltipTextParam;
 }
 
@@ -99,13 +98,12 @@ QString LabelFloatItem::copyrightYears() const
 
 QList<PluginAuthor> LabelFloatItem::pluginAuthors() const
 {
-  return QList<PluginAuthor>()
-         << PluginAuthor("Alexander Barthel", "alex@littlenavmap.org");
+  return QList<PluginAuthor>({PluginAuthor(QStringLiteral("Alexander Barthel"), QStringLiteral("alex@littlenavmap.org"))});
 }
 
 QIcon LabelFloatItem::icon() const
 {
-  return QIcon(":/icons/document-import.png");
+  return QIcon(QStringLiteral(":/icons/document-import.png"));
 }
 
 QDialog *LabelFloatItem::configDialog()
@@ -122,7 +120,8 @@ QDialog *LabelFloatItem::configDialog()
     connect(ui_configWidget->m_buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(restoreDefaultSettings()));
 
     QPushButton *applyButton = ui_configWidget->m_buttonBox->button(QDialogButtonBox::Apply);
-    connect(applyButton, SIGNAL(clicked()), SLOT(writeSettings()));
+    if(applyButton != nullptr)
+      connect(applyButton, SIGNAL(clicked()), SLOT(writeSettings()));
   }
 
   readSettings();
@@ -143,6 +142,9 @@ bool LabelFloatItem::isInitialized() const
 
 void LabelFloatItem::paintContent(QPainter *painter)
 {
+  if(ui_configWidget == nullptr || painter == nullptr)
+    return;
+
   painter->save();
 
   // Adjust font based on scale and make it a bit smaller
@@ -162,10 +164,6 @@ void LabelFloatItem::paintContent(QPainter *painter)
   // Set document text
   textDocument.setHtml(text);
 
-  // QAbstractTextDocumentLayout *layout = textDocument.documentLayout();
-  // QRectF rect = layout->frameBoundingRect(textDocument.rootFrame());
-  // qDebug() << Q_FUNC_INFO << rect << contentRect().contains(rect);
-
   // Draw background rectangle a bit smaller than the content rect
   painter->setPen(Qt::transparent);
   painter->setBackground(background);
@@ -175,11 +173,11 @@ void LabelFloatItem::paintContent(QPainter *painter)
 
   // Set document foreground color
   painter->setBackgroundMode(Qt::TransparentMode);
-  QAbstractTextDocumentLayout::PaintContext ctx;
-  ctx.palette.setColor(QPalette::Text, foreground);
+  QAbstractTextDocumentLayout::PaintContext context;
+  context.palette.setColor(QPalette::Text, foreground);
 
   // Draw to painter
-  textDocument.documentLayout()->draw(painter, ctx);
+  textDocument.documentLayout()->draw(painter, context);
 
   painter->restore();
 }
@@ -210,7 +208,7 @@ void LabelFloatItem::setSettings(const QHash<QString, QVariant>& settings)
 
 void LabelFloatItem::readSettings()
 {
-  if(!m_configDialog)
+  if(ui_configWidget == nullptr)
     return;
 
   ui_configWidget->m_widthBox->setValue(m_settings.value("width").toInt());
@@ -220,7 +218,7 @@ void LabelFloatItem::readSettings()
 
 void LabelFloatItem::writeSettings()
 {
-  if(!m_configDialog)
+  if(ui_configWidget == nullptr)
     return;
 
   m_settings.insert("width", ui_configWidget->m_widthBox->value());
@@ -234,7 +232,7 @@ void LabelFloatItem::writeSettings()
 
 void LabelFloatItem::updateSettings()
 {
-  if(!m_configDialog)
+  if(!ui_configWidget)
     return;
 
   setContentSize(QSizeF(ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value()));
