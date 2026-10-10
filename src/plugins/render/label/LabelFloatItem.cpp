@@ -34,6 +34,7 @@ LabelFloatItem::LabelFloatItem()
 LabelFloatItem::LabelFloatItem(const MarbleModel *marbleModel)
   : AbstractFloatItem(marbleModel, QPointF(155., 1.), QSizeF(300.0, 70.0)), m_defaultSize(AbstractFloatItem::size())
 {
+  qDebug() << Q_FUNC_INFO;
   setMargin(0);
   setPadding(0);
 
@@ -45,10 +46,12 @@ LabelFloatItem::LabelFloatItem(const MarbleModel *marbleModel)
 
 LabelFloatItem::~LabelFloatItem()
 {
+  qDebug() << Q_FUNC_INFO;
 }
 
 void LabelFloatItem::setText(const QString& textParam, const QString& tooltipTextParam, QColor foregroundParam, QColor backgroundParam)
 {
+  qDebug() << Q_FUNC_INFO;
   if(text != textParam || foreground != foregroundParam || background != backgroundParam)
   {
     foreground = foregroundParam;
@@ -110,6 +113,8 @@ QDialog *LabelFloatItem::configDialog()
 {
   if(!m_configDialog)
   {
+    qDebug() << Q_FUNC_INFO;
+
     // Initializing configuration dialog
     m_configDialog = new QDialog();
     ui_configWidget = new Ui::LabelFloatItemConfigWidget;
@@ -184,6 +189,8 @@ void LabelFloatItem::paintContent(QPainter *painter)
 
 QHash<QString, QVariant> LabelFloatItem::settings() const
 {
+  qDebug() << Q_FUNC_INFO;
+
   QHash<QString, QVariant> result = AbstractFloatItem::settings();
 
   typedef QHash<QString, QVariant>::ConstIterator Iterator;
@@ -196,6 +203,8 @@ QHash<QString, QVariant> LabelFloatItem::settings() const
 
 void LabelFloatItem::setSettings(const QHash<QString, QVariant>& settings)
 {
+  qDebug() << Q_FUNC_INFO;
+
   AbstractFloatItem::setSettings(settings);
 
   m_settings.insert("width", settings.value("width", m_defaultSize.toSize().width()));
@@ -211,6 +220,8 @@ void LabelFloatItem::readSettings()
   if(ui_configWidget == nullptr)
     return;
 
+  qDebug() << Q_FUNC_INFO;
+
   ui_configWidget->m_widthBox->setValue(m_settings.value("width").toInt());
   ui_configWidget->m_heightBox->setValue(m_settings.value("height").toInt());
   ui_configWidget->m_spinBoxFontSize->setValue(m_settings.value("fontscale").toInt());
@@ -220,6 +231,8 @@ void LabelFloatItem::writeSettings()
 {
   if(ui_configWidget == nullptr)
     return;
+
+  qDebug() << Q_FUNC_INFO;
 
   m_settings.insert("width", ui_configWidget->m_widthBox->value());
   m_settings.insert("height", ui_configWidget->m_heightBox->value());
@@ -235,11 +248,15 @@ void LabelFloatItem::updateSettings()
   if(!ui_configWidget)
     return;
 
+  qDebug() << Q_FUNC_INFO;
+
   setContentSize(QSizeF(ui_configWidget->m_widthBox->value(), ui_configWidget->m_heightBox->value()));
 }
 
 void LabelFloatItem::toolTipEvent(QHelpEvent *event)
 {
+  qDebug() << Q_FUNC_INFO;
+
   if(event->type() == QEvent::ToolTip && !tooltipText.isEmpty())
     QToolTip::showText(event->globalPos(), tooltipText);
 }

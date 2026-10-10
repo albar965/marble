@@ -115,11 +115,11 @@ bool appendPlugin(QObject *obj, QPluginLoader * & loader, QList<T *>& plugins)
 {
   if(qobject_cast<T *>(obj) && qobject_cast<U *>(obj))
   {
-    Q_ASSERT(obj->metaObject()->superClass());       // all our plugins have a super class
+    Q_ASSERT(obj->metaObject()->superClass()); // all our plugins have a super class
     mDebug() << obj->metaObject()->superClass()->className()
              << "plugin loaded from" << loader->fileName();
     T *plugin = qobject_cast<T *>(obj);
-    Q_ASSERT(plugin);       // checked above
+    Q_ASSERT(plugin); // checked above
     plugins << plugin;
     return true;
   }
@@ -133,11 +133,11 @@ bool appendPlugin(QObject *obj, QPluginLoader * & loader, QList<const T *>& plug
 {
   if(qobject_cast<T *>(obj) && qobject_cast<U *>(obj))
   {
-    Q_ASSERT(obj->metaObject()->superClass());       // all our plugins have a super class
+    Q_ASSERT(obj->metaObject()->superClass()); // all our plugins have a super class
     mDebug() << obj->metaObject()->superClass()->className()
              << "plugin loaded from" << loader->fileName();
     T *plugin = qobject_cast<T *>(obj);
-    Q_ASSERT(plugin);       // checked above
+    Q_ASSERT(plugin); // checked above
     plugins << plugin;
     return true;
   }
@@ -174,7 +174,7 @@ void PluginManagerPrivate::loadPlugins()
     }
     if(m_blacklist.contains(baseName))
     {
-      mDebug() << "Ignoring blacklisted plugin " << fileName;
+      qDebug() << Q_FUNC_INFO << "Ignoring blacklisted plugin" << baseName << "file" << fileName;
       continue;
     }
 
