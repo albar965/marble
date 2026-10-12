@@ -53,7 +53,6 @@ void GeoTagHandler::registerHandler(const GeoParser::QualifiedName& qName, const
 {
   TagHash *hash = tagHandlerHash();
 
-  Q_ASSERT(!hash->contains(qName));
   hash->insert(qName, handler);
   Q_ASSERT(hash->contains(qName));
 
@@ -66,7 +65,6 @@ void GeoTagHandler::unregisterHandler(const GeoParser::QualifiedName& qName)
 {
   TagHash *hash = tagHandlerHash();
 
-  Q_ASSERT(hash->contains(qName));
   hash->remove(qName);
   Q_ASSERT(!hash->contains(qName));
 }
