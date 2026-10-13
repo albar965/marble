@@ -494,7 +494,7 @@ void FileLoaderPrivate::createFilterProperties(GeoDataContainer *container)
             break;
         }
       }
-      else if(placemark->role() == "PPLA2" || placemark->role() == "PPLA3")
+      else if(placemark->role() == "PPLA2" || placemark->role() == "PPLA3" || placemark->role() == "PPLA4")
       {
         switch(placemark->zoomLevel())
         {

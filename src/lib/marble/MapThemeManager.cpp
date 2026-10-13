@@ -268,6 +268,12 @@ GeoSceneDocument *MapThemeManager::Private::loadMapThemeFile(const QString& mapT
   prop->setAvailable(true);
   document->settings()->addProperty(prop);
 
+  // Same for cities
+  prop = new GeoSceneProperty("cities");
+  prop->setValue(true);
+  prop->setAvailable(true);
+  document->settings()->addProperty(prop);
+
   // Set path to DGML file folder
   document->documentPath(QFileInfo(dgmlPath).absolutePath());
   return document;
