@@ -155,11 +155,11 @@ void GeoPolygonGraphicsItem::initializeBuildingPainting(const GeoPainter *painte
     {
       screenPolygons(viewport, m_polygon, innerPolygons, outlinePolygons);
     }
-    viewport->screenCoordinates(m_polygon->outerBoundary(), outlinePolygons);
+    viewport->screenCoordinates(m_polygon->outerBoundary(), outlinePolygons, true);
   }
   else if(m_ring)
   {
-    viewport->screenCoordinates(*m_ring, outlinePolygons);
+    viewport->screenCoordinates(*m_ring, outlinePolygons, true);
   }
 }
 
@@ -550,7 +550,7 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
   Q_ASSERT(polygon);
 
   QList<QPolygonF *> outerPolygons;
-  viewport->screenCoordinates(polygon->outerBoundary(), outerPolygons);
+  viewport->screenCoordinates(polygon->outerBoundary(), outerPolygons, true);
 
   outlines << outerPolygons;
 
@@ -558,7 +558,7 @@ void GeoPolygonGraphicsItem::screenPolygons(const ViewportParams *viewport, cons
   foreach(const GeoDataLinearRing& innerBoundary, innerBoundaries)
   {
     QList<QPolygonF *> innerPolygonsPerBoundary;
-    viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary);
+    viewport->screenCoordinates(innerBoundary, innerPolygonsPerBoundary, true);
 
     outlines << innerPolygonsPerBoundary;
     innerPolygons.reserve(innerPolygons.size() + innerPolygonsPerBoundary.size());

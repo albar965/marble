@@ -185,7 +185,7 @@ public:
 
   virtual bool screenCoordinates(const GeoDataLineString& lineString,
                                  const ViewportParams *viewport,
-                                 QList<QPolygonF *>& polygons) const = 0;
+                                 QList<QPolygonF *>& polygons, bool checkResolves) const = 0;
 
   /**
    * @brief Get the earth coordinates corresponding to a pixel in the map.

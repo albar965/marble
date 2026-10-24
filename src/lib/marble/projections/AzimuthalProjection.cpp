@@ -45,13 +45,13 @@ qreal AzimuthalProjection::clippingRadius() const
 
 bool AzimuthalProjection::screenCoordinates(const GeoDataLineString& lineString,
                                             const ViewportParams *viewport,
-                                            QList<QPolygonF *>& polygons) const
+                                            QList<QPolygonF *>& polygons, bool checkResolves) const
 {
 
   Q_D(const AzimuthalProjection);
   // Compare bounding box size of the line string with the angularResolution
   // Immediately return if the latLonAltBox is smaller.
-  if(!viewport->resolves(lineString.latLonAltBox()))
+  if(checkResolves && !viewport->resolvesRelaxed(lineString.latLonAltBox()))
   {
     // mDebug() << "Object too small to be resolved";
     return false;

@@ -76,6 +76,9 @@ public:
 
   bool resolves(const GeoDataLatLonBox& latLonBox, qreal pixel = 2.0) const;
 
+  /* Relaxed check to avoid small line segments disappearing from the map */
+  bool resolvesRelaxed(const GeoDataLatLonBox& latLonBox, qreal pixel = 2.0) const;
+
   bool resolves(const GeoDataLatLonAltBox& latLonAltBox, qreal pixel = 2.0, qreal altitude = 10000.0) const;
 
   /* Relaxed check to avoid small line segments disappearing from the map */
@@ -169,7 +172,7 @@ public:
                          bool& globeHidesPoint) const;
 
   bool screenCoordinates(const GeoDataLineString& lineString,
-                         QList<QPolygonF *>& polygons) const;
+                         QList<QPolygonF *>& polygons, bool checkResolves) const;
 
   /**
    * @brief Get the earth coordinates corresponding to a pixel in the map.

@@ -16,7 +16,6 @@
 #include "CylindricalProjection_p.h"
 
 // Marble
-#include "GeoDataLinearRing.h"
 #include "GeoDataLineString.h"
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
@@ -81,13 +80,13 @@ QPainterPath CylindricalProjection::mapShape(const ViewportParams *viewport) con
 
 bool CylindricalProjection::screenCoordinates(const GeoDataLineString& lineString,
                                               const ViewportParams *viewport,
-                                              QList<QPolygonF *>& polygons) const
+                                              QList<QPolygonF *>& polygons, bool checkResolves) const
 {
 
   Q_D(const CylindricalProjection);
   // Compare bounding box size of the line string with the angularResolution
   // Immediately return if the latLonAltBox is smaller.
-  if(!viewport->resolvesRelaxed(lineString.latLonAltBox()))
+  if(checkResolves && !viewport->resolvesRelaxed(lineString.latLonAltBox()))
   {
     // mDebug() << "Object too small to be resolved";
     return false;

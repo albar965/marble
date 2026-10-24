@@ -47,12 +47,12 @@ public:
   // Parameters that determine the painting
   qreal m_centerLongitude;
   qreal m_centerLatitude;
-  Quaternion m_planetAxis;               // Position, coded in a quaternion
+  Quaternion m_planetAxis; // Position, coded in a quaternion
   matrix m_planetAxisMatrix;
-  int m_radius;                          // Zoom level (pixels / globe radius)
+  int m_radius; // Zoom level (pixels / globe radius)
   qreal m_angularResolution;
 
-  QSize m_size;                          // width, height
+  QSize m_size; // width, height
 
   bool m_dirtyBox;
   GeoDataLatLonAltBox m_viewLatLonAltBox;
@@ -329,9 +329,7 @@ const GeoDataLatLonAltBox& ViewportParams::viewLatLonAltBox() const
 {
   if(d->m_dirtyBox)
   {
-    d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox(QRect(QPoint(0, 0),
-                                                                       d->m_size),
-                                                                 this);
+    d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox(QRect(QPoint(0, 0), d->m_size), this);
     d->m_dirtyBox = false;
   }
 
@@ -354,21 +352,23 @@ qreal ViewportParams::angularResolution() const
 bool ViewportParams::resolves(const GeoDataLatLonBox& latLonBox, qreal pixel) const
 {
   return latLonBox.width() + latLonBox.height() > pixel *angularResolution();
+}
 
+bool ViewportParams::resolvesRelaxed(const GeoDataLatLonBox& latLonBox, qreal pixel) const
+{
+  return latLonBox.width() + latLonBox.height() > pixel * angularResolution() / 20.;
 }
 
 bool ViewportParams::resolves(const GeoDataLatLonAltBox& latLonAltBox, qreal pixel, qreal altitude) const
 {
-  return latLonAltBox.width() + latLonAltBox.height() > pixel *angularResolution() ||
+  return latLonAltBox.width() + latLonAltBox.height() > pixel * angularResolution() ||
          latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
-
 }
 
 bool ViewportParams::resolvesRelaxed(const GeoDataLatLonAltBox& latLonAltBox, qreal pixel, qreal altitude) const
 {
-  return latLonAltBox.width() + latLonAltBox.height() > pixel *angularResolution() / 20. ||
+  return latLonAltBox.width() + latLonAltBox.height() > pixel * angularResolution() / 20. ||
          latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > altitude;
-
 }
 
 bool ViewportParams::resolves(const GeoDataCoordinates& coord1,
@@ -425,9 +425,9 @@ bool ViewportParams::screenCoordinates(const GeoDataCoordinates& coordinates,
 }
 
 bool ViewportParams::screenCoordinates(const GeoDataLineString& lineString,
-                                       QList<QPolygonF *>& polygons) const
+                                       QList<QPolygonF *>& polygons, bool checkResolves) const
 {
-  return d->m_currentProjection->screenCoordinates(lineString, this, polygons);
+  return d->m_currentProjection->screenCoordinates(lineString, this, polygons, checkResolves);
 }
 
 bool ViewportParams::geoCoordinates(const int x, const int y,
