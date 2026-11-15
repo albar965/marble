@@ -24,7 +24,7 @@ IF ERRORLEVEL 1 goto :err
 pushd "%BUILDDIR%"
 IF ERRORLEVEL 1 goto :err
 
-cmake -Wno-dev -G "MinGW Makefiles" -DWITH_ZLIB=NO -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DCMAKE_INSTALL_PREFIX=%DEPLOYDIR% ..\marble\
+cmake -Wno-dev -G "Ninja" -DWITH_ZLIB=NO -DCMAKE_BUILD_TYPE=%BUILDTYPE% -DCMAKE_INSTALL_PREFIX=%DEPLOYDIR% ..\marble\
 IF ERRORLEVEL 1 goto :err
 
 cmake --build .
