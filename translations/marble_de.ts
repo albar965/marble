@@ -6,37 +6,37 @@
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="14"/>
         <source>Configure Crosshairs Plugin</source>
-        <translation type="unfinished">Fadenkreuz-Modul einrichten</translation>
+        <translation>Fadenkreuz-Modul einrichten</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="20"/>
         <source>Theme</source>
-        <translation type="unfinished">Design</translation>
+        <translation>Design</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="43"/>
         <source>Default</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="52"/>
         <source>Gun 1</source>
-        <translation type="unfinished">Gewehr 1</translation>
+        <translation>Gewehr 1</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="61"/>
         <source>Gun 2</source>
-        <translation type="unfinished">Gewehr 2</translation>
+        <translation>Gewehr 2</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="70"/>
         <source>Circled</source>
-        <translation type="unfinished">Kreisförmig</translation>
+        <translation>Kreisförmig</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsConfigWidget.ui" line="79"/>
         <source>German</source>
-        <translation type="unfinished">Deutsch</translation>
+        <translation>Deutsch</translation>
     </message>
 </context>
 <context>
@@ -44,64 +44,64 @@
     <message>
         <location filename="src/lib/marble/geodata/data/GeoDataCoordinates.cpp" line="477"/>
         <source>W</source>
-        <translation type="unfinished">W</translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/GeoDataCoordinates.cpp" line="477"/>
         <source>E</source>
-        <translation type="unfinished">O</translation>
+        <translation>O</translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/GeoDataCoordinates.cpp" line="681"/>
         <source>N</source>
-        <translation type="unfinished">N</translation>
+        <translation>N</translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/GeoDataCoordinates.cpp" line="681"/>
         <source>S</source>
-        <translation type="unfinished">S</translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="51"/>
         <source>*</source>
         <comment>North direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="55"/>
         <source>*</source>
         <comment>East direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="59"/>
         <source>*</source>
         <comment>South direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="63"/>
         <source>*</source>
         <comment>West direction terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="97"/>
         <source>*</source>
         <comment>Degree symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="101"/>
         <source>*</source>
         <comment>Minutes symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/data/LonLatParser.cpp" line="105"/>
         <source>*</source>
         <comment>Seconds symbol terms, see http://techbase.kde.org/Projects/Marble/GeoDataCoordinatesTranslation</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -109,73 +109,73 @@
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="14"/>
         <source>Coordinate Grid Plugin</source>
-        <translation type="unfinished">Koordinatengitter-Modul</translation>
+        <translation>Koordinatengitter-Modul</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="20"/>
         <source>C&amp;olors</source>
-        <translation type="unfinished">&amp;Farben</translation>
+        <translation>&amp;Farben</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="444"/>
         <source>&amp;Grid:</source>
-        <translation type="unfinished">&amp;Gitter:</translation>
+        <translation>&amp;Gitter:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="497"/>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1432"/>
         <source>Color of the coordinate grid.</source>
-        <translation type="unfinished">Farbe des Koordinatengitters.</translation>
+        <translation>Farbe des Koordinatengitters.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="922"/>
         <source>&amp;Tropics:</source>
-        <translation type="unfinished">&amp;Tropen:</translation>
+        <translation>&amp;Tropen:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="938"/>
         <source>Color of the tropical circles.</source>
-        <translation type="unfinished">Farbe der Wendekreise.</translation>
+        <translation>Farbe der Wendekreise.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1363"/>
         <source>&amp;Equator:</source>
-        <translation type="unfinished">Ä&amp;quator:</translation>
+        <translation>Ä&amp;quator:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1379"/>
         <source>Color of the equator.</source>
-        <translation type="unfinished">Farbe des Äquators.</translation>
+        <translation>Farbe des Äquators.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1857"/>
         <source>&amp;Grid Labels:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1870"/>
         <source>Labels</source>
-        <translation type="unfinished">Beschriftungen</translation>
+        <translation>Beschriftungen</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1876"/>
         <source>&amp;Named Labels</source>
-        <translation type="unfinished">Be&amp;nannte Textmarken</translation>
+        <translation>Be&amp;nannte Textmarken</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1886"/>
         <source>Show Labels for Prime meridian, Equator, Tropics.</source>
-        <translation type="unfinished">Zeigt Beschriftungen für Nullmeridian, Äquator und Wendekreise.</translation>
+        <translation>Zeigt Beschriftungen für Nullmeridian, Äquator und Wendekreise.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1893"/>
         <source>&amp;Numerical Labels</source>
-        <translation type="unfinished">&amp;Numerische Textmarken</translation>
+        <translation>&amp;Numerische Textmarken</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticuleConfigWidget.ui" line="1903"/>
         <source>Show numerical Labels.</source>
-        <translation type="unfinished">Numerische Textmarken anzeigen.</translation>
+        <translation>Numerische Textmarken anzeigen.</translation>
     </message>
 </context>
 <context>
@@ -183,12 +183,12 @@
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleConfigWidget.ui" line="14"/>
         <source>Configure Scale Bar Plugin</source>
-        <translation type="unfinished">Maßstab-Modul einrichten</translation>
+        <translation>Maßstab-Modul einrichten</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleConfigWidget.ui" line="20"/>
         <source>Minimize</source>
-        <translation type="unfinished">Minimieren</translation>
+        <translation>Minimieren</translation>
     </message>
 </context>
 <context>
@@ -196,7 +196,7 @@
     <message>
         <location filename="src/lib/marble/MarbleGlobal.h" line="260"/>
         <source>not available</source>
-        <translation type="unfinished">nicht verfügbar</translation>
+        <translation>nicht verfügbar</translation>
     </message>
 </context>
 <context>
@@ -204,17 +204,17 @@
     <message>
         <location filename="src/lib/marble/AbstractFloatItem.cpp" line="234"/>
         <source>&amp;Lock</source>
-        <translation type="unfinished">&amp;Sperren</translation>
+        <translation>&amp;Sperren</translation>
     </message>
     <message>
         <location filename="src/lib/marble/AbstractFloatItem.cpp" line="241"/>
         <source>&amp;Hide</source>
-        <translation type="unfinished">&amp;Ausblenden</translation>
+        <translation>&amp;Ausblenden</translation>
     </message>
     <message>
         <location filename="src/lib/marble/AbstractFloatItem.cpp" line="250"/>
         <source>&amp;Configure...</source>
-        <translation type="unfinished">&amp;Einrichten ...</translation>
+        <translation>&amp;Einrichten ...</translation>
     </message>
 </context>
 <context>
@@ -222,17 +222,17 @@
     <message>
         <location filename="src/plugins/render/atmosphere/AtmospherePlugin.cpp" line="64"/>
         <source>Atmosphere</source>
-        <translation type="unfinished">Atmosphäre</translation>
+        <translation>Atmosphäre</translation>
     </message>
     <message>
         <location filename="src/plugins/render/atmosphere/AtmospherePlugin.cpp" line="69"/>
         <source>&amp;Atmosphere</source>
-        <translation type="unfinished">&amp;Atmosphäre</translation>
+        <translation>&amp;Atmosphäre</translation>
     </message>
     <message>
         <location filename="src/plugins/render/atmosphere/AtmospherePlugin.cpp" line="84"/>
         <source>Shows the atmosphere around the earth.</source>
-        <translation type="unfinished">Zeigt die Atmosphäre um die Erde an.</translation>
+        <translation>Zeigt die Atmosphäre um die Erde an.</translation>
     </message>
 </context>
 <context>
@@ -240,17 +240,17 @@
     <message>
         <location filename="src/plugins/runner/cache/CachePlugin.cpp" line="22"/>
         <source>Cache File Parser</source>
-        <translation type="unfinished">Parser für Cache-Dateien</translation>
+        <translation>Parser für Cache-Dateien</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/cache/CachePlugin.cpp" line="37"/>
         <source>Create GeoDataDocument from Cache Files</source>
-        <translation type="unfinished">Geo-Daten-Dokument aus Cache-Dateien erstellen</translation>
+        <translation>Geo-Daten-Dokument aus Cache-Dateien erstellen</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/cache/CachePlugin.cpp" line="53"/>
         <source>Marble Cache Files</source>
-        <translation type="unfinished">Marble-Zwischenspeicherdateien</translation>
+        <translation>Marble-Zwischenspeicherdateien</translation>
     </message>
 </context>
 <context>
@@ -258,27 +258,27 @@
     <message>
         <location filename="src/plugins/render/compass/CompassFloatItem.cpp" line="55"/>
         <source>Compass</source>
-        <translation type="unfinished">Kompass</translation>
+        <translation>Kompass</translation>
     </message>
     <message>
         <location filename="src/plugins/render/compass/CompassFloatItem.cpp" line="60"/>
         <source>&amp;Compass</source>
-        <translation type="unfinished">&amp;Kompass</translation>
+        <translation>&amp;Kompass</translation>
     </message>
     <message>
         <location filename="src/plugins/render/compass/CompassFloatItem.cpp" line="75"/>
         <source>This is a float item that provides a compass.</source>
-        <translation type="unfinished">Dies ist ein freischwebendes Objekt, das einen Kompass bereitstellt.</translation>
+        <translation>Dies ist ein freischwebendes Objekt, das einen Kompass bereitstellt.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/compass/CompassFloatItem.cpp" line="137"/>
         <source>N</source>
-        <translation type="unfinished">N</translation>
+        <translation>N</translation>
     </message>
     <message>
         <location filename="src/plugins/render/compass/CompassFloatItem.cpp" line="139"/>
         <source>S</source>
-        <translation type="unfinished">S</translation>
+        <translation>S</translation>
     </message>
 </context>
 <context>
@@ -286,17 +286,17 @@
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsPlugin.cpp" line="76"/>
         <source>Crosshairs</source>
-        <translation type="unfinished">Fadenkreuz</translation>
+        <translation>Fadenkreuz</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsPlugin.cpp" line="81"/>
         <source>Cross&amp;hairs</source>
-        <translation type="unfinished">&amp;Fadenkreuz</translation>
+        <translation>&amp;Fadenkreuz</translation>
     </message>
     <message>
         <location filename="src/plugins/render/crosshairs/CrosshairsPlugin.cpp" line="96"/>
         <source>A plugin that shows crosshairs.</source>
-        <translation type="unfinished">Ein Modul, das ein Fadenkreuz anzeigt.</translation>
+        <translation>Ein Modul, das ein Fadenkreuz anzeigt.</translation>
     </message>
 </context>
 <context>
@@ -304,17 +304,17 @@
     <message>
         <location filename="src/plugins/templates/floatitem/FITemplateFloatItem.cpp" line="50"/>
         <source>FITemplate</source>
-        <translation type="unfinished">FO-Vorlage</translation>
+        <translation>FO-Vorlage</translation>
     </message>
     <message>
         <location filename="src/plugins/templates/floatitem/FITemplateFloatItem.cpp" line="55"/>
         <source>Float Item &amp;Template</source>
-        <translation type="unfinished">&amp;Vorlage für ein freischwebendes Objekt</translation>
+        <translation>&amp;Vorlage für ein freischwebendes Objekt</translation>
     </message>
     <message>
         <location filename="src/plugins/templates/floatitem/FITemplateFloatItem.cpp" line="65"/>
         <source>This is a template class for float items.</source>
-        <translation type="unfinished">Dies ist eine Vorlagenklasse für freischwebende Objekte.</translation>
+        <translation>Dies ist eine Vorlagenklasse für freischwebende Objekte.</translation>
     </message>
 </context>
 <context>
@@ -322,28 +322,28 @@
     <message>
         <location filename="src/lib/marble/GeoDataTreeModel.cpp" line="239"/>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="src/lib/marble/GeoDataTreeModel.cpp" line="242"/>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="src/lib/marble/GeoDataTreeModel.cpp" line="245"/>
         <source>Popularity</source>
-        <translation type="unfinished">Popularität</translation>
+        <translation>Popularität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/GeoDataTreeModel.cpp" line="248"/>
         <source>PopIndex</source>
         <comment>Popularity index</comment>
-        <translation type="unfinished">Popularitätsindex</translation>
+        <translation>Popularitätsindex</translation>
     </message>
     <message>
         <location filename="src/lib/marble/GeoDataTreeModel.cpp" line="317"/>
         <source>Playlist</source>
-        <translation type="unfinished">Wiedergabeliste</translation>
+        <translation>Wiedergabeliste</translation>
     </message>
 </context>
 <context>
@@ -351,72 +351,72 @@
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="76"/>
         <source>Coordinate Grid</source>
-        <translation type="unfinished">Koordinatengitter</translation>
+        <translation>Koordinatengitter</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="81"/>
         <source>Coordinate &amp;Grid</source>
-        <translation type="unfinished">Koordinaten&amp;gitter</translation>
+        <translation>Koordinaten&amp;gitter</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="96"/>
         <source>A plugin that shows a coordinate grid.</source>
-        <translation type="unfinished">Ein Modul zur Anzeige eines Koordinatengitters.</translation>
+        <translation>Ein Modul zur Anzeige eines Koordinatengitters.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="222"/>
         <source>Please choose the color for the coordinate grid.</source>
-        <translation type="unfinished">Bitte wählen Sie die Farbe des Koordinatengitters.</translation>
+        <translation>Bitte wählen Sie die Farbe des Koordinatengitters.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="234"/>
         <source>Please choose the color for the coordinate grid labels.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie die Farbe der Beschriftungen des Koordinatengitters.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="246"/>
         <source>Please choose the color for the tropic circles.</source>
-        <translation type="unfinished">Bitte wählen Sie die Farbe für die Wendekreise.</translation>
+        <translation>Bitte wählen Sie die Farbe für die Wendekreise.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="258"/>
         <source>Please choose the color for the equator.</source>
-        <translation type="unfinished">Bitte wählen Sie die Farbe für den Äquator.</translation>
+        <translation>Bitte wählen Sie die Farbe für den Äquator.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="335"/>
         <source>Equator</source>
-        <translation type="unfinished">Äquator</translation>
+        <translation>Äquator</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="341"/>
         <source>Prime Meridian</source>
-        <translation type="unfinished">Nullmeridian</translation>
+        <translation>Nullmeridian</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="342"/>
         <source>Antimeridian</source>
-        <translation type="unfinished">180°-Meridian</translation>
+        <translation>180°-Meridian</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="385"/>
         <source>Tropic of Cancer</source>
-        <translation type="unfinished">Nördlicher Wendekreis</translation>
+        <translation>Nördlicher Wendekreis</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="386"/>
         <source>Tropic of Capricorn</source>
-        <translation type="unfinished">Südlicher Wendekreis</translation>
+        <translation>Südlicher Wendekreis</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="389"/>
         <source>Arctic Circle</source>
-        <translation type="unfinished">Nördlicher Polarkreis</translation>
+        <translation>Nördlicher Polarkreis</translation>
     </message>
     <message>
         <location filename="src/plugins/render/graticule/GraticulePlugin.cpp" line="390"/>
         <source>Antarctic Circle</source>
-        <translation type="unfinished">Südlicher Polarkreis</translation>
+        <translation>Südlicher Polarkreis</translation>
     </message>
 </context>
 <context>
@@ -424,17 +424,17 @@
     <message>
         <location filename="src/plugins/runner/kml/KmlPlugin.cpp" line="23"/>
         <source>KML File Parser</source>
-        <translation type="unfinished">KML-Datei-Parser</translation>
+        <translation>KML-Datei-Parser</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/kml/KmlPlugin.cpp" line="38"/>
         <source>Create GeoDataDocument from KML and KMZ Files</source>
-        <translation type="unfinished">Geo-Daten-Dokument aus KML- und KMZ-Dateien erstellen</translation>
+        <translation>Geo-Daten-Dokument aus KML- und KMZ-Dateien erstellen</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/kml/KmlPlugin.cpp" line="55"/>
         <source>Google Earth KML</source>
-        <translation type="unfinished">Google Earth KML</translation>
+        <translation>Google Earth KML</translation>
     </message>
 </context>
 <context>
@@ -442,27 +442,27 @@
     <message>
         <location filename="src/plugins/render/license/License.cpp" line="101"/>
         <source>License</source>
-        <translation type="unfinished">Lizenz</translation>
+        <translation>Lizenz</translation>
     </message>
     <message>
         <location filename="src/plugins/render/license/License.cpp" line="106"/>
         <source>&amp;License</source>
-        <translation type="unfinished">&amp;Lizenz</translation>
+        <translation>&amp;Lizenz</translation>
     </message>
     <message>
         <location filename="src/plugins/render/license/License.cpp" line="121"/>
         <source>This is a float item that provides copyright information.</source>
-        <translation type="unfinished">Dies ist ein freischwebendes Objekt, das Copyright-Informationen bereitstellt.</translation>
+        <translation>Dies ist ein freischwebendes Objekt, das Copyright-Informationen bereitstellt.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/license/License.cpp" line="248"/>
         <source>&amp;Full License</source>
-        <translation type="unfinished">&amp;Vollständige Lizenz</translation>
+        <translation>&amp;Vollständige Lizenz</translation>
     </message>
     <message>
         <location filename="src/plugins/render/license/License.cpp" line="253"/>
         <source>&amp;Show Details</source>
-        <translation type="unfinished">Details &amp;anzeigen</translation>
+        <translation>Details &amp;anzeigen</translation>
     </message>
 </context>
 <context>
@@ -470,17 +470,17 @@
     <message>
         <location filename="src/plugins/runner/log/LogPlugin.cpp" line="22"/>
         <source>TangoGPS Log File Parser</source>
-        <translation type="unfinished">TangoGPS-Protokolldatei-Parser</translation>
+        <translation>TangoGPS-Protokolldatei-Parser</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/log/LogPlugin.cpp" line="37"/>
         <source>Allows loading of TangoGPS log files.</source>
-        <translation type="unfinished">Ermöglicht das Laden von TangoGPS-Protokolldateien.</translation>
+        <translation>Ermöglicht das Laden von TangoGPS-Protokolldateien.</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/log/LogPlugin.cpp" line="53"/>
         <source>TangoGPS Log Files</source>
-        <translation type="unfinished">TangoGPS-Protokolldateien</translation>
+        <translation>TangoGPS-Protokolldateien</translation>
     </message>
 </context>
 <context>
@@ -488,53 +488,53 @@
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="58"/>
         <source>Minimize</source>
-        <translation type="unfinished">Minimieren</translation>
+        <translation>Minimieren</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="75"/>
         <source>Scale Bar</source>
-        <translation type="unfinished">Maßstab</translation>
+        <translation>Maßstab</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="80"/>
         <source>&amp;Scale Bar</source>
-        <translation type="unfinished">&amp;Maßstab</translation>
+        <translation>&amp;Maßstab</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="95"/>
         <source>This is a float item that provides a map scale.</source>
-        <translation type="unfinished">Dies ist ein freischwebendes Objekt, das einen Maßstab bereitstellt.</translation>
+        <translation>Dies ist ein freischwebendes Objekt, das einen Maßstab bereitstellt.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="106"/>
         <source>Original Developer</source>
-        <translation type="unfinished">Ursprünglicher Entwickler</translation>
+        <translation>Ursprünglicher Entwickler</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="244"/>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="250"/>
         <source>km</source>
-        <translation type="unfinished">km</translation>
+        <translation>km</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="255"/>
         <source>m</source>
-        <translation type="unfinished">m</translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="260"/>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="273"/>
         <source>nm</source>
-        <translation type="unfinished">sm</translation>
+        <translation>sm</translation>
     </message>
     <message>
         <location filename="src/plugins/render/mapscale/MapScaleFloatItem.cpp" line="393"/>
         <source>&amp;Configure...</source>
-        <translation type="unfinished">&amp;Einrichten ...</translation>
+        <translation>&amp;Einrichten ...</translation>
     </message>
 </context>
 <context>
@@ -542,12 +542,12 @@
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="396"/>
         <source>Using Marble Library version %1 for Little Navmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutze Marble-Bibliothek Version %1 für Little Navmap</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="407"/>
         <source>&lt;br /&gt;(c) 2007-%1 by the authors of Marble Virtual Globe&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://edu.kde.org/marble&quot;&gt;http://edu.kde.org/marble&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br /&gt;© 2007-%1, die Autoren von Marble, dem virtuellen Globus&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;https://edu.kde.org/marble&quot;&gt;https://edu.kde.org/marble&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
@@ -555,17 +555,17 @@
     <message>
         <location filename="src/plugins/render/navigation/NavigationFloatItem.cpp" line="70"/>
         <source>Navigation</source>
-        <translation type="unfinished">Navigation</translation>
+        <translation>Navigation</translation>
     </message>
     <message>
         <location filename="src/plugins/render/navigation/NavigationFloatItem.cpp" line="75"/>
         <source>&amp;Navigation</source>
-        <translation type="unfinished">&amp;Navigation</translation>
+        <translation>&amp;Navigation</translation>
     </message>
     <message>
         <location filename="src/plugins/render/navigation/NavigationFloatItem.cpp" line="90"/>
         <source>A mouse control to zoom and move the map</source>
-        <translation type="unfinished">Ein Navigationsfenster zum Bewegen, Vergrößern und Verkleinern der Karte mit der Maus</translation>
+        <translation>Ein Navigationsfenster zum Bewegen, Vergrößern und Verkleinern der Karte mit der Maus</translation>
     </message>
 </context>
 <context>
@@ -573,27 +573,27 @@
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingItem.cpp" line="192"/>
         <source>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Cache name&lt;/td&gt;</source>
-        <translation type="unfinished">&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Name des Cache&lt;/td&gt;</translation>
+        <translation>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Name des Cache&lt;/td&gt;</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingItem.cpp" line="194"/>
         <source>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;User name&lt;/td&gt;&lt;td&gt;</source>
-        <translation type="unfinished">&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Benutzername&lt;/td&gt;&lt;td&gt;</translation>
+        <translation>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Benutzername&lt;/td&gt;&lt;td&gt;</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingItem.cpp" line="197"/>
         <source>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Date hidden&lt;/td&gt;&lt;td&gt;</source>
-        <translation type="unfinished">&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Datum ausgeblendet&lt;/td&gt;&lt;td&gt;</translation>
+        <translation>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Datum ausgeblendet&lt;/td&gt;&lt;td&gt;</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingItem.cpp" line="199"/>
         <source>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Difficulty&lt;/td&gt;&lt;td&gt;</source>
-        <translation type="unfinished">&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Schwierigkeitsgrad&lt;/td&gt;&lt;td&gt;</translation>
+        <translation>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Schwierigkeitsgrad&lt;/td&gt;&lt;td&gt;</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingItem.cpp" line="200"/>
         <source>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Size&lt;/td&gt;&lt;td&gt;</source>
-        <translation type="unfinished">&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Größe&lt;/td&gt;&lt;td&gt;</translation>
+        <translation>&lt;tr&gt;&lt;td align=&quot;right&quot;&gt;Größe&lt;/td&gt;&lt;td&gt;</translation>
     </message>
 </context>
 <context>
@@ -601,22 +601,22 @@
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingPlugin.cpp" line="27"/>
         <source>Cache positions by opencaching.de.</source>
-        <translation type="unfinished">Cache-Positionen von opencaching.de.</translation>
+        <translation>Cache-Positionen von opencaching.de.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingPlugin.cpp" line="51"/>
         <source>OpenCaching</source>
-        <translation type="unfinished">OpenCaching</translation>
+        <translation>OpenCaching</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingPlugin.cpp" line="56"/>
         <source>&amp;OpenCaching</source>
-        <translation type="unfinished">&amp;OpenCaching</translation>
+        <translation>&amp;OpenCaching</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingPlugin.cpp" line="61"/>
         <source>Shows caches from OpenCaching.de on the screen.</source>
-        <translation type="unfinished">Zeigt Caches von OpenCaching.de auf dem Bildschirm an.</translation>
+        <translation>Zeigt Caches von OpenCaching.de auf dem Bildschirm an.</translation>
     </message>
 </context>
 <context>
@@ -624,22 +624,22 @@
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMap.cpp" line="79"/>
         <source>Overview Map</source>
-        <translation type="unfinished">Übersichtskarte</translation>
+        <translation>Übersichtskarte</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMap.cpp" line="84"/>
         <source>&amp;Overview Map</source>
-        <translation type="unfinished">Ü&amp;bersichtskarte</translation>
+        <translation>Ü&amp;bersichtskarte</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMap.cpp" line="99"/>
         <source>This is a float item that provides an overview map.</source>
-        <translation type="unfinished">Dies ist ein freischwebendes Objekt, das eine Übersichtskarte bereitstellt.</translation>
+        <translation>Dies ist ein freischwebendes Objekt, das eine Übersichtskarte bereitstellt.</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMap.cpp" line="422"/>
         <source>Please choose the color for the position indicator</source>
-        <translation type="unfinished">Bitte wählen Sie die Farbe für die Positionsanzeige</translation>
+        <translation>Bitte wählen Sie die Farbe für die Positionsanzeige</translation>
     </message>
 </context>
 <context>
@@ -647,17 +647,17 @@
     <message>
         <location filename="src/lib/marble/PluginAboutDialog.cpp" line="60"/>
         <source>About %1</source>
-        <translation type="unfinished">Über %1</translation>
+        <translation>Über %1</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PluginAboutDialog.cpp" line="65"/>
         <source>Version %1</source>
-        <translation type="unfinished">Version %1</translation>
+        <translation>Version %1</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PluginAboutDialog.cpp" line="107"/>
         <source>Data</source>
-        <translation type="unfinished">Daten</translation>
+        <translation>Daten</translation>
     </message>
 </context>
 <context>
@@ -665,12 +665,12 @@
     <message>
         <location filename="src/lib/marble/PluginItemDelegate.cpp" line="373"/>
         <source>About</source>
-        <translation type="unfinished">Über</translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PluginItemDelegate.cpp" line="392"/>
         <source>Configure</source>
-        <translation type="unfinished">Einrichten</translation>
+        <translation>Einrichten</translation>
     </message>
 </context>
 <context>
@@ -678,17 +678,17 @@
     <message>
         <location filename="src/plugins/runner/pn2/Pn2Plugin.cpp" line="22"/>
         <source>Pn2 File Parser</source>
-        <translation type="unfinished">Pn2-Datei-Parser</translation>
+        <translation>Pn2-Datei-Parser</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/pn2/Pn2Plugin.cpp" line="37"/>
         <source>Create GeoDataDocument from Pn2 Files</source>
-        <translation type="unfinished">Geo-Daten-Dokument aus Pn2-Dateien erstellen</translation>
+        <translation>Geo-Daten-Dokument aus Pn2-Dateien erstellen</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/pn2/Pn2Plugin.cpp" line="53"/>
         <source>Compressed Pnt</source>
-        <translation type="unfinished">Komprimierte PNT-Datei</translation>
+        <translation>Komprimierte PNT-Datei</translation>
     </message>
 </context>
 <context>
@@ -696,17 +696,17 @@
     <message>
         <location filename="src/plugins/runner/pnt/PntPlugin.cpp" line="22"/>
         <source>Pnt File Parser</source>
-        <translation type="unfinished">PNT-Datei-Parser</translation>
+        <translation>PNT-Datei-Parser</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/pnt/PntPlugin.cpp" line="37"/>
         <source>Create GeoDataDocument from Pnt Files</source>
-        <translation type="unfinished">Geo-Daten-Dokument aus PNT-Dateien erstellen</translation>
+        <translation>Geo-Daten-Dokument aus PNT-Dateien erstellen</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/pnt/PntPlugin.cpp" line="53"/>
         <source>Micro World Database II</source>
-        <translation type="unfinished">Micro World Datenbank II</translation>
+        <translation>Micro World Datenbank II</translation>
     </message>
 </context>
 <context>
@@ -714,17 +714,17 @@
     <message>
         <location filename="src/plugins/render/progress/ProgressFloatItem.cpp" line="87"/>
         <source>Download Progress Indicator</source>
-        <translation type="unfinished">Download-Fortschrittsanzeige</translation>
+        <translation>Download-Fortschrittsanzeige</translation>
     </message>
     <message>
         <location filename="src/plugins/render/progress/ProgressFloatItem.cpp" line="92"/>
         <source>&amp;Download Progress</source>
-        <translation type="unfinished">&amp;Download-Fortschritt</translation>
+        <translation>&amp;Download-Fortschritt</translation>
     </message>
     <message>
         <location filename="src/plugins/render/progress/ProgressFloatItem.cpp" line="107"/>
         <source>Shows a pie chart download progress indicator</source>
-        <translation type="unfinished">Download-Fortschritt als Tortendiagramm anzeigen</translation>
+        <translation>Download-Fortschritt als Tortendiagramm anzeigen</translation>
     </message>
 </context>
 <context>
@@ -732,7 +732,7 @@
     <message>
         <location filename="src/lib/marble/RemoveItemEditWidget.cpp" line="39"/>
         <source>Choose item:</source>
-        <translation type="unfinished">Eintrag auswählen:</translation>
+        <translation>Eintrag auswählen:</translation>
     </message>
 </context>
 <context>
@@ -740,17 +740,17 @@
     <message>
         <location filename="src/plugins/runner/shp/ShpPlugin.cpp" line="22"/>
         <source>Shp File Parser</source>
-        <translation type="unfinished">Shp-Datei-Parser</translation>
+        <translation>Shp-Datei-Parser</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/shp/ShpPlugin.cpp" line="37"/>
         <source>Create GeoDataDocument from Shp Files</source>
-        <translation type="unfinished">Geo-Daten-Dokument aus Shp-Dateien erstellen</translation>
+        <translation>Geo-Daten-Dokument aus Shp-Dateien erstellen</translation>
     </message>
     <message>
         <location filename="src/plugins/runner/shp/ShpPlugin.cpp" line="53"/>
         <source>Shapefile Map Files</source>
-        <translation type="unfinished">Shapefile-Kartendateien</translation>
+        <translation>Shapefile-Kartendateien</translation>
     </message>
 </context>
 <context>
@@ -758,13 +758,13 @@
     <message>
         <location filename="src/lib/marble/WaitEditWidget.cpp" line="40"/>
         <source>Wait duration:</source>
-        <translation type="unfinished">Wartedauer:</translation>
+        <translation>Wartedauer:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/WaitEditWidget.cpp" line="45"/>
         <source> s</source>
         <comment>seconds</comment>
-        <translation type="unfinished"> s</translation>
+        <translation> s</translation>
     </message>
 </context>
 <context>
@@ -772,7 +772,7 @@
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="14"/>
         <source>About Marble</source>
-        <translation type="unfinished">Über Marble</translation>
+        <translation>Über Marble</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="49"/>
@@ -780,7 +780,7 @@
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Marble Virtual Globe&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Marble – Virtueller Globus&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -788,12 +788,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="59"/>
         <source>Version Unknown</source>
-        <translation type="unfinished">Unbekannte Version</translation>
+        <translation>Unbekannte Version</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="86"/>
         <source>&amp;About</source>
-        <translation type="unfinished">Ü&amp;ber</translation>
+        <translation>Ü&amp;ber</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="98"/>
@@ -805,12 +805,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;(c) 2007, The Marble Project&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-style:italic;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;http://edu.kde.org/marble&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;© 2007, das Marble-Projekt&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-style:italic;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;https://edu.kde.org/marble&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="116"/>
         <source>A&amp;uthors</source>
-        <translation type="unfinished">A&amp;utoren</translation>
+        <translation>A&amp;utoren</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="128"/>
@@ -820,7 +827,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -829,12 +836,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="143"/>
         <source>&amp;Data</source>
-        <translation type="unfinished">&amp;Daten</translation>
+        <translation>&amp;Daten</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="170"/>
         <source>&amp;License Agreement</source>
-        <translation type="unfinished">&amp;Lizenzvereinbarung</translation>
+        <translation>&amp;Lizenzvereinbarung</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.ui" line="182"/>
@@ -843,7 +850,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -855,12 +862,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="62"/>
         <source>Up</source>
-        <translation type="unfinished">Nach oben</translation>
+        <translation>Nach oben</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="65"/>
         <source>Tilts the globe&apos;s axis towards the user.</source>
-        <translation type="unfinished">Neigt die Achse des Globus zum Benutzer hin.</translation>
+        <translation>Neigt die Achse des Globus zum Benutzer hin.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="68"/>
@@ -871,94 +878,94 @@ p, li { white-space: pre-wrap; }
         <location filename="src/lib/marble/MarbleNavigator.ui" line="157"/>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="215"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="78"/>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="90"/>
         <source>Left</source>
-        <translation type="unfinished">Links</translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="81"/>
         <source>Rotates the globe counterclockwise around its axis.</source>
-        <translation type="unfinished">Rotiert den Globus gegen den Uhrzeigersinn um seine Achse.</translation>
+        <translation>Rotiert den Globus gegen den Uhrzeigersinn um seine Achse.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="97"/>
         <source>Reset View</source>
-        <translation type="unfinished">Ansicht zurücksetzen</translation>
+        <translation>Ansicht zurücksetzen</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="100"/>
         <source>Click this button to restore the original zoom level and view angle.</source>
-        <translation type="unfinished">Klicken Sie auf diesen Knopf, um Ihre ursprüngliche Vergrößerungsstufe und Ihren ursprünglichen Ansichtswinkel wiederherzustellen.</translation>
+        <translation>Klicken Sie auf diesen Knopf, um Ihre ursprüngliche Vergrößerungsstufe und Ihren ursprünglichen Ansichtswinkel wiederherzustellen.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="109"/>
         <source>Home</source>
-        <translation type="unfinished">Heimatort</translation>
+        <translation>Heimatort</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="116"/>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="128"/>
         <source>Right</source>
-        <translation type="unfinished">Rechts</translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="119"/>
         <source>Rotates the globe clockwise around its axis.</source>
-        <translation type="unfinished">Rotiert den Globus im Uhrzeigersinn um seine Achse.</translation>
+        <translation>Rotiert den Globus im Uhrzeigersinn um seine Achse.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="135"/>
         <source>Down</source>
-        <translation type="unfinished">Nach unten</translation>
+        <translation>Nach unten</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="138"/>
         <source>Tilts the globe&apos;s axis away from the user.</source>
-        <translation type="unfinished">Neigt die Achse des Globus vom Benutzer weg.</translation>
+        <translation>Neigt die Achse des Globus vom Benutzer weg.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="151"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Vergrößern</translation>
+        <translation>Vergrößern</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="154"/>
         <source>Zoom in by pressing this button to see more detail.</source>
-        <translation type="unfinished">Vergrößern Sie die Ansicht mit diesem Knopf, um mehr Details zu sehen.</translation>
+        <translation>Vergrößern Sie die Ansicht mit diesem Knopf, um mehr Details zu sehen.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="163"/>
         <source>+</source>
-        <translation type="unfinished">+</translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="178"/>
         <source>Zoom Slider</source>
-        <translation type="unfinished">Vergrößerungsregler</translation>
+        <translation>Vergrößerungsregler</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="181"/>
         <source>Use this slider to adjust the zoom level of the map.</source>
-        <translation type="unfinished">Benutzen Sie diesen Regler, um die Vergrößerungsstufe der Karte anzupassen.</translation>
+        <translation>Benutzen Sie diesen Regler, um die Vergrößerungsstufe der Karte anzupassen.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="209"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Verkleinern</translation>
+        <translation>Verkleinern</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="212"/>
         <source>Zoom out by pressing this button to see less detail.</source>
-        <translation type="unfinished">Verkleinern Sie die Ansicht mit diesem Knopf, um weniger Details zu sehen.</translation>
+        <translation>Verkleinern Sie die Ansicht mit diesem Knopf, um weniger Details zu sehen.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleNavigator.ui" line="221"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
 </context>
 <context>
@@ -972,7 +979,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;This is Marble&apos;s machine room for advanced users. Here you can select and deselect the functionality that is provided through plugins. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Deselecting a plugin will remove the functionality from the map, menus and toolbars. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Sans Serif&apos;;&quot;&gt;Also some of the plugins might allow for tweaking their configuration a bit. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -983,7 +990,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarblePluginSettingsWidget.ui" line="26"/>
         <source>P&amp;lugins</source>
-        <translation type="unfinished">&amp;Module</translation>
+        <translation>&amp;Module</translation>
     </message>
 </context>
 <context>
@@ -991,192 +998,192 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="23"/>
         <source>Time Zone</source>
-        <translation type="unfinished">Zeitzone</translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="29"/>
         <source>UTC</source>
-        <translation type="unfinished">UTC</translation>
+        <translation>UTC</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="39"/>
         <source>System time zone</source>
-        <translation type="unfinished">Zeitzone des Systems</translation>
+        <translation>Zeitzone des Systems</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="51"/>
         <source>Choose Time zone</source>
-        <translation type="unfinished">Zeitzone auswählen</translation>
+        <translation>Zeitzone auswählen</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="68"/>
         <source>Universal Time Coordinated</source>
-        <translation type="unfinished">Koordinierte Weltzeit</translation>
+        <translation>Koordinierte Weltzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="73"/>
         <source>European Central Time</source>
-        <translation type="unfinished">Mitteleuropäische Zeit</translation>
+        <translation>Mitteleuropäische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="78"/>
         <source>Eastern European Time</source>
-        <translation type="unfinished">Osteuropäische Zeit</translation>
+        <translation>Osteuropäische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="83"/>
         <source>Egypt Standard Time</source>
-        <translation type="unfinished">Ägypten-Normalzeit</translation>
+        <translation>Ägypten-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="88"/>
         <source>Eastern African Time</source>
-        <translation type="unfinished">Ostafrikanische Zeit</translation>
+        <translation>Ostafrikanische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="93"/>
         <source>Middle East Time</source>
-        <translation type="unfinished">Mittelöstliche Zeit</translation>
+        <translation>Mittelöstliche Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="98"/>
         <source>Near East Time</source>
-        <translation type="unfinished">Nahöstliche Zeit</translation>
+        <translation>Nahöstliche Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="103"/>
         <source>Pakistan Lahore Time</source>
-        <translation type="unfinished">Pakistan-Lahore-Zeit</translation>
+        <translation>Pakistan-Lahore-Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="108"/>
         <source>India Standard Time</source>
-        <translation type="unfinished">Indien-Normalzeit</translation>
+        <translation>Indien-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="113"/>
         <source>Bangladesh Standard Time</source>
-        <translation type="unfinished">Bangladesch-Normalzeit</translation>
+        <translation>Bangladesch-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="118"/>
         <source>Vietnam Standard Time</source>
-        <translation type="unfinished">Vietnam-Normalzeit</translation>
+        <translation>Vietnam-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="123"/>
         <source>China Taiwan Time</source>
-        <translation type="unfinished">China-Taiwan-Zeit</translation>
+        <translation>China-Taiwan-Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="128"/>
         <source>Japan Standard Time</source>
-        <translation type="unfinished">Japan-Normalzeit</translation>
+        <translation>Japan-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="133"/>
         <source>Australia Central Time</source>
-        <translation type="unfinished">Zentralaustralische Zeit</translation>
+        <translation>Zentralaustralische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="138"/>
         <source>Australia Eastern Time</source>
-        <translation type="unfinished">Ostaustralische Zeit</translation>
+        <translation>Ostaustralische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="143"/>
         <source>Solomon Standard Time</source>
-        <translation type="unfinished">Solomon-Normalzeit</translation>
+        <translation>Solomon-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="148"/>
         <source>New Zealand Standard Time</source>
-        <translation type="unfinished">Neuseeland-Normalzeit</translation>
+        <translation>Neuseeland-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="153"/>
         <source>Midway Islands Time</source>
-        <translation type="unfinished">Midwayinseln-Zeit</translation>
+        <translation>Midwayinseln-Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="158"/>
         <source>Hawaii Standard Time</source>
-        <translation type="unfinished">Hawaii-Normalzeit</translation>
+        <translation>Hawaii-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="163"/>
         <source>Alaska Standard Time</source>
-        <translation type="unfinished">Alaska-Normalzeit</translation>
+        <translation>Alaska-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="168"/>
         <source>Pacific Standard Time</source>
-        <translation type="unfinished">Pazifik-Normalzeit</translation>
+        <translation>Pazifik-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="173"/>
         <source>Phoenix Standard Time</source>
-        <translation type="unfinished">Phoenix-Normalzeit</translation>
+        <translation>Phoenix-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="178"/>
         <source>Mountain Standard Time</source>
-        <translation type="unfinished">Mountain-Normalzeit</translation>
+        <translation>Mountain-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="183"/>
         <source>Central Standard Time</source>
-        <translation type="unfinished">US-Zentrale Normalzeit</translation>
+        <translation>US-Zentrale Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="188"/>
         <source>Eastern Standard Time</source>
-        <translation type="unfinished">US-Östliche Normalzeit</translation>
+        <translation>US-Östliche Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="193"/>
         <source>Indiana Eastern Standard Time</source>
-        <translation type="unfinished">Östliche Indiana-Normalzeit</translation>
+        <translation>Östliche Indiana-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="198"/>
         <source>Puerto Rico and US Virgin Islands Time</source>
-        <translation type="unfinished">„Puerto Rico und US-Jungferninseln“-Zeit</translation>
+        <translation>„Puerto Rico und US-Jungferninseln“-Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="203"/>
         <source>Canada Newfoundland Time</source>
-        <translation type="unfinished">Kanada-Neufundland-Zeit</translation>
+        <translation>Kanada-Neufundland-Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="208"/>
         <source>Argentina Standard Time</source>
-        <translation type="unfinished">Argentinien-Normalzeit</translation>
+        <translation>Argentinien-Normalzeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="213"/>
         <source>Brazil Eastern Time</source>
-        <translation type="unfinished">Ostbrasilianische Zeit</translation>
+        <translation>Ostbrasilianische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="218"/>
         <source>Central African Time</source>
-        <translation type="unfinished">Zentralafrikanische Zeit</translation>
+        <translation>Zentralafrikanische Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="231"/>
         <source>When Marble starts</source>
-        <translation type="unfinished">Beim Start von Marble</translation>
+        <translation>Beim Start von Marble</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="237"/>
         <source>Load system time</source>
-        <translation type="unfinished">Systemzeit laden</translation>
+        <translation>Systemzeit laden</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleTimeSettingsWidget.ui" line="247"/>
         <source>Load last session time</source>
-        <translation type="unfinished">Zeit der letzten Sitzung laden</translation>
+        <translation>Zeit der letzten Sitzung laden</translation>
     </message>
 </context>
 <context>
@@ -1184,12 +1191,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="17"/>
         <source>&amp;Units</source>
-        <translation type="unfinished">&amp;Einheiten</translation>
+        <translation>&amp;Einheiten</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="35"/>
         <source>&amp;Distance:</source>
-        <translation type="unfinished">En&amp;tfernung:</translation>
+        <translation>En&amp;tfernung:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="54"/>
@@ -1197,7 +1204,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The unit that gets used to measure altitude, lengths and distances (e.g. km, mi, ft).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Die Einheit, die zum Messen von Höhe, Länge und Entfernungen verwendet wird (z. B. km, mi, ft).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -1205,22 +1212,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="61"/>
         <source>Kilometer, Meter</source>
-        <translation type="unfinished">Kilometer, Meter</translation>
+        <translation>Kilometer, Meter</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="66"/>
         <source>Miles, Feet</source>
-        <translation type="unfinished">Meilen, Fuß</translation>
+        <translation>Meilen, Fuß</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="71"/>
         <source>Nautical miles, Knots</source>
-        <translation type="unfinished">Seemeilen, Knoten</translation>
+        <translation>Seemeilen, Knoten</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="85"/>
         <source>An&amp;gle:</source>
-        <translation type="unfinished">&amp;Winkel:</translation>
+        <translation>&amp;Winkel:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="98"/>
@@ -1228,7 +1235,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (e.g. 54°30&apos;00&quot; ) gets used. As an alternative you can choose decimal degrees (e.g. 54.5°).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Legt fest, wie Winkel in Koordinaten angegeben werden: Voreingestellt ist Grad-Minute-Sekunde (z. B. 54°30&apos;00&quot;). Alternativ können auch dezimale Gradzahlen verwendet werden (z. B. 54,4°)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -1236,27 +1243,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="105"/>
         <source>Degree (DMS)</source>
-        <translation type="unfinished">Grad (DMS)</translation>
+        <translation>Grad (DMS)</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="110"/>
         <source>Degree (Decimal)</source>
-        <translation type="unfinished">Grad (Dezimal)</translation>
+        <translation>Grad (Dezimal)</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="115"/>
         <source>Universal Transverse Mercator (UTM)</source>
-        <translation type="unfinished">UTM-Koordinatensystem</translation>
+        <translation>UTM-Koordinatensystem</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="126"/>
         <source>Map &amp;Quality</source>
-        <translation type="unfinished">Karten&amp;qualität</translation>
+        <translation>Karten&amp;qualität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="144"/>
         <source>&amp;Still image:</source>
-        <translation type="unfinished">&amp;Unbewegtes Bild:</translation>
+        <translation>&amp;Unbewegtes Bild:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="154"/>
@@ -1264,7 +1271,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Specifies the map quality that gets displayed while there is no user input. Usually this allows for high map quality as speed is no concern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Legt die Qualität der Karte fest, wenn der Benutzer keine Eingaben tätigt. Dies erlaubt eine hohe Qualität, da die Geschwindigkeit keine Rolle spielt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -1273,36 +1280,36 @@ p, li { white-space: pre-wrap; }
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="164"/>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="219"/>
         <source>Outline Quality</source>
-        <translation type="unfinished">Umriss-Qualität</translation>
+        <translation>Umriss-Qualität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="169"/>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="224"/>
         <source>Low Quality</source>
-        <translation type="unfinished">Niedrige Qualität</translation>
+        <translation>Niedrige Qualität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="174"/>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="229"/>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="179"/>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="234"/>
         <source>High Quality</source>
-        <translation type="unfinished">Hohe Qualität</translation>
+        <translation>Hohe Qualität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="184"/>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="239"/>
         <source>Print Quality</source>
-        <translation type="unfinished">Druckqualität</translation>
+        <translation>Druckqualität</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="198"/>
         <source>During &amp;animations:</source>
-        <translation type="unfinished">Während der &amp;Animationen:</translation>
+        <translation>Während der &amp;Animationen:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="208"/>
@@ -1311,7 +1318,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Specifies the map quality that gets displayed during map animations (e.g. while dragging the globe). &lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Especially on slow machines it is advisable to set this option to &quot;low quality&quot; as this will give better speed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Legt die Qualität der Karte während der Animation fest (z. B. beim Ziehen des Globus).&lt;/p&gt;
@@ -1320,12 +1327,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="266"/>
         <source>&amp;Text Labels</source>
-        <translation type="unfinished">&amp;Textmarken</translation>
+        <translation>&amp;Textmarken</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="286"/>
         <source>&amp;Place names:</source>
-        <translation type="unfinished">Na&amp;men der Orte:</translation>
+        <translation>Na&amp;men der Orte:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="299"/>
@@ -1333,7 +1340,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Places often have different names in different languages. The label on the map can show the name in the user&apos;s language. Alternatively it can display the name in the official language and glyphs of that place. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Viele Orte haben in verschiedenen Sprachen verschiedene Namen. Die Textmarke in der Karte kann die Namen in der Sprache des Benutzers oder alternativ in der offiziellen Sprache des Ortes anzeigen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -1341,22 +1348,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="306"/>
         <source>Custom &amp; Native Language</source>
-        <translation type="unfinished">Benutzerdefinierte Sprache und Muttersprache</translation>
+        <translation>Benutzerdefinierte Sprache und Muttersprache</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="311"/>
         <source>Custom Language</source>
-        <translation type="unfinished">Benutzerdefinierte Sprache</translation>
+        <translation>Benutzerdefinierte Sprache</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="316"/>
         <source>Native Language</source>
-        <translation type="unfinished">Muttersprache</translation>
+        <translation>Muttersprache</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="340"/>
         <source>Default map &amp;font:</source>
-        <translation type="unfinished">Standardschri&amp;ftart in der Karte:</translation>
+        <translation>Standardschri&amp;ftart in der Karte:</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleViewSettingsWidget.ui" line="350"/>
@@ -1364,7 +1371,7 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The default font that gets used on the map.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Die Standardschriftart, die in der Karte verwendet wird.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -1375,7 +1382,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/plugins/render/navigation/navigation.ui" line="14"/>
         <source>Navigation</source>
-        <translation type="unfinished">Navigation</translation>
+        <translation>Navigation</translation>
     </message>
 </context>
 <context>
@@ -1383,17 +1390,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="24"/>
         <source>General</source>
-        <translation type="unfinished">Allgemein</translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="36"/>
         <source>Cache name:</source>
-        <translation type="unfinished">Name des Cache:</translation>
+        <translation>Name des Cache:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="43"/>
@@ -1411,87 +1418,87 @@ p, li { white-space: pre-wrap; }
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="283"/>
         <source>TextLabel</source>
         <comment>KDE::DoNotExtract</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="56"/>
         <source>User name:</source>
-        <translation type="unfinished">Benutzername:</translation>
+        <translation>Benutzername:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="76"/>
         <source>Type:</source>
-        <translation type="unfinished">Typ:</translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="96"/>
         <source>Status:</source>
-        <translation type="unfinished">Status:</translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="116"/>
         <source>Country:</source>
-        <translation type="unfinished">Land:</translation>
+        <translation>Land:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="136"/>
         <source>Size:</source>
-        <translation type="unfinished">Größe:</translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="156"/>
         <source>Difficulty:</source>
-        <translation type="unfinished">Schwierigkeit:</translation>
+        <translation>Schwierigkeit:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="176"/>
         <source>Terrain:</source>
-        <translation type="unfinished">Gelände:</translation>
+        <translation>Gelände:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="196"/>
         <source>Longitude:</source>
-        <translation type="unfinished">Längengrad:</translation>
+        <translation>Längengrad:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="216"/>
         <source>Latitude:</source>
-        <translation type="unfinished">Breitengrad:</translation>
+        <translation>Breitengrad:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="236"/>
         <source>Date hidden:</source>
-        <translation type="unfinished">Versteckt am:</translation>
+        <translation>Versteckt am:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="256"/>
         <source>Date created:</source>
-        <translation type="unfinished">Erstellt am:</translation>
+        <translation>Erstellt am:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="276"/>
         <source>Date last modified:</source>
-        <translation type="unfinished">Zuletzt geändert:</translation>
+        <translation>Zuletzt geändert:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="291"/>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="308"/>
         <source>Log</source>
-        <translation type="unfinished">Protokoll</translation>
+        <translation>Protokoll</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="346"/>
         <source>Previous</source>
-        <translation type="unfinished">Zurück</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingCacheDialog.ui" line="356"/>
         <source>Next</source>
-        <translation type="unfinished">Weiter</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -1499,47 +1506,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="20"/>
         <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="26"/>
         <source>Maximum number of results:</source>
-        <translation type="unfinished">Maximale Anzahl der Ergebnisse:</translation>
+        <translation>Maximale Anzahl der Ergebnisse:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="36"/>
         <source>Minimum difficulty:</source>
-        <translation type="unfinished">Minimaler Schwierigkeitsgrad:</translation>
+        <translation>Minimaler Schwierigkeitsgrad:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="53"/>
         <source>Maximum difficulty:</source>
-        <translation type="unfinished">Maximaler Schwierigkeitsgrad:</translation>
+        <translation>Maximaler Schwierigkeitsgrad:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="70"/>
         <source>Maximum Distance:</source>
-        <translation type="unfinished">Maximale Entfernung:</translation>
+        <translation>Maximale Entfernung:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="87"/>
         <source>Time Range</source>
-        <translation type="unfinished">Zeitspanne</translation>
+        <translation>Zeitspanne</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="93"/>
         <source>Start:</source>
-        <translation type="unfinished">Start:</translation>
+        <translation>Start:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/opencaching/OpenCachingConfigWidget.ui" line="104"/>
         <source>End:</source>
-        <translation type="unfinished">Ende:</translation>
+        <translation>Ende:</translation>
     </message>
 </context>
 <context>
@@ -1547,32 +1554,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="20"/>
         <source>Map &amp;Image</source>
-        <translation type="unfinished">Kartenb&amp;ild</translation>
+        <translation>Kartenb&amp;ild</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="28"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished">&amp;Größe:</translation>
+        <translation>&amp;Größe:</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="54"/>
         <source>x</source>
-        <translation type="unfinished">x</translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="92"/>
         <source>C&amp;olors</source>
-        <translation type="unfinished">&amp;Farben</translation>
+        <translation>&amp;Farben</translation>
     </message>
     <message>
         <location filename="src/plugins/render/overviewmap/OverviewMapConfigWidget.ui" line="98"/>
         <source>Position I&amp;ndicator:</source>
-        <translation type="unfinished">Positionsa&amp;nzeige:</translation>
+        <translation>Positionsa&amp;nzeige:</translation>
     </message>
 </context>
 <context>
@@ -1580,27 +1587,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/CacheStoragePolicy.cpp" line="39"/>
         <source>Unable to insert data into cache</source>
-        <translation type="unfinished">Daten können nicht in den Zwischenspeicher geladen werden</translation>
+        <translation>Daten können nicht in den Zwischenspeicher geladen werden</translation>
     </message>
     <message>
         <location filename="src/lib/marble/FileManager.cpp" line="227"/>
         <source>File Parsing Error</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/handlers/dgml/DgmlMaximumTagHandler.cpp" line="49"/>
         <source>Could not convert &lt;maximum&gt; child text content to integer. Was: &apos;%1&apos;</source>
-        <translation type="unfinished">Der Inhalt des Kindtextes &lt;maximum&gt; kann nicht in eine Ganzzahl umgewandelt werden. Wert: „%1“</translation>
+        <translation>Der Inhalt des Kindtextes &lt;maximum&gt; kann nicht in eine Ganzzahl umgewandelt werden. Wert: „%1“</translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp" line="49"/>
         <source>Could not convert &lt;minimum&gt; child text content to integer. Was: &apos;%1&apos;</source>
-        <translation type="unfinished">Der Inhalt des Kindtextes &lt;minimum&gt; kann nicht in eine Ganzzahl umgewandelt werden. Wert: „%1“</translation>
+        <translation>Der Inhalt des Kindtextes &lt;minimum&gt; kann nicht in eine Ganzzahl umgewandelt werden. Wert: „%1“</translation>
     </message>
     <message numerus="yes">
         <location filename="src/lib/marble/geodata/parser/GeoParser.cpp" line="107"/>
         <source>Parsing failed line %1. Still %n unclosed tag(s) after document end. </source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Einlesen in Zeile %1 fehlgeschlagen. Am Ende des Dokuments ist noch ein Tag nicht geschlossen.</numerusform>
             <numerusform>Einlesen in Zeile %1 fehlgeschlagen. Am Ende des Dokuments sind noch %n Tags nicht geschlossen.</numerusform>
         </translation>
@@ -1610,831 +1617,831 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/geodata/parser/GeoParser.cpp" line="148"/>
         <source>Error parsing file at line: %1 and column %2 . </source>
-        <translation type="unfinished">Fehler beim Einlesen der Datei bei Zeile %1 und Spalte %2. </translation>
+        <translation>Fehler beim Einlesen der Datei bei Zeile %1 und Spalte %2. </translation>
     </message>
     <message>
         <location filename="src/lib/marble/geodata/parser/GeoParser.cpp" line="150"/>
         <source>This is an Invalid File</source>
-        <translation type="unfinished">Dies ist keine gültige Datei.</translation>
+        <translation>Dies ist keine gültige Datei.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MapThemeManager.cpp" line="446"/>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="76"/>
         <source>Marble Virtual Globe</source>
-        <translation type="unfinished">Marble – Virtueller Globus</translation>
+        <translation>Marble – Virtueller Globus</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="94"/>
         <source>&lt;b&gt;Active Development Team of Marble&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Aktuelles Entwicklungsteam für Marble&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Aktuelles Entwicklungsteam für Marble&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="95"/>
         <source>&lt;p&gt;Torsten Rahn &lt;a href=&quot;mailto:rahn@kde.org&quot;&gt;rahn@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Developer and Original Author&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Torsten Rahn &lt;a href=&quot;mailto:rahn@kde.org&quot;&gt;rahn@kde.org&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Entwickler und ursprünglicher Autor&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Torsten Rahn &lt;a href=&quot;mailto:rahn@kde.org&quot;&gt;rahn@kde.org&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Entwickler und ursprünglicher Autor&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="97"/>
         <source>&lt;p&gt;Dennis Nienh&amp;uuml;ser &lt;a href=&quot;mailto:nienhueser@kde.org&quot;&gt;nienhueser@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routing, Navigation, Mobile&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Dennis Nienh&amp;uuml;ser &lt;a href=&quot;mailto:nienhueser@kde.org&quot;&gt;nienhueser@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routenplaner, Navigation, Mobilversion&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Dennis Nienh&amp;uuml;ser &lt;a href=&quot;mailto:nienhueser@kde.org&quot;&gt;nienhueser@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routenplaner, Navigation, Mobilversion&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="99"/>
         <source>&lt;p&gt;Bernhard Beschow &lt;a href=&quot;mailto:bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;WMS Support, Mobile, Performance&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Bernhard Beschow &lt;a href=&quot;mailto:bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;WMS-Unterstützung, Mobilversion, Geschwindigkeit&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bernhard Beschow &lt;a href=&quot;mailto:bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;WMS-Unterstützung, Mobilversion, Geschwindigkeit&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="101"/>
         <source>&lt;p&gt;Friedrich W. H. Kossebau, &lt;a href=&quot;mailto:kossebau@kde.org&quot;&gt;kossebau@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Plasma Integration, Bugfixes&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Friedrich W. H. Kossebau, &lt;a href=&quot;mailto:kossebau@kde.org&quot;&gt;kossebau@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Plasma-Integration, Fehlerbehebungen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Friedrich W. H. Kossebau, &lt;a href=&quot;mailto:kossebau@kde.org&quot;&gt;kossebau@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Plasma-Integration, Fehlerbehebungen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="103"/>
         <source>&lt;p&gt;Thibaut Gridel &lt;a href=&quot;mailto:tgridel@free.fr&quot;&gt;tgridel@free.fr&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Geodata&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Thibaut Gridel &lt;a href=&quot;mailto:tgridel@free.fr&quot;&gt;tgridel@free.fr&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Geodata&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Thibaut Gridel &lt;a href=&quot;mailto:tgridel@free.fr&quot;&gt;tgridel@free.fr&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Geodata&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="105"/>
         <source>&lt;p&gt;Jens-Michael Hoffmann &lt;a href=&quot;mailto:jensmh@gmx.de&quot;&gt;jensmh@gmx.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;OpenStreetMap Support, Download Management&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Jens-Michael Hoffmann &lt;a href=&quot;mailto:jensmh@gmx.de&quot;&gt;jensmh@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für OpenStreetMap, Download-Verwaltung&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Jens-Michael Hoffmann &lt;a href=&quot;mailto:jensmh@gmx.de&quot;&gt;jensmh@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für OpenStreetMap, Download-Verwaltung&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="107"/>
         <source>&lt;p&gt;Florian E&amp;szlig;er &lt;a href=&quot;mailto:f.esser@rwth-aachen.de&quot;&gt;f.esser@rwth-aachen.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Elevation Profile&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Florian E&amp;szlig;er &lt;a href=&quot;mailto:f.esser@rwth-aachen.de&quot;&gt;f.esser@rwth-aachen.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Höhenprofil&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Florian E&amp;szlig;er &lt;a href=&quot;mailto:f.esser@rwth-aachen.de&quot;&gt;f.esser@rwth-aachen.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Höhenprofil&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="109"/>
         <source>&lt;p&gt;Wes Hardaker &lt;a href=&quot;mailto:marble@hardakers.net&quot;&gt;marble@hardakers.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Amateur Radio Support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Wes Hardaker &lt;a href=&quot;mailto:marble@hardakers.net&quot;&gt;marble@hardakers.net&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für Amateur Radio&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Wes Hardaker &lt;a href=&quot;mailto:marble@hardakers.net&quot;&gt;marble@hardakers.net&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für Amateur Radio&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="111"/>
         <source>&lt;p&gt;Bastian Holst, &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Online Services Support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Bastian Holst, &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für Online-Dienste&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bastian Holst, &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für Online-Dienste&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="113"/>
         <source>&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Satellites&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Satelliten&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Satelliten&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="115"/>
         <source>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Planetary Satellites&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Erdsatelliten&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Erdsatelliten&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="117"/>
         <source>&lt;p&gt;Niko Sams &lt;a href=&quot;mailto:niko.sams@gmail.com&quot;&gt;niko.sams@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routing, Elevation Profile&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Niko Sams &lt;a href=&quot;mailto:niko.sams@gmail.com&quot;&gt;niko.sams@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routenplaner, Höhenprofil&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Niko Sams &lt;a href=&quot;mailto:niko.sams@gmail.com&quot;&gt;niko.sams@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Routenplaner, Höhenprofil&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="119"/>
         <source>&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;KML and Windows Support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für KML und Windows&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Unterstützung für KML und Windows&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="121"/>
         <source>&lt;p&gt;Eckhart W&amp;ouml;rner &lt;a href=&quot;mailto:kde@ewsoftware.de&quot;&gt;kde@ewsoftware.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Bugfixes&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Eckhart W&amp;ouml;rner &lt;a href=&quot;mailto:kde@ewsoftware.de&quot;&gt;kde@ewsoftware.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Fehlerkorrekturen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Eckhart W&amp;ouml;rner &lt;a href=&quot;mailto:kde@ewsoftware.de&quot;&gt;kde@ewsoftware.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Fehlerkorrekturen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="123"/>
         <source>&lt;b&gt;Developers&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Entwickler&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Entwickler&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="124"/>
         <source>&lt;p&gt;M&amp;eacute;d&amp;eacute;ric Boquien &lt;a href=&quot;mailto:mboquien@free.fr&quot;&gt;mboquien@free.fr&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Astronomical Observatories&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;M&amp;eacute;d&amp;eacute;ric Boquien &lt;a href=&quot;mailto:mboquien@free.fr&quot;&gt;mboquien@free.fr&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Astronomische Observatorien&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;M&amp;eacute;d&amp;eacute;ric Boquien &lt;a href=&quot;mailto:mboquien@free.fr&quot;&gt;mboquien@free.fr&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Astronomische Observatorien&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="126"/>
         <source>&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:sonu.itbhu@googlemail.com&quot;&gt;sonu.itbhu@googlemail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Planet Filter, Bugfixes&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:sonu.itbhu@googlemail.com&quot;&gt;sonu.itbhu@googlemail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Planetenfilter, Fehlerkorrekturen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:sonu.itbhu@googlemail.com&quot;&gt;sonu.itbhu@googlemail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Planetenfilter, Fehlerkorrekturen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="128"/>
         <source>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Proxy Support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Proxy-Unterstützung&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Proxy-Unterstützung&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="130"/>
         <source>&lt;p&gt;Pino Toscano &lt;a href=&quot;mailto:pino@kde.org&quot;&gt;pino@kde.org&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Network plugins&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Pino Toscano &lt;a href=&quot;mailto:pino@kde.org&quot;&gt;pino@kde.org&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Netzwerkmodule&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Pino Toscano &lt;a href=&quot;mailto:pino@kde.org&quot;&gt;pino@kde.org&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Netzwerkmodule&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="132"/>
         <source>&lt;p&gt;Henry de Valence &lt;a href=&quot;mailto:hdevalence@gmail.com&quot;&gt;hdevalence@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Marble Runners, World-Clock Plasmoid&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Henry de Valence &lt;a href=&quot;mailto:hdevalence@gmail.com&quot;&gt;hdevalence@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Marble-Runner, Weltuhr-Miniprogramm&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Henry de Valence &lt;a href=&quot;mailto:hdevalence@gmail.com&quot;&gt;hdevalence@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Marble-Runner, Weltuhr-Miniprogramm&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="134"/>
         <source>&lt;p&gt;Magnus Valle&lt;br /&gt;&lt;i&gt;Historical Maps&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Magnus Valle&lt;br/&gt;&lt;i&gt;Historische Karten&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Magnus Valle&lt;br/&gt;&lt;i&gt;Historische Karten&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="135"/>
         <source>&lt;p&gt;Inge Wallin &lt;a href=&quot;mailto:inge@lysator.liu.se&quot;&gt;inge@lysator.liu.se&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Original Co-Maintainer&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Inge Wallin &lt;a href=&quot;mailto:inge@lysator.liu.se&quot;&gt;inge@lysator.liu.se&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Ursprünglicher Mitbetreuer&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Inge Wallin &lt;a href=&quot;mailto:inge@lysator.liu.se&quot;&gt;inge@lysator.liu.se&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Ursprünglicher Mitbetreuer&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="137"/>
         <source>&lt;p&gt;&lt;i&gt;Development &amp;amp; Patches:&lt;/i&gt; Simon Schmeisser, Claudiu Covaci, David Roberts, Nikolas Zimmermann, Jan Becker, Stefan Asserh&amp;auml;ll, Laurent Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, Frederik Gladhorn, Fredrik H&amp;ouml;glund, Albert Astals Cid, Thomas Zander, Joseph Wenninger, Kris Thomsen, Daniel Molkentin  &lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Hilfe bei der Entwicklung und Beseitigung von Fehlern:&lt;/i&gt; Simon Schmeisser, Claudiu Covaci, David Roberts, Nikolas Zimmermann, Jan Becker, Stefan Asserh&amp;auml;ll, Laurent Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, Frederik Gladhorn, Fredrik H&amp;ouml;glund, Albert Astals Cid, Thomas Zander, Joseph Wenninger, Kris Thomsen, Daniel Molkentin &lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Hilfe bei der Entwicklung und Beseitigung von Fehlern:&lt;/i&gt; Simon Schmeisser, Claudiu Covaci, David Roberts, Nikolas Zimmermann, Jan Becker, Stefan Asserh&amp;auml;ll, Laurent Montel, Prashanth Udupa, Anne-Marie Mahfouf, Josef Spillner, Frerich Raabe, Frederik Gladhorn, Fredrik H&amp;ouml;glund, Albert Astals Cid, Thomas Zander, Joseph Wenninger, Kris Thomsen, Daniel Molkentin &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="142"/>
         <source>&lt;p&gt;&lt;i&gt;Platforms &amp;amp; Distributions:&lt;/i&gt; Tim Sutton, Christian Ehrlicher, Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh Goorah, Sebastian Wiedenroth, Christophe Leske&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Plattformen und Distributionen:&lt;/i&gt;Tim Sutton, Christian Ehrlicher, Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh Goorah, Sebastian Wiedenroth, Christophe Leske.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Plattformen und Distributionen:&lt;/i&gt;Tim Sutton, Christian Ehrlicher, Ralf Habacker, Steffen Joeris, Marcus Czeslinski, Marcus D. Hanwell, Chitlesh Goorah, Sebastian Wiedenroth, Christophe Leske.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="145"/>
         <source>&lt;p&gt;&lt;i&gt;Artwork:&lt;/i&gt; Nuno Pinheiro, Torsten Rahn&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Grafikdesign:&lt;/i&gt; Nuno Pinheiro, Torsten Rahn&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Grafikdesign:&lt;/i&gt; Nuno Pinheiro, Torsten Rahn&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="146"/>
         <source>&lt;b&gt;Join us&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Treten Sie uns bei&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Treten Sie uns bei&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="147"/>
         <source>&lt;p&gt;You can reach the developers of the Marble Project at &lt;a href=&quot;mailto:marble-devel@kde.org&quot;&gt;marble-devel@kde.org&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Die Entwickler des Marble-Projekts erreichen Sie über die Mailingliste &lt;a href=&quot;mailto:marble-devel@kde.org&quot;&gt;marble-devel@kde.org&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Die Entwickler des Marble-Projekts erreichen Sie über die Mailingliste &lt;a href=&quot;mailto:marble-devel@kde.org&quot;&gt;marble-devel@kde.org&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="150"/>
         <source>&lt;b&gt;ESA - Summer of Code in Space&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;ESA „Summer of Code in Space“&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;ESA „Summer of Code in Space“&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="151"/>
         <source>&lt;p&gt; The Marble Team would like to thank its members who participated in ESA SoCiS for their successful work on Marble:&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „ESA SoCiS“ teilgenommen haben, für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „ESA SoCiS“ teilgenommen haben, für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="153"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="202"/>
         <source>&lt;p&gt;&lt;b&gt;2016&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2016&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2016&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="154"/>
         <source>&lt;p&gt;Judit Bartha, &lt;a href=&quot;mailto:bartha.m.judit@gmail.com&quot;&gt; bartha.m.judit@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Improving Marble&apos;s Satellite maps using Sentinel-2 mission data&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Judit Bartha, &lt;a href=&quot;mailto:bartha.m.judit@gmail.com&quot;&gt; bartha.m.judit@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Verbesserung der Satellitenkarten in Marble mit Daten der Mission Sentinel-2&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Judit Bartha, &lt;a href=&quot;mailto:bartha.m.judit@gmail.com&quot;&gt; bartha.m.judit@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Verbesserung der Satellitenkarten in Marble mit Daten der Mission Sentinel-2&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="156"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="208"/>
         <source>&lt;p&gt;&lt;b&gt;2015&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2015&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2015&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="157"/>
         <source>&lt;p&gt;Ana Badescu, &lt;a href=&quot;mailto:anabee.emacs@gmail.com&quot;&gt; anabee.emacs@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Integrate data provided by the Sentinel missions&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ana Badescu, &lt;a href=&quot;mailto:anabee.emacs@gmail.com&quot;&gt; anabee.emacs@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Integration von Daten der Sentinel-Missionen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ana Badescu, &lt;a href=&quot;mailto:anabee.emacs@gmail.com&quot;&gt; anabee.emacs@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Integration von Daten der Sentinel-Missionen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="159"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="175"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="215"/>
         <source>&lt;p&gt;&lt;b&gt;2014&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2014&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2014&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="160"/>
         <source>&lt;p&gt;G&amp;#xE1;bor P&amp;#xE9;terffy, &lt;a href=&quot;mailto:peterffy95@gmail.com&quot;&gt; peterffy95@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Panoramic Picture Support for celestial bodies in Marble   &lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;G&amp;#xE1;bor P&amp;#xE9;terffy, &lt;a href=&quot;mailto:peterffy95@gmail.com&quot;&gt; peterffy95@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Unterstützung für Panoramabildern von Himmelskörpern&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;G&amp;#xE1;bor P&amp;#xE9;terffy, &lt;a href=&quot;mailto:peterffy95@gmail.com&quot;&gt; peterffy95@gmail.com &lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Unterstützung für Panoramabildern von Himmelskörpern&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="162"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="182"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="222"/>
         <source>&lt;p&gt;&lt;b&gt;2013&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2013&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2013&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="163"/>
         <source>&lt;p&gt;Marek Hakala, &lt;a href=&quot;mailto:hakala.marek@gmail.com&quot;&gt;hakala.marek@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Displaying Solar / Lunar Eclipses in Marble &lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Marek Hakala, &lt;a href=&quot;mailto:hakala.marek@gmail.com&quot;&gt;hakala.marek@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Anzeige von Sonnen- und Mondfinsternissen in Marble &lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Marek Hakala, &lt;a href=&quot;mailto:hakala.marek@gmail.com&quot;&gt;hakala.marek@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Anzeige von Sonnen- und Mondfinsternissen in Marble &lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="165"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="187"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="231"/>
         <source>&lt;p&gt;&lt;b&gt;2012&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2012&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2012&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="166"/>
         <source>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Visualization of planetary satellites&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Darstellung von Satellitenbahnen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner, &lt;a href=&quot;mailto:rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Darstellung von Satellitenbahnen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="168"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="193"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="238"/>
         <source>&lt;p&gt;&lt;b&gt;2011&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2011&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2011&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="169"/>
         <source>&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Visualization of Satellite Orbits&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Darstellung von Satellitenbahnen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Guillaume Martres, &lt;a href=&quot;mailto:smarter@ubuntu.com&quot;&gt;smarter@ubuntu.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Darstellung von Satellitenbahnen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="172"/>
         <source>&lt;b&gt;Google Code-in&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Google Code-in&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Google Code-in&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="173"/>
         <source>&lt;p&gt; The Marble Team would like to thank its members who participated in the Google Code-in for their successful work on Marble:&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „Google Code-in“ teilgenommen haben, für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „Google Code-in“ teilgenommen haben, für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="176"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="183"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="188"/>
         <source>Ilya Kowalewski &lt;a href=&quot;mailto:illya.kovalevskyy@gmail.com&quot;&gt;illya.kovalevskyy@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Ilya Kowalewski &lt;a href=&quot;mailto:illya.kovalevskyy@gmail.com&quot;&gt;illya.kovalevskyy@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Ilya Kowalewski &lt;a href=&quot;mailto:illya.kovalevskyy@gmail.com&quot;&gt;illya.kovalevskyy@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="177"/>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="184"/>
         <source>Mikhail Ivchenko &lt;a href=&quot;mailto:ematirov@gmail.com&quot;&gt;ematirov@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Mikhail Ivchenko &lt;a href=&quot;mailto:ematirov@gmail.com&quot;&gt;ematirov@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Mikhail Ivchenko &lt;a href=&quot;mailto:ematirov@gmail.com&quot;&gt;ematirov@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="178"/>
         <source>Sergey Popov &lt;a href=&quot;mailto:sergobot256@gmail.com&quot;&gt;sergobot256@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Sergey Popov &lt;a href=&quot;mailto:sergobot256@gmail.com&quot;&gt;sergobot256@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Sergey Popov &lt;a href=&quot;mailto:sergobot256@gmail.com&quot;&gt;sergobot256@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="179"/>
         <source>Daniel Pastushchak &lt;a href=&quot;mailto:danikpastushchak90@gmail.com&quot;&gt;danikpastushchak90@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Daniel Pastushchak &lt;a href=&quot;mailto:danikpastushchak90@gmail.com&quot;&gt;danikpastushchak90@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Daniel Pastushchak &lt;a href=&quot;mailto:danikpastushchak90@gmail.com&quot;&gt;danikpastushchak90@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="185"/>
         <source>Levente Kurusa &lt;a href=&quot;mailto:levex@linux.com&quot;&gt;levex@linux.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Levente Kurusa &lt;a href=&quot;mailto:levex@linux.com&quot;&gt;levex@linux.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Levente Kurusa &lt;a href=&quot;mailto:levex@linux.com&quot;&gt;levex@linux.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="186"/>
         <source>Benjamin Kaiser &lt;a href=&quot;mailto:benjaminjkaiser@gmail.com&quot;&gt;benjaminjkaiser@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Benjamin Kaiser &lt;a href=&quot;mailto:benjaminjkaiser@gmail.com&quot;&gt;benjaminjkaiser@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Benjamin Kaiser &lt;a href=&quot;mailto:benjaminjkaiser@gmail.com&quot;&gt;benjaminjkaiser@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="189"/>
         <source>Mohammed Nafees &lt;a href=&quot;mailto:nafees.technocool@gmail.com&quot;&gt;nafees.technocool@gmail.com&lt;/a&gt;&lt;/p&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Mohammed Nafees &lt;a href=&quot;mailto:nafees.technocool@gmail.com&quot;&gt;nafees.technocool@gmail.com&lt;/a&gt;&lt;/p&gt;&lt;br /&gt;</translation>
+        <translation>Mohammed Nafees &lt;a href=&quot;mailto:nafees.technocool@gmail.com&quot;&gt;nafees.technocool@gmail.com&lt;/a&gt;&lt;/p&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="191"/>
         <source>Mayank Madan &lt;a href=&quot;mailto:maddiemadan@gmail.com&quot;&gt;maddiemadan@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Mayank Madan &lt;a href=&quot;mailto:maddiemadan@gmail.com&quot;&gt;maddiemadan@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Mayank Madan &lt;a href=&quot;mailto:maddiemadan@gmail.com&quot;&gt;maddiemadan@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="192"/>
         <source>Timothy Lanzi &lt;a href=&quot;mailto:trlanzi@gmail.com&quot;&gt;trlanzi@gmail.com&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">Timothy Lanzi &lt;a href=&quot;mailto:trlanzi@gmail.com&quot;&gt;trlanzi@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>Timothy Lanzi &lt;a href=&quot;mailto:trlanzi@gmail.com&quot;&gt;trlanzi@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="194"/>
         <source>&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;mailto:utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;mailto:utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;mailto:utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="195"/>
         <source>Daniel Marth &lt;a href=&quot;mailto:danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Daniel Marth &lt;a href=&quot;mailto:danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Daniel Marth &lt;a href=&quot;mailto:danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="196"/>
         <source>Cezar Mocan &lt;a href=&quot;mailto:mocancezar@gmail.com&quot;&gt;mocancezar@gmail.com&lt;/a&gt;&lt;br /&gt;</source>
-        <translation type="unfinished">Cezar Mocan &lt;a href=&quot;mailto:mocancezar@gmail.com&quot;&gt;mocancezar@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
+        <translation>Cezar Mocan &lt;a href=&quot;mailto:mocancezar@gmail.com&quot;&gt;mocancezar@gmail.com&lt;/a&gt;&lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="197"/>
         <source>Furkan &amp;Uuml;z&amp;uuml;mc&amp;uuml; &lt;a href=&quot;mailto:furkanuzumcu@gmail.com&quot;&gt;furkanuzumcu@gmail.com&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">Furkan &amp;Uuml;z&amp;uuml;mc&amp;uuml; &lt;a href=&quot;mailto:furkanuzumcu@gmail.com&quot;&gt;furkanuzumcu@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>Furkan &amp;Uuml;z&amp;uuml;mc&amp;uuml; &lt;a href=&quot;mailto:furkanuzumcu@gmail.com&quot;&gt;furkanuzumcu@gmail.com&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="199"/>
         <source>&lt;b&gt;Google Summer of Code&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Google „Summer of Code“&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Google „Summer of Code“&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="200"/>
         <source>&lt;p&gt; The Marble Team would like to thank its members who participated in the Google Summer of Code for their successful work on Marble:&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „Google Summer of Code“ teilgenommen haben für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Das Marble-Team dankt seinen Mitgliedern, die an der Aktion „Google Summer of Code“ teilgenommen haben für ihre gute und erfolgreiche Arbeit an Marble:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="203"/>
         <source>&lt;p&gt;Dávid Kolozsvári &lt;a href=&quot;freedawson@gmail.com&quot;&gt;freedawson@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Fluent graphics across every tile level in Marble&apos;s OSM vector map&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="205"/>
         <source>&lt;p&gt;Akshat Tandon &lt;a href=&quot;akshat.tandon@research.iiit.ac.in&quot;&gt;akshat.tandon@research.iiit.ac.in&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Support for medium and low tile levels in the OSM Vector Map of Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="209"/>
         <source>&lt;p&gt;Dávid Kolozsvári &lt;a href=&quot;freedawson@gmail.com&quot;&gt;freedawson@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Improve Marble&apos;s OSM vector rendering support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="211"/>
         <source>&lt;p&gt;Gábor Péterffy &lt;a href=&quot;gabor.peterffy@gmail.com&quot;&gt;gabor.peterffy@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Porting Marble to Android platform&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Gábor Péterffy &lt;a href=&quot;gabor.peterffy@gmail.com&quot;&gt;gabor.peterffy@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Portierung von Marble auf die Android-Plattform&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Gábor Péterffy &lt;a href=&quot;gabor.peterffy@gmail.com&quot;&gt;gabor.peterffy@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Portierung von Marble auf die Android-Plattform&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="213"/>
         <source>&lt;p&gt;Marius Valeriu Stanciu &lt;a href=&quot;stanciumarius94@gmail.com&quot;&gt;stanciumarius94@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Offering OpenStreetMap support and improving Edit Mode for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="216"/>
         <source>&lt;p&gt;Abhinav Gangwar &lt;a href=&quot;abhgang@gmail.com&quot;&gt;abhgang@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble Game&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Abhinav Gangwar &lt;a href=&quot;abhgang@gmail.com&quot;&gt;abhgang@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble Game&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Abhinav Gangwar &lt;a href=&quot;abhgang@gmail.com&quot;&gt;abhgang@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble Game&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="218"/>
         <source>&lt;p&gt;Calin Cruceru &lt;a href=&quot;crucerucalincristian@gmail.com&quot;&gt;crucerucalincristian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Editing Mode for Polygons&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Calin Cruceru &lt;a href=&quot;crucerucalincristian@gmail.com&quot;&gt;crucerucalincristian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Bearbeitungsmodus für Polygone&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Calin Cruceru &lt;a href=&quot;crucerucalincristian@gmail.com&quot;&gt;crucerucalincristian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Bearbeitungsmodus für Polygone&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="220"/>
         <source>&lt;p&gt;Sanjiban Bairagya &lt;a href=&quot;sanjiban22393@gmail.com&quot;&gt;sanjiban22393@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Interactive Tours &lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sanjiban Bairagya &lt;a href=&quot;sanjiban22393@gmail.com&quot;&gt;sanjiban22393@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Interaktive Touren&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Sanjiban Bairagya &lt;a href=&quot;sanjiban22393@gmail.com&quot;&gt;sanjiban22393@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Interaktive Touren&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="223"/>
         <source>&lt;p&gt;Adrian Draghici &lt;a href=&quot;draghici.adrian.b@gmail.com&quot;&gt;draghici.adrian.b@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble KML Map Editor&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Adrian Draghici &lt;a href=&quot;draghici.adrian.b@gmail.com&quot;&gt;draghici.adrian.b@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: KML-Karteneditor für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Adrian Draghici &lt;a href=&quot;draghici.adrian.b@gmail.com&quot;&gt;draghici.adrian.b@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: KML-Karteneditor für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="225"/>
         <source>&lt;p&gt;Andrei Duma &lt;a href=&quot;andrei.duma.dorian@gmail.com&quot;&gt;andrei.duma.dorian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble meets ownCloud&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Andrei Duma &lt;a href=&quot;andrei.duma.dorian@gmail.com&quot;&gt;andrei.duma.dorian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble und ownCloud&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Andrei Duma &lt;a href=&quot;andrei.duma.dorian@gmail.com&quot;&gt;andrei.duma.dorian@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble und ownCloud&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="227"/>
         <source>&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: ownCloud storage and synchronization for Marble &lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: ownCloud-Speicherung und -Abgleich für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Utku Ayd&amp;#x131;n &lt;a href=&quot;utkuaydin34@gmail.com&quot;&gt;utkuaydin34@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: ownCloud-Speicherung und -Abgleich für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="229"/>
         <source>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner &lt;a href=&quot;rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL SceneGraph&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner &lt;a href=&quot;rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL SceneGraph&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ren&amp;#xE9; K&amp;#xFC;ttner &lt;a href=&quot;rene@bitkanal.net&quot;&gt;rene@bitkanal.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL SceneGraph&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="232"/>
         <source>&lt;p&gt;Ander Pijoan &lt;a href=&quot;ander.pijoan@deusto.es&quot;&gt;ander.pijoan@deusto.es&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenStreetMap Vector Rendering&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Ander Pijoan &lt;a href=&quot;ander.pijoan@deusto.es&quot;&gt;ander.pijoan@deusto.es&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Vektor-Rendering für OpenStreetMap&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ander Pijoan &lt;a href=&quot;ander.pijoan@deusto.es&quot;&gt;ander.pijoan@deusto.es&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Vektor-Rendering für OpenStreetMap&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="234"/>
         <source>&lt;p&gt;Cezar Mocan &lt;a href=&quot;mocancezar@gmail.com&quot;&gt;mocancezar@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Natural Earth Vector Map&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="236"/>
         <source>&lt;p&gt;Bernhard Beschow &lt;a href=&quot;bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL Mode for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Bernhard Beschow &lt;a href=&quot;bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL-Modus für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bernhard Beschow &lt;a href=&quot;bbeschow@cs.tu-berlin.de&quot;&gt;bbeschow@cs.tu-berlin.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenGL-Modus für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="239"/>
         <source>&lt;p&gt;Konstantin Oblaukhov &lt;a href=&quot;oblaukhov.konstantin@gmail.com&quot;&gt;oblaukhov.konstantin@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OpenStreetMap Vector Rendering&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Konstantin Oblaukhov &lt;a href=&quot;oblaukhov.konstantin@gmail.com&quot;&gt;oblaukhov.konstantin@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Vektorrenderer für OpenStreetMap&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Konstantin Oblaukhov &lt;a href=&quot;oblaukhov.konstantin@gmail.com&quot;&gt;oblaukhov.konstantin@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Vektorrenderer für OpenStreetMap&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="242"/>
         <source>&lt;p&gt;Daniel Marth &lt;a href=&quot;danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Marble Touch on MeeGo&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Daniel Marth &lt;a href=&quot;danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Marble Touch für MeeGo&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Daniel Marth &lt;a href=&quot;danielmarth@gmx.at&quot;&gt;danielmarth@gmx.at&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Marble Touch für MeeGo&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="244"/>
         <source>&lt;p&gt;&lt;b&gt;2010&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2010&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2010&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="245"/>
         <source>&lt;p&gt;Gaurav Gupta &lt;a href=&quot;mailto:1989.gaurav@gmail.com&quot;&gt;1989.gaurav@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Bookmarks&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Gaurav Gupta &lt;a href=&quot;mailto:1989.gaurav@gmail.com&quot;&gt;1989.gaurav@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Lesezeichen&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Gaurav Gupta &lt;a href=&quot;mailto:1989.gaurav@gmail.com&quot;&gt;1989.gaurav@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Lesezeichen&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="247"/>
         <source>&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:hjain.itbhu@gmail.com&quot;&gt;hjain.itbhu@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Time Support&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:hjain.itbhu@gmail.com&quot;&gt;hjain.itbhu@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Zeit-Unterstützung&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Harshit Jain &lt;a href=&quot;mailto:hjain.itbhu@gmail.com&quot;&gt;hjain.itbhu@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Zeit-Unterstützung&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="249"/>
         <source>&lt;p&gt;Siddharth Srivastava &lt;a href=&quot;mailto:akssps011@gmail.com&quot;&gt;akssps011@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Turn-by-turn Navigation&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Siddharth Srivastava &lt;a href=&quot;mailto:akssps011@gmail.com&quot;&gt;akssps011@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Zielführungsnavigation&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Siddharth Srivastava &lt;a href=&quot;mailto:akssps011@gmail.com&quot;&gt;akssps011@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Projekt: Zielführungsnavigation&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="251"/>
         <source>&lt;p&gt;&lt;b&gt;2009&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2009&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2009&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="252"/>
         <source>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: OSM Annotation&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: OSM-Vermerke&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: OSM-Vermerke&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="254"/>
         <source>&lt;p&gt;Bastian Holst &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Online Services&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Bastian Holst, &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Online-Dienste&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Bastian Holst, &lt;a href=&quot;mailto:bastianholst@gmx.de&quot;&gt;bastianholst@gmx.de&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Online-Dienste&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="256"/>
         <source>&lt;p&gt;&lt;b&gt;2008&lt;/b&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;2008&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;2008&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="257"/>
         <source>&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Vector Tiles for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Vektorkacheln für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Patrick Spendrin &lt;a href=&quot;pspendrin@gmail.com&quot;&gt;pspendrin@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Vektorkacheln für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="259"/>
         <source>&lt;p&gt;Shashank Singh &lt;a href=&quot;mailto:shashank.personal@gmail.com&quot;&gt;shashank.personal@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Panoramio / Wikipedia -photo support for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Shashank Singh &lt;a href=&quot;mailto:shashank.personal@gmail.com&quot;&gt;shashank.personal@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Unterstützung für Fotos von Panoramio und Wikipedia in Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Shashank Singh &lt;a href=&quot;mailto:shashank.personal@gmail.com&quot;&gt;shashank.personal@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Unterstützung für Fotos von Panoramio und Wikipedia in Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="261"/>
         <source>&lt;b&gt;2007&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;2007&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;2007&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="262"/>
         <source>&lt;p&gt;Carlos Licea &lt;a href=&quot;mailto:carlos.licea@kdemail.net&quot;&gt;carlos.licea@kdemail.net&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: Equirectangular Projection (&quot;Flat Map&quot;)&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Carlos Licea &lt;a href=&quot;mailto:carlos.licea@kdemail.net&quot;&gt;carlos.licea@kdemail.net&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Rektangularprojektion („Plattkarte“)&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Carlos Licea &lt;a href=&quot;mailto:carlos.licea@kdemail.net&quot;&gt;carlos.licea@kdemail.net&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: Rektangularprojektion („Plattkarte“)&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="264"/>
         <source>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: GPS Support for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: GPS-Unterstützung für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Andrew Manson &lt;a href=&quot;mailto:g.real.ate@gmail.com&quot;&gt;g.real.ate@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: GPS-Unterstützung für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="266"/>
         <source>&lt;p&gt;Murad Tagirov &lt;a href=&quot;mailto:tmurad@gmail.com&quot;&gt;tmurad@gmail.com&lt;/a&gt;&lt;br /&gt;&lt;i&gt;Project: KML Support for Marble&lt;/i&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Murad Tagirov &lt;a href=&quot;mailto:tmurad@gmail.com&quot;&gt;tmurad@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: KML-Unterstützung für Marble&lt;/i&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Murad Tagirov &lt;a href=&quot;mailto:tmurad@gmail.com&quot;&gt;tmurad@gmail.com&lt;/a&gt;&lt;br/&gt;&lt;i&gt;Projekt: KML-Unterstützung für Marble&lt;/i&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="268"/>
         <source>&lt;p&gt;... and of course we&apos;d like to thank the people at Google Inc. for making these projects possible.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;... und natürlich danken wir den Leuten bei Google Inc., die diese Projekte ermöglicht haben.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;... und natürlich danken wir den Leuten bei Google Inc., die diese Projekte ermöglicht haben.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="270"/>
         <source>&lt;b&gt;Credits&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Danke an:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Danke an:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="271"/>
         <source>&lt;p&gt;&lt;i&gt;Various Suggestions &amp;amp; Testing:&lt;/i&gt; Stefan Jordan, Robert Scott, Lubos Petrovic, Benoit Sigoure, Martin Konold, Matthias Welwarsky, Rainer Endres, Luis Silva, Ralf Gesellensetter, Tim Alder&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Verschiedene Verbesserungsvorschläge und Tests:&lt;/i&gt; Stefan Jordan, Robert Scott, Lubos Petrovic, Benoit Sigoure, Martin Konold, Matthias Welwarsky, Rainer Endres, Luis Silva, Ralf Gesellensetter, Tim Alder&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Verschiedene Verbesserungsvorschläge und Tests:&lt;/i&gt; Stefan Jordan, Robert Scott, Lubos Petrovic, Benoit Sigoure, Martin Konold, Matthias Welwarsky, Rainer Endres, Luis Silva, Ralf Gesellensetter, Tim Alder&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="274"/>
         <source>&lt;p&gt; We&apos;d especially like to thank John Layt who provided an important source of inspiration by creating Marble&apos;s predecessor &quot;Kartographer&quot;.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Wir danken insbesondere John Layt, der uns mit Marbles Vorgänger „Kartographer“ eine ganz besondere Inspiration gab.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Wir danken insbesondere John Layt, der uns mit Marbles Vorgänger „Kartographer“ eine ganz besondere Inspiration gab.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="285"/>
         <source>&lt;b&gt;Maps&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Karten&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Karten&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="286"/>
         <source>&lt;p&gt;&lt;i&gt;Blue Marble Next Generation (500 m / pixel)&lt;/i&gt;&lt;br /&gt;NASA Goddard Space Flight Center Earth Observatory &lt;a href=&quot;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&quot;&gt;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Blue Marble Next Generation (500 m / pixel)&lt;/i&gt;&lt;br /&gt;NASA Goddard Space Flight Center Earth Observatory &lt;a href=&quot;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&quot;&gt;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Blue Marble Next Generation (500 m / pixel)&lt;/i&gt;&lt;br /&gt;NASA Goddard Space Flight Center Earth Observatory &lt;a href=&quot;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&quot;&gt;http://earthobservatory.nasa.gov/Newsroom/BlueMarble/&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="290"/>
         <source>&lt;p&gt;&lt;i&gt;Earth&apos;s City Lights&lt;/i&gt;&lt;br /&gt;Data courtesy Marc Imhoff of NASA GSFC and Christopher Elvidge of NOAA NGDC. Image by Craig Mayhew and Robert Simmon, NASA GSFC.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Stadtlichter der Erde&lt;/i&gt;&lt;br /&gt;Daten von Marc Imhoff von NASA GSFC und Christopher Elvidge von NOAA NGDC. Bilder von Craig Mayhew und Robert Simmon, NASA GSFC.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Stadtlichter der Erde&lt;/i&gt;&lt;br /&gt;Daten von Marc Imhoff von NASA GSFC und Christopher Elvidge von NOAA NGDC. Bilder von Craig Mayhew und Robert Simmon, NASA GSFC.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="293"/>
         <source>&lt;p&gt;&lt;i&gt;Shuttle Radar Topography Mission (SRTM30, 1 km / pixel )&lt;/i&gt;&lt;br /&gt;NASA Jet Propulsion Laboratory &lt;a href=&quot;http://www2.jpl.nasa.gov/srtm/&quot;&gt;http://www2.jpl.nasa.gov/srtm/&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="296"/>
         <source>&lt;p&gt;&lt;i&gt;Micro World Data Bank in Polygons (&quot;MWDB-POLY / MWDBII&quot;)&lt;/i&gt;&lt;br /&gt;CIA ; Global Associates, Ltd.; Fred Pospeschil and Antonio Rivera&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;Micro World Data Bank in Polygons („MWDB-POLY / MWDBII“)&lt;/i&gt;&lt;br /&gt;CIA; Global Associates, Ltd.; Fred Pospeschil und Antonio Rivera&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;Micro World Data Bank in Polygons („MWDB-POLY / MWDBII“)&lt;/i&gt;&lt;br /&gt;CIA; Global Associates, Ltd.; Fred Pospeschil und Antonio Rivera&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="298"/>
         <source>&lt;p&gt;&lt;i&gt;Temperature and Precipitation Maps (July and December)&lt;/i&gt;&lt;br /&gt;A combination of two datasets:&lt;ul&gt;&lt;li&gt;Legates, D.R. and Willmott, C.J. 1989. Average Monthly Surface Air Temperature and Precipitation. Digital Raster Data on a .5 degree Geographic (lat/long) 361x721 grid (centroid-registered on .5 degree meridians). Boulder CO: National Center for Atmospheric Research. &lt;a href=&quot;http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm&quot;&gt;http://www.ngdc.noaa.gov/ecosys/cdroms/ged_iia/datasets/a04/lw.htm&lt;/a&gt;&lt;/li&gt;&lt;li&gt;CRU CL 2.0: New, M., Lister, D., Hulme, M. and Makin, I., 2002: A high-resolution data set of surface climate over global land areas. Climate Research 21.&lt;a href=&quot;http://www.cru.uea.ac.uk/cru/data/hrg&quot;&gt;http://www.cru.uea.ac.uk/cru/data/hrg&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="310"/>
         <source>&lt;b&gt;Street Map&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Straßenkarten&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Straßenkarten&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="311"/>
         <source>&lt;p&gt;&lt;i&gt;OpenStreetMap&lt;/i&gt;&lt;br /&gt;The street maps used in Marble via download are provided by the &lt;a href=&quot;http://www.openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&gt; Project (&quot;OSM&quot;). OSM is an open community which creates free editable maps.&lt;br /&gt;&lt;i&gt;License&lt;/i&gt;: OpenStreetMap data can be used freely under the terms of the &lt;a href=&quot;http://wiki.openstreetmap.org/index.php/OpenStreetMap_License&quot;&gt;Creative Commons Attribution-ShareAlike 2.0 license&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="318"/>
         <source>&lt;p&gt;&lt;i&gt;Icons&lt;/i&gt;&lt;br /&gt;Some icons are taken from &lt;a href=&quot;http://www.sjjb.co.uk/mapicons&quot;&gt;SJJB Management&lt;/a&gt; and &lt;a href=&quot;http://thenounproject.com&quot;&gt;NounProject&lt;/a&gt;. These icons can be used freely under the terms of the &lt;a href=&quot;http://creativecommons.org/publicdomain/zero/1.0/&quot;&gt;CC0 1.0 Universal&lt;/a&gt; license.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="322"/>
         <source>&lt;p&gt;Some icons are taken from &lt;a href=&quot;http://fortawesome.github.com/Font-Awesome&quot;&gt;Font Awesome&lt;/a&gt;. These icons can be used freely under the terms of the &lt;a href=&quot;http://creativecommons.org/licenses/by/3.0/&quot;&gt;CC BY 3.0&lt;/a&gt; license.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="325"/>
         <source>&lt;p&gt;&lt;i&gt;OpenRouteService&lt;/i&gt;&lt;br /&gt;Some of the routes used in Marble via download are provided by the &lt;a href=&quot;http://www.openrouteservice.org&quot;&gt;OpenRouteService&lt;/a&gt; Project (&quot;ORS&quot;). &lt;br /&gt;&lt;i&gt;License&lt;/i&gt;: OpenRouteService data can be used freely under the terms of the &lt;a href=&quot;http://wiki.openstreetmap.org/index.php/OpenStreetMap_License&quot;&gt;Creative Commons Attribution-ShareAlike 2.0 license&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="331"/>
         <source>&lt;p&gt;&lt;i&gt;Open Source Routing Machine&lt;/i&gt;&lt;br /&gt;Some of the routes used in Marble via download are provided by the &lt;a href=&quot;http://project-osrm.org&quot;&gt;Open Source Routing Machine&lt;/a&gt; Project (&quot;OSRM&quot;). &lt;br /&gt;&lt;i&gt;License&lt;/i&gt;: Open Source Routing Machine data can be used freely under the terms of the &lt;a href=&quot;http://wiki.openstreetmap.org/index.php/OpenStreetMap_License&quot;&gt;Creative Commons Attribution-ShareAlike 2.0 license&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="337"/>
         <source>&lt;p&gt;&lt;i&gt;MapQuest&lt;/i&gt;&lt;br /&gt;Some of the routes used in Marble via download are provided by &lt;a href=&quot;http://www.mapquest.com/&quot;&gt;MapQuest&lt;/a&gt; and their Open Data Map APIs and Web Services.&lt;br /&gt;Directions courtesy of MapQuest working on OpenStreetMap data that can be used freely under the terms of the &lt;a href=&quot;http://wiki.openstreetmap.org/index.php/OpenStreetMap_License&quot;&gt;Creative Commons Attribution-ShareAlike 2.0 license&lt;/a&gt;. Usage of the MapQuest routing service is subject to the &lt;a href=&quot;http://info.mapquest.com/terms-of-use/&quot;&gt;MapQuest terms of use&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="345"/>
         <source>&lt;b&gt;Cities and Locations&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Städte und Orte&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Städte und Orte&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="346"/>
         <source>&lt;p&gt;&lt;i&gt;World Gazetteer&lt;/i&gt;&lt;br /&gt;Stefan Helders &lt;a href=&quot;http://www.world-gazetteer.com&quot;&gt;http://www.world-gazetteer.com&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;i&gt;World Gazetteer&lt;/i&gt;&lt;br /&gt;Stefan Helders &lt;a href=&quot;http://www.world-gazetteer.com&quot;&gt;http://www.world-gazetteer.com&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;i&gt;World Gazetteer&lt;/i&gt;&lt;br /&gt;Stefan Helders &lt;a href=&quot;http://www.world-gazetteer.com&quot;&gt;http://www.world-gazetteer.com&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="348"/>
         <source>&lt;p&gt;&lt;i&gt;Geonames.org&lt;/i&gt;&lt;br /&gt;&lt;a href=&quot;http://www.geonames.org/&quot;&gt;http://www.geonames.org/&lt;/a&gt;&lt;i&gt;License&lt;/i&gt;: Geonames.org data can be used freely under the terms of the &lt;a href=&quot;http://creativecommons.org/licenses/by/3.0/&quot;&gt;Creative Commons Attribution 3.0 license&lt;/a&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="353"/>
         <source>&lt;p&gt;&lt;i&gt;Czech Statistical Office&lt;/i&gt;&lt;br /&gt;Public database &lt;a href=&quot;http://www.czso.cz/eng/redakce.nsf/i/home&quot;&gt;http://www.czso.cz&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="355"/>
         <source>&lt;b&gt;Flags&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Flaggen&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Flaggen&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="356"/>
         <source>&lt;p&gt;&lt;i&gt;Flags of the World&lt;/i&gt;&lt;br /&gt;The flags were taken from Wikipedia (&lt;a href=&quot;http://www.wikipedia.org&quot;&gt;http://www.wikipedia.org&lt;/a&gt;) which in turn took a subset from &lt;a href=&quot;http://www.openclipart.org&quot;&gt;http://www.openclipart.org&lt;/a&gt; and reworked them. All flags are under the public domain (see comments inside the svg files).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="361"/>
         <source>&lt;b&gt;Stars&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Sterne&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Sterne&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleAboutDialog.cpp" line="362"/>
         <source>&lt;p&gt;&lt;i&gt;The Bright Star Catalogue&lt;/i&gt;&lt;br /&gt;5th Revised Ed. (Preliminary Version) Hoffleit D., Warren Jr W.H., Astronomical Data Center, NSSDC/ADC (1991)&lt;a href=&quot;http://adc.gsfc.nasa.gov/adc-cgi/cat.pl?/catalogs/5/5050&quot;&gt; http://adc.gsfc.nasa.gov&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="129"/>
         <source>m</source>
         <comment>means meter</comment>
-        <translation type="unfinished">m</translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="131"/>
         <source>mm</source>
         <comment>means milimeters</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="133"/>
         <source>km</source>
         <comment>means kilometers</comment>
-        <translation type="unfinished">km</translation>
+        <translation>km</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="135"/>
         <source>cm</source>
         <comment>means centimeters</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="137"/>
         <source>ft</source>
         <comment>means feet</comment>
-        <translation type="unfinished">ft</translation>
+        <translation>ft</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="139"/>
         <source>in</source>
         <comment>means inches</comment>
-        <translation type="unfinished">in</translation>
+        <translation>in</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="141"/>
         <source>yd</source>
         <comment>means yards</comment>
-        <translation type="unfinished">yd</translation>
+        <translation>yd</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="143"/>
         <source>mi</source>
         <comment>means miles</comment>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarbleLocale.cpp" line="145"/>
         <source>nm</source>
         <comment>means nautical miles</comment>
-        <translation type="unfinished">sm</translation>
+        <translation>sm</translation>
     </message>
     <message>
         <location filename="src/lib/marble/MarblePluginSettingsWidget.cpp" line="64"/>
         <source>&lt;br/&gt;(c) %1 The Marble Project&lt;br /&gt;&lt;br/&gt;&lt;a href=&quot;http://edu.kde.org/marble&quot;&gt;http://edu.kde.org/marble&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="259"/>
         <source>Mercury</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Merkur</translation>
+        <translation>Merkur</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="263"/>
         <source>Venus</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Venus</translation>
+        <translation>Venus</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="267"/>
         <source>Earth</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Erde</translation>
+        <translation>Erde</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="271"/>
         <source>Mars</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Mars</translation>
+        <translation>Mars</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="275"/>
         <source>Jupiter</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Jupiter</translation>
+        <translation>Jupiter</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="279"/>
         <source>Saturn</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Saturn</translation>
+        <translation>Saturn</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="283"/>
         <source>Uranus</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Uranus</translation>
+        <translation>Uranus</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="287"/>
         <source>Neptune</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Neptun</translation>
+        <translation>Neptun</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="292"/>
         <source>Pluto</source>
         <comment>the planet</comment>
-        <translation type="unfinished">Pluto</translation>
+        <translation>Pluto</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="297"/>
         <source>Sun</source>
         <comment>the earth&apos;s star</comment>
-        <translation type="unfinished">Sonne</translation>
+        <translation>Sonne</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="301"/>
         <source>Moon</source>
         <comment>the earth&apos;s moon</comment>
-        <translation type="unfinished">Mond</translation>
+        <translation>Mond</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="305"/>
         <source>Sky</source>
-        <translation type="unfinished">Himmel</translation>
+        <translation>Himmel</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PlanetFactory.cpp" line="310"/>
         <source>Unknown Planet</source>
         <comment>a planet without data</comment>
-        <translation type="unfinished">Unbekannter Planet</translation>
+        <translation>Unbekannter Planet</translation>
     </message>
     <message>
         <location filename="src/lib/marble/PluginInterface.h" line="30"/>
         <source>Developer</source>
-        <translation type="unfinished">Entwickler</translation>
+        <translation>Entwickler</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/AzimuthalEquidistantProjection.cpp" line="61"/>
         <source>Azimuthal Equidistant</source>
-        <translation type="unfinished">Mittabstandstreu Azimutal</translation>
+        <translation>Mittabstandstreu Azimutal</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/AzimuthalEquidistantProjection.cpp" line="66"/>
         <source>&lt;p&gt;&lt;b&gt;Azimuthal Equidistant Projection&lt;/b&gt; (&quot;fish eye&quot;)&lt;/p&gt;&lt;p&gt;Applications: Display of seismic and radio data and for use in digital planetariums.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/EquirectProjection.cpp" line="37"/>
         <source>Flat Map</source>
-        <translation type="unfinished">Plattkarte</translation>
+        <translation>Plattkarte</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/EquirectProjection.cpp" line="42"/>
         <source>&lt;p&gt;&lt;b&gt;Equirectangular Projection&lt;/b&gt; (&quot;Plate carrée&quot;)&lt;/p&gt;&lt;p&gt;Applications: De facto standard for global texture data sets for computer software.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;Äquirektanguläre Projektion&lt;/b&gt; (&quot;Platkartet&quot;)&lt;/p&gt;&lt;p&gt;Anwendungen: De-facto-Standard für globale Textur-Datensätze für Computer-Software.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Äquirektanguläre Projektion&lt;/b&gt; (&quot;Platkartet&quot;)&lt;/p&gt;&lt;p&gt;Anwendungen: De-facto-Standard für globale Textur-Datensätze für Computer-Software.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/GnomonicProjection.cpp" line="66"/>
         <source>Gnomonic</source>
-        <translation type="unfinished">Gnomonisch</translation>
+        <translation>Gnomonisch</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/GnomonicProjection.cpp" line="71"/>
         <source>&lt;p&gt;&lt;b&gt;Gnomonic Projection&lt;/b&gt; (&quot;rectilinear&quot;)&lt;/p&gt;&lt;p&gt;Applications: Used for displaying panorama photography. Also used for navigation, radio and seismic work.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/LambertAzimuthalProjection.cpp" line="66"/>
         <source>Lambert Azimuthal Equal-Area</source>
-        <translation type="unfinished">Flächentreuer Azimutalbereich</translation>
+        <translation>Flächentreuer Azimutalbereich</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/LambertAzimuthalProjection.cpp" line="71"/>
         <source>&lt;p&gt;&lt;b&gt;Lambert Azimuthal Equal-Area Projection&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Applications: Used in structural geology to plot directional data.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/MercatorProjection.cpp" line="41"/>
         <source>Mercator</source>
-        <translation type="unfinished">Mercator</translation>
+        <translation>Mercator</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/MercatorProjection.cpp" line="46"/>
         <source>&lt;p&gt;&lt;b&gt;Mercator Projection&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Applications: popular standard map projection for navigation.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;Mercator-Projektion&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Anwendungen: beliebte Standard-Kartenprojektion für die Navigation.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Mercator-Projektion&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Anwendungen: beliebte Standard-Kartenprojektion für die Navigation.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/SphericalProjection.cpp" line="68"/>
         <source>Globe</source>
-        <translation type="unfinished">Globus</translation>
+        <translation>Globus</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/SphericalProjection.cpp" line="73"/>
         <source>&lt;p&gt;&lt;b&gt;Orthographic Projection&lt;/b&gt; (&quot;orthogonal&quot;)&lt;/p&gt;&lt;p&gt;Applications: A perspective projection that is used to display the hemisphere of a globe as it appears from outer space.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/StereographicProjection.cpp" line="66"/>
         <source>Stereographic</source>
-        <translation type="unfinished">Stereografisch</translation>
+        <translation>Stereografisch</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/StereographicProjection.cpp" line="71"/>
         <source>&lt;p&gt;&lt;b&gt;Stereographic Projection&lt;/b&gt; (&quot;orthogonal&quot;)&lt;/p&gt;&lt;p&gt;Applications: Used for planetary cartography, geology and panorama photography.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;&lt;b&gt;Stereografische Projektion&lt;/b&gt; (&quot;Orthogonal&quot;)&lt;/p&gt;&lt;p&gt;Anwendungen: Einsatz in der Planetenkartografie, Geologie und Panoramafotografie.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Stereografische Projektion&lt;/b&gt; (&quot;Orthogonal&quot;)&lt;/p&gt;&lt;p&gt;Anwendungen: Einsatz in der Planetenkartografie, Geologie und Panoramafotografie.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/VerticalPerspectiveProjection.cpp" line="79"/>
         <source>Vertical Perspective Projection</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/projections/VerticalPerspectiveProjection.cpp" line="84"/>
         <source>&lt;p&gt;&lt;b&gt;Vertical Perspective Projection&lt;/b&gt; (&quot;orthogonal&quot;)&lt;/p&gt;&lt;p&gt; Shows the earth as it appears from a relatively short distance above the surface. Applications: Used for Virtual Globes.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2442,22 +2449,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/TileCreatorDialog.ui" line="20"/>
         <source>Creating Map</source>
-        <translation type="unfinished">Karte wird erstellt</translation>
+        <translation>Karte wird erstellt</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TileCreatorDialog.ui" line="507"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Satellite View&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Earth as seen from Space. The map is based on NASA&apos;s beautiful &quot;Blue Marble Next Generation&quot; pictures. Credits: NASA&apos;s Earth Observatory&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Satellitenansicht&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Die Erde, wie man sie aus dem Weltall sehen kann. Die Karte basiert auf den schönen „Blue Marble Next Generation“-Bildern der NASA. Quelle: NASA Earth Observatory&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Satellitenansicht&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Die Erde, wie man sie aus dem Weltall sehen kann. Die Karte basiert auf den schönen „Blue Marble Next Generation“-Bildern der NASA. Quelle: NASA Earth Observatory&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TileCreatorDialog.ui" line="517"/>
         <source>Marble needs to create this map. This only needs to be done once and may take a few seconds.</source>
-        <translation type="unfinished">Marble muss diese Karte erstellen. Dies muss nur einmal getan werden und kann ein paar Sekunden dauern.</translation>
+        <translation>Marble muss diese Karte erstellen. Dies muss nur einmal getan werden und kann ein paar Sekunden dauern.</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TileCreatorDialog.ui" line="555"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2465,57 +2472,57 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="14"/>
         <source>Time Control</source>
-        <translation type="unfinished">Zeiteinstellung</translation>
+        <translation>Zeiteinstellung</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="20"/>
         <source>Time</source>
-        <translation type="unfinished">Zeit</translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="26"/>
         <source>New Date Time      :</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="36"/>
         <source>Refresh Interval     :</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="46"/>
         <source> seconds</source>
-        <translation type="unfinished"> Sekunden</translation>
+        <translation> Sekunden</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="65"/>
         <source>Now</source>
-        <translation type="unfinished">Jetzt</translation>
+        <translation>Jetzt</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="123"/>
         <source>Current Date Time :</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="136"/>
         <source>Time Speed</source>
-        <translation type="unfinished">Zeitgeschwindigkeit</translation>
+        <translation>Zeitgeschwindigkeit</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="198"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="205"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <location filename="src/lib/marble/TimeControlWidget.ui" line="215"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
